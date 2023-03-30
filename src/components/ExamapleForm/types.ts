@@ -1,4 +1,4 @@
-export type Inputs = {
+export interface Inputs {
   example: string;
   exampleRequired: string;
-};
+}

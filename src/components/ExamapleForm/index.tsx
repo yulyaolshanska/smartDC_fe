@@ -1,4 +1,5 @@
 import { useForm, SubmitHandler } from 'react-hook-form';
+import { Trans, useTranslation } from 'react-i18next';
 import { Inputs } from './types';
 
 export default function ExampleForm() {

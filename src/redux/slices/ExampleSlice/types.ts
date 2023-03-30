@@ -1,3 +1,3 @@
 export interface InitialState {
-  exmapleValue: number;
+  exampleValue: number;
 }

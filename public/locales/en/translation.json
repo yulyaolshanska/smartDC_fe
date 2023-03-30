@@ -1,0 +1,7 @@
+{
+  "ExampleComponent": {
+    "fieldOne": "Click Me",
+    "fieldTwo": "No Click Me",
+    "goToPage": "Go to another page"
+  }
+}
