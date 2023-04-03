@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { InitialState } from './types';
 
-const initialState = {
+const initialState: InitialState = {
   exampleValue: 123,
 };
 const exampleSlice = createSlice({

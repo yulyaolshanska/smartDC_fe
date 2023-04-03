@@ -13,10 +13,14 @@
     "lib": ["es2017", "dom"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
-    "baseUrl": ".",
+    "baseUrl": "./src/",
     "paths": {
-      "@store/cart": ["cart/src/index.ts"],
-      "@store/ui": ["ui/src/index.ts"]
+      "@components/*": ["components/*"],
+      "@pages/*": ["pages/*"],
+      "@constants/*": ["constants/*"],
+      "@redux/*": ["redux/*"],
+      "@router/*": ["router/*"],
+      "@translation/*": ["translation/*"]
     }
   },
   "exclude": ["node_modules", "tmp"]
