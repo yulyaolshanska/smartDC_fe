@@ -24,7 +24,8 @@
     "react-i18next": "^12.2.0",
     "react-router-dom": "^6.9.0",
     "styled-components": "^5.3.9",
-    "typeface-roboto": "^1.1.13"
+    "typeface-roboto": "^1.1.13",
+    "yup": "^1.0.2"
   },
   "devDependencies": {
     "@nrwl/eslint-plugin-nx": "15.5.3",
