@@ -1,5 +1,4 @@
 import { useForm } from 'react-hook-form';
-import {useState} from 'react';
 import { useTranslation } from 'react-i18next';
 import { yupResolver } from '@hookform/resolvers/yup';
 import {
@@ -28,7 +27,7 @@ import {
 } from 'components/RegistrationForm2/style';
 import { validationSchema } from 'components/RegistrationForm2/validation';
 
-const RegistrationForm2 = () => {
+const RegistrationForm2: React.FC = (): JSX.Element => {
   const { t } = useTranslation();
   const {
     register,
@@ -37,9 +36,9 @@ const RegistrationForm2 = () => {
   } = useForm<DoctorSubmitValue>({
     resolver: yupResolver(validationSchema)
   });
-  const onSubmit = (data:DoctorSubmitValue) => setTimeout(() => alert("Success"), 1000);
+  const onSubmit = (data: DoctorSubmitValue) => setTimeout(() => alert('Success'), 1000);
   return (
-    <RegForm2Container onSubmit={handleSubmit(onSubmit)} onChange={()=>{console.log(errors)}}>
+    <RegForm2Container onSubmit={handleSubmit(onSubmit)}>
       <TitleComponent />
       <InputGroup>
         <StyledLabel>{t('RegForm2.role')}</StyledLabel>

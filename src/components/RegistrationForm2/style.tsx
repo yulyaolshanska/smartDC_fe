@@ -22,8 +22,8 @@ export const RegForm2Container = styled.form`
 `;
 
 export const Title = styled.h1`
-  font-size: 1.5em;
-  font-weight: 700;
+  font-size: ${StylesConstantsColor.INPUT_FONT_SIZE_BIG};
+  font-weight:700;
   margin-bottom: 0.5em;
 `;
 
@@ -35,18 +35,18 @@ export const StyledSelect = styled.select<StyledProps>`
   width: 100%;
   height: 2em;
   border-radius: 5px;
-  background: white;
+  background: ${StylesConstantsColor.RF2_BTN_COLOR};
   border: 1px solid ${StylesConstantsColor.RF2_BOX_COLOR};
   padding: 5px;
   color: ${StylesConstantsColor.INPUTS_FONT_COLOR};
-  font-size: 0.8rem;
+  font-size: ${StylesConstantsColor.INPUT_FONT_SIZE};
   margin: 5px;
 `;
 
 export const StyledLabel = styled.div`
   display: flex;
   width: 100%;
-  font-size: 0.8em;
+  font-size: ${StylesConstantsColor.INPUT_FONT_SIZE};
   align-items: left;
   color: ${StylesConstantsColor.LABEL_COLOR};
 `;
@@ -60,7 +60,7 @@ export const StyledInput = styled.input`
   width: 100%;
   height: 1em;
   padding: 0.8rem;
-  font-size: 0.8rem;
+  font-size: ${StylesConstantsColor.INPUT_FONT_SIZE};
   margin: 5px;
 `;
 
@@ -102,7 +102,7 @@ export const InputGroup = styled.div`
 export const ErrorMessage = styled.div`
   display: flex;
   width: 100%;
-  font-size: small;
+  font-size: ${StylesConstantsColor.INPUT_FONT_SIZE};;
   color: ${StylesConstantsColor.ERROR_COLOR};
 `;
 
@@ -113,6 +113,6 @@ export const LinkContainer = styled(Link)`
   color: black;
   @media only screen and (min-width: 360px) {
     min-width: 360px;
-    font-size:0.8em;
+    font-size:${StylesConstantsColor.INPUT_FONT_SIZE};;
   }
 `;

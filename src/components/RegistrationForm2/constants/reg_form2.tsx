@@ -1,12 +1,9 @@
-export type OptionType = {
-  value: string;
-  label: string;
-};
+import { OptionType } from "../types";
 
 export const roles:OptionType[] = [
-    { value: 'local', label: 'Local' },
-    { value: 'remote', label: 'Remote'},
-  ];
+  { value: 'local', label: 'Local' },
+  { value: 'remote', label: 'Remote'},
+];
 
   export const specializations = [
     {value: 'anesthesiology', label: 'Anesthesiology'},

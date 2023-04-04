@@ -3,28 +3,30 @@ export interface InputType {
   placeholder?: string;
 }
 
-export interface Option {
-  value:string;
-  label:string;
+
+export type OptionType = {
+  value: string;
+  label: string;
 };
 
+
 export interface InputOptions {
-  title:string;
-  options:Option[];
-};
+  title: string;
+  options: OptionType[];
+}
 
 export type DoctorSubmitValue = {
   role: string;
   specialization: string;
-  gender:string;
-  country:string;
-  city:string;
-  date_of_birth:string;
-  address:string;
-  timezone:string;
+  gender: string;
+  country: string;
+  city: string;
+  date_of_birth: string;
+  address: string;
+  timezone: string;
 };
 
 export interface SignInButtonProps {
-  status?:boolean;
-  color?:boolean;
+  status?: boolean;
+  color?: boolean;
 }

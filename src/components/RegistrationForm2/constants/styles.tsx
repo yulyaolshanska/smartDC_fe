@@ -9,4 +9,6 @@ export const StylesConstantsColor =  {
    LABEL_COLOR:'#00000',
    INPUTS_FONT_COLOR:"#808080",
    GLOBAL_FONT: 'Arial, sans-serif',
+   INPUT_FONT_SIZE:"0.8rem",
+   INPUT_FONT_SIZE_BIG:"1.5rem"
 } as const;

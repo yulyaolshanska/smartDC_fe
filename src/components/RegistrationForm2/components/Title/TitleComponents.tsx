@@ -1,7 +1,7 @@
 import { InputGroup, Title } from 'components/RegistrationForm2/style';
 import { useTranslation } from 'react-i18next';
 
-export const TitleComponent = () => {
+export const TitleComponent:React.FC = ():JSX.Element => {
   const { t } = useTranslation();
   return (
     <InputGroup>
