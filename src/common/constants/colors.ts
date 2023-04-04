@@ -37,4 +37,16 @@ export const CORNFLOWER_BLUE = "#4D93F8";
 /**
  * @deprecated
  */
+export const NOBEL = "#a2a2a2";
+/**
+ * @deprecated
+ */
+export const MANDY = "#FF000000";
+/**
+ * @deprecated
+ */
+export const SNUFF = "#0000FF00";
+/**
+ * @deprecated
+ */
 export const RED = "#FF0000FF";

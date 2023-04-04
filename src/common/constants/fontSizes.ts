@@ -1,11 +1,15 @@
 /**
  * @deprecated
  */
-export const VERY_SMALL_FONT_SIZE = "16px";
+export const VERY_SMALL_FONT_SIZE = "13px";
 /**
  * @deprecated
  */
-export const SMALL_FONT_SIZE = "18px";
+export const SMALL_FONT_SIZE = "16px";
+/**
+ * @deprecated
+ */
+export const NORMAL_FONT_SIZE = "18px";
 /**
  * @deprecated
  */

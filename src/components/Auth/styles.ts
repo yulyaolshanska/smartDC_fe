@@ -9,6 +9,7 @@ import {
   WHITE,
   ZAMBEZI
 } from '../../common/constants/colors';
+import { MEDIUM_FONT_SIZE, NORMAL_FONT_SIZE, SMALL_FONT_SIZE } from '../../common/constants/fontSizes';
 
 export const AuthContainer = styled.div`
   width: 100%;
@@ -35,7 +36,7 @@ export const AuthTitle = styled.h1`
   margin-bottom: 35px;
 `;
 export const AuthText = styled.div`
-  font-size: 20px;
+  font-size: ${MEDIUM_FONT_SIZE};
   width: 70%;
   margin-left: auto;
   margin-right: auto;
@@ -50,7 +51,7 @@ export const AuthInput = styled.div`
 
 export const AuthInputTitle = styled.div`
   color: ${ZAMBEZI};
-  font-size: 18px;
+  font-size: ${NORMAL_FONT_SIZE};
   line-height: 20px;
   padding-top: 20px;
   padding-bottom: 5px;
@@ -83,7 +84,7 @@ export const AuthSendButton = styled.input`
   margin-top: 20px;
   line-height: 22px;
   color: ${WHITE}; 
-  font-size: 16px;
+  font-size: ${SMALL_FONT_SIZE};
   font-weight: bold;
   background: -webkit-linear-gradient(${NAVY_BLUE}, ${CORNFLOWER_BLUE});
 `;
@@ -102,7 +103,7 @@ export const AuthGoogleContainer = styled.div`
   margin-top: 40px;
   background-color: ${WHITE}; 
   color: ${BLACK}; 
-  font-size: 16px;
+  font-size: ${SMALL_FONT_SIZE};
   font-weight: bold;
   transition: all 0.2s ease-in-out;
 
@@ -126,14 +127,14 @@ export const AuthLinkContainer = styled.div`
   text-align: center;
   padding-top: 10px;
   font-style: normal;
-  font-size: 16px;
+  font-size: ${SMALL_FONT_SIZE};
   line-height: 22px;
 `
 
 export const AuthLinkToLogin = styled.span`
   font-style: normal;
   font-weight: bold;
-  font-size: 16px;
+  font-size: ${SMALL_FONT_SIZE};
   line-height: 22px;
   color: ${BLACK};
   text-decoration: none;
