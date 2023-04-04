@@ -1,24 +1,45 @@
+// {
+//   "overrides": [
+//     {
+//       "files": ["*.ts", "*.tsx"],
+//       "extends": ["airbnb", "airbnb-typescript"]
+//     }
+//   ],
+
+//   "env": {
+//     "browser": true,
+//     "es2021": true
+//   },
+//   "extends": ["airbnb", "airbnb-typescript"],
+
+//   "parser": "@typescript-eslint/parser",
+//   "parserOptions": {
+//     "ecmaVersion": "latest",
+//     "sourceType": "module",
+//     "project": "tsconfig.json",
+//     "tsconfigRootDir": "_dirname"
+//   },
+//   "plugins": ["react"],
+//   "rules": {}
+// }
+
 {
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint", "prettier"],
   "overrides": [
     {
       "files": ["*.ts", "*.tsx"],
-      "extends": ["airbnb", "airbnb-typescript"]
+      "extends": [
+        "airbnb-base",
+        "airbnb-typescript/base",
+        "plugin:@typescript-eslint/eslint-recommended",
+        "plugin:@typescript-eslint/recommended"
+      ],
+      "parserOptions": {
+        "parser": "@typescript-eslint/parser",
+        "project": "tsconfig.app.json",
+        "sourceType": "module"
+      }
     }
-  ],
-
-  "env": {
-    "browser": true,
-    "es2021": true
-  },
-  "extends": ["airbnb", "airbnb-typescript"],
-
-  "parser": "@typescript-eslint/parser",
-  "parserOptions": {
-    "ecmaVersion": "latest",
-    "sourceType": "module",
-    "project": "tsconfig.json",
-    "tsconfigRootDir": "_dirname"
-  },
-  "plugins": ["react"],
-  "rules": {}
+  ]
 }
