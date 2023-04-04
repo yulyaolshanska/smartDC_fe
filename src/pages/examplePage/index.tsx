@@ -6,7 +6,7 @@ const ExamplePage = () => {
   return (
     <div>
       <ExampleComponent />
-      <Link to="/form">Go to another page</Link>
+      {/* <Link to="/form">Go to another page</Link> */}
     </div>
   );
 };

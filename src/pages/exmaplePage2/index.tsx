@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import ExampleForm from 'src/components/ExamapleForm';
+import ExampleForm from 'components/ExamapleForm';
 
 const ExamplePage2 = () => {
   const props = [{ value: 1 }, { value: 1 }];

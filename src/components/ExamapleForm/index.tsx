@@ -9,12 +9,7 @@ export default function ExampleForm() {
     watch,
     formState: { errors },
   } = useForm<Inputs>();
-  const onSubmit: SubmitHandler<Inputs> = (data) =>
-    alert('Form has been submitted');
-
-  console.log(watch('example'));
-
-  //inline style only for demonstration purposes
+  const onSubmit: SubmitHandler<Inputs> = (data) => {}
 
   return (
     <form style={{ backgroundColor: 'red' }} onSubmit={handleSubmit(onSubmit)}>
