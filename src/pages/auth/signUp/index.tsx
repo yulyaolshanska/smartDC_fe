@@ -1,10 +1,13 @@
 import React from 'react';
-import SignUpForm from '../../../components/Auth/SignUpForm';
+
+import Logo from '@components/Logo';
+import SignUpForm from '@components/Auth/SignUpForm';
 
 const SignUp = () => {
   return (
     <>
-      <SignUpForm />
+      <Logo />
+      <SignUpForm/>
     </>
   );
 };

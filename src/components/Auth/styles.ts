@@ -8,8 +8,9 @@ import {
   WHISPER,
   WHITE,
   ZAMBEZI
-} from '../../common/constants/colors';
-import { MEDIUM_FONT_SIZE, NORMAL_FONT_SIZE, SMALL_FONT_SIZE } from '../../common/constants/fontSizes';
+} from '@constants/colors';
+import { MEDIUM_FONT_SIZE, NORMAL_FONT_SIZE, SMALL_FONT_SIZE } from '@constants/fontSizes';
+import { FONT_ROBOTO } from '@constants/fonts';
 
 export const AuthContainer = styled.div`
   width: 100%;
@@ -34,12 +35,16 @@ export const AuthTitle = styled.h1`
   color: ${BLACK}; 
   margin-top: 45px;
   margin-bottom: 35px;
+  font-family: ${FONT_ROBOTO};
+  text-align: center;
 `;
 export const AuthText = styled.div`
   font-size: ${MEDIUM_FONT_SIZE};
   width: 70%;
   margin-left: auto;
   margin-right: auto;
+  text-align: center;
+  font-family: ${FONT_ROBOTO};
 `;
 
 export const AuthInput = styled.div`
@@ -47,6 +52,8 @@ export const AuthInput = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: start;
+  font-family: ${FONT_ROBOTO};
+  margin-bottom: 8px;
 `
 
 export const AuthInputTitle = styled.div`
@@ -76,8 +83,13 @@ export const AuthSendButton = styled.input`
     background: ${PINK_SWAN}; 
     color: ${WHITE}; 
   }
-
+  display: flex;
+  margin-right: auto;
+  margin-left: auto;
+  align-items: center;
+  justify-content: center;
   border-radius: 8px;
+  font-family: ${FONT_ROBOTO};
   border: none;
   height: 55px;
   width: 45%;
@@ -96,6 +108,7 @@ export const AuthGoogleContainer = styled.div`
   margin-right: auto;
   align-items: center;
   justify-content: center;
+  font-family: ${FONT_ROBOTO};
   border-radius: 8px;
   border: 2px solid ${WHISPER};
   height: 55px;
@@ -128,13 +141,14 @@ export const AuthLinkContainer = styled.div`
   padding-top: 10px;
   font-style: normal;
   font-size: ${SMALL_FONT_SIZE};
+  font-family: ${FONT_ROBOTO};
   line-height: 22px;
+  margin-top: 20px;
 `
 
 export const AuthLinkToLogin = styled.span`
   font-style: normal;
   font-weight: bold;
-  font-size: ${SMALL_FONT_SIZE};
   line-height: 22px;
   color: ${BLACK};
   text-decoration: none;

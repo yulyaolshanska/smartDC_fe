@@ -1,7 +1,7 @@
 import React from "react";
-import { LogoContainer, LogoImg, LogoTitle } from "./styles";
-import logo from '../../assets/logo.svg'
 import {useTranslation} from "react-i18next";
+import { LogoContainer, LogoImg, LogoTitle } from "@components/Logo/styles";
+import logo from '@assets/logo.svg'
 
 function Logo() {
   const { t } = useTranslation();

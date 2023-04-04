@@ -2,7 +2,9 @@ import React, {useEffect} from 'react';
 import {useTranslation} from "react-i18next";
 import {useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
-import Input from '../../Input';
+import { useGoogleLogin } from '@react-oauth/google';
+import {IconButton, InputAdornment } from '@mui/material';
+import Input from '@components/Input';
 import {
   AuthContainer,
   AuthForm,
@@ -17,17 +19,14 @@ import {
   Form, GoogleImg,
   GoogleText,
   PasswordImg
-} from '../styles';
-import { ISignUp } from '../type';
-import {confirmPassword, email, end, firstName, lastName, password, phoneNumber } from '../../../common/constants/auth';
-import {IconButton, InputAdornment } from '@mui/material';
-import visible from "../../../assets//auth/eye.svg";
-import visibleOff from "../../../assets//auth/eyeSlash.svg";
-import 'react-phone-input-2/lib/style.css'
-import PhoneInput from "../../PhoneInput";
-import { useGoogleLogin } from '@react-oauth/google';
-import google from '../../../assets/auth/google.svg'
-import { signUpSchema } from 'src/validation/auth.validate';
+} from '@components/Auth/styles';
+import { ISignUp } from '@components/Auth/type';
+import PhoneInput from "@components/PhoneInput";
+import visible from "@assets/auth/eye.svg";
+import visibleOff from "@assets/auth/eyeSlash.svg";
+import google from '@assets/auth/google.svg'
+import { confirmPassword, email, end, firstName, lastName, password, phoneNumber } from '@constants/auth';
+import { signUpSchema } from '@validation/auth.validate';
 
 function SignUpForm() {
   const [showPassword, setShowPassword] = React.useState(false);

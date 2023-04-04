@@ -1,10 +1,10 @@
 import React from 'react';
-import 'react-phone-input-2/lib/bootstrap.css';
-import {HelperText, PhoneInputContainer } from './styles';
 import {Control, Controller} from "react-hook-form";
 import {TextFieldProps} from "@mui/material/TextField/TextField";
-import { ISignUp } from '../Auth/type';
-import { SignUpFields } from 'src/common/types/auth.type';
+import 'react-phone-input-2/lib/bootstrap.css';
+import {HelperText, PhoneInputContainer } from '@components/PhoneInput/styles';
+import { ISignUp } from '@components/Auth/type';
+import { SignUpFields } from '@types';
 
 function PhoneInput({ control, name, label, error, type, helperText, ...props}: TextFieldProps & { control: Control<ISignUp>}) {
   return (

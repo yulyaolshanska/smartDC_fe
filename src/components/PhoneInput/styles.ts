@@ -1,14 +1,16 @@
 import PhoneInput from 'react-phone-input-2';
 import styled from 'styled-components';
-import { BLACK, MANDY, NAVY_BLUE, NOBEL, RED, SNUFF, WHISPER } from '../../common/constants/colors';
-import { VERY_SMALL_FONT_SIZE } from '../../common/constants/fontSizes';
+import { BLACK, MANDY, NAVY_BLUE, RED, SNUFF, WHISPER, WHITE } from '@constants/colors';
+import { VERY_SMALL_FONT_SIZE } from '@constants/fontSizes';
+import { FONT_ROBOTO } from '@constants/fonts';
 
 export const PhoneInputContainer = styled(PhoneInput)<{hasError: boolean }>`
-  background: #FFF;
+  background: #${WHITE};
   font-style: normal;
   height: 60px;
   border-radius: 8px;
   outline: none !important;
+  font-family: ${FONT_ROBOTO};
   
   .button-class {
     position: absolute;
@@ -21,9 +23,8 @@ export const PhoneInputContainer = styled(PhoneInput)<{hasError: boolean }>`
     justify-content: center;
     border-right: 2px solid ${WHISPER}; 
     transition: box-shadow ease .25s,border-color ease .25s;
-    border-right: ${(props) =>
-    props.hasError ? "2px solid ${RED}" : "2px solid transparent"};
-    border-color: ${(props) => (props.hasError ? "${RED}" : "${WHISPER}")}; 
+    border-right: ${(props) => props.hasError ? `2px solid ${RED}` : "2px solid transparent"};
+    border-color: ${(props) => (props.hasError ? `${RED}` : `${WHISPER}`)}; 
   }
 
   .button-class:focus {
@@ -37,10 +38,9 @@ export const PhoneInputContainer = styled(PhoneInput)<{hasError: boolean }>`
     border-radius: 8px;
     border: 2px solid ${WHISPER}; 
     padding-left: 90px;
-    color: ${NOBEL}; 
-    border: ${(props) =>
-    props.hasError ? "2px solid ${RED}" : "2px solid transparent"};
-    border-color: ${(props) => (props.hasError ? "${RED}" : "${WHISPER}")}; 
+    color: ${BLACK};
+    border-right: ${(props) => props.hasError ? `2px solid ${RED}` : "2px solid transparent"};
+    border-color: ${(props) => (props.hasError ? `${RED}` : `${WHISPER}`)};
   }
   .input-phone:focus {
     outline: none !important;
@@ -77,5 +77,7 @@ export const PhoneInputContainer = styled(PhoneInput)<{hasError: boolean }>`
 export const HelperText = styled.span`
   color: ${RED}; 
   margin-left: 0;
+  padding-top: 6px;
+  font-family: ${FONT_ROBOTO};
   font-size: ${VERY_SMALL_FONT_SIZE};
 `
