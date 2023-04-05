@@ -152,4 +152,7 @@ export const AuthLinkToLogin = styled.span`
   line-height: 22px;
   color: ${BLACK};
   text-decoration: none;
+  &:hover {
+    color: ${NAVY_BLUE};
+  }
 `

@@ -26,6 +26,8 @@ import visibleOff from "@assets/auth/eyeSlash.svg";
 import google from '@assets/auth/google.svg'
 import { email, end, password } from '@constants/auth';
 import { LoginSchema } from '@validation/auth.validate';
+import { PATH } from '@router/index';
+import { NavLink } from 'react-router-dom';
 
 function LoginForm() {
   const [showPassword, setShowPassword] = React.useState(false);
@@ -105,7 +107,9 @@ function LoginForm() {
           />
           <AuthLinkContainer>
             {t("Auth.alreadyExistText")}
-            <AuthLinkToLogin>{t("Auth.click")}</AuthLinkToLogin>
+            <NavLink to={PATH.SIGN_UP}>
+              <AuthLinkToLogin>{t("Auth.click")}</AuthLinkToLogin>
+            </NavLink>
           </AuthLinkContainer>
         </Form>
       </AuthForm>

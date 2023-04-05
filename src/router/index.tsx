@@ -9,7 +9,7 @@ import ExamplePage from '@pages/examplePage';
 import SignUp from '@pages/auth/signUp';
 import Login from '@pages/auth/login';
 
-const PATH = {
+export const PATH = {
   LOGIN: "/login",
   SIGN_UP: "/sign-up",
   HOME: "/",
