@@ -1,0 +1,1 @@
+export type SignUpFields = "firstName" | "lastName" |"email" | "phoneNumber" | "password" | "confirmPassword";

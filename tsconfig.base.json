@@ -18,9 +18,12 @@
       "@components/*": ["components/*"],
       "@pages/*": ["pages/*"],
       "@constants/*": ["constants/*"],
+      "@types": ["types/index"],
       "@redux/*": ["redux/*"],
       "@router/*": ["router/*"],
-      "@translation/*": ["translation/*"]
+      "@translation/*": ["translation/*"],
+      "@validation/*": ["validation/*"],
+      "@assets/*": ["assets/*"],
     }
   },
   "exclude": ["node_modules", "tmp"]
