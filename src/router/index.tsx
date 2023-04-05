@@ -7,8 +7,10 @@ import {
 import ExamplePage2 from '@pages/exmaplePage2';
 import ExamplePage from '@pages/examplePage';
 import SignUp from '@pages/auth/signUp';
+import Login from '@pages/auth/login';
 
 const PATH = {
+  LOGIN: "/login",
   SIGN_UP: "/sign-up",
   HOME: "/",
   FORM: "/form"
@@ -20,6 +22,7 @@ export const router = createBrowserRouter(
       <Route path={PATH.HOME} element={<ExamplePage />} />
       <Route path={PATH.FORM} element={<ExamplePage2 />} />
       <Route path={PATH.SIGN_UP} element={<SignUp />} />
+      <Route path={PATH.LOGIN} element={<Login />} />
     </Route>
   )
 );

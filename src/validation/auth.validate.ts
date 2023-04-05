@@ -34,3 +34,17 @@ export const signUpSchema = yup.object().shape({
     .required('*Confirm password is required')
     .oneOf([yup.ref('password')], '*Passwords does not match'),
 });
+
+export const LoginSchema = yup.object().shape({
+  email: yup
+    .string()
+    .email('*Invalid email format')
+    .required('*Email is required'),
+  password: yup
+    .string()
+    .required('*Please Enter your password')
+    .matches(
+      PASSWORD_PATTERN,
+      '*Must Contain 10 Characters, One Uppercase, One Lowercase',
+    )
+});

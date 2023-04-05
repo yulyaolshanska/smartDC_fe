@@ -1,7 +1,7 @@
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { Trans, useTranslation } from 'react-i18next';
 import { Inputs } from './types';
-import { Form } from './style';
+import Form from './style';
 
 export default function ExampleForm() {
   const {
