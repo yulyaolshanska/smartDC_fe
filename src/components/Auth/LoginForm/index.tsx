@@ -2,13 +2,11 @@ import React, {useEffect} from 'react';
 import {useTranslation} from "react-i18next";
 import {useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
-import { useGoogleLogin } from '@react-oauth/google';
 import {IconButton, InputAdornment } from '@mui/material';
 import Input from '@components/Input';
 import {
   AuthContainer,
   AuthForm,
-  AuthGoogleContainer,
   AuthInput,
   AuthInputTitle,
   AuthLinkContainer,
@@ -16,18 +14,17 @@ import {
   AuthSendButton,
   AuthText,
   AuthTitle,
-  Form, GoogleImg,
-  GoogleText,
+  Form,
   PasswordImg
 } from '@components/Auth/styles';
 import { ILogin } from '@components/Auth/type';
 import visible from "@assets/auth/eye.svg";
 import visibleOff from "@assets/auth/eyeSlash.svg";
-import google from '@assets/auth/google.svg'
 import { email, end, password } from '@constants/auth';
 import { LoginSchema } from '@validation/auth.validate';
 import { PATH } from '@router/index';
 import { NavLink } from 'react-router-dom';
+import GoogleLoginButton from './GoogleLogin';
 
 function LoginForm() {
   const [showPassword, setShowPassword] = React.useState(false);
@@ -53,8 +50,6 @@ function LoginForm() {
   }, []);
 
   const onSubmit = (data: ILogin) => { };
-
-  const login = useGoogleLogin({ });
 
   return (
     <AuthContainer>
@@ -96,10 +91,7 @@ function LoginForm() {
               }}
             />
           </AuthInput>
-          <AuthGoogleContainer onClick={() => login()}>
-            <GoogleImg src={google}/>
-            <GoogleText>{t("Auth.continueWithGoogle")}</GoogleText>
-          </AuthGoogleContainer>
+          <GoogleLoginButton />
           <AuthSendButton
             disabled={!isValid}
             type='submit'
