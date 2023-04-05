@@ -10,7 +10,7 @@ export function useToggle(initialValue: boolean): [boolean, () => void] {
 export function useLanguageSwitcher() {
   const { i18n, t } = useTranslation();
   const [currentLanguage, setCurrentLanguage] = React.useState<string>(
-    i18n.language
+    i18n.language,
   );
 
   const changeLanguage = (language: string) => {

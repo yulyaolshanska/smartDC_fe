@@ -1,8 +1,8 @@
 import styled from 'styled-components';
+import { colors, fonts } from '@constants/index';
 import { ExampleButtonProps } from './types';
-import { colors, fonts } from '../../constants/index';
 
-export const ExampleButton = styled.button<ExampleButtonProps>`
+const ExampleButton = styled.button<ExampleButtonProps>`
   font-size: ${fonts.primary.size};
   padding: 10px;
   border: none;
@@ -17,3 +17,5 @@ export const ExampleButton = styled.button<ExampleButtonProps>`
       props.primary ? `${colors.primary}` : 'darkgreen'};
   }
 `;
+
+export default ExampleButton;
