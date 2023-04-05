@@ -106,7 +106,7 @@ function LoginForm() {
             value={t("Auth.continue").toString()}
           />
           <AuthLinkContainer>
-            {t("Auth.alreadyExistText")}
+            {t("Auth.haventAnAccount")}
             <NavLink to={PATH.SIGN_UP}>
               <AuthLinkToLogin>{t("Auth.click")}</AuthLinkToLogin>
             </NavLink>
