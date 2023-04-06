@@ -43,6 +43,7 @@ function LoginForm() {
       email: '',
       password: ''
     },
+    
     resolver: yupResolver(LoginSchema),
   });
   useEffect(() => {
