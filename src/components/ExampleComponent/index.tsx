@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { ExampleButton } from './style';
+import ExampleButton from './style';
 import { useToggle } from './exampleComponentHooks';
 import { useTranslation } from 'react-i18next';
 import { useLanguageSwitcher } from './exampleComponentHooks';
