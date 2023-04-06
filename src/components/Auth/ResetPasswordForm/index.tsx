@@ -40,6 +40,7 @@ function ResetPasswordForm() {
       password: '',
       confirmPassword: ''
     },
+    
     resolver: yupResolver(resetPasswordSchema),
   });
   useEffect(() => {
