@@ -17,7 +17,7 @@ import {
   Form,
   PasswordImg
 } from '@components/Auth/styles';
-import { ILogin } from '@components/Auth/type';
+import { ISignUp } from '@components/Auth/type';
 import visible from "@assets/auth/eye.svg";
 import visibleOff from "@assets/auth/eyeSlash.svg";
 import { email, end, password } from '@constants/auth';
@@ -37,7 +37,7 @@ function LoginForm() {
     handleSubmit,
     control,
     formState: { errors, isValid }
-  } = useForm<ILogin>({
+  } = useForm<ISignUp>({
     mode: 'onChange',
     defaultValues: {
       email: '',
@@ -50,7 +50,7 @@ function LoginForm() {
     register('password');
   }, []);
 
-  const onSubmit = (data: ILogin) => { };
+  const onSubmit = (data: ISignUp) => { };
 
   return (
     <AuthContainer>

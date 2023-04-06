@@ -7,14 +7,14 @@ import {InputContainer} from "@components/Input/styles";
 import { ISignUp } from "@components/Auth/type";
 import { ILogin } from "@components/Auth/type";
 
-export function Input({ control, name, label, error, type, placeholder, ...props}: TextFieldProps & { control: Control<ISignUp | ILogin>}) {
+export function Input({ control, name, label, error, type, placeholder, ...props}: TextFieldProps & { control: Control<ISignUp>}) {
   return (
     <InputContainer hasError={!!error}>
       <span>{label}</span>
       <Controller
         control={control}
         defaultValue=""
-        name={(name as SignUpFields | LoginFields)}
+        name={(name as SignUpFields)}
         render={(rest) => (
           <TextField
             {...props}
