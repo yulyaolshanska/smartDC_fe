@@ -102,7 +102,7 @@ function ResetPasswordForm() {
           <AuthSendButton
             disabled={!isValid}
             type='submit'
-            value={t("Auth.save").toString()}
+            value={t("Auth.save")??""}
           />
         </Form>
       </AuthForm>
