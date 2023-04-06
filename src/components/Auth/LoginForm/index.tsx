@@ -43,7 +43,7 @@ function LoginForm() {
       email: '',
       password: ''
     },
-    
+
     resolver: yupResolver(LoginSchema),
   });
   useEffect(() => {
@@ -96,7 +96,7 @@ function LoginForm() {
           <AuthSendButton
             disabled={!isValid}
             type='submit'
-            value={t("Auth.continue").toString()}
+            value={t("Auth.continue")??""}
           />
           <AuthLinkContainer>
             {t("Auth.haventAnAccount")}
