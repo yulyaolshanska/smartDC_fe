@@ -27,6 +27,13 @@ import visibleOff from "@assets/auth/eyeSlash.svg";
 import google from '@assets/auth/google.svg'
 import { confirmPassword, email, end, firstName, lastName, password, phoneNumber } from '@constants/auth';
 import { signUpSchema } from '@validation/auth.validate';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  selectAllData,
+} from '@redux/selectors/auth/signUp';
+import {
+  setAllData
+} from '@redux/slices/auth/signUp';
 
 function SignUpForm() {
   const [showPassword, setShowPassword] = React.useState(false);
@@ -36,11 +43,16 @@ function SignUpForm() {
   const handleClickShowConfirmPassword = () => setShowConfirmPassword((show) => !show);
 
   const { t } = useTranslation();
+  const dispatch = useDispatch();
+  const data = useSelector(selectAllData);
+  console.log("saas",data);
+
   const {
     register,
     handleSubmit,
     control,
-    formState: { errors, isValid }
+    formState: { errors, isValid },
+    reset
   } = useForm<ISignUp>({
     mode: 'onChange',
     defaultValues: {
@@ -58,7 +70,10 @@ function SignUpForm() {
     register('confirmPassword');
   }, []);
 
-  const onSubmit = (data: ISignUp) => { };
+  const onSubmit = (data: ISignUp) => {
+    dispatch(setAllData(data));
+    reset();
+  };
 
   const login = useGoogleLogin({ });
 

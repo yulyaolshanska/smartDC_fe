@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import { ExampleButton } from './style';
 import { useToggle } from './exampleComponentHooks';
 import { useTranslation } from 'react-i18next';
 import { useLanguageSwitcher } from './exampleComponentHooks';
+import ExampleButton from './style';
 
 function ExampleComponent() {
   const [isVisible, setIsVisible] = useToggle(false);
