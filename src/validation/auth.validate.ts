@@ -61,6 +61,6 @@ export const LoginSchema = yup.object().shape({
     .required('*Please Enter your password')
     .matches(
       PASSWORD_PATTERN,
-      '*Must Contain 10 Characters, One Uppercase, One Lowercase',
+      `*Must Contain ${PASSWORD_REQUIRED_LENGTH} Characters, One Uppercase, One Lowercase`,
     )
 });
