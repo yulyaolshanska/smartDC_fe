@@ -3,6 +3,8 @@ import * as yup from 'yup';
 const NAME_PATTERN = /^([A-Z][a-z]{1,11})/;
 const PASSWORD_PATTERN = /^(?=.*[a-z])(?=.*[A-Z])(?=.{10,})/;
 
+const PASSWORD_REQUIRED_LENGTH = 10;
+
 export const signUpSchema = yup.object().shape({
   firstName: yup
     .string()
@@ -27,7 +29,7 @@ export const signUpSchema = yup.object().shape({
     .required('*Please Enter your password')
     .matches(
       PASSWORD_PATTERN,
-      '*Must Contain 10 Characters, One Uppercase, One Lowercase',
+      `*Must Contain ${PASSWORD_REQUIRED_LENGTH} Characters, One Uppercase, One Lowercase`,
     ),
   confirmPassword: yup
     .string()
@@ -41,7 +43,7 @@ export const resetPasswordSchema = yup.object().shape({
     .required('*Please Enter your password')
     .matches(
       PASSWORD_PATTERN,
-      '*Must Contain 10 Characters, One Uppercase, One Lowercase',
+      `*Must Contain ${PASSWORD_REQUIRED_LENGTH} Characters, One Uppercase, One Lowercase`,
     ),
   confirmPassword: yup
     .string()
