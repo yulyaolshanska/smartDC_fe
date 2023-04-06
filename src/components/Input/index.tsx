@@ -15,7 +15,6 @@ export function Input({ control, name, label, error, type, placeholder, ...props
         name={(name as SignUpFields)}
         render={(rest) => (
           <>
-          {console.log("rest.field.value",rest.field.value)}
           <TextField
             {...props}
             id={name}

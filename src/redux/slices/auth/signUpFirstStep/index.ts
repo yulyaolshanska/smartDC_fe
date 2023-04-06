@@ -9,21 +9,21 @@ const initialState: ISignUp = {
   password: '',
   confirmPassword: ''
 };
-const signUpSlice = createSlice({
-  name: 'signUpSlice',
+const signUpFirstStepSlice = createSlice({
+  name: 'signUpFirstStepSlice',
   initialState,
   reducers: {
-    setAllData(state, action) {
+    setSignUpFirstStepData(state, action) {
       state.firstName = action.payload.firstName;
       state.lastName = action.payload.lastName;
       state.email = action.payload.email;
       state.phoneNumber = action.payload.phoneNumber;
       state.password = action.payload.password;
       state.confirmPassword = action.payload.confirmPassword;
-    }
+    },
   },
 });
 export const {
-  setAllData  } = signUpSlice.actions;
+  setSignUpFirstStepData  } = signUpFirstStepSlice.actions;
 
-export default signUpSlice.reducer;
+export default signUpFirstStepSlice.reducer;

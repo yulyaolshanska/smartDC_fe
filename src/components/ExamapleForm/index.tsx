@@ -1,8 +1,6 @@
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { Trans, useTranslation } from 'react-i18next';
-import Form from './style';
 import { Inputs } from './types';
-
 
 export default function ExampleForm() {
   const {
@@ -11,19 +9,16 @@ export default function ExampleForm() {
     watch,
     formState: { errors },
   } = useForm<Inputs>();
-  const onSubmit: SubmitHandler<Inputs> = (data) =>
-    alert('Form has been submitted');
-
-  console.log(watch('example'));
+  const onSubmit: SubmitHandler<Inputs> = (data) => {}
 
   return (
-    <Form onSubmit={handleSubmit(onSubmit)}>
+    <form style={{ backgroundColor: 'red' }} onSubmit={handleSubmit(onSubmit)}>
       <div>Field One</div>
       <input defaultValue="test" {...register('example')} />
       <div>Field Two</div>
       <input {...register('exampleRequired', { required: true })} />
       {errors.exampleRequired && <span>This field is required</span>}
       <input type="submit" />
-    </Form>
+    </form>
   );
 }

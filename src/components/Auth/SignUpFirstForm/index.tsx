@@ -28,14 +28,12 @@ import google from '@assets/auth/google.svg'
 import { confirmPassword, email, end, firstName, lastName, password, phoneNumber } from '@constants/auth';
 import { signUpSchema } from '@validation/auth.validate';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  selectAllData,
-} from '@redux/selectors/auth/signUp';
-import {
-  setAllData
-} from '@redux/slices/auth/signUp';
+import { selectSignUpFirstStepData } from '@redux/selectors/auth/signUp';
+import { setSignUpFirstStepData } from '@redux/slices/auth/signUpFirstStep';
+import { PATH } from '@router/index';
+import { useNavigate } from 'react-router-dom';
 
-function SignUpForm() {
+function SignUpFirstForm() {
   const [showPassword, setShowPassword] = React.useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = React.useState(false);
 
@@ -44,9 +42,9 @@ function SignUpForm() {
 
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const data = useSelector(selectAllData);
+  const data = useSelector(selectSignUpFirstStepData);
   console.log("saas",data);
-
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -71,7 +69,8 @@ function SignUpForm() {
   }, []);
 
   const onSubmit = (data: ISignUp) => {
-    dispatch(setAllData(data));
+    dispatch(setSignUpFirstStepData(data));
+    navigate(PATH.SIGN_UP_SECOND_STEP);
     reset();
   };
 
@@ -193,4 +192,4 @@ function SignUpForm() {
   );
 }
 
-export default SignUpForm;
+export default SignUpFirstForm;

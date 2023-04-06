@@ -6,12 +6,14 @@ import {
 } from 'react-router-dom';
 import ExamplePage2 from '@pages/exmaplePage2';
 import ExamplePage from '@pages/examplePage';
-import SignUp from '@pages/auth/signUp';
+import SignUpFirstPage from '@pages/auth/signUpFirstPage';
+import SignUpSecondPage from '@pages/auth/signUpSecondPage';
 
-const PATH = {
-  SIGN_UP: "/sign-up",
+export const PATH = {
+  SIGN_UP_FIRST_STEP: "/sign-up/first-step",
+  SIGN_UP_SECOND_STEP: "/sign-up/second-step",
   HOME: "/",
-  FORM: "/form"
+  FORM: "/form",
 }
 
 export const router = createBrowserRouter(
@@ -19,7 +21,8 @@ export const router = createBrowserRouter(
     <Route>
       <Route path={PATH.HOME} element={<ExamplePage />} />
       <Route path={PATH.FORM} element={<ExamplePage2 />} />
-      <Route path={PATH.SIGN_UP} element={<SignUp />} />
+      <Route path={PATH.SIGN_UP_FIRST_STEP} element={<SignUpFirstPage />} />
+      <Route path={PATH.SIGN_UP_SECOND_STEP} element={<SignUpSecondPage />} />
     </Route>
   )
 );

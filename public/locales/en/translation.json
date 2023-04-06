@@ -39,5 +39,39 @@
     "click": "Click here! ",
     "continueWithGoogle": "Continue with Google",
     "continue": "Continue"
+  },
+  "RegForm2": {
+    "title": "Registration",
+    "remark": "Please,create your medical account and",
+    "remark2": "become a member",
+    "role": "Role",
+    "placeholder_role":"Enter role...",
+    "specialization":"Specialization",
+    "placeholder_specialization":"Enter specialization...",
+    "gender":"Gender",
+    "placeholder_gender":"Enter your gender...",
+    "date_of_birth":"Date of birth",
+    "country":"Country",
+    "placeholder_country":"Enter your country...",
+    "city":"City",
+    "placeholder_city":"Enter your city...",
+    "address":"Address",
+    "placeholder_address":"Enter your address...",
+    "time_zone":"Time Zone",
+    "placeholder_time_zone":"Enter your timezone...",
+    "sign_up":"Sign Up",
+    "isAccount":"Already have an account  ",
+    "click_here":"Click here",
+    "error_role":"Role is required",
+    "error_specialization":"Specialization is required",
+    "error_gender":"Gender is required",
+    "error_date_of_birth":"Date of birth is required",
+    "error_country":"Country is required",
+    "error_address":"City is required",
+    "error_timezone":"Role is required"
   }
+
+
 }
+
+
