@@ -1,7 +1,9 @@
 import styled from "styled-components";
 import {
   BLACK, CORNFLOWER_BLUE,
+  DARK_GREEN,
   GHOST_WHITE,
+  LIGHT_GREEN,
   NAVY_BLUE,
   PINK_SWAN,
   VERY_LIGHT_GREY,
@@ -46,6 +48,18 @@ export const AuthText = styled.div`
   text-align: center;
   font-family: ${FONT_ROBOTO};
 `;
+
+export const AuthGreenText = styled.div`
+  background: ${LIGHT_GREEN};
+  color: ${DARK_GREEN};
+  font-size: ${MEDIUM_FONT_SIZE};
+  margin-left: auto;
+  margin-right: auto;
+  padding: 10px 36px;
+  text-align: center;
+  font-family: ${FONT_ROBOTO};
+  border-radius: 8px;
+`
 
 export const AuthInput = styled.div`
   display: flex;
