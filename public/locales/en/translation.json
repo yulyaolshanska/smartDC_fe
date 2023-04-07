@@ -21,7 +21,9 @@
     "email": "Email",
     "phoneNumber": "Phone Number",
     "createPassword": "Create a Password",
+    "createNewPassword": "Create new Password",
     "confirmPassword": "Confirm a Password",
+    "confirmNewPassword": "Confirm new Password",
     "forgotPasswordTitle": "Forgot Password",
     "forgotPasswordText": "Enter your email and we’ll send you a link to reset your password",
     "forgotPasswordLink": "Forgot the password?",
@@ -33,7 +35,9 @@
     "enterEmail": "Enter your email...",
     "enterPhoneNumber": "Enter your phoneNumber...",
     "enterPassword": "Enter your password...",
+    "enterNewPassword": "Enter new password...",
     "enterConfirmPassword": "Confirm your password...",
+    "enterConfirmNewPassword": "Confirm new password...",
     "defaultPhoneNumber": "+380 (00) 0000 00 00",
     "alreadyExistText": "Already have an account? ",
     "click": "Click here! ",
@@ -55,8 +59,12 @@
     "enterCity":"Enter your city...",
     "country":"Country",
     "enterCountry":"Enter your time country...",
+<<<<<<< HEAD
     "forgotPassword":"Forgot Password",
     "email_forgotPassword":"Enter your email we'll send you a link to reset your password",
     "backToLogin":"< Back to Login"
+=======
+    "save": "Save"
+>>>>>>> 0ae3bf592623f5c7ee9f80f6a98177d873fd9d6f
   }
 }
