@@ -15,24 +15,24 @@ import {
   AuthText,
   AuthTitle,
   Form,
-  InputInlineContainer,
+  InputInlineContainer
 } from '@components/Auth/styles';
-import { ISignUp} from '@components/Auth/type';
+import { ISignUp } from '@components/Auth/type';
 import {
   role,
   specialization,
   gender,
   address,
-  timezone,
+  time_zone,
   date_of_birth,
   city,
   country
 } from '@constants/auth';
 import { signUpSchema } from '@validation/auth.validate';
-import { roles, specializations, genders, countries, cities, timZones } from '@constants/mockData';
+import { roles, specializations, genders, countries, cities, timeZones } from '@constants/mockData';
+import SelectInput2 from '@components/Select2';
 
 function SignUpForm2() {
-
   const { t } = useTranslation();
   const {
     register,
@@ -41,9 +41,7 @@ function SignUpForm2() {
     formState: { errors, isValid }
   } = useForm<ISignUp>({
     mode: 'onChange',
-    defaultValues: {
-    },
-    // resolver: yupResolver(signUpSchema)
+    resolver: yupResolver(signUpSchema)
   });
 
   const onSubmit = (data: ISignUp) => {
@@ -58,7 +56,7 @@ function SignUpForm2() {
           <AuthText>{t('Auth.registrationText')}</AuthText>
           <AuthInput>
             <AuthInputTitle>{t('Auth.role')}</AuthInputTitle>
-            <SelectInput
+            <SelectInput2
               control={control}
               fullWidth
               name={role}
@@ -71,7 +69,7 @@ function SignUpForm2() {
           </AuthInput>
           <AuthInput>
             <AuthInputTitle>{t('Auth.specialization')}</AuthInputTitle>
-            <SelectInput
+            <SelectInput2
               control={control}
               fullWidth
               name={specialization}
@@ -84,7 +82,7 @@ function SignUpForm2() {
           </AuthInput>
           <AuthInput>
             <AuthInputTitle>{t('Auth.gender')}</AuthInputTitle>
-            <SelectInput
+            <SelectInput2
               control={control}
               fullWidth
               name={gender}
@@ -108,32 +106,34 @@ function SignUpForm2() {
               required={true}
             />
           </AuthInput>
-          <InputInlineContainer><AuthInput>
-            <AuthInputTitle>{t('Auth.country')}</AuthInputTitle>
-            <SelectInput
-              control={control}
-              fullWidth
-              name={country}
-              placeholder={t('Auth.enterCountry') ?? ''}
-              helperText={errors.country?.message}
-              error={Boolean(errors?.country)}
-              options={countries}
-              required={true}
-            />
-          </AuthInput>
-          <AuthInput>
-            <AuthInputTitle>{t('Auth.city')}</AuthInputTitle>
-            <SelectInput
-              control={control}
-              fullWidth
-              name={city}
-              placeholder={t('Auth.enterCity') ?? ''}
-              options={cities}
-              helperText={errors.city?.message}
-              error={Boolean(errors?.city)}
-              required={true}
-            />
-          </AuthInput></InputInlineContainer>
+          <InputInlineContainer>
+            <AuthInput>
+              <AuthInputTitle>{t('Auth.country')}</AuthInputTitle>
+              <SelectInput2
+                control={control}
+                fullWidth
+                name={country}
+                placeholder={t('Auth.enterCountry') ?? ''}
+                helperText={errors.country?.message}
+                error={Boolean(errors?.country)}
+                options={countries}
+                required={true}
+              />
+            </AuthInput>
+            <AuthInput>
+              <AuthInputTitle>{t('Auth.city')}</AuthInputTitle>
+              <SelectInput2
+                control={control}
+                fullWidth
+                name={city}
+                placeholder={t('Auth.enterCity') ?? ''}
+                options={cities}
+                helperText={errors.city?.message}
+                error={Boolean(errors?.city)}
+                required={true}
+              />
+            </AuthInput>
+          </InputInlineContainer>
           <AuthInput>
             <AuthInputTitle>{t('Auth.address')}</AuthInputTitle>
             <Input
@@ -143,19 +143,19 @@ function SignUpForm2() {
               placeholder={t('Auth.enterAddress') ?? ''}
               helperText={errors.address?.message}
               error={Boolean(errors?.address)}
-              required={true}
+              // required={true}
             />
           </AuthInput>
           <AuthInput>
             <AuthInputTitle>{t('Auth.timezone')}</AuthInputTitle>
-            <SelectInput
+            <SelectInput2
               control={control}
               fullWidth
-              name={timezone}
+              name={time_zone}
               placeholder={t('Auth.enterTimeZone') ?? ''}
               helperText={errors.time_zone?.message}
               error={Boolean(errors?.time_zone)}
-              options={timZones}
+              options={timeZones}
               required={true}
             />
           </AuthInput>

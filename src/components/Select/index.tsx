@@ -31,7 +31,9 @@ export function SelectInput({
             {...rest}
             id={name}
             type={type}
-            renderValue={(value) => (value ? value: placeholder)}
+            // renderValue={(value) => (value ? value: placeholder)}
+            placeholder={placeholder}
+            defaultValue = "sdlfjskd"
             value={rest.field.value}
             onChange={rest.field.onChange}
             fullWidth

@@ -1,7 +1,7 @@
 export const roles = [
-    { value: 'local', label: 'Local' },
-    { value: 'remote', label: 'Remote' },
-  ];
+  { value: 'local', label: 'Local' },
+  { value: 'remote', label: 'Remote' },
+];
 
 export const specializations = [
   { value: 'anesthesiology', label: 'Anesthesiology' },
@@ -23,7 +23,7 @@ export const cities = [
   { value: 'odessa', label: 'Odessa' },
 ];
 
-export const timZones = [
+export const timeZones = [
   {
     value: 'GMT-07:00',
     label: '(GMT-07:00) Phoenix, Tucson, Mesa, Chandler, Gilbert',

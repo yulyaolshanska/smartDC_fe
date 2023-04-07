@@ -10,22 +10,19 @@ address:yup
 .required('Field is required'),
  city:yup.string() 
 .required('Field is required'),
-// //   // country:yup
-// //   // .string() 
-// //   // .required('Field is required'),
-// //   // gender:yup
-// //   // .string()
-//   // .required('Field is required'),
-//   // specialization:yup
-//   // .string()
-//   // .required('Field is required'),
-//   // role:yup
-//   // .string()
-//   // .required('Field is required'),
-//   // date_of_birth:yup
-//   // .string()
-//   // .required('Field is required'),
-//   // time_zone:yup
-//   // .string()
-//   // .required('Field is required'),
+  country:yup
+  .string() 
+  .required('Field is required'),
+  gender:yup
+  .string()
+  .required('Field is required'),
+  specialization:yup
+  .string()
+  .required('Field is required'),
+  role:yup
+  .string()
+  .required('Field is required'),
+  time_zone:yup
+  .string()
+  .required('Field is required'),
 });

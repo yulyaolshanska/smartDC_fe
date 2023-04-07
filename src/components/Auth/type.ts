@@ -17,5 +17,4 @@ export interface ISignUp {
 
 export type Option = {
   value: string;
-  label: string;
 };
