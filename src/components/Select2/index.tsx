@@ -26,20 +26,16 @@ export function SelectInput2({
       <Controller
               control={control}
               name={name as SignUpFields}
-              // defaultValue={""}
               render={({ field: { ref, onChange, ...field } }) => (
                 <Autocomplete
                   options={options}
                   onChange={(_, data) => onChange(data?.value)}
-                  // defaultValue={options[0]}
                   renderInput={(params) => (
                     <TextField
                       {...params}
                       {...field}
                       fullWidth
                       inputRef={ref}
-                      // variant="filled"
-                      // label="Auto-Complete"
                       placeholder={placeholder}
                     />
                   )}

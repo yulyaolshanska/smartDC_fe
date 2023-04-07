@@ -20,6 +20,7 @@ export function Input({ control, name, label, error, type, placeholder, ...props
             type={type}
             placeholder={placeholder}
             value={rest.field.value}
+            sx={{ input: { color: type=='date'?"#cecdcd":null }} }
             onChange={rest.field.onChange}
           />
         )}
