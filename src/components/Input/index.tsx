@@ -5,7 +5,7 @@ import { SignUpFields } from '@types';
 import {InputContainer} from "@components/Input/styles";
 import { ISignUp } from "@components/Auth/type";
 
-export function Input({ control, name, label, error, type, placeholder, ...props}: TextFieldProps & { control: Control<ISignUp>}) {
+export function Input({ control, name, label, error, type, placeholder, ...props}: TextFieldProps & { control: Control<ISignUp>}, load:any) {
   return (
     <InputContainer hasError={!!error}>
       <span>{label}</span>

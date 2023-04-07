@@ -38,6 +38,22 @@
     "alreadyExistText": "Already have an account? ",
     "click": "Click here! ",
     "continueWithGoogle": "Continue with Google",
-    "continue": "Continue"
+    "continue": "Continue",
+    "role":"Role",
+    "enterRole":"Enter role...",
+    "specialization":"Specialization",
+    "enterSpecialization":"Enter your specialization...",
+    "gender":"Gender",
+    "enterGender":"Enter your gender...",
+    "address":"Address",
+    "enterAddress":"Enter your address...",
+    "timezone":"Time Zone",
+    "enterTimeZone":"Enter your time zone...",
+    "date_of_birth":"Date",
+    "enterDateOfBirth":"Enter your date of birth...",
+    "city":"City",
+    "enterCity":"Enter your city...",
+    "country":"Country",
+    "enterCountry":"Enter your time country..."  
   }
 }

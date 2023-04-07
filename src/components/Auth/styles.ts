@@ -1,16 +1,22 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 import {
-  BLACK, CORNFLOWER_BLUE,
+  BLACK,
+  CORNFLOWER_BLUE,
   GHOST_WHITE,
   NAVY_BLUE,
   PINK_SWAN,
   VERY_LIGHT_GREY,
   WHISPER,
   WHITE,
-  ZAMBEZI
+  ZAMBEZI,
 } from '@constants/colors';
-import { MEDIUM_FONT_SIZE, NORMAL_FONT_SIZE, SMALL_FONT_SIZE } from '@constants/fontSizes';
+import {
+  MEDIUM_FONT_SIZE,
+  NORMAL_FONT_SIZE,
+  SMALL_FONT_SIZE,
+} from '@constants/fontSizes';
 import { FONT_ROBOTO } from '@constants/fonts';
+import { Option } from './type';
 
 export const AuthContainer = styled.div`
   width: 100%;
@@ -19,8 +25,8 @@ export const AuthContainer = styled.div`
 
 export const AuthForm = styled.div`
   width: 70%;
-  background-color: ${GHOST_WHITE}; 
-  border: 1.5px solid ${WHISPER}; 
+  background-color: ${GHOST_WHITE};
+  border: 1.5px solid ${WHISPER};
   border-radius: 12px;
   display: flex;
   flex-direction: column;
@@ -28,11 +34,11 @@ export const AuthForm = styled.div`
   margin-right: auto;
   margin-left: auto;
   margin-bottom: 50px;
-  box-shadow: 0 0 50px ${VERY_LIGHT_GREY}; 
+  box-shadow: 0 0 50px ${VERY_LIGHT_GREY};
 `;
 
 export const AuthTitle = styled.h1`
-  color: ${BLACK}; 
+  color: ${BLACK};
   margin-top: 45px;
   margin-bottom: 35px;
   font-family: ${FONT_ROBOTO};
@@ -54,7 +60,7 @@ export const AuthInput = styled.div`
   align-items: start;
   font-family: ${FONT_ROBOTO};
   margin-bottom: 8px;
-`
+`;
 
 export const AuthInputTitle = styled.div`
   color: ${ZAMBEZI};
@@ -62,12 +68,12 @@ export const AuthInputTitle = styled.div`
   line-height: 20px;
   padding-top: 20px;
   padding-bottom: 5px;
-`
+`;
 
 export const Form = styled.form`
   width: 40%;
   margin-bottom: 30px;
-`
+`;
 
 export const PasswordImg = styled.img`
   width: 30px;
@@ -77,11 +83,11 @@ export const PasswordImg = styled.img`
 export const InputWrapper = styled.div`
   position: relative;
   width: 100%;
-`
+`;
 export const AuthSendButton = styled.input`
   :disabled {
-    background: ${PINK_SWAN}; 
-    color: ${WHITE}; 
+    background: ${PINK_SWAN};
+    color: ${WHITE};
   }
   display: flex;
   margin-right: auto;
@@ -95,12 +101,11 @@ export const AuthSendButton = styled.input`
   width: 45%;
   margin-top: 20px;
   line-height: 22px;
-  color: ${WHITE}; 
+  color: ${WHITE};
   font-size: ${SMALL_FONT_SIZE};
   font-weight: bold;
   background: -webkit-linear-gradient(${NAVY_BLUE}, ${CORNFLOWER_BLUE});
 `;
-
 
 export const AuthGoogleContainer = styled.div`
   display: flex;
@@ -114,27 +119,27 @@ export const AuthGoogleContainer = styled.div`
   height: 55px;
   width: 45%;
   margin-top: 40px;
-  background-color: ${WHITE}; 
-  color: ${BLACK}; 
+  background-color: ${WHITE};
+  color: ${BLACK};
   font-size: ${SMALL_FONT_SIZE};
   font-weight: bold;
   transition: all 0.2s ease-in-out;
 
   &:hover {
     background-color: ${NAVY_BLUE};
-    color: ${WHITE}; 
-    border-color: ${BLACK}; 
+    color: ${WHITE};
+    border-color: ${BLACK};
   }
-`
+`;
 
 export const GoogleImg = styled.img`
   width: 30px;
   height: 30px;
-`
+`;
 
 export const GoogleText = styled.span`
   padding-left: 10px;
-`
+`;
 
 export const AuthLinkContainer = styled.div`
   text-align: center;
@@ -144,7 +149,7 @@ export const AuthLinkContainer = styled.div`
   font-family: ${FONT_ROBOTO};
   line-height: 22px;
   margin-top: 20px;
-`
+`;
 
 export const AuthLinkToLogin = styled.span`
   font-style: normal;
@@ -152,4 +157,12 @@ export const AuthLinkToLogin = styled.span`
   line-height: 22px;
   color: ${BLACK};
   text-decoration: none;
-`
+`;
+
+export const InputInlineContainer = styled.div`
+  display: grid;
+  width: 100%;
+  justify-content: space-between;
+  gap: 1em;
+  grid-template-columns: 1fr 1fr;
+`;
