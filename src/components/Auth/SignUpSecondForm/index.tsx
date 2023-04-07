@@ -27,15 +27,19 @@ import {
 } from '@components/Auth/SignUpSecondForm/style';
 import { validationSchema } from '@components/Auth/SignUpSecondForm/validation';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectSignUpSecondStepData } from '@redux/selectors/auth/signUp';
-import { setSignUpSecondStepData } from '@redux/slices/auth/signUpSecondStep';
+import {IResponse} from "@components/Auth/type";
+import {signUpQuery} from "redux/slices/auth/signUp";
+import {useNavigate} from "react-router-dom";
+import {toast} from "react-toastify";
+import {selectSignUp} from "@redux/selectors/auth/signUp";
+import {AuthSignUpDto} from "../../../api/auth/auth.api";
 
 const SignUpSecondForm: React.FC = (): JSX.Element => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const data = useSelector(selectSignUpSecondStepData);
-
-  console.log("saas",data);
+  const navigate = useNavigate();
+  /*console.log("saas",data);*/
+    const dataSignUpFirst = useSelector(selectSignUp);
   const {
     register,
     handleSubmit,
@@ -45,7 +49,17 @@ const SignUpSecondForm: React.FC = (): JSX.Element => {
   });
 
   const onSubmit = (data: DoctorSubmitValue) => {
-    dispatch(setSignUpSecondStepData(data));
+      const newObj = {...dataSignUpFirst, data};
+      dispatch(signUpQuery(newObj as AuthSignUpDto)).then((res: IResponse) => {
+          if (!res.error){
+              navigate('/');
+          }
+          else {
+              toast.error("Sorry, something was wrong!", {
+                  position: toast.POSITION.TOP_CENTER,
+              })
+          }
+      });
   };
 
   return (

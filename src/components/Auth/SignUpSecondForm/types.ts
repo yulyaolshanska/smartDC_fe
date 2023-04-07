@@ -1,3 +1,5 @@
+import {ISignUp} from "@components/Auth/type";
+
 export interface InputType {
   type: string;
   placeholder?: string;
@@ -15,7 +17,7 @@ export interface InputOptions {
   options: OptionType[];
 }
 
-export type DoctorSubmitValue = {
+export interface DoctorSubmitValue extends ISignUp {
   role: string;
   specialization: string;
   gender: string;
@@ -24,6 +26,9 @@ export type DoctorSubmitValue = {
   date_of_birth: string;
   address: string;
   timezone: string;
+  isLoading?: boolean;
+  token?:string;
+  error?:string | null;
 };
 
 export interface SignInButtonProps {

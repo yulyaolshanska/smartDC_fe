@@ -6,3 +6,7 @@ export interface ISignUp{
   password: string;
   confirmPassword: string;
 }
+
+export interface IResponse {
+  error: string;
+}

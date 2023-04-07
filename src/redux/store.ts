@@ -1,14 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 import exampleSlice from './slices/ExampleSlice';
-import signUpFirstStepSlice from './slices/auth/signUpFirstStep';
-import signUpSecondStepSlice from './slices/auth/signUpSecondStep';
+import signUp from './slices/auth/signUp';
 
 export const store = configureStore({
   reducer: {
     exampleSlice,
-    signUpFirstStepSlice,
-    signUpSecondStepSlice
-
+    signUp,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

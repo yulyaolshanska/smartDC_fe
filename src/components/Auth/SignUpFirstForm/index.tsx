@@ -28,8 +28,8 @@ import google from '@assets/auth/google.svg'
 import { confirmPassword, email, end, firstName, lastName, password, phoneNumber } from '@constants/auth';
 import { signUpSchema } from '@validation/auth.validate';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectSignUpFirstStepData } from '@redux/selectors/auth/signUp';
-import { setSignUpFirstStepData } from '@redux/slices/auth/signUpFirstStep';
+import { selectSignUp } from '@redux/selectors/auth/signUp';
+import { setSignUpFirstStepData } from 'redux/slices/auth/signUp';
 import { PATH } from '@router/index';
 import { useNavigate } from 'react-router-dom';
 
@@ -42,7 +42,7 @@ function SignUpFirstForm() {
 
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const data = useSelector(selectSignUpFirstStepData);
+  const data = useSelector(selectSignUp);
   console.log("saas",data);
   const navigate = useNavigate();
   const {
