@@ -54,6 +54,9 @@
     "city":"City",
     "enterCity":"Enter your city...",
     "country":"Country",
-    "enterCountry":"Enter your time country..."  
+    "enterCountry":"Enter your time country...",
+    "forgotPassword":"Forgot Password",
+    "email_forgotPassword":"Enter your email we'll send you a link to reset your password",
+    "backToLogin":"< Back to Login"
   }
 }
