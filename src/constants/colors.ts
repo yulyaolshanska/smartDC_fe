@@ -50,3 +50,13 @@ export const SNUFF = "#0000FF00";
  * @deprecated
  */
 export const RED = "#FF0000FF";
+
+export const DODGE_BLUE = "dodgerblue";
+/**
+ * @deprecated
+ */
+export const DARK_GREEN = "#188038";
+/**
+ * @deprecated
+ */
+export const LIGHT_GREEN = "#BFE8CA";

@@ -20,7 +20,7 @@ import {
   GoogleText,
   PasswordImg
 } from '@components/Auth/styles';
-import { ISignUp } from '@components/Auth/type';
+import {ISignUp, ISignUpFirstStep} from '@components/Auth/type';
 import PhoneInput from "@components/PhoneInput";
 import visible from "@assets/auth/eye.svg";
 import visibleOff from "@assets/auth/eyeSlash.svg";
@@ -49,9 +49,9 @@ function SignUpFirstForm() {
     register,
     handleSubmit,
     control,
+    reset,
     formState: { errors, isValid },
-    reset
-  } = useForm<ISignUp>({
+  } = useForm<ISignUpFirstStep>({
     mode: 'onChange',
     defaultValues: {
       firstName: '',
@@ -68,12 +68,13 @@ function SignUpFirstForm() {
     register('confirmPassword');
   }, []);
 
-  const onSubmit = (data: ISignUp) => {
+  const onSubmit = (data: ISignUpFirstStep) => {
     dispatch(setSignUpFirstStepData(data));
     navigate(PATH.SIGN_UP_SECOND_STEP);
     reset();
   };
-
+  console.log('check is valid', isValid);
+  console.log('check is error', errors);
   const login = useGoogleLogin({ });
 
   return (

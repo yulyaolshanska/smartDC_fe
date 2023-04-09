@@ -2,7 +2,7 @@ import React from 'react';
 import Logo from '@components/Logo';
 import SignUpSecondForm from '@components/Auth/SignUpSecondForm';
 
-export const signUpSecondPage = () => {
+export const signUpSecondStep = () => {
   return (
     <>
       <Logo />
@@ -10,5 +10,5 @@ export const signUpSecondPage = () => {
     </>
   )
 };
-export default signUpSecondPage;
+export default signUpSecondStep;
 

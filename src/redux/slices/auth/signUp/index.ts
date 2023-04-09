@@ -1,8 +1,8 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
-import {DoctorSubmitValue} from "@components/Auth/SignUpSecondForm/types";
 import {authAPI, AuthSignUpDto} from "../../../../api/auth/auth.api";
+import {ISignUp} from "@components/Auth/type";
 
-const initialState: DoctorSubmitValue = {
+const initialState: ISignUp = {
   firstName: '',
   lastName: '',
   email: '',
@@ -16,7 +16,7 @@ const initialState: DoctorSubmitValue = {
   city: '',
   date_of_birth: '',
   address: '',
-  timezone: '',
+  time_zone: '',
   isLoading: false,
   token: JSON.parse(<string>localStorage.getItem('token')),
   error: null,

@@ -15,7 +15,7 @@ export interface AuthSignUpDto {
     city: string;
     date_of_birth: string;
     address: string;
-    timezone: string;
+    time_zone: string;
 }
 
 export interface AuthSignUpResponseDto {
@@ -32,11 +32,11 @@ export interface AuthSignUpResponseDto {
     city: string;
     date_of_birth: string;
     address: string;
-    timezone: string;
+    time_zone: string;
 }
 
 export const authAPI = {
-    signUp({firstName, lastName, email, phoneNumber, password, confirmPassword, role, specialization, gender, country, city, date_of_birth, address, timezone,}: AuthSignUpDto) {
+    signUp({firstName, lastName, email, phoneNumber, password, confirmPassword, role, specialization, gender, country, city, date_of_birth, address, time_zone,}: AuthSignUpDto) {
 
         return axios
             .post<AuthSignUpResponseDto>(API_URLS.signUp, {
@@ -53,7 +53,7 @@ export const authAPI = {
                 city,
                 date_of_birth,
                 address,
-                timezone,
+                time_zone,
             })
             .then((res) => res.data);
     }

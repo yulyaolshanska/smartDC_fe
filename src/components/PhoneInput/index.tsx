@@ -3,10 +3,10 @@ import {Control, Controller} from "react-hook-form";
 import {TextFieldProps} from "@mui/material/TextField/TextField";
 import 'react-phone-input-2/lib/bootstrap.css';
 import {HelperText, PhoneInputContainer } from '@components/PhoneInput/styles';
-import { ISignUp } from '@components/Auth/type';
+import {ISignUp, ISignUpFirstStep, ISignUpSecondStep} from '@components/Auth/type';
 import { SignUpFields } from '@types';
 
-function PhoneInput({ control, name, label, error, type, helperText, ...props}: TextFieldProps & { control: Control<ISignUp>}) {
+function PhoneInput({ control, name, label, error, type, helperText, ...props}: TextFieldProps & { control: Control<ISignUpFirstStep | ISignUpSecondStep>}) {
   return (
     <Controller
       control={control}

@@ -1,138 +1,202 @@
+import {useTranslation } from 'react-i18next';
 import { useForm } from 'react-hook-form';
-import { useTranslation } from 'react-i18next';
 import { yupResolver } from '@hookform/resolvers/yup';
-import {
-  roles,
-  specializations,
-  gender,
-  country,
-  city,
-  timZones
-} from '@components/Auth/SignUpSecondForm/constants/reg_form2';
-import { DoctorSubmitValue } from '@components/Auth/SignUpSecondForm/types';
-import { Options } from '@components/Auth/SignUpSecondForm/components/Options/Options';
-import { TitleComponent } from '@components/Auth/SignUpSecondForm/components/Title/TitleComponents';
-import {
-  RegForm2Container,
-  StyledSelect,
-  InputGroup,
-  StyledLabel,
-  StyledInput,
-  StyledButton,
-  InputInlineContainer,
-  InlineContainerRow,
-  ErrorMessage,
-  ButtonContainer,
-  LinkContainer
-} from '@components/Auth/SignUpSecondForm/style';
-import { validationSchema } from '@components/Auth/SignUpSecondForm/validation';
-import { useDispatch, useSelector } from 'react-redux';
-import {IResponse} from "@components/Auth/type";
-import {signUpQuery} from "redux/slices/auth/signUp";
-import {useNavigate} from "react-router-dom";
-import {toast} from "react-toastify";
-import {selectSignUp} from "@redux/selectors/auth/signUp";
-import {AuthSignUpDto} from "../../../api/auth/auth.api";
+import Input from '@components/Input';
 
-const SignUpSecondForm: React.FC = (): JSX.Element => {
+import {
+  AuthContainer,
+  AuthForm,
+  AuthInput,
+  AuthInputTitle,
+  AuthLinkContainer,
+  AuthLinkToLogin,
+  AuthSendButton,
+  AuthText,
+  AuthTitle,
+  Form,
+  InputInlineContainer
+} from '@components/Auth/styles';
+import {IResponse, ISignUp, ISignUpSecondStep} from '@components/Auth/type';
+
+import {
+  role,
+  specialization,
+  gender,
+  address,
+  time_zone,
+  date_of_birth,
+  city,
+  country
+} from '@constants/auth';
+import { signUpSchema } from '@validation/auth.validate';
+import { roles, specializations, genders, countries, cities, timeZones } from '@constants/mockData';
+import SelectInput from 'components/Select';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectSignUp } from '@redux/selectors/auth/signUp';
+import {signUpQuery } from '@redux/slices/auth/signUp';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { AuthSignUpDto } from 'api/auth/auth.api';
+
+function SignUpSecondForm() {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  /*console.log("saas",data);*/
-    const dataSignUpFirst = useSelector(selectSignUp);
+  const dataSignUpFirst = useSelector(selectSignUp);
   const {
     register,
     handleSubmit,
-    formState: { errors }
-  } = useForm<DoctorSubmitValue>({
-    resolver: yupResolver(validationSchema)
+    control,
+    formState: { errors, isValid }
+  } = useForm<ISignUpSecondStep>({
+    mode: 'onChange',
+    defaultValues: {
+      role: '',
+      gender: '',
+      city: '',
+      country: '',
+      address: '',
+      specialization: '',
+      date_of_birth: '',
+      time_zone: ''
+    },
+    resolver: yupResolver(signUpSchema)
   });
 
-  const onSubmit = (data: DoctorSubmitValue) => {
-      const newObj = {...dataSignUpFirst, data};
-      dispatch(signUpQuery(newObj as AuthSignUpDto)).then((res: IResponse) => {
-          if (!res.error){
-              navigate('/');
-          }
-          else {
-              toast.error("Sorry, something was wrong!", {
-                  position: toast.POSITION.TOP_CENTER,
-              })
-          }
-      });
+  const onSubmit = (data: ISignUpSecondStep) => {
+    const newObj = {...dataSignUpFirst, data};
+    dispatch(signUpQuery(newObj as AuthSignUpDto)).then((res: IResponse) => {
+      if (!res.error){
+        navigate('/');
+      }
+      else {
+        toast.error("Sorry, something was wrong!", {
+          position: toast.POSITION.TOP_CENTER,
+        })
+      }
+    });
   };
 
   return (
-    <RegForm2Container onSubmit={handleSubmit(onSubmit)}>
-      <TitleComponent />
-      <InputGroup>
-        <StyledLabel>{t('RegForm2.role')}</StyledLabel>
-        <StyledSelect {...register('role')}>
-          <Options title={t('RegForm2.placeholder_role')} options={roles} />
-        </StyledSelect>
-        <ErrorMessage>{errors.role?.message}</ErrorMessage>
-      </InputGroup>
-      <InputGroup>
-        <StyledLabel>{t('RegForm2.specialization')}</StyledLabel>
-        <StyledSelect {...register('specialization')}>
-          <Options title={t('RegForm2.placeholder_specialization')} options={specializations} />
-        </StyledSelect>
-        <ErrorMessage>{errors.specialization?.message}</ErrorMessage>
-      </InputGroup>
-      <InputGroup>
-        <StyledLabel>{t('RegForm2.gender')}</StyledLabel>
-        <StyledSelect {...register('gender')}>
-          <Options title={t('RegForm2.placeholder_gender')} options={gender} />
-        </StyledSelect>
-        <ErrorMessage>{errors.gender?.message}</ErrorMessage>
-      </InputGroup>
-      <InputGroup>
-        <StyledLabel>{t('RegForm2.date_of_birth')}</StyledLabel>
-        <StyledInput {...register('date_of_birth')} type="date" />
-      </InputGroup>
-      <ErrorMessage>{errors.date_of_birth?.message}</ErrorMessage>
-      <InputInlineContainer>
-        <InlineContainerRow>
-          <InputGroup>
-            <StyledLabel>{t('RegForm2.country')}</StyledLabel>
-            <StyledSelect {...register('country')}>
-              <Options title={t('RegForm2.placeholder_country')} options={country} />
-            </StyledSelect>
-            <ErrorMessage>{errors.country?.message}</ErrorMessage>
-          </InputGroup>
-        </InlineContainerRow>
-        <InlineContainerRow>
-          <StyledLabel>{t('RegForm2.city')}</StyledLabel>
-          <StyledSelect {...register('city')}>
-            <Options title={t('RegForm2.placeholder_country')} options={city} />
-          </StyledSelect>
-          <ErrorMessage>{errors.city?.message}</ErrorMessage>
-        </InlineContainerRow>
-      </InputInlineContainer>
-      <InputGroup>
-        <StyledLabel>{t('RegForm2.address')}</StyledLabel>
-        <StyledInput
-          {...register('address')}
-          type="text"
-          placeholder={t('RegForm2.placeholder_address')!}
-        />
-        <ErrorMessage>{errors.address?.message}</ErrorMessage>
-      </InputGroup>
-      <InputGroup>
-        <StyledLabel>{t('RegForm2.time_zone')}</StyledLabel>
-        <StyledSelect {...register('timezone')}>
-          <Options title={t('RegForm2.placeholder_time_zone')} options={timZones} />
-        </StyledSelect>
-        <ErrorMessage>{errors.timezone?.message}</ErrorMessage>
-      </InputGroup>
-      <ButtonContainer>
-        <StyledButton onClick={handleSubmit(onSubmit)}>{t('RegForm2.sign_up')}</StyledButton>
-      </ButtonContainer>
-      <span>
-        {t('RegForm2.isAccount')}
-        <LinkContainer to="/form">{t('RegForm2.click_here')}</LinkContainer>
-      </span>
-    </RegForm2Container>
+    <AuthContainer>
+      <AuthForm>
+        <Form onSubmit={handleSubmit(onSubmit)}>
+          <AuthTitle>{t('Auth.registrationTitle')}</AuthTitle>
+          <AuthText>{t('Auth.registrationText')}</AuthText>
+          <AuthInput>
+            <AuthInputTitle>{t('Auth.role')}</AuthInputTitle>
+            <SelectInput
+              control={control}
+              fullWidth
+              name={role}
+              placeholder={t('Auth.enterRole') ?? ''}
+              helperText={errors.role?.message}
+              error={Boolean(errors?.role)}
+              options={roles}
+              required={true}
+            />
+          </AuthInput>
+          <AuthInput>
+            <AuthInputTitle>{t('Auth.specialization')}</AuthInputTitle>
+            <SelectInput
+              control={control}
+              fullWidth
+              name={specialization}
+              placeholder={t('Auth.enterSpecialization') ?? ''}
+              options={specializations}
+              helperText={errors.specialization?.message}
+              error={Boolean(errors?.specialization)}
+              required={true}
+            />
+          </AuthInput>
+          <AuthInput>
+            <AuthInputTitle>{t('Auth.gender')}</AuthInputTitle>
+            <SelectInput
+              control={control}
+              fullWidth
+              name={gender}
+              placeholder={t('Auth.enterGender') ?? ''}
+              helperText={errors.gender?.message}
+              error={Boolean(errors?.gender)}
+              options={genders}
+              required={true}
+            />
+          </AuthInput>
+          <AuthInput>
+            <AuthInputTitle>{t('Auth.date_of_birth')}</AuthInputTitle>
+            {/*<Input
+              control={control}
+              fullWidth
+              name={date_of_birth}
+              type="date"
+              placeholder={t('Auth.enterDateOfBirth') ?? ''}
+              helperText={errors.date_of_birth?.message}
+              error={Boolean(errors?.date_of_birth)}
+              required={true}
+            />*/}
+          </AuthInput>
+          <InputInlineContainer>
+            <AuthInput>
+              <AuthInputTitle>{t('Auth.country')}</AuthInputTitle>
+              <SelectInput
+                control={control}
+                fullWidth
+                name={country}
+                placeholder={t('Auth.enterCountry') ?? ''}
+                helperText={errors.country?.message}
+                error={Boolean(errors?.country)}
+                options={countries}
+                required={true}
+              />
+            </AuthInput>
+            <AuthInput>
+              <AuthInputTitle>{t('Auth.city')}</AuthInputTitle>
+              <SelectInput
+                control={control}
+                fullWidth
+                name={city}
+                placeholder={t('Auth.enterCity') ?? ''}
+                options={cities}
+                helperText={errors.city?.message}
+                error={Boolean(errors?.city)}
+                required={true}
+              />
+            </AuthInput>
+          </InputInlineContainer>
+          <AuthInput>
+            <AuthInputTitle>{t('Auth.address')}</AuthInputTitle>
+            {/*<Input
+              control={control}
+              fullWidth
+              name={address}
+              placeholder={t('Auth.enterAddress') ?? ''}
+              helperText={errors.address?.message}
+              error={Boolean(errors?.address)}
+              // required={true}
+            />*/}
+          </AuthInput>
+          <AuthInput>
+            <AuthInputTitle>{t('Auth.timezone')}</AuthInputTitle>
+            <SelectInput
+              control={control}
+              fullWidth
+              name={time_zone}
+              placeholder={t('Auth.enterTimeZone') ?? ''}
+              helperText={errors.time_zone?.message}
+              error={Boolean(errors?.time_zone)}
+              options={timeZones}
+              required={true}
+            />
+          </AuthInput>
+          <AuthSendButton disabled={!isValid} type="submit" value={t('Auth.continue').toString()} />
+          <AuthLinkContainer>
+            {t('Auth.alreadyExistText')}
+            <AuthLinkToLogin>{t('Auth.click')}</AuthLinkToLogin>
+          </AuthLinkContainer>
+        </Form>
+      </AuthForm>
+    </AuthContainer>
   );
-};
+}
+
 export default SignUpSecondForm;

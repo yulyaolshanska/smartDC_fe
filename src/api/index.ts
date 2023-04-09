@@ -1,5 +1,5 @@
 
-const api = process.env.REACT_APP_SERVER_API_DEV;
+const api = '';
 
 export const API_URLS = {
     signUp: `${api}auth/sign-up/`,
