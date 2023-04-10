@@ -2,7 +2,6 @@ import React, {useEffect} from 'react';
 import {useTranslation} from "react-i18next";
 import {useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
-import { useGoogleLogin } from '@react-oauth/google';
 import {IconButton, InputAdornment } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -10,7 +9,6 @@ import Input from '@components/Input';
 import {
   AuthContainer,
   AuthForm,
-  AuthGoogleContainer,
   AuthInput,
   AuthInputTitle,
   AuthLinkContainer,
@@ -18,8 +16,7 @@ import {
   AuthSendButton,
   AuthText,
   AuthTitle,
-  Form, GoogleImg,
-  GoogleText,
+  Form,
   PasswordImg
 } from '@components/Auth/styles';
 import {ISignUp} from '@components/Auth/type';
