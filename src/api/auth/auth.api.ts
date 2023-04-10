@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { API_URLS } from '../index';
+import { API_URLS } from 'api';
 
 export interface AuthSignUpDto {
     firstName: string;
@@ -9,37 +9,19 @@ export interface AuthSignUpDto {
     password: string;
     confirmPassword: string;
     role: string;
-    specialization: string;
+    specialization: number;
     gender: string;
     country: string;
     city: string;
-    date_of_birth: string;
+    birthDate: string;
     address: string;
-    time_zone: string;
-}
-
-export interface AuthSignUpResponseDto {
-    firstName: string;
-    lastName: string;
-    email: string;
-    phoneNumber: string;
-    password: string;
-    confirmPassword: string;
-    role: string;
-    specialization: string;
-    gender: string;
-    country: string;
-    city: string;
-    date_of_birth: string;
-    address: string;
-    time_zone: string;
+    timeZone: string;
 }
 
 export const authAPI = {
-    signUp({firstName, lastName, email, phoneNumber, password, confirmPassword, role, specialization, gender, country, city, date_of_birth, address, time_zone,}: AuthSignUpDto) {
-
+    signUp({firstName, lastName, email, phoneNumber, password, confirmPassword, role, specialization, gender, country, city, birthDate, address, timeZone,}: AuthSignUpDto) {
         return axios
-            .post<AuthSignUpResponseDto>(API_URLS.signUp, {
+            .post<AuthSignUpDto>(API_URLS.signUp, {
                 firstName ,
                 lastName ,
                 email,
@@ -51,9 +33,9 @@ export const authAPI = {
                 gender,
                 country,
                 city,
-                date_of_birth,
+                birthDate,
                 address,
-                time_zone,
+                timeZone
             })
             .then((res) => res.data);
     }

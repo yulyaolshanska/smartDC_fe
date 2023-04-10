@@ -1,33 +1,30 @@
 export const roles = [
-  { value: 'local', label: 'Local' },
-  { value: 'remote', label: 'Remote' },
+  { value: 'Local', label: 'Local' },
+  { value: 'Remote', label: 'Remote' },
 ];
 
 export const specializations = [
-  { value: 'anesthesiology', label: 'Anesthesiology' },
-  { value: 'cardiology', label: 'Cardiology' },
+  { value: 1, label: 'Anesthesiology' },
+  { value: 2, label: 'Cardiology' },
 ];
 
 export const genders = [
-  { value: 'male', label: 'Male' },
-  { value: 'female', label: 'Female' },
+  { value: 'Male', label: 'Male' },
+  { value: 'Female', label: 'Female' },
 ];
 
 export const countries = [
-  { value: 'ukraine', label: 'Ukraine' },
-  { value: 'usa', label: 'USA' },
+  { value: 'UA', label: 'Ukraine' },
+  { value: 'USA', label: 'USA' },
 ];
 
 export const cities = [
-  { value: 'kiev', label: 'Kiev' },
-  { value: 'odessa', label: 'Odessa' },
+  { value: 'Kiev', label: 'Kiev' },
+  { value: 'Odessa', label: 'Odessa' },
 ];
 
 export const timeZones = [
-  {
-    value: 'GMT-07:00',
-    label: '(GMT-07:00) Phoenix, Tucson, Mesa, Chandler, Gilbert',
-  },
-  { value: 'GMT-07:00)', label: '(GMT-07:00) Whitehorse' },
+  { value: '(GMT+2) Europe/Berlin', label: '(GMT+2) Europe/Berlin' },
+  { value: 'GMT+7) Whitehorse/Phoenix', label: '(GMT-07:00) Whitehorse' },
   { value: 'GMT-06:00', label: '(GMT-06:00) Mezcales, San Vicente, Bucerías' },
 ];

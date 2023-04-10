@@ -1,10 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
-import exampleSlice from './slices/ExampleSlice';
-import signUp from './slices/auth/signUp';
+import signUp from '@redux/slices/auth/signUp';
 
 export const store = configureStore({
   reducer: {
-    exampleSlice,
     signUp,
   },
   middleware: (getDefaultMiddleware) =>

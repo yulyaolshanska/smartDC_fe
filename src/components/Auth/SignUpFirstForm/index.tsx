@@ -4,6 +4,8 @@ import {useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
 import { useGoogleLogin } from '@react-oauth/google';
 import {IconButton, InputAdornment } from '@mui/material';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import Input from '@components/Input';
 import {
   AuthContainer,
@@ -20,18 +22,16 @@ import {
   GoogleText,
   PasswordImg
 } from '@components/Auth/styles';
-import {ISignUp, ISignUpFirstStep} from '@components/Auth/type';
+import {ISignUp} from '@components/Auth/type';
 import PhoneInput from "@components/PhoneInput";
 import visible from "@assets/auth/eye.svg";
 import visibleOff from "@assets/auth/eyeSlash.svg";
-import google from '@assets/auth/google.svg'
 import { confirmPassword, email, end, firstName, lastName, password, phoneNumber } from '@constants/auth';
-import { signUpSchema } from '@validation/auth.validate';
-import { useDispatch, useSelector } from 'react-redux';
-import { selectSignUp } from '@redux/selectors/auth/signUp';
-import { setSignUpFirstStepData } from 'redux/slices/auth/signUp';
-import { PATH } from '@router/index';
-import { useNavigate } from 'react-router-dom';
+import { signUpFirstStepSchema } from '@validation/auth.validate';
+import { setSignUpFirstStepData } from '@redux/slices/auth/signUp';
+import {PATH} from "@router/index";
+import AuthGoogleButton from "@components/Auth/AuthGoogleButton";
+
 
 function SignUpFirstForm() {
   const [showPassword, setShowPassword] = React.useState(false);
@@ -42,16 +42,13 @@ function SignUpFirstForm() {
 
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const data = useSelector(selectSignUp);
-  console.log("saas",data);
   const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     control,
-    reset,
     formState: { errors, isValid },
-  } = useForm<ISignUpFirstStep>({
+  } = useForm<ISignUp>({
     mode: 'onChange',
     defaultValues: {
       firstName: '',
@@ -61,21 +58,18 @@ function SignUpFirstForm() {
       password: '',
       confirmPassword: ''
     },
-    resolver: yupResolver(signUpSchema),
+
+    resolver: yupResolver(signUpFirstStepSchema),
   });
   useEffect(() => {
     register('password');
     register('confirmPassword');
   }, []);
 
-  const onSubmit = (data: ISignUpFirstStep) => {
+  const onSubmit = (data: ISignUp) => {
     dispatch(setSignUpFirstStepData(data));
     navigate(PATH.SIGN_UP_SECOND_STEP);
-    reset();
   };
-  console.log('check is valid', isValid);
-  console.log('check is error', errors);
-  const login = useGoogleLogin({ });
 
   return (
     <AuthContainer>
@@ -145,7 +139,7 @@ function SignUpFirstForm() {
                 endAdornment: (
                   <IconButton onClick={handleClickShowPassword}>
                     <InputAdornment position={end}>
-                      {showPassword ? <PasswordImg src={visible}/> : <PasswordImg src={visibleOff}/>}
+                      {<PasswordImg src={showPassword ? visible : visibleOff}/>}
                     </InputAdornment>
                   </IconButton>
                 ),
@@ -167,21 +161,18 @@ function SignUpFirstForm() {
                 endAdornment: (
                   <IconButton onClick={handleClickShowConfirmPassword}>
                     <InputAdornment position={end}>
-                      {showConfirmPassword ? <PasswordImg src={visible}/> : <PasswordImg src={visibleOff}/>}
+                      {<PasswordImg src={showConfirmPassword ? visible : visibleOff}/>}
                     </InputAdornment>
                   </IconButton>
                 ),
               }}
             />
           </AuthInput>
-          <AuthGoogleContainer onClick={() => login()}>
-            <GoogleImg src={google}/>
-            <GoogleText>{t("Auth.continueWithGoogle")}</GoogleText>
-          </AuthGoogleContainer>
+          <AuthGoogleButton/>
           <AuthSendButton
             disabled={!isValid}
             type='submit'
-            value={t("Auth.continue").toString()}
+            value={t("Auth.continue")??""}
           />
           <AuthLinkContainer>
             {t("Auth.alreadyExistText")}

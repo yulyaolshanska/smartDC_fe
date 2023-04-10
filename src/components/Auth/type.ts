@@ -1,33 +1,30 @@
-export interface ISignUpFirstStep {
+export interface ISignUp {
   firstName: string;
   lastName: string;
   email: string;
   phoneNumber: string;
   password: string;
   confirmPassword: string;
-}
-export interface ISignUpSecondStep extends ISignUpFirstStep{
   role: string;
-  specialization: string;
+  specialization: number;
   gender: string;
   country: string;
   city: string;
-  date_of_birth: string;
+  birthDate: string;
   address: string;
-  time_zone: string;
-}
-export interface ISignUp extends ISignUpSecondStep{
+  timeZone: string;
   isLoading?: boolean;
   token?:string;
   error?:string | null;
 }
-
 
 export interface IResponse {
   error: string;
 }
 
 export type Option = {
-  value: string;
+  value: string | number;
 };
+
+
 

@@ -1,10 +1,9 @@
 import { Control, Controller } from 'react-hook-form';
 import { TextFieldProps} from '@mui/material/TextField/TextField';
 import {TextField, Autocomplete} from "@mui/material";
-
 import { InputContainer } from '@components/Input/styles';
 import {ISignUp, Option} from '@components/Auth/type';
-import { SignUpFields } from 'types/auth.type';
+import { SignUpFields } from '@types';
 
 export type Props = {
   options: Option[];
@@ -16,7 +15,6 @@ export function SelectInput({
   name,
   label,
   error,
-  type,
   placeholder,
   options
 }: Props & { control: Control<ISignUp> }) {

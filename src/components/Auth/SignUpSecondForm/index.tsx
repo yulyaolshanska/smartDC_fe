@@ -1,8 +1,10 @@
 import {useTranslation } from 'react-i18next';
 import { useForm } from 'react-hook-form';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { yupResolver } from '@hookform/resolvers/yup';
 import Input from '@components/Input';
-
 import {
   AuthContainer,
   AuthForm,
@@ -16,39 +18,26 @@ import {
   Form,
   InputInlineContainer
 } from '@components/Auth/styles';
-import {IResponse, ISignUp, ISignUpSecondStep} from '@components/Auth/type';
-
-import {
-  role,
-  specialization,
-  gender,
-  address,
-  time_zone,
-  date_of_birth,
-  city,
-  country
-} from '@constants/auth';
-import { signUpSchema } from '@validation/auth.validate';
+import {IResponse, ISignUp} from '@components/Auth/type';
+import {role, specialization, gender, address, timeZone, birthDate, city, country, date} from '@constants/auth';
+import { signUpSecondStepSchema } from '@validation/auth.validate';
 import { roles, specializations, genders, countries, cities, timeZones } from '@constants/mockData';
-import SelectInput from 'components/Select';
-import { useDispatch, useSelector } from 'react-redux';
+import SelectInput from '@components/Select';
 import { selectSignUp } from '@redux/selectors/auth/signUp';
 import {signUpQuery } from '@redux/slices/auth/signUp';
-import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
-import { AuthSignUpDto } from 'api/auth/auth.api';
+import { AuthSignUpDto } from '@api/auth/auth.api';
 
 function SignUpSecondForm() {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const dataSignUpFirst = useSelector(selectSignUp);
+
   const {
-    register,
     handleSubmit,
     control,
     formState: { errors, isValid }
-  } = useForm<ISignUpSecondStep>({
+  } = useForm<ISignUp>({
     mode: 'onChange',
     defaultValues: {
       role: '',
@@ -56,16 +45,19 @@ function SignUpSecondForm() {
       city: '',
       country: '',
       address: '',
-      specialization: '',
-      date_of_birth: '',
-      time_zone: ''
+      specialization: 0,
+      birthDate: '',
+      timeZone: ''
     },
-    resolver: yupResolver(signUpSchema)
+
+    resolver: yupResolver(signUpSecondStepSchema)
   });
 
-  const onSubmit = (data: ISignUpSecondStep) => {
-    const newObj = {...dataSignUpFirst, data};
-    dispatch(signUpQuery(newObj as AuthSignUpDto)).then((res: IResponse) => {
+  const onSubmit = (data: ISignUp) => {
+    data.specialization = Number(data.specialization);
+    const combinedObj = Object.assign({}, dataSignUpFirst, data);
+
+    dispatch(signUpQuery(combinedObj as AuthSignUpDto)).then((res: IResponse) => {
       if (!res.error){
         navigate('/');
       }
@@ -123,17 +115,17 @@ function SignUpSecondForm() {
             />
           </AuthInput>
           <AuthInput>
-            <AuthInputTitle>{t('Auth.date_of_birth')}</AuthInputTitle>
-            {/*<Input
+            <AuthInputTitle>{t('Auth.birthDate')}</AuthInputTitle>
+            <Input
               control={control}
               fullWidth
-              name={date_of_birth}
-              type="date"
+              name={birthDate}
+              type={date}
               placeholder={t('Auth.enterDateOfBirth') ?? ''}
-              helperText={errors.date_of_birth?.message}
-              error={Boolean(errors?.date_of_birth)}
+              helperText={errors.birthDate?.message}
+              error={Boolean(errors?.birthDate)}
               required={true}
-            />*/}
+            />
           </AuthInput>
           <InputInlineContainer>
             <AuthInput>
@@ -165,30 +157,32 @@ function SignUpSecondForm() {
           </InputInlineContainer>
           <AuthInput>
             <AuthInputTitle>{t('Auth.address')}</AuthInputTitle>
-            {/*<Input
+            <Input
               control={control}
               fullWidth
               name={address}
               placeholder={t('Auth.enterAddress') ?? ''}
               helperText={errors.address?.message}
               error={Boolean(errors?.address)}
-              // required={true}
-            />*/}
+            />
           </AuthInput>
           <AuthInput>
-            <AuthInputTitle>{t('Auth.timezone')}</AuthInputTitle>
+            <AuthInputTitle>{t('Auth.timeZone')}</AuthInputTitle>
             <SelectInput
               control={control}
               fullWidth
-              name={time_zone}
+              name={timeZone}
               placeholder={t('Auth.enterTimeZone') ?? ''}
-              helperText={errors.time_zone?.message}
-              error={Boolean(errors?.time_zone)}
+              helperText={errors.timeZone?.message}
+              error={Boolean(errors?.timeZone)}
               options={timeZones}
               required={true}
             />
           </AuthInput>
-          <AuthSendButton disabled={!isValid} type="submit" value={t('Auth.continue').toString()} />
+          <AuthSendButton
+              disabled={!isValid}
+              type="submit"
+              value={t('Auth.signUp')??""} />
           <AuthLinkContainer>
             {t('Auth.alreadyExistText')}
             <AuthLinkToLogin>{t('Auth.click')}</AuthLinkToLogin>

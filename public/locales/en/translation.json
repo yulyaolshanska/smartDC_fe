@@ -49,7 +49,7 @@
     "enterSpecialization":"Enter specialization...",
     "gender":"Gender",
     "enterGender":"Enter your gender...",
-    "date_of_birth":"Date of birth",
+    "birthDate":"Date of birth",
     "enterDateOfBirth": "dd/mm/yyyy",
     "country":"Country",
     "enterCountry":"Enter your country...",
@@ -57,7 +57,7 @@
     "enterCity":"Enter your city...",
     "address":"Address",
     "enterAddress":"Enter your address...",
-    "time_zone":"Time Zone",
+    "timeZone":"Time Zone",
     "enterTimeZone":"Enter your timezone..."
   }
 }

@@ -1,6 +1,7 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
-import {authAPI, AuthSignUpDto} from "../../../../api/auth/auth.api";
 import {ISignUp} from "@components/Auth/type";
+import {authAPI, AuthSignUpDto} from "@api/auth/auth.api";
+import {plus} from "@constants/auth";
 
 const initialState: ISignUp = {
   firstName: '',
@@ -10,13 +11,13 @@ const initialState: ISignUp = {
   password: '',
   confirmPassword: '',
   role: '',
-  specialization: '',
+  specialization: 0,
   gender: '',
   country: '',
   city: '',
-  date_of_birth: '',
+  birthDate: '',
   address: '',
-  time_zone: '',
+  timeZone: '',
   isLoading: false,
   token: JSON.parse(<string>localStorage.getItem('token')),
   error: null,
@@ -46,7 +47,7 @@ const signUp = createSlice({
       state.firstName = action.payload.firstName;
       state.lastName = action.payload.lastName;
       state.email = action.payload.email;
-      state.phoneNumber = action.payload.phoneNumber;
+      state.phoneNumber = plus + action.payload.phoneNumber;
       state.password = action.payload.password;
       state.confirmPassword = action.payload.confirmPassword;
     },

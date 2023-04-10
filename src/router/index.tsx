@@ -11,7 +11,6 @@ export const PATH = {
     SIGN_UP_FIRST_STEP: "/sign-up/first-step",
     SIGN_UP_SECOND_STEP: "/sign-up/second-step",
     HOME: "/",
-    FORM: "/form",
 }
 
 export const router = createBrowserRouter(

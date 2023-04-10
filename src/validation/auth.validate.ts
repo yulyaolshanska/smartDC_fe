@@ -1,9 +1,10 @@
 import * as yup from 'yup';
+import {PASSWORD_REQUIRED_LENGTH} from "@constants/auth";
 
 const NAME_PATTERN = /^([A-Z][a-z]{1,11})/;
 const PASSWORD_PATTERN = /^(?=.*[a-z])(?=.*[A-Z])(?=.{10,})/;
 
-export const signUpSchema = yup.object().shape({
+export const signUpFirstStepSchema = yup.object().shape({
  firstName: yup
      .string()
      .required('*First name is required')
@@ -27,12 +28,14 @@ export const signUpSchema = yup.object().shape({
      .required('*Please Enter your password')
      .matches(
          PASSWORD_PATTERN,
-         '*Must Contain 10 Characters, One Uppercase, One Lowercase',
+         `*Must Contain ${PASSWORD_REQUIRED_LENGTH} Characters, One Uppercase, One Lowercase`,
      ),
  confirmPassword: yup
      .string()
      .required('*Confirm password is required')
      .oneOf([yup.ref('password')], '*Passwords does not match'),
+});
+export const signUpSecondStepSchema = yup.object().shape({
  address:yup
      .string()
      .required('Field is required'),
@@ -50,7 +53,7 @@ export const signUpSchema = yup.object().shape({
  role:yup
      .string()
      .required('Field is required'),
- time_zone:yup
+ timeZone:yup
      .string()
      .required('Field is required'),
 });

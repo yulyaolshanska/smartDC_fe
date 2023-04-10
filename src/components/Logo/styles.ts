@@ -4,7 +4,6 @@ import { CORNFLOWER_BLUE, NAVY_BLUE } from '@constants/colors';
 import { FONT_ROBOTO } from '@constants/fonts';
 
 export const LogoContainer = styled.div`
-  margin: 20px;
   display: flex;
   align-items: center;
   flex-direction: row;

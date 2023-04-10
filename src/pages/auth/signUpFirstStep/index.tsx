@@ -1,12 +1,11 @@
 import React from 'react';
-
-import Logo from '@components/Logo';
 import SignUpFirstForm from '@components/Auth/SignUpFirstForm';
+import Header from "@components/Header";
 
 const SignUpFirstStep = () => {
   return (
     <>
-      <Logo />
+      <Header />
       <SignUpFirstForm/>
     </>
   );

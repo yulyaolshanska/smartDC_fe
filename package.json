@@ -13,7 +13,6 @@
   "private": true,
   "dependencies": {
     "@emotion/styled": "^11.10.6",
-    "@esbuild/darwin-x64": "^0.17.15",
     "@hookform/resolvers": "^3.0.0",
     "@mui/material": "^5.11.15",
     "@mui/x-date-pickers": "^6.0.4",
