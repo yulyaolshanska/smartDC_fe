@@ -57,3 +57,16 @@ export const signUpSecondStepSchema = yup.object().shape({
      .string()
      .required('Field is required'),
 });
+export const LoginSchema = yup.object().shape({
+  email: yup
+    .string()
+    .email('*Invalid email format')
+    .required('*Email is required'),
+  password: yup
+    .string()
+    .required('*Please Enter your password')
+    .matches(
+      PASSWORD_PATTERN,
+      `*Must Contain ${PASSWORD_REQUIRED_LENGTH} Characters, One Uppercase, One Lowercase`,
+    )
+});
