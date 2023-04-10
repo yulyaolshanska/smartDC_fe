@@ -1,10 +1,14 @@
-/* You can add global styles to this file*/
+/*
+!* You can add global styles to this file*!
+
 
 * {
   padding: 0px;
   margin: 0px;
   border: none;
+  box-sizing: border-box;
 }
+
 
 *,
 *::before,
@@ -22,22 +26,22 @@ a:active {
   outline: none;
 }
 
-/* Links */
+!* Links *!
 
 a,
 a:link,
 a:visited {
-  /* color: inherit; */
+  !* color: inherit; *!
   text-decoration: none;
-  /* display: inline-block; */
+  !* display: inline-block; *!
 }
 
 a:hover {
-  /* color: inherit; */
+  !* color: inherit; *!
   text-decoration: none;
 }
 
-/* Common */
+!* Common *!
 
 aside,
 nav,
@@ -55,8 +59,6 @@ h4,
 h5,
 h6,
 p {
-  font-size: inherit;
-  font-weight: inherit;
 }
 
 ul,
@@ -78,7 +80,7 @@ address {
   font-style: normal;
 }
 
-/* Form */
+!* Form *!
 
 input,
 textarea,
@@ -96,10 +98,7 @@ input::-ms-clear {
 
 button,
 input[type='submit'] {
-  display: inline-block;
   box-shadow: none;
-  background-color: transparent;
-  background: none;
   cursor: pointer;
 }
 
@@ -121,4 +120,4 @@ label {
 
 legend {
   display: block;
-}
+}*/

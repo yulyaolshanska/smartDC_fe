@@ -1,0 +1,15 @@
+export const firstName = 'firstName';
+export const lastName = 'lastName';
+export const phoneNumber = 'phoneNumber';
+export const email = 'email';
+export const password = 'password';
+export const confirmPassword = 'confirmPassword';
+export const end = 'end';
+export const address = 'address';
+export const role = 'role';
+export const specialization = 'specialization';
+export const gender = 'gender';
+export const time_zone = 'time_zone';
+export const date_of_birth = 'date';
+export const city = 'city';
+export const country = 'country';
