@@ -70,3 +70,17 @@ export const LoginSchema = yup.object().shape({
       `*Must Contain ${PASSWORD_REQUIRED_LENGTH} Characters, One Uppercase, One Lowercase`,
     )
 });
+
+export const resetPasswordSchema = yup.object().shape({
+    password: yup
+        .string()
+        .required('*Please Enter your password')
+        .matches(
+            PASSWORD_PATTERN,
+            `*Must Contain ${PASSWORD_REQUIRED_LENGTH} Characters, One Uppercase, One Lowercase`,
+        ),
+    confirmPassword: yup
+        .string()
+        .required('*Confirm password is required')
+        .oneOf([yup.ref('password')], '*Passwords does not match'),
+});

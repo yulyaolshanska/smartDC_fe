@@ -173,7 +173,7 @@ function SignUpFirstForm() {
           />
           <AuthLinkContainer>
             {t("Auth.alreadyExistText")}
-            <AuthLinkToLogin>{t("Auth.click")}</AuthLinkToLogin>
+            <AuthLinkToLogin to={PATH.LOGIN}>{t("Auth.click")}</AuthLinkToLogin>
           </AuthLinkContainer>
         </Form>
       </AuthForm>

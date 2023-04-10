@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import {
-  BLACK, CORNFLOWER_BLUE,
-  GHOST_WHITE,
+  BLACK, CORNFLOWER_BLUE, DARK_GREEN,
+  GHOST_WHITE, LIGHT_GREEN,
   NAVY_BLUE,
   PINK_SWAN,
   VERY_LIGHT_GREY,
@@ -15,6 +15,7 @@ import {
   SMALL_FONT_SIZE,
 } from '@constants/fontSizes';
 import { FONT_ROBOTO } from '@constants/fonts';
+import {NavLink} from "react-router-dom";
 
 export const AuthContainer = styled.div`
   width: 100%;
@@ -50,6 +51,18 @@ export const AuthText = styled.div`
   text-align: center;
   font-family: ${FONT_ROBOTO};
 `;
+
+export const AuthGreenText = styled.div`
+  background: ${LIGHT_GREEN};
+  color: ${DARK_GREEN};
+  font-size: ${MEDIUM_FONT_SIZE};
+  margin-left: auto;
+  margin-right: auto;
+  padding: 10px 36px;
+  text-align: center;
+  font-family: ${FONT_ROBOTO};
+  border-radius: 8px;
+`
 
 export const AuthInput = styled.div`
   display: flex;
@@ -146,12 +159,16 @@ export const AuthLinkContainer = styled.div`
   margin-top: 20px;
 `;
 
-export const AuthLinkToLogin = styled.span`
+export const AuthLinkToLogin = styled(NavLink)`
   font-style: normal;
   font-weight: bold;
   line-height: 22px;
   color: ${BLACK};
   text-decoration: none;
+  
+  &:hover {
+    color: ${NAVY_BLUE};
+  }
 `;
 
 export const InputInlineContainer = styled.div`

@@ -100,9 +100,7 @@ function LoginForm() {
           />
           <AuthLinkContainer>
             {t("Auth.haventAnAccount")}
-            <NavLink to={PATH.SIGN_UP}>
-              <AuthLinkToLogin>{t("Auth.click")}</AuthLinkToLogin>
-            </NavLink>
+              <AuthLinkToLogin to={PATH.SIGN_UP_FIRST_STEP}>{t("Auth.click")}</AuthLinkToLogin>
           </AuthLinkContainer>
         </Form>
       </AuthForm>
