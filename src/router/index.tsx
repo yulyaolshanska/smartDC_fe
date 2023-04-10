@@ -8,8 +8,10 @@ import ExamplePage2 from '@pages/exmaplePage2';
 import ExamplePage from '@pages/examplePage';
 import SignUp from '@pages/auth/signUp';
 import ResetPassword from "@pages/auth/resetPassword";
+import Login from '@pages/auth/login';
 
-const PATH = {
+export const PATH = {
+  LOGIN: "/login",
   SIGN_UP: "/sign-up",
   HOME: "/",
   FORM: "/form",
@@ -23,6 +25,7 @@ export const router = createBrowserRouter(
       <Route path={PATH.FORM} element={<ExamplePage2 />} />
       <Route path={PATH.SIGN_UP} element={<SignUp />} />
       <Route path={PATH.RESET_PASS} element={<ResetPassword />} />
+      <Route path={PATH.LOGIN} element={<Login />} />
     </Route>
   )
 );
