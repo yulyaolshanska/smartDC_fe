@@ -17,21 +17,28 @@ import {
   Form,
   PasswordImg
 } from '@components/Auth/styles';
-import { ISignUp } from '@components/Auth/type';
+import { IResponse, ISignUp } from '@components/Auth/type';
 import visible from "@assets/auth/eye.svg";
 import visibleOff from "@assets/auth/eyeSlash.svg";
 import { email, end, password } from '@constants/auth';
 import { LoginSchema } from '@validation/auth.validate';
 import { PATH } from '@router/index';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import GoogleLoginButton from './GoogleLogin';
+import { AuthLoginDto } from 'api/auth/auth.api';
+import { toast } from 'react-toastify';
+import { loginQuery } from '@redux/slices/login';
+import { useDispatch } from 'react-redux';
 
 function LoginForm() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { t } = useTranslation();
+
   const [showPassword, setShowPassword] = React.useState(false);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
-  const { t } = useTranslation();
   const {
     register,
     handleSubmit,
@@ -50,7 +57,18 @@ function LoginForm() {
     register('password');
   }, []);
 
-  const onSubmit = (data: ISignUp) => { };
+  const onSubmit = (data: ISignUp) => {
+    dispatch(loginQuery(data as AuthLoginDto)).then((res: IResponse) => {
+      if (!res.error){
+          navigate('/');
+      }
+      else {
+          toast.error("Sorry, something was wrong!", {
+              position: toast.POSITION.TOP_CENTER,
+          })
+      }
+    });
+  };
 
   return (
     <AuthContainer>
