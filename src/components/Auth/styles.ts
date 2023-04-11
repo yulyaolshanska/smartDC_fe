@@ -208,3 +208,14 @@ export const AuthForgotPasswordContainer = styled.div`
   line-height: 22px;
   margin-top: 15px;
 `;
+
+
+export const AuthConfirmationContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 40px;
+`;
+
+export const AuthConfirmationImg = styled.img`
+`;

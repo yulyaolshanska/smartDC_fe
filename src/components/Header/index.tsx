@@ -1,12 +1,15 @@
 import React from "react";
-import { HeaderContainer } from "@components/Header/styles";
+import { HeaderContainer, LinkToLogin } from "@components/Header/styles";
 import Logo from "@components/Logo";
+import {PATH} from "@router/index";
 
 function Header() {
 
     return (
         <HeaderContainer>
-            <Logo/>
+                <LinkToLogin to={PATH.LOGIN}>
+                    <Logo/>
+                </LinkToLogin>
         </HeaderContainer>
     );
 }

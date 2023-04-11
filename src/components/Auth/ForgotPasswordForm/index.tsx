@@ -12,7 +12,6 @@ import {
     AuthTitle,
     Form,
     AuthArrowBack,
-    AuthForgotPasswordContainer,
 } from '@components/Auth/styles';
 import { ISignUp } from '@components/Auth/type';
 import { email } from '@constants/auth';

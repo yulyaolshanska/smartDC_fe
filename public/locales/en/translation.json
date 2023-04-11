@@ -28,6 +28,8 @@
     "forgotPasswordText": "Enter your email and we’ll send you a link to reset your password",
     "forgotPasswordLink": "Forgot the password?",
     "backToLogin": "Back to Login",
+    "confirmation": "Confirmation",
+    "confirmationText": "We sent a link to reset your password. Check your email",
     "resetPasswordTitle": "Reset Password",
     "resetPasswordText": "Please create a new password that you don’t use on any other site",
     "haventAnAccount": "Don’t  have an account? ",
