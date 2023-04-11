@@ -6,7 +6,6 @@ import {
     AuthContainer,
     AuthForm,
     AuthText,
-    AuthTitle,
     Form,
 } from '@components/Auth/styles';
 import checkmark from "@assets/auth/checkmark.svg";

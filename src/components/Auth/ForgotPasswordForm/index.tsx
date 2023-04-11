@@ -1,6 +1,7 @@
 import React from 'react';
 import {useTranslation} from "react-i18next";
 import {useForm} from "react-hook-form";
+import {useNavigate} from "react-router-dom";
 import {yupResolver} from "@hookform/resolvers/yup";
 import Input from '@components/Input';
 import {
@@ -17,7 +18,6 @@ import { ISignUp } from '@components/Auth/type';
 import { email } from '@constants/auth';
 import {forgotPasswordSchema} from '@validation/auth.validate';
 import {PATH} from "@router/index";
-import {useNavigate} from "react-router-dom";
 
 function ForgotPasswordForm() {
     const { t } = useTranslation();
