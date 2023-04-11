@@ -43,6 +43,7 @@ export const AuthTitle = styled.h1`
   font-family: ${FONT_ROBOTO};
   text-align: center;
 `;
+
 export const AuthText = styled.div`
   font-size: ${MEDIUM_FONT_SIZE};
   width: 70%;
@@ -188,7 +189,7 @@ export const InputInlineContainer = styled.div`
 `;
 
 
-export const Arrow = styled.i`
+export const AuthArrowBack = styled.i`
   border: solid black;
   border-width: 0 2px 2px 0;
   display: inline-block;
@@ -197,4 +198,13 @@ export const Arrow = styled.i`
   
   transform: rotate(135deg);
   -webkit-transform: rotate(135deg);
+`;
+
+export const AuthForgotPasswordContainer = styled.div`
+  text-align: end;
+  font-style: normal;
+  font-size: ${SMALL_FONT_SIZE};
+  font-family: ${FONT_ROBOTO};
+  line-height: 22px;
+  margin-top: 15px;
 `;

@@ -15,7 +15,7 @@ import {
   AuthText,
   AuthTitle,
   Form,
-  PasswordImg
+  PasswordImg, AuthForgotPasswordContainer
 } from '@components/Auth/styles';
 import { ISignUp } from '@components/Auth/type';
 import visible from "@assets/auth/eye.svg";
@@ -23,7 +23,6 @@ import visibleOff from "@assets/auth/eyeSlash.svg";
 import { email, end, password } from '@constants/auth';
 import { LoginSchema } from '@validation/auth.validate';
 import { PATH } from '@router/index';
-import { NavLink } from 'react-router-dom';
 import GoogleLoginButton from './GoogleLogin';
 
 function LoginForm() {
@@ -92,6 +91,9 @@ function LoginForm() {
               }}
             />
           </AuthInput>
+          <AuthForgotPasswordContainer>
+            <AuthLink to={PATH.FORGOT_PASS}>{t("Auth.forgotPasswordLink")}</AuthLink>
+          </AuthForgotPasswordContainer>
           <GoogleLoginButton />
           <AuthSendButton
             disabled={!isValid}

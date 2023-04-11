@@ -11,7 +11,8 @@ import {
     AuthSendButton, AuthText,
     AuthTitle,
     Form,
-    Arrow,
+    AuthArrowBack,
+    AuthForgotPasswordContainer,
 } from '@components/Auth/styles';
 import { ISignUp } from '@components/Auth/type';
 import { email } from '@constants/auth';
@@ -58,7 +59,7 @@ function ForgotPasswordForm() {
                         value={t("Auth.submit")??""}
                     />
                     <AuthLinkContainer>
-                        <AuthLink to={PATH.LOGIN}><Arrow/>{t("Auth.backToLogin")}</AuthLink>
+                        <AuthLink to={PATH.LOGIN}><AuthArrowBack/>{t("Auth.backToLogin")}</AuthLink>
                     </AuthLinkContainer>
                 </Form>
             </AuthForm>
