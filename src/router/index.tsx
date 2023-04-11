@@ -16,7 +16,7 @@ export const PATH = {
     SIGN_UP_FIRST_STEP: "/sign-up/first-step",
     SIGN_UP_SECOND_STEP: "/sign-up/second-step",
     FORGOT_PASS: "/forgot-pass",
-    CONFIRMATION: "/forgot-pass/confirm",
+    CONFIRM: "/forgot-pass/confirm",
     RESET_PASS: "/reset-pass",
     LOGIN: "/login",
     HOME: "/",
@@ -29,7 +29,7 @@ export const router = createBrowserRouter(
             <Route path={PATH.SIGN_UP_SECOND_STEP} element={<SignUpSecondStep />} />
             <Route path={PATH.LOGIN} element={<Login />} />
             <Route path={PATH.FORGOT_PASS} element={<ForgotPassword />} />
-            <Route path={PATH.CONFIRMATION} element={<Confirmation />} />
+            <Route path={PATH.CONFIRM} element={<Confirmation />} />
             <Route path={PATH.RESET_PASS} element={<ResetPassword />} />
         </Route>
     )

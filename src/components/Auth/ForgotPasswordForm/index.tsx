@@ -17,9 +17,11 @@ import { ISignUp } from '@components/Auth/type';
 import { email } from '@constants/auth';
 import {forgotPasswordSchema} from '@validation/auth.validate';
 import {PATH} from "@router/index";
+import {useNavigate} from "react-router-dom";
 
 function ForgotPasswordForm() {
     const { t } = useTranslation();
+    const navigate = useNavigate();
     const {
         handleSubmit,
         control,
@@ -32,7 +34,9 @@ function ForgotPasswordForm() {
         resolver: yupResolver(forgotPasswordSchema),
     });
 
-    const onSubmit = (data: ISignUp) => { };
+    const onSubmit = (data: ISignUp) => {
+        navigate(PATH.CONFIRM);
+    };
 
     return (
         <AuthContainer>
