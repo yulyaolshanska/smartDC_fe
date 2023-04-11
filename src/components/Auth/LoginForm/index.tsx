@@ -10,7 +10,7 @@ import {
   AuthInput,
   AuthInputTitle,
   AuthLinkContainer,
-  AuthLinkToLogin,
+  AuthLink,
   AuthSendButton,
   AuthText,
   AuthTitle,
@@ -100,7 +100,7 @@ function LoginForm() {
           />
           <AuthLinkContainer>
             {t("Auth.haventAnAccount")}
-              <AuthLinkToLogin to={PATH.SIGN_UP_FIRST_STEP}>{t("Auth.click")}</AuthLinkToLogin>
+              <AuthLink to={PATH.SIGN_UP_FIRST_STEP}>{t("Auth.click")}</AuthLink>
           </AuthLinkContainer>
         </Form>
       </AuthForm>

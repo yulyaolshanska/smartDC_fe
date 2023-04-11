@@ -11,7 +11,7 @@ import {
   AuthInput,
   AuthInputTitle,
   AuthLinkContainer,
-  AuthLinkToLogin,
+  AuthLink,
   AuthSendButton,
   AuthText,
   AuthTitle,
@@ -185,7 +185,7 @@ function SignUpSecondForm() {
               value={t('Auth.signUp')??""} />
           <AuthLinkContainer>
             {t('Auth.alreadyExistText')}
-            <AuthLinkToLogin>{t('Auth.click')}</AuthLinkToLogin>
+            <AuthLink>{t('Auth.click')}</AuthLink>
           </AuthLinkContainer>
         </Form>
       </AuthForm>

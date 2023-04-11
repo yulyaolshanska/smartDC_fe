@@ -95,6 +95,7 @@ export const AuthSendButton = styled.input`
   :disabled {
     background: ${PINK_SWAN};
     color: ${WHITE};
+    cursor: inherit;
   }
   display: flex;
   margin-right: auto;
@@ -159,7 +160,8 @@ export const AuthLinkContainer = styled.div`
   margin-top: 20px;
 `;
 
-export const AuthLinkToLogin = styled(NavLink)`
+export const AuthLink = styled(NavLink)`
+  text-align: center;
   font-style: normal;
   font-weight: bold;
   line-height: 22px;
@@ -168,6 +170,12 @@ export const AuthLinkToLogin = styled(NavLink)`
   
   &:hover {
     color: ${NAVY_BLUE};
+    
+    & > i {
+      border: solid  ${NAVY_BLUE};
+      display: inline-block;
+      border-width: 0 2px 2px 0;
+    }
   }
 `;
 
@@ -177,4 +185,16 @@ export const InputInlineContainer = styled.div`
   justify-content: space-between;
   gap: 1em;
   grid-template-columns: 1fr 1fr;
+`;
+
+
+export const Arrow = styled.i`
+  border: solid black;
+  border-width: 0 2px 2px 0;
+  display: inline-block;
+  padding: 4px;
+  margin-right: 7px;
+  
+  transform: rotate(135deg);
+  -webkit-transform: rotate(135deg);
 `;

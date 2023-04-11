@@ -12,7 +12,7 @@ import {
   AuthInput,
   AuthInputTitle,
   AuthLinkContainer,
-  AuthLinkToLogin,
+  AuthLink,
   AuthSendButton,
   AuthText,
   AuthTitle,
@@ -173,7 +173,7 @@ function SignUpFirstForm() {
           />
           <AuthLinkContainer>
             {t("Auth.alreadyExistText")}
-            <AuthLinkToLogin to={PATH.LOGIN}>{t("Auth.click")}</AuthLinkToLogin>
+            <AuthLink to={PATH.LOGIN}>{t("Auth.click")}</AuthLink>
           </AuthLinkContainer>
         </Form>
       </AuthForm>
