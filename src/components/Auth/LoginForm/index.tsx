@@ -57,8 +57,9 @@ function LoginForm() {
     register('password');
   }, []);
 
-  const onSubmit = (data: ISignUp) => {
-    dispatch(loginQuery(data as AuthLoginDto)).then((res: IResponse) => {
+  const onSubmit = (data: AuthLoginDto) => {
+    // @ts-ignore
+    dispatch(loginQuery(data)).then((res: IResponse) => {
       if (!res.error){
           navigate('/');
       }
