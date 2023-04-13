@@ -14,8 +14,8 @@ export interface ISignUp {
   address: string;
   timeZone: string;
   isLoading?: boolean;
-  token?:string;
-  error?:string | null;
+  token?: string | null;
+  error?: string | null;
 }
 
 export interface IResponse {
@@ -25,4 +25,3 @@ export interface IResponse {
 export type Option = {
   value: string | number;
 };
-

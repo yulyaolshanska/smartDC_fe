@@ -1,7 +1,14 @@
-import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
-import {ISignUp} from "@components/Auth/type";
-import {authAPI, AuthSignUpDto} from "@api/auth/auth.api";
-import {plus} from "@constants/auth";
+import {
+  createAsyncThunk,
+  createSlice,
+  SerializedError,
+} from '@reduxjs/toolkit';
+import { ISignUp } from '@components/Auth/type';
+import { authAPI, AuthSignUpDto } from '@api/auth/auth.api';
+import storage from 'redux-persist/lib/storage';
+import { AxiosError } from 'axios';
+import { plus } from '@constants/auth';
+import { persistReducer } from 'redux-persist';
 
 const initialState: ISignUp = {
   firstName: '',
@@ -19,24 +26,34 @@ const initialState: ISignUp = {
   address: '',
   timeZone: '',
   isLoading: false,
-  token: JSON.parse(<string>localStorage.getItem('token')),
+  token: null,
   error: null,
 };
 
+const persistConfig = {
+  key: 'root',
+  storage,
+  blacklist: ['isLoading'],
+};
 
-export const signUpQuery: any = createAsyncThunk(
-    'signUp/signUpQuery',
-    async (data: AuthSignUpDto, { rejectWithValue }) => {
-      try {
-        return await authAPI.signUp(data);
-      } catch (err: any) {
-        if (!err.response) {
-          throw err;
+export const signUpQuery = createAsyncThunk(
+  'signUp/signUpQuery',
+  async (data: AuthSignUpDto, { rejectWithValue }) => {
+    try {
+      return await authAPI.signUp(data);
+    } catch (err: unknown) {
+      if (err instanceof AxiosError) {
+        if (err.response) {
+          const { status, data } = err.response;
+          return rejectWithValue({
+            status: status.toString(),
+            message: data.message || 'Something went wrong.',
+          } as SerializedError);
         }
-
-        return rejectWithValue(err.response.data);
       }
-    },
+      throw err;
+    }
+  }
 );
 
 const signUp = createSlice({
@@ -58,7 +75,6 @@ const signUp = createSlice({
     },
     [signUpQuery.fulfilled.type]: (state, action) => {
       state.token = action.payload.accessToken;
-      localStorage.setItem('token', JSON.stringify(state.token));
       state.error = null;
       state.isLoading = false;
     },
@@ -68,7 +84,9 @@ const signUp = createSlice({
     },
   },
 });
-export const {
-  setSignUpFirstStepData  } = signUp.actions;
 
-export default signUp.reducer;
+const persistedReducer = persistReducer(persistConfig, signUp.reducer);
+
+export const { setSignUpFirstStepData } = signUp.actions;
+
+export default persistedReducer;

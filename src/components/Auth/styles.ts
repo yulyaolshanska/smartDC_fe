@@ -1,7 +1,10 @@
 import styled from 'styled-components';
 import {
-  BLACK, CORNFLOWER_BLUE, DARK_GREEN,
-  GHOST_WHITE, LIGHT_GREEN,
+  BLACK,
+  CORNFLOWER_BLUE,
+  DARK_GREEN,
+  GHOST_WHITE,
+  LIGHT_GREEN,
   NAVY_BLUE,
   PINK_SWAN,
   VERY_LIGHT_GREY,
@@ -15,7 +18,7 @@ import {
   SMALL_FONT_SIZE,
 } from '@constants/fontSizes';
 import { FONT_ROBOTO } from '@constants/fonts';
-import {NavLink} from "react-router-dom";
+import { NavLink } from 'react-router-dom';
 
 export const AuthContainer = styled.div`
   width: 100%;
@@ -63,7 +66,7 @@ export const AuthGreenText = styled.div`
   text-align: center;
   font-family: ${FONT_ROBOTO};
   border-radius: 8px;
-`
+`;
 
 export const AuthInput = styled.div`
   display: flex;
@@ -168,12 +171,12 @@ export const AuthLink = styled(NavLink)`
   line-height: 22px;
   color: ${BLACK};
   text-decoration: none;
-  
+
   &:hover {
     color: ${NAVY_BLUE};
-    
+
     & > i {
-      border: solid  ${NAVY_BLUE};
+      border: solid ${NAVY_BLUE};
       display: inline-block;
       border-width: 0 2px 2px 0;
     }
@@ -188,14 +191,13 @@ export const InputInlineContainer = styled.div`
   grid-template-columns: 1fr 1fr;
 `;
 
-
 export const AuthArrowBack = styled.i`
   border: solid black;
   border-width: 0 2px 2px 0;
   display: inline-block;
   padding: 4px;
   margin-right: 7px;
-  
+
   transform: rotate(135deg);
   -webkit-transform: rotate(135deg);
 `;
@@ -209,7 +211,6 @@ export const AuthForgotPasswordContainer = styled.div`
   margin-top: 15px;
 `;
 
-
 export const AuthConfirmationContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -217,5 +218,4 @@ export const AuthConfirmationContainer = styled.div`
   margin-top: 40px;
 `;
 
-export const AuthConfirmationImg = styled.img`
-`;
+export const AuthConfirmationImg = styled.img``;

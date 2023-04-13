@@ -1,4 +1,4 @@
-import {useTranslation } from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -16,16 +16,34 @@ import {
   AuthText,
   AuthTitle,
   Form,
-  InputInlineContainer
+  InputInlineContainer,
 } from '@components/Auth/styles';
-import {IResponse, ISignUp} from '@components/Auth/type';
-import {role, specialization, gender, address, timeZone, birthDate, city, country, date} from '@constants/auth';
+import { IResponse, ISignUp } from '@components/Auth/type';
+import {
+  role,
+  specialization,
+  gender,
+  address,
+  timeZone,
+  birthDate,
+  city,
+  country,
+  date,
+} from '@constants/auth';
 import { signUpSecondStepSchema } from '@validation/auth.validate';
-import { roles, specializations, genders, countries, cities, timeZones } from '@constants/mockData';
+import {
+  roles,
+  specializations,
+  genders,
+  countries,
+  cities,
+  timeZones,
+} from '@constants/mockData';
 import SelectInput from '@components/Select';
 import { selectSignUp } from '@redux/selectors/auth/signUp';
-import {signUpQuery } from '@redux/slices/auth/signUp';
+import { signUpQuery } from '@redux/slices/auth/signUp';
 import { AuthSignUpDto } from '@api/auth/auth.api';
+import { PATH } from '@router/index';
 
 function SignUpSecondForm() {
   const { t } = useTranslation();
@@ -36,7 +54,7 @@ function SignUpSecondForm() {
   const {
     handleSubmit,
     control,
-    formState: { errors, isValid }
+    formState: { errors, isValid },
   } = useForm<ISignUp>({
     mode: 'onChange',
     defaultValues: {
@@ -47,24 +65,23 @@ function SignUpSecondForm() {
       address: '',
       specialization: 0,
       birthDate: '',
-      timeZone: ''
+      timeZone: '',
     },
 
-    resolver: yupResolver(signUpSecondStepSchema)
+    resolver: yupResolver(signUpSecondStepSchema),
   });
 
   const onSubmit = (data: ISignUp) => {
     data.specialization = Number(data.specialization);
     const combinedObj = Object.assign({}, dataSignUpFirst, data);
 
-    dispatch(signUpQuery(combinedObj as AuthSignUpDto)).then((res: IResponse) => {
-      if (!res.error){
+    dispatch(signUpQuery(combinedObj)).then((res: IResponse) => {
+      if (!res.error) {
         navigate('/');
-      }
-      else {
-        toast.error("Sorry, something was wrong!", {
+      } else {
+        toast.error('Sorry, something was wrong!', {
           position: toast.POSITION.TOP_CENTER,
-        })
+        });
       }
     });
   };
@@ -180,12 +197,13 @@ function SignUpSecondForm() {
             />
           </AuthInput>
           <AuthSendButton
-              disabled={!isValid}
-              type="submit"
-              value={t('Auth.signUp')??""} />
+            disabled={!isValid}
+            type="submit"
+            value={t('Auth.signUp') ?? ''}
+          />
           <AuthLinkContainer>
             {t('Auth.alreadyExistText')}
-            <AuthLink>{t('Auth.click')}</AuthLink>
+            <AuthLink to={PATH.LOGIN}>{t('Auth.click')}</AuthLink>
           </AuthLinkContainer>
         </Form>
       </AuthForm>

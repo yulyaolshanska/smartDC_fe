@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 import { LARGE_FONT_SIZE } from '@constants/fontSizes';
 import { CORNFLOWER_BLUE, NAVY_BLUE } from '@constants/colors';
 import { FONT_ROBOTO } from '@constants/fonts';
@@ -17,9 +17,7 @@ export const LogoImg = styled.img`
 export const LogoTitle = styled.h1`
   font-size: ${LARGE_FONT_SIZE};
   font-family: ${FONT_ROBOTO};
-  background: -webkit-linear-gradient(${NAVY_BLUE}, ${CORNFLOWER_BLUE}); 
+  background: -webkit-linear-gradient(${NAVY_BLUE}, ${CORNFLOWER_BLUE});
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 `;
-
-

@@ -1,8 +1,8 @@
-import React, {useEffect} from 'react';
-import {useTranslation} from "react-i18next";
-import {useForm} from "react-hook-form";
-import {yupResolver} from "@hookform/resolvers/yup";
-import {IconButton, InputAdornment } from '@mui/material';
+import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { IconButton, InputAdornment } from '@mui/material';
 import Input from '@components/Input';
 import {
   AuthContainer,
@@ -15,18 +15,19 @@ import {
   AuthText,
   AuthTitle,
   Form,
-  PasswordImg, AuthForgotPasswordContainer
+  PasswordImg,
+  AuthForgotPasswordContainer,
 } from '@components/Auth/styles';
 import { ISignUp } from '@components/Auth/type';
-import visible from "@assets/auth/eye.svg";
-import visibleOff from "@assets/auth/eyeSlash.svg";
+import visible from '@assets/auth/eye.svg';
+import visibleOff from '@assets/auth/eyeSlash.svg';
 import { email, end, password } from '@constants/auth';
 import { LoginSchema } from '@validation/auth.validate';
 import { PATH } from '@router/index';
 import GoogleLoginButton from './GoogleLogin';
 
 function LoginForm() {
-  const [showPassword, setShowPassword] = React.useState(false);
+  const [showPassword, setShowPassword] = useState<boolean>(false);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
@@ -35,12 +36,12 @@ function LoginForm() {
     register,
     handleSubmit,
     control,
-    formState: { errors, isValid }
+    formState: { errors, isValid },
   } = useForm<ISignUp>({
     mode: 'onChange',
     defaultValues: {
       email: '',
-      password: ''
+      password: '',
     },
 
     resolver: yupResolver(LoginSchema),
@@ -49,34 +50,34 @@ function LoginForm() {
     register('password');
   }, []);
 
-  const onSubmit = (data: ISignUp) => { };
+  const onSubmit = (data: ISignUp) => {};
 
   return (
     <AuthContainer>
       <AuthForm>
         <Form onSubmit={handleSubmit(onSubmit)}>
-          <AuthTitle>{t("Auth.loginTitle")}</AuthTitle>
-          <AuthText>{t("Auth.loginText")}</AuthText>
+          <AuthTitle>{t('Auth.loginTitle')}</AuthTitle>
+          <AuthText>{t('Auth.loginText')}</AuthText>
           <AuthInput>
-            <AuthInputTitle>{t("Auth.email")}</AuthInputTitle>
+            <AuthInputTitle>{t('Auth.email')}</AuthInputTitle>
             <Input
               control={control}
               fullWidth
               name={email}
-              placeholder={t("Auth.enterEmail")??""}
+              placeholder={t('Auth.enterEmail') ?? ''}
               helperText={errors.email?.message}
               error={Boolean(errors?.email)}
               required={true}
             />
           </AuthInput>
           <AuthInput>
-            <AuthInputTitle>{t("Auth.createPassword")}</AuthInputTitle>
+            <AuthInputTitle>{t('Auth.createPassword')}</AuthInputTitle>
             <Input
               control={control}
               fullWidth
               name={password}
-              type={showPassword ? "text" : "password"}
-              placeholder={t("Auth.enterPassword")??""}
+              type={showPassword ? 'text' : 'password'}
+              placeholder={t('Auth.enterPassword') ?? ''}
               helperText={errors.password?.message}
               error={Boolean(errors?.password)}
               required={true}
@@ -84,7 +85,11 @@ function LoginForm() {
                 endAdornment: (
                   <IconButton onClick={handleClickShowPassword}>
                     <InputAdornment position={end}>
-                      {<PasswordImg src={showPassword ? visible : visibleOff}/>}
+                      {
+                        <PasswordImg
+                          src={showPassword ? visible : visibleOff}
+                        />
+                      }
                     </InputAdornment>
                   </IconButton>
                 ),
@@ -92,17 +97,19 @@ function LoginForm() {
             />
           </AuthInput>
           <AuthForgotPasswordContainer>
-            <AuthLink to={PATH.FORGOT_PASS}>{t("Auth.forgotPasswordLink")}</AuthLink>
+            <AuthLink to={PATH.FORGOT_PASS}>
+              {t('Auth.forgotPasswordLink')}
+            </AuthLink>
           </AuthForgotPasswordContainer>
           <GoogleLoginButton />
           <AuthSendButton
             disabled={!isValid}
-            type='submit'
-            value={t("Auth.continue")??""}
+            type="submit"
+            value={t('Auth.continue') ?? ''}
           />
           <AuthLinkContainer>
-            {t("Auth.haventAnAccount")}
-              <AuthLink to={PATH.SIGN_UP_FIRST_STEP}>{t("Auth.click")}</AuthLink>
+            {t('Auth.haventAnAccount')}
+            <AuthLink to={PATH.SIGN_UP_FIRST_STEP}>{t('Auth.click')}</AuthLink>
           </AuthLinkContainer>
         </Form>
       </AuthForm>
