@@ -30,6 +30,7 @@
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.9.0",
     "react-toastify": "^9.1.2",
+    "redux-persist": "^6.0.0",
     "styled-components": "^5.3.9",
     "typeface-roboto": "^1.1.13",
     "yup": "^1.0.2"
@@ -47,6 +48,7 @@
     "@types/react-dom": "18.0.9",
     "@types/react-i18next": "^8.1.0",
     "@types/react-router": "^5.1.20",
+    "@types/redux-persist": "^4.3.1",
     "@typescript-eslint/eslint-plugin": "^5.57.1",
     "@typescript-eslint/parser": "^5.57.1",
     "@vitejs/plugin-react": "3.0.1",

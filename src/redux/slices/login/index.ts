@@ -1,20 +1,36 @@
-import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
+import {SerializedError, createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import { AuthLoginDto, authAPI } from 'api/auth/auth.api';
+import { persistStore } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
+import { persistReducer } from 'redux-persist';
+import { AxiosError } from 'axios';
 
-export const loginQuery: any = createAsyncThunk(
-    'login/loginQuery',
-    async (data: AuthLoginDto, { rejectWithValue }) => {
-      try {
-        return await authAPI.login(data);
-      } catch (err: any) {
-        if (!err.response) {
-          throw err;
+const persistConfig = {
+  key: 'root',
+  storage,
+  blacklist: ['isLoading'],
+};
+
+export const loginQuery = createAsyncThunk(
+  'login/loginQuery',
+  async (data: AuthLoginDto, { rejectWithValue }) => {
+    try {
+      return await authAPI.login(data);
+    } catch (err: unknown) {
+      if (err instanceof AxiosError) {
+        if (err.response) {
+          const { status, data } = err.response;
+          return rejectWithValue({
+            status: status.toString(),
+            message: data.message || 'Something went wrong.',
+          } as SerializedError);
         }
-
-        return rejectWithValue(err.response.data);
       }
-    },
+      throw err;
+    }
+  },
 );
+
 
 const login = createSlice({
   name: 'login',
@@ -22,12 +38,12 @@ const login = createSlice({
     email: '',
     password: '',
     isLoading: false,
-    token: JSON.parse(<string>localStorage.getItem('token')),
+    token: null,
     error: null
   },
   reducers: {
     logout(state) {
-      state.token = '';
+      state.token = null;
       state.error = null;
       state.isLoading = false;
       localStorage.clear();
@@ -39,7 +55,6 @@ const login = createSlice({
     },
     [loginQuery.fulfilled.type]: (state, action) => {
       state.token = action.payload.accessToken;
-      localStorage.setItem('token', JSON.stringify(state.token));
       state.error = null;
       state.isLoading = false;
     },
@@ -50,4 +65,6 @@ const login = createSlice({
   },
 });
 
-export default login.reducer;
+const persistedReducer = persistReducer(persistConfig, login.reducer);
+
+export default persistedReducer;
