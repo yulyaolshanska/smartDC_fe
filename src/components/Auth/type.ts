@@ -21,3 +21,7 @@ export interface ISignUp {
 export type Option = {
   value: string | number;
 };
+
+export interface IResponse {
+  error: string;
+}

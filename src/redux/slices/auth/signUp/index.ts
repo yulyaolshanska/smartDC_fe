@@ -53,7 +53,7 @@ export const signUpQuery = createAsyncThunk(
       }
       throw err;
     }
-  }
+  },
 );
 
 const signUp = createSlice({

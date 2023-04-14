@@ -18,22 +18,30 @@ import {
   PasswordImg,
   AuthForgotPasswordContainer,
 } from '@components/Auth/styles';
-import { ISignUp } from '@components/Auth/type';
-import visible from '@assets/auth/eye.svg';
-import visibleOff from '@assets/auth/eyeSlash.svg';
+import { IResponse, ISignUp } from '@components/Auth/type';
+import visible from "@assets/auth/eye.svg";
+import visibleOff from "@assets/auth/eyeSlash.svg";
 import { email, end, password } from '@constants/auth';
 import { signUpSchema } from '@validation/auth.validate';
 import { PATH } from '@router/index';
 import GoogleLoginButton from './GoogleLogin';
+import { AuthLoginDto } from 'api/auth/auth.api';
+import { toast } from 'react-toastify';
+import { loginQuery } from '@redux/slices/login';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router';
 
 function LoginForm() {
-  const [showPassword, setShowPassword] = useState<boolean>(false);
+  const dispatch = useDispatch();
+  const { t } = useTranslation();
+  const navigate = useNavigate();
+
+  const [showPassword, setShowPassword] = React.useState(false);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
   const { LoginSchema } = signUpSchema();
 
-  const { t } = useTranslation();
   const {
     register,
     handleSubmit,
@@ -52,7 +60,19 @@ function LoginForm() {
     register('password');
   }, []);
 
-  const onSubmit = (data: ISignUp) => {};
+  const onSubmit = (data: AuthLoginDto) => {
+    // @ts-ignore
+    dispatch(loginQuery(data)).then((res: IResponse) => {
+      if (!res.error){
+          navigate('/');
+      }
+      else {
+          toast.error("Sorry, something was wrong!", {
+              position: toast.POSITION.TOP_CENTER,
+          })
+      }
+    });
+  };
 
   return (
     <AuthContainer>
@@ -73,7 +93,7 @@ function LoginForm() {
             />
           </AuthInput>
           <AuthInput>
-            <AuthInputTitle>{t('Auth.createPassword')}</AuthInputTitle>
+            <AuthInputTitle>{t('Auth.passwordLogin')}</AuthInputTitle>
             <Input
               control={control}
               fullWidth

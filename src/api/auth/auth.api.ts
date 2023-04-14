@@ -18,10 +18,23 @@ export interface AuthSignUpDto {
   timeZone: string;
 }
 
+export interface AuthLoginDto {
+  email: string;
+  password: string;
+}
+
 export const authAPI = {
   signUp(data: AuthSignUpDto) {
     return axios
       .post<AuthSignUpDto>(API_URLS.signUp, data)
+      .then((res) => res.data);
+  },
+  login({ email, password }: AuthLoginDto) {
+    return axios
+      .post<AuthLoginDto>(API_URLS.login, {
+      email,
+      password,
+    })
       .then((res) => res.data);
   },
 };
