@@ -32,7 +32,7 @@ import {
   password,
   phoneNumber,
 } from '@constants/auth';
-import { signUpFirstStepSchema } from '@validation/auth.validate';
+import { signUpSchema } from '@validation/auth.validate';
 import { setSignUpFirstStepData } from '@redux/slices/auth/signUp';
 import { PATH } from '@router/index';
 import AuthGoogleButton from '@components/Auth/AuthGoogleButton';
@@ -45,6 +45,8 @@ function SignUpFirstForm() {
   const handleClickShowPassword = () => setShowPassword((show) => !show);
   const handleClickShowConfirmPassword = () =>
     setShowConfirmPassword((show) => !show);
+
+  const { signUpFirstStepSchema } = signUpSchema();
 
   const { t } = useTranslation();
   const dispatch = useDispatch();

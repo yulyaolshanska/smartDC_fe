@@ -19,7 +19,7 @@ import { ISignUp } from '@components/Auth/type';
 import visible from '@assets/auth/eye.svg';
 import visibleOff from '@assets/auth/eyeSlash.svg';
 import { confirmPassword, end, password } from '@constants/auth';
-import { resetPasswordSchema } from '@validation/auth.validate';
+import { signUpSchema } from '@validation/auth.validate';
 
 function ResetPasswordForm() {
   const [showPassword, setShowPassword] = useState<boolean>(false);
@@ -29,6 +29,8 @@ function ResetPasswordForm() {
   const handleClickShowPassword = () => setShowPassword((show) => !show);
   const handleClickShowConfirmPassword = () =>
     setShowConfirmPassword((show) => !show);
+
+  const { resetPasswordSchema } = signUpSchema();
 
   const { t } = useTranslation();
   const {

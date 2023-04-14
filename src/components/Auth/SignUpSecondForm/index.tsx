@@ -30,7 +30,7 @@ import {
   country,
   date,
 } from '@constants/auth';
-import { signUpSecondStepSchema } from '@validation/auth.validate';
+import { signUpSchema } from '@validation/auth.validate';
 import {
   roles,
   specializations,
@@ -50,6 +50,8 @@ function SignUpSecondForm() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const dataSignUpFirst = useSelector(selectSignUp);
+
+  const { signUpSecondStepSchema } = signUpSchema();
 
   const {
     handleSubmit,

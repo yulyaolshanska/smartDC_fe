@@ -22,7 +22,7 @@ import { ISignUp } from '@components/Auth/type';
 import visible from '@assets/auth/eye.svg';
 import visibleOff from '@assets/auth/eyeSlash.svg';
 import { email, end, password } from '@constants/auth';
-import { LoginSchema } from '@validation/auth.validate';
+import { signUpSchema } from '@validation/auth.validate';
 import { PATH } from '@router/index';
 import GoogleLoginButton from './GoogleLogin';
 
@@ -30,6 +30,8 @@ function LoginForm() {
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
+
+  const { LoginSchema } = signUpSchema();
 
   const { t } = useTranslation();
   const {

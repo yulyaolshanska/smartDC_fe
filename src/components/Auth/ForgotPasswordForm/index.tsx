@@ -19,12 +19,15 @@ import {
 } from '@components/Auth/styles';
 import { ISignUp } from '@components/Auth/type';
 import { email } from '@constants/auth';
-import { forgotPasswordSchema } from '@validation/auth.validate';
+import { signUpSchema } from '@validation/auth.validate';
 import { PATH } from '@router/index';
 
 function ForgotPasswordForm() {
   const { t } = useTranslation();
   const navigate = useNavigate();
+
+  const { forgotPasswordSchema } = signUpSchema();
+
   const {
     handleSubmit,
     control,

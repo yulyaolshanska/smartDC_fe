@@ -64,6 +64,21 @@
     "enterAddress":"Enter your address...",
     "timeZone":"Time Zone",
     "enterTimeZone":"Enter your timezone..."
+  },
+  "Error": {
+    "firstNameRequired": "*First name is required",
+    "lastNameRequired": "*Last name is required",
+    "tooShort": "*Too short!",
+    "nameFormat": "*The name must contain English letters with first Uppercase character",
+    "invalidEmailFormat": "*Invalid email format",
+    "emailRequired": "*Email is required",
+    "phoneNumberRequired": "*Phone number is required",
+    "enterPassword": "*Please Enter your password",
+    "confirmPasswordRequired": "*Confirm password is required",
+    "passwordsDoesNotMatch": "*Passwords does not match",
+    "fieldRequired": "*Field is required",
+    "mustContain": "*Must Contain",
+    "charactersUppercaseLowercase": "Characters, One Uppercase, One Lowercase"
   }
 }
 
