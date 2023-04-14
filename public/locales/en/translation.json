@@ -20,6 +20,7 @@
     "lastName": "Your last name",
     "email": "Email",
     "phoneNumber": "Phone Number",
+    "passwordLogin": "Password",
     "createPassword": "Create a Password",
     "createNewPassword": "Create new Password",
     "confirmPassword": "Confirm a Password",

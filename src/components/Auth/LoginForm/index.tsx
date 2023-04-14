@@ -29,10 +29,12 @@ import { AuthLoginDto } from 'api/auth/auth.api';
 import { toast } from 'react-toastify';
 import { loginQuery } from '@redux/slices/login';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router';
 
 function LoginForm() {
   const dispatch = useDispatch();
   const { t } = useTranslation();
+  const navigate = useNavigate();
 
   const [showPassword, setShowPassword] = React.useState(false);
 
@@ -91,7 +93,7 @@ function LoginForm() {
             />
           </AuthInput>
           <AuthInput>
-            <AuthInputTitle>{t('Auth.createPassword')}</AuthInputTitle>
+            <AuthInputTitle>{t('Auth.passwordLogin')}</AuthInputTitle>
             <Input
               control={control}
               fullWidth

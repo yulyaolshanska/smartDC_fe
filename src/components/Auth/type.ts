@@ -24,4 +24,4 @@ export type Option = {
 
 export interface IResponse {
   error: string;
-};
+}

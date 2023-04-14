@@ -1,8 +1,7 @@
-import {SerializedError, createAsyncThunk, createSlice} from '@reduxjs/toolkit';
+import { SerializedError, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { AuthLoginDto, authAPI } from 'api/auth/auth.api';
-import { persistStore } from 'redux-persist';
+import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-import { persistReducer } from 'redux-persist';
 import { AxiosError } from 'axios';
 
 const persistConfig = {
@@ -31,7 +30,6 @@ export const loginQuery = createAsyncThunk(
   },
 );
 
-
 const login = createSlice({
   name: 'login',
   initialState: {
@@ -39,7 +37,7 @@ const login = createSlice({
     password: '',
     isLoading: false,
     token: null,
-    error: null
+    error: null,
   },
   reducers: {
     logout(state) {

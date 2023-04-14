@@ -29,13 +29,12 @@ export const authAPI = {
       .post<AuthSignUpDto>(API_URLS.signUp, data)
       .then((res) => res.data);
   },
-  login({email, password}: AuthLoginDto) {
+  login({ email, password }: AuthLoginDto) {
     return axios
       .post<AuthLoginDto>(API_URLS.login, {
-          email,
-          password,
-      })
+      email,
+      password,
+    })
       .then((res) => res.data);
-  }
+  },
 };
-
