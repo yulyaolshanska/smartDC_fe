@@ -1,4 +1,4 @@
-const api = process.env.REACT_APP_SERVER_API_DEV;
+const api = 'http://localhost:3000/';
 
 export const API_URLS = {
   signUp: `${api}auth/registration`,

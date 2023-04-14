@@ -18,10 +18,6 @@ export interface ISignUp {
   error?: string | null;
 }
 
-export interface IResponse {
-  error: string;
-}
-
 export type Option = {
   value: string | number;
 };

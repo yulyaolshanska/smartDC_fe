@@ -1,6 +1,6 @@
 import React from 'react';
-import SignUpSecondForm from '@components/Auth/SignUpSecondForm';
-import Header from "@components/Header";
+import SignUpSecondForm from '@components/Auth/SignUpForm/SignUpSecondStepForm';
+import Header from '@components/Header';
 
 export const signUpSecondStep = () => {
   return (
@@ -8,7 +8,6 @@ export const signUpSecondStep = () => {
       <Header />
       <SignUpSecondForm />
     </>
-  )
+  );
 };
 export default signUpSecondStep;
-

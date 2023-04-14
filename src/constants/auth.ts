@@ -14,5 +14,6 @@ export const birthDate = 'birthDate';
 export const city = 'city';
 export const country = 'country';
 export const date = 'date';
-export const plus = "+";
+export const error = 'error';
+export const plus = '+';
 export const PASSWORD_REQUIRED_LENGTH = 10;

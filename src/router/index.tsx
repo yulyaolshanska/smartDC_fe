@@ -4,8 +4,8 @@ import {
   createRoutesFromElements,
   Route,
 } from 'react-router-dom';
-import SignUpFirstStep from '@pages/auth/signUpFirstStep';
-import SignUpSecondStep from '@pages/auth/signUpSecondStep';
+import SignUpFirstStep from '@pages/auth/signUp/signUpFirstStep';
+import SignUpSecondStep from '@pages/auth/signUp/signUpSecondStep';
 import ResetPassword from '@pages/auth/resetPassword';
 import Login from '@pages/auth/login';
 import ForgotPassword from '@pages/auth/forgotPassword';

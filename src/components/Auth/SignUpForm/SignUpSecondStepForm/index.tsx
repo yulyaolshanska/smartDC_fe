@@ -18,7 +18,7 @@ import {
   Form,
   InputInlineContainer,
 } from '@components/Auth/styles';
-import { IResponse, ISignUp } from '@components/Auth/type';
+import { ISignUp } from '@components/Auth/type';
 import {
   role,
   specialization,
@@ -29,6 +29,7 @@ import {
   city,
   country,
   date,
+  error,
 } from '@constants/auth';
 import { signUpSchema } from '@validation/auth.validate';
 import {
@@ -42,12 +43,13 @@ import {
 import SelectInput from '@components/Select';
 import { selectSignUp } from '@redux/selectors/auth/signUp';
 import { signUpQuery } from '@redux/slices/auth/signUp';
-import { AuthSignUpDto } from '@api/auth/auth.api';
+import { AuthSignUpDto } from '@auth/auth.api';
 import { PATH } from '@router/index';
+import { AppDispatch } from '@redux/store';
 
 function SignUpSecondForm() {
   const { t } = useTranslation();
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
   const dataSignUpFirst = useSelector(selectSignUp);
 
@@ -77,13 +79,13 @@ function SignUpSecondForm() {
     data.specialization = Number(data.specialization);
     const combinedObj = Object.assign({}, dataSignUpFirst, data);
 
-    dispatch(signUpQuery(combinedObj)).then((res: IResponse) => {
-      if (!res.error) {
-        navigate('/');
-      } else {
+    dispatch(signUpQuery(combinedObj)).then((res) => {
+      if (error in res && res.error) {
         toast.error('Sorry, something was wrong!', {
           position: toast.POSITION.TOP_CENTER,
         });
+      } else {
+        navigate('/');
       }
     });
   };
