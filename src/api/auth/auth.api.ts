@@ -1,4 +1,7 @@
-export interface ISignUp {
+import axios from 'axios';
+import { API_URLS } from 'api';
+
+export interface AuthSignUpDto {
   firstName: string;
   lastName: string;
   email: string;
@@ -13,11 +16,12 @@ export interface ISignUp {
   birthDate: string;
   address: string;
   timeZone: string;
-  isLoading?: boolean;
-  token?: string | null;
-  error?: string | null;
 }
 
-export type Option = {
-  value: string | number;
+export const authAPI = {
+  signUp(data: AuthSignUpDto) {
+    return axios
+      .post<AuthSignUpDto>(API_URLS.signUp, data)
+      .then((res) => res.data);
+  },
 };

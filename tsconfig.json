@@ -5,8 +5,10 @@
     "esModuleInterop": false,
     "allowSyntheticDefaultImports": true,
     "strict": true,
-    "types": []
+    "types": [],
+    "baseUrl": "src",
   },
+  "include":["src"],
   "files": [],
   "references": [
     {

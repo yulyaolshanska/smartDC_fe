@@ -1,13 +1,12 @@
 import React from 'react';
-
-import Logo from '@components/Logo';
 import LoginForm from '@components/Auth/LoginForm';
+import Header from '@components/Header';
 
 const Login = () => {
   return (
     <>
-      <Logo />
-      <LoginForm/>
+      <Header />
+      <LoginForm />
     </>
   );
 };

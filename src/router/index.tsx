@@ -1,31 +1,35 @@
-import React from "react";
+import React from 'react';
 import {
   createBrowserRouter,
   createRoutesFromElements,
-  Route
+  Route,
 } from 'react-router-dom';
-import ExamplePage2 from '@pages/exmaplePage2';
-import ExamplePage from '@pages/examplePage';
-import SignUp from '@pages/auth/signUp';
-import ResetPassword from "@pages/auth/resetPassword";
+import SignUpFirstStep from '@pages/auth/signUp/signUpFirstStep';
+import SignUpSecondStep from '@pages/auth/signUp/signUpSecondStep';
+import ResetPassword from '@pages/auth/resetPassword';
 import Login from '@pages/auth/login';
+import ForgotPassword from '@pages/auth/forgotPassword';
+import Confirmation from '@pages/auth/forgotPassword/confirmation';
 
 export const PATH = {
-  LOGIN: "/login",
-  SIGN_UP: "/sign-up",
-  HOME: "/",
-  FORM: "/form",
-  RESET_PASS: "/reset-pass",
-}
+  SIGN_UP_FIRST_STEP: '/sign-up/first-step',
+  SIGN_UP_SECOND_STEP: '/sign-up/second-step',
+  FORGOT_PASS: '/forgot-pass',
+  CONFIRM: '/forgot-pass/confirm',
+  RESET_PASS: '/reset-pass',
+  LOGIN: '/login',
+  HOME: '/',
+};
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
     <Route>
-      <Route path={PATH.HOME} element={<ExamplePage />} />
-      <Route path={PATH.FORM} element={<ExamplePage2 />} />
-      <Route path={PATH.SIGN_UP} element={<SignUp />} />
-      <Route path={PATH.RESET_PASS} element={<ResetPassword />} />
+      <Route path={PATH.SIGN_UP_FIRST_STEP} element={<SignUpFirstStep />} />
+      <Route path={PATH.SIGN_UP_SECOND_STEP} element={<SignUpSecondStep />} />
       <Route path={PATH.LOGIN} element={<Login />} />
+      <Route path={PATH.FORGOT_PASS} element={<ForgotPassword />} />
+      <Route path={PATH.CONFIRM} element={<Confirmation />} />
+      <Route path={PATH.RESET_PASS} element={<ResetPassword />} />
     </Route>
   )
 );

@@ -1,17 +1,25 @@
 import React from 'react';
-import {Control, Controller} from "react-hook-form";
-import {TextFieldProps} from "@mui/material/TextField/TextField";
+import { Control, Controller } from 'react-hook-form';
+import { TextFieldProps } from '@mui/material/TextField/TextField';
 import 'react-phone-input-2/lib/bootstrap.css';
-import {HelperText, PhoneInputContainer } from '@components/PhoneInput/styles';
+import { HelperText, PhoneInputContainer } from '@components/PhoneInput/styles';
 import { ISignUp } from '@components/Auth/type';
 import { SignUpFields } from '@types';
 
-function PhoneInput({ control, name, label, error, type, helperText, ...props}: TextFieldProps & { control: Control<ISignUp>}) {
+function PhoneInput({
+  control,
+  name,
+  label,
+  error,
+  type,
+  helperText,
+  ...props
+}: TextFieldProps & { control: Control<ISignUp> }) {
   return (
     <Controller
       control={control}
       defaultValue=""
-      name={(name as SignUpFields)}
+      name={name as SignUpFields}
       render={(rest) => (
         <>
           <PhoneInputContainer
@@ -25,9 +33,7 @@ function PhoneInput({ control, name, label, error, type, helperText, ...props}: 
             inputClass={'input-phone'}
             buttonClass={'button-class'}
           />
-          <HelperText>
-            {helperText}
-          </HelperText>
+          <HelperText>{helperText}</HelperText>
         </>
       )}
     />
