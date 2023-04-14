@@ -24,6 +24,8 @@
       "@translation/*": ["translation/*"],
       "@validation/*": ["validation/*"],
       "@assets/*": ["assets/*"],
+      "@api/*": ["api/*"],
+      "@auth/*": ["api/auth/*"]
     }
   },
   "exclude": ["node_modules", "tmp"]

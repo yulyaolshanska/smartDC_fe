@@ -1,10 +1,14 @@
 import React from 'react';
 import { useGoogleLogin } from '@react-oauth/google';
-import { AuthGoogleContainer, GoogleImg, GoogleText } from '../styles';
 import { useTranslation } from 'react-i18next';
+import {
+  AuthGoogleContainer,
+  GoogleImg,
+  GoogleText,
+} from '@components/Auth/styles';
 import google from '@assets/auth/google.svg';
 
-function GoogleLoginButton() {
+function AuthGoogleButton() {
   const { t } = useTranslation();
   const login = useGoogleLogin({});
 
@@ -20,4 +24,4 @@ function GoogleLoginButton() {
   );
 }
 
-export default GoogleLoginButton;
+export default AuthGoogleButton;

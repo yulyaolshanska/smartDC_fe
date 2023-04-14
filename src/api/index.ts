@@ -1,6 +1,7 @@
 const api = process.env.REACT_APP_SERVER_API_DEV;
 
 export const API_URLS = {
-    login: `${api}auth/login`,
-    base: api
+  signUp: `${api}auth/registration`,
+  login: `${api}auth/login`,
+  base: api,
 };

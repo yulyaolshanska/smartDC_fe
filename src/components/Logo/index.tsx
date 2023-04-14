@@ -7,10 +7,10 @@ function Logo() {
   const { t } = useTranslation();
 
   return (
-    <LogoContainer>
-      <LogoImg src={logo}/>
-      <LogoTitle>{t("Logo.title")}</LogoTitle>
-    </LogoContainer>
+        <LogoContainer>
+            <LogoImg src={logo}/>
+            <LogoTitle>{t("Logo.title")}</LogoTitle>
+        </LogoContainer>
   );
 }
 export default Logo;
