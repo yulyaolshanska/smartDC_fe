@@ -25,6 +25,7 @@ import { email, end, password } from '@constants/auth';
 import { signUpSchema } from '@validation/auth.validate';
 import { PATH } from '@router/index';
 import GoogleLoginButton from './GoogleLogin';
+import { ToastContainer } from 'react-toastify';
 
 function LoginForm() {
   const [showPassword, setShowPassword] = useState<boolean>(false);
@@ -115,6 +116,7 @@ function LoginForm() {
           </AuthLinkContainer>
         </Form>
       </AuthForm>
+      <ToastContainer />
     </AuthContainer>
   );
 }

@@ -20,7 +20,6 @@ import {
   PasswordImg,
 } from '@components/Auth/styles';
 import { ISignUp } from '@components/Auth/type';
-import PhoneInput from '@components/PhoneInput';
 import visible from '@assets/auth/eye.svg';
 import visibleOff from '@assets/auth/eyeSlash.svg';
 import {
@@ -30,7 +29,6 @@ import {
   firstName,
   lastName,
   password,
-  phoneNumber,
 } from '@constants/auth';
 import { signUpSchema } from '@validation/auth.validate';
 import { setSignUpFirstStepData } from '@redux/slices/auth/signUp';
@@ -62,7 +60,6 @@ function SignUpFirstForm() {
       firstName: '',
       lastName: '',
       email: '',
-      phoneNumber: '',
       password: '',
       confirmPassword: '',
     },
@@ -118,18 +115,6 @@ function SignUpFirstForm() {
               placeholder={t('Auth.enterEmail') ?? ''}
               helperText={errors.email?.message}
               error={Boolean(errors?.email)}
-              required={true}
-            />
-          </AuthInput>
-          <AuthInput>
-            <AuthInputTitle>{t('Auth.phoneNumber')}</AuthInputTitle>
-            <PhoneInput
-              control={control}
-              fullWidth
-              name={phoneNumber}
-              placeholder={t('Auth.defaultPhoneNumber') ?? ''}
-              helperText={errors.phoneNumber?.message}
-              error={Boolean(errors?.phoneNumber)}
               required={true}
             />
           </AuthInput>

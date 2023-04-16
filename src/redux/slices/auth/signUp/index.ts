@@ -7,7 +7,6 @@ import { ISignUp } from '@components/Auth/type';
 import { authAPI, AuthSignUpDto } from '@api/auth/auth.api';
 import storage from 'redux-persist/lib/storage';
 import { AxiosError } from 'axios';
-import { plus } from '@constants/auth';
 import { persistReducer } from 'redux-persist';
 
 const initialState: ISignUp = {
@@ -64,7 +63,6 @@ const signUp = createSlice({
       state.firstName = action.payload.firstName;
       state.lastName = action.payload.lastName;
       state.email = action.payload.email;
-      state.phoneNumber = plus + action.payload.phoneNumber;
       state.password = action.payload.password;
       state.confirmPassword = action.payload.confirmPassword;
     },

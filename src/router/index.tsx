@@ -16,7 +16,7 @@ export const PATH = {
   SIGN_UP_SECOND_STEP: '/sign-up/second-step',
   FORGOT_PASS: '/forgot-pass',
   CONFIRM: '/forgot-pass/confirm',
-  RESET_PASS: '/reset-pass',
+  RESET_PASS: `/reset-pass/:token`,
   LOGIN: '/login',
   HOME: '/',
 };

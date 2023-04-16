@@ -18,10 +18,29 @@ export interface AuthSignUpDto {
   timeZone: string;
 }
 
+export interface AuthForgotPasswordDto {
+  email: string;
+}
+
+export interface AuthResetPasswordDto {
+  token: string;
+  password: string;
+}
+
 export const authAPI = {
   signUp(data: AuthSignUpDto) {
     return axios
       .post<AuthSignUpDto>(API_URLS.signUp, data)
+      .then((res) => res.data);
+  },
+  forgotPassword(data: AuthForgotPasswordDto) {
+    return axios
+      .post<AuthForgotPasswordDto>(API_URLS.forgotPassword, data)
+      .then((res) => res.data);
+  },
+  resetPassword(data: AuthResetPasswordDto) {
+    return axios
+      .patch<AuthResetPasswordDto>(API_URLS.resetPassword, data)
       .then((res) => res.data);
   },
 };

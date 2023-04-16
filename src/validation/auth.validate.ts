@@ -23,10 +23,6 @@ export function signUpSchema() {
       .string()
       .email(t('Error.invalidEmailFormat') ?? '')
       .required(t('Error.emailRequired') ?? ''),
-    phoneNumber: yup
-      .string()
-      .required(t('Error.phoneNumberRequired') ?? '')
-      .min(6, t('Error.tooShort') ?? ''),
     password: yup
       .string()
       .required(t('Error.enterPassword') ?? '')
@@ -43,6 +39,10 @@ export function signUpSchema() {
   });
 
   const signUpSecondStepSchema = yup.object().shape({
+    phoneNumber: yup
+      .string()
+      .required(t('Error.phoneNumberRequired') ?? '')
+      .min(6, t('Error.tooShort') ?? ''),
     address: yup.string().required(t('Error.fieldRequired') ?? ''),
     city: yup.string().required(t('Error.fieldRequired') ?? ''),
     country: yup.string().required(t('Error.fieldRequired') ?? ''),
