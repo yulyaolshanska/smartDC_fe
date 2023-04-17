@@ -32,6 +32,10 @@ export interface AuthLoginDto {
   password: string;
 }
 
+export interface AuthActivationDto {
+  link: string;
+}
+
 export const authAPI = {
   signUp(data: AuthSignUpDto) {
     return axios
@@ -48,12 +52,12 @@ export const authAPI = {
       .patch<AuthResetPasswordDto>(API_URLS.resetPassword, data)
       .then((res) => res.data);
   },
-  login({ email, password }: AuthLoginDto) {
+  login(data: AuthLoginDto) {
     return axios
-      .post<AuthLoginDto>(API_URLS.login, {
-      email,
-      password,
-    })
+      .post<AuthLoginDto>(API_URLS.login, data)
       .then((res) => res.data);
+  },
+  activation(data: AuthActivationDto) {
+    return axios.get(API_URLS.activation(data.link)).then((res) => res.data);
   },
 };

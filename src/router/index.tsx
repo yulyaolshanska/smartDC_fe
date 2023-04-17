@@ -10,10 +10,12 @@ import ResetPassword from '@pages/auth/resetPassword';
 import Login from '@pages/auth/login';
 import ForgotPassword from '@pages/auth/forgotPassword';
 import Confirmation from '@pages/auth/forgotPassword/confirmation';
+import Activation from '@pages/auth/signUp/activation';
 
 export const PATH = {
   SIGN_UP_FIRST_STEP: '/sign-up/first-step',
   SIGN_UP_SECOND_STEP: '/sign-up/second-step',
+  VERIFICATION: '/auth/activation/:link',
   FORGOT_PASS: '/forgot-pass',
   CONFIRM: '/forgot-pass/confirm',
   RESET_PASS: `/reset-pass/:token`,
@@ -26,6 +28,7 @@ export const router = createBrowserRouter(
     <Route>
       <Route path={PATH.SIGN_UP_FIRST_STEP} element={<SignUpFirstStep />} />
       <Route path={PATH.SIGN_UP_SECOND_STEP} element={<SignUpSecondStep />} />
+      <Route path={PATH.VERIFICATION} element={<Activation />} />
       <Route path={PATH.LOGIN} element={<Login />} />
       <Route path={PATH.FORGOT_PASS} element={<ForgotPassword />} />
       <Route path={PATH.CONFIRM} element={<Confirmation />} />

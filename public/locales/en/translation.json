@@ -14,6 +14,7 @@
     "logOut": "Log Out",
     "loginTitle": "Login",
     "loginText": "Please, login into your medical account",
+    "activationText": "You have successfully verified your account. In order to enter the system, go to the login form by clicking on the logo",
     "registrationTitle": "Registration",
     "registrationText": "Please, create your medical account and become a member",
     "firstName": "Your first name",
