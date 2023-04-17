@@ -5,8 +5,14 @@ dist
 tmp
 /out-tsc
 
+# env
+.env
+
 # dependencies
 node_modules
+
+# env
+.env
 
 # IDEs and editors
 /.idea
@@ -37,3 +43,7 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
+# envs
+.env
+.env.prod

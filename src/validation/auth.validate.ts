@@ -1,66 +1,101 @@
 import * as yup from 'yup';
+import { PASSWORD_REQUIRED_LENGTH } from '@constants/auth';
+import { useTranslation } from 'react-i18next';
 
 const NAME_PATTERN = /^([A-Z][a-z]{1,11})/;
 const PASSWORD_PATTERN = /^(?=.*[a-z])(?=.*[A-Z])(?=.{10,})/;
 
-const PASSWORD_REQUIRED_LENGTH = 10;
+export function signUpSchema() {
+  const { t } = useTranslation();
 
-export const signUpSchema = yup.object().shape({
-  firstName: yup
-    .string()
-    .required('*First name is required')
-    .min(2, "*Too short!")
-    .matches(NAME_PATTERN, '*The name must contain English letters with first Uppercase character'),
-  lastName: yup
-    .string()
-    .required('*Last name is required')
-    .min(2, "*Too short!")
-    .matches(NAME_PATTERN, '*The name must contain English letters with first Uppercase character'),
-  email: yup
-    .string()
-    .email('*Invalid email format')
-    .required('*Email is required'),
-  phoneNumber: yup
-    .string()
-    .required('*Phone number is required')
-    .min(6, "*Too short!"),
-  password: yup
-    .string()
-    .required('*Please Enter your password')
-    .matches(
-      PASSWORD_PATTERN,
-      `*Must Contain ${PASSWORD_REQUIRED_LENGTH} Characters, One Uppercase, One Lowercase`,
-    ),
-  confirmPassword: yup
-    .string()
-    .required('*Confirm password is required')
-    .oneOf([yup.ref('password')], '*Passwords does not match'),
-});
+  const signUpFirstStepSchema = yup.object().shape({
+    firstName: yup
+      .string()
+      .required(t('Error.firstNameRequired') ?? '')
+      .min(2, t('Error.firstNameRequired') ?? '')
+      .matches(NAME_PATTERN, t('Error.firstNameRequired') ?? ''),
+    lastName: yup
+      .string()
+      .required(t('Error.lastNameRequired') ?? '')
+      .min(2, t('Error.tooShort') ?? '')
+      .matches(NAME_PATTERN, t('Error.nameFormat') ?? ''),
+    email: yup
+      .string()
+      .email(t('Error.invalidEmailFormat') ?? '')
+      .required(t('Error.emailRequired') ?? ''),
+    phoneNumber: yup
+      .string()
+      .required(t('Error.phoneNumberRequired') ?? '')
+      .min(6, t('Error.tooShort') ?? ''),
+    password: yup
+      .string()
+      .required(t('Error.enterPassword') ?? '')
+      .matches(
+        PASSWORD_PATTERN,
+        `${t('Error.mustContain') ?? ''} ${PASSWORD_REQUIRED_LENGTH} ${
+          t('Error.charactersUppercaseLowercase') ?? ''
+        }`,
+      ),
+    confirmPassword: yup
+      .string()
+      .required(t('Error.confirmPasswordRequired') ?? '')
+      .oneOf([yup.ref('password')], t('Error.passwordsDoesNotMatch') ?? ''),
+  });
 
-export const resetPasswordSchema = yup.object().shape({
-  password: yup
-    .string()
-    .required('*Please Enter your password')
-    .matches(
-      PASSWORD_PATTERN,
-      `*Must Contain ${PASSWORD_REQUIRED_LENGTH} Characters, One Uppercase, One Lowercase`,
-    ),
-  confirmPassword: yup
-    .string()
-    .required('*Confirm password is required')
-    .oneOf([yup.ref('password')], '*Passwords does not match'),
-});
+  const signUpSecondStepSchema = yup.object().shape({
+    address: yup.string().required(t('Error.fieldRequired') ?? ''),
+    city: yup.string().required(t('Error.fieldRequired') ?? ''),
+    country: yup.string().required(t('Error.fieldRequired') ?? ''),
+    gender: yup.string().required(t('Error.fieldRequired') ?? ''),
+    specialization: yup.string().required(t('Error.fieldRequired') ?? ''),
+    role: yup.string().required(t('Error.fieldRequired') ?? ''),
+    timeZone: yup.string().required(t('Error.fieldRequired') ?? ''),
+  });
 
-export const LoginSchema = yup.object().shape({
-  email: yup
-    .string()
-    .email('*Invalid email format')
-    .required('*Email is required'),
-  password: yup
-    .string()
-    .required('*Please Enter your password')
-    .matches(
-      PASSWORD_PATTERN,
-      `*Must Contain ${PASSWORD_REQUIRED_LENGTH} Characters, One Uppercase, One Lowercase`,
-    )
-});
+  const resetPasswordSchema = yup.object().shape({
+    password: yup
+      .string()
+      .required(t('Error.enterPassword') ?? '')
+      .matches(
+        PASSWORD_PATTERN,
+        `${t('Error.mustContain') ?? ''} ${PASSWORD_REQUIRED_LENGTH} ${
+          t('Error.charactersUppercaseLowercase') ?? ''
+        }`,
+      ),
+    confirmPassword: yup
+      .string()
+      .required(t('Error.confirmPasswordRequired') ?? '')
+      .oneOf([yup.ref('password')], t('Error.passwordsDoesNotMatch') ?? ''),
+  });
+
+  const forgotPasswordSchema = yup.object().shape({
+    email: yup
+      .string()
+      .email(t('Error.invalidEmailFormat') ?? '')
+      .required(t('Error.emailRequired') ?? ''),
+  });
+
+  const LoginSchema = yup.object().shape({
+    email: yup
+      .string()
+      .email(t('Error.invalidEmailFormat') ?? '')
+      .required(t('Error.emailRequired') ?? ''),
+    password: yup
+      .string()
+      .required(t('Error.enterPassword') ?? '')
+      .matches(
+        PASSWORD_PATTERN,
+        `${t('Error.mustContain') ?? ''} ${PASSWORD_REQUIRED_LENGTH} ${
+          t('Error.charactersUppercaseLowercase') ?? ''
+        }`,
+      ),
+  });
+
+  return {
+    signUpFirstStepSchema,
+    signUpSecondStepSchema,
+    LoginSchema,
+    resetPasswordSchema,
+    forgotPasswordSchema,
+  };
+}

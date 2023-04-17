@@ -1,8 +1,8 @@
-import React, {useEffect} from 'react';
-import {useTranslation} from "react-i18next";
-import {useForm} from "react-hook-form";
-import {yupResolver} from "@hookform/resolvers/yup";
-import {IconButton, InputAdornment } from '@mui/material';
+import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { IconButton, InputAdornment } from '@mui/material';
 import Input from '@components/Input';
 import {
   AuthContainer,
@@ -13,57 +13,62 @@ import {
   AuthSendButton,
   AuthTitle,
   Form,
-  PasswordImg
+  PasswordImg,
 } from '@components/Auth/styles';
 import { ISignUp } from '@components/Auth/type';
-import visible from "@assets/auth/eye.svg";
-import visibleOff from "@assets/auth/eyeSlash.svg";
+import visible from '@assets/auth/eye.svg';
+import visibleOff from '@assets/auth/eyeSlash.svg';
 import { confirmPassword, end, password } from '@constants/auth';
-import { resetPasswordSchema } from '@validation/auth.validate';
+import { signUpSchema } from '@validation/auth.validate';
 
 function ResetPasswordForm() {
-  const [showPassword, setShowPassword] = React.useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = React.useState(false);
+  const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [showConfirmPassword, setShowConfirmPassword] =
+    useState<boolean>(false);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
-  const handleClickShowConfirmPassword = () => setShowConfirmPassword((show) => !show);
+  const handleClickShowConfirmPassword = () =>
+    setShowConfirmPassword((show) => !show);
+
+  const { resetPasswordSchema } = signUpSchema();
 
   const { t } = useTranslation();
   const {
     register,
     handleSubmit,
     control,
-    formState: { errors, isValid }
+    formState: { errors, isValid },
   } = useForm<ISignUp>({
     mode: 'onChange',
     defaultValues: {
       password: '',
-      confirmPassword: ''
+      confirmPassword: '',
     },
-    
+
     resolver: yupResolver(resetPasswordSchema),
   });
+
   useEffect(() => {
     register('password');
     register('confirmPassword');
   }, []);
 
-  const onSubmit = (data: ISignUp) => { };
+  const onSubmit = (data: ISignUp) => {};
 
   return (
     <AuthContainer>
       <AuthForm>
         <Form onSubmit={handleSubmit(onSubmit)}>
-          <AuthTitle>{t("Auth.resetPasswordTitle")}</AuthTitle>
-          <AuthGreenText>{t("Auth.resetPasswordText")}</AuthGreenText>
+          <AuthTitle>{t('Auth.resetPasswordTitle')}</AuthTitle>
+          <AuthGreenText>{t('Auth.resetPasswordText')}</AuthGreenText>
           <AuthInput>
-            <AuthInputTitle>{t("Auth.createNewPassword")}</AuthInputTitle>
+            <AuthInputTitle>{t('Auth.createNewPassword')}</AuthInputTitle>
             <Input
               control={control}
               fullWidth
               name={password}
-              type={showPassword ? "text" : "password"}
-              placeholder={t("Auth.enterNewPassword")??""}
+              type={showPassword ? 'text' : 'password'}
+              placeholder={t('Auth.enterNewPassword') ?? ''}
               helperText={errors.password?.message}
               error={Boolean(errors?.password)}
               required={true}
@@ -71,7 +76,11 @@ function ResetPasswordForm() {
                 endAdornment: (
                   <IconButton onClick={handleClickShowPassword}>
                     <InputAdornment position={end}>
-                    {<PasswordImg src={showPassword ? visible : visibleOff}/>}
+                      {
+                        <PasswordImg
+                          src={showPassword ? visible : visibleOff}
+                        />
+                      }
                     </InputAdornment>
                   </IconButton>
                 ),
@@ -79,13 +88,13 @@ function ResetPasswordForm() {
             />
           </AuthInput>
           <AuthInput>
-            <AuthInputTitle>{t("Auth.confirmNewPassword")}</AuthInputTitle>
+            <AuthInputTitle>{t('Auth.confirmNewPassword')}</AuthInputTitle>
             <Input
               control={control}
               fullWidth
               name={confirmPassword}
-              type={showConfirmPassword ? "text" : "password"}
-              placeholder={t("Auth.enterConfirmNewPassword")??""}
+              type={showConfirmPassword ? 'text' : 'password'}
+              placeholder={t('Auth.enterConfirmNewPassword') ?? ''}
               helperText={errors.confirmPassword?.message}
               error={Boolean(errors?.confirmPassword)}
               required={true}
@@ -93,7 +102,11 @@ function ResetPasswordForm() {
                 endAdornment: (
                   <IconButton onClick={handleClickShowConfirmPassword}>
                     <InputAdornment position={end}>
-                    {<PasswordImg src={showConfirmPassword ? visible : visibleOff}/>}
+                      {
+                        <PasswordImg
+                          src={showConfirmPassword ? visible : visibleOff}
+                        />
+                      }
                     </InputAdornment>
                   </IconButton>
                 ),
@@ -102,8 +115,8 @@ function ResetPasswordForm() {
           </AuthInput>
           <AuthSendButton
             disabled={!isValid}
-            type='submit'
-            value={t("Auth.save")??""}
+            type="submit"
+            value={t('Auth.save') ?? ''}
           />
         </Form>
       </AuthForm>
