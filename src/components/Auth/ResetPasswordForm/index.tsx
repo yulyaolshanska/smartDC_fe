@@ -28,8 +28,6 @@ import { resetPasswordQuery } from '@redux/slices/auth/resetPassword';
 import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router';
 
-console.log('787878787878');
-
 function ResetPasswordForm() {
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [showConfirmPassword, setShowConfirmPassword] =

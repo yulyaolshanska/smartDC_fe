@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -21,20 +21,29 @@ import {
 import { ISignUp } from '@components/Auth/type';
 import visible from '@assets/auth/eye.svg';
 import visibleOff from '@assets/auth/eyeSlash.svg';
-import { email, end, password } from '@constants/auth';
+import { email, end, error, password } from '@constants/auth';
 import { signUpSchema } from '@validation/auth.validate';
 import { PATH } from '@router/index';
 import GoogleLoginButton from './GoogleLogin';
 import { ToastContainer } from 'react-toastify';
+import { AuthLoginDto } from 'api/auth/auth.api';
+import { toast } from 'react-toastify';
+import { loginQuery } from '@redux/slices/auth/login';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router';
+import { AppDispatch } from '@redux/store';
 
 function LoginForm() {
-  const [showPassword, setShowPassword] = useState<boolean>(false);
+  const dispatch = useDispatch<AppDispatch>();
+  const { t } = useTranslation();
+  const navigate = useNavigate();
+
+  const [showPassword, setShowPassword] = React.useState(false);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
   const { LoginSchema } = signUpSchema();
 
-  const { t } = useTranslation();
   const {
     register,
     handleSubmit,
@@ -53,7 +62,20 @@ function LoginForm() {
     register('password');
   }, []);
 
-  const onSubmit = (data: ISignUp) => {};
+  const onSubmit = (data: ISignUp) => {
+    dispatch(loginQuery(data)).then((res) => {
+      if (error in res && res.error) {
+        toast.error(
+          'Sorry, something was wrong! Check your email and password!',
+          {
+            position: toast.POSITION.TOP_CENTER,
+          }
+        );
+      } else {
+        navigate('/');
+      }
+    });
+  };
 
   return (
     <AuthContainer>
@@ -74,7 +96,7 @@ function LoginForm() {
             />
           </AuthInput>
           <AuthInput>
-            <AuthInputTitle>{t('Auth.createPassword')}</AuthInputTitle>
+            <AuthInputTitle>{t('Auth.passwordLogin')}</AuthInputTitle>
             <Input
               control={control}
               fullWidth

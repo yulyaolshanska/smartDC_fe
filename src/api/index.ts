@@ -4,5 +4,6 @@ export const API_URLS = {
   signUp: `${api}auth/registration`,
   forgotPassword: `${api}auth/forgotPassword`,
   resetPassword: `${api}auth/resetPassword`,
+  login: `${api}auth/login`,
   base: api,
 };

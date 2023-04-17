@@ -1,10 +1,12 @@
 import PhoneInput from 'react-phone-input-2';
 import styled from 'styled-components';
-import { BLACK, MANDY, NAVY_BLUE, RED, SNUFF, WHISPER, WHITE } from '@constants/colors';
+import {
+  BLACK, MANDY, NAVY_BLUE, RED, SNUFF, WHISPER, WHITE,
+} from '@constants/colors';
 import { VERY_SMALL_FONT_SIZE } from '@constants/fontSizes';
 import { FONT_ROBOTO } from '@constants/fonts';
 
-export const PhoneInputContainer = styled(PhoneInput)<{hasError: boolean }>`
+export const PhoneInputContainer = styled(PhoneInput)<{ hasError: boolean }>`
   background: #${WHITE};
   font-style: normal;
   height: 60px;
@@ -23,7 +25,7 @@ export const PhoneInputContainer = styled(PhoneInput)<{hasError: boolean }>`
     justify-content: center;
     border-right: 2px solid ${WHISPER}; 
     transition: box-shadow ease .25s,border-color ease .25s;
-    border-right: ${(props) => props.hasError ? `2px solid ${RED}` : "2px solid transparent"};
+    border-right: ${(props) => (props.hasError ? `2px solid ${RED}` : '2px solid transparent')};
     border-color: ${(props) => (props.hasError ? `${RED}` : `${WHISPER}`)}; 
   }
 
@@ -39,7 +41,7 @@ export const PhoneInputContainer = styled(PhoneInput)<{hasError: boolean }>`
     border: 2px solid ${WHISPER}; 
     padding-left: 90px;
     color: ${BLACK};
-    border-right: ${(props) => props.hasError ? `2px solid ${RED}` : "2px solid transparent"};
+    border-right: ${(props) => (props.hasError ? `2px solid ${RED}` : '2px solid transparent')};
     border-color: ${(props) => (props.hasError ? `${RED}` : `${WHISPER}`)};
   }
   .input-phone:focus {
@@ -80,4 +82,4 @@ export const HelperText = styled.span`
   padding-top: 6px;
   font-family: ${FONT_ROBOTO};
   font-size: ${VERY_SMALL_FONT_SIZE};
-`
+`;
