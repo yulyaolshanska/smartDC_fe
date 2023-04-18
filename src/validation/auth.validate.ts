@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 const NAME_PATTERN = /^([A-Z][a-z]{1,11})/;
 const PASSWORD_PATTERN = /^(?=.*[a-z])(?=.*[A-Z])(?=.{10,})/;
 
-export function signUpSchema() {
+export default function signUpSchema() {
   const { t } = useTranslation();
 
   const signUpFirstStepSchema = yup.object().shape({

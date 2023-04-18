@@ -2,7 +2,7 @@ import { useTranslation } from 'react-i18next';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 import { yupResolver } from '@hookform/resolvers/yup';
 import Input from '@components/Input';
 import {
@@ -30,8 +30,10 @@ import {
   country,
   date,
   error,
+  phoneNumber,
+  plus,
 } from '@constants/auth';
-import { signUpSchema } from '@validation/auth.validate';
+import signUpSchema from '@validation/auth.validate';
 import {
   roles,
   specializations,
@@ -41,11 +43,12 @@ import {
   timeZones,
 } from '@constants/mockData';
 import SelectInput from '@components/Select';
-import { selectSignUp } from '@redux/selectors/auth/signUp';
+import selectSignUp from '@redux/selectors/auth/signUp';
 import { signUpQuery } from '@redux/slices/auth/signUp';
-import { AuthSignUpDto } from '@auth/auth.api';
 import { PATH } from '@router/index';
 import { AppDispatch } from '@redux/store';
+import React from 'react';
+import PhoneInput from '@components/PhoneInput';
 
 function SignUpSecondForm() {
   const { t } = useTranslation();
@@ -64,6 +67,7 @@ function SignUpSecondForm() {
     defaultValues: {
       role: '',
       gender: '',
+      phoneNumber: '',
       city: '',
       country: '',
       address: '',
@@ -77,6 +81,8 @@ function SignUpSecondForm() {
 
   const onSubmit = (data: ISignUp) => {
     data.specialization = Number(data.specialization);
+    data.phoneNumber = plus + data.phoneNumber;
+
     const combinedObj = Object.assign({}, dataSignUpFirst, data);
 
     dispatch(signUpQuery(combinedObj)).then((res) => {
@@ -132,6 +138,18 @@ function SignUpSecondForm() {
               helperText={errors.gender?.message}
               error={Boolean(errors?.gender)}
               options={genders}
+              required={true}
+            />
+          </AuthInput>
+          <AuthInput>
+            <AuthInputTitle>{t('Auth.phoneNumber')}</AuthInputTitle>
+            <PhoneInput
+              control={control}
+              fullWidth
+              name={phoneNumber}
+              placeholder={t('Auth.defaultPhoneNumber') ?? ''}
+              helperText={errors.phoneNumber?.message}
+              error={Boolean(errors?.phoneNumber)}
               required={true}
             />
           </AuthInput>
@@ -211,6 +229,7 @@ function SignUpSecondForm() {
           </AuthLinkContainer>
         </Form>
       </AuthForm>
+      <ToastContainer />
     </AuthContainer>
   );
 }

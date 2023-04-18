@@ -50,21 +50,21 @@
     "save": "Save",
     "submit": "Submit",
     "role": "Role",
-    "enterRole":"Enter role...",
-    "specialization":"Specialization",
-    "enterSpecialization":"Enter specialization...",
-    "gender":"Gender",
-    "enterGender":"Enter your gender...",
-    "birthDate":"Date of birth",
+    "enterRole": "Enter role...",
+    "specialization": "Specialization",
+    "enterSpecialization": "Enter specialization...",
+    "gender": "Gender",
+    "enterGender": "Enter your gender...",
+    "birthDate": "Date of birth",
     "enterDateOfBirth": "dd/mm/yyyy",
-    "country":"Country",
-    "enterCountry":"Enter your country...",
-    "city":"City",
-    "enterCity":"Enter your city...",
-    "address":"Address",
-    "enterAddress":"Enter your address...",
-    "timeZone":"Time Zone",
-    "enterTimeZone":"Enter your timezone..."
+    "country": "Country",
+    "enterCountry": "Enter your country...",
+    "city": "City",
+    "enterCity": "Enter your city...",
+    "address": "Address",
+    "enterAddress": "Enter your address...",
+    "timeZone": "Time Zone",
+    "enterTimeZone": "Enter your timezone..."
   },
   "Error": {
     "firstNameRequired": "*First name is required",
@@ -80,7 +80,10 @@
     "fieldRequired": "*Field is required",
     "mustContain": "*Must Contain",
     "charactersUppercaseLowercase": "Characters, One Uppercase, One Lowercase"
+  },
+
+  "Profile": {
+    "cancel": "Cancel",
+    "save": "Save"
   }
 }
-
-

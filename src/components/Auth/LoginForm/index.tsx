@@ -19,10 +19,10 @@ import {
   AuthForgotPasswordContainer,
 } from '@components/Auth/styles';
 import { IResponse, ISignUp } from '@components/Auth/type';
-import visible from "@assets/auth/eye.svg";
-import visibleOff from "@assets/auth/eyeSlash.svg";
+import visible from '@assets/auth/eye.svg';
+import visibleOff from '@assets/auth/eyeSlash.svg';
 import { email, end, password } from '@constants/auth';
-import { signUpSchema } from '@validation/auth.validate';
+import signUpSchema from '@validation/auth.validate';
 import { PATH } from '@router/index';
 import GoogleLoginButton from './GoogleLogin';
 import { AuthLoginDto } from 'api/auth/auth.api';
@@ -30,11 +30,18 @@ import { toast } from 'react-toastify';
 import { loginQuery } from '@redux/slices/login';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
+import { Link } from 'react-router-dom';
+import ContinueLinkContainer from './styles';
+import cookie from 'utils/functions/cookies';
+import { useAppDispatch, useAppSelector } from '@redux/hooks';
+import { doctorActions } from '@redux/slices/DoctorSlice';
 
 function LoginForm() {
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const navigate = useNavigate();
+
+  const doctorData = useAppSelector((state) => state.doctorReducer);
 
   const [showPassword, setShowPassword] = React.useState(false);
 
@@ -61,15 +68,23 @@ function LoginForm() {
   }, []);
 
   const onSubmit = (data: AuthLoginDto) => {
-    // @ts-ignore
-    dispatch(loginQuery(data)).then((res: IResponse) => {
-      if (!res.error){
-          navigate('/');
-      }
-      else {
-          toast.error("Sorry, something was wrong!", {
-              position: toast.POSITION.TOP_CENTER,
-          })
+    //@ts-ignore
+    dispatch(loginQuery(data)).then((res) => {
+      if (!res.error) {
+        console.log(res.payload.token);
+        const token = res.payload.token;
+        const doctor = res.payload.userInfo;
+        cookie.delete('googleUserData');
+        cookie.set('accessToken', token, 1);
+        console.log('doctor', doctor);
+        dispatch(doctorActions.getDoctor(doctor));
+        console.log('DoctorData inside func', doctorData);
+
+        navigate('/dashboard');
+      } else {
+        toast.error('Sorry, something was wrong!', {
+          position: toast.POSITION.TOP_CENTER,
+        });
       }
     });
   };
@@ -124,11 +139,13 @@ function LoginForm() {
             </AuthLink>
           </AuthForgotPasswordContainer>
           <GoogleLoginButton />
+
           <AuthSendButton
             disabled={!isValid}
             type="submit"
             value={t('Auth.continue') ?? ''}
           />
+
           <AuthLinkContainer>
             {t('Auth.haventAnAccount')}
             <AuthLink to={PATH.SIGN_UP_FIRST_STEP}>{t('Auth.click')}</AuthLink>

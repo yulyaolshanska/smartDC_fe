@@ -1,7 +1,7 @@
 import { Control, Controller } from 'react-hook-form';
 import { TextFieldProps } from '@mui/material/TextField/TextField';
 import { TextField, Autocomplete } from '@mui/material';
-import { InputContainer } from '@components/Input/styles';
+import InputContainer from '@components/Input/styles';
 import { ISignUp, Option } from '@components/Auth/type';
 import { SignUpFields } from '@types';
 

@@ -1,5 +1,8 @@
 import 'typeface-roboto';
+
+import { LinkToLogin } from '@components/Header/styles';
 /**
  * @deprecated
  */
-export const FONT_ROBOTO = 'Roboto';
+const FONT_ROBOTO = 'Roboto';
+export default FONT_ROBOTO;
