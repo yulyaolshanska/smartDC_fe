@@ -72,7 +72,7 @@ function LoginForm() {
           }
         );
       } else {
-        navigate('/');
+        navigate(PATH.DASHBOARD);
       }
     });
   };
@@ -134,7 +134,7 @@ function LoginForm() {
           />
           <AuthLinkContainer>
             {t('Auth.haventAnAccount')}
-            <AuthLink to={PATH.SIGN_UP_FIRST_STEP}>{t('Auth.click')}</AuthLink>
+            <AuthLink to={PATH.SIGN_UP}>{t('Auth.click')}</AuthLink>
           </AuthLinkContainer>
         </Form>
       </AuthForm>

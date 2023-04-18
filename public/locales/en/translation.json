@@ -5,7 +5,7 @@
     "goToPage": "Go to another page"
   },
   "Logo": {
-    "title": "smartDC"
+    "title": "myDOC"
   },
   "Auth": {
     "signUp": "Sign Up",
@@ -14,7 +14,7 @@
     "logOut": "Log Out",
     "loginTitle": "Login",
     "loginText": "Please, login into your medical account",
-    "activationText": "You have successfully verified your account. In order to enter the system, go to the login form by clicking on the logo",
+    "activationText": "You have successfully verified your account. In order to enter the system, please go to the login form",
     "registrationTitle": "Registration",
     "registrationText": "Please, create your medical account and become a member",
     "firstName": "Your first name",
@@ -30,6 +30,7 @@
     "forgotPasswordText": "Enter your email and we’ll send you a link to reset your password",
     "forgotPasswordLink": "Forgot the password?",
     "backToLogin": "Back to Login",
+    "goToLogin": "Go to Login",
     "confirmation": "Confirmation",
     "confirmationText": "We sent a link to reset your password. Check your email",
     "resetPasswordTitle": "Reset Password",

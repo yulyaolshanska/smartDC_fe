@@ -47,7 +47,7 @@ import { selectSignUp } from '@redux/selectors/auth/signUp';
 import { signUpQuery } from '@redux/slices/auth/signUp';
 import { PATH } from '@router/index';
 import { AppDispatch } from '@redux/store';
-import React from 'react';
+import React, { useState } from 'react';
 import PhoneInput from '@components/PhoneInput';
 
 function SignUpSecondForm() {
@@ -87,11 +87,14 @@ function SignUpSecondForm() {
 
     dispatch(signUpQuery(combinedObj)).then((res) => {
       if (error in res && res.error) {
-        toast.error('Sorry, something was wrong!', {
-          position: toast.POSITION.TOP_CENTER,
-        });
+        toast.error(
+          'Sorry, you entered the wrong phone number! Please change it',
+          {
+            position: toast.POSITION.TOP_CENTER,
+          }
+        );
       } else {
-        navigate('/');
+        navigate(PATH.DASHBOARD);
       }
     });
   };
@@ -182,15 +185,13 @@ function SignUpSecondForm() {
             </AuthInput>
             <AuthInput>
               <AuthInputTitle>{t('Auth.city')}</AuthInputTitle>
-              <SelectInput
+              <Input
                 control={control}
                 fullWidth
                 name={city}
                 placeholder={t('Auth.enterCity') ?? ''}
-                options={cities}
                 helperText={errors.city?.message}
                 error={Boolean(errors?.city)}
-                required={true}
               />
             </AuthInput>
           </InputInlineContainer>

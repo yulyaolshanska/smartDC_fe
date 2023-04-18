@@ -13,21 +13,19 @@ import Confirmation from '@pages/auth/forgotPassword/confirmation';
 import Activation from '@pages/auth/signUp/activation';
 
 export const PATH = {
-  SIGN_UP_FIRST_STEP: '/sign-up/first-step',
-  SIGN_UP_SECOND_STEP: '/sign-up/second-step',
+  SIGN_UP: '/auth',
   VERIFICATION: '/auth/activation/:link',
   FORGOT_PASS: '/forgot-pass',
   CONFIRM: '/forgot-pass/confirm',
   RESET_PASS: `/reset-pass/:token`,
-  LOGIN: '/login',
-  HOME: '/',
+  LOGIN: '/',
+  DASHBOARD: '/dashboard',
 };
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
     <Route>
-      <Route path={PATH.SIGN_UP_FIRST_STEP} element={<SignUpFirstStep />} />
-      <Route path={PATH.SIGN_UP_SECOND_STEP} element={<SignUpSecondStep />} />
+      <Route path={PATH.SIGN_UP} element={<SignUpFirstStep />} />
       <Route path={PATH.VERIFICATION} element={<Activation />} />
       <Route path={PATH.LOGIN} element={<Login />} />
       <Route path={PATH.FORGOT_PASS} element={<ForgotPassword />} />

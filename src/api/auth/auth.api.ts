@@ -18,6 +18,10 @@ export interface AuthSignUpDto {
   timeZone: string;
 }
 
+export interface AuthCheckEmailDto {
+  email: string;
+}
+
 export interface AuthForgotPasswordDto {
   email: string;
 }
@@ -40,24 +44,49 @@ export const authAPI = {
   signUp(data: AuthSignUpDto) {
     return axios
       .post<AuthSignUpDto>(API_URLS.signUp, data)
-      .then((res) => res.data);
+      .then((res) => res.data)
+      .catch((error) => {
+        throw error.response.data;
+      });
+  },
+  checkEmail(data: AuthCheckEmailDto) {
+    return axios
+      .post<AuthCheckEmailDto>(API_URLS.checkEmail, data)
+      .then((res) => res.data)
+      .catch((error) => {
+        throw error.response.data;
+      });
   },
   forgotPassword(data: AuthForgotPasswordDto) {
     return axios
       .post<AuthForgotPasswordDto>(API_URLS.forgotPassword, data)
-      .then((res) => res.data);
+      .then((res) => res.data)
+      .catch((error) => {
+        throw error.response.data;
+      });
   },
   resetPassword(data: AuthResetPasswordDto) {
     return axios
       .patch<AuthResetPasswordDto>(API_URLS.resetPassword, data)
-      .then((res) => res.data);
+      .then((res) => res.data)
+      .catch((error) => {
+        throw error.response.data;
+      });
   },
   login(data: AuthLoginDto) {
     return axios
       .post<AuthLoginDto>(API_URLS.login, data)
-      .then((res) => res.data);
+      .then((res) => res.data)
+      .catch((error) => {
+        throw error.response.data;
+      });
   },
   activation(data: AuthActivationDto) {
-    return axios.get(API_URLS.activation(data.link)).then((res) => res.data);
+    return axios
+      .get(API_URLS.activation(data.link))
+      .then((res) => res.data)
+      .catch((error) => {
+        throw error.response.data;
+      });
   },
 };

@@ -1,8 +1,4 @@
-import {
-  createAsyncThunk,
-  createSlice,
-  SerializedError,
-} from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { AuthActivationDto, authAPI } from '@api/auth/auth.api';
 import storage from 'redux-persist/lib/storage';
 import { AxiosError } from 'axios';
@@ -25,15 +21,14 @@ export const activationAccountQuery = createAsyncThunk(
   async (data: AuthActivationDto, { rejectWithValue }) => {
     try {
       return await authAPI.activation(data);
-    } catch (err: unknown) {
-      if (err instanceof AxiosError) {
-        if (err.response) {
-          const { status, data } = err.response;
-          return rejectWithValue({
-            status: status.toString(),
-            message: data.message || 'Something went wrong.',
-          } as SerializedError);
-        }
+    } catch (err) {
+      const error = err as Error;
+      if (error instanceof AxiosError && error.response) {
+        const { status, data } = error.response;
+        return rejectWithValue({
+          status: status.toString(),
+          message: data.message || 'Something went wrong.',
+        });
       }
       throw err;
     }
