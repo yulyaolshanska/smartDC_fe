@@ -41,7 +41,7 @@ export interface AuthActivationDto {
 }
 
 export const authAPI = {
-  signUp(data: AuthSignUpDto) {
+  signUp(data: AuthSignUpDto): Promise<AuthSignUpDto> {
     return axios
       .post<AuthSignUpDto>(API_URLS.signUp, data)
       .then((res) => res.data)
@@ -49,7 +49,7 @@ export const authAPI = {
         throw error.response.data;
       });
   },
-  checkEmail(data: AuthCheckEmailDto) {
+  checkEmail(data: AuthCheckEmailDto): Promise<AuthCheckEmailDto> {
     return axios
       .post<AuthCheckEmailDto>(API_URLS.checkEmail, data)
       .then((res) => res.data)
@@ -57,7 +57,7 @@ export const authAPI = {
         throw error.response.data;
       });
   },
-  forgotPassword(data: AuthForgotPasswordDto) {
+  forgotPassword(data: AuthForgotPasswordDto): Promise<AuthForgotPasswordDto> {
     return axios
       .post<AuthForgotPasswordDto>(API_URLS.forgotPassword, data)
       .then((res) => res.data)
@@ -65,7 +65,7 @@ export const authAPI = {
         throw error.response.data;
       });
   },
-  resetPassword(data: AuthResetPasswordDto) {
+  resetPassword(data: AuthResetPasswordDto): Promise<AuthResetPasswordDto> {
     return axios
       .patch<AuthResetPasswordDto>(API_URLS.resetPassword, data)
       .then((res) => res.data)
@@ -73,7 +73,7 @@ export const authAPI = {
         throw error.response.data;
       });
   },
-  login(data: AuthLoginDto) {
+  login(data: AuthLoginDto): Promise<AuthLoginDto> {
     return axios
       .post<AuthLoginDto>(API_URLS.login, data)
       .then((res) => res.data)
@@ -81,7 +81,7 @@ export const authAPI = {
         throw error.response.data;
       });
   },
-  activation(data: AuthActivationDto) {
+  activation(data: AuthActivationDto): Promise<void> {
     return axios
       .get(API_URLS.activation(data.link))
       .then((res) => res.data)
