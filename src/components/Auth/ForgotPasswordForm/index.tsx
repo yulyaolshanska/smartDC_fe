@@ -18,13 +18,18 @@ import {
   AuthArrowBack,
 } from '@components/Auth/styles';
 import { ISignUp } from '@components/Auth/type';
-import { email } from '@constants/auth';
+import { email, error } from '@constants/auth';
 import { signUpSchema } from '@validation/auth.validate';
 import { PATH } from '@router/index';
+import { forgotPasswordQuery } from '@redux/slices/auth/forgotPassword';
+import { toast, ToastContainer } from 'react-toastify';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '@redux/store';
 
 function ForgotPasswordForm() {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const dispatch = useDispatch<AppDispatch>();
 
   const { forgotPasswordSchema } = signUpSchema();
 
@@ -41,7 +46,15 @@ function ForgotPasswordForm() {
   });
 
   const onSubmit = (data: ISignUp) => {
-    navigate(PATH.CONFIRM);
+    dispatch(forgotPasswordQuery(data)).then((res) => {
+      if (error in res && res.error) {
+        toast.error(`Doctor with email ${data.email} not found!`, {
+          position: toast.POSITION.TOP_CENTER,
+        });
+      } else {
+        navigate(PATH.CONFIRM);
+      }
+    });
   };
 
   return (
@@ -75,6 +88,7 @@ function ForgotPasswordForm() {
           </AuthLinkContainer>
         </Form>
       </AuthForm>
+      <ToastContainer />
     </AuthContainer>
   );
 }

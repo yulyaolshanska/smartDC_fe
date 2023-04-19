@@ -15,7 +15,7 @@ export const genders = [
 
 export const countries = [
   { value: 'UA', label: 'Ukraine' },
-  { value: 'USA', label: 'USA' },
+  { value: 'US', label: 'USA' },
 ];
 
 export const cities = [
