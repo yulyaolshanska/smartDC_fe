@@ -41,12 +41,15 @@ const ProfileComponent = () => {
 
   const dispatch = useAppDispatch();
 
-  React.useEffect(() => {}, []);
+  // React.useEffect(() => {
+  //   refetch();
+  // }, []);
 
   const [updateDoctorProfile, {}] = doctorApi.useUpdateDoctorProfileMutation();
   const { data: doctor, refetch } = authApi.useGetMeQuery({});
 
   React.useEffect(() => {
+    refetch();
     dispatch(doctorActions.getDoctor(doctor));
   }, [doctor]);
   const { t } = useTranslation();
@@ -57,7 +60,18 @@ const ProfileComponent = () => {
     formState: { errors, isValid },
   } = useForm<ISignUp>({
     mode: 'onChange',
-    defaultValues: defaultValues,
+    defaultValues: {
+      firstName: doctorData.firstName,
+      lastName: doctorData.lastName,
+      email: doctorData.email,
+      phoneNumber: doctorData.phoneNumber,
+      gender: doctorData.gender,
+      birthDate: doctorData.birthDate,
+      country: doctorData.country,
+      city: doctorData.city,
+      address: doctorData.address,
+      timeZone: doctorData.timeZone,
+    },
     resolver: yupResolver(EditRemoteSchema),
   });
 
