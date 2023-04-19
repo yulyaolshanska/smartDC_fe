@@ -5,13 +5,13 @@ import { AccordionBody, AccordionTitle, Arrow } from './styles';
 
 const Accordion = () => {
   const [toggle, setToggle] = React.useState(false);
-  const [heightEl, setHeightEl] = React.useState();
+  const [heightEl, setHeightEl] = React.useState<string>();
 
-  const refHeight = React.useRef();
+  const refHeight = React.useRef<HTMLDivElement>(null);
 
   React.useEffect(() => {
-    console.log(refHeight);
-    setHeightEl(`${refHeight.current.scrollHeight + 20 + 16}px`);
+    if (refHeight.current)
+      setHeightEl(`${refHeight.current.scrollHeight + 20 + 16}px`);
   }, []);
 
   const toggleState = () => {

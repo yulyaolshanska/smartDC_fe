@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+
 import cookie from 'utils/functions/cookies';
 
 export interface IUpdateDoctorProfile {

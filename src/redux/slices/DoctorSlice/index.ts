@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+
 import { doctorApi } from 'services/DoctorService';
 import DoctorInitialState from './types';
 

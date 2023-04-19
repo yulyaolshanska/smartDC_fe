@@ -1,15 +1,9 @@
+import { useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
+import { DevTool } from '@hookform/devtools';
+
 import Input from '@components/Input';
-import Wrapper from '@components/Wrapper';
 import {
-  AuthTitle,
-  AuthText,
-  AuthInput,
-  AuthInputTitle,
-  AuthForm,
-} from '@components/Auth/styles';
-import {
-  role,
-  specialization,
   gender,
   address,
   timeZone,
@@ -17,43 +11,26 @@ import {
   city,
   country,
   date,
-  error,
 } from '@constants/auth';
-import {
-  confirmPassword,
-  email,
-  end,
-  lastName,
-  password,
-  phoneNumber,
-} from '@constants/auth';
-import { useTranslation } from 'react-i18next';
+import { phoneNumber } from '@constants/auth';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useForm } from 'react-hook-form';
-import React from 'react';
 import { EditRemoteSchema } from '@validation/editDoctorProfile.validate';
 import { ISignUp } from '@components/Auth/type';
 import { Stack, Typography } from '@mui/material';
-import { ButtonsWrapepr, StageWrapper } from './styles';
-import { firstName } from './../../constants/auth';
-import PhotoChanger from './PhotoChanger';
 import CustomButton from '@components/Button';
 import SelectInput from '@components/Select';
 import PhoneInput from '@components/PhoneInput';
-import { DevTool } from '@hookform/devtools';
-import { authApi } from 'services/AuthService';
-import { doctorActions } from '@redux/slices/DoctorSlice';
-// import { Input } from './ProfileInput';
-// import { PhoneInput } from './ProfileInput';
-// import { SelectInput } from './ProfileInput';
+import { useAppSelector } from '@redux/hooks';
+
+import { doctorApi } from 'services/DoctorService';
+import { ButtonsWrapepr, StageWrapper } from './styles';
+
 import {
   cities,
   countries,
   genders,
   timeZones,
 } from './../../constants/mockData';
-import { IUpdateDoctorProfile, doctorApi } from 'services/DoctorService';
-import { useAppDispatch, useAppSelector } from '@redux/hooks';
 
 export interface IEditProfileRemote {}
 const ProfileComponent = () => {
@@ -87,10 +64,7 @@ const ProfileComponent = () => {
     try {
       const doctor = { ...data, id: doctorData.id };
       await updateDoctorProfile(doctor);
-      console.log('data', data);
-    } catch (error) {
-      console.log('The error in submittig doctor profile update form', error);
-    }
+    } catch (error) {}
   };
 
   // React.useEffect(() => {

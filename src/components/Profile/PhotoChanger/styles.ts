@@ -1,16 +1,18 @@
 import styled from 'styled-components';
 import FONT_ROBOTO from '@constants/fonts';
+import { ACTIVE, BORDER } from '@constants/colors';
+import { SMALL_FONT_SIZE } from '@constants/fontSizes';
 
 export const PhotoChangerWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  border-bottom: 1px solid #d8dbe8;
+  border-bottom: 1px solid ${BORDER};
   padding-bottom: 8px;
   font-family: ${FONT_ROBOTO};
   p {
-    color: #4d84e7;
+    color: ${ACTIVE};
     font-weight: 700;
-    font-size: 0.875rem;
+    font-size: ${SMALL_FONT_SIZE};
     align-self: right;
     margin-left: 32px;
   }

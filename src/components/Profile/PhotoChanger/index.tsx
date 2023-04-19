@@ -1,7 +1,5 @@
-import { Stack, Typography } from '@mui/material';
 import DoctorPhoto from '@assets/doctorPic.png';
 import EditIcon from '@assets/edit.svg';
-import React from 'react';
 import { Photo, PhotoChangerWrapper, EditIconContainer } from './styles';
 
 const PhotoChanger = () => {

@@ -3,16 +3,9 @@ import {
   createAsyncThunk,
   createSlice,
 } from '@reduxjs/toolkit';
-import { AuthLoginDto, authAPI } from 'api/auth/auth.api';
-import { persistStore, persistReducer } from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
 import { AxiosError } from 'axios';
 
-const persistConfig = {
-  key: 'root',
-  storage,
-  blacklist: ['isLoading'],
-};
+import { AuthLoginDto, authAPI } from 'api/auth/auth.api';
 
 export const loginQuery = createAsyncThunk(
   'login/loginQuery',

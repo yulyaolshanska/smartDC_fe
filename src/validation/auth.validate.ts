@@ -1,6 +1,7 @@
 import * as yup from 'yup';
-import { PASSWORD_REQUIRED_LENGTH } from '@constants/auth';
 import { useTranslation } from 'react-i18next';
+
+import { PASSWORD_REQUIRED_LENGTH } from '@constants/auth';
 
 const NAME_PATTERN = /^([A-Z][a-z]{1,11})/;
 const PASSWORD_PATTERN = /^(?=.*[a-z])(?=.*[A-Z])(?=.{10,})/;
@@ -34,7 +35,7 @@ export default function signUpSchema() {
         PASSWORD_PATTERN,
         `${t('Error.mustContain') ?? ''} ${PASSWORD_REQUIRED_LENGTH} ${
           t('Error.charactersUppercaseLowercase') ?? ''
-        }`,
+        }`
       ),
     confirmPassword: yup
       .string()
@@ -60,7 +61,7 @@ export default function signUpSchema() {
         PASSWORD_PATTERN,
         `${t('Error.mustContain') ?? ''} ${PASSWORD_REQUIRED_LENGTH} ${
           t('Error.charactersUppercaseLowercase') ?? ''
-        }`,
+        }`
       ),
     confirmPassword: yup
       .string()
@@ -87,7 +88,7 @@ export default function signUpSchema() {
         PASSWORD_PATTERN,
         `${t('Error.mustContain') ?? ''} ${PASSWORD_REQUIRED_LENGTH} ${
           t('Error.charactersUppercaseLowercase') ?? ''
-        }`,
+        }`
       ),
   });
 

@@ -262,7 +262,7 @@ import {
   timeZones,
 } from '@constants/mockData';
 import SelectInput from '@components/Select';
-import { selectSignUp } from '@redux/selectors/auth/signUp';
+import selectSignUp from '@redux/selectors/auth/signUp';
 import { signUpQuery } from '@redux/slices/auth/signUp';
 import { PATH } from '@router/index';
 import { AppDispatch } from '@redux/store';

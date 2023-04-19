@@ -93,7 +93,7 @@ function SignUpSecondFormGoogle() {
     data: doctor,
     error: getMeError,
     isLoading,
-  } = authApi.useGetMeQuery();
+  } = authApi.useGetMeQuery({});
 
   const onSubmit = async (data: ISignUp) => {
     data.id = doctor.id;

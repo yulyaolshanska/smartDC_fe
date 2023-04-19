@@ -63,7 +63,7 @@ const Drawer = () => {
     }
   }, [location.pathname]);
 
-  const { data: doctor, error, isLoading, refetch } = authApi.useGetMeQuery();
+  const { data: doctor, error, isLoading, refetch } = authApi.useGetMeQuery({});
 
   React.useEffect(() => {
     dispatch(doctorActions.getDoctor(doctor));

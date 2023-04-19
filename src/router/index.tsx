@@ -1,10 +1,6 @@
 import React from 'react';
-import {
-  createBrowserRouter,
-  createRoutesFromElements,
-  Route,
-  Routes,
-} from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
+
 import SignUpFirstStep from '@pages/auth/signUp/signUpFirstStep';
 import SignUpSecondStep from '@pages/auth/signUp/signUpSecondStep';
 import SignUpSecondFormGoogle from '@components/Auth/SignUpForm/SignUpSecondStepFormGoogle';
@@ -15,11 +11,6 @@ import Confirmation from '@pages/auth/forgotPassword/confirmation';
 import Profile from '@pages/doctor/profile';
 import PageWrapper from '@components/PageWrapper';
 import Help from '@pages/help';
-import { authApi } from 'services/AuthService';
-import { useAppDispatch, useAppSelector } from '@redux/hooks';
-import { doctorActions } from '@redux/slices/DoctorSlice';
-import { signUpSecondStepFormGoogle } from './../pages/auth/signUp/signUpSecondStepGoogle/index';
-import { persistor } from '@redux/store';
 export const PATH = {
   SIGN_UP_FIRST_STEP: '/sign-up/first-step',
   SIGN_UP_SECOND_STEP: '/sign-up/second-step',
@@ -35,13 +26,6 @@ export const PATH = {
 };
 
 const AppRouter = () => {
-  const dispatch = useAppDispatch();
-  const { data: doctor, error, isLoading, refetch } = authApi.useGetMeQuery();
-
-  React.useEffect(() => {
-    dispatch(doctorActions.getDoctor(doctor));
-  }, []);
-
   return (
     <PageWrapper>
       <Routes>

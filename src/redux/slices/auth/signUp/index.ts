@@ -3,12 +3,11 @@ import {
   createSlice,
   SerializedError,
 } from '@reduxjs/toolkit';
+import { AxiosError } from 'axios';
+
 import { ISignUp } from '@components/Auth/type';
 import { authAPI, AuthSignUpDto } from '@api/auth/auth.api';
-import storage from 'redux-persist/lib/storage';
-import { AxiosError } from 'axios';
 import { plus } from '@constants/auth';
-import { persistReducer } from 'redux-persist';
 
 const initialState: ISignUp = {
   firstName: '',
@@ -28,12 +27,6 @@ const initialState: ISignUp = {
   isLoading: false,
   token: null,
   error: null,
-};
-
-const persistConfig = {
-  key: 'root',
-  storage,
-  blacklist: ['isLoading'],
 };
 
 export const signUpQuery = createAsyncThunk(
