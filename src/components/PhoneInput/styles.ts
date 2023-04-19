@@ -31,8 +31,7 @@ export const PhoneInputContainer = styled(PhoneInput)<{ hasError: boolean }>`
     justify-content: center;
     border-right: 2px solid ${WHISPER};
     transition: box-shadow ease 0.25s, border-color ease 0.25s;
-    border-right: ${(props) =>
-      props.hasError ? `2px solid ${RED}` : '2px solid transparent'};
+    border-right: ${(props) => (props.hasError ? `2px solid ${RED}` : '2px solid transparent')};
     border-color: ${(props) => (props.hasError ? `${RED}` : `${WHISPER}`)};
   }
 
@@ -48,8 +47,7 @@ export const PhoneInputContainer = styled(PhoneInput)<{ hasError: boolean }>`
     border: 2px solid ${WHISPER};
     padding-left: 90px;
     color: ${BLACK};
-    border-right: ${(props) =>
-      props.hasError ? `2px solid ${RED}` : '2px solid transparent'};
+    border-right: ${(props) => (props.hasError ? `2px solid ${RED}` : '2px solid transparent')};
     border-color: ${(props) => (props.hasError ? `${RED}` : `${WHISPER}`)};
   }
   .input-phone:focus {

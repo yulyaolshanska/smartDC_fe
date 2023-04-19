@@ -36,6 +36,7 @@ export const doctorApi = createApi({
         url: `/doctor/${doctor.id}`,
         method: 'PATCH',
         body: doctor,
+        staleTime: 1,
       }),
       invalidatesTags: ['Doctor'],
     }),

@@ -20,7 +20,7 @@ import { Stack, Typography } from '@mui/material';
 import CustomButton from '@components/Button';
 import SelectInput from '@components/Select';
 import PhoneInput from '@components/PhoneInput';
-import { useAppSelector } from '@redux/hooks';
+import { useAppSelector, useAppDispatch } from '@redux/hooks';
 
 import { doctorApi } from 'services/DoctorService';
 import { ButtonsWrapepr, StageWrapper } from './styles';
@@ -31,12 +31,24 @@ import {
   genders,
   timeZones,
 } from './../../constants/mockData';
+import { authApi } from 'services/AuthService';
+import React from 'react';
+import { doctorActions } from '@redux/slices/DoctorSlice';
 
 export interface IEditProfileRemote {}
 const ProfileComponent = () => {
   const doctorData = useAppSelector((state) => state.doctorReducer);
-  console.log('doctorDataqweqweqweqwe123123', doctorData);
+
+  const dispatch = useAppDispatch();
+
+  React.useEffect(() => {}, []);
+
   const [updateDoctorProfile, {}] = doctorApi.useUpdateDoctorProfileMutation();
+  const { data: doctor, refetch } = authApi.useGetMeQuery({});
+
+  React.useEffect(() => {
+    dispatch(doctorActions.getDoctor(doctor));
+  }, [doctor]);
   const { t } = useTranslation();
   const {
     register,
@@ -45,18 +57,7 @@ const ProfileComponent = () => {
     formState: { errors, isValid },
   } = useForm<ISignUp>({
     mode: 'onChange',
-    defaultValues: {
-      firstName: doctorData.firstName,
-      lastName: doctorData.lastName,
-      email: doctorData.email,
-      phoneNumber: doctorData.phoneNumber,
-      gender: doctorData.gender,
-      birthDate: doctorData.birthDate,
-      country: doctorData.country,
-      city: doctorData.city,
-      address: doctorData.address,
-      timeZone: doctorData.timeZone,
-    },
+    defaultValues: defaultValues,
     resolver: yupResolver(EditRemoteSchema),
   });
 
@@ -66,19 +67,7 @@ const ProfileComponent = () => {
       await updateDoctorProfile(doctor);
     } catch (error) {}
   };
-
-  // React.useEffect(() => {
-  //   register('firstName');
-  //   register('lastName');
-  //   register('email');
-  //   register('phoneNumber');
-  //   register('gender');
-  //   register('birthDate');
-  //   register('country');
-  //   register('city');
-  //   register('address');
-  //   register('timeZone');
-  // }, []);
+  console.log('doctordoctor', doctor, 'doctorData123123', doctorData);
 
   return (
     <>

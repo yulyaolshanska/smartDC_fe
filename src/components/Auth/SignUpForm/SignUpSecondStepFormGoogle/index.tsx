@@ -47,21 +47,21 @@ import selectSignUp from '@redux/selectors/auth/signUp';
 import { signUpQuery } from '@redux/slices/auth/signUp';
 import { PATH } from '@router/index';
 import { AppDispatch } from '@redux/store';
-import React from 'react';
+import React, { useEffect } from 'react';
 import PhoneInput from '@components/PhoneInput';
 import { doctorApi } from 'services/DoctorService';
 import { authApi } from 'services/AuthService';
 import { firstName } from './../../../../constants/auth';
 import { useAppSelector } from '@redux/hooks';
+import { doctorActions } from '@redux/slices/DoctorSlice';
 
 function SignUpSecondFormGoogle() {
   const { t } = useTranslation();
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
   const doctorData = useAppSelector((state) => state.doctorReducer);
-  if (doctorData.address) {
-    navigate('/dashboard');
-  }
+  console.log('signup', doctorData);
+
   //TODO add another value to db to check if user is from Google
 
   const { signUpSecondStepSchema } = signUpSchema();
@@ -89,11 +89,18 @@ function SignUpSecondFormGoogle() {
 
   const [updateDoctorProfile, { error }] =
     doctorApi.useUpdateDoctorProfileMutation();
+
   const {
     data: doctor,
     error: getMeError,
     isLoading,
+    refetch,
+    isFetching,
   } = authApi.useGetMeQuery({});
+
+  React.useEffect(() => {
+    dispatch(doctorActions.getDoctor(doctor));
+  }, [doctor]);
 
   const onSubmit = async (data: ISignUp) => {
     data.id = doctor.id;
@@ -102,15 +109,21 @@ function SignUpSecondFormGoogle() {
     data.email = doctor.email;
     data.specialization = Number(data.specialization);
     data.phoneNumber = plus + data.phoneNumber;
-    console.log('doctorSubmitGoogle', doctor);
 
     if (error) {
       toast.error('Sorry, something was wrong!', {
         position: toast.POSITION.TOP_CENTER,
       });
     } else {
-      await updateDoctorProfile(data);
-      navigate('/dashboard');
+      await updateDoctorProfile(data).then((res) => {
+        dispatch(doctorActions.getDoctor(doctor));
+        console.log('hnntgff regfregfb fg', data, 'ewrgrgegfrgf', res);
+        refetch().then(() => navigate('/dashboard'));
+      });
+
+      // const token = res.payload.token;
+      // const doctor = res.payload.userInfo;
+      // dispatch(doctorActions.getDoctor(doctor));
     }
   };
 

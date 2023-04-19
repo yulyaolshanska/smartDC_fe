@@ -2,9 +2,6 @@ import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import { signUpReducer } from '@redux/slices/auth/signUp';
 import { doctorApi } from 'services/DoctorService';
 import { authApi } from 'services/AuthService';
-import { loginReducer } from './slices/login';
-import { navigationReducer } from './slices/NavigationSlice';
-import { doctorReducer } from './slices/DoctorSlice';
 import {
   persistStore,
   persistReducer,
@@ -16,6 +13,9 @@ import {
   REGISTER,
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
+import { loginReducer } from './slices/login';
+import { navigationReducer } from './slices/NavigationSlice';
+import { doctorReducer } from './slices/DoctorSlice';
 
 const rootReducer = combineReducers({
   loginReducer,
@@ -33,16 +33,14 @@ const persistConfig = {
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-export const setupStore = () =>
-  configureStore({
-    reducer: persistedReducer,
-    middleware: (getDefaultMiddleware) =>
-      getDefaultMiddleware({
-        serializableCheck: {
-          ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-        },
-      }).concat(doctorApi.middleware, authApi.middleware),
-  });
+export const setupStore = () => configureStore({
+  reducer: persistedReducer,
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware({
+    serializableCheck: {
+      ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+    },
+  }).concat(doctorApi.middleware, authApi.middleware),
+});
 export const store = setupStore();
 export const persistor = persistStore(store);
 

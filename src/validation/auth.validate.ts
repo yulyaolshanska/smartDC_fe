@@ -35,7 +35,7 @@ export default function signUpSchema() {
         PASSWORD_PATTERN,
         `${t('Error.mustContain') ?? ''} ${PASSWORD_REQUIRED_LENGTH} ${
           t('Error.charactersUppercaseLowercase') ?? ''
-        }`
+        }`,
       ),
     confirmPassword: yup
       .string()
@@ -61,7 +61,7 @@ export default function signUpSchema() {
         PASSWORD_PATTERN,
         `${t('Error.mustContain') ?? ''} ${PASSWORD_REQUIRED_LENGTH} ${
           t('Error.charactersUppercaseLowercase') ?? ''
-        }`
+        }`,
       ),
     confirmPassword: yup
       .string()
@@ -88,7 +88,7 @@ export default function signUpSchema() {
         PASSWORD_PATTERN,
         `${t('Error.mustContain') ?? ''} ${PASSWORD_REQUIRED_LENGTH} ${
           t('Error.charactersUppercaseLowercase') ?? ''
-        }`
+        }`,
       ),
   });
 

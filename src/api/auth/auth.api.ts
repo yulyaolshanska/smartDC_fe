@@ -32,9 +32,9 @@ export const authAPI = {
   login({ email, password }: AuthLoginDto) {
     return axios
       .post<AuthLoginDto>(API_URLS.login, {
-        email,
-        password,
-      })
+      email,
+      password,
+    })
       .then((res) => res.data);
   },
 };

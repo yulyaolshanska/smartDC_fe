@@ -71,13 +71,11 @@ function LoginForm() {
     //@ts-ignore
     dispatch(loginQuery(data)).then((res) => {
       if (!res.error) {
-        console.log(res.payload.token);
         const token = res.payload.token;
         const doctor = res.payload.userInfo;
-        cookie.delete('googleUserData');
-        cookie.set('accessToken', token, 1);
-        console.log('doctor', doctor);
         dispatch(doctorActions.getDoctor(doctor));
+        cookie.set('accessToken', token, 1);
+
         console.log('DoctorData inside func', doctorData);
 
         navigate('/dashboard');

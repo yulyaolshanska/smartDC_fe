@@ -11,11 +11,6 @@ import getGoogleOauthURL from 'utils/functions/getGoogleOauthURL';
 
 function AuthGoogleButton() {
   const { t } = useTranslation();
-  // const login = useGoogleLogin({});
-
-  // const handleLogin = () => {
-  //   login();
-  // };
 
   return (
     <AuthGoogleContainer href={getGoogleOauthURL()}>

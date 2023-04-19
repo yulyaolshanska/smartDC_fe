@@ -6,6 +6,8 @@ import {
 import { AxiosError } from 'axios';
 
 import { AuthLoginDto, authAPI } from 'api/auth/auth.api';
+import cookie from 'utils/functions/cookies';
+import { persistor } from '@redux/store';
 
 export const loginQuery = createAsyncThunk(
   'login/loginQuery',
@@ -42,6 +44,8 @@ const login = createSlice({
       state.error = null;
       state.isLoading = false;
       localStorage.clear();
+      cookie.delete('accessToken');
+      persistor.purge();
     },
   },
   extraReducers: {

@@ -3,6 +3,6 @@ import { RootState } from '@redux/store';
 
 const selectSignUp = createSelector(
   (state: RootState) => state,
-  (state) => state.signUpReducer
+  (state) => state.signUpReducer,
 );
 export default selectSignUp;
