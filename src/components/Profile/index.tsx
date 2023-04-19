@@ -58,7 +58,7 @@ import { useAppDispatch, useAppSelector } from '@redux/hooks';
 export interface IEditProfileRemote {}
 const ProfileComponent = () => {
   const doctorData = useAppSelector((state) => state.doctorReducer);
-  console.log('doctorData', doctorData);
+  console.log('doctorDataqweqweqweqwe123123', doctorData);
   const [updateDoctorProfile, {}] = doctorApi.useUpdateDoctorProfileMutation();
   const { t } = useTranslation();
   const {

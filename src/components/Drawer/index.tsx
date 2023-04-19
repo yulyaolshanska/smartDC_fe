@@ -7,6 +7,8 @@ import { ReactComponent as UserIcon } from '@assets/user.svg';
 import { ReactComponent as AppoitmentIcon } from '@assets/appointment.svg';
 import { ReactComponent as AvaliabilityIcon } from '@assets/calendar.svg';
 import photo from '@assets/doctorPicture.png';
+import { authApi } from 'services/AuthService';
+import { doctorActions } from '@redux/slices/DoctorSlice';
 import { Stack, Typography } from '@mui/material';
 import {
   BottomDrawer,
@@ -60,6 +62,12 @@ const Drawer = () => {
       dispatch(navigationActions.setCurrentPage(position.to));
     }
   }, [location.pathname]);
+
+  const { data: doctor, error, isLoading, refetch } = authApi.useGetMeQuery();
+
+  React.useEffect(() => {
+    dispatch(doctorActions.getDoctor(doctor));
+  }, []);
 
   return (
     <DrawerContainer>

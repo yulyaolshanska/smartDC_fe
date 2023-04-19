@@ -19,6 +19,7 @@ import { authApi } from 'services/AuthService';
 import { useAppDispatch, useAppSelector } from '@redux/hooks';
 import { doctorActions } from '@redux/slices/DoctorSlice';
 import { signUpSecondStepFormGoogle } from './../pages/auth/signUp/signUpSecondStepGoogle/index';
+import { persistor } from '@redux/store';
 export const PATH = {
   SIGN_UP_FIRST_STEP: '/sign-up/first-step',
   SIGN_UP_SECOND_STEP: '/sign-up/second-step',
@@ -35,11 +36,11 @@ export const PATH = {
 
 const AppRouter = () => {
   const dispatch = useAppDispatch();
-  const { data: doctor, error, isLoading } = authApi.useGetMeQuery();
+  const { data: doctor, error, isLoading, refetch } = authApi.useGetMeQuery();
 
   React.useEffect(() => {
     dispatch(doctorActions.getDoctor(doctor));
-  }, [doctor]);
+  }, []);
 
   return (
     <PageWrapper>
@@ -47,13 +48,13 @@ const AppRouter = () => {
         {/* Public Routes */}
         <Route path={PATH.SIGN_UP_FIRST_STEP} element={<SignUpFirstStep />} />
         <Route path={PATH.SIGN_UP_SECOND_STEP} element={<SignUpSecondStep />} />
+        <Route path={PATH.LOGIN} element={<Login />} />
+        <Route path={PATH.RESET_PASS} element={<ResetPassword />} />
+        {/* Private Routes */}
         <Route
           path={PATH.SIGN_UP_SECOND_STEP_GOOGLE}
           element={<SignUpSecondFormGoogle />}
         />
-        <Route path={PATH.LOGIN} element={<Login />} />
-        <Route path={PATH.RESET_PASS} element={<ResetPassword />} />
-        {/* Private Routes */}
         <Route path={PATH.FORGOT_PASS} element={<ForgotPassword />} />
         <Route path={PATH.CONFIRM} element={<Confirmation />} />
         <Route path={PATH.EDIT_DOCTOR_PROFILE} element={<Profile />} />

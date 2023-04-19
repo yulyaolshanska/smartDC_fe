@@ -1,4 +1,8 @@
-import { SerializedError, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import {
+  SerializedError,
+  createAsyncThunk,
+  createSlice,
+} from '@reduxjs/toolkit';
 import { AuthLoginDto, authAPI } from 'api/auth/auth.api';
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
@@ -27,7 +31,7 @@ export const loginQuery = createAsyncThunk(
       }
       throw err;
     }
-  },
+  }
 );
 
 const login = createSlice({
@@ -63,6 +67,4 @@ const login = createSlice({
   },
 });
 
-const persistedReducer = persistReducer(persistConfig, login.reducer);
-
-export default persistedReducer;
+export const { reducer: loginReducer, actions: loginActions } = login;

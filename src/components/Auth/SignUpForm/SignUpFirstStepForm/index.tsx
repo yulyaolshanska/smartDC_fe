@@ -236,7 +236,7 @@ import {
   password,
 } from '@constants/auth';
 import signUpSchema from '@validation/auth.validate';
-import { setSignUpFirstStepData } from '@redux/slices/auth/signUp';
+import { signUpActions } from '@redux/slices/auth/signUp';
 import { PATH } from '@router/index';
 import AuthGoogleButton from '@components/Auth/AuthGoogleButton';
 
@@ -277,7 +277,7 @@ function SignUpFirstForm() {
   }, []);
 
   const onSubmit = (data: ISignUp) => {
-    dispatch(setSignUpFirstStepData(data));
+    dispatch(signUpActions.setSignUpFirstStepData(data));
     navigate(PATH.SIGN_UP_SECOND_STEP);
   };
 

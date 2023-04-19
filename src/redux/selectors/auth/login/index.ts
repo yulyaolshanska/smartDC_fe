@@ -3,7 +3,7 @@ import { RootState } from '@redux/store';
 
 const selectLogin = createSelector(
   (state: RootState) => state,
-  (state) => state.login,
+  (state) => state.loginReducer
 );
 
 export default selectLogin;

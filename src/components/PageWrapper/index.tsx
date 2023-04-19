@@ -11,7 +11,7 @@ interface WrapperProps {
 }
 
 const PageWrapper = ({ children }: WrapperProps) => {
-  const shouldRender = useAvoidRenderOnPaths(['/sign-up', '/login']);
+  const shouldRender = useAvoidRenderOnPaths(['/sign-up', '/login']); //TODO add to constant
   if (shouldRender && children) {
     return children as ReactElement;
   }

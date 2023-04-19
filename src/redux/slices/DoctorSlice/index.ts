@@ -1,11 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { doctorApi } from 'services/DoctorService';
+import DoctorInitialState from './types';
 
-const initialState = {
+const initialState: DoctorInitialState = {
   address: undefined,
   birthDate: undefined,
   city: undefined,
-  country: 'UA',
+  country: undefined,
   email: undefined,
   firstName: undefined,
   gender: undefined,

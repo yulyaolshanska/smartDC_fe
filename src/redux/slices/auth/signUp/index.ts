@@ -53,7 +53,7 @@ export const signUpQuery = createAsyncThunk(
       }
       throw err;
     }
-  },
+  }
 );
 
 const signUp = createSlice({
@@ -85,8 +85,4 @@ const signUp = createSlice({
   },
 });
 
-const persistedReducer = persistReducer(persistConfig, signUp.reducer);
-
-export const { setSignUpFirstStepData } = signUp.actions;
-
-export default persistedReducer;
+export const { reducer: signUpReducer, actions: signUpActions } = signUp;

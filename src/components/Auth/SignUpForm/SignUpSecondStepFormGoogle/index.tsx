@@ -89,7 +89,6 @@ function SignUpSecondFormGoogle() {
 
   const [updateDoctorProfile, { error }] =
     doctorApi.useUpdateDoctorProfileMutation();
-
   const {
     data: doctor,
     error: getMeError,
