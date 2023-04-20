@@ -36,6 +36,8 @@ import {
   timeZones,
 } from './../../constants/mockData';
 import { persistor } from '@redux/store';
+import { SMALL_FONT_SIZE } from '@constants/fontSizes';
+import { ZAMBEZI } from '@constants/colors';
 
 export interface IEditProfileRemote {}
 const ProfileComponent = () => {
@@ -96,7 +98,7 @@ const ProfileComponent = () => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <StageWrapper>
           <Stack gap="16px" width="100%">
-            <Typography fontSize="0.875rem" color="#585858">
+            <Typography fontSize={SMALL_FONT_SIZE} color={ZAMBEZI}>
               {t('Auth.firstName') ?? ''}
             </Typography>
             <Input
@@ -111,7 +113,7 @@ const ProfileComponent = () => {
           </Stack>
 
           <Stack gap="16px" width="100%">
-            <Typography fontSize="0.875rem" color="#585858">
+            <Typography fontSize={SMALL_FONT_SIZE} color={ZAMBEZI}>
               {t('Auth.lastName') ?? ''}
             </Typography>
             <Input
@@ -127,7 +129,7 @@ const ProfileComponent = () => {
         </StageWrapper>
         <StageWrapper>
           <Stack gap="16px" width="100%">
-            <Typography fontSize="0.875rem" color="#585858">
+            <Typography fontSize={SMALL_FONT_SIZE} color={ZAMBEZI}>
               {t('Auth.phoneNumber') ?? ''}
             </Typography>
             <PhoneInput
@@ -141,7 +143,7 @@ const ProfileComponent = () => {
             />
           </Stack>
           <Stack gap="16px" width="100%">
-            <Typography fontSize="0.875rem" color="#585858">
+            <Typography fontSize={SMALL_FONT_SIZE} color={ZAMBEZI}>
               {t('Auth.email') ?? ''}
             </Typography>
             <Input
@@ -157,7 +159,7 @@ const ProfileComponent = () => {
         </StageWrapper>
         <StageWrapper>
           <Stack gap="16px" width="100%">
-            <Typography fontSize="0.875rem" color="#585858">
+            <Typography fontSize={SMALL_FONT_SIZE} color={ZAMBEZI}>
               {t('Auth.gender') ?? ''}
             </Typography>
             <SelectInput
@@ -172,7 +174,7 @@ const ProfileComponent = () => {
             />
           </Stack>
           <Stack gap="16px" width="100%">
-            <Typography fontSize="0.875rem" color="#585858">
+            <Typography fontSize={SMALL_FONT_SIZE} color={ZAMBEZI}>
               {t('Auth.birthDate') ?? ''}
             </Typography>
             <Input
@@ -189,7 +191,7 @@ const ProfileComponent = () => {
         </StageWrapper>
         <StageWrapper>
           <Stack gap="16px" width="100%">
-            <Typography fontSize="0.875rem" color="#585858">
+            <Typography fontSize={SMALL_FONT_SIZE} color={ZAMBEZI}>
               {t('Auth.country') ?? ''}
             </Typography>
             <SelectInput
@@ -204,7 +206,7 @@ const ProfileComponent = () => {
             />
           </Stack>
           <Stack gap="16px" width="100%">
-            <Typography fontSize="0.875rem" color="#585858">
+            <Typography fontSize={SMALL_FONT_SIZE} color={ZAMBEZI}>
               {t('Auth.city') ?? ''}
             </Typography>
             <SelectInput
@@ -221,7 +223,7 @@ const ProfileComponent = () => {
         </StageWrapper>
         <StageWrapper>
           <Stack gap="16px" width="100%">
-            <Typography fontSize="0.875rem" color="#585858">
+            <Typography fontSize={SMALL_FONT_SIZE} color={ZAMBEZI}>
               {t('Auth.address') ?? ''}
             </Typography>
             <Input
@@ -234,7 +236,7 @@ const ProfileComponent = () => {
             />
           </Stack>
           <Stack gap="16px" width="100%">
-            <Typography fontSize="0.875rem" color="#585858">
+            <Typography fontSize={SMALL_FONT_SIZE} color={ZAMBEZI}>
               {t('Auth.timeZone') ?? ''}
             </Typography>
             <SelectInput
@@ -249,7 +251,7 @@ const ProfileComponent = () => {
             />
           </Stack>
         </StageWrapper>
-        <Typography fontSize="0.875rem" color="#585858">
+        <Typography fontSize={SMALL_FONT_SIZE} color={ZAMBEZI}>
           {t('Auth.timeZone') ?? ''}
         </Typography>
         <SelectInput

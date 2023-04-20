@@ -1,8 +1,12 @@
 import Wrapper from '@components/Wrapper';
+import { useTranslation } from 'react-i18next';
 import React from 'react';
+
 import { AccordionBody, AccordionTitle, Arrow } from './styles';
 
 const Accordion: React.FC = () => {
+  const { t } = useTranslation();
+
   const [toggle, setToggle] = React.useState<boolean>(false);
   const [heightEl, setHeightEl] = React.useState<string>();
 
@@ -19,7 +23,7 @@ const Accordion: React.FC = () => {
   return (
     <Wrapper>
       <AccordionTitle toggle={toggle} onClick={toggleState}>
-        <p>Some problem</p>
+        <p> {t('Help.problem')}</p>
         <Arrow toggle={toggle} />
       </AccordionTitle>
       <AccordionBody
@@ -31,10 +35,7 @@ const Accordion: React.FC = () => {
         }}
         ref={refHeight}
       >
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore,
-        suscipit quae maiores sunt ducimus est dolorem perspiciatis earum
-        corporis unde, dicta quibusdam aut placeat dignissimos distinctio vel
-        quo eligendi ipsam.
+        {t('Help.lorem')}
       </AccordionBody>
     </Wrapper>
   );
