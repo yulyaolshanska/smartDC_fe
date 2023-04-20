@@ -5,6 +5,7 @@ export const API_URLS = {
   checkEmail: `${api}auth/checkEmail`,
   forgotPassword: `${api}auth/forgotPassword`,
   resetPassword: `${api}auth/resetPassword`,
+  createPatient: `${api}patient`,
   login: `${api}auth/login`,
   activation: (link: string) => `${api}auth/activation/${link}`,
   base: api,

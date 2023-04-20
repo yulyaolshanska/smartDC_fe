@@ -4,6 +4,7 @@ import forgotPassword from '@redux/slices/auth/forgotPassword';
 import resetPassword from '@redux/slices/auth/resetPassword';
 import login from '@redux/slices/auth/login';
 import activationAccount from '@redux/slices/auth/activation';
+import createPatient from '@redux/slices/patient/createPatient';
 
 export const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ export const store = configureStore({
     forgotPassword,
     resetPassword,
     activationAccount,
+    createPatient,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

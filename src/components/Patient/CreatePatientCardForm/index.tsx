@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useForm } from 'react-hook-form';
-import { ToastContainer } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 import { yupResolver } from '@hookform/resolvers/yup';
 import {
   CancelButton,
@@ -10,20 +10,27 @@ import {
   ButtonContainer,
 } from '@components/general/styles';
 import { Form, InputInlineContainer, Text } from '@components/Patient/styles';
-import { FormValues, ISignUp } from '@components/general/type';
+import { FormValues, IPatient, ISignUp } from '@components/general/type';
 import { patientSchema } from '@validation/patient.validate';
 import { PATH } from '@router/index';
 import InputName from '@components/Patient/Inputs/InputName';
 import InputPhoneNumberEmail from '@components/Patient/Inputs/InputPhoneNumberEmail';
 import InputGenderBirthDate from '@components/Patient/Inputs/InputGenderBirthDate';
 import InputAddressTimeZone from '@components/Patient/Inputs/InputAddressTimeZone';
+import InputCountryCity from '@components/Patient/Inputs/InputCountryCity';
 import InputOverview from '@components/Patient/Inputs/InputOverview';
+import { error } from '@constants/auth';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '@redux/store';
+import { createPatientQuery } from '@redux/slices/patient/createPatient';
 
 function CreatePatientCardForm() {
   const { t } = useTranslation();
 
   const { createPatientCardSchema } = patientSchema();
-
+  const navigate = useNavigate();
+  const dispatch = useDispatch<AppDispatch>();
   const {
     handleSubmit,
     control,
@@ -47,7 +54,17 @@ function CreatePatientCardForm() {
     resolver: yupResolver(createPatientCardSchema),
   });
 
-  const onSubmit = (data: ISignUp) => {};
+  const onSubmit = (data: IPatient) => {
+    dispatch(createPatientQuery(data)).then((res) => {
+      if (error in res && res.error) {
+        toast.error(`Sorry, something was wrong!`, {
+          position: toast.POSITION.TOP_CENTER,
+        });
+      } else {
+        navigate(PATH.DASHBOARD);
+      }
+    });
+  };
 
   return (
     <FormContainer>
@@ -63,7 +80,7 @@ function CreatePatientCardForm() {
           <InputGenderBirthDate control={control} errors={errors} />
         </InputInlineContainer>
         <InputInlineContainer>
-          <InputGenderBirthDate control={control} errors={errors} />
+          <InputCountryCity control={control} errors={errors} />
         </InputInlineContainer>
         <InputInlineContainer>
           <InputAddressTimeZone control={control} errors={errors} />
