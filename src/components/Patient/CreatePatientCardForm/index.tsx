@@ -18,6 +18,7 @@ import InputPhoneNumberEmail from '@components/Patient/Inputs/InputPhoneNumberEm
 import InputGenderBirthDate from '@components/Patient/Inputs/InputGenderBirthDate';
 import InputAddressTimeZone from '@components/Patient/Inputs/InputAddressTimeZone';
 import InputOverview from '@components/Patient/Inputs/InputOverview';
+import InputCountryCity from '@components/Patient/Inputs/InputCountryCity';
 
 function CreatePatientCardForm() {
   const { t } = useTranslation();
@@ -63,7 +64,7 @@ function CreatePatientCardForm() {
           <InputGenderBirthDate control={control} errors={errors} />
         </InputInlineContainer>
         <InputInlineContainer>
-          <InputGenderBirthDate control={control} errors={errors} />
+          <InputCountryCity control={control} errors={errors} />
         </InputInlineContainer>
         <InputInlineContainer>
           <InputAddressTimeZone control={control} errors={errors} />
