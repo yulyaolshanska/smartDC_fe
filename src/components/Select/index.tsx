@@ -1,3 +1,4 @@
+import React from 'react';
 import { Control, Controller } from 'react-hook-form';
 import { TextFieldProps } from '@mui/material/TextField/TextField';
 import { TextField, Autocomplete } from '@mui/material';
@@ -8,6 +9,8 @@ import { SignUpFields } from '@types';
 export type Props = {
   options: Option[];
 } & TextFieldProps;
+
+const [inputValue, setInputValue] = React.useState('');
 
 export function SelectInput({
   control,
@@ -26,11 +29,13 @@ export function SelectInput({
         render={({ field: { ref, onChange, ...field } }) => (
           <Autocomplete
             options={options}
+            inputValue={inputValue}
             onChange={(_, data) => onChange(data?.value)}
             renderInput={(params) => (
               <TextField
                 {...params}
                 {...field}
+                value={field.value}
                 fullWidth
                 inputRef={ref}
                 placeholder={placeholder}

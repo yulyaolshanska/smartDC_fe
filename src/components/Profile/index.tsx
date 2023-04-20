@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { DevTool } from '@hookform/devtools';
-
+import React from 'react';
 import Input from '@components/Input';
 import {
   gender,
@@ -21,7 +21,9 @@ import CustomButton from '@components/Button';
 import SelectInput from '@components/Select';
 import PhoneInput from '@components/PhoneInput';
 import { useAppSelector, useAppDispatch } from '@redux/hooks';
+import { doctorActions } from '@redux/slices/DoctorSlice';
 
+import { authApi } from 'services/AuthService';
 import { doctorApi } from 'services/DoctorService';
 import { ButtonsWrapepr, StageWrapper } from './styles';
 
@@ -31,9 +33,7 @@ import {
   genders,
   timeZones,
 } from './../../constants/mockData';
-import { authApi } from 'services/AuthService';
-import React from 'react';
-import { doctorActions } from '@redux/slices/DoctorSlice';
+import { persistor } from '@redux/store';
 
 export interface IEditProfileRemote {}
 const ProfileComponent = () => {
@@ -41,37 +41,44 @@ const ProfileComponent = () => {
 
   const dispatch = useAppDispatch();
 
-  // React.useEffect(() => {
-  //   refetch();
-  // }, []);
+  const [updateDoctorProfile, { error: doctorUpdateError }] =
+    doctorApi.useUpdateDoctorProfileMutation();
+  const {
+    data: doctor,
+    refetch: doctorRefetch,
+    error: doctorGetError,
+  } = authApi.useGetMeQuery({});
 
-  const [updateDoctorProfile, {}] = doctorApi.useUpdateDoctorProfileMutation();
-  const { data: doctor, refetch } = authApi.useGetMeQuery({});
+  const { t } = useTranslation();
 
   React.useEffect(() => {
-    refetch();
+    doctorRefetch();
     dispatch(doctorActions.getDoctor(doctor));
+    setTimeout(() => {
+      reset({
+        firstName: doctor.firstName,
+        lastName: doctor.lastName,
+        email: doctor.email,
+        phoneNumber: doctor.phoneNumber,
+        gender: doctor.gender,
+        birthDate: doctor.birthDate,
+        country: doctor.country,
+        city: doctor.city,
+        address: doctor.address,
+        timeZone: doctor.timeZone,
+      });
+    }, 0);
   }, [doctor]);
-  const { t } = useTranslation();
+
   const {
     register,
     handleSubmit,
     control,
     formState: { errors, isValid },
+    reset,
   } = useForm<ISignUp>({
     mode: 'onChange',
-    defaultValues: {
-      firstName: doctorData.firstName,
-      lastName: doctorData.lastName,
-      email: doctorData.email,
-      phoneNumber: doctorData.phoneNumber,
-      gender: doctorData.gender,
-      birthDate: doctorData.birthDate,
-      country: doctorData.country,
-      city: doctorData.city,
-      address: doctorData.address,
-      timeZone: doctorData.timeZone,
-    },
+    defaultValues: async () => await { ...doctor },
     resolver: yupResolver(EditRemoteSchema),
   });
 
@@ -81,7 +88,6 @@ const ProfileComponent = () => {
       await updateDoctorProfile(doctor);
     } catch (error) {}
   };
-  console.log('doctordoctor', doctor, 'doctorData123123', doctorData);
 
   return (
     <>
