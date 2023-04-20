@@ -20,27 +20,35 @@ import {
   PasswordImg,
 } from '@components/Auth/styles';
 import { ISignUp } from '@components/Auth/type';
-import PhoneInput from '@components/PhoneInput';
 import visible from '@assets/auth/eye.svg';
 import visibleOff from '@assets/auth/eyeSlash.svg';
 import {
   confirmPassword,
   email,
   end,
+  error,
   firstName,
   lastName,
   password,
-  phoneNumber,
 } from '@constants/auth';
 import { signUpSchema } from '@validation/auth.validate';
-import { setSignUpFirstStepData } from '@redux/slices/auth/signUp';
+import {
+  checkEmailQuery,
+  setSignUpFirstStepData,
+  signUpQuery,
+} from '@redux/slices/auth/signUp';
 import { PATH } from '@router/index';
 import AuthGoogleButton from '@components/Auth/AuthGoogleButton';
+import SignUpSecondForm from '@components/Auth/SignUpForm/SignUpSecondStepForm';
+import { toast, ToastContainer } from 'react-toastify';
+import { AppDispatch } from '@redux/store';
 
 function SignUpFirstForm() {
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [showConfirmPassword, setShowConfirmPassword] =
     useState<boolean>(false);
+
+  const [isFirstStep, setFirstStep] = useState<boolean>(true);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
   const handleClickShowConfirmPassword = () =>
@@ -49,7 +57,7 @@ function SignUpFirstForm() {
   const { signUpFirstStepSchema } = signUpSchema();
 
   const { t } = useTranslation();
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
   const {
     register,
@@ -62,7 +70,6 @@ function SignUpFirstForm() {
       firstName: '',
       lastName: '',
       email: '',
-      phoneNumber: '',
       password: '',
       confirmPassword: '',
     },
@@ -75,129 +82,135 @@ function SignUpFirstForm() {
   }, []);
 
   const onSubmit = (data: ISignUp) => {
-    dispatch(setSignUpFirstStepData(data));
-    navigate(PATH.SIGN_UP_SECOND_STEP);
+    dispatch(checkEmailQuery(data)).then((res) => {
+      if (error in res && res.error) {
+        toast.error(
+          `Sorry, user with email ${data.email} already exists! Please change the email for continue`,
+          {
+            position: toast.POSITION.TOP_CENTER,
+          }
+        );
+      } else {
+        dispatch(setSignUpFirstStepData(data));
+        setFirstStep(!isFirstStep);
+      }
+    });
   };
 
   return (
-    <AuthContainer>
-      <AuthForm>
-        <Form onSubmit={handleSubmit(onSubmit)}>
-          <AuthTitle>{t('Auth.registrationTitle')}</AuthTitle>
-          <AuthText>{t('Auth.registrationText')}</AuthText>
-          <AuthInput>
-            <AuthInputTitle>{t('Auth.firstName')}</AuthInputTitle>
-            <Input
-              control={control}
-              fullWidth
-              name={firstName}
-              placeholder={t('Auth.enterFirstName') ?? ''}
-              helperText={errors.firstName?.message}
-              error={Boolean(errors?.firstName)}
-              required={true}
-            />
-          </AuthInput>
-          <AuthInput>
-            <AuthInputTitle>{t('Auth.lastName')}</AuthInputTitle>
-            <Input
-              control={control}
-              fullWidth
-              name={lastName}
-              placeholder={t('Auth.enterLastName') ?? ''}
-              helperText={errors.lastName?.message}
-              error={Boolean(errors?.lastName)}
-              required={true}
-            />
-          </AuthInput>
-          <AuthInput>
-            <AuthInputTitle>{t('Auth.email')}</AuthInputTitle>
-            <Input
-              control={control}
-              fullWidth
-              name={email}
-              placeholder={t('Auth.enterEmail') ?? ''}
-              helperText={errors.email?.message}
-              error={Boolean(errors?.email)}
-              required={true}
-            />
-          </AuthInput>
-          <AuthInput>
-            <AuthInputTitle>{t('Auth.phoneNumber')}</AuthInputTitle>
-            <PhoneInput
-              control={control}
-              fullWidth
-              name={phoneNumber}
-              placeholder={t('Auth.defaultPhoneNumber') ?? ''}
-              helperText={errors.phoneNumber?.message}
-              error={Boolean(errors?.phoneNumber)}
-              required={true}
-            />
-          </AuthInput>
-          <AuthInput>
-            <AuthInputTitle>{t('Auth.createPassword')}</AuthInputTitle>
-            <Input
-              control={control}
-              fullWidth
-              name={password}
-              type={showPassword ? 'text' : 'password'}
-              placeholder={t('Auth.enterPassword') ?? ''}
-              helperText={errors.password?.message}
-              error={Boolean(errors?.password)}
-              required={true}
-              InputProps={{
-                endAdornment: (
-                  <IconButton onClick={handleClickShowPassword}>
-                    <InputAdornment position={end}>
-                      {
-                        <PasswordImg
-                          src={showPassword ? visible : visibleOff}
-                        />
-                      }
-                    </InputAdornment>
-                  </IconButton>
-                ),
-              }}
-            />
-          </AuthInput>
-          <AuthInput>
-            <AuthInputTitle>{t('Auth.confirmPassword')}</AuthInputTitle>
-            <Input
-              control={control}
-              fullWidth
-              name={confirmPassword}
-              type={showConfirmPassword ? 'text' : 'password'}
-              placeholder={t('Auth.enterConfirmPassword') ?? ''}
-              helperText={errors.confirmPassword?.message}
-              error={Boolean(errors?.confirmPassword)}
-              required={true}
-              InputProps={{
-                endAdornment: (
-                  <IconButton onClick={handleClickShowConfirmPassword}>
-                    <InputAdornment position={end}>
-                      {
-                        <PasswordImg
-                          src={showConfirmPassword ? visible : visibleOff}
-                        />
-                      }
-                    </InputAdornment>
-                  </IconButton>
-                ),
-              }}
-            />
-          </AuthInput>
-          <AuthGoogleButton />
-          <AuthSendButton
-            disabled={!isValid}
-            type="submit"
-            value={t('Auth.continue') ?? ''}
-          />
-          <AuthLinkContainer>
-            {t('Auth.alreadyExistText')}
-            <AuthLink to={PATH.LOGIN}>{t('Auth.click')}</AuthLink>
-          </AuthLinkContainer>
-        </Form>
-      </AuthForm>
-    </AuthContainer>
+    <>
+      {isFirstStep ? (
+        <AuthContainer>
+          <AuthForm>
+            <Form onSubmit={handleSubmit(onSubmit)}>
+              <AuthTitle>{t('Auth.registrationTitle')}</AuthTitle>
+              <AuthText>{t('Auth.registrationText')}</AuthText>
+              <AuthInput>
+                <AuthInputTitle>{t('Auth.firstName')}</AuthInputTitle>
+                <Input
+                  control={control}
+                  fullWidth
+                  name={firstName}
+                  placeholder={t('Auth.enterFirstName') ?? ''}
+                  helperText={errors.firstName?.message}
+                  error={Boolean(errors?.firstName)}
+                  required={true}
+                />
+              </AuthInput>
+              <AuthInput>
+                <AuthInputTitle>{t('Auth.lastName')}</AuthInputTitle>
+                <Input
+                  control={control}
+                  fullWidth
+                  name={lastName}
+                  placeholder={t('Auth.enterLastName') ?? ''}
+                  helperText={errors.lastName?.message}
+                  error={Boolean(errors?.lastName)}
+                  required={true}
+                />
+              </AuthInput>
+              <AuthInput>
+                <AuthInputTitle>{t('Auth.email')}</AuthInputTitle>
+                <Input
+                  control={control}
+                  fullWidth
+                  name={email}
+                  placeholder={t('Auth.enterEmail') ?? ''}
+                  helperText={errors.email?.message}
+                  error={Boolean(errors?.email)}
+                  required={true}
+                />
+              </AuthInput>
+              <AuthInput>
+                <AuthInputTitle>{t('Auth.createPassword')}</AuthInputTitle>
+                <Input
+                  control={control}
+                  fullWidth
+                  name={password}
+                  type={showPassword ? 'text' : 'password'}
+                  placeholder={t('Auth.enterPassword') ?? ''}
+                  helperText={errors.password?.message}
+                  error={Boolean(errors?.password)}
+                  required={true}
+                  InputProps={{
+                    endAdornment: (
+                      <IconButton onClick={handleClickShowPassword}>
+                        <InputAdornment position={end}>
+                          {
+                            <PasswordImg
+                              src={showPassword ? visible : visibleOff}
+                            />
+                          }
+                        </InputAdornment>
+                      </IconButton>
+                    ),
+                  }}
+                />
+              </AuthInput>
+              <AuthInput>
+                <AuthInputTitle>{t('Auth.confirmPassword')}</AuthInputTitle>
+                <Input
+                  control={control}
+                  fullWidth
+                  name={confirmPassword}
+                  type={showConfirmPassword ? 'text' : 'password'}
+                  placeholder={t('Auth.enterConfirmPassword') ?? ''}
+                  helperText={errors.confirmPassword?.message}
+                  error={Boolean(errors?.confirmPassword)}
+                  required={true}
+                  InputProps={{
+                    endAdornment: (
+                      <IconButton onClick={handleClickShowConfirmPassword}>
+                        <InputAdornment position={end}>
+                          {
+                            <PasswordImg
+                              src={showConfirmPassword ? visible : visibleOff}
+                            />
+                          }
+                        </InputAdornment>
+                      </IconButton>
+                    ),
+                  }}
+                />
+              </AuthInput>
+              <AuthGoogleButton />
+              <AuthSendButton
+                disabled={!isValid}
+                type="submit"
+                value={t('Auth.continue') ?? ''}
+              />
+              <AuthLinkContainer>
+                {t('Auth.alreadyExistText')}
+                <AuthLink to={PATH.LOGIN}>{t('Auth.click')}</AuthLink>
+              </AuthLinkContainer>
+            </Form>
+          </AuthForm>
+          <ToastContainer />
+        </AuthContainer>
+      ) : (
+        <SignUpSecondForm />
+      )}
+    </>
   );
 }
 

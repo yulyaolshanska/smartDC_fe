@@ -1,13 +1,8 @@
-import {
-  createAsyncThunk,
-  createSlice,
-  SerializedError,
-} from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { ISignUp } from '@components/Auth/type';
-import { authAPI, AuthSignUpDto } from '@api/auth/auth.api';
+import { authAPI, AuthCheckEmailDto, AuthSignUpDto } from '@api/auth/auth.api';
 import storage from 'redux-persist/lib/storage';
 import { AxiosError } from 'axios';
-import { plus } from '@constants/auth';
 import { persistReducer } from 'redux-persist';
 
 const initialState: ISignUp = {
@@ -41,19 +36,37 @@ export const signUpQuery = createAsyncThunk(
   async (data: AuthSignUpDto, { rejectWithValue }) => {
     try {
       return await authAPI.signUp(data);
-    } catch (err: unknown) {
-      if (err instanceof AxiosError) {
-        if (err.response) {
-          const { status, data } = err.response;
-          return rejectWithValue({
-            status: status.toString(),
-            message: data.message || 'Something went wrong.',
-          } as SerializedError);
-        }
+    } catch (err) {
+      const error = err as Error;
+      if (error instanceof AxiosError && error.response) {
+        const { status, data } = error.response;
+        return rejectWithValue({
+          status: status.toString(),
+          message: data.message || 'Something went wrong.',
+        });
       }
       throw err;
     }
-  },
+  }
+);
+
+export const checkEmailQuery = createAsyncThunk(
+  'signUp/signUpQuery',
+  async (data: AuthCheckEmailDto, { rejectWithValue }) => {
+    try {
+      return await authAPI.checkEmail(data);
+    } catch (err) {
+      const error = err as Error;
+      if (error instanceof AxiosError && error.response) {
+        const { status, data } = error.response;
+        return rejectWithValue({
+          status: status.toString(),
+          message: data.message || 'Something went wrong.',
+        });
+      }
+      throw err;
+    }
+  }
 );
 
 const signUp = createSlice({
@@ -64,7 +77,6 @@ const signUp = createSlice({
       state.firstName = action.payload.firstName;
       state.lastName = action.payload.lastName;
       state.email = action.payload.email;
-      state.phoneNumber = plus + action.payload.phoneNumber;
       state.password = action.payload.password;
       state.confirmPassword = action.payload.confirmPassword;
     },
@@ -79,6 +91,18 @@ const signUp = createSlice({
       state.isLoading = false;
     },
     [signUpQuery.rejected.type]: (state, action) => {
+      state.error = action.payload;
+      state.isLoading = false;
+    },
+
+    [checkEmailQuery.pending.type]: (state) => {
+      state.isLoading = true;
+    },
+    [checkEmailQuery.fulfilled.type]: (state, action) => {
+      state.error = null;
+      state.isLoading = false;
+    },
+    [checkEmailQuery.rejected.type]: (state, action) => {
       state.error = action.payload;
       state.isLoading = false;
     },

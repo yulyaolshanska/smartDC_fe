@@ -2,12 +2,12 @@ export interface ISignUp {
   firstName: string;
   lastName: string;
   email: string;
-  phoneNumber: string;
   password: string;
   confirmPassword: string;
   role: string;
   specialization: number;
   gender: string;
+  phoneNumber: string;
   country: string;
   city: string;
   birthDate: string;
@@ -21,7 +21,3 @@ export interface ISignUp {
 export type Option = {
   value: string | number;
 };
-
-export interface IResponse {
-  error: string;
-}
