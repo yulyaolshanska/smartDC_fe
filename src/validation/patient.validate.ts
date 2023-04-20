@@ -17,19 +17,11 @@ export function patientSchema() {
       .required(t('Error.lastNameRequired') ?? '')
       .min(2, t('Error.tooShort') ?? '')
       .matches(NAME_PATTERN, t('Error.nameFormat') ?? ''),
-    email: yup
-      .string()
-      .email(t('Error.invalidEmailFormat') ?? '')
-      .required(t('Error.emailRequired') ?? ''),
+    email: yup.string().email(t('Error.invalidEmailFormat') ?? ''),
     phoneNumber: yup
       .string()
       .required(t('Error.phoneNumberRequired') ?? '')
       .min(6, t('Error.tooShort') ?? ''),
-    address: yup.string().required(t('Error.fieldRequired') ?? ''),
-    city: yup.string().required(t('Error.fieldRequired') ?? ''),
-    country: yup.string().required(t('Error.fieldRequired') ?? ''),
-    gender: yup.string().required(t('Error.fieldRequired') ?? ''),
-    timeZone: yup.string().required(t('Error.fieldRequired') ?? ''),
   });
 
   return {

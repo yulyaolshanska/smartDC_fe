@@ -4,7 +4,7 @@ import {
   AuthGoogleContainer,
   GoogleImg,
   GoogleText,
-} from '../../general/styles';
+} from '@components/general/styles';
 import { useTranslation } from 'react-i18next';
 import google from '@assets/auth/google.svg';
 

@@ -19,14 +19,13 @@ import {
   AuthForgotPasswordContainer,
 } from '@components/general/styles';
 import { FormValues, ISignUp } from '@components/general/type';
+import GoogleLoginButton from '@components/Auth/LoginForm/GoogleLogin';
 import visible from '@assets/auth/eye.svg';
 import visibleOff from '@assets/auth/eyeSlash.svg';
 import { email, end, error, password } from '@constants/auth';
 import { signUpSchema } from '@validation/auth.validate';
 import { PATH } from '@router/index';
-import GoogleLoginButton from './GoogleLogin';
 import { ToastContainer } from 'react-toastify';
-import { AuthLoginDto } from 'api/auth/auth.api';
 import { toast } from 'react-toastify';
 import { loginQuery } from '@redux/slices/auth/login';
 import { useDispatch } from 'react-redux';
