@@ -1,10 +1,9 @@
 import Wrapper from '@components/Wrapper';
 import React from 'react';
-import picture from '@assets/Sign Out.svg';
 import { AccordionBody, AccordionTitle, Arrow } from './styles';
 
-const Accordion = () => {
-  const [toggle, setToggle] = React.useState(false);
+const Accordion: React.FC = () => {
+  const [toggle, setToggle] = React.useState<boolean>(false);
   const [heightEl, setHeightEl] = React.useState<string>();
 
   const refHeight = React.useRef<HTMLDivElement>(null);
@@ -14,7 +13,7 @@ const Accordion = () => {
       setHeightEl(`${refHeight.current.scrollHeight + 20 + 16}px`);
   }, []);
 
-  const toggleState = () => {
+  const toggleState = (): void => {
     setToggle(!toggle);
   };
   return (

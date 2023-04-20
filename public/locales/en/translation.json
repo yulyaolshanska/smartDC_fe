@@ -85,5 +85,10 @@
   "Profile": {
     "cancel": "Cancel",
     "save": "Save"
+  },
+
+  "Help": {
+    "problem": "Some problem",
+    "lorem": " Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore"
   }
 }

@@ -60,9 +60,6 @@ function SignUpSecondFormGoogle() {
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
   const doctorData = useAppSelector((state) => state.doctorReducer);
-  console.log('signup', doctorData);
-
-  //TODO add another value to db to check if user is from Google
 
   const { signUpSecondStepSchema } = signUpSchema();
 
@@ -117,13 +114,9 @@ function SignUpSecondFormGoogle() {
     } else {
       await updateDoctorProfile(data).then((res) => {
         dispatch(doctorActions.getDoctor(doctor));
-        console.log('hnntgff regfregfb fg', data, 'ewrgrgegfrgf', res);
+
         refetch().then(() => navigate('/dashboard'));
       });
-
-      // const token = res.payload.token;
-      // const doctor = res.payload.userInfo;
-      // dispatch(doctorActions.getDoctor(doctor));
     }
   };
 

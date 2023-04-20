@@ -1,4 +1,4 @@
-import DoctorPhoto from '@assets/doctorPic.png';
+import DoctorPhoto from '@assets/mockDoctorPhoto.png';
 import EditIcon from '@assets/edit.svg';
 import { Photo, PhotoChangerWrapper, EditIconContainer } from './styles';
 

@@ -11,6 +11,7 @@ import {
   city,
   country,
   date,
+  specialization,
 } from '@constants/auth';
 import { phoneNumber } from '@constants/auth';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -31,6 +32,7 @@ import {
   cities,
   countries,
   genders,
+  specializations,
   timeZones,
 } from './../../constants/mockData';
 import { persistor } from '@redux/store';
@@ -247,6 +249,19 @@ const ProfileComponent = () => {
             />
           </Stack>
         </StageWrapper>
+        <Typography fontSize="0.875rem" color="#585858">
+          {t('Auth.timeZone') ?? ''}
+        </Typography>
+        <SelectInput
+          control={control}
+          fullWidth
+          name={specialization}
+          placeholder={t('Auth.enterSpecialization') ?? ''}
+          options={specializations}
+          helperText={errors.specialization?.message}
+          error={Boolean(errors?.specialization)}
+          required={true}
+        />
         <ButtonsWrapepr>
           <CustomButton disabled> {t('Profile.cancel') ?? ''}</CustomButton>
           <CustomButton type="submit"> {t('Profile.save') ?? ''}</CustomButton>

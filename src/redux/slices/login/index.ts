@@ -26,7 +26,7 @@ export const loginQuery = createAsyncThunk(
       }
       throw err;
     }
-  }
+  },
 );
 
 const login = createSlice({

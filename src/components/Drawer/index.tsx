@@ -34,8 +34,6 @@ const Drawer = () => {
     (state) => state.navigationReducer.currentPage
   );
   const location = useLocation();
-  console.log(location.pathname, 'pathname');
-  console.log(selectedPosition, 'selected positions');
 
   const handleSelected = (position: PositionsInterface) => {
     dispatch(navigationActions.setCurrentPage(position.to));

@@ -28,12 +28,10 @@ import GoogleLoginButton from './GoogleLogin';
 import { AuthLoginDto } from 'api/auth/auth.api';
 import { toast } from 'react-toastify';
 import { loginQuery } from '@redux/slices/login';
+import { useAppDispatch, useAppSelector } from '@redux/hooks';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
-import { Link } from 'react-router-dom';
-import ContinueLinkContainer from './styles';
 import cookie from 'utils/functions/cookies';
-import { useAppDispatch, useAppSelector } from '@redux/hooks';
 import { doctorActions } from '@redux/slices/DoctorSlice';
 
 function LoginForm() {
@@ -74,9 +72,11 @@ function LoginForm() {
         const token = res.payload.token;
         const doctor = res.payload.userInfo;
         dispatch(doctorActions.getDoctor(doctor));
-        cookie.set('accessToken', token, 1);
-
-        console.log('DoctorData inside func', doctorData);
+        cookie.set(
+          'accessToken',
+          token,
+          import.meta.env.VITE_REACT_APP_ACCESS_TOKEN_MAXAGE
+        );
 
         navigate('/dashboard');
       } else {

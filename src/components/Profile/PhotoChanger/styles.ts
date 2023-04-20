@@ -23,6 +23,10 @@ export const Photo = styled.div`
   position: relative;
   width: 160px;
   height: 160px;
+
+  img {
+    border-radius: 50%;
+  }
 `;
 
 export const EditIconContainer = styled.div`

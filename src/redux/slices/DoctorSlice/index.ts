@@ -1,9 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 import { doctorApi } from 'services/DoctorService';
-import DoctorInitialState from './types';
 import cookie from 'utils/functions/cookies';
 import { persistor } from '@redux/store';
+import DoctorInitialState from './types';
 
 const initialState: DoctorInitialState = {
   address: undefined,

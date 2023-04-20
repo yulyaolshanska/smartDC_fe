@@ -1,3 +1,4 @@
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
@@ -47,7 +48,7 @@ import selectSignUp from '@redux/selectors/auth/signUp';
 import { signUpQuery } from '@redux/slices/auth/signUp';
 import { PATH } from '@router/index';
 import { AppDispatch } from '@redux/store';
-import React from 'react';
+
 import PhoneInput from '@components/PhoneInput';
 
 function SignUpSecondForm() {
