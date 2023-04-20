@@ -1,1 +1,1 @@
-export * from './auth.type';
+export * from './fieldName.type';

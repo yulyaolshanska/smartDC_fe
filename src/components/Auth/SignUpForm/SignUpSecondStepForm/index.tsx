@@ -6,19 +6,19 @@ import { toast, ToastContainer } from 'react-toastify';
 import { yupResolver } from '@hookform/resolvers/yup';
 import Input from '@components/Input';
 import {
-  AuthContainer,
-  AuthForm,
-  AuthInput,
-  AuthInputTitle,
-  AuthLinkContainer,
-  AuthLink,
-  AuthSendButton,
-  AuthText,
-  AuthTitle,
+  Container,
+  FormContainer,
+  InputContainer,
+  InputTitle,
+  LinkContainer,
+  Link,
+  SendButton,
+  Text,
+  Title,
   Form,
   InputInlineContainer,
-} from '@components/Auth/styles';
-import { ISignUp } from '@components/Auth/type';
+} from '@components/general/styles';
+import { FormValues, ISignUp } from '@components/general/type';
 import {
   role,
   specialization,
@@ -62,7 +62,7 @@ function SignUpSecondForm() {
     handleSubmit,
     control,
     formState: { errors, isValid },
-  } = useForm<ISignUp>({
+  } = useForm<FormValues>({
     mode: 'onChange',
     defaultValues: {
       role: '',
@@ -100,13 +100,13 @@ function SignUpSecondForm() {
   };
 
   return (
-    <AuthContainer>
-      <AuthForm>
+    <Container>
+      <FormContainer>
         <Form onSubmit={handleSubmit(onSubmit)}>
-          <AuthTitle>{t('Auth.registrationTitle')}</AuthTitle>
-          <AuthText>{t('Auth.registrationText')}</AuthText>
-          <AuthInput>
-            <AuthInputTitle>{t('Auth.role')}</AuthInputTitle>
+          <Title>{t('Auth.registrationTitle')}</Title>
+          <Text>{t('Auth.registrationText')}</Text>
+          <InputContainer>
+            <InputTitle>{t('Auth.role')}</InputTitle>
             <SelectInput
               control={control}
               fullWidth
@@ -117,9 +117,9 @@ function SignUpSecondForm() {
               options={roles}
               required={true}
             />
-          </AuthInput>
-          <AuthInput>
-            <AuthInputTitle>{t('Auth.specialization')}</AuthInputTitle>
+          </InputContainer>
+          <InputContainer>
+            <InputTitle>{t('Auth.specialization')}</InputTitle>
             <SelectInput
               control={control}
               fullWidth
@@ -130,9 +130,9 @@ function SignUpSecondForm() {
               error={Boolean(errors?.specialization)}
               required={true}
             />
-          </AuthInput>
-          <AuthInput>
-            <AuthInputTitle>{t('Auth.gender')}</AuthInputTitle>
+          </InputContainer>
+          <InputContainer>
+            <InputTitle>{t('Auth.gender')}</InputTitle>
             <SelectInput
               control={control}
               fullWidth
@@ -143,9 +143,9 @@ function SignUpSecondForm() {
               options={genders}
               required={true}
             />
-          </AuthInput>
-          <AuthInput>
-            <AuthInputTitle>{t('Auth.phoneNumber')}</AuthInputTitle>
+          </InputContainer>
+          <InputContainer>
+            <InputTitle>{t('Auth.phoneNumber')}</InputTitle>
             <PhoneInput
               control={control}
               fullWidth
@@ -155,9 +155,9 @@ function SignUpSecondForm() {
               error={Boolean(errors?.phoneNumber)}
               required={true}
             />
-          </AuthInput>
-          <AuthInput>
-            <AuthInputTitle>{t('Auth.birthDate')}</AuthInputTitle>
+          </InputContainer>
+          <InputContainer>
+            <InputTitle>{t('Auth.birthDate')}</InputTitle>
             <Input
               control={control}
               fullWidth
@@ -168,10 +168,10 @@ function SignUpSecondForm() {
               error={Boolean(errors?.birthDate)}
               required={true}
             />
-          </AuthInput>
+          </InputContainer>
           <InputInlineContainer>
-            <AuthInput>
-              <AuthInputTitle>{t('Auth.country')}</AuthInputTitle>
+            <InputContainer>
+              <InputTitle>{t('Auth.country')}</InputTitle>
               <SelectInput
                 control={control}
                 fullWidth
@@ -182,9 +182,9 @@ function SignUpSecondForm() {
                 options={countries}
                 required={true}
               />
-            </AuthInput>
-            <AuthInput>
-              <AuthInputTitle>{t('Auth.city')}</AuthInputTitle>
+            </InputContainer>
+            <InputContainer>
+              <InputTitle>{t('Auth.city')}</InputTitle>
               <Input
                 control={control}
                 fullWidth
@@ -193,10 +193,10 @@ function SignUpSecondForm() {
                 helperText={errors.city?.message}
                 error={Boolean(errors?.city)}
               />
-            </AuthInput>
+            </InputContainer>
           </InputInlineContainer>
-          <AuthInput>
-            <AuthInputTitle>{t('Auth.address')}</AuthInputTitle>
+          <InputContainer>
+            <InputTitle>{t('Auth.address')}</InputTitle>
             <Input
               control={control}
               fullWidth
@@ -205,9 +205,9 @@ function SignUpSecondForm() {
               helperText={errors.address?.message}
               error={Boolean(errors?.address)}
             />
-          </AuthInput>
-          <AuthInput>
-            <AuthInputTitle>{t('Auth.timeZone')}</AuthInputTitle>
+          </InputContainer>
+          <InputContainer>
+            <InputTitle>{t('Auth.timeZone')}</InputTitle>
             <SelectInput
               control={control}
               fullWidth
@@ -218,20 +218,20 @@ function SignUpSecondForm() {
               options={timeZones}
               required={true}
             />
-          </AuthInput>
-          <AuthSendButton
+          </InputContainer>
+          <SendButton
             disabled={!isValid}
             type="submit"
             value={t('Auth.signUp') ?? ''}
           />
-          <AuthLinkContainer>
+          <LinkContainer>
             {t('Auth.alreadyExistText')}
-            <AuthLink to={PATH.LOGIN}>{t('Auth.click')}</AuthLink>
-          </AuthLinkContainer>
+            <Link to={PATH.LOGIN}>{t('Auth.click')}</Link>
+          </LinkContainer>
         </Form>
-      </AuthForm>
+      </FormContainer>
       <ToastContainer />
-    </AuthContainer>
+    </Container>
   );
 }
 

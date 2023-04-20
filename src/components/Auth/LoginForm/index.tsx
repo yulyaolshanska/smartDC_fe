@@ -5,20 +5,20 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { IconButton, InputAdornment } from '@mui/material';
 import Input from '@components/Input';
 import {
-  AuthContainer,
-  AuthForm,
-  AuthInput,
-  AuthInputTitle,
-  AuthLinkContainer,
-  AuthLink,
-  AuthSendButton,
-  AuthText,
-  AuthTitle,
+  Container,
+  FormContainer,
+  InputContainer,
+  InputTitle,
+  LinkContainer,
+  Link,
+  SendButton,
+  Text,
+  Title,
   Form,
   PasswordImg,
   AuthForgotPasswordContainer,
-} from '@components/Auth/styles';
-import { ISignUp } from '@components/Auth/type';
+} from '@components/general/styles';
+import { FormValues, ISignUp } from '@components/general/type';
 import visible from '@assets/auth/eye.svg';
 import visibleOff from '@assets/auth/eyeSlash.svg';
 import { email, end, error, password } from '@constants/auth';
@@ -49,7 +49,7 @@ function LoginForm() {
     handleSubmit,
     control,
     formState: { errors, isValid },
-  } = useForm<ISignUp>({
+  } = useForm<FormValues>({
     mode: 'onChange',
     defaultValues: {
       email: '',
@@ -78,13 +78,13 @@ function LoginForm() {
   };
 
   return (
-    <AuthContainer>
-      <AuthForm>
+    <Container>
+      <FormContainer>
         <Form onSubmit={handleSubmit(onSubmit)}>
-          <AuthTitle>{t('Auth.loginTitle')}</AuthTitle>
-          <AuthText>{t('Auth.loginText')}</AuthText>
-          <AuthInput>
-            <AuthInputTitle>{t('Auth.email')}</AuthInputTitle>
+          <Title>{t('Auth.loginTitle')}</Title>
+          <Text>{t('Auth.loginText')}</Text>
+          <InputContainer>
+            <InputTitle>{t('Auth.email')}</InputTitle>
             <Input
               control={control}
               fullWidth
@@ -94,9 +94,9 @@ function LoginForm() {
               error={Boolean(errors?.email)}
               required={true}
             />
-          </AuthInput>
-          <AuthInput>
-            <AuthInputTitle>{t('Auth.passwordLogin')}</AuthInputTitle>
+          </InputContainer>
+          <InputContainer>
+            <InputTitle>{t('Auth.passwordLogin')}</InputTitle>
             <Input
               control={control}
               fullWidth
@@ -120,26 +120,24 @@ function LoginForm() {
                 ),
               }}
             />
-          </AuthInput>
+          </InputContainer>
           <AuthForgotPasswordContainer>
-            <AuthLink to={PATH.FORGOT_PASS}>
-              {t('Auth.forgotPasswordLink')}
-            </AuthLink>
+            <Link to={PATH.FORGOT_PASS}>{t('Auth.forgotPasswordLink')}</Link>
           </AuthForgotPasswordContainer>
           <GoogleLoginButton />
-          <AuthSendButton
+          <SendButton
             disabled={!isValid}
             type="submit"
             value={t('Auth.continue') ?? ''}
           />
-          <AuthLinkContainer>
+          <LinkContainer>
             {t('Auth.haventAnAccount')}
-            <AuthLink to={PATH.SIGN_UP}>{t('Auth.click')}</AuthLink>
-          </AuthLinkContainer>
+            <Link to={PATH.SIGN_UP}>{t('Auth.click')}</Link>
+          </LinkContainer>
         </Form>
-      </AuthForm>
+      </FormContainer>
       <ToastContainer />
-    </AuthContainer>
+    </Container>
   );
 }
 

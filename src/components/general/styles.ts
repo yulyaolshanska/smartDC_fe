@@ -20,12 +20,12 @@ import {
 import { FONT_ROBOTO } from '@constants/fonts';
 import { NavLink } from 'react-router-dom';
 
-export const AuthContainer = styled.div`
+export const Container = styled.div`
   width: 100%;
   align-items: center;
 `;
 
-export const AuthForm = styled.div`
+export const FormContainer = styled.div`
   width: 70%;
   background-color: ${GHOST_WHITE};
   border: 1.5px solid ${WHISPER};
@@ -39,7 +39,7 @@ export const AuthForm = styled.div`
   box-shadow: 0 0 50px ${VERY_LIGHT_GREY};
 `;
 
-export const AuthTitle = styled.h1`
+export const Title = styled.h1`
   color: ${BLACK};
   margin-top: 45px;
   margin-bottom: 35px;
@@ -47,7 +47,7 @@ export const AuthTitle = styled.h1`
   text-align: center;
 `;
 
-export const AuthText = styled.div`
+export const Text = styled.div`
   font-size: ${MEDIUM_FONT_SIZE};
   width: 70%;
   margin-left: auto;
@@ -56,7 +56,7 @@ export const AuthText = styled.div`
   font-family: ${FONT_ROBOTO};
 `;
 
-export const AuthGreenText = styled.div`
+export const GreenText = styled.div`
   background: ${LIGHT_GREEN};
   color: ${DARK_GREEN};
   font-size: ${MEDIUM_FONT_SIZE};
@@ -68,7 +68,7 @@ export const AuthGreenText = styled.div`
   border-radius: 8px;
 `;
 
-export const AuthInput = styled.div`
+export const InputContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -77,7 +77,7 @@ export const AuthInput = styled.div`
   margin-bottom: 8px;
 `;
 
-export const AuthInputTitle = styled.div`
+export const InputTitle = styled.div`
   color: ${ZAMBEZI};
   font-size: ${NORMAL_FONT_SIZE};
   line-height: 20px;
@@ -95,7 +95,7 @@ export const PasswordImg = styled.img`
   height: 30px;
 `;
 
-export const AuthSendButton = styled.input`
+export const SendButton = styled.input`
   :disabled {
     background: ${PINK_SWAN};
     color: ${WHITE};
@@ -156,7 +156,7 @@ export const GoogleText = styled.span`
   width: 80%;
 `;
 
-export const AuthLinkContainer = styled.div`
+export const LinkContainer = styled.div`
   text-align: center;
   padding-top: 10px;
   font-style: normal;
@@ -166,7 +166,7 @@ export const AuthLinkContainer = styled.div`
   margin-top: 20px;
 `;
 
-export const AuthLink = styled(NavLink)`
+export const Link = styled(NavLink)`
   text-align: center;
   font-style: normal;
   font-weight: bold;
@@ -193,7 +193,7 @@ export const InputInlineContainer = styled.div`
   grid-template-columns: 1fr 1fr;
 `;
 
-export const AuthArrowBack = styled.i`
+export const ArrowBack = styled.i`
   border: solid black;
   border-width: 0 2px 2px 0;
   display: inline-block;
@@ -221,3 +221,34 @@ export const AuthConfirmationContainer = styled.div`
 `;
 
 export const AuthConfirmationImg = styled.img``;
+
+export const CancelButton = styled(NavLink)`
+  display: flex;
+  margin-right: auto;
+  margin-left: auto;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  font-family: ${FONT_ROBOTO};
+  border: none;
+  height: 55px;
+  width: 45%;
+  margin-top: 20px;
+  line-height: 22px;
+  color: ${WHITE};
+  font-size: ${SMALL_FONT_SIZE};
+  font-weight: bold;
+  cursor: pointer;
+  background: ${PINK_SWAN};
+  text-decoration: none;
+`;
+
+export const ButtonContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 70%;
+  margin-right: auto;
+  margin-left: auto;
+`;

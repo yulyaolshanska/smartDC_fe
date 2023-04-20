@@ -1,16 +1,16 @@
 import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
-  AuthArrowBack,
+  ArrowBack,
   AuthConfirmationContainer,
   AuthConfirmationImg,
-  AuthContainer,
-  AuthForm,
-  AuthLink,
-  AuthLinkContainer,
-  AuthText,
+  Container,
+  FormContainer,
+  Link,
+  LinkContainer,
+  Text,
   Form,
-} from '@components/Auth/styles';
+} from '@components/general/styles';
 import checkmark from '@assets/auth/checkmark.svg';
 import { useDispatch } from 'react-redux';
 import { activationAccountQuery } from '@redux/slices/auth/activation';
@@ -38,22 +38,22 @@ function ActivationForm() {
   }, [dispatch]);
 
   return (
-    <AuthContainer>
-      <AuthForm>
+    <Container>
+      <FormContainer>
         <Form>
           <AuthConfirmationContainer>
             <AuthConfirmationImg src={checkmark} />
           </AuthConfirmationContainer>
-          <AuthText>{t('Auth.activationText')}</AuthText>
-          <AuthLinkContainer>
-            <AuthLink to={PATH.LOGIN}>
-              <AuthArrowBack />
+          <Text>{t('Auth.activationText')}</Text>
+          <LinkContainer>
+            <Link to={PATH.LOGIN}>
+              <ArrowBack />
               {t('Auth.goToLogin')}
-            </AuthLink>
-          </AuthLinkContainer>
+            </Link>
+          </LinkContainer>
         </Form>
-      </AuthForm>
-    </AuthContainer>
+      </FormContainer>
+    </Container>
   );
 }
 

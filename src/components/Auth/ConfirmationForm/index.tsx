@@ -1,16 +1,16 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import {
-  AuthArrowBack,
+  ArrowBack,
   AuthConfirmationContainer,
   AuthConfirmationImg,
-  AuthContainer,
-  AuthForm,
-  AuthLink,
-  AuthLinkContainer,
-  AuthText,
+  Container,
+  FormContainer,
+  Link,
+  LinkContainer,
+  Text,
   Form,
-} from '@components/Auth/styles';
+} from '@components/general/styles';
 import checkmark from '@assets/auth/checkmark.svg';
 import { PATH } from '@router/index';
 
@@ -18,22 +18,22 @@ function ConfirmationForm() {
   const { t } = useTranslation();
 
   return (
-    <AuthContainer>
-      <AuthForm>
+    <Container>
+      <FormContainer>
         <Form>
           <AuthConfirmationContainer>
             <AuthConfirmationImg src={checkmark} />
           </AuthConfirmationContainer>
-          <AuthText>{t('Auth.confirmationText')}</AuthText>
-          <AuthLinkContainer>
-            <AuthLink to={PATH.LOGIN}>
-              <AuthArrowBack />
+          <Text>{t('Auth.confirmationText')}</Text>
+          <LinkContainer>
+            <Link to={PATH.LOGIN}>
+              <ArrowBack />
               {t('Auth.backToLogin')}
-            </AuthLink>
-          </AuthLinkContainer>
+            </Link>
+          </LinkContainer>
         </Form>
-      </AuthForm>
-    </AuthContainer>
+      </FormContainer>
+    </Container>
   );
 }
 
