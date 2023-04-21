@@ -60,3 +60,7 @@ export const DARK_GREEN = '#188038';
  * @deprecated
  */
 export const LIGHT_GREEN = '#BFE8CA';
+/**
+ * @deprecated
+ */
+export const GRAY_SHADOW = '#66666666';
