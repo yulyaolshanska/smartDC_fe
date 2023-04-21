@@ -1,5 +1,6 @@
 import React, { ChangeEvent, useState } from 'react';
-import { Calendar, momentLocalizer } from 'react-big-calendar';
+import { Calendar, momentLocalizer, Event } from 'react-big-calendar';
+import { v4 as uuidv4 } from 'uuid';
 import moment from 'moment';
 import events from './events';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
@@ -21,38 +22,56 @@ import { useTranslation } from 'react-i18next';
 
 const localizer = momentLocalizer(moment);
 
-interface SelectedRange {
+interface ISelectedRange {
     start: null | number | string;
     end: null | number | string;
 };
-
+interface IScheduleItem {
+    id: string;
+    title: string;
+    start: Date;
+    end: Date;
+};
+  
 function Scheduler() {
     const { t } = useTranslation();
 
-    const [showPopup, setShowPopup] = useState(false);
+    const [showCreatePopup, setShowCreatePopup] = useState(false);
     const [selectedDate, setSelectedDate] = useState<Date | undefined>(undefined);
-    const [selectedRange, setSelectedRange] = useState<SelectedRange>({ start: null, end: null });
+    const [selectedRange, setSelectedRange] = useState<ISelectedRange>({ start: null, end: null });
     const [eventsData, setEventsData] = useState(events);
     const [errorMessage, setErrorMessage] = useState('');
+    const [selectedEvent, setSelectedEvent] = useState<IScheduleItem | null>(null);
+
+    const handleSelectEvent = (event: IScheduleItem): void => {
+        setSelectedEvent(event);
+    };
+
+    const handleDeleteEvent = () => {
+        if (!selectedEvent) return;
+        const updatedEvents = eventsData.filter((event) => event.id !== selectedEvent.id);
+        setSelectedEvent(null);
+        setEventsData(updatedEvents);
+    };
   
-    function handleSelectSlot(slotInfo: {start: Date, end: Date}) {
+    function handleSelectSlot(slotInfo: {start: Date, end: Date}): void {
         setSelectedDate(slotInfo.start);
-        setShowPopup(true);
+        setShowCreatePopup(true);
         setSelectedRange({
             start: '',
             end: '',
         });
     };
     
-    function handleStartChange(event: ChangeEvent<HTMLInputElement>) {
+    function handleStartChange(event: ChangeEvent<HTMLInputElement>): void {
         setSelectedRange({ ...selectedRange, start: event.target.value });
     };
     
-    function handleEndChange(event: ChangeEvent<HTMLInputElement>) {
+    function handleEndChange(event: ChangeEvent<HTMLInputElement>): void {
         setSelectedRange({ ...selectedRange, end: event.target.value });
     };
     
-    const handleSave = () => {
+    const handleSave = (): void => {
         if (selectedDate) {
             let dayStartValue = new Date(selectedDate.getTime());
             let dayEndValue = new Date(selectedDate.getTime());
@@ -78,20 +97,22 @@ function Scheduler() {
             dayStartValue.setMinutes(Number(startMinutes));
             dayEndValue.setMinutes(Number(endMinutes));
 
+            const id = uuidv4();
             setEventsData([
                 ...eventsData,
                 {
+                    id: id,
                     title: 'Working hours',
                     start: dayStartValue,
                     end: dayEndValue,
                 }
             ]);
-            setShowPopup(false);
+            setShowCreatePopup(false);
             setErrorMessage('');
         }
     };      
 
-    const popupContent = (
+    const popupCreateContent = (
         <ModalOverlay>
             <ModalContainer>
                 <ModalContent>
@@ -121,7 +142,7 @@ function Scheduler() {
                     <ModalButtonsWrapper>
                         <CancelButton 
                             onClick={() => {
-                            setShowPopup(false);
+                            setShowCreatePopup(false);
                             setErrorMessage('');
                             }}
                             type='button'
@@ -139,6 +160,29 @@ function Scheduler() {
         </ModalOverlay>
     );
 
+    const popupDeleteContent = (
+        <ModalOverlay>
+            <ModalContainer>
+                <ModalContent>
+                    <Title>{t('Calendar.deleteTime')}</Title>
+                    <ModalButtonsWrapper>
+                        <CancelButton 
+                            onClick={() => setSelectedEvent(null)}
+                            type='button'
+                            value={t('Auth.cancel') ?? ''}
+                        />
+                        <SaveButton
+                            onClick={handleDeleteEvent}
+                            disabled={false}
+                            type='submit'
+                            value={t('Auth.delete') ?? ''}
+                        />
+                    </ModalButtonsWrapper>
+                </ModalContent>
+            </ModalContainer>
+        </ModalOverlay>
+    )
+
     return (
         <>
         <Calendar
@@ -146,11 +190,13 @@ function Scheduler() {
           localizer={localizer}
           selectable={true}
           onSelectSlot={handleSelectSlot}
+          onSelectEvent={handleSelectEvent}
           startAccessor='start'
           endAccessor='end'
           style={{ height: 500 }}
         />
-        {showPopup && popupContent}
+        {showCreatePopup && popupCreateContent}
+        {selectedEvent && popupDeleteContent}
       </>
     )
 }

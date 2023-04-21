@@ -52,6 +52,7 @@
     "save": "Save",
     "submit": "Submit",
     "cancel": "Cancel",
+    "delete": "Delete",
     "role": "Role",
     "enterRole":"Enter role...",
     "specialization":"Specialization",
@@ -84,13 +85,15 @@
     "mustContain": "*Must Contain",
     "charactersUppercaseLowercase": "Characters, One Uppercase, One Lowercase",
     "bothDatesRequired": "Validation error: both start and end dates are required",
-    "endBeforeStartDateError": "Validation error: end date should be after start date"
+    "endBeforeStartDateError": "Validation error: end date should be after start date",
+    "overlappingEventsError": "Validation error: working hours overlap"
   },
   "Calendar": {
     "endTime": "End time:",
     "startTime": "Start time:",
     "selectTime": "Select a time range",
-    "selectedDate": "Selected date:"
+    "selectedDate": "Selected date:",
+    "deleteTime": "Delete time:"
   }
 }
 

@@ -85,6 +85,7 @@ export const ModalContainer = styled.div`
 `;
 
 export const ModalContent = styled.div`
+  min-width: 200px;
   height: fit-content;
   width: fit-content;
 `;
