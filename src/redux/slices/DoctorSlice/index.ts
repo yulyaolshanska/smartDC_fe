@@ -1,7 +1,6 @@
+import cookie from 'utils/functions/cookies';
 import { createSlice } from '@reduxjs/toolkit';
 
-import { doctorApi } from 'services/DoctorService';
-import cookie from 'utils/functions/cookies';
 import { persistor } from '@redux/store';
 import DoctorInitialState from './types';
 

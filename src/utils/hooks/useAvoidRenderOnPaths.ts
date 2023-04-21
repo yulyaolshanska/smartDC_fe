@@ -3,10 +3,15 @@ import { Location } from 'history';
 
 const useAvoidRenderOnPaths = (
   pathsStart: string[],
-  pathsExact: string[]
+  pathsExact: string[],
 ): boolean => {
   const location: Location = useLocation();
-  return pathsStart.some((path) => location.pathname.startsWith(path));
+  if (
+    pathsStart.some((path) => location.pathname.startsWith(path))
+    || pathsExact.some((path) => location.pathname === path)
+  ) { return true; }
+
+  return false;
 };
 
 export default useAvoidRenderOnPaths;

@@ -1,14 +1,9 @@
-import {
-  createAsyncThunk,
-  createSlice,
-  SerializedError,
-} from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 import { ISignUp } from '@components/Auth/type';
 import { authAPI, AuthCheckEmailDto, AuthSignUpDto } from '@api/auth/auth.api';
-import storage from 'redux-persist/lib/storage';
+
 import { AxiosError } from 'axios';
-import { persistReducer } from 'redux-persist';
 
 const initialState: ISignUp = {
   firstName: '',
@@ -97,7 +92,7 @@ const signUp = createSlice({
     [checkEmailQuery.pending.type]: (state) => {
       state.isLoading = true;
     },
-    [checkEmailQuery.fulfilled.type]: (state, action) => {
+    [checkEmailQuery.fulfilled.type]: (state) => {
       state.error = null;
       state.isLoading = false;
     },

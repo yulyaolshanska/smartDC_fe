@@ -21,7 +21,6 @@ import {
 import { Link, useLocation } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from '@redux/hooks';
 import { navigationActions } from '@redux/slices/NavigationSlice';
-import { loginActions } from '@redux/slices/login';
 interface PositionsInterface {
   name: string;
   to: string;

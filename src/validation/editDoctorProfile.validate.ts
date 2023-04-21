@@ -2,7 +2,6 @@ import { t } from 'i18next';
 import * as yup from 'yup';
 
 const NAME_PATTERN = /^([A-Z][a-z]{1,11})/;
-const PASSWORD_PATTERN = /^(?=.*[a-z])(?=.*[A-Z])(?=.{10,})/;
 
 export const EditRemoteSchema = yup.object().shape({
   firstName: yup
@@ -32,7 +31,7 @@ export const EditRemoteSchema = yup.object().shape({
   city: yup.string().required(t('Error.fieldRequired') ?? ''),
   country: yup.string().required(t('Error.fieldRequired') ?? ''),
   gender: yup.string().required(t('Error.fieldRequired') ?? ''),
-  // specialization: yup.string().required(t('Error.fieldRequired') ?? ''),
+
   timeZone: yup.string().required(t('Error.fieldRequired') ?? ''),
   address: yup.string().required(t('Error.fieldRequired') ?? ''),
 });

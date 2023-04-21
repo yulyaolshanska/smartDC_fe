@@ -1,6 +1,5 @@
 import { BORDER, ZAMBEZI } from '@constants/colors';
 import { SMALL_FONT_SIZE } from '@constants/fontSizes';
-import { Ref } from 'react';
 import styled from 'styled-components';
 
 export const Arrow = styled.div<{ toggle: boolean }>`

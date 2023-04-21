@@ -1,6 +1,9 @@
 import React, { ReactElement } from 'react';
 import Drawer from '@components/Drawer';
-import { avoidRenderArray } from '@constants/other';
+import {
+  avoidExactRenderArray,
+  avoidStartWithRenderArray,
+} from '@constants/other';
 import { MainContent, PageContainer } from './styles';
 import useAvoidRenderOnPaths from 'utils/hooks/useAvoidRenderOnPaths';
 
@@ -9,7 +12,10 @@ interface WrapperProps {
 }
 
 const PageWrapper = ({ children }: WrapperProps) => {
-  const shouldRender = useAvoidRenderOnPaths(avoidRenderArray);
+  const shouldRender = useAvoidRenderOnPaths(
+    avoidStartWithRenderArray,
+    avoidExactRenderArray
+  );
   if (shouldRender && children) {
     return children as ReactElement;
   }

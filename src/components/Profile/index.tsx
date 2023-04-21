@@ -172,7 +172,6 @@ const ProfileComponent = () => {
               error={Boolean(errors?.gender)}
               options={genders}
               required={true}
-              allowFreeSolo={true}
             />
           </Stack>
           <Stack gap="16px" width="100%">

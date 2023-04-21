@@ -7,7 +7,6 @@ import {
 } from '@constants/colors';
 import { SMALL_FONT_SIZE } from '@constants/fontSizes';
 import FONT_ROBOTO from '@constants/fonts';
-import { Button } from '@mui/material';
 
 const SimpleButton = styled.button`
   :disabled {

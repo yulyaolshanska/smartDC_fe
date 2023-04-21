@@ -1,7 +1,8 @@
-export const avoidRenderArray = [
+export const avoidStartWithRenderArray = [
   '/sign-up',
   '/login',
   '/forgot-pass',
   '/reset-pass',
+  '/auth',
 ];
-export const mock = [];
+export const avoidExactRenderArray = ['/'];

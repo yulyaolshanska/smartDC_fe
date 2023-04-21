@@ -1,7 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { AuthLoginDto, authAPI } from '@auth/auth.api';
-import { persistReducer } from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
 import { AxiosError } from 'axios';
 
 export const loginQuery = createAsyncThunk(
@@ -20,7 +18,7 @@ export const loginQuery = createAsyncThunk(
       }
       throw err;
     }
-  }
+  },
 );
 
 const login = createSlice({
