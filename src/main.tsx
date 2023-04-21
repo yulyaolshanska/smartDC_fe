@@ -3,7 +3,7 @@ import { StrictMode, Suspense } from 'react';
 import * as ReactDOM from 'react-dom/client';
 import { BrowserRouter, RouterProvider } from 'react-router-dom';
 import { Provider } from 'react-redux';
-
+import 'react-toastify/dist/ReactToastify.css';
 import { persistor, setupStore, store } from '@redux/store';
 
 import AppRouter from './router';

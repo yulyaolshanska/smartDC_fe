@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -18,24 +18,26 @@ import {
   PasswordImg,
   AuthForgotPasswordContainer,
 } from '@components/Auth/styles';
-import { IResponse, ISignUp } from '@components/Auth/type';
+import { ISignUp } from '@components/Auth/type';
 import visible from '@assets/auth/eye.svg';
 import visibleOff from '@assets/auth/eyeSlash.svg';
-import { email, end, password } from '@constants/auth';
+import { email, end, password, error } from '@constants/auth';
 import signUpSchema from '@validation/auth.validate';
 import { PATH } from '@router/index';
 import GoogleLoginButton from './GoogleLogin';
+import { ToastContainer } from 'react-toastify';
 import { AuthLoginDto } from 'api/auth/auth.api';
 import { toast } from 'react-toastify';
-import { loginQuery } from '@redux/slices/login';
+import { loginQuery } from '@redux/slices/auth/login';
 import { useAppDispatch, useAppSelector } from '@redux/hooks';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
 import cookie from 'utils/functions/cookies';
 import { doctorActions } from '@redux/slices/DoctorSlice';
+import { AppDispatch } from '@redux/store';
 
 function LoginForm() {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const { t } = useTranslation();
   const navigate = useNavigate();
 
@@ -146,10 +148,11 @@ function LoginForm() {
 
           <AuthLinkContainer>
             {t('Auth.haventAnAccount')}
-            <AuthLink to={PATH.SIGN_UP_FIRST_STEP}>{t('Auth.click')}</AuthLink>
+            <AuthLink to={PATH.SIGN_UP}>{t('Auth.click')}</AuthLink>
           </AuthLinkContainer>
         </Form>
       </AuthForm>
+      <ToastContainer />
     </AuthContainer>
   );
 }

@@ -1,5 +1,7 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import { signUpReducer } from '@redux/slices/auth/signUp';
+import forgotPassword from '@redux/slices/auth/forgotPassword';
+import resetPassword from '@redux/slices/auth/resetPassword';
 import { doctorApi } from 'services/DoctorService';
 import { authApi } from 'services/AuthService';
 import {
@@ -13,7 +15,8 @@ import {
   REGISTER,
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-import { loginReducer } from './slices/login';
+import { loginReducer } from '@redux/slices/auth/login';
+import activationAccount from '@redux/slices/auth/activation';
 import { navigationReducer } from './slices/NavigationSlice';
 import { doctorReducer } from './slices/DoctorSlice';
 
@@ -22,25 +25,37 @@ const rootReducer = combineReducers({
   signUpReducer,
   navigationReducer,
   doctorReducer,
+  forgotPassword,
+  resetPassword,
+  activationAccount,
   [doctorApi.reducerPath]: doctorApi.reducer,
   [authApi.reducerPath]: authApi.reducer,
 });
 const persistConfig = {
   key: 'root',
   storage,
-  blacklist: ['navigationReducer'],
+  blacklist: [
+    'navigationReducer',
+    'activationAccount',
+    'resetPassword',
+    'forgotPassword',
+    'loginReducer',
+    'signUpReducer',
+  ],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-export const setupStore = () => configureStore({
-  reducer: persistedReducer,
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware({
-    serializableCheck: {
-      ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-    },
-  }).concat(doctorApi.middleware, authApi.middleware),
-});
+export const setupStore = () =>
+  configureStore({
+    reducer: persistedReducer,
+    middleware: (getDefaultMiddleware) =>
+      getDefaultMiddleware({
+        serializableCheck: {
+          ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+        },
+      }).concat(doctorApi.middleware, authApi.middleware),
+  });
 export const store = setupStore();
 export const persistor = persistStore(store);
 

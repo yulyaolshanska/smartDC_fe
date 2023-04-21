@@ -70,6 +70,7 @@ const ProfileComponent = () => {
         city: doctor.city,
         address: doctor.address,
         timeZone: doctor.timeZone,
+        specialization: doctor.specialization,
       });
     }, 0);
   }, [doctor]);
@@ -171,6 +172,7 @@ const ProfileComponent = () => {
               error={Boolean(errors?.gender)}
               options={genders}
               required={true}
+              allowFreeSolo={true}
             />
           </Stack>
           <Stack gap="16px" width="100%">
@@ -251,19 +253,26 @@ const ProfileComponent = () => {
             />
           </Stack>
         </StageWrapper>
-        <Typography fontSize={SMALL_FONT_SIZE} color={ZAMBEZI}>
-          {t('Auth.timeZone') ?? ''}
-        </Typography>
-        <SelectInput
-          control={control}
-          fullWidth
-          name={specialization}
-          placeholder={t('Auth.enterSpecialization') ?? ''}
-          options={specializations}
-          helperText={errors.specialization?.message}
-          error={Boolean(errors?.specialization)}
-          required={true}
-        />
+        {doctorData.role === 'Remote' ? (
+          <StageWrapper>
+            <Stack gap="16px" width="100%">
+              <Typography fontSize={SMALL_FONT_SIZE} color={ZAMBEZI}>
+                {t('Auth.specialization') ?? ''}
+              </Typography>
+              <SelectInput
+                control={control}
+                fullWidth
+                name={specialization}
+                placeholder={t('Auth.enterSpecialization') ?? ''}
+                options={specializations}
+                helperText={errors.specialization?.message}
+                error={Boolean(errors?.specialization)}
+                required={true}
+              />
+            </Stack>
+          </StageWrapper>
+        ) : null}
+
         <ButtonsWrapepr>
           <CustomButton disabled> {t('Profile.cancel') ?? ''}</CustomButton>
           <CustomButton type="submit"> {t('Profile.save') ?? ''}</CustomButton>

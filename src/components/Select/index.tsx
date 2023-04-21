@@ -23,6 +23,7 @@ export function SelectInput({
       <Controller
         control={control}
         name={name as SignUpFields}
+        defaultValue=""
         render={({ field: { ref, onChange, ...field } }) => (
           <Autocomplete
             options={options}

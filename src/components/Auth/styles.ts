@@ -146,12 +146,14 @@ export const AuthGoogleContainer = styled.a`
 `;
 
 export const GoogleImg = styled.img`
-  width: 30px;
   height: 30px;
+  width: 30px;
+  padding-left: 10px;
 `;
 
 export const GoogleText = styled.span`
-  padding-left: 10px;
+  text-align: center;
+  width: 80%;
 `;
 
 export const AuthLinkContainer = styled.div`

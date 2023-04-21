@@ -11,15 +11,16 @@ import Confirmation from '@pages/auth/forgotPassword/confirmation';
 import Profile from '@pages/doctor/profile';
 import PageWrapper from '@components/PageWrapper';
 import Help from '@pages/help';
+import Activation from '@pages/auth/signUp/activation';
+
 export const PATH = {
-  SIGN_UP_FIRST_STEP: '/sign-up/first-step',
-  SIGN_UP_SECOND_STEP: '/sign-up/second-step',
+  SIGN_UP: '/auth',
+  VERIFICATION: '/auth/activation/:link',
   SIGN_UP_SECOND_STEP_GOOGLE: '/sign-up/second-step/google',
   FORGOT_PASS: '/forgot-pass',
   CONFIRM: '/forgot-pass/confirm',
-  RESET_PASS: '/reset-pass',
-  LOGIN: '/login',
-  HOME: '/',
+  RESET_PASS: `/reset-pass/:token`,
+  LOGIN: '/',
   EDIT_DOCTOR_PROFILE: '/edit-doctor-profile',
   HELP: '/help',
   DASHBOARD: '/dashboard',
@@ -30,8 +31,8 @@ const AppRouter = () => {
     <PageWrapper>
       <Routes>
         {/* Public Routes */}
-        <Route path={PATH.SIGN_UP_FIRST_STEP} element={<SignUpFirstStep />} />
-        <Route path={PATH.SIGN_UP_SECOND_STEP} element={<SignUpSecondStep />} />
+        <Route path={PATH.SIGN_UP} element={<SignUpFirstStep />} />
+        <Route path={PATH.VERIFICATION} element={<Activation />} />
         <Route path={PATH.LOGIN} element={<Login />} />
         <Route path={PATH.RESET_PASS} element={<ResetPassword />} />
         {/* Private Routes */}

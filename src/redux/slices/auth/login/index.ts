@@ -1,32 +1,26 @@
-import {
-  SerializedError,
-  createAsyncThunk,
-  createSlice,
-} from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { AuthLoginDto, authAPI } from '@auth/auth.api';
+import { persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 import { AxiosError } from 'axios';
-
-import { AuthLoginDto, authAPI } from 'api/auth/auth.api';
-import cookie from 'utils/functions/cookies';
-import { persistor } from '@redux/store';
 
 export const loginQuery = createAsyncThunk(
   'login/loginQuery',
   async (data: AuthLoginDto, { rejectWithValue }) => {
     try {
       return await authAPI.login(data);
-    } catch (err: unknown) {
-      if (err instanceof AxiosError) {
-        if (err.response) {
-          const { status, data } = err.response;
-          return rejectWithValue({
-            status: status.toString(),
-            message: data.message || 'Something went wrong.',
-          } as SerializedError);
-        }
+    } catch (err) {
+      const error = err as Error;
+      if (error instanceof AxiosError && error.response) {
+        const { status, data } = error.response;
+        return rejectWithValue({
+          status: status.toString(),
+          message: data.message || 'Something went wrong.',
+        });
       }
       throw err;
     }
-  },
+  }
 );
 
 const login = createSlice({
@@ -44,8 +38,6 @@ const login = createSlice({
       state.error = null;
       state.isLoading = false;
       localStorage.clear();
-      cookie.delete('accessToken');
-      persistor.purge();
     },
   },
   extraReducers: {
