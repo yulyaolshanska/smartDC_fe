@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { CancelButton, DateInput, ErrorText, Label, ModalButtonsWrapper, ModalContainer, ModalContent, ModalOverlay, SaveButton, SelectedDateText, Title, WrapperLabelAndInput } from '../styles';
 import { ISelectedRange } from '..';
 
-interface PopupCreateContentProps {
+interface IPopupCreateContentProps {
     selectedDate: Date | undefined;
     selectedRange: ISelectedRange;
     errorMessage: string;
@@ -23,7 +23,7 @@ const PopupCreateContent = ({
     handleSave,
     setShowCreatePopup,
     setErrorMessage
-}: PopupCreateContentProps) => {
+}: IPopupCreateContentProps) => {
     const { t } = useTranslation();
 
     return (
