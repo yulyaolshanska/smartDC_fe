@@ -115,7 +115,7 @@ function Scheduler() {
     function handleSubmit() {
         // TODO: send saved schedule to DB
     }
-    
+
     function handleCancel() {
         // TODO: clear saved schedule
     }

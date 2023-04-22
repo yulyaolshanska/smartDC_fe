@@ -25,7 +25,7 @@ export const SaveButton = styled.input`
   font-family: ${FONT_ROBOTO};
   border: none;
   height: 55px;
-  width: 45%;
+  min-width: 90px;
   margin-top: 20px;
   line-height: 22px;
   color: ${WHITE}; 
@@ -47,7 +47,7 @@ export const CancelButton = styled.input`
   font-family: ${FONT_ROBOTO};
   border: none;
   height: 55px;
-  width: 45%;
+  min-width: 90px;
   margin-top: 20px;
   line-height: 22px;
   color: ${WHITE}; 
@@ -138,4 +138,5 @@ export const SchedulerButtonsWrapper = styled.div`
   float: right;
   display: flex;
   max-width: 40vw;
+  gap: 20px;
 `;
