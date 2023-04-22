@@ -19,6 +19,7 @@ import {
     WrapperLabelAndInput
 } from './styles';
 import { useTranslation } from 'react-i18next';
+import PopupDeleteContent from './Modals/PopupDeleteContent';
 
 const localizer = momentLocalizer(moment);
 
@@ -168,29 +169,6 @@ function Scheduler() {
         </ModalOverlay>
     );
 
-    const popupDeleteContent = (
-        <ModalOverlay>
-            <ModalContainer>
-                <ModalContent>
-                    <Title>{t('Calendar.deleteTime')}</Title>
-                    <ModalButtonsWrapper>
-                        <CancelButton 
-                            onClick={() => setSelectedEvent(null)}
-                            type='button'
-                            value={t('Auth.cancel') ?? ''}
-                        />
-                        <SaveButton
-                            onClick={handleDeleteEvent}
-                            disabled={false}
-                            type='submit'
-                            value={t('Auth.delete') ?? ''}
-                        />
-                    </ModalButtonsWrapper>
-                </ModalContent>
-            </ModalContainer>
-        </ModalOverlay>
-    )
-
     return (
         <>
         <Calendar
@@ -204,7 +182,11 @@ function Scheduler() {
           style={{ height: 500 }}
         />
         {showCreatePopup && popupCreateContent}
-        {selectedEvent && popupDeleteContent}
+        {selectedEvent && 
+        <PopupDeleteContent
+            setSelectedEvent={setSelectedEvent}
+            handleDeleteEvent={handleDeleteEvent}
+        />}
         <SchedulerButtonsWrapper>
             <CancelButton
                 onClick={handleCancel}
