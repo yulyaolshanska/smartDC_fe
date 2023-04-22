@@ -3,31 +3,18 @@ import { Calendar, momentLocalizer } from 'react-big-calendar';
 import { v4 as uuidv4 } from 'uuid';
 import moment from 'moment';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
-import {
-    CancelButton,
-    DateInput,
-    ErrorText,
-    Label,
-    ModalButtonsWrapper,
-    ModalContainer,
-    ModalContent,
-    ModalOverlay,
-    SaveButton,
-    SchedulerButtonsWrapper,
-    SelectedDateText,
-    Title,
-    WrapperLabelAndInput
-} from './styles';
+import { CancelButton, SaveButton, SchedulerButtonsWrapper } from './styles';
 import { useTranslation } from 'react-i18next';
 import PopupDeleteContent from './Modals/PopupDeleteContent';
+import PopupCreateContent from './Modals/PopupCreateContent';
 
 const localizer = momentLocalizer(moment);
 
-interface ISelectedRange {
+export interface ISelectedRange {
     start: null | number | string;
     end: null | number | string;
 };
-interface IScheduleItem {
+export interface IScheduleItem {
     id: string;
     title: string;
     start: Date;
@@ -121,54 +108,6 @@ function Scheduler() {
         // TODO: clear saved schedule
     }
 
-    const popupCreateContent = (
-        <ModalOverlay>
-            <ModalContainer>
-                <ModalContent>
-                    <Title>{t('Calendar.selectTime')}</Title>
-                    {errorMessage &&
-                    <ErrorText>{errorMessage}</ErrorText>}
-                    {selectedDate &&
-                    <SelectedDateText>{t('Calendar.selectedDate')} {selectedDate.toLocaleDateString()}</SelectedDateText>}
-                    <WrapperLabelAndInput>
-                        <Label htmlFor='start-time'>{t('Calendar.startTime')}</Label>
-                        <DateInput
-                            id='start-time'
-                            type='time'
-                            value={selectedRange?.start ?? ''}
-                            onChange={handleStartChange}
-                        />
-                    </WrapperLabelAndInput>
-                    <WrapperLabelAndInput>
-                    <Label htmlFor='end-time'>{t('Calendar.endTime')}</Label>
-                        <DateInput
-                            id='end-time'
-                            type='time'
-                            value={selectedRange?.end ?? ''}
-                            onChange={handleEndChange}
-                        />
-                    </WrapperLabelAndInput>
-                    <ModalButtonsWrapper>
-                        <CancelButton 
-                            onClick={() => {
-                            setShowCreatePopup(false);
-                            setErrorMessage('');
-                            }}
-                            type='button'
-                            value={t('Auth.cancel') ?? ''}
-                        />
-                        <SaveButton
-                            onClick={handleSave}
-                            disabled={false}
-                            type='submit'
-                            value={t('Auth.save') ?? ''}
-                        />
-                    </ModalButtonsWrapper>
-                </ModalContent>
-            </ModalContainer>
-        </ModalOverlay>
-    );
-
     return (
         <>
         <Calendar
@@ -181,7 +120,17 @@ function Scheduler() {
           endAccessor='end'
           style={{ height: 500 }}
         />
-        {showCreatePopup && popupCreateContent}
+        {showCreatePopup && 
+        <PopupCreateContent
+            handleSave={handleSave}
+            handleStartChange={handleStartChange}
+            handleEndChange={handleEndChange}
+            selectedRange={selectedRange}
+            selectedDate={selectedDate}
+            errorMessage={errorMessage}
+            setShowCreatePopup={setShowCreatePopup}
+            setErrorMessage={setErrorMessage}
+        />}
         {selectedEvent && 
         <PopupDeleteContent
             setSelectedEvent={setSelectedEvent}

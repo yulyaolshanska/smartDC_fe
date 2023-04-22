@@ -1,13 +1,8 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { CancelButton, ModalButtonsWrapper, ModalContainer, ModalContent, ModalOverlay, SaveButton, Title } from '../styles';
+import { IScheduleItem } from '..';
 
-interface IScheduleItem {
-    id: string;
-    title: string;
-    start: Date;
-    end: Date;
-};
 interface IPopupDeleteContentProps {
     setSelectedEvent: (event: IScheduleItem | null) => void;
     handleDeleteEvent: () => void;
