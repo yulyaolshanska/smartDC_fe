@@ -1,9 +1,9 @@
 import React, { ChangeEvent, useState } from 'react';
-import { Calendar, momentLocalizer, Event } from 'react-big-calendar';
+import { Calendar, momentLocalizer } from 'react-big-calendar';
 import { v4 as uuidv4 } from 'uuid';
 import moment from 'moment';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
-import { 
+import {
     CancelButton,
     DateInput,
     ErrorText,
@@ -13,6 +13,7 @@ import {
     ModalContent,
     ModalOverlay,
     SaveButton,
+    SchedulerButtonsWrapper,
     SelectedDateText,
     Title,
     WrapperLabelAndInput
@@ -109,7 +110,15 @@ function Scheduler() {
             setShowCreatePopup(false);
             setErrorMessage('');
         }
-    };      
+    };
+    
+    function handleSubmit() {
+        // TODO: send saved schedule to DB
+    }
+    
+    function handleCancel() {
+        // TODO: clear saved schedule
+    }
 
     const popupCreateContent = (
         <ModalOverlay>
@@ -196,6 +205,19 @@ function Scheduler() {
         />
         {showCreatePopup && popupCreateContent}
         {selectedEvent && popupDeleteContent}
+        <SchedulerButtonsWrapper>
+            <CancelButton
+                onClick={handleCancel}
+                type='button'
+                value={t('Auth.cancel') ?? ''}
+            />
+            <SaveButton
+                onClick={handleSubmit}
+                disabled={false}
+                type='submit'
+                value={t('Calendar.saveSchedule') ?? ''}
+            />
+        </SchedulerButtonsWrapper>
       </>
     )
 }

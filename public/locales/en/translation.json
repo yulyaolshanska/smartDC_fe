@@ -93,7 +93,8 @@
     "startTime": "Start time:",
     "selectTime": "Select a time range",
     "selectedDate": "Selected date:",
-    "deleteTime": "Delete time:"
+    "deleteTime": "Delete time:",
+    "saveSchedule": "Save schedule"
   }
 }
 

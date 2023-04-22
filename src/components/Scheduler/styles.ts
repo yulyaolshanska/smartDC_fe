@@ -133,3 +133,9 @@ export const WrapperLabelAndInput = styled.div`
   gap: 12px;
   margin-bottom: 20px;
 `;
+
+export const SchedulerButtonsWrapper = styled.div`
+  float: right;
+  display: flex;
+  max-width: 40vw;
+`;
