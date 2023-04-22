@@ -1,14 +1,16 @@
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent, useEffect, useMemo, useState } from 'react';
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 import { v4 as uuidv4 } from 'uuid';
 import moment from 'moment';
+import 'moment-timezone';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
-import { CancelButton, SaveButton, SchedulerButtonsWrapper } from './styles';
+import { CancelButton, ErrorText, SaveButton, SchedulerButtonsWrapper } from './styles';
 import { useTranslation } from 'react-i18next';
 import PopupDeleteContent from './Modals/PopupDeleteContent';
 import PopupCreateContent from './Modals/PopupCreateContent';
+import TimezoneSelect from './TimezoneSelect/TimezoneSelect';
 
-const localizer = momentLocalizer(moment);
+const defaultTZ = moment.tz.guess();
 
 export interface ISelectedRange {
     start: null | number | string;
@@ -24,12 +26,37 @@ export interface IScheduleItem {
 function Scheduler() {
     const { t } = useTranslation();
 
+    const [showWarning, setShowWarning] = useState(false);
+    const [timezone, setTimezone] = useState(defaultTZ);
     const [showCreatePopup, setShowCreatePopup] = useState(false);
     const [selectedDate, setSelectedDate] = useState<Date | undefined>(undefined);
     const [selectedRange, setSelectedRange] = useState<ISelectedRange>({ start: null, end: null });
     const [eventsData, setEventsData] = useState<IScheduleItem[]>([]);
     const [errorMessage, setErrorMessage] = useState('');
     const [selectedEvent, setSelectedEvent] = useState<IScheduleItem | null>(null);
+
+    const { getNow, localizer, scrollToTime } =
+    useMemo(() => {
+      moment.tz.setDefault(timezone)
+      return {
+        getNow: () => moment().toDate(),
+        localizer: momentLocalizer(moment),
+        scrollToTime: moment().toDate(),
+      }
+    }, [timezone])
+
+    useEffect(() => {
+        return () => {
+          moment.tz.setDefault()
+        }
+    }, [])
+
+    const handleTimezoneChange = (newTimezone: string) => {
+        setTimezone(newTimezone);
+        if (!showWarning) {
+            setShowWarning(true);
+        }
+    }
 
     const handleSelectEvent = (event: IScheduleItem): void => {
         setSelectedEvent(event);
@@ -90,7 +117,7 @@ function Scheduler() {
                 ...eventsData,
                 {
                     id: id,
-                    title: `Working hours: ${startHours}:${startMinutes}-${endHours}:${endMinutes}`,
+                    title: `Working hours`,
                     start: dayStartValue,
                     end: dayEndValue,
                 }
@@ -110,6 +137,13 @@ function Scheduler() {
 
     return (
         <>
+        <TimezoneSelect
+          defaultTZ={defaultTZ}
+          setTimezone={handleTimezoneChange}
+          timezone={timezone}
+        />
+        {showWarning &&
+        <ErrorText>Warning: you are in view mode and creating new schedule will be done according to your local time!</ErrorText>}
         <Calendar
           events={eventsData}
           localizer={localizer}
@@ -119,6 +153,8 @@ function Scheduler() {
           startAccessor='start'
           endAccessor='end'
           style={{ height: 500 }}
+          getNow={getNow}
+          scrollToTime={scrollToTime}
         />
         {showCreatePopup && 
         <PopupCreateContent

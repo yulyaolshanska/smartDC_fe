@@ -1,7 +1,8 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { CancelButton, DateInput, ErrorText, Label, ModalButtonsWrapper, ModalContainer, ModalContent, ModalOverlay, SaveButton, SelectedDateText, Title, WrapperLabelAndInput } from '../styles';
 import { ISelectedRange } from '..';
+import { DateInput, Label, ModalButtonsWrapper, ModalContainer, ModalContent, ModalOverlay, SelectedDateText, Title, WrapperLabelAndInput } from './styles';
+import { CancelButton, ErrorText, SaveButton } from '../styles';
 
 interface IPopupCreateContentProps {
     selectedDate: Date | undefined;
@@ -54,7 +55,7 @@ const PopupCreateContent = ({
                         />
                     </WrapperLabelAndInput>
                     <ModalButtonsWrapper>
-                        <CancelButton 
+                        <CancelButton
                             onClick={() => {
                                 setShowCreatePopup(false);
                                 setErrorMessage('');
