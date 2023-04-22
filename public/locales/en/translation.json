@@ -88,13 +88,17 @@
     "endBeforeStartDateError": "Validation error: end date should be after start date",
     "overlappingEventsError": "Validation error: working hours overlap"
   },
+  "Warning": {
+    "viewScheduleWarning": "Warning: you are in view mode and creating new schedule will be done according to your local time!"
+  },
   "Calendar": {
     "endTime": "End time:",
     "startTime": "Start time:",
     "selectTime": "Select a time range",
     "selectedDate": "Selected date:",
     "deleteTime": "Delete time:",
-    "saveSchedule": "Save schedule"
+    "saveSchedule": "Save schedule",
+    "selectTimezone": "Time Zone:"
   }
 }
 

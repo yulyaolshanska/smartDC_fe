@@ -50,7 +50,9 @@ export const SNUFF = '#0000FF00';
  * @deprecated
  */
 export const RED = '#FF0000FF';
-
+/**
+ * @deprecated
+ */
 export const DODGE_BLUE = 'dodgerblue';
 /**
  * @deprecated
@@ -64,3 +66,10 @@ export const LIGHT_GREEN = '#BFE8CA';
  * @deprecated
  */
 export const GRAY_SHADOW = '#66666666';
+/**
+ * @deprecated
+ */
+export const LIGHT_GRAY = '#808080';
+/**
+ * @deprecated
+ */

@@ -143,7 +143,7 @@ function Scheduler() {
           timezone={timezone}
         />
         {showWarning &&
-        <ErrorText>Warning: you are in view mode and creating new schedule will be done according to your local time!</ErrorText>}
+        <ErrorText>{t('Warning.viewScheduleWarning')}</ErrorText>}
         <Calendar
           events={eventsData}
           localizer={localizer}
