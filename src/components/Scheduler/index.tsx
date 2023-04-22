@@ -2,7 +2,6 @@ import React, { ChangeEvent, useState } from 'react';
 import { Calendar, momentLocalizer, Event } from 'react-big-calendar';
 import { v4 as uuidv4 } from 'uuid';
 import moment from 'moment';
-import events from './events';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import { 
     CancelButton,
@@ -39,7 +38,7 @@ function Scheduler() {
     const [showCreatePopup, setShowCreatePopup] = useState(false);
     const [selectedDate, setSelectedDate] = useState<Date | undefined>(undefined);
     const [selectedRange, setSelectedRange] = useState<ISelectedRange>({ start: null, end: null });
-    const [eventsData, setEventsData] = useState(events);
+    const [eventsData, setEventsData] = useState<IScheduleItem[]>([]);
     const [errorMessage, setErrorMessage] = useState('');
     const [selectedEvent, setSelectedEvent] = useState<IScheduleItem | null>(null);
 
@@ -102,7 +101,7 @@ function Scheduler() {
                 ...eventsData,
                 {
                     id: id,
-                    title: 'Working hours',
+                    title: `Working hours: ${startHours}:${startMinutes}-${endHours}:${endMinutes}`,
                     start: dayStartValue,
                     end: dayEndValue,
                 }
