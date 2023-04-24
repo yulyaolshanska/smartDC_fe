@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { ISelectedRange } from '..';
-import { DateInput, Label, ModalButtonsWrapper, ModalContainer, ModalContent, ModalOverlay, SelectedDateText, Title, WrapperLabelAndInput } from './styles';
+import { ModalButtonsWrapper, ModalContainer, ModalContent, ModalOverlay, Title, WrapperLabelAndInput } from './styles';
 import { CancelButton, ErrorText, SaveButton } from '../styles';
 
 interface IPopupCreateContentProps {
@@ -35,10 +35,10 @@ const PopupCreateContent = ({
                     {errorMessage &&
                     <ErrorText>{errorMessage}</ErrorText>}
                     {selectedDate &&
-                    <SelectedDateText>{t('Calendar.selectedDate')} {selectedDate.toLocaleDateString()}</SelectedDateText>}
+                    <p>{t('Calendar.selectedDate')} {selectedDate.toLocaleDateString()}</p>}
                     <WrapperLabelAndInput>
-                        <Label htmlFor='start-time'>{t('Calendar.startTime')}</Label>
-                        <DateInput
+                        <label htmlFor='start-time'>{t('Calendar.startTime')}</label>
+                        <input
                             id='start-time'
                             type='time'
                             value={selectedRange?.start ?? ''}
@@ -46,8 +46,8 @@ const PopupCreateContent = ({
                         />
                     </WrapperLabelAndInput>
                     <WrapperLabelAndInput>
-                    <Label htmlFor='end-time'>{t('Calendar.endTime')}</Label>
-                        <DateInput
+                    <label htmlFor='end-time'>{t('Calendar.endTime')}</label>
+                        <input
                             id='end-time'
                             type='time'
                             value={selectedRange?.end ?? ''}

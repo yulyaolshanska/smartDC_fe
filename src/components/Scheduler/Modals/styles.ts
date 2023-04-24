@@ -62,15 +62,6 @@ export const Title = styled.h2`
   text-align: center;
 `;
 
-export const Label = styled.label`
-`;
-
-export const DateInput = styled.input`
-`;
-
-export const SelectedDateText = styled.p`
-`;
-
 export const WrapperLabelAndInput = styled.div`
   display: flex;
   flex-direction: column;
