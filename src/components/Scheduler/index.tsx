@@ -17,7 +17,7 @@ export interface ISelectedRange {
     end: null | number | string;
 };
 export interface IScheduleItem {
-    id: string;
+    uuid: string;
     title: string;
     start: Date;
     end: Date;
@@ -64,7 +64,7 @@ function Scheduler() {
 
     const handleDeleteEvent = () => {
         if (!selectedEvent) return;
-        const updatedEvents = eventsData.filter((event) => event.id !== selectedEvent.id);
+        const updatedEvents = eventsData.filter((event) => event.uuid !== selectedEvent.uuid);
         setSelectedEvent(null);
         setEventsData(updatedEvents);
     };
@@ -112,11 +112,11 @@ function Scheduler() {
             dayStartValue.setMinutes(Number(startMinutes));
             dayEndValue.setMinutes(Number(endMinutes));
 
-            const id = uuidv4();
+            const uuid = uuidv4();
             setEventsData([
                 ...eventsData,
                 {
-                    id: id,
+                    uuid: uuid,
                     title: `Working hours`,
                     start: dayStartValue,
                     end: dayEndValue,
@@ -124,6 +124,7 @@ function Scheduler() {
             ]);
             setShowCreatePopup(false);
             setErrorMessage('');
+            console.log(eventsData);
         }
     };
     
