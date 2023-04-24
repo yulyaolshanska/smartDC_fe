@@ -1,7 +1,8 @@
 import { createSelector } from '@reduxjs/toolkit';
 import { RootState } from '@redux/store';
 
-export const selectSignUp = createSelector(
+const selectSignUp = createSelector(
   (state: RootState) => state,
-  (state) => state.signUp,
+  (state) => state.signUpReducer,
 );
+export default selectSignUp;

@@ -15,18 +15,16 @@ import {
   Form,
   PasswordImg,
 } from '@components/general/styles';
-import { FormValues, ISignUp } from '@components/general/type';
+import { FormValues, IAuth } from '@components/general/type';
 import visible from '@assets/auth/eye.svg';
 import visibleOff from '@assets/auth/eyeSlash.svg';
 import { confirmPassword, end, error, password } from '@constants/auth';
-import { signUpSchema } from '@validation/auth.validate';
+import signUpSchema from '@validation/auth.validate';
 import { toast, ToastContainer } from 'react-toastify';
 import { PATH } from '@router/index';
-import { useDispatch } from 'react-redux';
-import { AppDispatch } from '@redux/store';
-import { resetPasswordQuery } from '@redux/slices/auth/resetPassword';
 import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router';
+import { authApi } from 'services/AuthService';
 
 function ResetPasswordForm() {
   const [showPassword, setShowPassword] = useState<boolean>(false);
@@ -42,8 +40,6 @@ function ResetPasswordForm() {
   const navigate = useNavigate();
 
   const { token } = useParams();
-
-  const dispatch = useDispatch<AppDispatch>();
 
   const { t } = useTranslation();
   const {
@@ -66,14 +62,14 @@ function ResetPasswordForm() {
     register('confirmPassword');
   }, []);
 
-  const onSubmit = (data: ISignUp) => {
+  const [resetPassword] = authApi.useResetPasswordMutation();
+
+  const onSubmit = async (data: IAuth) => {
     if (token) {
-      dispatch(
-        resetPasswordQuery({
-          password: data.password,
-          token,
-        })
-      ).then((res) => {
+      await resetPassword({
+        password: data.password,
+        token,
+      }).then((res) => {
         if (error in res && res.error) {
           toast.error('Sorry, something was wrong!', {
             position: toast.POSITION.TOP_CENTER,

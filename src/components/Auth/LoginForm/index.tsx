@@ -18,19 +18,21 @@ import {
   PasswordImg,
   AuthForgotPasswordContainer,
 } from '@components/general/styles';
-import { FormValues, ISignUp } from '@components/general/type';
+import { FormValues, IAuth } from '@components/general/type';
 import GoogleLoginButton from '@components/Auth/LoginForm/GoogleLogin';
 import visible from '@assets/auth/eye.svg';
 import visibleOff from '@assets/auth/eyeSlash.svg';
-import { email, end, error, password } from '@constants/auth';
-import { signUpSchema } from '@validation/auth.validate';
+import { email, end, password, error } from '@constants/auth';
+import signUpSchema from '@validation/auth.validate';
 import { PATH } from '@router/index';
 import { ToastContainer } from 'react-toastify';
 import { toast } from 'react-toastify';
-import { loginQuery } from '@redux/slices/auth/login';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
+import cookie from 'utils/functions/cookies';
+import { doctorActions } from '@redux/slices/DoctorSlice';
 import { AppDispatch } from '@redux/store';
+import { authApi } from 'services/AuthService';
 
 function LoginForm() {
   const dispatch = useDispatch<AppDispatch>();
@@ -61,19 +63,31 @@ function LoginForm() {
     register('password');
   }, []);
 
-  const onSubmit = (data: ISignUp) => {
-    dispatch(loginQuery(data)).then((res) => {
-      if (error in res && res.error) {
-        toast.error(
-          'Sorry, something was wrong! Check your email and password!',
-          {
-            position: toast.POSITION.TOP_CENTER,
-          }
-        );
-      } else {
-        navigate(PATH.DASHBOARD);
-      }
-    });
+  const [login] = authApi.useLoginMutation();
+
+  const onSubmit = async (data: IAuth) => {
+    await login(data)
+      .unwrap()
+      .then((res) => {
+        if (error in res && res.error) {
+          toast.error(
+            'Sorry, something was wrong! Check your email and password!',
+            {
+              position: toast.POSITION.TOP_CENTER,
+            }
+          );
+        } else {
+          const token = res.token;
+          const doctor = res.userInfo;
+          dispatch(doctorActions.getDoctor(doctor));
+          cookie.set(
+            'accessToken',
+            token,
+            import.meta.env.VITE_REACT_APP_ACCESS_TOKEN_MAXAGE
+          );
+          navigate(PATH.DASHBOARD);
+        }
+      });
   };
 
   return (

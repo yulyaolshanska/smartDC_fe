@@ -1,9 +1,6 @@
+import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { useForm } from 'react-hook-form';
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { toast, ToastContainer } from 'react-toastify';
-import { yupResolver } from '@hookform/resolvers/yup';
+import { ToastContainer } from 'react-toastify';
 import Input from '@components/Input';
 import {
   Container,
@@ -18,7 +15,6 @@ import {
   Form,
   InputInlineContainer,
 } from '@components/general/styles';
-import { FormValues, ISignUp } from '@components/general/type';
 import {
   role,
   specialization,
@@ -29,11 +25,8 @@ import {
   city,
   country,
   date,
-  error,
   phoneNumber,
-  plus,
 } from '@constants/auth';
-import { signUpSchema } from '@validation/auth.validate';
 import {
   roles,
   specializations,
@@ -42,61 +35,18 @@ import {
   timeZones,
 } from '@constants/mockData';
 import SelectInput from '@components/Select';
-import { selectSignUp } from '@redux/selectors/auth/signUp';
-import { signUpQuery } from '@redux/slices/auth/signUp';
 import { PATH } from '@router/index';
-import { AppDispatch } from '@redux/store';
-import React from 'react';
 import PhoneInput from '@components/PhoneInput';
+import useSignUpHook from 'hooks/useSignUp.hook';
 
 function SignUpSecondForm() {
   const { t } = useTranslation();
-  const dispatch = useDispatch<AppDispatch>();
-  const navigate = useNavigate();
-  const dataSignUpFirst = useSelector(selectSignUp);
-
-  const { signUpSecondStepSchema } = signUpSchema();
-
-  const {
-    handleSubmit,
-    control,
-    formState: { errors, isValid },
-  } = useForm<FormValues>({
-    mode: 'onChange',
-    defaultValues: {
-      role: '',
-      gender: '',
-      phoneNumber: '',
-      city: '',
-      country: '',
-      address: '',
-      specialization: 0,
-      birthDate: '',
-      timeZone: '',
-    },
-
-    resolver: yupResolver(signUpSecondStepSchema),
-  });
-
-  const onSubmit = (data: ISignUp) => {
-    data.specialization = Number(data.specialization);
-    data.phoneNumber = plus + data.phoneNumber;
-
-    const combinedObj = Object.assign({}, dataSignUpFirst, data);
-
-    dispatch(signUpQuery(combinedObj)).then((res) => {
-      if (error in res && res.error) {
-        toast.error(
-          'Sorry, you entered the wrong phone number! Please change it',
-          {
-            position: toast.POSITION.TOP_CENTER,
-          }
-        );
-      } else {
-        navigate(PATH.DASHBOARD);
-      }
-    });
+  const tWithDefault = (key: string) => {
+    const translation = t(key);
+    return translation || '';
   };
+
+  const { handleSubmit, onSubmit, control, errors, isValid } = useSignUpHook();
 
   return (
     <Container>
@@ -110,7 +60,7 @@ function SignUpSecondForm() {
               control={control}
               fullWidth
               name={role}
-              placeholder={t('Auth.enterRole') ?? ''}
+              placeholder={tWithDefault('Auth.enterRole')}
               helperText={errors.role?.message}
               error={Boolean(errors?.role)}
               options={roles}
@@ -123,7 +73,7 @@ function SignUpSecondForm() {
               control={control}
               fullWidth
               name={specialization}
-              placeholder={t('Auth.enterSpecialization') ?? ''}
+              placeholder={tWithDefault('Auth.enterSpecialization')}
               options={specializations}
               helperText={errors.specialization?.message}
               error={Boolean(errors?.specialization)}
@@ -136,7 +86,7 @@ function SignUpSecondForm() {
               control={control}
               fullWidth
               name={gender}
-              placeholder={t('Auth.enterGender') ?? ''}
+              placeholder={tWithDefault('Auth.enterGender')}
               helperText={errors.gender?.message}
               error={Boolean(errors?.gender)}
               options={genders}
@@ -149,7 +99,7 @@ function SignUpSecondForm() {
               control={control}
               fullWidth
               name={phoneNumber}
-              placeholder={t('Auth.defaultPhoneNumber') ?? ''}
+              placeholder={tWithDefault('Auth.defaultPhoneNumber')}
               helperText={errors.phoneNumber?.message}
               error={Boolean(errors?.phoneNumber)}
               required={true}
@@ -162,7 +112,7 @@ function SignUpSecondForm() {
               fullWidth
               name={birthDate}
               type={date}
-              placeholder={t('Auth.enterDateOfBirth') ?? ''}
+              placeholder={tWithDefault('Auth.enterDateOfBirth')}
               helperText={errors.birthDate?.message}
               error={Boolean(errors?.birthDate)}
               required={true}
@@ -175,7 +125,7 @@ function SignUpSecondForm() {
                 control={control}
                 fullWidth
                 name={country}
-                placeholder={t('Auth.enterCountry') ?? ''}
+                placeholder={tWithDefault('Auth.enterCountry')}
                 helperText={errors.country?.message}
                 error={Boolean(errors?.country)}
                 options={countries}
@@ -188,7 +138,7 @@ function SignUpSecondForm() {
                 control={control}
                 fullWidth
                 name={city}
-                placeholder={t('Auth.enterCity') ?? ''}
+                placeholder={tWithDefault('Auth.enterCity')}
                 helperText={errors.city?.message}
                 error={Boolean(errors?.city)}
               />
@@ -200,7 +150,7 @@ function SignUpSecondForm() {
               control={control}
               fullWidth
               name={address}
-              placeholder={t('Auth.enterAddress') ?? ''}
+              placeholder={tWithDefault('Auth.enterAddress')}
               helperText={errors.address?.message}
               error={Boolean(errors?.address)}
             />
@@ -211,7 +161,7 @@ function SignUpSecondForm() {
               control={control}
               fullWidth
               name={timeZone}
-              placeholder={t('Auth.enterTimeZone') ?? ''}
+              placeholder={tWithDefault('Auth.enterTimeZone')}
               helperText={errors.timeZone?.message}
               error={Boolean(errors?.timeZone)}
               options={timeZones}
@@ -221,7 +171,7 @@ function SignUpSecondForm() {
           <SendButton
             disabled={!isValid}
             type="submit"
-            value={t('Auth.signUp') ?? ''}
+            value={tWithDefault('Auth.signUp')}
           />
           <LinkContainer>
             {t('Auth.alreadyExistText')}

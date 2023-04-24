@@ -6,9 +6,9 @@
     "allowSyntheticDefaultImports": true,
     "strict": true,
     "types": [],
-    "baseUrl": "src",
+    "baseUrl": "src"
   },
-  "include":["src"],
+  "include": ["src"],
   "files": [],
   "references": [
     {

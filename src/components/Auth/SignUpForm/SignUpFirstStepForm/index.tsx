@@ -18,7 +18,7 @@ import {
   Form,
   PasswordImg,
 } from '@components/general/styles';
-import { FormValues, ISignUp } from '@components/general/type';
+import { FormValues, IAuth } from '@components/general/type';
 import visible from '@assets/auth/eye.svg';
 import visibleOff from '@assets/auth/eyeSlash.svg';
 import {
@@ -30,16 +30,14 @@ import {
   lastName,
   password,
 } from '@constants/auth';
-import { signUpSchema } from '@validation/auth.validate';
-import {
-  checkEmailQuery,
-  setSignUpFirstStepData,
-} from '@redux/slices/auth/signUp';
+import signUpSchema from '@validation/auth.validate';
+import { signUpActions } from '@redux/slices/auth/signUp';
 import { PATH } from '@router/index';
 import AuthGoogleButton from '@components/Auth/AuthGoogleButton';
 import SignUpSecondForm from '@components/Auth/SignUpForm/SignUpSecondStepForm';
 import { toast, ToastContainer } from 'react-toastify';
 import { AppDispatch } from '@redux/store';
+import { authApi } from 'services/AuthService';
 
 function SignUpFirstForm() {
   const [showPassword, setShowPassword] = useState<boolean>(false);
@@ -79,8 +77,10 @@ function SignUpFirstForm() {
     register('confirmPassword');
   }, []);
 
-  const onSubmit = (data: ISignUp) => {
-    dispatch(checkEmailQuery(data)).then((res) => {
+  const [checkEmail] = authApi.useCheckEmailMutation();
+
+  const onSubmit = async (data: IAuth) => {
+    await checkEmail(data).then((res) => {
       if (error in res && res.error) {
         toast.error(
           `Sorry, user with email ${data.email} already exists! Please change the email for continue`,
@@ -89,7 +89,7 @@ function SignUpFirstForm() {
           }
         );
       } else {
-        dispatch(setSignUpFirstStepData(data));
+        dispatch(signUpActions.setSignUpFirstStepData(data));
         setFirstStep(!isFirstStep);
       }
     });
