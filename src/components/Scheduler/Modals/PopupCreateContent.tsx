@@ -27,6 +27,11 @@ const PopupCreateContent = ({
 }: IPopupCreateContentProps) => {
     const { t } = useTranslation();
 
+    const handlePopupClose = () => {
+        setShowCreatePopup(false);
+        setErrorMessage('');
+    };
+
     return (
         <ModalOverlay>
             <ModalContainer>
@@ -56,10 +61,7 @@ const PopupCreateContent = ({
                     </WrapperLabelAndInput>
                     <ModalButtonsWrapper>
                         <CancelButton
-                            onClick={() => {
-                                setShowCreatePopup(false);
-                                setErrorMessage('');
-                            }}
+                            onClick={handlePopupClose}
                             type='button'
                             value={t('Auth.cancel') ?? ''}
                         />
