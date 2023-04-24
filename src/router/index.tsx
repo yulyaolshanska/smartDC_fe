@@ -2,7 +2,6 @@ import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 
 import SignUpFirstStep from '@pages/auth/signUp/signUpFirstStep';
-import SignUpSecondStep from '@pages/auth/signUp/signUpSecondStep';
 import SignUpSecondFormGoogle from '@components/Auth/SignUpForm/SignUpSecondStepFormGoogle';
 import ResetPassword from '@pages/auth/resetPassword';
 import Login from '@pages/auth/login';
@@ -12,6 +11,7 @@ import Profile from '@pages/doctor/profile';
 import PageWrapper from '@components/PageWrapper';
 import Help from '@pages/help';
 import Activation from '@pages/auth/signUp/activation';
+import PatientPage from '@pages/patient';
 
 export const PATH = {
   SIGN_UP: '/auth',
@@ -24,6 +24,7 @@ export const PATH = {
   EDIT_DOCTOR_PROFILE: '/edit-doctor-profile',
   HELP: '/help',
   DASHBOARD: '/dashboard',
+  PATIENT: '/patients',
 };
 
 const AppRouter = () => {
@@ -40,6 +41,7 @@ const AppRouter = () => {
           path={PATH.SIGN_UP_SECOND_STEP_GOOGLE}
           element={<SignUpSecondFormGoogle />}
         />
+        <Route path={PATH.PATIENT} element={<PatientPage />} />
         <Route path={PATH.FORGOT_PASS} element={<ForgotPassword />} />
         <Route path={PATH.CONFIRM} element={<Confirmation />} />
         <Route path={PATH.EDIT_DOCTOR_PROFILE} element={<Profile />} />

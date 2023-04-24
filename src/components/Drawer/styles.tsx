@@ -44,7 +44,7 @@ export const PositionContainer = styled.div<{ selected?: boolean | string }>`
     fill: ${({ selected }) => (selected ? ACTIVE : NOT_ACTIVE)};
   }
   cursor: ${({ selected }) => (selected ? 'default' : 'pointer')};
-  transition: 0.3s all;
+  transition: 0.2s all;
   &:nth-child(2) {
     margin-top: 40px;
   }
