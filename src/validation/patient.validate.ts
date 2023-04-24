@@ -5,23 +5,27 @@ const NAME_PATTERN = /^([A-Z][a-z]{1,11})/;
 
 export function patientSchema() {
   const { t } = useTranslation();
+  const tWithDefault = (key: string) => {
+    const translation = t(key);
+    return translation || '';
+  };
 
   const createPatientCardSchema = yup.object().shape({
     firstName: yup
       .string()
-      .required(t('Error.firstNameRequired') ?? '')
-      .min(2, t('Error.firstNameRequired') ?? '')
-      .matches(NAME_PATTERN, t('Error.firstNameRequired') ?? ''),
+      .required(tWithDefault('Error.firstNameRequired'))
+      .min(2, tWithDefault('Error.tooShort'))
+      .matches(NAME_PATTERN, tWithDefault('Error.nameFormat')),
     lastName: yup
       .string()
-      .required(t('Error.lastNameRequired') ?? '')
-      .min(2, t('Error.tooShort') ?? '')
-      .matches(NAME_PATTERN, t('Error.nameFormat') ?? ''),
-    email: yup.string().email(t('Error.invalidEmailFormat') ?? ''),
+      .required(tWithDefault('Error.lastNameRequired'))
+      .min(2, tWithDefault('Error.tooShort'))
+      .matches(NAME_PATTERN, tWithDefault('Error.nameFormat')),
+    email: yup.string().email(tWithDefault('Error.invalidEmailFormat')),
     phoneNumber: yup
       .string()
-      .required(t('Error.phoneNumberRequired') ?? '')
-      .min(6, t('Error.tooShort') ?? ''),
+      .required(tWithDefault('Error.phoneNumberRequired'))
+      .min(6, tWithDefault('Error.tooShort')),
   });
 
   return {
