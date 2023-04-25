@@ -9,6 +9,7 @@ import { useTranslation } from 'react-i18next';
 import PopupDeleteContent from './Modals/PopupDeleteContent';
 import PopupCreateContent from './Modals/PopupCreateContent';
 import TimezoneSelect from './TimezoneSelect/TimezoneSelect';
+import { TFunction } from 'i18next';
 
 const defaultTZ = moment.tz.guess();
 
@@ -16,6 +17,7 @@ export interface ISelectedRange {
     start: null | number | string;
     end: null | number | string;
 };
+
 export interface IScheduleItem {
     uuid: string;
     title: string;
@@ -24,7 +26,7 @@ export interface IScheduleItem {
 };
   
 function Scheduler() {
-    const { t } = useTranslation();
+    const { t }: { t: TFunction } = useTranslation();
 
     const [showWarning, setShowWarning] = useState(false);
     const [timezone, setTimezone] = useState(defaultTZ);
