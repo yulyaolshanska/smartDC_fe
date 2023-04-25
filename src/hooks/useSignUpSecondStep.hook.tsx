@@ -11,7 +11,7 @@ import { toast } from 'react-toastify';
 import { PATH } from '@router/index';
 import { useNavigate } from 'react-router-dom';
 
-function useSignUpHook() {
+function useSignUpSecondStepHook() {
   const navigate = useNavigate();
   const dataSignUpFirst = useSelector(selectSignUp);
   const { signUpSecondStepSchema } = signUpSchema();
@@ -64,4 +64,4 @@ function useSignUpHook() {
   };
 }
 
-export default useSignUpHook;
+export default useSignUpSecondStepHook;

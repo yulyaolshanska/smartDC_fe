@@ -37,7 +37,7 @@ import {
 import SelectInput from '@components/Select';
 import { PATH } from '@router/index';
 import PhoneInput from '@components/PhoneInput';
-import useSignUpHook from 'hooks/useSignUp.hook';
+import useSignUpSecondStepHook from 'hooks/useSignUpSecondStep.hook';
 
 function SignUpSecondForm() {
   const { t } = useTranslation();
@@ -46,7 +46,8 @@ function SignUpSecondForm() {
     return translation || '';
   };
 
-  const { handleSubmit, onSubmit, control, errors, isValid } = useSignUpHook();
+  const { handleSubmit, onSubmit, control, errors, isValid } =
+    useSignUpSecondStepHook();
 
   return (
     <Container>

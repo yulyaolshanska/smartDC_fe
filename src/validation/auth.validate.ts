@@ -18,7 +18,7 @@ export default function signUpSchema() {
     firstName: yup
       .string()
       .required(tWithDefault('Error.firstNameRequired'))
-      .min(2, tWithDefault('Error.firstNameRequired'))
+      .min(2, tWithDefault('Error.tooShort'))
       .matches(NAME_PATTERN, tWithDefault('Error.nameFormat')),
     lastName: yup
       .string()
