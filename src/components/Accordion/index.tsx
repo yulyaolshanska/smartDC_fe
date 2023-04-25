@@ -12,9 +12,12 @@ const Accordion: React.FC = () => {
 
   const refHeight = React.useRef<HTMLDivElement>(null);
 
+  const MARGIN_TOP = 20;
+  const PADDING = 16;
+
   React.useEffect(() => {
     if (refHeight.current)
-      setHeightEl(`${refHeight.current.scrollHeight + 20 + 16}px`);
+      setHeightEl(`${refHeight.current.scrollHeight + MARGIN_TOP + PADDING}px`);
   }, []);
 
   const toggleState = (): void => {
