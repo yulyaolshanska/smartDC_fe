@@ -28,9 +28,9 @@ export interface IScheduleItem {
 function Scheduler() {
     const { t }: { t: TFunction } = useTranslation();
 
-    const [showWarning, setShowWarning] = useState(false);
-    const [timezone, setTimezone] = useState(defaultTZ);
-    const [showCreatePopup, setShowCreatePopup] = useState(false);
+    const [showWarning, setShowWarning] = useState<boolean>(false);
+    const [timezone, setTimezone] = useState<string>(defaultTZ);
+    const [showCreatePopup, setShowCreatePopup] = useState<boolean>(false);
     const [selectedDate, setSelectedDate] = useState<Date | undefined>(undefined);
     const [selectedRange, setSelectedRange] = useState<ISelectedRange>({ start: null, end: null });
     const [eventsData, setEventsData] = useState<IScheduleItem[]>([]);
