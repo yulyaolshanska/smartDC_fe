@@ -20,6 +20,7 @@ import { navigationReducer } from 'redux/slices/NavigationSlice';
 import { doctorReducer } from 'redux/slices/DoctorSlice';
 import { resetPasswordReducer } from '@redux/slices/auth/resetPassword';
 import { createPatientReducer } from '@redux/slices/patient/createPatient';
+import { patientApi } from '../services/PatientService';
 
 const rootReducer = combineReducers({
   loginReducer,
@@ -32,6 +33,7 @@ const rootReducer = combineReducers({
   createPatientReducer,
   [doctorApi.reducerPath]: doctorApi.reducer,
   [authApi.reducerPath]: authApi.reducer,
+  [patientApi.reducerPath]: patientApi.reducer,
 });
 const persistConfig = {
   key: 'root',
@@ -56,7 +58,11 @@ export const setupStore = () =>
         serializableCheck: {
           ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
         },
-      }).concat(doctorApi.middleware, authApi.middleware),
+      }).concat(
+        doctorApi.middleware,
+        authApi.middleware,
+        patientApi.middleware
+      ),
   });
 export const store = setupStore();
 export const persistor = persistStore(store);
