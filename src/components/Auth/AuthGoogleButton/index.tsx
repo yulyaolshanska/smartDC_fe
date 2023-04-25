@@ -5,7 +5,7 @@ import {
   AuthGoogleContainer,
   GoogleImg,
   GoogleText,
-} from '@components/Auth/styles';
+} from '@components/general/styles';
 import google from '@assets/auth/google.svg';
 
 function AuthGoogleButton() {
