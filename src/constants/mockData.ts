@@ -25,6 +25,6 @@ export const cities = [
 
 export const timeZones = [
   { value: '(GMT+2) Europe/Berlin', label: '(GMT+2) Europe/Berlin' },
-  { value: 'GMT+7) Whitehorse/Phoenix', label: '(GMT-07:00) Whitehorse' },
+  { value: '(GMT+7) Whitehorse/Phoenix', label: '(GMT-07:00) Whitehorse' },
   { value: 'GMT-06:00', label: '(GMT-06:00) Mezcales, San Vicente, Bucerías' },
 ];

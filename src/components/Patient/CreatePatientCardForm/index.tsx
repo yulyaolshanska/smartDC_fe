@@ -5,7 +5,6 @@ import { toast, ToastContainer } from 'react-toastify';
 import { yupResolver } from '@hookform/resolvers/yup';
 import {
   CancelButton,
-  FormContainer,
   SendButton,
   ButtonContainer,
 } from '@components/general/styles';
@@ -23,7 +22,6 @@ import { error, plus } from '@constants/auth';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '@redux/store';
-import { createPatientQuery } from '@redux/slices/patient/createPatient';
 import { patientApi } from 'services/PatientService';
 
 function CreatePatientCardForm() {

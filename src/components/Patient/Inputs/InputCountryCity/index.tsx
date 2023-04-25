@@ -7,7 +7,7 @@ import { InputProps } from '@components/Patient/Inputs/type';
 import SelectInput from '@components/Select';
 import { countries } from '@constants/mockData';
 
-function InputGenderBirthDate({ control, errors }: InputProps) {
+function InputCountryCity({ control, errors }: InputProps) {
   const { t } = useTranslation();
 
   return (
@@ -40,4 +40,4 @@ function InputGenderBirthDate({ control, errors }: InputProps) {
   );
 }
 
-export default InputGenderBirthDate;
+export default InputCountryCity;
