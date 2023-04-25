@@ -25,7 +25,8 @@
       "@validation/*": ["validation/*"],
       "@assets/*": ["assets/*"],
       "@api/*": ["api/*"],
-      "@auth/*": ["api/auth/*"]
+      "@auth/*": ["api/auth/*"],
+      "@hooks/*": ["hooks/*"],
     }
   },
   "exclude": ["node_modules", "tmp"]
