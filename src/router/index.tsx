@@ -12,6 +12,7 @@ import ForgotPassword from '@pages/auth/forgotPassword';
 import Confirmation from '@pages/auth/forgotPassword/confirmation';
 import Activation from '@pages/auth/signUp/activation';
 import CreatePatientCard from '@pages/patient/createPatientCard';
+import TempScheduler from '@pages/tempScheduler';
 
 export const PATH = {
   SIGN_UP: '/auth',
@@ -22,6 +23,7 @@ export const PATH = {
   LOGIN: '/',
   DASHBOARD: '/dashboard',
   CREATE_PATIENT_CARD: '/create-patient-card',
+  SCHEDULER: '/scheduler',
 };
 
 export const router = createBrowserRouter(
@@ -34,6 +36,7 @@ export const router = createBrowserRouter(
       <Route path={PATH.CONFIRM} element={<Confirmation />} />
       <Route path={PATH.RESET_PASS} element={<ResetPassword />} />
       <Route path={PATH.CREATE_PATIENT_CARD} element={<CreatePatientCard />} />
+      <Route path={PATH.SCHEDULER} element={<TempScheduler />} />
     </Route>
   )
 );

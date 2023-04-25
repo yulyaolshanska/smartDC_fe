@@ -51,6 +51,8 @@
     "continue": "Continue",
     "save": "Save",
     "submit": "Submit",
+    "cancel": "Cancel",
+    "delete": "Delete",
     "role": "Role",
     "enterRole":"Enter role...",
     "specialization":"Specialization",
@@ -82,7 +84,10 @@
     "fieldRequired": "*Field is required",
     "mustContain": "*Must Contain",
     "charactersUppercaseLowercase": "Characters, One Uppercase, One Lowercase",
-    "overviewRequired": "*Overview is required"
+    "overviewRequired": "*Overview is required",
+    "bothDatesRequired": "Validation error: both start and end dates are required",
+    "endBeforeStartDateError": "Validation error: end date should be after start date",
+    "overlappingEventsError": "Validation error: working hours overlap"
   },
   "Patient": {
     "createPatientCard": "Create patient's card",
@@ -110,6 +115,18 @@
     "enterOverview": "Enter patient's overview",
     "save": "Save",
     "cancel": "Cancel"
+  },
+  "Warning": {
+    "viewScheduleWarning": "Warning: you are in view mode and creating new schedule will be done according to your local time!"
+  },
+  "Calendar": {
+    "endTime": "End time:",
+    "startTime": "Start time:",
+    "selectTime": "Select a time range",
+    "selectedDate": "Selected date:",
+    "deleteTime": "Delete time:",
+    "saveSchedule": "Save schedule",
+    "selectTimezone": "Time Zone:"
   }
 }
 
