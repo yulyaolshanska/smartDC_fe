@@ -60,3 +60,5 @@ export const DARK_GREEN = '#188038';
  * @deprecated
  */
 export const LIGHT_GREEN = '#BFE8CA';
+
+export const BORDER = '#d8dbe8';
