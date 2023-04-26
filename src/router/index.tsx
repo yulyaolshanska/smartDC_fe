@@ -12,6 +12,8 @@ import Profile from '@pages/doctor/profile';
 import PageWrapper from '@components/PageWrapper';
 import Help from '@pages/help';
 import Activation from '@pages/auth/signUp/activation';
+import CreatePatientCard from '@pages/patient/createPatientCard';
+import TempScheduler from '@pages/tempScheduler';
 
 export const PATH = {
   SIGN_UP: '/auth',
@@ -24,6 +26,8 @@ export const PATH = {
   EDIT_DOCTOR_PROFILE: '/edit-doctor-profile',
   HELP: '/help',
   DASHBOARD: '/dashboard',
+  CREATE_PATIENT_CARD: '/create-patient-card',
+  SCHEDULER: '/scheduler',
 };
 
 const AppRouter = () => {
@@ -45,6 +49,11 @@ const AppRouter = () => {
         <Route path={PATH.EDIT_DOCTOR_PROFILE} element={<Profile />} />
         <Route path={PATH.HELP} element={<Help />} />
         <Route path={PATH.DASHBOARD} element={<Profile />} /> {/*TODO */}
+        <Route
+          path={PATH.CREATE_PATIENT_CARD}
+          element={<CreatePatientCard />}
+        />
+        <Route path={PATH.SCHEDULER} element={<TempScheduler />} />
       </Routes>
     </PageWrapper>
   );

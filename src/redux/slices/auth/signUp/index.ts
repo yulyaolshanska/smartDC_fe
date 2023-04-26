@@ -41,7 +41,7 @@ export const signUpQuery = createAsyncThunk(
       }
       throw err;
     }
-  }
+  },
 );
 
 export const checkEmailQuery = createAsyncThunk(
@@ -60,7 +60,7 @@ export const checkEmailQuery = createAsyncThunk(
       }
       throw err;
     }
-  }
+  },
 );
 
 const signUp = createSlice({

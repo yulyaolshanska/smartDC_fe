@@ -4,22 +4,21 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { IconButton, InputAdornment } from '@mui/material';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 import Input from '@components/Input';
 import {
-  AuthContainer,
-  AuthForm,
-  AuthInput,
-  AuthInputTitle,
-  AuthLinkContainer,
-  AuthLink,
-  AuthSendButton,
-  AuthText,
-  AuthTitle,
+  Container,
+  FormContainer,
+  InputContainer,
+  InputTitle,
+  LinkContainer,
+  Link,
+  SendButton,
+  Text,
+  Title,
   Form,
   PasswordImg,
-} from '@components/Auth/styles';
-import { ISignUp } from '@components/Auth/type';
+} from '@components/general/styles';
+import { FormValues, ISignUp } from '@components/general/type';
 import visible from '@assets/auth/eye.svg';
 import visibleOff from '@assets/auth/eyeSlash.svg';
 import {
@@ -35,7 +34,6 @@ import signUpSchema from '@validation/auth.validate';
 import {
   checkEmailQuery,
   signUpActions,
-  signUpQuery,
 } from '@redux/slices/auth/signUp';
 import { PATH } from '@router/index';
 import AuthGoogleButton from '@components/Auth/AuthGoogleButton';
@@ -58,13 +56,13 @@ function SignUpFirstForm() {
 
   const { t } = useTranslation();
   const dispatch = useDispatch<AppDispatch>();
-  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
     control,
     formState: { errors, isValid },
-  } = useForm<ISignUp>({
+  } = useForm<FormValues>({
     mode: 'onChange',
     defaultValues: {
       firstName: '',
@@ -100,13 +98,13 @@ function SignUpFirstForm() {
   return (
     <>
       {isFirstStep ? (
-        <AuthContainer>
-          <AuthForm>
+        <Container>
+          <FormContainer>
             <Form onSubmit={handleSubmit(onSubmit)}>
-              <AuthTitle>{t('Auth.registrationTitle')}</AuthTitle>
-              <AuthText>{t('Auth.registrationText')}</AuthText>
-              <AuthInput>
-                <AuthInputTitle>{t('Auth.firstName')}</AuthInputTitle>
+              <Title>{t('Auth.registrationTitle')}</Title>
+              <Text>{t('Auth.registrationText')}</Text>
+              <InputContainer>
+                <InputTitle>{t('Auth.firstName')}</InputTitle>
                 <Input
                   control={control}
                   fullWidth
@@ -116,9 +114,9 @@ function SignUpFirstForm() {
                   error={Boolean(errors?.firstName)}
                   required={true}
                 />
-              </AuthInput>
-              <AuthInput>
-                <AuthInputTitle>{t('Auth.lastName')}</AuthInputTitle>
+              </InputContainer>
+              <InputContainer>
+                <InputTitle>{t('Auth.lastName')}</InputTitle>
                 <Input
                   control={control}
                   fullWidth
@@ -128,9 +126,9 @@ function SignUpFirstForm() {
                   error={Boolean(errors?.lastName)}
                   required={true}
                 />
-              </AuthInput>
-              <AuthInput>
-                <AuthInputTitle>{t('Auth.email')}</AuthInputTitle>
+              </InputContainer>
+              <InputContainer>
+                <InputTitle>{t('Auth.email')}</InputTitle>
                 <Input
                   control={control}
                   fullWidth
@@ -140,9 +138,9 @@ function SignUpFirstForm() {
                   error={Boolean(errors?.email)}
                   required={true}
                 />
-              </AuthInput>
-              <AuthInput>
-                <AuthInputTitle>{t('Auth.createPassword')}</AuthInputTitle>
+              </InputContainer>
+              <InputContainer>
+                <InputTitle>{t('Auth.createPassword')}</InputTitle>
                 <Input
                   control={control}
                   fullWidth
@@ -166,9 +164,9 @@ function SignUpFirstForm() {
                     ),
                   }}
                 />
-              </AuthInput>
-              <AuthInput>
-                <AuthInputTitle>{t('Auth.confirmPassword')}</AuthInputTitle>
+              </InputContainer>
+              <InputContainer>
+                <InputTitle>{t('Auth.confirmPassword')}</InputTitle>
                 <Input
                   control={control}
                   fullWidth
@@ -192,21 +190,21 @@ function SignUpFirstForm() {
                     ),
                   }}
                 />
-              </AuthInput>
+              </InputContainer>
               <AuthGoogleButton />
-              <AuthSendButton
+              <SendButton
                 disabled={!isValid}
                 type="submit"
                 value={t('Auth.continue') ?? ''}
               />
-              <AuthLinkContainer>
+              <LinkContainer>
                 {t('Auth.alreadyExistText')}
-                <AuthLink to={PATH.LOGIN}>{t('Auth.click')}</AuthLink>
-              </AuthLinkContainer>
+                <Link to={PATH.LOGIN}>{t('Auth.click')}</Link>
+              </LinkContainer>
             </Form>
-          </AuthForm>
+          </FormContainer>
           <ToastContainer />
-        </AuthContainer>
+        </Container>
       ) : (
         <SignUpSecondForm />
       )}

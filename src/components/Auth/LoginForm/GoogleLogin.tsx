@@ -1,6 +1,10 @@
 import React from 'react';
 import { useGoogleLogin } from '@react-oauth/google';
-import { AuthGoogleContainer, GoogleImg, GoogleText } from '../styles';
+import {
+  AuthGoogleContainer,
+  GoogleImg,
+  GoogleText,
+} from '@components/general/styles';
 import { useTranslation } from 'react-i18next';
 import google from '@assets/auth/google.svg';
 import getGoogleOauthURL from 'utils/functions/getGoogleOauthURL';

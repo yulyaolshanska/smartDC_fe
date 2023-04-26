@@ -5,17 +5,17 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { IconButton, InputAdornment } from '@mui/material';
 import Input from '@components/Input';
 import {
-  AuthContainer,
-  AuthForm,
-  AuthGreenText,
-  AuthInput,
-  AuthInputTitle,
-  AuthSendButton,
-  AuthTitle,
+  Container,
+  FormContainer,
+  GreenText,
+  InputContainer,
+  InputTitle,
+  SendButton,
+  Title,
   Form,
   PasswordImg,
-} from '@components/Auth/styles';
-import { ISignUp } from '@components/Auth/type';
+} from '@components/general/styles';
+import { FormValues, ISignUp } from '@components/general/type';
 import visible from '@assets/auth/eye.svg';
 import visibleOff from '@assets/auth/eyeSlash.svg';
 import { confirmPassword, end, error, password } from '@constants/auth';
@@ -51,7 +51,7 @@ function ResetPasswordForm() {
     handleSubmit,
     control,
     formState: { errors, isValid },
-  } = useForm<ISignUp>({
+  } = useForm<FormValues>({
     mode: 'onChange',
     defaultValues: {
       password: '',
@@ -86,13 +86,13 @@ function ResetPasswordForm() {
   };
 
   return (
-    <AuthContainer>
-      <AuthForm>
+    <Container>
+      <FormContainer>
         <Form onSubmit={handleSubmit(onSubmit)}>
-          <AuthTitle>{t('Auth.resetPasswordTitle')}</AuthTitle>
-          <AuthGreenText>{t('Auth.resetPasswordText')}</AuthGreenText>
-          <AuthInput>
-            <AuthInputTitle>{t('Auth.createNewPassword')}</AuthInputTitle>
+          <Title>{t('Auth.resetPasswordTitle')}</Title>
+          <GreenText>{t('Auth.resetPasswordText')}</GreenText>
+          <InputContainer>
+            <InputTitle>{t('Auth.createNewPassword')}</InputTitle>
             <Input
               control={control}
               fullWidth
@@ -116,9 +116,9 @@ function ResetPasswordForm() {
                 ),
               }}
             />
-          </AuthInput>
-          <AuthInput>
-            <AuthInputTitle>{t('Auth.confirmNewPassword')}</AuthInputTitle>
+          </InputContainer>
+          <InputContainer>
+            <InputTitle>{t('Auth.confirmNewPassword')}</InputTitle>
             <Input
               control={control}
               fullWidth
@@ -142,16 +142,16 @@ function ResetPasswordForm() {
                 ),
               }}
             />
-          </AuthInput>
-          <AuthSendButton
+          </InputContainer>
+          <SendButton
             disabled={!isValid}
             type="submit"
             value={t('Auth.save') ?? ''}
           />
         </Form>
-      </AuthForm>
+      </FormContainer>
       <ToastContainer />
-    </AuthContainer>
+    </Container>
   );
 }
 
