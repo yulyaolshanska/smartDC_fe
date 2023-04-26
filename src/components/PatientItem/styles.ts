@@ -1,4 +1,5 @@
 import { SMALL_FONT_SIZE } from '@constants/fontSizes';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const PatientItem = styled.li`
@@ -6,6 +7,10 @@ export const PatientItem = styled.li`
   /* border: 1.5px solid #d8dbe8; */
   border-radius: 8px;
   padding: 20px;
+
+  &:not(:last-child) {
+    margin-bottom: 16px;
+  }
 `;
 
 export const ContactsContainer = styled.div`
@@ -70,4 +75,9 @@ export const LastAppointment = styled.p`
   color: #060d33;
 `;
 
-// export const EditCardBtn = styled.button``;
+export const ViewLink = styled(Link)`
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.4;
+  color: #4d84e7;
+`;

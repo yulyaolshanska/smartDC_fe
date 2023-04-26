@@ -38,4 +38,8 @@ export type Option = {
   value: string | number;
 };
 
-export type FormValues = IPatient & ISignUp;
+export type FormValues = IPatient & ISignUp & ISearch;
+
+export interface ISearch {
+  search: string;
+}

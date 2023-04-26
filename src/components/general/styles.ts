@@ -252,3 +252,20 @@ export const ButtonContainer = styled.div`
   margin-right: auto;
   margin-left: auto;
 `;
+
+export const AddButton = styled(CancelButton)`
+  :disabled {
+    background: ${PINK_SWAN};
+    color: ${WHITE};
+    cursor: inherit;
+  }
+  width: 140px;
+  height: 48px;
+  padding: 12px;
+  line-height: 1.7;
+  font-size: 14px;
+  margin-right: 0;
+
+  margin-top: 0px;
+  background: -webkit-linear-gradient(${NAVY_BLUE}, ${CORNFLOWER_BLUE});
+`;

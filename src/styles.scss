@@ -5,6 +5,13 @@
   box-sizing: border-box;
 }
 
+a,
+a:link,
+a:visited {
+  text-decoration: none;
+  // display: inline-block;
+}
+
 /*
 *,
 *::before,
@@ -24,13 +31,7 @@ a:active {
 
 !* Links *!
 
-a,
-a:link,
-a:visited {
-  !* color: inherit; *!
-  text-decoration: none;
-  !* display: inline-block; *!
-}
+
 
 a:hover {
   !* color: inherit; *!

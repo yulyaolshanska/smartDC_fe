@@ -113,6 +113,11 @@
   },
   "PatientCard": {
     "overview:": "Overview:",
-    "lastAppointment": "Last Appointment:"
+    "lastAppointment": "Last Appointment:",
+    "viewProfile": "View Profile"
+  },
+  "Patients": {
+    "createPatient": "Create Patient",
+    "search": "Search"
   }
 }

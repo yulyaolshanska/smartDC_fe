@@ -4,6 +4,7 @@ import { ReactComponent as EmailIcon } from '@assets/patients/email.svg';
 import { ReactComponent as PinIcon } from '@assets/patients/pin.svg';
 import { ReactComponent as GenderMaleIcon } from '@assets/patients/genderMale.svg';
 import { ReactComponent as CalengarIcon } from '@assets/patients/calendar.svg';
+import { PATH } from '@router/index';
 
 import {
   ContactInfo,
@@ -16,6 +17,7 @@ import {
   PatientItem,
   PatientName,
   UserInfo,
+  ViewLink,
 } from './styles';
 import CardWrapper from '@components/CardWrapper';
 
@@ -51,6 +53,9 @@ function PatientCard() {
           measured through this test. Results outside of the normal range can be
           a sign of anemia or chronic fatigue.
         </LastAppointment>
+        <ViewLink to={PATH.CREATE_PATIENT_CARD}>
+          {t('PatientCard.viewProfile')}
+        </ViewLink>
       </CardWrapper>
     </PatientItem>
   );
