@@ -12,3 +12,4 @@ export const LoadButton = styled.button`
   border: 2px solid ${ACTIVE};
   border-radius: 4px;
 `;
+export const mock = [];

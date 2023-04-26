@@ -2,6 +2,7 @@ import {
   ACTIVE,
   BLACK,
   GHOST_WHITE,
+  NOT_ACTIVE_BACKGROUND_HOVER,
   NOT_ACTIVE_HOVER,
   PINK_SWAN,
   ZAMBEZI,
@@ -35,12 +36,11 @@ export const SortList = styled.ul<{ toggle?: boolean }>`
   flex-direction: column;
   width: 100%;
 
-  animation: ${(props) =>
-    props.toggle
-      ? css`
+  animation: ${(props) => (props.toggle
+    ? css`
           ${fadeIn} 0.5s ease-in-out
         `
-      : 'none'};
+    : 'none')};
 
   & * {
     background-color: ${NOT_ACTIVE_HOVER};
@@ -57,6 +57,11 @@ export const SortList = styled.ul<{ toggle?: boolean }>`
       border-top-right-radius: 15px;
     }
   }
+`;
+
+export const SortItem = styled.li<{ selected: boolean }>`
+  background-color: ${({ selected }) => (selected ? ACTIVE : null)};
+  cursor: pointer;
 `;
 export const Arrow = styled.div<{ toggle: boolean }>`
   border: solid black;

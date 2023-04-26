@@ -29,6 +29,9 @@ export const Text = styled.div`
 `;
 
 export const PlusButton = styled.div`
+  display: flex;
+  align-items: center;
+
   svg {
     fill: ${ACTIVE};
   }

@@ -39,6 +39,7 @@ export const MainText = styled.div`
 
 export const StyledTextArea = styled.textarea`
   height: 112px;
+  padding: 10px;
   background-color: ${WHITE};
   border: 1.5px solid ${WHISPER};
   margin: 6px 0;

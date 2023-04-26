@@ -13,7 +13,7 @@ const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 
-console.log(import.meta.env.VITE_REACT_APP_SERVER_API_DEV);
+
 root.render(
   <StrictMode>
     <BrowserRouter>

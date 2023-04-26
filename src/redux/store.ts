@@ -17,8 +17,10 @@ import {
 import storage from 'redux-persist/lib/storage';
 import { loginReducer } from '@redux/slices/auth/login';
 import activationAccount from '@redux/slices/auth/activation';
+import { noteApi } from 'services/NoteService';
 import { navigationReducer } from './slices/NavigationSlice';
 import { doctorReducer } from './slices/DoctorSlice';
+import { noteFilterReducer } from './slices/NoteFilterSlice';
 
 const rootReducer = combineReducers({
   loginReducer,
@@ -28,6 +30,8 @@ const rootReducer = combineReducers({
   forgotPassword,
   resetPassword,
   activationAccount,
+  noteFilterReducer,
+  [noteApi.reducerPath]: noteApi.reducer,
   [doctorApi.reducerPath]: doctorApi.reducer,
   [authApi.reducerPath]: authApi.reducer,
 });
@@ -41,6 +45,9 @@ const persistConfig = {
     'forgotPassword',
     'loginReducer',
     'signUpReducer',
+    'noteFilterReducer',
+    'authApi',
+    'noteApi',
   ],
 };
 
@@ -52,7 +59,7 @@ export const setupStore = () => configureStore({
     serializableCheck: {
       ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
     },
-  }).concat(doctorApi.middleware, authApi.middleware),
+  }).concat(doctorApi.middleware, authApi.middleware, noteApi.middleware),
 });
 export const store = setupStore();
 export const persistor = persistStore(store);

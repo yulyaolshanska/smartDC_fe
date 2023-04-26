@@ -67,8 +67,8 @@ function LoginForm() {
     register('password');
   }, []);
 
-  const onSubmit = (data: AuthLoginDto) => {
-    //@ts-ignore
+  const onSubmit = (data: AuthLoginDto):void => {
+
     dispatch(loginQuery(data)).then((res) => {
       if (!res.error) {
         const token = res.payload.token;

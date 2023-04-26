@@ -6,7 +6,7 @@ import { ReactComponent as HelpIcon } from '@assets/help.svg';
 import { ReactComponent as UserIcon } from '@assets/user.svg';
 import { ReactComponent as AppoitmentIcon } from '@assets/appointment.svg';
 import { ReactComponent as AvaliabilityIcon } from '@assets/calendar.svg';
-import photo from '@assets/doctorPicture.png';
+import photo from '@assets/mockDoctorPhoto.png';
 import { authApi } from 'services/AuthService';
 import { doctorActions } from '@redux/slices/DoctorSlice';
 import { Stack, Typography } from '@mui/material';
@@ -89,7 +89,7 @@ const Drawer = () => {
         </PositionContainer>
       </TopDrawer>
       <BottomDrawer>
-        <img src={photo} />
+        <img src={photo} width={40} />
         <Stack>
           <DoctorName> Dr. Malikovsy</DoctorName>
           <DoctorSpeciality>Therapist</DoctorSpeciality>
