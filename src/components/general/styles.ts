@@ -18,7 +18,7 @@ import {
   NORMAL_FONT_SIZE,
   SMALL_FONT_SIZE,
 } from '@constants/fontSizes';
-import { FONT_ROBOTO } from '@constants/fonts';
+import FONT_ROBOTO from '@constants/fonts';
 import { NavLink } from 'react-router-dom';
 
 export const Container = styled.div`
@@ -121,7 +121,7 @@ export const SendButton = styled.button`
   background: -webkit-linear-gradient(${NAVY_BLUE}, ${CORNFLOWER_BLUE});
 `;
 
-export const AuthGoogleContainer = styled.div`
+export const AuthGoogleContainer = styled.a`
   display: flex;
   margin-left: auto;
   margin-right: auto;

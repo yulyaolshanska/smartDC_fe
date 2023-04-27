@@ -2,10 +2,10 @@ import {
   NAVY_BLUE, WHITE, RED, WHISPER,
 } from '@constants/colors';
 import styled from 'styled-components';
-import { FONT_ROBOTO } from '@constants/fonts';
+import FONT_ROBOTO from '@constants/fonts';
 import { VERY_SMALL_FONT_SIZE } from '@constants/fontSizes';
 
-export const InputContainer = styled.div<{ hasError: boolean }>`
+const InputContainer = styled.div<{ hasError: boolean }>`
   background: ${WHITE};
   width: 100%;
   font-style: normal;
@@ -47,3 +47,4 @@ export const InputContainer = styled.div<{ hasError: boolean }>`
     font-size: ${VERY_SMALL_FONT_SIZE};
   }
 `;
+export default InputContainer;

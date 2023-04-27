@@ -19,7 +19,7 @@ import {
 } from '@components/general/styles';
 import { FormValues, ISignUp } from '@components/general/type';
 import { email, error } from '@constants/auth';
-import { signUpSchema } from '@validation/auth.validate';
+import signUpSchema from '@validation/auth.validate';
 import { PATH } from '@router/index';
 import { forgotPasswordQuery } from '@redux/slices/auth/forgotPassword';
 import { toast, ToastContainer } from 'react-toastify';

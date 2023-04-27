@@ -1,5 +1,4 @@
 import 'typeface-roboto';
-/**
- * @deprecated
- */
-export const FONT_ROBOTO = 'Roboto';
+
+const FONT_ROBOTO = 'Roboto';
+export default FONT_ROBOTO;

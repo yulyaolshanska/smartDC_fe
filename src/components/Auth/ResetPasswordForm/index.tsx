@@ -19,7 +19,7 @@ import { FormValues, ISignUp } from '@components/general/type';
 import visible from '@assets/auth/eye.svg';
 import visibleOff from '@assets/auth/eyeSlash.svg';
 import { confirmPassword, end, error, password } from '@constants/auth';
-import { signUpSchema } from '@validation/auth.validate';
+import signUpSchema from '@validation/auth.validate';
 import { toast, ToastContainer } from 'react-toastify';
 import { PATH } from '@router/index';
 import { useDispatch } from 'react-redux';

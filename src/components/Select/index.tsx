@@ -1,7 +1,7 @@
 import { Control, Controller } from 'react-hook-form';
 import { TextFieldProps } from '@mui/material/TextField/TextField';
 import { TextField, Autocomplete } from '@mui/material';
-import { InputContainer } from '@components/Input/styles';
+import InputContainer from '@components/Input/styles';
 import { FormValues, Option } from '@components/general/type';
 import { FieldName } from '@types';
 
@@ -23,6 +23,7 @@ export function SelectInput({
       <Controller
         control={control}
         name={name as FieldName}
+        defaultValue=""
         render={({ field: { ref, onChange, ...field } }) => (
           <Autocomplete
             options={options}

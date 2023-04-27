@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { LARGE_FONT_SIZE } from '@constants/fontSizes';
 import { CORNFLOWER_BLUE, NAVY_BLUE } from '@constants/colors';
-import { FONT_ROBOTO } from '@constants/fonts';
+import FONT_ROBOTO from '@constants/fonts';
 
 export const LogoContainer = styled.div`
   display: flex;
