@@ -5,33 +5,10 @@
   box-sizing: border-box;
 }
 
-a,
-a:link,
-a:visited {
-  text-decoration: none;
-  // display: inline-block;
-}
-
-a,
-a:link,
-a:visited {
-  text-decoration: none;
-}
-
-ul,
-ul li {
-  list-style: none;
-}
-
 *,
 *::before,
 *::after {
   box-sizing: border-box;
-}
-
-:focus,
-:active {
-  outline: none;
 }
 
 a:focus,
