@@ -5,6 +5,8 @@ import {
   ACTIVE,
   WHITE,
   WHISPER,
+  ZAMBEZI,
+  NOT_ACTIVE_HOVER,
 } from '@constants/colors';
 import { VERY_SMALL_FONT_SIZE } from '@constants/fontSizes';
 import styled from 'styled-components';

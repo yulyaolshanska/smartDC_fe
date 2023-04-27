@@ -31,8 +31,8 @@ const noteFilterSlice = createSlice({
     setSearchString(state, action) {
       state.searchString = action.payload;
     },
-    setSkipAmount(state, action) {
-      state.skipAmount += action.payload;
+    setSkipAmount(state) {
+      state.skipAmount += 4;
     },
     clearSkipAmount(state) {
       state.skipAmount = 0;
@@ -40,4 +40,5 @@ const noteFilterSlice = createSlice({
   },
 });
 
-export const { reducer: noteFilterReducer, actions: noteFilterActions } = noteFilterSlice;
+export const { reducer: noteFilterReducer, actions: noteFilterActions } =
+  noteFilterSlice;

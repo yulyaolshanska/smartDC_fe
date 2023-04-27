@@ -14,14 +14,9 @@ const LoadMoreButton = ({ notesLocal }: INotes[]) => {
 
   const notesLocalLength = notesLocal.length;
 
-  const fetchMore = () => {
-    dispatch(noteFilterActions.setSkipAmount(notesLocalLength));
-    refetchNotes();
-
-    // setTimeout(() => {
-    //   setNotesLocal([...notesLocal, ...notes]);
-    // }, 0);
-  };
+  const fetchMore = React.useCallback(() => {
+    dispatch(noteFilterActions.setSkipAmount());
+  }, [notesLocalLength]);
 
   return <LoadButton onClick={() => fetchMore()}>Load More</LoadButton>;
 };
