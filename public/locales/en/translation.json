@@ -119,7 +119,9 @@
   },
   "Profile": {
     "cancel": "Cancel",
-    "save": "Save"
+    "save": "Save",
+    "showMore": "Show more",
+    "showLess": "Show less"
   },
 
   "Help": {

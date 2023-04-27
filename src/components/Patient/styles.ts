@@ -105,3 +105,11 @@ export const LastAppointment = styled.p`
   line-height: 1.4;
   color: #060d33;
 `;
+
+export const ShowMoreLessButton = styled.button`
+  color: black;
+  font-weight: bold;
+  &:hover {
+    color: ${NAVY_BLUE};
+  }
+`;

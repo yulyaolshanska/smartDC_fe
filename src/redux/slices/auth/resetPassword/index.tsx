@@ -1,10 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
+import ResetPasswordInitialState from '@redux/slices/auth/resetPassword/types';
 
-const initialState = {
-  password: '',
+const initialState: ResetPasswordInitialState = {
   isLoading: false,
   isSuccess: false,
-  error: null,
 };
 
 const resetPassword = createSlice({

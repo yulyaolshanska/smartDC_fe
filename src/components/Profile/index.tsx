@@ -59,19 +59,21 @@ const ProfileComponent = () => {
     doctorRefetch();
     dispatch(doctorActions.getDoctor(doctor));
     setTimeout(() => {
-      reset({
-        firstName: doctor.firstName,
-        lastName: doctor.lastName,
-        email: doctor.email,
-        phoneNumber: doctor.phoneNumber,
-        gender: doctor.gender,
-        birthDate: doctor.birthDate,
-        country: doctor.country,
-        city: doctor.city,
-        address: doctor.address,
-        timeZone: doctor.timeZone,
-        specialization: doctor.specialization,
-      });
+      if (doctor) {
+        reset({
+          firstName: doctor.firstName,
+          lastName: doctor.lastName,
+          email: doctor.email,
+          phoneNumber: doctor.phoneNumber,
+          gender: doctor.gender,
+          birthDate: doctor.birthDate,
+          country: doctor.country,
+          city: doctor.city,
+          address: doctor.address,
+          timeZone: doctor.timeZone,
+          specialization: doctor.specialization,
+        });
+      }
     }, 0);
   }, [doctor]);
 

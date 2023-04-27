@@ -1,8 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
-const initialState = {
+import ActivationInitialState from '@redux/slices/auth/activation/types';
+
+const initialState: ActivationInitialState = {
   isLoading: false,
   isSuccess: false,
-  error: null,
 };
 
 const activationAccount = createSlice({

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ReactComponent as CallIcon } from '@assets/patients/call.svg';
 import { ReactComponent as EmailIcon } from '@assets/patients/email.svg';
@@ -15,41 +15,56 @@ import {
   OverviewTitle,
   PatientCardInfoContainer,
   PatientInfoName,
+  ShowMoreLessButton,
   UserInfo,
 } from '@components/Patient/styles';
+import {
+  cityCountryInfo,
+  emailInfo,
+  genderInfo,
+  lastAppointmentInfo,
+  nameInfo,
+  overviewInformation,
+  phoneNumberInfo,
+  yearsInfo,
+} from '@constants/mockData';
 
 function PatientCardInfo() {
   const { t } = useTranslation();
+  const [showMore, setShowMore] = useState<boolean>(false);
+
+  const text = lastAppointmentInfo;
 
   return (
     <PatientCardInfoContainer>
-      <PatientInfoName>Patrick Beverley</PatientInfoName>
+      <PatientInfoName>{nameInfo}</PatientInfoName>
       <ContactsContainer>
         <CallIcon />
-        <ContactInfo>+380660012300</ContactInfo>
+        <ContactInfo>{phoneNumberInfo}</ContactInfo>
         <EmailIcon />
-        <ContactInfo>pat123beverley@gmail.com</ContactInfo>
+        <ContactInfo>{emailInfo}</ContactInfo>
       </ContactsContainer>
       <InfoContainer>
         <GenderMaleIcon />
-        <UserInfo>Male</UserInfo>
+        <UserInfo>{genderInfo}</UserInfo>
         <CalendarIcon />
-        <UserInfo>32 years</UserInfo>
+        <UserInfo>{yearsInfo}</UserInfo>
         <PinIcon />
-        <UserInfo>Leova, Moldova</UserInfo>
+        <UserInfo>{cityCountryInfo}</UserInfo>
       </InfoContainer>
       <Overview>
         <OverviewTitle>{t('Patient.overview')}:</OverviewTitle>
-        overview information
+        {overviewInformation}
       </Overview>
       <LastAppointment>
         <LastAppointmentTitle>
           {t('Patient.lastAppointment')}
         </LastAppointmentTitle>
-        The average volume of RBCs, or the space each red blood cell fills, is
-        measured through this test. Results outside of the normal range can be a
-        sign of anemia or chronic fatigue.
+        {showMore ? text : `${text.substring(0, 250)}...`}
       </LastAppointment>
+      <ShowMoreLessButton onClick={() => setShowMore(!showMore)}>
+        {showMore ? t('Profile.showLess') : t('Profile.showMore')}
+      </ShowMoreLessButton>
     </PatientCardInfoContainer>
   );
 }

@@ -1,10 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
+import ForgotPasswordInitialState from '@redux/slices/auth/forgotPassword/types';
 
-const initialState = {
-  email: '',
+const initialState: ForgotPasswordInitialState = {
   isLoading: false,
   isSuccess: false,
-  error: null,
 };
 
 const forgotPassword = createSlice({
