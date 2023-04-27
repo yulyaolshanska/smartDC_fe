@@ -15,12 +15,11 @@ import PopupCreateContent from './Modals/PopupCreateContent';
 import TimezoneSelect from './TimezoneSelect/TimezoneSelect';
 import { TFunction } from 'i18next';
 import { WHITE } from '@constants/colors';
-import { useAppDispatch, useAppSelector } from '@redux/hooks';
+import { useAppSelector } from '@redux/hooks';
 import { doctorApi } from '../../services/DoctorService';
 import { authApi } from '../../services/AuthService';
 import { useForm } from 'react-hook-form';
 import { FormValues, IAuth } from '@components/general/type';
-import { doctorActions } from '@redux/slices/DoctorSlice';
 import { ToastContainer, toast } from 'react-toastify';
 
 const defaultTZ = moment.tz.guess();
@@ -45,7 +44,6 @@ const calendarStyle = {
 function Scheduler() {
   const { t }: { t: TFunction } = useTranslation();
   const doctorData = useAppSelector((state) => state.doctorReducer);
-  const dispatch = useAppDispatch();
 
   const [updateDoctorProfile, { error: doctorUpdateError }] =
   doctorApi.useUpdateDoctorProfileMutation();
@@ -172,7 +170,6 @@ function Scheduler() {
   const {
     handleSubmit,
     formState: { errors, isValid },
-    reset,
   } = useForm<FormValues>({
     mode: 'onChange',
     defaultValues: async () => await { ...doctor },
