@@ -1,17 +1,17 @@
 export default interface DoctorInitialState {
-  address: undefined | string;
-  birthDate: undefined | string;
-  city: undefined | string;
-  country: undefined | string;
-  email: undefined | string;
-  firstName: undefined | string;
-  gender: undefined | string;
-  id: undefined | number;
-  isVerified: undefined | boolean;
-  lastName: undefined | string;
-  phoneNumber: undefined | string;
-  photoUrl: undefined | string;
-  role: undefined | string;
-  specialityId: undefined | number;
-  timeZone: undefined | string;
+  address?: string;
+  birthDate?: string;
+  city?: string;
+  country?: string;
+  email?: string;
+  firstName?: string;
+  gender?: string;
+  id?: number;
+  isVerified?: boolean;
+  lastName?: string;
+  phoneNumber?: string;
+  photoUrl?: string;
+  role?: string;
+  specialityId?: number;
+  timeZone?: string;
 }

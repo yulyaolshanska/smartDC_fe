@@ -12,22 +12,21 @@ import {
   Form,
 } from '@components/general/styles';
 import checkmark from '@assets/auth/checkmark.svg';
-import { useDispatch } from 'react-redux';
-import { activationAccountQuery } from '@redux/slices/auth/activation';
-import { AppDispatch } from '@redux/store';
 import { useParams } from 'react-router';
 import { error } from '@constants/auth';
 import { toast } from 'react-toastify';
 import { PATH } from '@router/index';
+import { authApi } from 'services/AuthService';
 
 function ActivationForm() {
   const { t } = useTranslation();
-  const dispatch = useDispatch<AppDispatch>();
   const { link } = useParams();
+
+  const [activationAccount] = authApi.useActivationMutation();
 
   useEffect(() => {
     if (link) {
-      dispatch(activationAccountQuery({ link })).then((res) => {
+      activationAccount({ link }).then((res) => {
         if (error in res && res.error) {
           toast.error('Sorry, something was wrong!', {
             position: toast.POSITION.TOP_CENTER,
@@ -35,7 +34,7 @@ function ActivationForm() {
         }
       });
     }
-  }, [dispatch]);
+  }, [activationAccount]);
 
   return (
     <Container>

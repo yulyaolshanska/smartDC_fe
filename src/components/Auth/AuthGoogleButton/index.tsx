@@ -1,5 +1,4 @@
 import React from 'react';
-import { useGoogleLogin } from '@react-oauth/google';
 import { useTranslation } from 'react-i18next';
 import {
   AuthGoogleContainer,

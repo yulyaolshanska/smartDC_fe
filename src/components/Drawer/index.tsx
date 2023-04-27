@@ -46,7 +46,7 @@ const Drawer = () => {
         icon: DashbordIcon,
       },
       { name: 'Availability', to: '/availability', icon: AvaliabilityIcon },
-      { name: 'Patients', to: '/patients', icon: UserIcon },
+      { name: 'Patients', to: '/create-patient-card', icon: UserIcon },
       { name: 'Profile', to: '/edit-doctor-profile', icon: UserIcon },
       { name: 'Appointment', to: '/appointment', icon: AppoitmentIcon },
       { name: 'Help', to: '/help', icon: HelpIcon },

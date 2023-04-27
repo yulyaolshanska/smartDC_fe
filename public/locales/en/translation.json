@@ -116,17 +116,17 @@
     "save": "Save",
     "cancel": "Cancel"
   },
-  "PatientCard": {
-    "overview:": "Overview:",
-    "lastAppointment": "Last Appointment:",
-    "viewProfile": "View Profile"
+  "Profile": {
+    "cancel": "Cancel",
+    "save": "Save"
   },
-  "Patients": {
-    "createPatient": "Create Patient",
-    "viewCard": "View card",
-    "editCard": "Edit card",
-    "search": "Search",
-    "loadMore": "Load More"
+
+  "Help": {
+    "problem": "Some problem",
+    "lorem": " Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore"
+  },
+  "Dashboard": {
+    "backToDashboard": "Back to dashboard"
   },
   "Warning": {
     "viewScheduleWarning": "Warning: you are in view mode and creating new schedule will be done according to your local time!"
@@ -140,14 +140,16 @@
     "saveSchedule": "Save schedule",
     "selectTimezone": "Time Zone:"
   },
-
-  "Profile": {
-    "cancel": "Cancel",
-    "save": "Save"
+  "PatientCard": {
+    "overview:": "Overview:",
+    "lastAppointment": "Last Appointment:",
+    "viewProfile": "View Profile"
   },
-
-  "Help": {
-    "problem": "Some problem",
-    "lorem": " Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore"
+  "Patients": {
+    "createPatient": "Create Patient",
+    "viewCard": "View card",
+    "editCard": "Edit card",
+    "search": "Search",
+    "loadMore": "Load More"
   }
 }
