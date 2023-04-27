@@ -1,6 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import cookie from 'utils/functions/cookies';
 import { CreatePatientDto } from 'services/types/patient.type';
+import { IPatient } from '@components/general/type';
 
 export const patientApi = createApi({
   reducerPath: 'patientApi',
@@ -24,5 +25,10 @@ export const patientApi = createApi({
         body: data,
       }),
     }),
+    getPatients: builder.query<IPatient[], string>({
+      query: () => '/patient',
+    }),
   }),
 });
+
+export const { useGetPatientsQuery } = patientApi;

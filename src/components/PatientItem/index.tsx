@@ -15,35 +15,52 @@ import {
   Overview,
   OverviewTitle,
   PatientItem,
-  PatientName,
   UserInfo,
   ViewLink,
 } from './styles';
 import CardWrapper from '@components/CardWrapper';
+import { IPatient } from '@components/general/type';
 
-function PatientCard() {
+interface IProps {
+  patient: IPatient;
+}
+
+function PatientCard({ patient }: IProps) {
   const { t } = useTranslation();
+  const {
+    phoneNumber,
+    firstName,
+    lastName,
+    email,
+    gender,
+    country,
+    city,
+    birthDate,
+    overview,
+  } = patient;
 
   return (
     <PatientItem>
       <CardWrapper>
         <ContactsContainer>
           <CallIcon />
-          <ContactInfo>+380660012300</ContactInfo>
+          <ContactInfo>{phoneNumber}</ContactInfo>
           <EmailIcon />
-          <ContactInfo>pat123beverley@gmail.com</ContactInfo>
+          <ContactInfo>{email}</ContactInfo>
         </ContactsContainer>
         <InfoContainer>
           <GenderMaleIcon />
-          <UserInfo>Male</UserInfo>
+          <UserInfo>{gender}</UserInfo>
           <CalengarIcon />
           <UserInfo>32 years</UserInfo>
           <PinIcon />
-          <UserInfo>Leova, Moldova</UserInfo>
+          <UserInfo>
+            {city}, {country}
+          </UserInfo>
         </InfoContainer>
         <Overview>
           <OverviewTitle>{t('Patient.overview')}:</OverviewTitle>
-          Overview information
+          {overview}
         </Overview>
         <LastAppointment>
           <LastAppointmentTitle>
