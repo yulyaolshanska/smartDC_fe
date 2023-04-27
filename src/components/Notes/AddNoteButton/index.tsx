@@ -8,7 +8,7 @@ import { ReactComponent as CancelImage } from '@assets/cross-cancel.svg';
 
 interface AddNoteButtonProps {
   addNew: boolean;
-  handleAddNew: (arg: boolean) => void;
+  handleAddNew: () => void;
 }
 
 const AddNoteButton = ({ handleAddNew, addNew }: AddNoteButtonProps) => {

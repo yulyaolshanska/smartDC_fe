@@ -13,6 +13,7 @@ export const Container = styled.div`
   border-radius: 16px;
   padding: 0px 16px;
   width: 100%;
+  cursor: text;
 `;
 
 export const StyledStack = styled.div`

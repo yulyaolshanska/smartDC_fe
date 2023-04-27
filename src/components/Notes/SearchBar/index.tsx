@@ -35,19 +35,20 @@ const SearchBar = React.memo(({ setNotesLocal }: SearchBarProps) => {
   const [value, setValue] = React.useState<string>('');
 
   const handleInputChange = React.useCallback(
-    debounce((event: React.ChangeEvent<HTMLInputElement>) => {
-      setNotesLocal([]);
+    debounce(async (event: React.ChangeEvent<HTMLInputElement>) => {
       setValue(event.target.value);
+      setNotesLocal([]);
       dispatch(noteFilterActions.clearSkipAmount());
       dispatch(noteFilterActions.setSearchString(event.target.value));
+      await refetchNotes();
     }, 500),
 
     []
   );
 
-  React.useEffect(() => {
-    refetchNotes();
-  }, [filterParams]);
+  // React.useEffect(() => {
+  //   refetchNotes();
+  // }, [filterParams]);
 
   return (
     <Container onClick={handleContainerClick}>

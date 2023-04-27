@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Stack } from '@mui/material';
 import AddNoteButton from './AddNoteButton';
 import SearchBar from './SearchBar';
@@ -8,6 +8,7 @@ import CreateNote from './CreateNote';
 import LoadMoreButton from '@components/LoadMoreButton';
 import { noteApi } from 'services/NoteService';
 import { useAppSelector } from '@redux/hooks';
+import Skeleton from './Skeleton';
 
 export interface INotes {
   id: number;
@@ -29,15 +30,18 @@ const Notes = () => {
     refetch,
     isLoading,
   } = noteApi.useGetPatientNoteQuery({ ...filterParams });
+  console.log('notesLocal', notesLocal);
+  console.log('notes', notes);
 
   const handleAddNew = () => {
     setAddNew(!addNew);
   };
 
   React.useEffect(() => {
-    setTimeout(() => {
-      setNotesLocal([...notesLocal, ...notes]);
-    }, 0);
+    if (notes)
+      setTimeout(() => {
+        setNotesLocal([...notesLocal, ...notes]);
+      }, 0);
   }, [notes]);
 
   return (
@@ -48,13 +52,16 @@ const Notes = () => {
         <Sort setNotesLocal={setNotesLocal} />
       </Stack>
       <CreateNote addNew={addNew} setAddNew={setAddNew} />
-      {isLoading || !notesLocal ? (
-        <p>Loading</p>
-      ) : (
-        notesLocal
-          .slice(0, filterParams.skipAmount + filterParams.limit)
-          .map((note) => <Note {...note} />)
-      )}
+      {isLoading || notesLocal.length === 0
+        ? Array(4)
+            .fill(null)
+            .map((_, index) => <Skeleton key={index} />)
+        : notesLocal
+            .filter(
+              (note, index, self) =>
+                self.findIndex((n) => n.id === note.id) === index
+            )
+            .map((note) => <Note key={note.id} {...note} />)}
       <Stack alignItems="center">
         <LoadMoreButton notesLocal={notesLocal} setNotesLocal={setNotesLocal} />
       </Stack>

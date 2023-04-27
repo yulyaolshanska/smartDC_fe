@@ -43,14 +43,15 @@ const Sort = React.memo(({ setNotesLocal }: SortProps) => {
   const handleSortBy = (arg: string) => {
     setNotesLocal([]);
     dispatch(noteFilterActions.setSortBy(arg));
-    setToggleSortBy(false);
     dispatch(noteFilterActions.clearSkipAmount());
+    setToggleSortBy(false);
     refetchNotes();
   };
 
   const handleSortOrder = (arg: string) => {
     setNotesLocal([]);
     dispatch(noteFilterActions.setSortOrder(arg));
+    dispatch(noteFilterActions.clearSkipAmount());
     setToggleSortOrder(false);
     refetchNotes();
   };
