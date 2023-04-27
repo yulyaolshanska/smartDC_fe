@@ -1,4 +1,4 @@
-export const VERY_SMALL_FONT_SIZE = '13px';
+export const VERY_SMALL_FONT_SIZE = '14px';
 
 export const SMALL_FONT_SIZE = '16px';
 

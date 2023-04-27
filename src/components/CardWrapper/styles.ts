@@ -29,23 +29,12 @@ export const PatientName = styled.div<{ toggle: boolean }>`
   font-size: ${SMALL_FONT_SIZE};
 `;
 
-// export const AccordionTitle = styled.div<{ toggle: boolean }>`
-//   display: flex;
-//   justify-content: left;
-//   align-items: center;
-//   cursor: pointer;
-//   color: ${ZAMBEZI};
-//   font-size: ${SMALL_FONT_SIZE};
-// `;
-
 export const AccordionBody = styled.div<{
   toggle: boolean;
   ref?: React.RefObject<HTMLDivElement>;
 }>`
   padding: ${(props) => (props.toggle ? '16px 0 16px 0' : '0')};
   border-top: ${(props) => (props.toggle ? `1px solid ${BORDER}` : null)};
-  /* border-bottom: ${(props) =>
-    props.toggle ? `1px solid ${BORDER}` : null}; */
   margin-top: ${(props) => (props.toggle ? '20px' : null)};
   font-size: ${SMALL_FONT_SIZE};
 `;

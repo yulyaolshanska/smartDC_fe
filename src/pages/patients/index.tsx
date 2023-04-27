@@ -20,7 +20,6 @@ function Patients() {
   const onSubmit = (data: ISearch) => {};
 
   return (
-    // <PageWrapper>
     <>
       <LinkContainer>
         <Link to={PATH.DASHBOARD}>
@@ -32,7 +31,6 @@ function Patients() {
         <Form onSubmit={handleSubmit(onSubmit)}>
           <Input
             control={control}
-            // type="submit"
             fullWidth
             name={search}
             placeholder={t('Patients.search') ?? ''}
@@ -45,7 +43,6 @@ function Patients() {
       </Container>
       <PatientList />
     </>
-    // </PageWrapper>
   );
 }
 

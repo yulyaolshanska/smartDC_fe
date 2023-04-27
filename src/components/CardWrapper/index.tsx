@@ -8,7 +8,6 @@ import {
   EditCardLink,
   PatientName,
 } from './styles';
-import { ViewLink } from '@components/PatientItem/styles';
 import { PATH } from '@router/index';
 
 type Props = {

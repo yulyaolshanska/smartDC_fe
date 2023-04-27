@@ -1,10 +1,11 @@
-import { SMALL_FONT_SIZE } from '@constants/fontSizes';
+import { ACTIVE, BORDER, GHOST_WHITE } from '@constants/colors';
+import { SMALL_FONT_SIZE, VERY_SMALL_FONT_SIZE } from '@constants/fontSizes';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const PatientItem = styled.li`
-  background: #f5f7fd;
-  /* border: 1.5px solid #d8dbe8; */
+  background: ${GHOST_WHITE};
+  border: 1.5px solid ${BORDER};
   border-radius: 8px;
   padding: 20px;
 
@@ -47,8 +48,6 @@ export const UserInfo = styled.p`
   }
 `;
 
-export const PatientName = styled.h3``;
-
 export const OverviewTitle = styled.span`
   margin-right: 4px;
   font-weight: 700;
@@ -63,21 +62,21 @@ export const Overview = styled.p`
 export const LastAppointmentTitle = styled.span`
   margin-right: 4px;
   font-weight: 700;
-  font-size: 14px;
+  font-size: ${VERY_SMALL_FONT_SIZE};
   line-height: 1.43;
   color: #081972;
 `;
 
 export const LastAppointment = styled.p`
   margin-bottom: 6px;
-  font-size: 14px;
+  font-size: ${VERY_SMALL_FONT_SIZE};
   line-height: 1.4;
   color: #060d33;
 `;
 
 export const ViewLink = styled(Link)`
   font-weight: 700;
-  font-size: 14px;
+  font-size: ${VERY_SMALL_FONT_SIZE};
   line-height: 1.4;
-  color: #4d84e7;
+  color: ${ACTIVE};
 `;

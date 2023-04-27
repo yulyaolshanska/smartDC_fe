@@ -11,9 +11,9 @@ function PatientList() {
   return (
     <>
       <PatientsList>
-        {patients?.map((patient) => (
-          <PatientCard patient={patient} />
-        ))}
+        {/* {patients?.map((patient) => ( */}
+        <PatientCard />
+        {/* ))} */}
       </PatientsList>
       <LoadMoreButton>{t('Patients.loadMore')}</LoadMoreButton>
     </>
