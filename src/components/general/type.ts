@@ -1,3 +1,5 @@
+import { IScheduleItem } from "@components/Scheduler";
+
 export interface IAuth {
   id?: number;
   firstName: string;
@@ -15,6 +17,7 @@ export interface IAuth {
   address: string;
   timeZone: string;
   isLoading?: boolean;
+  availabilities?: null | string;
   token?: string | null;
   error?: string | null;
 }

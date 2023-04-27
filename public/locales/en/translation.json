@@ -138,7 +138,8 @@
     "selectedDate": "Selected date:",
     "deleteTime": "Delete time:",
     "saveSchedule": "Save schedule",
-    "selectTimezone": "Time Zone:"
+    "selectTimezone": "Time Zone:",
+    "successfullySubmited": "Your schedule has been successfully updated!"
   }
 }
 

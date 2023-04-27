@@ -5,7 +5,6 @@ import moment from 'moment';
 import 'moment-timezone';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import {
-  CancelButton,
   ErrorText,
   SaveButton,
   SchedulerButtonsWrapper,
@@ -15,6 +14,14 @@ import PopupDeleteContent from './Modals/PopupDeleteContent';
 import PopupCreateContent from './Modals/PopupCreateContent';
 import TimezoneSelect from './TimezoneSelect/TimezoneSelect';
 import { TFunction } from 'i18next';
+import { WHITE } from '@constants/colors';
+import { useAppDispatch, useAppSelector } from '@redux/hooks';
+import { doctorApi } from '../../services/DoctorService';
+import { authApi } from '../../services/AuthService';
+import { useForm } from 'react-hook-form';
+import { FormValues, IAuth } from '@components/general/type';
+import { doctorActions } from '@redux/slices/DoctorSlice';
+import { ToastContainer, toast } from 'react-toastify';
 
 const defaultTZ = moment.tz.guess();
 
@@ -30,8 +37,30 @@ export interface IScheduleItem {
   end: Date;
 }
 
+const calendarStyle = {
+  backgroundColor: WHITE,
+  height: '600px'
+};
+
 function Scheduler() {
   const { t }: { t: TFunction } = useTranslation();
+  const doctorData = useAppSelector((state) => state.doctorReducer);
+  const dispatch = useAppDispatch();
+
+  const [updateDoctorProfile, { error: doctorUpdateError }] =
+  doctorApi.useUpdateDoctorProfileMutation();
+
+  const {
+    data: doctor,
+    refetch: doctorRefetch,
+    error: doctorGetError,
+  } = authApi.useGetMeQuery({});
+
+  const initialEventsWithDateObject = doctor.availabilities.map((event: IScheduleItem) => ({
+    ...event,
+    start: new Date(event.start),
+    end: new Date(event.end)
+  }));
 
   const [showWarning, setShowWarning] = useState<boolean>(false);
   const [timezone, setTimezone] = useState<string>(defaultTZ);
@@ -41,7 +70,7 @@ function Scheduler() {
     start: null,
     end: null,
   });
-  const [eventsData, setEventsData] = useState<IScheduleItem[]>([]);
+  const [eventsData, setEventsData] = useState<IScheduleItem[]>(initialEventsWithDateObject);
   const [errorMessage, setErrorMessage] = useState('');
   const [selectedEvent, setSelectedEvent] = useState<IScheduleItem | null>(
     null
@@ -140,65 +169,74 @@ function Scheduler() {
     }
   };
 
-  function handleSubmit() {
-    // TODO: send saved schedule to DB
-  }
+  const {
+    handleSubmit,
+    formState: { errors, isValid },
+    reset,
+  } = useForm<FormValues>({
+    mode: 'onChange',
+    defaultValues: async () => await { ...doctor },
+  });
 
-  function handleCancel() {
-    // TODO: clear saved schedule
+  const onSubmit = async (data: IAuth) => {
+    try {
+      data.availabilities = JSON.stringify(eventsData)
+      const doctor = { ...data, id: doctorData.id };
+      await updateDoctorProfile(doctor);
+      doctorRefetch();
+      toast.success(t('Calendar.successfullySubmited'), {
+        position: toast.POSITION.TOP_CENTER
+      });
+    } catch (error) {}
   }
 
   return (
     <>
-      <TimezoneSelect
-        defaultTZ={defaultTZ}
-        setTimezone={handleTimezoneChange}
-        timezone={timezone}
-      />
-      {showWarning && <ErrorText>{t('Warning.viewScheduleWarning')}</ErrorText>}
-      <Calendar
-        events={eventsData}
-        localizer={localizer}
-        selectable={true}
-        onSelectSlot={handleSelectSlot}
-        onSelectEvent={handleSelectEvent}
-        startAccessor="start"
-        endAccessor="end"
-        style={{ height: 500 }}
-        getNow={getNow}
-        scrollToTime={scrollToTime}
-      />
-      {showCreatePopup && (
-        <PopupCreateContent
-          handleSave={handleSave}
-          handleStartChange={handleStartChange}
-          handleEndChange={handleEndChange}
-          selectedRange={selectedRange}
-          selectedDate={selectedDate}
-          errorMessage={errorMessage}
-          setShowCreatePopup={setShowCreatePopup}
-          setErrorMessage={setErrorMessage}
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <TimezoneSelect
+          defaultTZ={defaultTZ}
+          setTimezone={handleTimezoneChange}
+          timezone={timezone}
         />
-      )}
-      {selectedEvent && (
-        <PopupDeleteContent
-          setSelectedEvent={setSelectedEvent}
-          handleDeleteEvent={handleDeleteEvent}
+        {showWarning && <ErrorText>{t('Warning.viewScheduleWarning')}</ErrorText>}
+        <Calendar
+          events={eventsData}
+          localizer={localizer}
+          selectable={true}
+          onSelectSlot={handleSelectSlot}
+          onSelectEvent={handleSelectEvent}
+          startAccessor="start"
+          endAccessor="end"
+          style={calendarStyle}
+          getNow={getNow}
+          scrollToTime={scrollToTime}
         />
-      )}
-      <SchedulerButtonsWrapper>
-        <CancelButton
-          onClick={handleCancel}
-          type="button"
-          value={t('Auth.cancel') ?? ''}
-        />
-        <SaveButton
-          onClick={handleSubmit}
-          disabled={false}
-          type="submit"
-          value={t('Calendar.saveSchedule') ?? ''}
-        />
-      </SchedulerButtonsWrapper>
+        {showCreatePopup && (
+          <PopupCreateContent
+            handleSave={handleSave}
+            handleStartChange={handleStartChange}
+            handleEndChange={handleEndChange}
+            selectedRange={selectedRange}
+            selectedDate={selectedDate}
+            errorMessage={errorMessage}
+            setShowCreatePopup={setShowCreatePopup}
+            setErrorMessage={setErrorMessage}
+          />
+        )}
+        {selectedEvent && (
+          <PopupDeleteContent
+            setSelectedEvent={setSelectedEvent}
+            handleDeleteEvent={handleDeleteEvent}
+          />
+        )}
+        <SchedulerButtonsWrapper>
+          <SaveButton
+            type="submit"
+            value={t('Calendar.saveSchedule') ?? ''}
+          />
+        </SchedulerButtonsWrapper>
+      </form>
+      <ToastContainer />
     </>
   );
 }

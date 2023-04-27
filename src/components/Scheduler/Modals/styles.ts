@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { BLACK, GRAY_SHADOW, WHISPER, WHITE } from '@constants/colors';
+import { BLACK, CORNFLOWER_BLUE, GRAY_SHADOW, NAVY_BLUE, PINK_SWAN, WHISPER, WHITE } from '@constants/colors';
 import { SMALL_FONT_SIZE } from '@constants/fontSizes';
 import FONT_ROBOTO from '@constants/fonts';
 
@@ -63,4 +63,56 @@ export const WrapperLabelAndInput = styled.div`
   justify-content: center;
   gap: 12px;
   margin-bottom: 20px;
+`;
+
+export const Input = styled.input`
+  border: 1px solid ${BLACK};
+`;
+
+export const SaveButton = styled.input`
+  :disabled {
+    background: ${PINK_SWAN};
+    color: ${WHITE};
+  }
+  display: flex;
+  margin-right: auto;
+  margin-left: auto;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  font-family: ${FONT_ROBOTO};
+  border: none;
+  height: 55px;
+  width: 40%;
+  margin-top: 20px;
+  line-height: 22px;
+  color: ${WHITE};
+  font-size: ${SMALL_FONT_SIZE};
+  font-weight: bold;
+  background: -webkit-linear-gradient(${NAVY_BLUE}, ${CORNFLOWER_BLUE});
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
+export const CancelButton = styled.input`
+  display: flex;
+  margin-right: auto;
+  margin-left: auto;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  font-family: ${FONT_ROBOTO};
+  border: none;
+  height: 55px;
+  width: 40%;
+  margin-top: 20px;
+  line-height: 22px;
+  color: ${WHITE};
+  font-size: ${SMALL_FONT_SIZE};
+  font-weight: bold;
+  background: ${PINK_SWAN};
+  &:hover {
+    cursor: pointer;
+  }
 `;
