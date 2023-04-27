@@ -5,3 +5,5 @@ export const selectForgotPassword = createSelector(
   (state: RootState) => state,
   (state) => state.forgotPassword,
 );
+
+export const mock = '';

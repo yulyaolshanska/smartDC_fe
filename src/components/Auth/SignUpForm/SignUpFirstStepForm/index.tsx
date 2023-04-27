@@ -30,10 +30,10 @@ import {
   lastName,
   password,
 } from '@constants/auth';
-import { signUpSchema } from '@validation/auth.validate';
+import signUpSchema from '@validation/auth.validate';
 import {
   checkEmailQuery,
-  setSignUpFirstStepData,
+  signUpActions,
 } from '@redux/slices/auth/signUp';
 import { PATH } from '@router/index';
 import AuthGoogleButton from '@components/Auth/AuthGoogleButton';
@@ -89,7 +89,7 @@ function SignUpFirstForm() {
           }
         );
       } else {
-        dispatch(setSignUpFirstStepData(data));
+        dispatch(signUpActions.setSignUpFirstStepData(data));
         setFirstStep(!isFirstStep);
       }
     });

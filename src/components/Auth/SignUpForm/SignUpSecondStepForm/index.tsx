@@ -1,3 +1,4 @@
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { ToastContainer } from 'react-toastify';
 import Input from '@components/Input';
@@ -26,6 +27,7 @@ import {
   date,
   phoneNumber,
 } from '@constants/auth';
+import signUpSchema from '@validation/auth.validate';
 import {
   roles,
   specializations,
@@ -34,8 +36,12 @@ import {
   timeZones,
 } from '@constants/mockData';
 import SelectInput from '@components/Select';
+import selectSignUp from '@redux/selectors/auth/signUp';
+import { signUpQuery } from '@redux/slices/auth/signUp';
 import { PATH } from '@router/index';
-import React from 'react';
+import { AppDispatch } from '@redux/store';
+import { useState } from 'react';
+
 import PhoneInput from '@components/PhoneInput';
 import useSignUpHook from 'hooks/useSignUp.hook';
 

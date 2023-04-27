@@ -54,21 +54,21 @@
     "cancel": "Cancel",
     "delete": "Delete",
     "role": "Role",
-    "enterRole":"Enter role...",
-    "specialization":"Specialization",
-    "enterSpecialization":"Enter specialization...",
-    "gender":"Gender",
-    "enterGender":"Enter your gender...",
-    "birthDate":"Date of Birth",
+    "enterRole": "Enter role...",
+    "specialization": "Specialization",
+    "enterSpecialization": "Enter specialization...",
+    "gender": "Gender",
+    "enterGender": "Enter your gender...",
+    "birthDate": "Date of Birth",
     "enterDateOfBirth": "dd/mm/yyyy",
-    "country":"Country",
-    "enterCountry":"Enter your country...",
-    "city":"City",
-    "enterCity":"Enter your city...",
-    "address":"Address",
-    "enterAddress":"Enter your address...",
-    "timeZone":"Time Zone",
-    "enterTimeZone":"Enter your timezone..."
+    "country": "Country",
+    "enterCountry": "Enter your country...",
+    "city": "City",
+    "enterCity": "Enter your city...",
+    "address": "Address",
+    "enterAddress": "Enter your address...",
+    "timeZone": "Time Zone",
+    "enterTimeZone": "Enter your timezone..."
   },
   "Error": {
     "firstNameRequired": "*First name is required",
@@ -99,18 +99,18 @@
     "enterEmail": "Enter patient's email",
     "phoneNumber": "Phone Number",
     "enterPhoneNumber": "Enter patient's phone Number",
-    "gender":"Gender",
-    "enterGender":"Enter patient's gender",
-    "birthDate":"Date of Birth",
-    "enterBirthDate":"Enter patient's date of Birth",
-    "country":"Country",
-    "enterCountry":"Enter patient's country",
-    "city":"City",
-    "enterCity":"Enter patient's city",
-    "address":"Address",
-    "enterAddress":"Enter patient's address",
-    "timeZone":"Time Zone",
-    "enterTimeZone":"Enter patient's time Zone",
+    "gender": "Gender",
+    "enterGender": "Enter patient's gender",
+    "birthDate": "Date of Birth",
+    "enterBirthDate": "Enter patient's date of Birth",
+    "country": "Country",
+    "enterCountry": "Enter patient's country",
+    "city": "City",
+    "enterCity": "Enter patient's city",
+    "address": "Address",
+    "enterAddress": "Enter patient's address",
+    "timeZone": "Time Zone",
+    "enterTimeZone": "Enter patient's time Zone",
     "overview": "Overview",
     "enterOverview": "Enter patient's overview",
     "save": "Save",
@@ -127,7 +127,15 @@
     "deleteTime": "Delete time:",
     "saveSchedule": "Save schedule",
     "selectTimezone": "Time Zone:"
+  },
+
+  "Profile": {
+    "cancel": "Cancel",
+    "save": "Save"
+  },
+
+  "Help": {
+    "problem": "Some problem",
+    "lorem": " Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore"
   }
 }
-
-

@@ -1,9 +1,9 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { ISignUp } from '@components/general/type';
+
+import { ISignUp } from '@components/Auth/type';
 import { authAPI, AuthCheckEmailDto, AuthSignUpDto } from '@api/auth/auth.api';
-import storage from 'redux-persist/lib/storage';
+
 import { AxiosError } from 'axios';
-import { persistReducer } from 'redux-persist';
 
 const initialState: ISignUp = {
   firstName: '',
@@ -23,12 +23,6 @@ const initialState: ISignUp = {
   isLoading: false,
   token: null,
   error: null,
-};
-
-const persistConfig = {
-  key: 'root',
-  storage,
-  blacklist: ['isLoading'],
 };
 
 export const signUpQuery = createAsyncThunk(
@@ -98,7 +92,7 @@ const signUp = createSlice({
     [checkEmailQuery.pending.type]: (state) => {
       state.isLoading = true;
     },
-    [checkEmailQuery.fulfilled.type]: (state, action) => {
+    [checkEmailQuery.fulfilled.type]: (state) => {
       state.error = null;
       state.isLoading = false;
     },
@@ -109,8 +103,4 @@ const signUp = createSlice({
   },
 });
 
-const persistedReducer = persistReducer(persistConfig, signUp.reducer);
-
-export const { setSignUpFirstStepData } = signUp.actions;
-
-export default persistedReducer;
+export const { reducer: signUpReducer, actions: signUpActions } = signUp;

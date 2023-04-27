@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { API_URLS } from 'api';
+import API_URLS from 'api';
 
 export interface AuthSignUpDto {
   firstName: string;
