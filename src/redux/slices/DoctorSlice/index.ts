@@ -2,25 +2,10 @@ import cookie from 'utils/functions/cookies';
 import { createSlice } from '@reduxjs/toolkit';
 
 import { persistor } from '@redux/store';
-import DoctorInitialState from './types';
+import DoctorInitialState from '@redux/slices/DoctorSlice/types';
 
-const initialState: DoctorInitialState = {
-  address: undefined,
-  birthDate: undefined,
-  city: undefined,
-  country: undefined,
-  email: undefined,
-  firstName: undefined,
-  gender: undefined,
-  id: undefined,
-  isVerified: undefined,
-  lastName: undefined,
-  phoneNumber: undefined,
-  photoUrl: undefined,
-  role: undefined,
-  specialityId: undefined,
-  timeZone: undefined,
-};
+const initialState: DoctorInitialState = {};
+
 const doctorSlice = createSlice({
   name: 'navigation',
   initialState,
