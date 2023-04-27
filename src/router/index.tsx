@@ -12,6 +12,7 @@ import ForgotPassword from '@pages/auth/forgotPassword';
 import Confirmation from '@pages/auth/forgotPassword/confirmation';
 import Activation from '@pages/auth/signUp/activation';
 import CreatePatientCard from '@pages/patient/createPatientCard';
+import EditPatientCard from '@pages/patient/EditPatientCard';
 import TempScheduler from '@pages/tempScheduler';
 
 export const PATH = {
@@ -19,10 +20,11 @@ export const PATH = {
   VERIFICATION: '/auth/activation/:link',
   FORGOT_PASS: '/forgot-pass',
   CONFIRM: '/forgot-pass/confirm',
-  RESET_PASS: `/reset-pass/:token`,
+  RESET_PASS: '/reset-pass/:token',
   LOGIN: '/',
   DASHBOARD: '/dashboard',
   CREATE_PATIENT_CARD: '/create-patient-card',
+  EDIT_PATIENT_CARD: '/edit-patient-card',
   SCHEDULER: '/scheduler',
 };
 
@@ -36,6 +38,7 @@ export const router = createBrowserRouter(
       <Route path={PATH.CONFIRM} element={<Confirmation />} />
       <Route path={PATH.RESET_PASS} element={<ResetPassword />} />
       <Route path={PATH.CREATE_PATIENT_CARD} element={<CreatePatientCard />} />
+      <Route path={PATH.EDIT_PATIENT_CARD} element={<EditPatientCard />} />
       <Route path={PATH.SCHEDULER} element={<TempScheduler />} />
     </Route>
   )
