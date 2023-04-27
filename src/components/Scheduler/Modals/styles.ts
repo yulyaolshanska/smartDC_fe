@@ -1,5 +1,7 @@
 import styled from 'styled-components';
-import { BLACK, CORNFLOWER_BLUE, GRAY_SHADOW, NAVY_BLUE, PINK_SWAN, WHISPER, WHITE } from '@constants/colors';
+import {
+  BLACK, CORNFLOWER_BLUE, GRAY_SHADOW, NAVY_BLUE, PINK_SWAN, WHISPER, WHITE,
+} from '@constants/colors';
 import { SMALL_FONT_SIZE } from '@constants/fontSizes';
 import FONT_ROBOTO from '@constants/fonts';
 

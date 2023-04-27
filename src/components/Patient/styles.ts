@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import {
-  MEDIUM_FONT_SIZE,
   NORMAL_FONT_SIZE,
   SMALL_FONT_SIZE,
 } from '@constants/fontSizes';
