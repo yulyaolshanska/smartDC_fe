@@ -1,12 +1,7 @@
 import styled from 'styled-components';
-import {
-  BLACK,
-  GRAY_SHADOW,
-  WHISPER,
-  WHITE,
-} from '@constants/colors';
+import { BLACK, GRAY_SHADOW, WHISPER, WHITE } from '@constants/colors';
 import { SMALL_FONT_SIZE } from '@constants/fontSizes';
-import { FONT_ROBOTO } from '@constants/fonts';
+import FONT_ROBOTO from '@constants/fonts';
 
 export const ModalContainer = styled.div`
   z-index: 1000;
@@ -26,8 +21,8 @@ export const ModalContainer = styled.div`
   height: fit-content;
   width: fit-content;
   padding: 32px;
-  background-color: ${WHITE}; 
-  color: ${BLACK}; 
+  background-color: ${WHITE};
+  color: ${BLACK};
   font-size: ${SMALL_FONT_SIZE};
   font-weight: bold;
   transition: all 0.2s ease-in-out;
@@ -56,7 +51,7 @@ export const ModalOverlay = styled.div`
 `;
 
 export const Title = styled.h2`
-  color: ${BLACK}; 
+  color: ${BLACK};
   margin-bottom: 10px;
   font-family: ${FONT_ROBOTO};
   text-align: center;

@@ -23,7 +23,6 @@ export function SelectInput({
       <Controller
         control={control}
         name={name as FieldName}
-        defaultValue=""
         render={({ field: { ref, onChange, ...field } }) => (
           <Autocomplete
             options={options}

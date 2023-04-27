@@ -1,9 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
 import { IconButton, InputAdornment } from '@mui/material';
-import { useDispatch } from 'react-redux';
 import Input from '@components/Input';
 import {
   Container,
@@ -18,82 +15,41 @@ import {
   Form,
   PasswordImg,
 } from '@components/general/styles';
-import { FormValues, ISignUp } from '@components/general/type';
 import visible from '@assets/auth/eye.svg';
 import visibleOff from '@assets/auth/eyeSlash.svg';
 import {
   confirmPassword,
   email,
   end,
-  error,
   firstName,
   lastName,
   password,
 } from '@constants/auth';
-import signUpSchema from '@validation/auth.validate';
-import {
-  checkEmailQuery,
-  signUpActions,
-} from '@redux/slices/auth/signUp';
 import { PATH } from '@router/index';
 import AuthGoogleButton from '@components/Auth/AuthGoogleButton';
 import SignUpSecondForm from '@components/Auth/SignUpForm/SignUpSecondStepForm';
-import { toast, ToastContainer } from 'react-toastify';
-import { AppDispatch } from '@redux/store';
+import { ToastContainer } from 'react-toastify';
+import useSignUpFirstStepHook from 'hooks/useSignUpFirstStep.hook';
 
 function SignUpFirstForm() {
-  const [showPassword, setShowPassword] = useState<boolean>(false);
-  const [showConfirmPassword, setShowConfirmPassword] =
-    useState<boolean>(false);
-
-  const [isFirstStep, setFirstStep] = useState<boolean>(true);
-
-  const handleClickShowPassword = () => setShowPassword((show) => !show);
-  const handleClickShowConfirmPassword = () =>
-    setShowConfirmPassword((show) => !show);
-
-  const { signUpFirstStepSchema } = signUpSchema();
-
   const { t } = useTranslation();
-  const dispatch = useDispatch<AppDispatch>();
+  const tWithDefault = (key: string) => {
+    const translation = t(key);
+    return translation || '';
+  };
 
   const {
-    register,
-    handleSubmit,
+    isFirstStep,
+    isValid,
+    onSubmit,
     control,
-    formState: { errors, isValid },
-  } = useForm<FormValues>({
-    mode: 'onChange',
-    defaultValues: {
-      firstName: '',
-      lastName: '',
-      email: '',
-      password: '',
-      confirmPassword: '',
-    },
-
-    resolver: yupResolver(signUpFirstStepSchema),
-  });
-  useEffect(() => {
-    register('password');
-    register('confirmPassword');
-  }, []);
-
-  const onSubmit = (data: ISignUp) => {
-    dispatch(checkEmailQuery(data)).then((res) => {
-      if (error in res && res.error) {
-        toast.error(
-          `Sorry, user with email ${data.email} already exists! Please change the email for continue`,
-          {
-            position: toast.POSITION.TOP_CENTER,
-          }
-        );
-      } else {
-        dispatch(signUpActions.setSignUpFirstStepData(data));
-        setFirstStep(!isFirstStep);
-      }
-    });
-  };
+    handleSubmit,
+    errors,
+    handleClickShowConfirmPassword,
+    handleClickShowPassword,
+    showConfirmPassword,
+    showPassword,
+  } = useSignUpFirstStepHook();
 
   return (
     <>
@@ -109,7 +65,7 @@ function SignUpFirstForm() {
                   control={control}
                   fullWidth
                   name={firstName}
-                  placeholder={t('Auth.enterFirstName') ?? ''}
+                  placeholder={tWithDefault('Auth.enterFirstName')}
                   helperText={errors.firstName?.message}
                   error={Boolean(errors?.firstName)}
                   required={true}
@@ -121,7 +77,7 @@ function SignUpFirstForm() {
                   control={control}
                   fullWidth
                   name={lastName}
-                  placeholder={t('Auth.enterLastName') ?? ''}
+                  placeholder={tWithDefault('Auth.enterLastName')}
                   helperText={errors.lastName?.message}
                   error={Boolean(errors?.lastName)}
                   required={true}
@@ -133,7 +89,7 @@ function SignUpFirstForm() {
                   control={control}
                   fullWidth
                   name={email}
-                  placeholder={t('Auth.enterEmail') ?? ''}
+                  placeholder={tWithDefault('Auth.enterEmail')}
                   helperText={errors.email?.message}
                   error={Boolean(errors?.email)}
                   required={true}
@@ -146,7 +102,7 @@ function SignUpFirstForm() {
                   fullWidth
                   name={password}
                   type={showPassword ? 'text' : 'password'}
-                  placeholder={t('Auth.enterPassword') ?? ''}
+                  placeholder={tWithDefault('Auth.enterPassword')}
                   helperText={errors.password?.message}
                   error={Boolean(errors?.password)}
                   required={true}
@@ -172,7 +128,7 @@ function SignUpFirstForm() {
                   fullWidth
                   name={confirmPassword}
                   type={showConfirmPassword ? 'text' : 'password'}
-                  placeholder={t('Auth.enterConfirmPassword') ?? ''}
+                  placeholder={tWithDefault('Auth.enterConfirmPassword')}
                   helperText={errors.confirmPassword?.message}
                   error={Boolean(errors?.confirmPassword)}
                   required={true}
@@ -195,7 +151,7 @@ function SignUpFirstForm() {
               <SendButton
                 disabled={!isValid}
                 type="submit"
-                value={t('Auth.continue') ?? ''}
+                value={tWithDefault('Auth.continue')}
               />
               <LinkContainer>
                 {t('Auth.alreadyExistText')}

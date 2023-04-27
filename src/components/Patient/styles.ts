@@ -4,13 +4,12 @@ import {
   NORMAL_FONT_SIZE,
   SMALL_FONT_SIZE,
 } from '@constants/fontSizes';
-import { FONT_ROBOTO } from '@constants/fonts';
+import FONT_ROBOTO from '@constants/fonts';
 import { CORNFLOWER_BLUE, NAVY_BLUE } from '@constants/colors';
 
 export const Form = styled.form`
   margin: 35px;
   text-align: center;
-  width: 90%;
 `;
 
 export const InputInlineContainer = styled.div`
@@ -31,4 +30,14 @@ export const Text = styled.div`
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   margin-bottom: 20px;
+`;
+
+export const LinkContainer = styled.div`
+  text-align: start;
+  padding-bottom: 20px;
+  font-style: normal;
+  font-size: ${SMALL_FONT_SIZE};
+  font-family: ${FONT_ROBOTO};
+  line-height: 22px;
+  margin-top: 10px;
 `;

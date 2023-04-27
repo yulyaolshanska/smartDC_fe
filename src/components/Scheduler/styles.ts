@@ -7,12 +7,12 @@ import {
   WHITE,
 } from '@constants/colors';
 import { SMALL_FONT_SIZE } from '@constants/fontSizes';
-import { FONT_ROBOTO } from '@constants/fonts';
+import FONT_ROBOTO from '@constants/fonts';
 
 export const SaveButton = styled.input`
   :disabled {
-    background: ${PINK_SWAN}; 
-    color: ${WHITE}; 
+    background: ${PINK_SWAN};
+    color: ${WHITE};
   }
   display: flex;
   margin-right: auto;
@@ -26,7 +26,7 @@ export const SaveButton = styled.input`
   min-width: 90px;
   margin-top: 20px;
   line-height: 22px;
-  color: ${WHITE}; 
+  color: ${WHITE};
   font-size: ${SMALL_FONT_SIZE};
   font-weight: bold;
   background: -webkit-linear-gradient(${NAVY_BLUE}, ${CORNFLOWER_BLUE});
@@ -48,7 +48,7 @@ export const CancelButton = styled.input`
   min-width: 90px;
   margin-top: 20px;
   line-height: 22px;
-  color: ${WHITE}; 
+  color: ${WHITE};
   font-size: ${SMALL_FONT_SIZE};
   font-weight: bold;
   background: ${PINK_SWAN};

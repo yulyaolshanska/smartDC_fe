@@ -54,12 +54,12 @@
     "cancel": "Cancel",
     "delete": "Delete",
     "role": "Role",
-    "enterRole": "Enter role...",
-    "specialization": "Specialization",
-    "enterSpecialization": "Enter specialization...",
-    "gender": "Gender",
-    "enterGender": "Enter your gender...",
-    "birthDate": "Date of Birth",
+    "enterRole":"Enter role...",
+    "specialization":"Specialization",
+    "enterSpecialization":"Enter specialization...",
+    "gender":"Gender",
+    "enterGender":"Enter your gender...",
+    "birthDate":"Date of Birth",
     "enterDateOfBirth": "dd/mm/yyyy",
     "country": "Country",
     "enterCountry": "Enter your country...",
@@ -99,22 +99,34 @@
     "enterEmail": "Enter patient's email",
     "phoneNumber": "Phone Number",
     "enterPhoneNumber": "Enter patient's phone Number",
-    "gender": "Gender",
-    "enterGender": "Enter patient's gender",
-    "birthDate": "Date of Birth",
-    "enterBirthDate": "Enter patient's date of Birth",
-    "country": "Country",
-    "enterCountry": "Enter patient's country",
-    "city": "City",
-    "enterCity": "Enter patient's city",
-    "address": "Address",
-    "enterAddress": "Enter patient's address",
-    "timeZone": "Time Zone",
-    "enterTimeZone": "Enter patient's time Zone",
+    "gender":"Gender",
+    "enterGender":"Enter patient's gender",
+    "birthDate":"Date of Birth",
+    "enterBirthDate":"Enter patient's date of Birth",
+    "country":"Country",
+    "enterCountry":"Enter patient's country",
+    "city":"City",
+    "enterCity":"Enter patient's city",
+    "address":"Address",
+    "enterAddress":"Enter patient's address",
+    "timeZone":"Time Zone",
+    "enterTimeZone":"Enter patient's time Zone",
     "overview": "Overview",
     "enterOverview": "Enter patient's overview",
     "save": "Save",
     "cancel": "Cancel"
+  },
+  "Profile": {
+    "cancel": "Cancel",
+    "save": "Save"
+  },
+
+  "Help": {
+    "problem": "Some problem",
+    "lorem": " Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore"
+  },
+  "Dashboard": {
+    "backToDashboard": "Back to dashboard"
   },
   "Warning": {
     "viewScheduleWarning": "Warning: you are in view mode and creating new schedule will be done according to your local time!"
@@ -127,15 +139,7 @@
     "deleteTime": "Delete time:",
     "saveSchedule": "Save schedule",
     "selectTimezone": "Time Zone:"
-  },
-
-  "Profile": {
-    "cancel": "Cancel",
-    "save": "Save"
-  },
-
-  "Help": {
-    "problem": "Some problem",
-    "lorem": " Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore"
   }
 }
+
+

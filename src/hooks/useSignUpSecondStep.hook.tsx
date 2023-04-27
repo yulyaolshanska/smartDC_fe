@@ -1,21 +1,19 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { AppDispatch } from '@redux/store';
-import { useNavigate } from 'react-router-dom';
-import { selectSignUp } from '@redux/selectors/auth/signUp';
-import { signUpSchema } from '@validation/auth.validate';
+import React from 'react';
+import { useSelector } from 'react-redux';
+import selectSignUp from '@redux/selectors/auth/signUp';
+import signUpSchema from '@validation/auth.validate';
 import { useForm } from 'react-hook-form';
-import { FormValues, ISignUp } from '@components/general/type';
+import { FormValues, IAuth } from '@components/general/type';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { authApi } from 'services/AuthService';
 import { error, plus } from '@constants/auth';
-import { signUpQuery } from '@redux/slices/auth/signUp';
 import { toast } from 'react-toastify';
 import { PATH } from '@router/index';
+import { useNavigate } from 'react-router-dom';
 
-function useSignUpHook() {
-  const dispatch = useDispatch<AppDispatch>();
+function useSignUpSecondStepHook() {
   const navigate = useNavigate();
   const dataSignUpFirst = useSelector(selectSignUp);
-
   const { signUpSecondStepSchema } = signUpSchema();
 
   const {
@@ -38,17 +36,16 @@ function useSignUpHook() {
 
     resolver: yupResolver(signUpSecondStepSchema),
   });
-
-  const onSubmit = (data: ISignUp) => {
+  const [signUp] = authApi.useSignUpMutation();
+  const onSubmit = async (data: IAuth) => {
     data.specialization = Number(data.specialization);
     data.phoneNumber = plus + data.phoneNumber;
-
     const combinedObj = Object.assign({}, dataSignUpFirst, data);
 
-    dispatch(signUpQuery(combinedObj)).then((res) => {
+    await signUp(combinedObj).then((res) => {
       if (error in res && res.error) {
         toast.error(
-          'Sorry, you entered the wrong phone number! Please change it',
+          `Sorry, you entered the wrong phone number! Please change it`,
           {
             position: toast.POSITION.TOP_CENTER,
           }
@@ -67,4 +64,4 @@ function useSignUpHook() {
   };
 }
 
-export default useSignUpHook;
+export default useSignUpSecondStepHook;

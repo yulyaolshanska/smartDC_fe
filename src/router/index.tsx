@@ -1,8 +1,6 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-
 import SignUpFirstStep from '@pages/auth/signUp/signUpFirstStep';
-import SignUpSecondStep from '@pages/auth/signUp/signUpSecondStep';
 import SignUpSecondFormGoogle from '@components/Auth/SignUpForm/SignUpSecondStepFormGoogle';
 import ResetPassword from '@pages/auth/resetPassword';
 import Login from '@pages/auth/login';
@@ -39,6 +37,10 @@ const AppRouter = () => {
         <Route path={PATH.VERIFICATION} element={<Activation />} />
         <Route path={PATH.LOGIN} element={<Login />} />
         <Route path={PATH.RESET_PASS} element={<ResetPassword />} />
+        <Route
+          path={PATH.CREATE_PATIENT_CARD}
+          element={<CreatePatientCard />}
+        />
         {/* Private Routes */}
         <Route
           path={PATH.SIGN_UP_SECOND_STEP_GOOGLE}
@@ -48,11 +50,7 @@ const AppRouter = () => {
         <Route path={PATH.CONFIRM} element={<Confirmation />} />
         <Route path={PATH.EDIT_DOCTOR_PROFILE} element={<Profile />} />
         <Route path={PATH.HELP} element={<Help />} />
-        <Route path={PATH.DASHBOARD} element={<Profile />} /> {/*TODO */}
-        <Route
-          path={PATH.CREATE_PATIENT_CARD}
-          element={<CreatePatientCard />}
-        />
+        <Route path={PATH.DASHBOARD} element={<Profile />} />
         <Route path={PATH.SCHEDULER} element={<TempScheduler />} />
       </Routes>
     </PageWrapper>

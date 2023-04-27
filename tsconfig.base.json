@@ -25,7 +25,8 @@
       "@assets/*": ["assets/*"],
       "@api/*": ["api/*"],
       "@auth/*": ["api/auth/*"],
-      "@hooks/*": ["hooks/*"],
+      "@services": ["services/*"],
+      "@hooks": ["hooks/*"]
     }
   },
   "exclude": ["node_modules", "tmp"]

@@ -1,20 +1,13 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-
 import cookie from 'utils/functions/cookies';
-
-export interface IUpdateDoctorProfile {
-  id: number;
-  firstName: string;
-  lastName: string;
-  phoneNumber: string;
-  email: string;
-  gender: string;
-  birthDate: string;
-  country: string;
-  city: string;
-  address: string;
-  timeZone: string;
-}
+import {
+  AuthActivationDto,
+  AuthCheckEmailDto,
+  AuthForgotPasswordDto,
+  AuthLoginDto,
+  AuthResetPasswordDto,
+  AuthSignUpDto,
+} from 'services/types/auth.type';
 
 export const authApi = createApi({
   reducerPath: 'authApi',
@@ -30,10 +23,51 @@ export const authApi = createApi({
       return headers;
     },
   }),
-  endpoints: (builder) => ({
-    getMe: builder.query({
+  endpoints: ({ mutation, query }) => ({
+    getMe: query({
       query: () => ({
         url: '/auth/me',
+        method: 'GET',
+      }),
+    }),
+    signUp: mutation({
+      query: (data: AuthSignUpDto) => ({
+        url: '/auth/registration',
+        method: 'POST',
+        body: data,
+      }),
+    }),
+    checkEmail: mutation({
+      query: (data: AuthCheckEmailDto) => ({
+        url: '/auth/checkEmail',
+        method: 'POST',
+        body: data,
+      }),
+    }),
+    forgotPassword: mutation({
+      query: (data: AuthForgotPasswordDto) => ({
+        url: '/auth/forgotPassword',
+        method: 'POST',
+        body: data,
+      }),
+    }),
+    resetPassword: mutation({
+      query: (data: AuthResetPasswordDto) => ({
+        url: '/auth/resetPassword',
+        method: 'PATCH',
+        body: data,
+      }),
+    }),
+    login: mutation({
+      query: (data: AuthLoginDto) => ({
+        url: '/auth/login',
+        method: 'POST',
+        body: data,
+      }),
+    }),
+    activation: mutation({
+      query: (data: AuthActivationDto) => ({
+        url: `/auth/activation/${data.link}`,
         method: 'GET',
       }),
     }),

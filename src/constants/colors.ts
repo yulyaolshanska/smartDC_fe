@@ -47,4 +47,5 @@ export const NOT_ACTIVE_BACKGROUND_HOVER = '#e2edfd';
 export const BORDER = '#d8dbe8';
 
 export const GRAY_SHADOW = '#66666666';
+
 export const LIGHT_GRAY = '#808080';

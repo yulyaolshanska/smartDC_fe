@@ -17,8 +17,9 @@ import {
   NORMAL_FONT_SIZE,
   SMALL_FONT_SIZE,
 } from '@constants/fontSizes';
-import FONT_ROBOTO from '@constants/fonts';
+
 import { NavLink } from 'react-router-dom';
+import FONT_ROBOTO from '@constants/fonts';
 
 export const Container = styled.div`
   width: 100%;

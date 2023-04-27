@@ -27,7 +27,6 @@ import {
   date,
   phoneNumber,
 } from '@constants/auth';
-import signUpSchema from '@validation/auth.validate';
 import {
   roles,
   specializations,
@@ -36,24 +35,19 @@ import {
   timeZones,
 } from '@constants/mockData';
 import SelectInput from '@components/Select';
-import selectSignUp from '@redux/selectors/auth/signUp';
-import { signUpQuery } from '@redux/slices/auth/signUp';
 import { PATH } from '@router/index';
-import { AppDispatch } from '@redux/store';
-import { useState } from 'react';
-
 import PhoneInput from '@components/PhoneInput';
-import useSignUpHook from 'hooks/useSignUp.hook';
+import useSignUpSecondStepHook from 'hooks/useSignUpSecondStep.hook';
 
 function SignUpSecondForm() {
   const { t } = useTranslation();
-
   const tWithDefault = (key: string) => {
     const translation = t(key);
     return translation || '';
   };
 
-  const { handleSubmit, onSubmit, control, errors, isValid } = useSignUpHook();
+  const { handleSubmit, onSubmit, control, errors, isValid } =
+    useSignUpSecondStepHook();
 
   return (
     <Container>

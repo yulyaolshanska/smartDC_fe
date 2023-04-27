@@ -1,8 +1,6 @@
-import {
-  NAVY_BLUE, WHITE, RED, WHISPER, LIGHT_GRAY,
-} from '@constants/colors';
+import { NAVY_BLUE, WHITE, RED, WHISPER, LIGHT_GRAY } from '@constants/colors';
 import styled from 'styled-components';
-import { FONT_ROBOTO } from '@constants/fonts';
+import FONT_ROBOTO from '@constants/fonts';
 import { VERY_SMALL_FONT_SIZE } from '@constants/fontSizes';
 
 export const InputContainer = styled.div`
@@ -63,5 +61,4 @@ export const Select = styled.select`
   padding: 12px 8px;
 `;
 
-export const Option = styled.option`
-`;
+export const Option = styled.option``;

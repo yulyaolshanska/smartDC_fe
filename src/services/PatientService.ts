@@ -1,10 +1,10 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-
 import cookie from 'utils/functions/cookies';
+import { CreatePatientDto } from 'services/types/patient.type';
 
-export const doctorApi = createApi({
-  reducerPath: 'doctorApi',
-  tagTypes: ['Doctor'],
+export const patientApi = createApi({
+  reducerPath: 'patientApi',
+  tagTypes: ['Patient'],
   baseQuery: fetchBaseQuery({
     baseUrl: import.meta.env.VITE_REACT_APP_BASE_URL_SERVER,
     prepareHeaders: (headers) => {
@@ -17,14 +17,12 @@ export const doctorApi = createApi({
     },
   }),
   endpoints: (builder) => ({
-    updateDoctorProfile: builder.mutation({
-      query: (doctor) => ({
-        url: `/doctor/${doctor.id}`,
-        method: 'PATCH',
-        body: doctor,
-        staleTime: 1,
+    createPatient: builder.mutation({
+      query: (data: CreatePatientDto) => ({
+        url: `/patient`,
+        method: 'POST',
+        body: data,
       }),
-      invalidatesTags: ['Doctor'],
     }),
   }),
 });
