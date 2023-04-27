@@ -1,21 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
+import CreatePatientInitialState from '@redux/slices/patient/createPatient/types';
 
-const initialState = {
-  firstName: '',
-  lastName: '',
-  email: '',
-  phoneNumber: '',
-  gender: '',
-  country: '',
-  city: '',
-  birthDate: '',
-  address: '',
-  timeZone: '',
-  overview: '',
-  isLoading: false,
-  token: null,
-  error: null,
-};
+const initialState: CreatePatientInitialState = { isLoading: false };
 
 const createPatient = createSlice({
   name: 'createPatient',

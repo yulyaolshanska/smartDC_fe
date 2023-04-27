@@ -1,14 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
+import LoginInitialState from '@redux/slices/auth/login/types';
+
+const initialState: LoginInitialState = {
+  isLoading: false,
+};
 
 const login = createSlice({
   name: 'login',
-  initialState: {
-    email: '',
-    password: '',
-    isLoading: false,
-    token: null,
-    error: null,
-  },
+  initialState,
   reducers: {
     logout(state) {
       state.token = null;

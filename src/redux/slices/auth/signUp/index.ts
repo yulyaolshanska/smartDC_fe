@@ -1,24 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { IAuth } from '@components/general/type';
+import SignUpInitialState from '@redux/slices/auth/signUp/types';
 
-const initialState: IAuth = {
-  firstName: '',
-  lastName: '',
-  email: '',
-  phoneNumber: '',
-  password: '',
-  confirmPassword: '',
-  role: '',
-  specialization: 0,
-  gender: '',
-  country: '',
-  city: '',
-  birthDate: '',
-  address: '',
-  timeZone: '',
+const initialState: SignUpInitialState = {
   isLoading: false,
-  token: null,
-  error: null,
 };
 
 const signUp = createSlice({
