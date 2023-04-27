@@ -1,7 +1,15 @@
 import { useTranslation } from 'react-i18next';
 import React from 'react';
 
-import { AccordionBody, Arrow, PatientName } from './styles';
+import {
+  AccordionBody,
+  Arrow,
+  Container,
+  EditCardLink,
+  PatientName,
+} from './styles';
+import { ViewLink } from '@components/PatientItem/styles';
+import { PATH } from '@router/index';
 
 type Props = {
   children: React.ReactNode;
@@ -28,12 +36,15 @@ const CardWrapper: React.FC<Props> = ({ children }) => {
   };
   return (
     <>
-      {/* <AccordionTitle toggle={toggle} onClick={toggleState}>  */}
-      <PatientName toggle={toggle} onClick={toggleState}>
-        John Doe
-        <Arrow toggle={toggle} />
-      </PatientName>
-      {/* </AccordionTitle> */}
+      <Container>
+        <PatientName toggle={toggle} onClick={toggleState}>
+          John Doe
+          <Arrow toggle={toggle} />
+        </PatientName>
+        <EditCardLink to={PATH.CREATE_PATIENT_CARD}>
+          {t('Patients.editCard')}
+        </EditCardLink>
+      </Container>
       <AccordionBody
         toggle={toggle}
         style={{

@@ -1,6 +1,11 @@
+import { ViewLink } from '@components/PatientItem/styles';
 import { BORDER, ZAMBEZI } from '@constants/colors';
 import { SMALL_FONT_SIZE } from '@constants/fontSizes';
 import styled from 'styled-components';
+
+export const Container = styled.div`
+  display: flex;
+`;
 
 export const Arrow = styled.div<{ toggle: boolean }>`
   border: solid black;
@@ -43,4 +48,8 @@ export const AccordionBody = styled.div<{
     props.toggle ? `1px solid ${BORDER}` : null}; */
   margin-top: ${(props) => (props.toggle ? '20px' : null)};
   font-size: ${SMALL_FONT_SIZE};
+`;
+
+export const EditCardLink = styled(ViewLink)`
+  margin-left: auto;
 `;

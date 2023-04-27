@@ -118,6 +118,9 @@
   },
   "Patients": {
     "createPatient": "Create Patient",
-    "search": "Search"
+    "viewCard": "View card",
+    "editCard": "Edit card",
+    "search": "Search",
+    "loadMore": "Load More"
   }
 }

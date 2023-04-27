@@ -60,5 +60,11 @@ export const DARK_GREEN = '#188038';
  * @deprecated
  */
 export const LIGHT_GREEN = '#BFE8CA';
-
+/**
+ * @deprecated
+ */
 export const BORDER = '#d8dbe8';
+/**
+ * @deprecated
+ */
+export const BLUE = '#4579EE';

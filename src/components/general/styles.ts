@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import {
   BLACK,
+  BLUE,
   CORNFLOWER_BLUE,
   DARK_GREEN,
   GHOST_WHITE,
@@ -95,7 +96,7 @@ export const PasswordImg = styled.img`
   height: 30px;
 `;
 
-export const SendButton = styled.input`
+export const SendButton = styled.button`
   :disabled {
     background: ${PINK_SWAN};
     color: ${WHITE};
@@ -268,4 +269,15 @@ export const AddButton = styled(CancelButton)`
 
   margin-top: 0px;
   background: -webkit-linear-gradient(${NAVY_BLUE}, ${CORNFLOWER_BLUE});
+`;
+
+export const LoadMoreButton = styled(SendButton)`
+  color: ${BLUE};
+  background: ${WHITE};
+  width: 131px;
+  height: 44px;
+  border: 1.5px solid ${BLUE};
+  border-radius: 4px;
+  font-size: 14px;
+  line-height: 1.4;
 `;
