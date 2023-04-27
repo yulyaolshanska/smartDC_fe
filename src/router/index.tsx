@@ -16,7 +16,6 @@ import CreatePatientCard from '@pages/patient/createPatientCard';
 import TempScheduler from '@pages/tempScheduler';
 import Patients from '@pages/patients';
 
-
 export const PATH = {
   SIGN_UP: '/auth',
   VERIFICATION: '/auth/activation/:link',
@@ -64,4 +63,3 @@ const AppRouter = () => {
 };
 
 export default AppRouter;
-
