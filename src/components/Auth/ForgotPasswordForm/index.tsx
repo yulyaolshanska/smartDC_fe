@@ -17,19 +17,16 @@ import {
   Form,
   ArrowBack,
 } from '@components/general/styles';
-import { FormValues, ISignUp } from '@components/general/type';
+import { FormValues, IAuth } from '@components/general/type';
 import { email, error } from '@constants/auth';
-import { signUpSchema } from '@validation/auth.validate';
+import signUpSchema from '@validation/auth.validate';
 import { PATH } from '@router/index';
-import { forgotPasswordQuery } from '@redux/slices/auth/forgotPassword';
 import { toast, ToastContainer } from 'react-toastify';
-import { useDispatch } from 'react-redux';
-import { AppDispatch } from '@redux/store';
+import { authApi } from 'services/AuthService';
 
 function ForgotPasswordForm() {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const dispatch = useDispatch<AppDispatch>();
 
   const { forgotPasswordSchema } = signUpSchema();
 
@@ -45,8 +42,10 @@ function ForgotPasswordForm() {
     resolver: yupResolver(forgotPasswordSchema),
   });
 
-  const onSubmit = (data: ISignUp) => {
-    dispatch(forgotPasswordQuery(data)).then((res) => {
+  const [forgotPassword] = authApi.useForgotPasswordMutation();
+
+  const onSubmit = async (data: IAuth) => {
+    await forgotPassword(data).then((res) => {
       if (error in res && res.error) {
         toast.error(`Doctor with email ${data.email} not found!`, {
           position: toast.POSITION.TOP_CENTER,

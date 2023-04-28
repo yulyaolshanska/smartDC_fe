@@ -3,7 +3,6 @@
   "compilerOptions": {
     "rootDir": ".",
     "sourceMap": true,
-    "declaration": false,
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
@@ -26,7 +25,8 @@
       "@assets/*": ["assets/*"],
       "@api/*": ["api/*"],
       "@auth/*": ["api/auth/*"],
-      "@hooks/*": ["hooks/*"],
+      "@services": ["services/*"],
+      "@hooks": ["hooks/*"]
     }
   },
   "exclude": ["node_modules", "tmp"]

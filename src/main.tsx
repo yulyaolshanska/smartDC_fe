@@ -1,22 +1,28 @@
-import { GoogleOAuthProvider } from '@react-oauth/google';
-import { StrictMode } from 'react';
+import { PersistGate } from 'redux-persist/integration/react';
+import { StrictMode, Suspense } from 'react';
 import * as ReactDOM from 'react-dom/client';
-import { RouterProvider } from 'react-router-dom';
-import { router } from './router';
-import './translation/i18n';
+import { BrowserRouter, RouterProvider } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import { store } from '@redux/store';
 import 'react-toastify/dist/ReactToastify.css';
+import { persistor, setupStore, store } from '@redux/store';
+
+import AppRouter from './router';
+import './translation/i18n';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
+
 root.render(
   <StrictMode>
-    <Provider store={store}>
-      <GoogleOAuthProvider clientId="1073480873881-9nf8712q3lcihcc82954d2ldqvqkvoig.apps.googleusercontent.com">
-        <RouterProvider router={router} />
-      </GoogleOAuthProvider>
-    </Provider>
+    <BrowserRouter>
+      <Provider store={store}>
+        <PersistGate persistor={persistor}>
+          <Suspense fallback={null}>
+            <AppRouter />
+          </Suspense>
+        </PersistGate>
+      </Provider>
+    </BrowserRouter>
   </StrictMode>
 );

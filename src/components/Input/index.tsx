@@ -1,7 +1,7 @@
 import { Control, Controller } from 'react-hook-form';
 import { TextFieldProps } from '@mui/material/TextField/TextField';
 import { TextField } from '@mui/material';
-import { InputContainer } from '@components/Input/styles';
+import InputContainer from '@components/Input/styles';
 import { FormValues } from '@components/general/type';
 import { FieldName } from '@types';
 import { BLACK } from '@constants/colors';

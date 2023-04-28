@@ -1,73 +1,9 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { ISignUp } from '@components/general/type';
-import { authAPI, AuthCheckEmailDto, AuthSignUpDto } from '@api/auth/auth.api';
-import storage from 'redux-persist/lib/storage';
-import { AxiosError } from 'axios';
-import { persistReducer } from 'redux-persist';
+import { createSlice } from '@reduxjs/toolkit';
+import SignUpInitialState from '@redux/slices/auth/signUp/types';
 
-const initialState: ISignUp = {
-  firstName: '',
-  lastName: '',
-  email: '',
-  phoneNumber: '',
-  password: '',
-  confirmPassword: '',
-  role: '',
-  specialization: 0,
-  gender: '',
-  country: '',
-  city: '',
-  birthDate: '',
-  address: '',
-  timeZone: '',
+const initialState: SignUpInitialState = {
   isLoading: false,
-  token: null,
-  error: null,
 };
-
-const persistConfig = {
-  key: 'root',
-  storage,
-  blacklist: ['isLoading'],
-};
-
-export const signUpQuery = createAsyncThunk(
-  'signUp/signUpQuery',
-  async (data: AuthSignUpDto, { rejectWithValue }) => {
-    try {
-      return await authAPI.signUp(data);
-    } catch (err) {
-      const error = err as Error;
-      if (error instanceof AxiosError && error.response) {
-        const { status, data } = error.response;
-        return rejectWithValue({
-          status: status.toString(),
-          message: data.message || 'Something went wrong.',
-        });
-      }
-      throw err;
-    }
-  },
-);
-
-export const checkEmailQuery = createAsyncThunk(
-  'signUp/signUpQuery',
-  async (data: AuthCheckEmailDto, { rejectWithValue }) => {
-    try {
-      return await authAPI.checkEmail(data);
-    } catch (err) {
-      const error = err as Error;
-      if (error instanceof AxiosError && error.response) {
-        const { status, data } = error.response;
-        return rejectWithValue({
-          status: status.toString(),
-          message: data.message || 'Something went wrong.',
-        });
-      }
-      throw err;
-    }
-  },
-);
 
 const signUp = createSlice({
   name: 'signUp',
@@ -81,36 +17,6 @@ const signUp = createSlice({
       state.confirmPassword = action.payload.confirmPassword;
     },
   },
-  extraReducers: {
-    [signUpQuery.pending.type]: (state) => {
-      state.isLoading = true;
-    },
-    [signUpQuery.fulfilled.type]: (state, action) => {
-      state.token = action.payload.accessToken;
-      state.error = null;
-      state.isLoading = false;
-    },
-    [signUpQuery.rejected.type]: (state, action) => {
-      state.error = action.payload;
-      state.isLoading = false;
-    },
-
-    [checkEmailQuery.pending.type]: (state) => {
-      state.isLoading = true;
-    },
-    [checkEmailQuery.fulfilled.type]: (state, action) => {
-      state.error = null;
-      state.isLoading = false;
-    },
-    [checkEmailQuery.rejected.type]: (state, action) => {
-      state.error = action.payload;
-      state.isLoading = false;
-    },
-  },
 });
 
-const persistedReducer = persistReducer(persistConfig, signUp.reducer);
-
-export const { setSignUpFirstStepData } = signUp.actions;
-
-export default persistedReducer;
+export const { reducer: signUpReducer, actions: signUpActions } = signUp;

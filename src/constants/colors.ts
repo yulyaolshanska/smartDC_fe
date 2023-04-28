@@ -1,75 +1,51 @@
-/**
- * @deprecated
- */
 export const WHITE = '#FFFFFF';
-/**
- * @deprecated
- */
+
 export const GHOST_WHITE = '#F5F7FD';
-/**
- * @deprecated
- */
+
 export const WHISPER = '#E5E5E5';
-/**
- * @deprecated
- */
+
 export const VERY_LIGHT_GREY = '#cecdcd';
-/**
- * @deprecated
- */
+
 export const BLACK = '#000000';
-/**
- * @deprecated
- */
+
 export const ZAMBEZI = '#585858';
-/**
- * @deprecated
- */
+
 export const PINK_SWAN = '#B3B3B3';
-/**
- * @deprecated
- */
+
 export const NAVY_BLUE = '#085DD7';
-/**
- * @deprecated
- */
+
 export const CORNFLOWER_BLUE = '#4D93F8';
-/**
- * @deprecated
- */
+
 export const NOBEL = '#a2a2a2';
-/**
- * @deprecated
- */
+
 export const MANDY = '#FF000000';
-/**
- * @deprecated
- */
+
 export const SNUFF = '#0000FF00';
-/**
- * @deprecated
- */
+
 export const RED = '#FF0000FF';
-/**
- * @deprecated
- */
+
 export const DODGE_BLUE = 'dodgerblue';
-/**
- * @deprecated
- */
+
 export const DARK_GREEN = '#188038';
-/**
- * @deprecated
- */
+
 export const LIGHT_GREEN = '#BFE8CA';
-/**
- * @deprecated
- */
+
+export const DRAWER_CONT = '#f4f6fd';
+
+export const DRAWER_BORDER = '#e7e7e7';
+
+export const ACTIVE = '#4D84E7';
+
+export const ACTIVE_BACKGROUND = '#E2EDFD';
+
+export const NOT_ACTIVE = '#828bae';
+
+export const NOT_ACTIVE_HOVER = '#79a8ff';
+
+export const NOT_ACTIVE_BACKGROUND_HOVER = '#e2edfd';
+
+export const BORDER = '#d8dbe8';
+
 export const GRAY_SHADOW = '#66666666';
-/**
- * @deprecated
- */
+
 export const LIGHT_GRAY = '#808080';
-/**
- * @deprecated
- */

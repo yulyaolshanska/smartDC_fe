@@ -1,4 +1,5 @@
-export interface ISignUp {
+export interface IAuth {
+  id?: number;
   firstName: string;
   lastName: string;
   email: string;
@@ -22,8 +23,6 @@ export interface IPatient {
   firstName: string;
   lastName: string;
   email: string;
-  password: string;
-  confirmPassword: string;
   gender: string;
   phoneNumber: string;
   country: string;
@@ -38,4 +37,4 @@ export type Option = {
   value: string | number;
 };
 
-export type FormValues = IPatient & ISignUp;
+export type FormValues = IPatient & IAuth;

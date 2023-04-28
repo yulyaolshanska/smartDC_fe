@@ -61,14 +61,14 @@
     "enterGender":"Enter your gender...",
     "birthDate":"Date of Birth",
     "enterDateOfBirth": "dd/mm/yyyy",
-    "country":"Country",
-    "enterCountry":"Enter your country...",
-    "city":"City",
-    "enterCity":"Enter your city...",
-    "address":"Address",
-    "enterAddress":"Enter your address...",
-    "timeZone":"Time Zone",
-    "enterTimeZone":"Enter your timezone..."
+    "country": "Country",
+    "enterCountry": "Enter your country...",
+    "city": "City",
+    "enterCity": "Enter your city...",
+    "address": "Address",
+    "enterAddress": "Enter your address...",
+    "timeZone": "Time Zone",
+    "enterTimeZone": "Enter your timezone..."
   },
   "Error": {
     "firstNameRequired": "*First name is required",
@@ -116,6 +116,18 @@
     "enterOverview": "Enter patient's overview",
     "save": "Save",
     "cancel": "Cancel"
+  },
+  "Profile": {
+    "cancel": "Cancel",
+    "save": "Save"
+  },
+
+  "Help": {
+    "problem": "Some problem",
+    "lorem": " Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore"
+  },
+  "Dashboard": {
+    "backToDashboard": "Back to dashboard"
   },
   "Warning": {
     "viewScheduleWarning": "Warning: you are in view mode and creating new schedule will be done according to your local time!"

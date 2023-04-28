@@ -1,3 +1,4 @@
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { ToastContainer } from 'react-toastify';
 import Input from '@components/Input';
@@ -35,19 +36,18 @@ import {
 } from '@constants/mockData';
 import SelectInput from '@components/Select';
 import { PATH } from '@router/index';
-import React from 'react';
 import PhoneInput from '@components/PhoneInput';
-import useSignUpHook from 'hooks/useSignUp.hook';
+import useSignUpSecondStepHook from 'hooks/useSignUpSecondStep.hook';
 
 function SignUpSecondForm() {
   const { t } = useTranslation();
-
   const tWithDefault = (key: string) => {
     const translation = t(key);
     return translation || '';
   };
 
-  const { handleSubmit, onSubmit, control, errors, isValid } = useSignUpHook();
+  const { handleSubmit, onSubmit, control, errors, isValid } =
+    useSignUpSecondStepHook();
 
   return (
     <Container>
