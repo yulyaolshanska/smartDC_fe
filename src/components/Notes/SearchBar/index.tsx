@@ -41,7 +41,7 @@ const SearchBar = React.memo(({ setNotesLocal }: SearchBarProps) => {
       dispatch(noteFilterActions.clearSkipAmount());
       dispatch(noteFilterActions.setSearchString(event.target.value));
       await refetchNotes();
-    }, 500),
+    }, 1000),
 
     []
   );

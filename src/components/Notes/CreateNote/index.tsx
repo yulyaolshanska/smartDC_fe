@@ -14,6 +14,7 @@ import { ReactComponent as PaperclipIcon } from '@assets/paperClip.svg';
 import { HINT, ZAMBEZI } from '@constants/colors';
 import {
   MEGA_SMAILL_FONT_SIZE,
+  SMALL_FONT_SIZE,
   SUPER_SMALL_FONT_SIZE,
 } from '@constants/fontSizes';
 import { debounce } from 'utils/functions/debounce';
@@ -28,10 +29,8 @@ interface CreateNoteProps {
 }
 
 const CreateNote = ({ addNew, setAddNew }: CreateNoteProps) => {
-  const [show, setShow] = React.useState<boolean>(false);
   const [value, setValue] = React.useState<string>('');
   const [files, setFiles] = React.useState({});
-  const fileInputField = React.useRef(null);
 
   const filterParams = useAppSelector((state) => state.noteFilterReducer);
 
@@ -48,12 +47,15 @@ const CreateNote = ({ addNew, setAddNew }: CreateNoteProps) => {
     []
   );
 
+  const updateUploadedFiles = (files) => setFiles(files);
+  console.log(files);
+
   const createNote = async () => {
     await createPatientNote({
       doctorId: doctor.id,
       patientId: 1,
       note: value,
-      file: '',
+      file: files ? files : null,
     });
     await refetchNotes();
     setAddNew(false);
@@ -83,7 +85,9 @@ const CreateNote = ({ addNew, setAddNew }: CreateNoteProps) => {
     <Wrapper>
       <Stack direction="row" justifyContent="space-between" alignItems="center">
         <StyledDate>{formattedDate}</StyledDate>
-        <AddButton onClick={() => createNote()}>Add</AddButton>
+        <AddButton onClick={() => createNote()} disabled={value.length < 10}>
+          Add
+        </AddButton>
       </Stack>
       <CreateNoteContainer>
         <Stack>
@@ -91,14 +95,23 @@ const CreateNote = ({ addNew, setAddNew }: CreateNoteProps) => {
             Description
           </Typography>
           <StyledTextArea onChange={handleTextArea} />
-          <Typography color={HINT} fontSize={MEGA_SMAILL_FONT_SIZE}>
-            Hint
-          </Typography>
+          <Stack direction="row" alignItems="center" gap="10px">
+            <Typography color={HINT} fontSize={MEGA_SMAILL_FONT_SIZE}>
+              Hint
+            </Typography>
+            {value.length < 10 ? (
+              <Typography color="red" fontSize={MEGA_SMAILL_FONT_SIZE}>
+                The note should contain at least 10 symbols
+              </Typography>
+            ) : null}
+          </Stack>
+
           <Stack alignItems="center">
             <FileUpload
-              accept=".jpg,.png,.jpeg,.docx"
+              accept=".jpg,.png,.jpeg,.docx,.pdf"
               label="Patient's files"
-              multiple
+              // multiple
+              updateFilesCb={updateUploadedFiles}
             />
           </Stack>
         </Stack>

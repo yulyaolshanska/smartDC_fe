@@ -1,5 +1,6 @@
 import {
   ACTIVE,
+  ACTIVE_BACKGROUND,
   BLACK,
   GHOST_WHITE,
   NOT_ACTIVE_BACKGROUND_HOVER,
@@ -36,11 +37,12 @@ export const SortList = styled.ul<{ toggle?: boolean }>`
   flex-direction: column;
   width: 100%;
 
-  animation: ${(props) => (props.toggle
-    ? css`
+  animation: ${(props) =>
+    props.toggle
+      ? css`
           ${fadeIn} 0.5s ease-in-out
         `
-    : 'none')};
+      : 'none'};
 
   & * {
     background-color: ${NOT_ACTIVE_HOVER};
@@ -61,8 +63,10 @@ export const SortList = styled.ul<{ toggle?: boolean }>`
 
 export const SortItem = styled.li<{ selected: boolean }>`
   background-color: ${({ selected }) => (selected ? ACTIVE : null)};
+  border: ${({ selected }) => (selected ? `${BLACK} 1.5px solid` : null)};
   cursor: pointer;
 `;
+
 export const Arrow = styled.div<{ toggle: boolean }>`
   border: solid black;
   border-width: 0 1px 1px 0;

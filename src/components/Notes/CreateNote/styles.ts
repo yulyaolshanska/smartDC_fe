@@ -22,7 +22,11 @@ export const Date = styled.div`
   color: ${PINK_SWAN};
 `;
 
-export const AddButton = styled.button`
+export const AddButton = styled.button<{ disabled: boolean }>`
+  :disabled {
+    color: ${PINK_SWAN};
+    border: 2px solid ${PINK_SWAN};
+  }
   color: ${ACTIVE};
   font-weight: 700;
   font-size: ${VERY_SMALL_FONT_SIZE};

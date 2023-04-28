@@ -30,8 +30,6 @@ const Notes = () => {
     refetch,
     isLoading,
   } = noteApi.useGetPatientNoteQuery({ ...filterParams });
-  console.log('notesLocal', notesLocal);
-  console.log('notes', notes);
 
   const handleAddNew = () => {
     setAddNew(!addNew);

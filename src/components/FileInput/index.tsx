@@ -29,6 +29,7 @@ const FileUpload = ({
 }) => {
   const fileInputField = useRef(null);
   const [files, setFiles] = useState({});
+  console.log('inner', files);
 
   const handleUploadBtnClick = () => {
     fileInputField.current.click();
