@@ -21,7 +21,7 @@ import InputAddressTimeZone from '@components/Patient/Inputs/InputAddressTimeZon
 import InputOverview from '@components/Patient/Inputs/InputOverview';
 import InputCountryCity from '@components/Patient/Inputs/InputCountryCity';
 import { patientApi } from 'services/PatientService';
-import { error, plus } from '@constants/auth';
+import { plus } from '@constants/auth';
 
 const EditPatientCardForm: React.FC = () => {
   const { t } = useTranslation();
@@ -42,7 +42,7 @@ const EditPatientCardForm: React.FC = () => {
     address: 'Berger Str. 22',
     timeZone: '(GMT+2) Europe/Berlin',
     overview: 'Some issue',
-    id: '17',
+    id: 1,
   };
 
   const {
@@ -68,20 +68,30 @@ const EditPatientCardForm: React.FC = () => {
     resolver: yupResolver(editPatientCardSchema),
   });
 
-  const [editPatient] = patientApi.useCreatePatientMutation();
+  const [updatePatient] = patientApi.useUpdatePatientMutation();
 
   const onSubmit = async (data: IPatient) => {
-    data.phoneNumber = plus + data.phoneNumber;
+    data.phoneNumber = plus + data.phoneNumber.replace(/\D/g, '');
 
-    await editPatient(data, patCard.id).then((res) => {
-      if (error in res && res.error) {
-        toast.error(t('Patient.somethingWasWrong'), {
-          position: toast.POSITION.TOP_CENTER,
-        });
-      } else {
-        navigate(PATH.DASHBOARD);
-      }
-    });
+    const updatedPatientInfo = {
+      id: patCard.id,
+      ...data,
+    };
+    try {
+      await updatePatient(updatedPatientInfo).then((res) => {
+        if (res && res.error) {
+          return toast.error(t('Error.somethingWasWrong'), {
+            position: toast.POSITION.TOP_CENTER,
+          });
+        } else {
+          navigate(PATH.DASHBOARD);
+        }
+      });
+    } catch (error) {
+      toast.error(t('Error.somethingWasWrong'), {
+        position: toast.POSITION.TOP_CENTER,
+      });
+    }
   };
 
   return (
