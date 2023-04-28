@@ -11,6 +11,7 @@ import PageWrapper from '@components/PageWrapper';
 import Help from '@pages/help';
 import Activation from '@pages/auth/signUp/activation';
 import CreatePatientCard from '@pages/patient/createPatientCard';
+import EditPatientCard from '@pages/patient/EditPatientCard';
 import TempScheduler from '@pages/tempScheduler';
 
 export const PATH = {
@@ -19,14 +20,16 @@ export const PATH = {
   SIGN_UP_SECOND_STEP_GOOGLE: '/sign-up/second-step/google',
   FORGOT_PASS: '/forgot-pass',
   CONFIRM: '/forgot-pass/confirm',
-  RESET_PASS: `/reset-pass/:token`,
+  RESET_PASS: '/reset-pass/:token',
   LOGIN: '/',
   EDIT_DOCTOR_PROFILE: '/edit-doctor-profile',
   HELP: '/help',
   DASHBOARD: '/dashboard',
   CREATE_PATIENT_CARD: '/create-patient-card',
+  EDIT_PATIENT_CARD: '/edit-patient-card',
   SCHEDULER: '/scheduler',
 };
+
 
 const AppRouter = () => {
   return (
