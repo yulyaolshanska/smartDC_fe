@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useForm } from 'react-hook-form';
-import { ToastContainer } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 import { yupResolver } from '@hookform/resolvers/yup';
 import {
   CancelButton,
@@ -10,19 +10,40 @@ import {
   ButtonContainer,
 } from '@components/general/styles';
 import { Form, InputInlineContainer, Text } from '@components/Patient/styles';
-import { FormValues, ISignUp } from '@components/general/type';
+import { FormValues, IPatient } from '@components/general/type';
 import { patientSchema } from '@validation/patient.validate';
 import { PATH } from '@router/index';
+import { useNavigate } from 'react-router-dom';
 import InputName from '@components/Patient/Inputs/InputName';
 import InputPhoneNumberEmail from '@components/Patient/Inputs/InputPhoneNumberEmail';
 import InputGenderBirthDate from '@components/Patient/Inputs/InputGenderBirthDate';
 import InputAddressTimeZone from '@components/Patient/Inputs/InputAddressTimeZone';
 import InputOverview from '@components/Patient/Inputs/InputOverview';
 import InputCountryCity from '@components/Patient/Inputs/InputCountryCity';
+import { patientApi } from 'services/PatientService';
+import { error, plus } from '@constants/auth';
 
-const EditPatientCardForm : React.FC = () => {
+const EditPatientCardForm: React.FC = () => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
   const { editPatientCardSchema } = patientSchema();
+
+  //   hardcoded values Patient (i need props from patientprofile)
+
+  const patCard = {
+    firstName: 'John',
+    lastName: 'Nedoe',
+    phoneNumber: '+380992598283',
+    email: 'john_nedoe@gmail.com',
+    gender: 'Male',
+    birthDate: '2000-10-10',
+    country: 'DE',
+    city: 'Berlin',
+    address: 'Berger Str. 22',
+    timeZone: '(GMT+2) Europe/Berlin',
+    overview: 'Some issue',
+    id: '17',
+  };
 
   const {
     handleSubmit,
@@ -31,23 +52,37 @@ const EditPatientCardForm : React.FC = () => {
   } = useForm<FormValues>({
     mode: 'onChange',
     defaultValues: {
-      firstName: '',
-      lastName: '',
-      phoneNumber: '',
-      email: '',
-      gender: '',
-      birthDate: '',
-      country: '',
-      city: '',
-      address: '',
-      timeZone: '',
-      role: '',
+      firstName: patCard.firstName,
+      lastName: patCard.lastName,
+      phoneNumber: patCard.phoneNumber,
+      email: patCard.email,
+      gender: patCard.gender,
+      birthDate: patCard.birthDate,
+      country: patCard.country,
+      city: patCard.city,
+      address: patCard.address,
+      timeZone: patCard.timeZone,
+      overview: patCard.overview,
     },
 
     resolver: yupResolver(editPatientCardSchema),
   });
 
-  const onSubmit = (data: ISignUp) => data;
+  const [editPatient] = patientApi.useCreatePatientMutation();
+
+  const onSubmit = async (data: IPatient) => {
+    data.phoneNumber = plus + data.phoneNumber;
+
+    await editPatient(data, patCard.id).then((res) => {
+      if (error in res && res.error) {
+        toast.error(t('Patient.somethingWasWrong'), {
+          position: toast.POSITION.TOP_CENTER,
+        });
+      } else {
+        navigate(PATH.DASHBOARD);
+      }
+    });
+  };
 
   return (
     <FormContainer>

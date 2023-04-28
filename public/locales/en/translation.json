@@ -87,7 +87,8 @@
     "overviewRequired": "*Overview is required",
     "bothDatesRequired": "Validation error: both start and end dates are required",
     "endBeforeStartDateError": "Validation error: end date should be after start date",
-    "overlappingEventsError": "Validation error: working hours overlap"
+    "overlappingEventsError": "Validation error: working hours overlap",
+    "somethingWasWrong":"Sorry, something was wrong!"
   },
   "Patient": {
     "createPatientCard": "Create patient's card",

@@ -44,6 +44,11 @@ const AppRouter = () => {
           path={PATH.CREATE_PATIENT_CARD}
           element={<CreatePatientCard />}
         />
+          <Route
+          path={PATH.EDIT_PATIENT_CARD}
+          element={<EditPatientCard />}
+        />
+
         {/* Private Routes */}
         <Route
           path={PATH.SIGN_UP_SECOND_STEP_GOOGLE}
