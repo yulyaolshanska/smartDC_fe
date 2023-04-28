@@ -9,7 +9,7 @@ import { ReactComponent as AvaliabilityIcon } from '@assets/calendar.svg';
 import photo from '@assets/mockDoctorPhoto.png';
 import { authApi } from 'services/AuthService';
 import { doctorActions } from '@redux/slices/DoctorSlice';
-import { Stack, Typography } from '@mui/material';
+import { Stack } from '@mui/material';
 import {
   BottomDrawer,
   DoctorName,
@@ -74,9 +74,12 @@ const Drawer = () => {
   }, []);
 
   const confirmLogout = () => {
-    setShowModal(false);
-    navigate(`${PATH.LOGIN}`);
-    dispatch(doctorActions.logout());
+    try {
+      setShowModal(false);
+      dispatch(doctorActions.logout());
+    } finally {
+      navigate(`${PATH.LOGIN}`);
+    }
   };
 
   const cancelLogout = () => {

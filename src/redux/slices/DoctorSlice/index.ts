@@ -1,5 +1,5 @@
 import cookie from 'utils/functions/cookies';
-import { Dispatch, createSlice } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 
 import { persistor } from '@redux/store';
 import DoctorInitialState from '@redux/slices/DoctorSlice/types';
