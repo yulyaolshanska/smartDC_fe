@@ -92,6 +92,7 @@
   },
   "Patient": {
     "createPatientCard": "Create patient's card",
+    "editPatientCard": "Edit patient's card",
     "firstName": "First Name",
     "enterFirstName": "Enter patient's first name...",
     "lastName": "Last Name",
