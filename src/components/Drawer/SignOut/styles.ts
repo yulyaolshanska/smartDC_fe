@@ -11,10 +11,6 @@ import { SMALL_FONT_SIZE } from '@constants/fontSizes';
 import FONT_ROBOTO from '@constants/fonts';
 
 export const SendButton = styled.input`
-  :disabled {
-    background: ${PINK_SWAN}; 
-    color: ${WHITE}; 
-  }
   display: flex;
   margin-right: auto;
   margin-left: auto;
@@ -31,6 +27,9 @@ export const SendButton = styled.input`
   font-size: ${SMALL_FONT_SIZE};
   font-weight: bold;
   background: -webkit-linear-gradient(${NAVY_BLUE}, ${CORNFLOWER_BLUE});
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 export const CancelButton = styled.input`
