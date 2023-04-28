@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Logo from '@components/Logo';
 import { ReactComponent as DashbordIcon } from '@assets/dashbord.svg';
 import { ReactComponent as SignOutIcon } from '@assets/Sign Out.svg';
@@ -18,9 +18,12 @@ import {
   PositionContainer,
   TopDrawer,
 } from './styles';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from '@redux/hooks';
 import { navigationActions } from '@redux/slices/NavigationSlice';
+import LogoutModal from './SignOut';
+import { useTranslation } from 'react-i18next';
+import { PATH } from '@router/index';
 interface PositionsInterface {
   name: string;
   to: string;
@@ -28,11 +31,14 @@ interface PositionsInterface {
 }
 
 const Drawer = () => {
+  const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const selectedPosition = useAppSelector(
     (state) => state.navigationReducer.currentPage
   );
+  const [showModal, setShowModal] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
 
   const handleSelected = (position: PositionsInterface) => {
     dispatch(navigationActions.setCurrentPage(position.to));
@@ -67,6 +73,16 @@ const Drawer = () => {
     dispatch(doctorActions.getDoctor(doctor));
   }, []);
 
+  const confirmLogout = () => {
+    setShowModal(false);
+    navigate(`${PATH.LOGIN}`);
+    dispatch(doctorActions.logout());
+  };
+
+  const cancelLogout = () => {
+    setShowModal(false);
+  }
+
   return (
     <DrawerContainer>
       <TopDrawer>
@@ -83,7 +99,7 @@ const Drawer = () => {
             </PositionContainer>
           </Link>
         ))}
-        <PositionContainer onClick={() => dispatch(doctorActions.logout())}>
+        <PositionContainer onClick={() => setShowModal(true)}>
           <SignOutIcon />
           Sign Out
         </PositionContainer>
@@ -95,6 +111,14 @@ const Drawer = () => {
           <DoctorSpeciality>Therapist</DoctorSpeciality>
         </Stack>
       </BottomDrawer>
+      {showModal && 
+      <LogoutModal 
+        title={t('Auth.logoutText')}
+        confirmText={t('Auth.confirm')}
+        cancelTest={t('Auth.cancel')}
+        handleSubmitModal={confirmLogout}
+        handleCancelModal={cancelLogout}/>
+      }
     </DrawerContainer>
   );
 };
