@@ -8,7 +8,7 @@ import { ReactComponent as AppoitmentIcon } from '@assets/appointment.svg';
 import { ReactComponent as AvaliabilityIcon } from '@assets/calendar.svg';
 import photo from '@assets/mockDoctorPhoto.png';
 import { authApi } from 'services/AuthService';
-import { doctorActions } from '@redux/slices/DoctorSlice';
+import { doctorActions, clearPersist } from '@redux/slices/DoctorSlice';
 import { Stack } from '@mui/material';
 import {
   BottomDrawer,
@@ -65,6 +65,7 @@ const Drawer = () => {
     if (position) {
       dispatch(navigationActions.setCurrentPage(position.to));
     }
+    
   }, [location.pathname]);
 
   const { data: doctor, error, isLoading, refetch } = authApi.useGetMeQuery({});
@@ -74,12 +75,10 @@ const Drawer = () => {
   }, []);
 
   const confirmLogout = () => {
-    try {
-      setShowModal(false);
-      dispatch(doctorActions.logout());
-    } finally {
-      navigate(`${PATH.LOGIN}`);
-    }
+    setShowModal(false);
+    dispatch(clearPersist());
+    dispatch(doctorActions.logout());
+    navigate(`${PATH.LOGIN}`);
   };
 
   const cancelLogout = () => {
