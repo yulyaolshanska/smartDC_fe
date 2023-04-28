@@ -110,6 +110,12 @@ function Scheduler() {
   };
 
   function handleSelectSlot(slotInfo: { start: Date; end: Date }): void {
+    if (moment(slotInfo.start).isBefore(moment(), 'day')) {
+      toast.error(t('Error.pastDateError'), {
+        position: toast.POSITION.TOP_CENTER
+      });
+      return;
+    }
     setSelectedDate(slotInfo.start);
     setShowCreatePopup(true);
     setSelectedRange({
