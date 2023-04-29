@@ -1,18 +1,21 @@
 import React from 'react';
 import { ReactComponent as SearchIcon } from '@assets/Search.svg';
+
+import { debounce } from 'utils/functions/debounce';
+import { noteFilterActions } from '@redux/slices/NoteFilterSlice';
+import { noteApi } from 'services/NoteService';
+import { useAppDispatch, useAppSelector } from '@redux/hooks';
+import { INotes } from '..';
+import { usePrevious } from 'utils/hooks/usePrevious';
 import {
   Container,
   SearchIconContainer,
   StyledInput,
   StyledStack,
 } from './styles';
-import { debounce } from 'utils/functions/debounce';
-import { noteFilterActions } from '@redux/slices/NoteFilterSlice';
-import { noteApi } from 'services/NoteService';
-import { useAppDispatch, useAppSelector } from '@redux/hooks';
 
 interface SearchBarProps {
-  setNotesLocal: ([]) => void;
+  setNotesLocal: (arg: INotes[]) => void;
 }
 
 const SearchBar = React.memo(({ setNotesLocal }: SearchBarProps) => {
@@ -31,9 +34,12 @@ const SearchBar = React.memo(({ setNotesLocal }: SearchBarProps) => {
   };
 
   const [value, setValue] = React.useState<string>('');
-
+  const prevProps = usePrevious(value);
   const handleInputChange = React.useCallback(
     debounce(async (event: React.ChangeEvent<HTMLInputElement>) => {
+      if (event.target.value === prevProps.current) {
+        return;
+      }
       setValue(event.target.value);
       setNotesLocal([]);
       dispatch(noteFilterActions.clearSkipAmount());
