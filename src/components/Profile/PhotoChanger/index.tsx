@@ -1,6 +1,10 @@
+import React from 'react';
+import AvatarEditor from 'react-avatar-editor';
+
 import DoctorPhoto from '@assets/mockDoctorPhoto.png';
 import EditIcon from '@assets/edit.svg';
 import { Photo, PhotoChangerWrapper, EditIconContainer } from './styles';
+import AvatarChanger from '../AvatarEditor';
 
 const PhotoChanger = () => {
   return (
@@ -12,6 +16,7 @@ const PhotoChanger = () => {
           <img src={EditIcon} />
         </EditIconContainer>
       </Photo>
+      <AvatarChanger />
     </PhotoChangerWrapper>
   );
 };

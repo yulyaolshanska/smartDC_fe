@@ -12,7 +12,6 @@ export const doctorApi = createApi({
       if (token) {
         headers.set('authorization', `Bearer ${token}`);
       }
-      headers.set('Content-Type', 'application/json');
       return headers;
     },
   }),
@@ -25,6 +24,18 @@ export const doctorApi = createApi({
         staleTime: 1,
       }),
       invalidatesTags: ['Doctor'],
+    }),
+    updateDoctorPhoto: builder.mutation({
+      query: (data) => {
+        const formData = new FormData();
+        formData.append('file', data.blob, 'avatar.png');
+        return {
+          url: `/doctor/${data.id}/upload`,
+          method: 'POST',
+          body: formData,
+          invalidatesTags: ['Doctor'],
+        };
+      },
     }),
   }),
 });
