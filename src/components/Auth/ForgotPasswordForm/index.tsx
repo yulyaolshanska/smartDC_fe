@@ -5,31 +5,28 @@ import { useNavigate } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 import Input from '@components/Input';
 import {
-  AuthContainer,
-  AuthForm,
-  AuthInput,
-  AuthInputTitle,
-  AuthLinkContainer,
-  AuthLink,
-  AuthSendButton,
-  AuthText,
-  AuthTitle,
+  Container,
+  FormContainer,
+  InputContainer,
+  InputTitle,
+  LinkContainer,
+  Link,
+  SendButton,
+  Text,
+  Title,
   Form,
-  AuthArrowBack,
-} from '@components/Auth/styles';
-import { ISignUp } from '@components/Auth/type';
+  ArrowBack,
+} from '@components/general/styles';
+import { FormValues, IAuth } from '@components/general/type';
 import { email, error } from '@constants/auth';
 import signUpSchema from '@validation/auth.validate';
 import { PATH } from '@router/index';
-import { forgotPasswordQuery } from '@redux/slices/auth/forgotPassword';
 import { toast, ToastContainer } from 'react-toastify';
-import { useDispatch } from 'react-redux';
-import { AppDispatch } from '@redux/store';
+import { authApi } from 'services/AuthService';
 
 function ForgotPasswordForm() {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const dispatch = useDispatch<AppDispatch>();
 
   const { forgotPasswordSchema } = signUpSchema();
 
@@ -37,7 +34,7 @@ function ForgotPasswordForm() {
     handleSubmit,
     control,
     formState: { errors, isValid },
-  } = useForm<ISignUp>({
+  } = useForm<FormValues>({
     mode: 'onChange',
     defaultValues: {
       email: '',
@@ -45,8 +42,10 @@ function ForgotPasswordForm() {
     resolver: yupResolver(forgotPasswordSchema),
   });
 
-  const onSubmit = (data: ISignUp) => {
-    dispatch(forgotPasswordQuery(data)).then((res) => {
+  const [forgotPassword] = authApi.useForgotPasswordMutation();
+
+  const onSubmit = async (data: IAuth) => {
+    await forgotPassword(data).then((res) => {
       if (error in res && res.error) {
         toast.error(`Doctor with email ${data.email} not found!`, {
           position: toast.POSITION.TOP_CENTER,
@@ -58,13 +57,13 @@ function ForgotPasswordForm() {
   };
 
   return (
-    <AuthContainer>
-      <AuthForm>
+    <Container>
+      <FormContainer>
         <Form onSubmit={handleSubmit(onSubmit)}>
-          <AuthTitle>{t('Auth.forgotPasswordTitle')}</AuthTitle>
-          <AuthText>{t('Auth.forgotPasswordText')}</AuthText>
-          <AuthInput>
-            <AuthInputTitle>{t('Auth.email')}</AuthInputTitle>
+          <Title>{t('Auth.forgotPasswordTitle')}</Title>
+          <Text>{t('Auth.forgotPasswordText')}</Text>
+          <InputContainer>
+            <InputTitle>{t('Auth.email')}</InputTitle>
             <Input
               control={control}
               fullWidth
@@ -74,22 +73,22 @@ function ForgotPasswordForm() {
               error={Boolean(errors?.email)}
               required={true}
             />
-          </AuthInput>
-          <AuthSendButton
+          </InputContainer>
+          <SendButton
             disabled={!isValid}
             type="submit"
             value={t('Auth.submit') ?? ''}
           />
-          <AuthLinkContainer>
-            <AuthLink to={PATH.LOGIN}>
-              <AuthArrowBack />
+          <LinkContainer>
+            <Link to={PATH.LOGIN}>
+              <ArrowBack />
               {t('Auth.backToLogin')}
-            </AuthLink>
-          </AuthLinkContainer>
+            </Link>
+          </LinkContainer>
         </Form>
-      </AuthForm>
+      </FormContainer>
       <ToastContainer />
-    </AuthContainer>
+    </Container>
   );
 }
 

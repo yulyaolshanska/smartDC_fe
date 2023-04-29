@@ -1,4 +1,4 @@
-export type SignUpFields =
+export type FieldName =
   | 'firstName'
   | 'lastName'
   | 'email'
@@ -11,4 +11,5 @@ export type SignUpFields =
   | 'country'
   | 'city'
   | 'birthDate'
-  | 'timeZone';
+  | 'timeZone'
+  | 'overview';

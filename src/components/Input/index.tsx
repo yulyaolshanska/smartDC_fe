@@ -2,8 +2,8 @@ import { Control, Controller } from 'react-hook-form';
 import { TextFieldProps } from '@mui/material/TextField/TextField';
 import { TextField } from '@mui/material';
 import InputContainer from '@components/Input/styles';
-import { ISignUp } from '@components/Auth/type';
-import { SignUpFields } from 'types/auth.type';
+import { FormValues } from '@components/general/type';
+import { FieldName } from '@types';
 import { BLACK } from '@constants/colors';
 
 export function Input({
@@ -14,14 +14,14 @@ export function Input({
   type,
   placeholder,
   ...props
-}: TextFieldProps & { control: Control<ISignUp> }) {
+}: TextFieldProps & { control: Control<FormValues> }) {
   return (
     <InputContainer hasError={!!error}>
       <span>{label}</span>
       <Controller
         control={control}
         defaultValue=""
-        name={name as SignUpFields}
+        name={name as FieldName}
         render={(rest) => (
           <>
             <TextField

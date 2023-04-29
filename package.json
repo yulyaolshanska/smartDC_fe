@@ -31,6 +31,7 @@
     "i18next-http-backend": "^2.2.0",
     "react": "18.2.0",
     "react-content-loader": "^6.2.1",
+    "react-big-calendar": "^1.6.9",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.43.8",
     "react-i18next": "^12.2.0",
@@ -44,6 +45,7 @@
     "timezones-list": "^3.0.2",
     "typeface-roboto": "^1.1.13",
     "vite-plugin-svgr": "^2.4.0",
+    "uuid": "^9.0.0",
     "yup": "^1.0.2"
   },
   "devDependencies": {
@@ -57,10 +59,12 @@
     "@types/jest": "^29.5.0",
     "@types/node": "18.11.9",
     "@types/react": "18.0.25",
+    "@types/react-big-calendar": "^1.6.3",
     "@types/react-dom": "18.0.9",
     "@types/react-i18next": "^8.1.0",
     "@types/react-router": "^5.1.20",
     "@types/redux-persist": "^4.3.1",
+    "@types/uuid": "^9.0.1",
     "@typescript-eslint/eslint-plugin": "^5.57.1",
     "@typescript-eslint/parser": "^5.57.1",
     "@vitejs/plugin-react": "3.0.1",

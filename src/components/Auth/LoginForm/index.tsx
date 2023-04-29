@@ -5,43 +5,39 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { IconButton, InputAdornment } from '@mui/material';
 import Input from '@components/Input';
 import {
-  AuthContainer,
-  AuthForm,
-  AuthInput,
-  AuthInputTitle,
-  AuthLinkContainer,
-  AuthLink,
-  AuthSendButton,
-  AuthText,
-  AuthTitle,
+  Container,
+  FormContainer,
+  InputContainer,
+  InputTitle,
+  LinkContainer,
+  Link,
+  SendButton,
+  Text,
+  Title,
   Form,
   PasswordImg,
   AuthForgotPasswordContainer,
-} from '@components/Auth/styles';
-import { ISignUp } from '@components/Auth/type';
+} from '@components/general/styles';
+import { FormValues, IAuth } from '@components/general/type';
+import GoogleLoginButton from '@components/Auth/LoginForm/GoogleLogin';
 import visible from '@assets/auth/eye.svg';
 import visibleOff from '@assets/auth/eyeSlash.svg';
 import { email, end, password, error } from '@constants/auth';
 import signUpSchema from '@validation/auth.validate';
 import { PATH } from '@router/index';
-import GoogleLoginButton from './GoogleLogin';
 import { ToastContainer } from 'react-toastify';
-import { AuthLoginDto } from 'api/auth/auth.api';
 import { toast } from 'react-toastify';
-import { loginQuery } from '@redux/slices/auth/login';
-import { useAppDispatch, useAppSelector } from '@redux/hooks';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
 import cookie from 'utils/functions/cookies';
 import { doctorActions } from '@redux/slices/DoctorSlice';
 import { AppDispatch } from '@redux/store';
+import { authApi } from 'services/AuthService';
 
 function LoginForm() {
   const dispatch = useDispatch<AppDispatch>();
   const { t } = useTranslation();
   const navigate = useNavigate();
-
-  const doctorData = useAppSelector((state) => state.doctorReducer);
 
   const [showPassword, setShowPassword] = React.useState(false);
 
@@ -54,7 +50,7 @@ function LoginForm() {
     handleSubmit,
     control,
     formState: { errors, isValid },
-  } = useForm<ISignUp>({
+  } = useForm<FormValues>({
     mode: 'onChange',
     defaultValues: {
       email: '',
@@ -67,36 +63,41 @@ function LoginForm() {
     register('password');
   }, []);
 
-  const onSubmit = (data: AuthLoginDto):void => {
+  const [login] = authApi.useLoginMutation();
 
-    dispatch(loginQuery(data)).then((res) => {
-      if (!res.error) {
-        const token = res.payload.token;
-        const doctor = res.payload.userInfo;
-        dispatch(doctorActions.getDoctor(doctor));
-        cookie.set(
-          'accessToken',
-          token,
-          import.meta.env.VITE_REACT_APP_ACCESS_TOKEN_MAXAGE
-        );
-
-        navigate('/dashboard');
-      } else {
-        toast.error('Sorry, something was wrong!', {
-          position: toast.POSITION.TOP_CENTER,
-        });
-      }
-    });
+  const onSubmit = async (data: IAuth) => {
+    await login(data)
+      .unwrap()
+      .then((res) => {
+        if (error in res && res.error) {
+          toast.error(
+            'Sorry, something was wrong! Check your email and password!',
+            {
+              position: toast.POSITION.TOP_CENTER,
+            }
+          );
+        } else {
+          const token = res.token;
+          const doctor = res.userInfo;
+          dispatch(doctorActions.getDoctor(doctor));
+          cookie.set(
+            'accessToken',
+            token,
+            import.meta.env.VITE_REACT_APP_ACCESS_TOKEN_MAXAGE
+          );
+          navigate(PATH.DASHBOARD);
+        }
+      });
   };
 
   return (
-    <AuthContainer>
-      <AuthForm>
+    <Container>
+      <FormContainer>
         <Form onSubmit={handleSubmit(onSubmit)}>
-          <AuthTitle>{t('Auth.loginTitle')}</AuthTitle>
-          <AuthText>{t('Auth.loginText')}</AuthText>
-          <AuthInput>
-            <AuthInputTitle>{t('Auth.email')}</AuthInputTitle>
+          <Title>{t('Auth.loginTitle')}</Title>
+          <Text>{t('Auth.loginText')}</Text>
+          <InputContainer>
+            <InputTitle>{t('Auth.email')}</InputTitle>
             <Input
               control={control}
               fullWidth
@@ -106,9 +107,9 @@ function LoginForm() {
               error={Boolean(errors?.email)}
               required={true}
             />
-          </AuthInput>
-          <AuthInput>
-            <AuthInputTitle>{t('Auth.passwordLogin')}</AuthInputTitle>
+          </InputContainer>
+          <InputContainer>
+            <InputTitle>{t('Auth.passwordLogin')}</InputTitle>
             <Input
               control={control}
               fullWidth
@@ -132,28 +133,24 @@ function LoginForm() {
                 ),
               }}
             />
-          </AuthInput>
+          </InputContainer>
           <AuthForgotPasswordContainer>
-            <AuthLink to={PATH.FORGOT_PASS}>
-              {t('Auth.forgotPasswordLink')}
-            </AuthLink>
+            <Link to={PATH.FORGOT_PASS}>{t('Auth.forgotPasswordLink')}</Link>
           </AuthForgotPasswordContainer>
           <GoogleLoginButton />
-
-          <AuthSendButton
+          <SendButton
             disabled={!isValid}
             type="submit"
             value={t('Auth.continue') ?? ''}
           />
-
-          <AuthLinkContainer>
+          <LinkContainer>
             {t('Auth.haventAnAccount')}
-            <AuthLink to={PATH.SIGN_UP}>{t('Auth.click')}</AuthLink>
-          </AuthLinkContainer>
+            <Link to={PATH.SIGN_UP}>{t('Auth.click')}</Link>
+          </LinkContainer>
         </Form>
-      </AuthForm>
+      </FormContainer>
       <ToastContainer />
-    </AuthContainer>
+    </Container>
   );
 }
 

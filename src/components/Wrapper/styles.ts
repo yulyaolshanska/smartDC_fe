@@ -5,11 +5,12 @@ const fadeIn = keyframes`
   from { opacity: 0; }
   to { opacity: 1; }
 `;
+import { SMALL_FONT_SIZE } from '@constants/fontSizes';
+import FONT_ROBOTO from '@constants/fonts';
 
-const WrapperElement = styled.div`
+export const WrapperElement = styled.div`
   background-color: ${GHOST_WHITE};
-  border: 1.5px solid;
-  border-color: ${BORDER};
+  border: 1.5px solid ${BORDER};
   border-radius: 16px;
   padding: 30px 16px;
   width: 100%;
@@ -18,5 +19,3 @@ const WrapperElement = styled.div`
     ${fadeIn} 0.5s ease-in-out
   `};
 `;
-
-export default WrapperElement;

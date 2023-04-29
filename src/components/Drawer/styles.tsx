@@ -14,7 +14,7 @@ import {
 export const DrawerContainer = styled.div`
   display: flex;
   flex-direction: column;
-  min-width: 24.5vw;
+  min-width: 23.5vw;
   background-color: ${DRAWER_CONT};
   min-height: 100vh;
   border-right: 1px solid ${DRAWER_BORDER};

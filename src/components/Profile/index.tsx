@@ -16,7 +16,7 @@ import {
 import { phoneNumber } from '@constants/auth';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { EditRemoteSchema } from '@validation/editDoctorProfile.validate';
-import { ISignUp } from '@components/Auth/type';
+
 import { Stack, Typography } from '@mui/material';
 import CustomButton from '@components/Button';
 import SelectInput from '@components/Select';
@@ -34,10 +34,10 @@ import {
   genders,
   specializations,
   timeZones,
-} from './../../constants/mockData';
-import { persistor } from '@redux/store';
+} from '@constants/mockData';
 import { SMALL_FONT_SIZE } from '@constants/fontSizes';
 import { ZAMBEZI } from '@constants/colors';
+import { FormValues, IAuth } from '@components/general/type';
 
 export interface IEditProfileRemote {}
 const ProfileComponent = () => {
@@ -59,19 +59,21 @@ const ProfileComponent = () => {
     doctorRefetch();
     dispatch(doctorActions.getDoctor(doctor));
     setTimeout(() => {
-      reset({
-        firstName: doctor.firstName,
-        lastName: doctor.lastName,
-        email: doctor.email,
-        phoneNumber: doctor.phoneNumber,
-        gender: doctor.gender,
-        birthDate: doctor.birthDate,
-        country: doctor.country,
-        city: doctor.city,
-        address: doctor.address,
-        timeZone: doctor.timeZone,
-        specialization: doctor.specialization,
-      });
+      if (doctor) {
+        reset({
+          firstName: doctor.firstName,
+          lastName: doctor.lastName,
+          email: doctor.email,
+          phoneNumber: doctor.phoneNumber,
+          gender: doctor.gender,
+          birthDate: doctor.birthDate,
+          country: doctor.country,
+          city: doctor.city,
+          address: doctor.address,
+          timeZone: doctor.timeZone,
+          specialization: doctor.specialization,
+        });
+      }
     }, 0);
   }, [doctor]);
 
@@ -81,13 +83,13 @@ const ProfileComponent = () => {
     control,
     formState: { errors, isValid },
     reset,
-  } = useForm<ISignUp>({
+  } = useForm<FormValues>({
     mode: 'onChange',
     defaultValues: async () => await { ...doctor },
     resolver: yupResolver(EditRemoteSchema),
   });
 
-  const onSubmit = async (data: ISignUp) => {
+  const onSubmit = async (data: IAuth) => {
     try {
       const doctor = { ...data, id: doctorData.id };
       await updateDoctorProfile(doctor);

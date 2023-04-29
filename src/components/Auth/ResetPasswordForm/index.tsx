@@ -5,28 +5,26 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { IconButton, InputAdornment } from '@mui/material';
 import Input from '@components/Input';
 import {
-  AuthContainer,
-  AuthForm,
-  AuthGreenText,
-  AuthInput,
-  AuthInputTitle,
-  AuthSendButton,
-  AuthTitle,
+  Container,
+  FormContainer,
+  GreenText,
+  InputContainer,
+  InputTitle,
+  SendButton,
+  Title,
   Form,
   PasswordImg,
-} from '@components/Auth/styles';
-import { ISignUp } from '@components/Auth/type';
+} from '@components/general/styles';
+import { FormValues, IAuth } from '@components/general/type';
 import visible from '@assets/auth/eye.svg';
 import visibleOff from '@assets/auth/eyeSlash.svg';
 import { confirmPassword, end, error, password } from '@constants/auth';
 import signUpSchema from '@validation/auth.validate';
 import { toast, ToastContainer } from 'react-toastify';
 import { PATH } from '@router/index';
-import { useDispatch } from 'react-redux';
-import { AppDispatch } from '@redux/store';
-import { resetPasswordQuery } from '@redux/slices/auth/resetPassword';
 import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router';
+import { authApi } from 'services/AuthService';
 
 function ResetPasswordForm() {
   const [showPassword, setShowPassword] = useState<boolean>(false);
@@ -43,15 +41,13 @@ function ResetPasswordForm() {
 
   const { token } = useParams();
 
-  const dispatch = useDispatch<AppDispatch>();
-
   const { t } = useTranslation();
   const {
     register,
     handleSubmit,
     control,
     formState: { errors, isValid },
-  } = useForm<ISignUp>({
+  } = useForm<FormValues>({
     mode: 'onChange',
     defaultValues: {
       password: '',
@@ -66,14 +62,14 @@ function ResetPasswordForm() {
     register('confirmPassword');
   }, []);
 
-  const onSubmit = (data: ISignUp) => {
+  const [resetPassword] = authApi.useResetPasswordMutation();
+
+  const onSubmit = async (data: IAuth) => {
     if (token) {
-      dispatch(
-        resetPasswordQuery({
-          password: data.password,
-          token,
-        })
-      ).then((res) => {
+      await resetPassword({
+        password: data.password,
+        token,
+      }).then((res) => {
         if (error in res && res.error) {
           toast.error('Sorry, something was wrong!', {
             position: toast.POSITION.TOP_CENTER,
@@ -86,13 +82,13 @@ function ResetPasswordForm() {
   };
 
   return (
-    <AuthContainer>
-      <AuthForm>
+    <Container>
+      <FormContainer>
         <Form onSubmit={handleSubmit(onSubmit)}>
-          <AuthTitle>{t('Auth.resetPasswordTitle')}</AuthTitle>
-          <AuthGreenText>{t('Auth.resetPasswordText')}</AuthGreenText>
-          <AuthInput>
-            <AuthInputTitle>{t('Auth.createNewPassword')}</AuthInputTitle>
+          <Title>{t('Auth.resetPasswordTitle')}</Title>
+          <GreenText>{t('Auth.resetPasswordText')}</GreenText>
+          <InputContainer>
+            <InputTitle>{t('Auth.createNewPassword')}</InputTitle>
             <Input
               control={control}
               fullWidth
@@ -116,9 +112,9 @@ function ResetPasswordForm() {
                 ),
               }}
             />
-          </AuthInput>
-          <AuthInput>
-            <AuthInputTitle>{t('Auth.confirmNewPassword')}</AuthInputTitle>
+          </InputContainer>
+          <InputContainer>
+            <InputTitle>{t('Auth.confirmNewPassword')}</InputTitle>
             <Input
               control={control}
               fullWidth
@@ -142,16 +138,16 @@ function ResetPasswordForm() {
                 ),
               }}
             />
-          </AuthInput>
-          <AuthSendButton
+          </InputContainer>
+          <SendButton
             disabled={!isValid}
             type="submit"
             value={t('Auth.save') ?? ''}
           />
         </Form>
-      </AuthForm>
+      </FormContainer>
       <ToastContainer />
-    </AuthContainer>
+    </Container>
   );
 }
 

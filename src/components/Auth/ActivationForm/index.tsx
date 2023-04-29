@@ -1,33 +1,32 @@
 import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
-  AuthArrowBack,
+  ArrowBack,
   AuthConfirmationContainer,
   AuthConfirmationImg,
-  AuthContainer,
-  AuthForm,
-  AuthLink,
-  AuthLinkContainer,
-  AuthText,
+  Container,
+  FormContainer,
+  Link,
+  LinkContainer,
+  Text,
   Form,
-} from '@components/Auth/styles';
+} from '@components/general/styles';
 import checkmark from '@assets/auth/checkmark.svg';
-import { useDispatch } from 'react-redux';
-import { activationAccountQuery } from '@redux/slices/auth/activation';
-import { AppDispatch } from '@redux/store';
 import { useParams } from 'react-router';
 import { error } from '@constants/auth';
 import { toast } from 'react-toastify';
 import { PATH } from '@router/index';
+import { authApi } from 'services/AuthService';
 
 function ActivationForm() {
   const { t } = useTranslation();
-  const dispatch = useDispatch<AppDispatch>();
   const { link } = useParams();
+
+  const [activationAccount] = authApi.useActivationMutation();
 
   useEffect(() => {
     if (link) {
-      dispatch(activationAccountQuery({ link })).then((res) => {
+      activationAccount({ link }).then((res) => {
         if (error in res && res.error) {
           toast.error('Sorry, something was wrong!', {
             position: toast.POSITION.TOP_CENTER,
@@ -35,25 +34,25 @@ function ActivationForm() {
         }
       });
     }
-  }, [dispatch]);
+  }, [activationAccount]);
 
   return (
-    <AuthContainer>
-      <AuthForm>
+    <Container>
+      <FormContainer>
         <Form>
           <AuthConfirmationContainer>
             <AuthConfirmationImg src={checkmark} />
           </AuthConfirmationContainer>
-          <AuthText>{t('Auth.activationText')}</AuthText>
-          <AuthLinkContainer>
-            <AuthLink to={PATH.LOGIN}>
-              <AuthArrowBack />
+          <Text>{t('Auth.activationText')}</Text>
+          <LinkContainer>
+            <Link to={PATH.LOGIN}>
+              <ArrowBack />
               {t('Auth.goToLogin')}
-            </AuthLink>
-          </AuthLinkContainer>
+            </Link>
+          </LinkContainer>
         </Form>
-      </AuthForm>
-    </AuthContainer>
+      </FormContainer>
+    </Container>
   );
 }
 

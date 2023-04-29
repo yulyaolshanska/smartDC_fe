@@ -2,20 +2,6 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 import cookie from 'utils/functions/cookies';
 
-export interface IUpdateDoctorProfile {
-  id: number;
-  firstName: string;
-  lastName: string;
-  phoneNumber: string;
-  email: string;
-  gender: string;
-  birthDate: string;
-  country: string;
-  city: string;
-  address: string;
-  timeZone: string;
-}
-
 export const doctorApi = createApi({
   reducerPath: 'doctorApi',
   tagTypes: ['Doctor'],

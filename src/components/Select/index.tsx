@@ -2,8 +2,8 @@ import { Control, Controller } from 'react-hook-form';
 import { TextFieldProps } from '@mui/material/TextField/TextField';
 import { TextField, Autocomplete } from '@mui/material';
 import InputContainer from '@components/Input/styles';
-import { ISignUp, Option } from '@components/Auth/type';
-import { SignUpFields } from '@types';
+import { FormValues, Option } from '@components/general/type';
+import { FieldName } from '@types';
 
 export type Props = {
   options: Option[];
@@ -16,14 +16,13 @@ export function SelectInput({
   error,
   placeholder,
   options,
-}: Props & { control: Control<ISignUp> }) {
+}: Props & { control: Control<FormValues> }) {
   return (
     <InputContainer hasError={!!error}>
       <span>{label}</span>
       <Controller
         control={control}
-        name={name as SignUpFields}
-        defaultValue=""
+        name={name as FieldName}
         render={({ field: { ref, onChange, ...field } }) => (
           <Autocomplete
             options={options}

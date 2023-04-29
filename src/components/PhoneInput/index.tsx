@@ -3,8 +3,8 @@ import { Control, Controller } from 'react-hook-form';
 import { TextFieldProps } from '@mui/material/TextField/TextField';
 import 'react-phone-input-2/lib/bootstrap.css';
 import { HelperText, PhoneInputContainer } from '@components/PhoneInput/styles';
-import { ISignUp } from '@components/Auth/type';
-import { SignUpFields } from '@types';
+import { FormValues } from '@components/general/type';
+import { FieldName } from '@types';
 
 function PhoneInput({
   control,
@@ -14,12 +14,12 @@ function PhoneInput({
   type,
   helperText,
   ...props
-}: TextFieldProps & { control: Control<ISignUp> }) {
+}: TextFieldProps & { control: Control<FormValues> }) {
   return (
     <Controller
       control={control}
       defaultValue=""
-      name={name as SignUpFields}
+      name={name as FieldName}
       render={(rest) => (
         <>
           <PhoneInputContainer
