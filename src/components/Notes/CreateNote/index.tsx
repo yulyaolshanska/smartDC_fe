@@ -1,27 +1,24 @@
 import Wrapper from '@components/Wrapper';
 import React from 'react';
-import { Stack, Button, Typography, Box, Input } from '@mui/material';
-import {
-  MainText,
-  Date as StyledDate,
-  Show,
-  Doctor,
-  AddButton,
-  StyledTextArea,
-  CreateNoteContainer,
-} from './styles';
-import { ReactComponent as PaperclipIcon } from '@assets/paperClip.svg';
+import { Stack, Typography } from '@mui/material';
+
 import { HINT, ZAMBEZI } from '@constants/colors';
 import {
   MEGA_SMAILL_FONT_SIZE,
-  SMALL_FONT_SIZE,
   SUPER_SMALL_FONT_SIZE,
 } from '@constants/fontSizes';
 import { debounce } from 'utils/functions/debounce';
 import { noteApi } from 'services/NoteService';
 import { authApi } from 'services/AuthService';
 import { useAppSelector } from '@redux/hooks';
-import FileUpload, { FileInput } from '@components/FileInput';
+import FileUpload from '@components/FileInput';
+import {
+  Date as StyledDate,
+  Doctor,
+  AddButton,
+  StyledTextArea,
+  CreateNoteContainer,
+} from './styles';
 
 interface CreateNoteProps {
   addNew: boolean;
@@ -47,8 +44,7 @@ const CreateNote = ({ addNew, setAddNew }: CreateNoteProps) => {
     []
   );
 
-  const updateUploadedFiles = (files) => setFiles(files);
-  console.log(files);
+  const updateUploadedFiles = (files: File[]) => setFiles(files);
 
   const createNote = async () => {
     await createPatientNote({
@@ -108,9 +104,8 @@ const CreateNote = ({ addNew, setAddNew }: CreateNoteProps) => {
 
           <Stack alignItems="center">
             <FileUpload
-              accept=".jpg,.png,.jpeg,.docx,.pdf"
               label="Patient's files"
-              // multiple
+              //  multiple
               updateFilesCb={updateUploadedFiles}
             />
           </Stack>

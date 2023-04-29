@@ -1,4 +1,5 @@
 import React, { useRef, useState } from 'react';
+import ClearIcon from '@mui/icons-material/Clear';
 import {
   FileUploadContainer,
   FormField,
@@ -13,58 +14,71 @@ import {
   InputLabel,
 } from './styles';
 
+interface FileUploadProps {
+  label: string;
+  updateFilesCb: (files: File[]) => void;
+  maxFileSizeInBytes?: number;
+  multiple?: boolean;
+}
+
+interface FileMap {
+  [key: string]: File;
+}
+
 const KILO_BYTES_PER_BYTE = 1000;
 const DEFAULT_MAX_FILE_SIZE_IN_BYTES = 500000;
 
-const convertNestedObjectToArray = (nestedObj) =>
+const convertNestedObjectToArray = (nestedObj: FileMap) =>
   Object.keys(nestedObj).map((key) => nestedObj[key]);
 
-const convertBytesToKB = (bytes) => Math.round(bytes / KILO_BYTES_PER_BYTE);
+const convertBytesToKB = (bytes: number) =>
+  Math.round(bytes / KILO_BYTES_PER_BYTE);
 
 const FileUpload = ({
   label,
   updateFilesCb,
   maxFileSizeInBytes = DEFAULT_MAX_FILE_SIZE_IN_BYTES,
   ...otherProps
-}) => {
-  const fileInputField = useRef(null);
-  const [files, setFiles] = useState({});
-  console.log('inner', files);
+}: FileUploadProps) => {
+  const fileInputField = useRef<HTMLInputElement>(null);
+  const [files, setFiles] = useState<{}>({});
 
   const handleUploadBtnClick = () => {
-    fileInputField.current.click();
+    fileInputField.current && fileInputField.current.click();
   };
 
-  const addNewFiles = (newFiles) => {
+  const addNewFiles = (newFiles: File[]): FileMap => {
+    const updatedFiles: FileMap = { ...files };
     for (let file of newFiles) {
       if (file.size < maxFileSizeInBytes) {
         if (!otherProps.multiple) {
-          return { file };
+          return { [file.name]: file } as FileMap;
         }
-        files[file.name] = file;
+        updatedFiles[file.name] = file;
       }
     }
-    return { ...files };
+    return updatedFiles;
   };
 
-  const callUpdateFilesCb = (files) => {
+  const callUpdateFilesCb = (files: FileMap) => {
     const filesAsArray = convertNestedObjectToArray(files);
     updateFilesCb(filesAsArray);
   };
 
-  const handleNewFileUpload = (e) => {
+  const handleNewFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { files: newFiles } = e.target;
-    if (newFiles.length) {
-      let updatedFiles = addNewFiles(newFiles);
+    if (newFiles && newFiles.length) {
+      let updatedFiles = addNewFiles(Array.from(newFiles));
       setFiles(updatedFiles);
       callUpdateFilesCb(updatedFiles);
     }
   };
 
-  const removeFile = (fileName) => {
-    delete files[fileName];
-    setFiles({ ...files });
-    callUpdateFilesCb({ ...files });
+  const removeFile = (fileName: string) => {
+    const toRemoveFiles: { [key: string]: any } = { ...files };
+    delete toRemoveFiles[fileName];
+    setFiles(toRemoveFiles);
+    callUpdateFilesCb(toRemoveFiles);
   };
 
   return (
@@ -73,7 +87,6 @@ const FileUpload = ({
         <InputLabel>{label}</InputLabel>
         <DragDropText>Drag and drop your files anywhere or</DragDropText>
         <UploadFileBtn type="button" onClick={handleUploadBtnClick}>
-          <i className="fas fa-file-upload" />
           <span> Upload {otherProps.multiple ? 'files' : 'a file'}</span>
         </UploadFileBtn>
         <FormField
@@ -89,7 +102,8 @@ const FileUpload = ({
         <span>To Upload</span>
         <PreviewList>
           {Object.keys(files).map((fileName, index) => {
-            let file = files[fileName];
+            let previewFiles: { [key: string]: any } = { ...files };
+            let file = previewFiles[fileName];
             let isImageFile = file.type.split('/')[0] === 'image';
             return (
               <PreviewContainer key={fileName}>
@@ -104,10 +118,9 @@ const FileUpload = ({
                     <span>{file.name}</span>
                     <aside>
                       <span>{convertBytesToKB(file.size)} kb</span>
-                      <RemoveFileIcon
-                        className="fas fa-trash-alt"
-                        onClick={() => removeFile(fileName)}
-                      />
+                      <RemoveFileIcon onClick={() => removeFile(fileName)}>
+                        <ClearIcon />
+                      </RemoveFileIcon>
                     </aside>
                   </FileMetaData>
                 </div>

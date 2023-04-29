@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import { Stack } from '@mui/material';
 import AddNoteButton from './AddNoteButton';
 import SearchBar from './SearchBar';
@@ -38,7 +38,7 @@ const Notes = () => {
   React.useEffect(() => {
     if (notes)
       setTimeout(() => {
-        setNotesLocal([...notesLocal, ...notes]);
+        setNotesLocal([...notesLocal, ...notes.notes]);
       }, 0);
   }, [notes]);
 
@@ -61,7 +61,7 @@ const Notes = () => {
             )
             .map((note) => <Note key={note.id} {...note} />)}
       <Stack alignItems="center">
-        <LoadMoreButton notesLocal={notesLocal} setNotesLocal={setNotesLocal} />
+        <LoadMoreButton notesLocal={notesLocal} />
       </Stack>
     </Stack>
   );

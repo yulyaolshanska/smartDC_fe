@@ -46,11 +46,10 @@ export const noteApi = createApi({
         body.append('doctorId', noteData.doctorId);
         body.append('patientId', noteData.patientId);
         body.append('note', noteData.note);
-        body.forEach((file) => console.log('File: ', file));
         return {
           url: '/notes/create',
           method: 'POST',
-          body: body,
+          body,
         };
       },
     }),

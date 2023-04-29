@@ -1,12 +1,5 @@
 import {
-  ACTIVE,
-  ACTIVE_BACKGROUND,
-  BLACK,
-  GHOST_WHITE,
-  NOT_ACTIVE_BACKGROUND_HOVER,
-  NOT_ACTIVE_HOVER,
-  PINK_SWAN,
-  ZAMBEZI,
+  ACTIVE, BLACK, NOT_ACTIVE_HOVER, ZAMBEZI,
 } from '@constants/colors';
 import styled, { keyframes, css } from 'styled-components';
 
@@ -37,12 +30,11 @@ export const SortList = styled.ul<{ toggle?: boolean }>`
   flex-direction: column;
   width: 100%;
 
-  animation: ${(props) =>
-    props.toggle
-      ? css`
+  animation: ${(props) => (props.toggle
+    ? css`
           ${fadeIn} 0.5s ease-in-out
         `
-      : 'none'};
+    : 'none')};
 
   & * {
     background-color: ${NOT_ACTIVE_HOVER};
@@ -64,6 +56,7 @@ export const SortList = styled.ul<{ toggle?: boolean }>`
 export const SortItem = styled.li<{ selected: boolean }>`
   background-color: ${({ selected }) => (selected ? ACTIVE : null)};
   border: ${({ selected }) => (selected ? `${BLACK} 1.5px solid` : null)};
+  pointer-events: ${({ selected }) => (selected ? 'none' : 'auto')};
   cursor: pointer;
 `;
 

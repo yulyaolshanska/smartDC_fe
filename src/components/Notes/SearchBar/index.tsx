@@ -1,6 +1,4 @@
 import React from 'react';
-import { Stack } from '@mui/system';
-
 import { ReactComponent as SearchIcon } from '@assets/Search.svg';
 import {
   Container,
@@ -45,10 +43,6 @@ const SearchBar = React.memo(({ setNotesLocal }: SearchBarProps) => {
 
     []
   );
-
-  // React.useEffect(() => {
-  //   refetchNotes();
-  // }, [filterParams]);
 
   return (
     <Container onClick={handleContainerClick}>

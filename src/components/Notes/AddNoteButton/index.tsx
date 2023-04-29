@@ -1,10 +1,8 @@
 import React from 'react';
-
 import { Stack } from '@mui/material';
-
-import { Container, Text, PlusButton } from './styles';
 import { ReactComponent as PlusImage } from '@assets/plusButton.svg';
 import { ReactComponent as CancelImage } from '@assets/cross-cancel.svg';
+import { Container, Text, PlusButton } from './styles';
 
 interface AddNoteButtonProps {
   addNew: boolean;

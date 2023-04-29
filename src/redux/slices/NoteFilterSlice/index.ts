@@ -1,7 +1,4 @@
-import cookie from 'utils/functions/cookies';
 import { createSlice } from '@reduxjs/toolkit';
-
-import { persistor } from '@redux/store';
 
 export interface INoteFilter {
   sortBy: string;
@@ -15,7 +12,7 @@ const initialState: INoteFilter = {
   searchString: '',
   sortBy: 'Date',
   sortOrder: 'desc',
-  limit: 4,
+  limit: 5,
   skipAmount: 0,
 };
 const noteFilterSlice = createSlice({
@@ -32,7 +29,7 @@ const noteFilterSlice = createSlice({
       state.searchString = action.payload;
     },
     setSkipAmount(state) {
-      state.skipAmount += 4;
+      state.skipAmount += 5;
     },
     clearSkipAmount(state) {
       state.skipAmount = 0;

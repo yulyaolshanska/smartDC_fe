@@ -1,8 +1,8 @@
 import { Typography } from '@mui/material';
 import React from 'react';
 
-const Error = ({ text }: string) => {
-  return <Typography>{text}</Typography>;
+const Error = () => {
+  return <Typography>Error</Typography>;
 };
 
 export default Error;

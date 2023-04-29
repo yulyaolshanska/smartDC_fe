@@ -1,12 +1,7 @@
-import styled, { keyframes, css } from 'styled-components';
+import styled from 'styled-components';
 import { ACTIVE, GHOST_WHITE } from '@constants/colors';
 import { SMALL_FONT_SIZE } from '@constants/fontSizes';
 import FONT_ROBOTO from '@constants/fonts';
-
-const fadeIn = keyframes`
-  from { opacity: 0; }
-  to { opacity: 1; }
-`;
 
 export const Container = styled.div`
   display: flex;

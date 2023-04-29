@@ -150,7 +150,7 @@ export const PreviewList = styled.section`
   }
 `;
 
-export const FileMetaData = styled.div`
+export const FileMetaData = styled.div<{ isImageFile: boolean }>`
   display: ${(props) => (props.isImageFile ? 'none' : 'flex')};
   flex-direction: column;
   position: absolute;

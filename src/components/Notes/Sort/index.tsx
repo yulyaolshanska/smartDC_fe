@@ -13,8 +13,9 @@ import { relative } from 'path';
 import { useAppDispatch, useAppSelector } from '@redux/hooks';
 import { noteFilterActions } from '@redux/slices/NoteFilterSlice';
 import { noteApi } from 'services/NoteService';
+import { INotes } from '..';
 interface SortProps {
-  setNotesLocal: ([]) => void;
+  setNotesLocal: (arg: INotes[]) => void;
 }
 
 const Sort = React.memo(({ setNotesLocal }: SortProps) => {

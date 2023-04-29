@@ -5,7 +5,13 @@ import { useAppDispatch, useAppSelector } from '@redux/hooks';
 import { noteFilterActions } from '@redux/slices/NoteFilterSlice';
 import { INotes } from '@components/Notes';
 
-const LoadMoreButton = ({ notesLocal }: INotes[]) => {
+//not reusable
+
+interface LoadMoreButtonProps {
+  notesLocal: INotes[];
+}
+
+const LoadMoreButton = ({ notesLocal }: LoadMoreButtonProps) => {
   const dispatch = useAppDispatch();
   const filterParams = useAppSelector((state) => state.noteFilterReducer);
   const { data: notes, refetch: refetchNotes } = noteApi.useGetPatientNoteQuery(
@@ -18,7 +24,14 @@ const LoadMoreButton = ({ notesLocal }: INotes[]) => {
     dispatch(noteFilterActions.setSkipAmount());
   }, [notesLocalLength]);
 
-  return <LoadButton onClick={() => fetchMore()}>Load More</LoadButton>;
+  return (
+    <LoadButton
+      onClick={() => fetchMore()}
+      disabled={notes?.count === notesLocalLength}
+    >
+      Load More
+    </LoadButton>
+  );
 };
 
 export default LoadMoreButton;

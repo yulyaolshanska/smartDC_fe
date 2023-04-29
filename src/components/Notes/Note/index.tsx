@@ -1,13 +1,12 @@
-import Wrapper from '@components/Wrapper';
 import React from 'react';
-import { MainText, Date as StyledDate, Show, Doctor } from './styles';
-import { noteApi } from 'services/NoteService';
+import axios from 'axios';
 import { useHighlight } from 'utils/hooks/useHighlight';
-import { firstName } from './../../../constants/auth';
-import { Stack, Box } from '@mui/system';
+import Wrapper from '@components/Wrapper';
+import { Stack } from '@mui/system';
 import DownloadIcon from '@mui/icons-material/Download';
 import { Typography } from '@mui/material';
-import axios from 'axios';
+
+import { MainText, Date as StyledDate, Show, Doctor } from './styles';
 
 interface NoteProps {
   createdAt: string;
