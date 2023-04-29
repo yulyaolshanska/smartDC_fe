@@ -1,12 +1,12 @@
-//@ts-ignore
+// @ts-ignore
 export const debounce = (fn, ms) => {
-  //@ts-ignore
+  // @ts-ignore
   let timeout;
   return function () {
     const fnCall = () => {
-      //@ts-ignore
+      // @ts-ignore
       fn.apply(this, arguments);
-    }; //@ts-ignore
+    }; // @ts-ignore
     clearTimeout(timeout);
     timeout = setTimeout(fnCall, ms);
   };

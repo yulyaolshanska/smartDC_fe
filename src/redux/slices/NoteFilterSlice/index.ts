@@ -37,5 +37,4 @@ const noteFilterSlice = createSlice({
   },
 });
 
-export const { reducer: noteFilterReducer, actions: noteFilterActions } =
-  noteFilterSlice;
+export const { reducer: noteFilterReducer, actions: noteFilterActions } = noteFilterSlice;
