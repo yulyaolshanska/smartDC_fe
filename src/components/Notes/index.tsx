@@ -9,6 +9,7 @@ import LoadMoreButton from '@components/LoadMoreButton';
 import { noteApi } from 'services/NoteService';
 import { useAppSelector } from '@redux/hooks';
 import Skeleton from './Skeleton';
+import { ToastContainer, toast } from 'react-toastify';
 
 export interface INotes {
   id: number;
@@ -22,6 +23,8 @@ export interface INotes {
 const Notes = () => {
   const [addNew, setAddNew] = React.useState<boolean>(false);
   const [notesLocal, setNotesLocal] = React.useState<INotes[] | []>([]);
+  const [created, setCreated] = React.useState<boolean>(false);
+  const [mounted, setMounted] = React.useState<boolean>(false);
 
   const filterParams = useAppSelector((state) => state.noteFilterReducer);
   const {
@@ -42,14 +45,28 @@ const Notes = () => {
       }, 0);
   }, [notes]);
 
+  React.useEffect(() => {
+    if (mounted) {
+      toast.success('Note has been created!');
+    } else {
+      setMounted(true);
+    }
+  }, [created]);
+
   return (
     <Stack gap="16px">
+      <ToastContainer limit={1} />
       <AddNoteButton handleAddNew={handleAddNew} addNew={addNew} />
       <Stack direction="row" alignItems="center" gap="48px">
         <SearchBar setNotesLocal={setNotesLocal} />
         <Sort setNotesLocal={setNotesLocal} />
       </Stack>
-      <CreateNote addNew={addNew} setAddNew={setAddNew} />
+      <CreateNote
+        addNew={addNew}
+        setAddNew={setAddNew}
+        setCreated={setCreated}
+        created={created}
+      />
       {isLoading || notesLocal.length === 0
         ? Array(4)
             .fill(null)

@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { toast } from 'react-toastify';
 
 import cookie from 'utils/functions/cookies';
 
