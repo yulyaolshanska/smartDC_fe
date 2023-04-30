@@ -1,17 +1,12 @@
 import React from 'react';
-import AvatarEditor from 'react-avatar-editor';
 import { createPortal } from 'react-dom';
-import axios from 'axios';
+import { useTranslation } from 'react-i18next';
 import editIcon from 'assets/edit.svg';
 import defaultDoctorPhoto from '@assets/mockDoctorPhoto.png';
-import { doctorApi } from 'services/DoctorService';
 import { authApi } from 'services/AuthService';
 import { useMount } from '../AvatarEditor/hooksAvatarEditor';
 import { Photo, PhotoChangerWrapper, EditIconContainer } from './styles';
 import AvatarChanger from '../AvatarEditor';
-import { persistor } from '@redux/store';
-import cookie from 'utils/functions/cookies';
-import { access } from 'fs';
 import { getDoctorAvatar } from '../api/getPhoto';
 
 const PhotoChanger = () => {
@@ -29,11 +24,13 @@ const PhotoChanger = () => {
     avatar();
   }, []);
 
+  const { t } = useTranslation();
+
   return (
     <PhotoChangerWrapper>
-      <p>Edit Profile</p>
+      <p> {t('Profile.editProfile') ?? ''}</p>
       <Photo>
-        {doctor.photoUrl ? (
+        {doctor?.photoUrl ? (
           <img src={avatarUrl} alt="Photo" width="160px" />
         ) : (
           <img src={defaultDoctorPhoto} alt="Photo" width="160px" />

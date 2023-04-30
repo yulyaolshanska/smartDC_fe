@@ -1,13 +1,14 @@
 import React from 'react';
 import AvatarEditor from 'react-avatar-editor';
 import { CSSTransition } from 'react-transition-group';
+import { ToastContainer, toast } from 'react-toastify';
+import { useTranslation } from 'react-i18next';
 import FileUploadIcon from '@mui/icons-material/FileUpload';
 import { Typography, Stack } from '@mui/material';
 import { doctorApi } from 'services/DoctorService';
 import { authApi } from 'services/AuthService';
 import { ANIMATION_TIME } from '@constants/animation';
 import animationStyles from '../styles/animationStyles.module.scss';
-import styles from '../styles/burgerMenu.module.scss';
 import { ChangerProps } from '..';
 import {
   Container,
@@ -18,8 +19,6 @@ import {
   RangeInput,
   StyledInput,
 } from '../styles/styles';
-import { persistor } from '@redux/store';
-import { ToastContainer, toast } from 'react-toastify';
 
 const overlayAnimation = {
   enter: animationStyles.overlayEnter,
@@ -41,6 +40,8 @@ const Layout = ({ opened, onClose, setAvatarUrl, avatar }: ChangerProps) => {
   const overlayRef = React.useRef<HTMLDivElement>(null);
   const contentRef = React.useRef<HTMLDivElement>(null);
   const [animationIn, setAnimationIn] = React.useState(false);
+
+  const { t } = useTranslation();
 
   React.useEffect(() => {
     setAnimationIn(opened);
@@ -100,11 +101,11 @@ const Layout = ({ opened, onClose, setAvatarUrl, avatar }: ChangerProps) => {
             <StyledInput type="file" onChange={handleImageUpload} />
             <Stack direction="row">
               <FileUploadIcon />
-              <Typography>Upload your photo</Typography>
+              <Typography> {t('Profile.uploadYourPhoto') ?? ''}</Typography>
             </Stack>
           </InputWrapper>
           <Stack direction="row" gap="10px" alignItems="center" width="90%">
-            <Typography>Scale</Typography>
+            <Typography>{t('Profile.scale') ?? ''}</Typography>
             <RangeInput
               type="range"
               min="1"
@@ -130,7 +131,7 @@ const Layout = ({ opened, onClose, setAvatarUrl, avatar }: ChangerProps) => {
               }
             }}
           >
-            Export
+            {t('Profile.export') ?? ''}
           </ExportButton>
         </Content>
       </CSSTransition>

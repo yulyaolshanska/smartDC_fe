@@ -54,12 +54,12 @@
     "cancel": "Cancel",
     "delete": "Delete",
     "role": "Role",
-    "enterRole":"Enter role...",
-    "specialization":"Specialization",
-    "enterSpecialization":"Enter specialization...",
-    "gender":"Gender",
-    "enterGender":"Enter your gender...",
-    "birthDate":"Date of Birth",
+    "enterRole": "Enter role...",
+    "specialization": "Specialization",
+    "enterSpecialization": "Enter specialization...",
+    "gender": "Gender",
+    "enterGender": "Enter your gender...",
+    "birthDate": "Date of Birth",
     "enterDateOfBirth": "dd/mm/yyyy",
     "country": "Country",
     "enterCountry": "Enter your country...",
@@ -100,18 +100,18 @@
     "enterEmail": "Enter patient's email",
     "phoneNumber": "Phone Number",
     "enterPhoneNumber": "Enter patient's phone Number",
-    "gender":"Gender",
-    "enterGender":"Enter patient's gender",
-    "birthDate":"Date of Birth",
-    "enterBirthDate":"Enter patient's date of Birth",
-    "country":"Country",
-    "enterCountry":"Enter patient's country",
-    "city":"City",
-    "enterCity":"Enter patient's city",
-    "address":"Address",
-    "enterAddress":"Enter patient's address",
-    "timeZone":"Time Zone",
-    "enterTimeZone":"Enter patient's time Zone",
+    "gender": "Gender",
+    "enterGender": "Enter patient's gender",
+    "birthDate": "Date of Birth",
+    "enterBirthDate": "Enter patient's date of Birth",
+    "country": "Country",
+    "enterCountry": "Enter patient's country",
+    "city": "City",
+    "enterCity": "Enter patient's city",
+    "address": "Address",
+    "enterAddress": "Enter patient's address",
+    "timeZone": "Time Zone",
+    "enterTimeZone": "Enter patient's time Zone",
     "overview": "Overview",
     "enterOverview": "Enter patient's overview",
     "save": "Save",
@@ -119,7 +119,11 @@
   },
   "Profile": {
     "cancel": "Cancel",
-    "save": "Save"
+    "save": "Save",
+    "editProfile": "Edit profile",
+    "uploadYourPhoto": "Upload your photo",
+    "export": "Export",
+    "scale": "Scale"
   },
 
   "Help": {
@@ -142,5 +146,3 @@
     "selectTimezone": "Time Zone:"
   }
 }
-
-
