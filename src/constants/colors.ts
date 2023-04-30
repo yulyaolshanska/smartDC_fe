@@ -53,3 +53,4 @@ export const HINT = '#808080';
 export const GRAY_SHADOW = '#66666666';
 
 export const LIGHT_GRAY = '#808080';
+export const UPLOAD_BUTTON_COLOR = '#3498db';

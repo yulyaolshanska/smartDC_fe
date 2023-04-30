@@ -1,5 +1,14 @@
+import { BLACK, UPLOAD_BUTTON_COLOR, WHITE } from '@constants/colors';
+
 import FONT_ROBOTO from '@constants/fonts';
 import styled from 'styled-components';
+
+import {
+  VERY_SMALL_FONT_SIZE,
+  LARGE_FONT_SIZE,
+  SMALL_FONT_SIZE,
+  NORMAL_FONT_SIZE,
+} from '@constants/fontSizes';
 
 export const FileUploadContainer = styled.section`
   position: relative;
@@ -10,12 +19,12 @@ export const FileUploadContainer = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: white;
+  background-color: ${WHITE};
   width: 100%;
 `;
 
 export const FormField = styled.input`
-  font-size: 18px;
+  font-size: ${NORMAL_FONT_SIZE};
   display: block;
   width: 100%;
   border: none;
@@ -34,8 +43,8 @@ export const FormField = styled.input`
 
 export const InputLabel = styled.label`
   top: -21px;
-  font-size: 13px;
-  color: black;
+  font-size: ${VERY_SMALL_FONT_SIZE};
+  color: ${BLACK};
   left: 0;
   position: absolute;
 `;
@@ -54,14 +63,14 @@ export const UploadFileBtn = styled.button`
   background-color: transparent;
   border: 2px solid #3498db;
   cursor: pointer;
-  font-size: 1rem;
+  font-size: ${SMALL_FONT_SIZE};
   line-height: 1;
   padding: 1.1em 2.8em;
   text-align: center;
   text-transform: uppercase;
   font-weight: 700;
   border-radius: 6px;
-  color: #3498db;
+  color: ${UPLOAD_BUTTON_COLOR};
   position: relative;
   overflow: hidden;
   z-index: 1;
@@ -88,7 +97,7 @@ export const UploadFileBtn = styled.button`
   }
 
   i {
-    font-size: 22px;
+    font-size: ${LARGE_FONT_SIZE};
     margin-right: 5px;
     border-right: 2px solid;
     position: absolute;
@@ -111,7 +120,7 @@ export const UploadFileBtn = styled.button`
   }
 
   &:hover {
-    color: #fff;
+    color: ${WHITE};
     outline: 0;
     background: transparent;
 
@@ -136,7 +145,7 @@ export const FilePreviewContainer = styled.article`
   margin-bottom: 35px;
   width: 100%;
   span {
-    font-size: 14px;
+    font-size: ${SMALL_FONT_SIZE};
   }
 `;
 
@@ -160,7 +169,7 @@ export const FileMetaData = styled.div<{ isImageFile: boolean }>`
   bottom: 0;
   padding: 10px;
   border-radius: 6px;
-  color: white;
+  color: ${WHITE};
   font-weight: bold;
   background-color: rgba(5, 5, 5, 0.55);
 
