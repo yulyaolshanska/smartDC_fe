@@ -1,10 +1,11 @@
 import React from 'react';
 
 import { ANIMATION_TIME } from 'constants/animation';
-type qwet = {
+
+interface UseMountProps {
   opened: boolean;
-};
-export const useMount = ({ opened }: qwet) => {
+}
+export const useMount = ({ opened }: UseMountProps) => {
   const [mounted, setMounted] = React.useState(false);
 
   React.useEffect(() => {
@@ -16,8 +17,6 @@ export const useMount = ({ opened }: qwet) => {
       }, ANIMATION_TIME);
     }
   }, [opened]);
-  console.log('mounted', mounted);
-  console.log('opeend', opened);
 
   return {
     mounted,

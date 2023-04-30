@@ -12,23 +12,17 @@ import AvatarChanger from '../AvatarEditor';
 import { persistor } from '@redux/store';
 import cookie from 'utils/functions/cookies';
 import { access } from 'fs';
+import { getDoctorAvatar } from '../api/getPhoto';
 
 const PhotoChanger = () => {
   const [opened, setOpened] = React.useState<boolean>(false);
   const { mounted } = useMount({ opened });
   const { data: doctor } = authApi.useGetMeQuery({});
-  const [avatarUlr, setAvatarUrl] = React.useState<string>('');
-  console.log(doctor);
-
-  const reader = new FileReader();
-  // if (avatarPhoto) {
-  //   refetchDoctorPhoto().then((res) => console.log(res.blob()));
-  // }
+  const [avatarUrl, setAvatarUrl] = React.useState<string>('');
 
   const avatar = async () => {
-    await axios.get('http://localhost:5000/doctor/1/avatar', {}).then((res) => {
-      setAvatarUrl(res.data);
-    });
+    const avatarUrl = await getDoctorAvatar(1);
+    setAvatarUrl(avatarUrl);
   };
 
   React.useEffect(() => {
@@ -40,7 +34,7 @@ const PhotoChanger = () => {
       <p>Edit Profile</p>
       <Photo>
         {doctor.photoUrl ? (
-          <img src={avatarUlr} alt="Photo" width="160px" />
+          <img src={avatarUrl} alt="Photo" width="160px" />
         ) : (
           <img src={defaultDoctorPhoto} alt="Photo" width="160px" />
         )}
@@ -50,7 +44,12 @@ const PhotoChanger = () => {
       </Photo>
       {mounted
         ? createPortal(
-            <AvatarChanger opened={opened} onClose={setOpened} />,
+            <AvatarChanger
+              opened={opened}
+              onClose={setOpened}
+              setAvatarUrl={setAvatarUrl}
+              avatar={avatar}
+            />,
             document.body
           )
         : null}

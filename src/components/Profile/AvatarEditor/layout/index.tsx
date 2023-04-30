@@ -19,6 +19,7 @@ import {
   StyledInput,
 } from '../styles/styles';
 import { persistor } from '@redux/store';
+import { ToastContainer, toast } from 'react-toastify';
 
 const overlayAnimation = {
   enter: animationStyles.overlayEnter,
@@ -33,9 +34,9 @@ const contentAnimation = {
   exitActive: animationStyles.contentExitActive,
 };
 
-const Layout: React.FC<ChangerProps> = ({ opened, onClose }) => {
-  const [image, setImage] = React.useState(null);
-  const [scale, setScale] = React.useState(1);
+const Layout = ({ opened, onClose, setAvatarUrl, avatar }: ChangerProps) => {
+  const [image, setImage] = React.useState<File | string>('');
+  const [scale, setScale] = React.useState<number>(1);
   const editorRef = React.useRef(null);
   const overlayRef = React.useRef<HTMLDivElement>(null);
   const contentRef = React.useRef<HTMLDivElement>(null);
@@ -47,13 +48,14 @@ const Layout: React.FC<ChangerProps> = ({ opened, onClose }) => {
 
   const [updateDoctorPhoto] = doctorApi.useUpdateDoctorPhotoMutation();
   const { data: doctorData } = authApi.useGetMeQuery({});
-  const { data: avatarPhoto, refetch: refetchDoctorPhoto } =
-    doctorApi.useGetDoctorAvatarQuery(doctorData.id);
-  const handleImageUpload = (e) => {
-    setImage(e.target.files[0]);
+
+  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      setImage(e.target.files[0]);
+    }
   };
 
-  const handleScaleChange = (e) => {
+  const handleScaleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const scale = parseFloat(e.target.value);
     setScale(scale);
   };
@@ -72,7 +74,6 @@ const Layout: React.FC<ChangerProps> = ({ opened, onClose }) => {
           ref={overlayRef}
           onClick={() => {
             onClose(false);
-            refetchDoctorPhoto();
           }}
         ></Overlay>
       </CSSTransition>
@@ -95,32 +96,38 @@ const Layout: React.FC<ChangerProps> = ({ opened, onClose }) => {
             rotate={0}
           />
           <InputWrapper>
+            <ToastContainer />
             <StyledInput type="file" onChange={handleImageUpload} />
             <Stack direction="row">
               <FileUploadIcon />
               <Typography>Upload your photo</Typography>
             </Stack>
           </InputWrapper>
-
-          <RangeInput
-            type="range"
-            min="1"
-            max="2"
-            step="0.01"
-            value={scale}
-            onChange={handleScaleChange}
-          />
+          <Stack direction="row" gap="10px" alignItems="center" width="90%">
+            <Typography>Scale</Typography>
+            <RangeInput
+              type="range"
+              min="1"
+              max="2"
+              step="0.01"
+              value={scale}
+              onChange={handleScaleChange}
+            />
+          </Stack>
 
           <ExportButton
+            disabled={image === ''}
             onClick={() => {
-              const canvas = editorRef.current.getImageScaledToCanvas();
-
-              canvas.toBlob((blob) => {
-                console.log(blob);
-                updateDoctorPhoto({ id: doctorData.id, blob }).then(() =>
-                  refetchDoctorPhoto()
-                );
-              });
+              if (editorRef.current) {
+                const canvas = editorRef.current.getImageScaledToCanvas();
+                canvas.toBlob((blob: Blob) => {
+                  updateDoctorPhoto({ id: doctorData.id, blob }).then(() => {
+                    setAvatarUrl(avatar());
+                    onClose(!opened);
+                  });
+                  toast.success('Photo was updated, ');
+                });
+              }
             }}
           >
             Export

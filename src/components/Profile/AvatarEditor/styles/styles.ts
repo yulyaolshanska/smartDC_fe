@@ -1,9 +1,18 @@
-import { CORNFLOWER_BLUE, NAVY_BLUE, WHITE } from '@constants/colors';
+import {
+  CORNFLOWER_BLUE,
+  NAVY_BLUE,
+  PINK_SWAN,
+  WHITE,
+} from '@constants/colors';
 import { SMALL_FONT_SIZE } from '@constants/fontSizes';
 import FONT_ROBOTO from '@constants/fonts';
 import styled from 'styled-components';
 
 export const ExportButton = styled.button`
+  :disabled {
+    background: ${PINK_SWAN};
+    color: ${WHITE};
+  }
   display: flex;
   margin-right: auto;
   margin-left: auto;

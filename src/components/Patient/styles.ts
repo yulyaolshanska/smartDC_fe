@@ -1,9 +1,5 @@
 import styled from 'styled-components';
-import {
-  MEDIUM_FONT_SIZE,
-  NORMAL_FONT_SIZE,
-  SMALL_FONT_SIZE,
-} from '@constants/fontSizes';
+import { NORMAL_FONT_SIZE, SMALL_FONT_SIZE } from '@constants/fontSizes';
 import FONT_ROBOTO from '@constants/fonts';
 import { CORNFLOWER_BLUE, NAVY_BLUE } from '@constants/colors';
 
