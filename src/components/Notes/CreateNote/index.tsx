@@ -20,6 +20,7 @@ import {
   StyledTextArea,
   CreateNoteContainer,
 } from './styles';
+import { useTranslation } from 'react-i18next';
 
 interface CreateNoteResponse {
   error: string;
@@ -82,6 +83,8 @@ const CreateNote = ({
     });
   };
 
+  const { t } = useTranslation();
+
   const dateObj = new Date();
   const month = dateObj.toLocaleString('en-US', { month: 'long' });
   const date = dateObj.getDate();
@@ -107,22 +110,22 @@ const CreateNote = ({
       <Stack direction="row" justifyContent="space-between" alignItems="center">
         <StyledDate>{formattedDate}</StyledDate>
         <AddButton onClick={createNote} disabled={value.length < 10}>
-          Add
+          {t('Notes.add')}
         </AddButton>
       </Stack>
       <CreateNoteContainer>
         <Stack>
           <Typography color={ZAMBEZI} fontSize={SUPER_SMALL_FONT_SIZE}>
-            Description
+            {t('Notes.description')}
           </Typography>
           <StyledTextArea onChange={handleTextArea} />
           <Stack direction="row" alignItems="center" gap="10px">
             <Typography color={HINT} fontSize={MEGA_SMAILL_FONT_SIZE}>
-              Hint
+              {t('Notes.hint')}
             </Typography>
             {value.length < 10 ? (
               <Typography color="red" fontSize={MEGA_SMAILL_FONT_SIZE}>
-                The note should contain at least 10 symbols
+                {t('Notes.theNoteShouldContainAtLeastSymbols')}
               </Typography>
             ) : null}
           </Stack>
@@ -137,7 +140,7 @@ const CreateNote = ({
         </Stack>
       </CreateNoteContainer>
       <Doctor>
-        Dr. {doctor.firstName} {doctor.lastName}
+        {t('Notes.dr')} {doctor.firstName} {doctor.lastName}
       </Doctor>
     </Wrapper>
   );

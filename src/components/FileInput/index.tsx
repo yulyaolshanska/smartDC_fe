@@ -13,6 +13,7 @@ import {
   RemoveFileIcon,
   InputLabel,
 } from './styles';
+import { useTranslation } from 'react-i18next';
 
 interface FileUploadProps {
   label: string;
@@ -42,6 +43,8 @@ const FileUpload = ({
 }: FileUploadProps) => {
   const fileInputField = useRef<HTMLInputElement>(null);
   const [files, setFiles] = useState<{}>({});
+
+  const { t } = useTranslation();
 
   const handleUploadBtnClick = () => {
     fileInputField.current && fileInputField.current.click();
@@ -85,9 +88,11 @@ const FileUpload = ({
     <>
       <FileUploadContainer>
         <InputLabel>{label}</InputLabel>
-        <DragDropText>Drag and drop your files anywhere or</DragDropText>
+        <DragDropText>{t('Notes.Draganddropyourfilesanywhereor')}</DragDropText>
         <UploadFileBtn type="button" onClick={handleUploadBtnClick}>
-          <span> Upload {otherProps.multiple ? 'files' : 'a file'}</span>
+          <span>
+            {t('Notes.Upload')} {otherProps.multiple ? 'files' : 'a file'}
+          </span>
         </UploadFileBtn>
         <FormField
           type="file"
@@ -99,7 +104,7 @@ const FileUpload = ({
         />
       </FileUploadContainer>
       <FilePreviewContainer>
-        <span>To Upload</span>
+        <span> {t('Notes.ToUpload')}</span>
         <PreviewList>
           {Object.keys(files).map((fileName, index) => {
             let previewFiles: { [key: string]: any } = { ...files };

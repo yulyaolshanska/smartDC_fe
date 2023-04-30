@@ -7,6 +7,7 @@ import DownloadIcon from '@mui/icons-material/Download';
 import { Typography } from '@mui/material';
 
 import { MainText, Date as StyledDate, Show, Doctor } from './styles';
+import { useTranslation } from 'react-i18next';
 
 interface NoteProps {
   createdAt: string;
@@ -19,6 +20,8 @@ const Note = ({ createdAt, note, doctorId, file }: NoteProps) => {
   const [show, setShow] = React.useState<boolean>(false);
   const highlightedTextLess = useHighlight(note.slice(0, 100).trim());
   const highlightedTextMore = useHighlight(note);
+
+  const { t } = useTranslation();
 
   const dateObj = new Date(createdAt);
   const formattedDate = dateObj.toLocaleString('en-US', {
@@ -59,12 +62,12 @@ const Note = ({ createdAt, note, doctorId, file }: NoteProps) => {
 
       {note.length > 100 && (
         <Show onClick={() => setShow(!show)}>
-          Show {show ? 'less' : 'more'}
+          {t('Notes.show')} {show ? 'less' : 'more'}
         </Show>
       )}
       <Stack direction="row" alignItems="center" gap="30px">
         <Doctor>
-          Dr. {doctorId.firstName} {doctorId.lastName}
+          {t('Notes.dr')} {doctorId.firstName} {doctorId.lastName}
         </Doctor>
         <Stack
           direction="row"
@@ -75,7 +78,7 @@ const Note = ({ createdAt, note, doctorId, file }: NoteProps) => {
           {file ? (
             <>
               <DownloadIcon color="success" />
-              <Typography>Download an attached file</Typography>
+              <Typography>{t('Notes.downloadAnAttachedFile')}</Typography>
             </>
           ) : null}
         </Stack>

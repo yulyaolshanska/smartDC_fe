@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { ReactComponent as SearchIcon } from '@assets/Search.svg';
 
 import { debounce } from 'utils/functions/debounce';
@@ -24,6 +25,8 @@ const SearchBar = React.memo(({ setNotesLocal }: SearchBarProps) => {
   const { data: notes, refetch: refetchNotes } = noteApi.useGetPatientNoteQuery(
     { ...filterParams }
   );
+
+  const { t } = useTranslation();
 
   const inputRef = React.useRef<HTMLInputElement>(null);
 
@@ -58,7 +61,7 @@ const SearchBar = React.memo(({ setNotesLocal }: SearchBarProps) => {
         </SearchIconContainer>
         <StyledInput
           ref={inputRef}
-          placeholder="Search"
+          placeholder={`${t('Notes.Search')}`}
           onChange={handleInputChange}
         ></StyledInput>
       </StyledStack>
