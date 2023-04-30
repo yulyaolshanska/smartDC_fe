@@ -37,5 +37,11 @@ export const doctorApi = createApi({
         };
       },
     }),
+    getDoctorAvatar: builder.query({
+      query: (id) => ({
+        url: `/doctor/${id}/avatar`,
+        method: 'GET',
+      }),
+    }),
   }),
 });
