@@ -17,6 +17,7 @@ import {
   MEDIUM_FONT_SIZE,
   NORMAL_FONT_SIZE,
   SMALL_FONT_SIZE,
+  VERY_SMALL_FONT_SIZE,
 } from '@constants/fontSizes';
 
 import { NavLink } from 'react-router-dom';
@@ -265,9 +266,8 @@ export const AddButton = styled(CancelButton)`
   height: 48px;
   padding: 12px;
   line-height: 1.7;
-  font-size: 14px;
-  margin-right: 0;
-
+  font-size: ${VERY_SMALL_FONT_SIZE};
+  margin-right: 0px;
   margin-top: 0px;
   background: -webkit-linear-gradient(${NAVY_BLUE}, ${CORNFLOWER_BLUE});
 `;
@@ -279,6 +279,6 @@ export const LoadMoreButton = styled(SendButton)`
   height: 44px;
   border: 1.5px solid ${BLUE};
   border-radius: 4px;
-  font-size: 14px;
+  font-size: ${VERY_SMALL_FONT_SIZE};
   line-height: 1.4;
 `;
