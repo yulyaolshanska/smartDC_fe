@@ -43,8 +43,8 @@ export const noteApi = createApi({
       query: (noteData) => {
         const body = new FormData();
         body.append('file', noteData.file[0] ? noteData.file[0] : 1);
-        body.append('doctorId', noteData.doctorId);
-        body.append('patientId', noteData.patientId);
+        body.append('doctor', noteData.doctorId);
+        body.append('patient', noteData.patientId);
         body.append('note', noteData.note);
         return {
           url: '/notes/create',

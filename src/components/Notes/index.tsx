@@ -17,7 +17,7 @@ export interface INotes {
   file: string;
   createdAt: string;
   updatedAt: string;
-  doctorId: { firstName: string; lastName: string };
+  doctor: { firstName: string; lastName: string };
 }
 
 const Notes = () => {

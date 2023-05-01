@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useHighlight } from 'utils/hooks/useHighlight';
 import Wrapper from '@components/Wrapper';
 import { Stack } from '@mui/system';
-import DownloadIcon from '@mui/icons-material/Download';
+import { ReactComponent as PaperClip } from '@assets/paperClip.svg';
 import { Typography } from '@mui/material';
 
 import { MainText, Date as StyledDate, Show, Doctor } from './styles';
@@ -12,11 +12,11 @@ import { useTranslation } from 'react-i18next';
 interface NoteProps {
   createdAt: string;
   note: string;
-  doctorId: { firstName: string; lastName: string };
+  doctor: { firstName: string; lastName: string };
   file: any;
 }
 
-const Note = ({ createdAt, note, doctorId, file }: NoteProps) => {
+const Note = ({ createdAt, note, doctor, file }: NoteProps) => {
   const [show, setShow] = React.useState<boolean>(false);
   const highlightedTextLess = useHighlight(note.slice(0, 100).trim());
   const highlightedTextMore = useHighlight(note);
@@ -33,20 +33,24 @@ const Note = ({ createdAt, note, doctorId, file }: NoteProps) => {
   });
 
   const handleDownload = () => {
-    const url = `${import.meta.env.VITE_REACT_APP_BASE_URL_SERVER}notes/file/${
-      file.filename
-    }`;
-    axios.get(url, { responseType: 'blob' }).then((res) => {
-      const blob = res.data;
-      const blobUrl = window.URL.createObjectURL(new Blob([blob]));
-      const fileName = `${file.originalName}`;
-      const aTag = document.createElement('a');
-      aTag.href = blobUrl;
-      aTag.setAttribute('download', fileName);
-      document.body.appendChild(aTag);
-      aTag.click();
-      aTag.remove();
-    });
+    try {
+      const url = `${
+        import.meta.env.VITE_REACT_APP_BASE_URL_SERVER
+      }notes/file/${file.filename}`;
+      axios.get(url, { responseType: 'blob' }).then((res) => {
+        const blob = res.data;
+        const blobUrl = window.URL.createObjectURL(new Blob([blob]));
+        const fileName = `${file.originalName}`;
+        const aTag = document.createElement('a');
+        aTag.href = blobUrl;
+        aTag.setAttribute('download', fileName);
+        document.body.appendChild(aTag);
+        aTag.click();
+        aTag.remove();
+      });
+    } catch (error) {
+      `Impossible to download file:${error}`;
+    }
   };
 
   return (
@@ -67,7 +71,7 @@ const Note = ({ createdAt, note, doctorId, file }: NoteProps) => {
       )}
       <Stack direction="row" alignItems="center" gap="30px">
         <Doctor>
-          {t('Notes.dr')} {doctorId.firstName} {doctorId.lastName}
+          {t('Notes.dr')} {doctor.firstName} {doctor.lastName}
         </Doctor>
         <Stack
           direction="row"
@@ -77,8 +81,8 @@ const Note = ({ createdAt, note, doctorId, file }: NoteProps) => {
         >
           {file ? (
             <>
-              <DownloadIcon color="success" />
-              <Typography>{t('Notes.downloadAnAttachedFile')}</Typography>
+              <PaperClip />
+              <Typography>{file.originalName}</Typography>
             </>
           ) : null}
         </Stack>
