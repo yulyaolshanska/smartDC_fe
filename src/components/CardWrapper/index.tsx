@@ -1,5 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import React from 'react';
+import Highlighter from 'react-highlight-words';
 
 import {
   AccordionBody,
@@ -11,10 +12,16 @@ import {
 import { PATH } from '@router/index';
 
 type Props = {
-  children: React.ReactNode;
+  children: any;
+  patientFullName: string;
+  searchValue: string;
 };
 
-const CardWrapper: React.FC<Props> = ({ children }) => {
+const CardWrapper: React.FC<Props> = ({
+  children,
+  patientFullName,
+  searchValue,
+}) => {
   const { t } = useTranslation();
 
   const [toggle, setToggle] = React.useState<boolean>(false);
@@ -37,7 +44,12 @@ const CardWrapper: React.FC<Props> = ({ children }) => {
     <>
       <Container>
         <PatientName toggle={toggle} onClick={toggleState}>
-          John Doe
+          <Highlighter
+            searchWords={[searchValue]}
+            autoEscape={true}
+            textToHighlight={patientFullName}
+          ></Highlighter>
+
           <Arrow toggle={toggle} />
         </PatientName>
         <EditCardLink to={PATH.CREATE_PATIENT_CARD}>
