@@ -129,7 +129,7 @@
     "lorem": " Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore"
   },
   "Dashboard": {
-    "backToDashboard": "Back to dashboard"
+    "backToDashboard": "Back to Dashboard"
   },
   "Warning": {
     "viewScheduleWarning": "Warning: you are in view mode and creating new schedule will be done according to your local time!"
