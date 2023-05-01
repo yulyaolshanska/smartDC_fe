@@ -42,7 +42,7 @@ const EditPatientCardForm: React.FC = () => {
     address: 'Berger Str. 22',
     timeZone: '(GMT+2) Europe/Berlin',
     overview: 'Some issue',
-    id: 1,
+    id: "1",
   };
 
   const {
@@ -78,15 +78,13 @@ const EditPatientCardForm: React.FC = () => {
       ...data,
     };
     try {
-      await updatePatient(updatedPatientInfo).then((res) => {
-        if (res && res.error) {
-          return toast.error(t('Error.somethingWasWrong'), {
-            position: toast.POSITION.TOP_CENTER,
-          });
-        } else {
-          navigate(PATH.DASHBOARD);
-        }
+      await updatePatient(updatedPatientInfo);
+      toast.success(t('Patient.cardUpdetedSuccess'), {
+        position: toast.POSITION.TOP_CENTER,
       });
+      setTimeout(() => {
+        navigate(PATH.DASHBOARD);
+      }, 2000);
     } catch (error) {
       toast.error(t('Error.somethingWasWrong'), {
         position: toast.POSITION.TOP_CENTER,
