@@ -13,6 +13,7 @@ import Activation from '@pages/auth/signUp/activation';
 import CreatePatientCard from '@pages/patient/createPatientCard';
 import EditPatientCard from '@pages/patient/EditPatientCard';
 import TempScheduler from '@pages/tempScheduler';
+import NotFound from '@pages/notFound';
 
 export const PATH = {
   SIGN_UP: '/auth',
@@ -60,6 +61,7 @@ const AppRouter = () => {
         <Route path={PATH.HELP} element={<Help />} />
         <Route path={PATH.DASHBOARD} element={<Profile />} />
         <Route path={PATH.SCHEDULER} element={<TempScheduler />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </PageWrapper>
   );

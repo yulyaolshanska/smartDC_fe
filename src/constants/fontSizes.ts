@@ -7,3 +7,5 @@ export const NORMAL_FONT_SIZE = '18px';
 export const MEDIUM_FONT_SIZE = '20px';
 
 export const LARGE_FONT_SIZE = '24px';
+
+export const EXTRA_LARGE_FONT_SIZE = '96px';
