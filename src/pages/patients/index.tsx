@@ -7,17 +7,23 @@ import { LinkContainer } from '@components/Patient/styles';
 import PatientList from '@components/PatientList';
 import { search } from '@constants/patient';
 import { PATH } from '@router/index';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { Container, Form } from './styles';
 
 function Patients() {
   const { t } = useTranslation();
+  const [searchValue, setSearchValue] = useState('');
 
   const { handleSubmit, control } = useForm<FormValues>({
     mode: 'onChange',
   });
   const onSubmit = (data: ISearch) => {};
+
+  const handleChange = (e: React.FormEvent<HTMLFormElement>) => {
+    setSearchValue(e.currentTarget.search.value);
+  };
 
   return (
     <>
@@ -28,7 +34,7 @@ function Patients() {
         </Link>
       </LinkContainer>
       <Container>
-        <Form onSubmit={handleSubmit(onSubmit)}>
+        <Form onSubmit={handleSubmit(onSubmit)} onChange={handleChange}>
           <Input
             control={control}
             fullWidth
@@ -41,7 +47,7 @@ function Patients() {
           {t('Patients.createPatient')}
         </AddButton>
       </Container>
-      <PatientList />
+      <PatientList searchValue={searchValue} />
     </>
   );
 }

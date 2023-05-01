@@ -13,3 +13,4 @@ export const error = 'error';
 export const plus = '+';
 export const overview = 'overview';
 export const search = 'search';
+export const male = 'Male';
