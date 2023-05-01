@@ -15,7 +15,7 @@ export function SelectInput({
   label,
   error,
   placeholder,
-  options,
+  options = [],
 }: Props & { control: Control<FormValues> }) {
   return (
     <InputContainer hasError={!!error}>
@@ -36,7 +36,7 @@ export function SelectInput({
                 placeholder={placeholder}
               />
             )}
-            value={options.find((option) => option.value === value) || null}
+            value={options?.find((option) => option.value === value) || null}
           />
         )}
       />
