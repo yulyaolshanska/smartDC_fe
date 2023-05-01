@@ -1,7 +1,14 @@
 import styled from 'styled-components';
 import { NORMAL_FONT_SIZE, SMALL_FONT_SIZE } from '@constants/fontSizes';
 import FONT_ROBOTO from '@constants/fonts';
-import { CORNFLOWER_BLUE, NAVY_BLUE } from '@constants/colors';
+import {
+  BLACK,
+  BORDER,
+  CORNFLOWER_BLUE,
+  DARK_BLUE,
+  LIGHT_BLUE,
+  NAVY_BLUE,
+} from '@constants/colors';
 export const Form = styled.form`
   margin: 35px;
   text-align: center;
@@ -13,7 +20,7 @@ export const InputInlineContainer = styled.div`
   padding-bottom: 40px;
   gap: 4em;
   grid-template-columns: 1fr 1fr;
-  border-bottom: 1.5px solid #d8dbe8;
+  border-bottom: 1.5px solid ${BORDER};
 `;
 
 export const Text = styled.div`
@@ -55,7 +62,7 @@ export const ContactsContainer = styled.div`
 export const ContactInfo = styled.p`
   margin-left: 4px;
   line-height: 1.5;
-  color: #060d33;
+  color: ${DARK_BLUE};
   &:not(:last-child) {
     margin-right: 12px;
   }
@@ -72,7 +79,7 @@ export const UserInfo = styled.p`
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #060d33;
+  color: ${DARK_BLUE};
   margin-left: 4px;
   &:not(:last-child) {
     margin-right: 12px;
@@ -88,7 +95,7 @@ export const OverviewTitle = styled.span`
 export const Overview = styled.p`
   margin-bottom: 6px;
   margin-top: 20px;
-  color: #060d33;
+  color: ${DARK_BLUE};
   font-size: ${NORMAL_FONT_SIZE};
 `;
 
@@ -96,18 +103,18 @@ export const LastAppointmentTitle = styled.span`
   margin-right: 4px;
   font-weight: 700;
   line-height: 1.43;
-  color: #081972;
+  color: ${LIGHT_BLUE};
 `;
 
 export const LastAppointment = styled.p`
   margin-bottom: 6px;
   font-size: ${SMALL_FONT_SIZE};
   line-height: 1.4;
-  color: #060d33;
+  color: ${DARK_BLUE};
 `;
 
 export const ShowMoreLessButton = styled.button`
-  color: black;
+  color: ${BLACK};
   font-weight: bold;
   &:hover {
     color: ${NAVY_BLUE};
