@@ -104,8 +104,8 @@ const AppRouter = () => {
         <Route
           path={PATH.AVAILABILITY}
           element={
-            <ProtectedRoute allowedRoles={['Remote', 'Local']}>
-              <TempScheduler />
+            <ProtectedRoute allowedRoles={['Remote']}>
+              <DoctorScheduler />
             </ProtectedRoute>
           }
         />
