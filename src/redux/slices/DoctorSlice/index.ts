@@ -14,6 +14,7 @@ const doctorSlice = createSlice({
     },
     logout() {
       localStorage.clear();
+      sessionStorage.clear();
       cookie.delete('accessToken');
       return initialState;
     },
