@@ -10,7 +10,7 @@ import PopupDeleteContent from './Modals/PopupDeleteContent';
 import PopupCreateContent from './Modals/PopupCreateContent';
 import TimezoneSelect from './TimezoneSelect/TimezoneSelect';
 import { WHITE } from '@constants/colors';
-import { useAppSelector } from '@redux/hooks';
+import { useAppDispatch, useAppSelector } from '@redux/hooks';
 import { ToastContainer, toast } from 'react-toastify';
 import { Availability, availabilityApi } from '../../services/AvailabilityService';
 
@@ -43,6 +43,7 @@ function Scheduler() {
     data: availabilityData,
     refetch: availabilityRefetch,
     error: availabilityGetError,
+    isLoading: availabilityIsLoading,
   } = availabilityApi.useGetAvailabilitiesForDoctorQuery(doctorData?.id || 0);
 
   const initialEventsWithDateObject = availabilityData?.map((event: Availability) => ({
@@ -81,9 +82,12 @@ function Scheduler() {
   }, []);
 
   useEffect(() => {
-    availabilityRefetch()
-  }, [eventsData]);
-
+      //availabilityRefetch()
+      if (initialEventsWithDateObject) {
+        setEventsData(initialEventsWithDateObject);
+      }
+  }, [initialEventsWithDateObject]);
+  //eventsData
   const handleTimezoneChange = (newTimezone: string) => {
     setTimezone(newTimezone);
     if (!showWarning) {
@@ -97,9 +101,6 @@ function Scheduler() {
 
   const handleDeleteEvent = () => {
     if (!selectedEvent) return;
-    const updatedEvents = eventsData.filter(
-      (event) => event.uuid !== selectedEvent.uuid
-    );
     setSelectedEvent(null);
     (async () => {
       try {
@@ -108,6 +109,7 @@ function Scheduler() {
           position: toast.POSITION.TOP_CENTER
         });
         availabilityRefetch();
+        const updatedEvents = eventsData.filter((event) => event.uuid !== selectedEvent.uuid);
         setEventsData(updatedEvents);
       } catch (err) {
         toast.error(t('Calendar.calendarSlotError'), {
@@ -196,9 +198,23 @@ function Scheduler() {
             position: toast.POSITION.TOP_CENTER
           });
         }
+        const updatedEventsData = eventsData.map((event) => {
+          if (event.start.getTime() === dayStartValue.getTime() && event.end.getTime() === dayEndValue.getTime()) {
+            return {
+              ...event,
+              uuid: uuid
+            }
+          }
+          return event;
+        });
+        setEventsData(updatedEventsData);
       })();
     }
   };
+
+  if (availabilityIsLoading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <>
