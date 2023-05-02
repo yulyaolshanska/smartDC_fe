@@ -10,6 +10,7 @@ import { noteApi } from 'services/NoteService';
 import { useAppSelector } from '@redux/hooks';
 import Skeleton from './Skeleton';
 import { ToastContainer, toast } from 'react-toastify';
+import Error from './Error';
 
 export interface INotes {
   id: number;
@@ -67,18 +68,31 @@ const Notes = () => {
         setCreated={setCreated}
         created={created}
       />
-      {isLoading || notesLocal.length === 0
-        ? Array(4)
-            .fill(null)
-            .map((_, index) => <Skeleton key={index} />)
-        : notesLocal
-            .filter(
-              (note, index, self) =>
-                self.findIndex((n) => n.id === note.id) === index
-            )
-            .map((note) => <Note key={note.id} {...note} />)}
+      {isLoading &&
+        Array(4)
+          .fill(null)
+          .map((index) => <Skeleton key={index} />)}
+      {notes?.count &&
+        notes?.countWithoutAnyParams &&
+        notesLocal
+          .filter(
+            (note, index, self) =>
+              self.findIndex((n) => n.id === note.id) === index
+          )
+          .map((note) => <Note key={note.id} {...note} />)}
       <Stack alignItems="center">
-        <LoadMoreButton notesLocal={notesLocal} />
+        {notes?.count && notes?.countWithoutAnyParams && (
+          <LoadMoreButton notesLocal={notesLocal} />
+        )}
+
+        {!notes?.count && notes?.countWithoutAnyParams && (
+          <Error
+            text={'No notes are matching search params! Try to change them!'}
+          />
+        )}
+        {!notes?.countWithoutAnyParams ? (
+          <Error text={'There are no notes! Add some!'} />
+        ) : null}
       </Stack>
     </Stack>
   );

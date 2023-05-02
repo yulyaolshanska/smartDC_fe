@@ -8,6 +8,7 @@ import { Typography } from '@mui/material';
 
 import { MainText, Date as StyledDate, Show, Doctor } from './styles';
 import { useTranslation } from 'react-i18next';
+import cookie from 'utils/functions/cookies';
 
 interface NoteProps {
   createdAt: string;
@@ -37,17 +38,22 @@ const Note = ({ createdAt, note, doctor, file }: NoteProps) => {
       const url = `${
         import.meta.env.VITE_REACT_APP_BASE_URL_SERVER
       }notes/file/${file.filename}`;
-      axios.get(url, { responseType: 'blob' }).then((res) => {
-        const blob = res.data;
-        const blobUrl = window.URL.createObjectURL(new Blob([blob]));
-        const fileName = `${file.originalName}`;
-        const aTag = document.createElement('a');
-        aTag.href = blobUrl;
-        aTag.setAttribute('download', fileName);
-        document.body.appendChild(aTag);
-        aTag.click();
-        aTag.remove();
-      });
+      axios
+        .get(url, {
+          responseType: 'blob',
+          headers: { Authorization: `Bearer ${cookie.get('accessToken')}` },
+        })
+        .then((res) => {
+          const blob = res.data;
+          const blobUrl = window.URL.createObjectURL(new Blob([blob]));
+          const fileName = `${file.originalName}`;
+          const aTag = document.createElement('a');
+          aTag.href = blobUrl;
+          aTag.setAttribute('download', fileName);
+          document.body.appendChild(aTag);
+          aTag.click();
+          aTag.remove();
+        });
     } catch (error) {
       `Impossible to download file:${error}`;
     }
