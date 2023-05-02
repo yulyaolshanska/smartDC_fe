@@ -12,7 +12,7 @@ import Help from '@pages/help';
 import Activation from '@pages/auth/signUp/activation';
 import CreatePatientCard from '@pages/patient/createPatientCard';
 import EditPatientCard from '@pages/patient/EditPatientCard';
-import TempScheduler from '@pages/tempScheduler';
+import DoctorScheduler from '@pages/doctorScheduler';
 import ProtectedRoute from './protected-route';
 import PatientInfo from '@pages/patient/patientInfo';
 
@@ -29,7 +29,7 @@ export const PATH = {
   DASHBOARD: '/dashboard',
   CREATE_PATIENT_CARD: '/create-patient-card',
   EDIT_PATIENT_CARD: '/edit-patient-card',
-  SCHEDULER: '/scheduler',
+  AVAILABILITY: '/availability',
   PATIENT_CARD_INFO: '/patient',
 };
 
@@ -102,10 +102,10 @@ const AppRouter = () => {
           }
         />
         <Route
-          path={PATH.SCHEDULER}
+          path={PATH.AVAILABILITY}
           element={
-            <ProtectedRoute allowedRoles={['Remote', 'Local']}>
-              <TempScheduler />
+            <ProtectedRoute allowedRoles={['Remote']}>
+              <DoctorScheduler />
             </ProtectedRoute>
           }
         />
