@@ -19,9 +19,9 @@ import { activationAccountReducer } from '@redux/slices/auth/activation';
 import { noteApi } from 'services/NoteService';
 import { navigationReducer } from 'redux/slices/NavigationSlice';
 import { doctorReducer } from 'redux/slices/DoctorSlice';
-import { noteFilterReducer } from './slices/NoteFilterSlice';
 import { resetPasswordReducer } from '@redux/slices/auth/resetPassword';
 import { createPatientReducer } from '@redux/slices/patient/createPatient';
+import { noteFilterReducer } from './slices/NoteFilterSlice';
 import { patientApi } from '../services/PatientService';
 
 const rootReducer = combineReducers({
@@ -57,21 +57,19 @@ const persistConfig = {
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-export const setupStore = () =>
-  configureStore({
-    reducer: persistedReducer,
-    middleware: (getDefaultMiddleware) =>
-      getDefaultMiddleware({
-        serializableCheck: {
-          ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-        },
-      }).concat(
-        doctorApi.middleware,
-        authApi.middleware,
-        noteApi.middleware,
-        patientApi.middleware
-      ),
-  });
+export const setupStore = () => configureStore({
+  reducer: persistedReducer,
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware({
+    serializableCheck: {
+      ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+    },
+  }).concat(
+    doctorApi.middleware,
+    authApi.middleware,
+    noteApi.middleware,
+    patientApi.middleware,
+  ),
+});
 export const store = setupStore();
 export const persistor = persistStore(store);
 

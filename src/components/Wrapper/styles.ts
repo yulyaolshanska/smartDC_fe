@@ -1,12 +1,12 @@
 import { BORDER, GHOST_WHITE } from '@constants/colors';
 import styled, { keyframes, css } from 'styled-components';
+import { SMALL_FONT_SIZE } from '@constants/fontSizes';
+import FONT_ROBOTO from '@constants/fonts';
 
 const fadeIn = keyframes`
   from { opacity: 0; }
   to { opacity: 1; }
 `;
-import { SMALL_FONT_SIZE } from '@constants/fontSizes';
-import FONT_ROBOTO from '@constants/fonts';
 
 export const WrapperElement = styled.div`
   background-color: ${GHOST_WHITE};
