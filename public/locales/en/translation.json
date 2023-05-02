@@ -12,6 +12,8 @@
     "signIn": "Sign In",
     "logIn": "Log In",
     "logOut": "Log Out",
+    "logoutTitle": "Logout",
+    "logoutText": "Are you sure you want to log out?",
     "loginTitle": "Login",
     "loginText": "Please, login into your medical account",
     "activationText": "You have successfully verified your account. In order to enter the system, please go to the login form",
@@ -52,6 +54,7 @@
     "save": "Save",
     "submit": "Submit",
     "cancel": "Cancel",
+    "confirm": "Confirm",
     "delete": "Delete",
     "role": "Role",
     "enterRole":"Enter role...",
@@ -117,11 +120,14 @@
     "overview": "Overview",
     "enterOverview": "Enter patient's overview",
     "save": "Save",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "lastAppointment": "Last Appointment:"
   },
   "Profile": {
     "cancel": "Cancel",
-    "save": "Save"
+    "save": "Save",
+    "showMore": "Show more",
+    "showLess": "Show less"
   },
 
   "Help": {

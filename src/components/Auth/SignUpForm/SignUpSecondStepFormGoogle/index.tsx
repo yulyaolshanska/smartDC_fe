@@ -95,19 +95,16 @@ function SignUpSecondFormGoogle() {
   }, [doctor]);
 
   const onSubmit = async (data: IAuth) => {
-    data.id = doctor.id;
-    data.firstName = doctor.firstName;
-    data.lastName = doctor.lastName;
-    data.email = doctor.email;
-    data.specialization = Number(data.specialization);
     data.phoneNumber = plus + data.phoneNumber;
+
+    const combinedObj = Object.assign({}, doctor, data);
 
     if (error) {
       toast.error('Sorry, something was wrong!', {
         position: toast.POSITION.TOP_CENTER,
       });
     } else {
-      await updateDoctorProfile(data).then((res) => {
+      await updateDoctorProfile(combinedObj).then((res) => {
         dispatch(doctorActions.getDoctor(doctor));
 
         refetch().then(() => navigate('/dashboard'));
