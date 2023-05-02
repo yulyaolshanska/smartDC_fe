@@ -14,6 +14,7 @@ import CreatePatientCard from '@pages/patient/createPatientCard';
 import EditPatientCard from '@pages/patient/EditPatientCard';
 import TempScheduler from '@pages/tempScheduler';
 import ProtectedRoute from './protected-route';
+import PatientInfo from '@pages/patient/patientInfo';
 
 export const PATH = {
   SIGN_UP: '/auth',
@@ -29,6 +30,7 @@ export const PATH = {
   CREATE_PATIENT_CARD: '/create-patient-card',
   EDIT_PATIENT_CARD: '/edit-patient-card',
   SCHEDULER: '/scheduler',
+  PATIENT_CARD_INFO: '/patient',
 };
 
 const AppRouter = () => {
@@ -90,7 +92,6 @@ const AppRouter = () => {
             </ProtectedRoute>
           }
         />
-        {/* <Route path={PATH.DASHBOARD} element={<Profile />} /> */}
 
         <Route
           path={PATH.DASHBOARD}
@@ -105,6 +106,14 @@ const AppRouter = () => {
           element={
             <ProtectedRoute allowedRoles={['Remote', 'Local']}>
               <TempScheduler />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path={PATH.PATIENT_CARD_INFO}
+          element={
+            <ProtectedRoute allowedRoles={['Remote', 'Local']}>
+              <PatientInfo />
             </ProtectedRoute>
           }
         />

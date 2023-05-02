@@ -47,6 +47,7 @@ function CreatePatientCardForm() {
       address: '',
       birthDate: '',
       timeZone: '',
+      overview: '',
     },
 
     resolver: yupResolver(createPatientCardSchema),
