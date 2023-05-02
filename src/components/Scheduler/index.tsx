@@ -4,23 +4,15 @@ import { v4 as uuidv4 } from 'uuid';
 import moment from 'moment';
 import 'moment-timezone';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
-import {
-  ErrorText,
-  SaveButton,
-  SchedulerButtonsWrapper,
-} from './styles';
+import { ErrorText } from './styles';
 import { useTranslation } from 'react-i18next';
 import PopupDeleteContent from './Modals/PopupDeleteContent';
 import PopupCreateContent from './Modals/PopupCreateContent';
 import TimezoneSelect from './TimezoneSelect/TimezoneSelect';
-import { TFunction } from 'i18next';
 import { WHITE } from '@constants/colors';
 import { useAppSelector } from '@redux/hooks';
-import { doctorApi } from 'services/DoctorService';
-import { authApi } from 'services/AuthService';
-import { useForm } from 'react-hook-form';
-import { FormValues, IAuth } from '@components/general/type';
 import { ToastContainer, toast } from 'react-toastify';
+import { availabilityApi } from '../../services/AvailabilityService';
 
 const defaultTZ = moment.tz.guess();
 
@@ -42,19 +34,18 @@ const calendarStyle = {
 };
 
 function Scheduler() {
-  const { t }: { t: TFunction } = useTranslation();
+  const { t } = useTranslation();
   const doctorData = useAppSelector((state) => state.doctorReducer);
-
-  const [updateDoctorProfile, { error: doctorUpdateError }] =
-  doctorApi.useUpdateDoctorProfileMutation();
+  const [createAvailability] = availabilityApi.useCreateAvailabilityMutation();
+  const [deleteAvailability] = availabilityApi.useDeleteAvailabilityByIdMutation();
 
   const {
-    data: doctor,
-    refetch: doctorRefetch,
-    error: doctorGetError,
-  } = authApi.useGetMeQuery({});
+    data: availabilityData,
+    refetch: availabilityRefetch,
+    error: availabilityGetError,
+  } = availabilityApi.useGetAvailabilitiesForDoctorQuery(doctorData?.id || 0);
 
-  const initialEventsWithDateObject = doctor.availabilities.map((event: IScheduleItem) => ({
+  const initialEventsWithDateObject = availabilityData.map((event: IScheduleItem) => ({
     ...event,
     start: new Date(event.start),
     end: new Date(event.end)
@@ -89,6 +80,10 @@ function Scheduler() {
     };
   }, []);
 
+  useEffect(() => {
+    availabilityRefetch()
+  }, [eventsData]);
+
   const handleTimezoneChange = (newTimezone: string) => {
     setTimezone(newTimezone);
     if (!showWarning) {
@@ -106,7 +101,20 @@ function Scheduler() {
       (event) => event.uuid !== selectedEvent.uuid
     );
     setSelectedEvent(null);
-    setEventsData(updatedEvents);
+    (async () => {
+      try {
+        await deleteAvailability({ doctorId: doctorData.id, uuid: selectedEvent.uuid }).unwrap();
+        toast.success(t('Calendar.successfullySubmited'), {
+          position: toast.POSITION.TOP_CENTER
+        });
+        availabilityRefetch();
+        setEventsData(updatedEvents);
+      } catch (err: any) {
+        toast.error(err, {
+          position: toast.POSITION.TOP_CENTER
+        });
+      }
+    })();
   };
 
   function handleSelectSlot(slotInfo: { start: Date; end: Date }): void {
@@ -159,43 +167,40 @@ function Scheduler() {
       dayEndValue.setMinutes(Number(endMinutes));
 
       const uuid = uuidv4();
-      setEventsData([
-        ...eventsData,
-        {
-          uuid: uuid,
-          title: `Working hours`,
-          start: dayStartValue,
-          end: dayEndValue,
-        },
-      ]);
       setShowCreatePopup(false);
       setErrorMessage('');
+      let newAvailability = {
+        uuid: uuid,
+        title: `Working hours`,
+        start: dayStartValue.toISOString(),
+        end: dayEndValue.toISOString(),
+      };
+      let newAvailabilityF = {
+        uuid: uuid,
+        title: `Working hours`,
+        start: dayStartValue,
+        end: dayEndValue,
+      };
+
+      (async () => {
+        try {
+          await createAvailability({ doctorId: doctorData.id, availability: newAvailability }).unwrap();
+          toast.success(t('Calendar.successfullySubmited'), {
+            position: toast.POSITION.TOP_CENTER
+          });
+          availabilityRefetch()
+          setEventsData([...eventsData, newAvailabilityF]);
+        } catch (err: any) {
+          toast.error(err, {
+            position: toast.POSITION.TOP_CENTER
+          });
+        }
+      })();
     }
   };
 
-  const {
-    handleSubmit,
-    formState: { errors, isValid },
-  } = useForm<FormValues>({
-    mode: 'onChange',
-    defaultValues: async () => await { ...doctor },
-  });
-
-  const onSubmit = async (data: IAuth) => {
-    try {
-      data.availabilities = JSON.stringify(eventsData)
-      const doctor = { ...data, id: doctorData.id };
-      await updateDoctorProfile(doctor);
-      doctorRefetch();
-      toast.success(t('Calendar.successfullySubmited'), {
-        position: toast.POSITION.TOP_CENTER
-      });
-    } catch (error) {}
-  }
-
   return (
     <>
-      <form onSubmit={handleSubmit(onSubmit)}>
         <TimezoneSelect
           defaultTZ={defaultTZ}
           setTimezone={handleTimezoneChange}
@@ -232,13 +237,6 @@ function Scheduler() {
             handleDeleteEvent={handleDeleteEvent}
           />
         )}
-        <SchedulerButtonsWrapper>
-          <SaveButton
-            type="submit"
-            value={t('Calendar.saveSchedule') ?? ''}
-          />
-        </SchedulerButtonsWrapper>
-      </form>
       <ToastContainer />
     </>
   );
