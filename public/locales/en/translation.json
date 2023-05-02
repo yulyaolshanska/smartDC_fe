@@ -118,11 +118,14 @@
     "overview": "Overview",
     "enterOverview": "Enter patient's overview",
     "save": "Save",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "lastAppointment": "Last Appointment:"
   },
   "Profile": {
     "cancel": "Cancel",
-    "save": "Save"
+    "save": "Save",
+    "showMore": "Show more",
+    "showLess": "Show less"
   },
 
   "Help": {

@@ -5,6 +5,7 @@ import { persistor } from '@redux/store';
 import DoctorInitialState from '@redux/slices/DoctorSlice/types';
 
 const initialState: DoctorInitialState = {};
+
 const doctorSlice = createSlice({
   name: 'navigation',
   initialState,
