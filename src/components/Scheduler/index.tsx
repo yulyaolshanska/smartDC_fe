@@ -82,12 +82,11 @@ function Scheduler() {
   }, []);
 
   useEffect(() => {
-      //availabilityRefetch()
-      if (initialEventsWithDateObject) {
-        setEventsData(initialEventsWithDateObject);
-      }
+    if (initialEventsWithDateObject) {
+      setEventsData(initialEventsWithDateObject);
+    }
   }, [initialEventsWithDateObject]);
-  //eventsData
+  
   const handleTimezoneChange = (newTimezone: string) => {
     setTimezone(newTimezone);
     if (!showWarning) {
@@ -112,7 +111,7 @@ function Scheduler() {
         const updatedEvents = eventsData.filter((event) => event.uuid !== selectedEvent.uuid);
         setEventsData(updatedEvents);
       } catch (err) {
-        toast.error(t('Calendar.calendarSlotError'), {
+        toast.error(t('Error.calendarSlotError'), {
           position: toast.POSITION.TOP_CENTER
         });
       }
