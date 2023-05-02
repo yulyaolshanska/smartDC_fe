@@ -88,7 +88,8 @@
     "bothDatesRequired": "Validation error: both start and end dates are required",
     "endBeforeStartDateError": "Validation error: end date should be after start date",
     "overlappingEventsError": "Validation error: working hours overlap",
-    "pastDateError": "You cannot create schedule on a past date!"
+    "pastDateError": "You cannot create schedule on a past date!",
+    "calendarSlotError": "Something went wrong!"
   },
   "Patient": {
     "createPatientCard": "Create patient's card",

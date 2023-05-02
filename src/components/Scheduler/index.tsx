@@ -12,7 +12,7 @@ import TimezoneSelect from './TimezoneSelect/TimezoneSelect';
 import { WHITE } from '@constants/colors';
 import { useAppSelector } from '@redux/hooks';
 import { ToastContainer, toast } from 'react-toastify';
-import { availabilityApi } from '../../services/AvailabilityService';
+import { Availability, availabilityApi } from '../../services/AvailabilityService';
 
 const defaultTZ = moment.tz.guess();
 
@@ -45,7 +45,7 @@ function Scheduler() {
     error: availabilityGetError,
   } = availabilityApi.useGetAvailabilitiesForDoctorQuery(doctorData?.id || 0);
 
-  const initialEventsWithDateObject = availabilityData.map((event: IScheduleItem) => ({
+  const initialEventsWithDateObject = availabilityData?.map((event: Availability) => ({
     ...event,
     start: new Date(event.start),
     end: new Date(event.end)
@@ -59,7 +59,7 @@ function Scheduler() {
     start: null,
     end: null,
   });
-  const [eventsData, setEventsData] = useState<IScheduleItem[]>(initialEventsWithDateObject);
+  const [eventsData, setEventsData] = useState<IScheduleItem[]>(initialEventsWithDateObject as IScheduleItem[]);
   const [errorMessage, setErrorMessage] = useState('');
   const [selectedEvent, setSelectedEvent] = useState<IScheduleItem | null>(
     null
@@ -109,8 +109,8 @@ function Scheduler() {
         });
         availabilityRefetch();
         setEventsData(updatedEvents);
-      } catch (err: any) {
-        toast.error(err, {
+      } catch (err) {
+        toast.error(t('Calendar.calendarSlotError'), {
           position: toast.POSITION.TOP_CENTER
         });
       }
@@ -169,13 +169,14 @@ function Scheduler() {
       const uuid = uuidv4();
       setShowCreatePopup(false);
       setErrorMessage('');
+
       let newAvailability = {
         uuid: uuid,
         title: `Working hours`,
         start: dayStartValue.toISOString(),
         end: dayEndValue.toISOString(),
       };
-      let newAvailabilityF = {
+      let newEventAvailability = {
         uuid: uuid,
         title: `Working hours`,
         start: dayStartValue,
@@ -189,9 +190,9 @@ function Scheduler() {
             position: toast.POSITION.TOP_CENTER
           });
           availabilityRefetch()
-          setEventsData([...eventsData, newAvailabilityF]);
-        } catch (err: any) {
-          toast.error(err, {
+          setEventsData([...eventsData, newEventAvailability]);
+        } catch (err) {
+          toast.error(t('Error.calendarSlotError'), {
             position: toast.POSITION.TOP_CENTER
           });
         }
