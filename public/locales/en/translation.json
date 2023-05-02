@@ -92,7 +92,8 @@
     "endBeforeStartDateError": "Validation error: end date should be after start date",
     "overlappingEventsError": "Validation error: working hours overlap",
     "pastDateError": "You cannot create schedule on a past date!",
-    "calendarSlotError": "Something went wrong!"
+    "calendarSlotError": "Something went wrong!",
+    "somethingWasWrong": "Something was wrong!"
   },
   "Patient": {
     "createPatientCard": "Create patient's card",
@@ -121,13 +122,15 @@
     "enterOverview": "Enter patient's overview",
     "save": "Save",
     "cancel": "Cancel",
-    "lastAppointment": "Last Appointment:"
+    "lastAppointment": "Last Appointment:",
+    "cardCreatedSuccess": "Patient's card created successfully"
   },
   "Profile": {
     "cancel": "Cancel",
     "save": "Save",
     "showMore": "Show more",
-    "showLess": "Show less"
+    "showLess": "Show less",
+    "profileUpdatedSuccess": "Doctor's profile updated successfully"
   },
 
   "Help": {

@@ -10,8 +10,8 @@ import {
   ButtonContainer,
 } from '@components/general/styles';
 import { Form, InputInlineContainer, Text } from '@components/Patient/styles';
-import { FormValues, ISignUp } from '@components/general/type';
-import { patientSchema } from '@validation/patient.validate';
+import { FormValues, IAuth } from '@components/general/type';
+import patientSchema from '@validation/patient.validate';
 import { PATH } from '@router/index';
 import InputName from '@components/Patient/Inputs/InputName';
 import InputPhoneNumberEmail from '@components/Patient/Inputs/InputPhoneNumberEmail';
@@ -20,7 +20,7 @@ import InputAddressTimeZone from '@components/Patient/Inputs/InputAddressTimeZon
 import InputOverview from '@components/Patient/Inputs/InputOverview';
 import InputCountryCity from '@components/Patient/Inputs/InputCountryCity';
 
-const EditPatientCardForm : React.FC = () => {
+const EditPatientCardForm: React.FC = () => {
   const { t } = useTranslation();
   const { editPatientCardSchema } = patientSchema();
 
@@ -47,7 +47,7 @@ const EditPatientCardForm : React.FC = () => {
     resolver: yupResolver(editPatientCardSchema),
   });
 
-  const onSubmit = (data: ISignUp) => data;
+  const onSubmit = (data: IAuth) => data;
 
   return (
     <FormContainer>
