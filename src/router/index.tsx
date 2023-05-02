@@ -13,6 +13,7 @@ import Activation from '@pages/auth/signUp/activation';
 import CreatePatientCard from '@pages/patient/createPatientCard';
 import EditPatientCard from '@pages/patient/EditPatientCard';
 import TempScheduler from '@pages/tempScheduler';
+import ProtectedRoute from './protected-route';
 
 export const PATH = {
   SIGN_UP: '/auth',
@@ -30,7 +31,6 @@ export const PATH = {
   SCHEDULER: '/scheduler',
 };
 
-
 const AppRouter = () => {
   return (
     <PageWrapper>
@@ -40,21 +40,74 @@ const AppRouter = () => {
         <Route path={PATH.VERIFICATION} element={<Activation />} />
         <Route path={PATH.LOGIN} element={<Login />} />
         <Route path={PATH.RESET_PASS} element={<ResetPassword />} />
-        <Route
-          path={PATH.CREATE_PATIENT_CARD}
-          element={<CreatePatientCard />}
-        />
+
         {/* Private Routes */}
         <Route
           path={PATH.SIGN_UP_SECOND_STEP_GOOGLE}
-          element={<SignUpSecondFormGoogle />}
+          element={
+            <ProtectedRoute allowedRoles={['']}>
+              <SignUpSecondFormGoogle />
+            </ProtectedRoute>
+          }
         />
-        <Route path={PATH.FORGOT_PASS} element={<ForgotPassword />} />
-        <Route path={PATH.CONFIRM} element={<Confirmation />} />
-        <Route path={PATH.EDIT_DOCTOR_PROFILE} element={<Profile />} />
-        <Route path={PATH.HELP} element={<Help />} />
-        <Route path={PATH.DASHBOARD} element={<Profile />} />
-        <Route path={PATH.SCHEDULER} element={<TempScheduler />} />
+        <Route
+          path={PATH.CREATE_PATIENT_CARD}
+          element={
+            <ProtectedRoute allowedRoles={['Remote', 'Local']}>
+              <CreatePatientCard />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path={PATH.FORGOT_PASS}
+          element={
+            <ProtectedRoute allowedRoles={['Remote', 'Local']}>
+              <ForgotPassword />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path={PATH.CONFIRM}
+          element={
+            <ProtectedRoute allowedRoles={['Remote', 'Local']}>
+              <Confirmation />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path={PATH.EDIT_DOCTOR_PROFILE}
+          element={
+            <ProtectedRoute allowedRoles={['Remote', 'Local']}>
+              <Profile />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path={PATH.HELP}
+          element={
+            <ProtectedRoute allowedRoles={['Remote', 'Local']}>
+              <Help />
+            </ProtectedRoute>
+          }
+        />
+        {/* <Route path={PATH.DASHBOARD} element={<Profile />} /> */}
+
+        <Route
+          path={PATH.DASHBOARD}
+          element={
+            <ProtectedRoute allowedRoles={['Remote', 'Local']}>
+              <Profile />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path={PATH.SCHEDULER}
+          element={
+            <ProtectedRoute allowedRoles={['Remote', 'Local']}>
+              <TempScheduler />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
     </PageWrapper>
   );
