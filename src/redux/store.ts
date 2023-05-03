@@ -52,19 +52,21 @@ const persistConfig = {
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-export const setupStore = () => configureStore({
-  reducer: persistedReducer,
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware({
-    serializableCheck: {
-      ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-    },
-  }).concat(
-    doctorApi.middleware,
-    authApi.middleware,
-    patientApi.middleware,
-    availabilityApi.middleware,
-  ),
-});
+export const setupStore = () =>
+  configureStore({
+    reducer: persistedReducer,
+    middleware: (getDefaultMiddleware) =>
+      getDefaultMiddleware({
+        serializableCheck: {
+          ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+        },
+      }).concat(
+        doctorApi.middleware,
+        authApi.middleware,
+        patientApi.middleware,
+        availabilityApi.middleware
+      ),
+  });
 export const store = setupStore();
 export const persistor = persistStore(store);
 

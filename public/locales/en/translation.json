@@ -126,6 +126,10 @@
   "Profile": {
     "cancel": "Cancel",
     "save": "Save",
+    "editProfile": "Edit profile",
+    "uploadYourPhoto": "Upload your photo",
+    "export": "Export",
+    "scale": "Scale",
     "showMore": "Show more",
     "showLess": "Show less"
   },

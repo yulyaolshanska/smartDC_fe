@@ -9,7 +9,9 @@ const useAvoidRenderOnPaths = (
   if (
     pathsStart.some((path) => location.pathname.startsWith(path))
     || pathsExact.some((path) => location.pathname === path)
-  ) { return true; }
+  ) {
+    return true;
+  }
 
   return false;
 };
