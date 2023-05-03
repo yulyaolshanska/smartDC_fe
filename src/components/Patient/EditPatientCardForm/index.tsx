@@ -37,7 +37,7 @@ const EditPatientCardForm: React.FC = () => {
     email: 'john_nedoe@gmail.com',
     gender: 'Male',
     birthDate: '2000-10-10',
-    country: 'DE',
+    country: 'UA',
     city: 'Berlin',
     address: 'Berger Str. 22',
     timeZone: '(GMT+2) Europe/Berlin',

@@ -54,12 +54,12 @@
     "cancel": "Cancel",
     "delete": "Delete",
     "role": "Role",
-    "enterRole":"Enter role...",
-    "specialization":"Specialization",
-    "enterSpecialization":"Enter specialization...",
-    "gender":"Gender",
-    "enterGender":"Enter your gender...",
-    "birthDate":"Date of Birth",
+    "enterRole": "Enter role...",
+    "specialization": "Specialization",
+    "enterSpecialization": "Enter specialization...",
+    "gender": "Gender",
+    "enterGender": "Enter your gender...",
+    "birthDate": "Date of Birth",
     "enterDateOfBirth": "dd/mm/yyyy",
     "country": "Country",
     "enterCountry": "Enter your country...",
@@ -88,7 +88,7 @@
     "bothDatesRequired": "Validation error: both start and end dates are required",
     "endBeforeStartDateError": "Validation error: end date should be after start date",
     "overlappingEventsError": "Validation error: working hours overlap",
-    "somethingWasWrong":"Sorry, something was wrong!"
+    "somethingWasWrong": "Sorry, something was wrong!"
   },
   "Patient": {
     "createPatientCard": "Create patient's card",
@@ -101,23 +101,23 @@
     "enterEmail": "Enter patient's email",
     "phoneNumber": "Phone Number",
     "enterPhoneNumber": "Enter patient's phone Number",
-    "gender":"Gender",
-    "enterGender":"Enter patient's gender",
-    "birthDate":"Date of Birth",
-    "enterBirthDate":"Enter patient's date of Birth",
-    "country":"Country",
-    "enterCountry":"Enter patient's country",
-    "city":"City",
-    "enterCity":"Enter patient's city",
-    "address":"Address",
-    "enterAddress":"Enter patient's address",
-    "timeZone":"Time Zone",
-    "enterTimeZone":"Enter patient's time Zone",
+    "gender": "Gender",
+    "enterGender": "Enter patient's gender",
+    "birthDate": "Date of Birth",
+    "enterBirthDate": "Enter patient's date of Birth",
+    "country": "Country",
+    "enterCountry": "Enter patient's country",
+    "city": "City",
+    "enterCity": "Enter patient's city",
+    "address": "Address",
+    "enterAddress": "Enter patient's address",
+    "timeZone": "Time Zone",
+    "enterTimeZone": "Enter patient's time Zone",
     "overview": "Overview",
     "enterOverview": "Enter patient's overview",
     "save": "Save",
     "cancel": "Cancel",
-    "cardUpdetedSuccess":"Patient's card updated successfully"
+    "cardUpdetedSuccess": "Patient's card updated successfully"
   },
   "Profile": {
     "cancel": "Cancel",
@@ -142,7 +142,11 @@
     "deleteTime": "Delete time:",
     "saveSchedule": "Save schedule",
     "selectTimezone": "Time Zone:"
+  },
+  "BookAppointment": {
+    "selectDoctorSpecialization": "Select doctor specialization",
+    "SelectAppointmentTime": "Select a time of appointment",
+    "youSelected": "You selected:",
+    "date": "Date:"
   }
 }
-
-

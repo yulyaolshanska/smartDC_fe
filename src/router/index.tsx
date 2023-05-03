@@ -15,6 +15,8 @@ import EditPatientCard from '@pages/patient/EditPatientCard';
 import TempScheduler from '@pages/tempScheduler';
 import NotFound from '@pages/notFound';
 
+import CreateAppointment from "@pages/appointment"
+
 export const PATH = {
   SIGN_UP: '/auth',
   VERIFICATION: '/auth/activation/:link',
@@ -29,6 +31,8 @@ export const PATH = {
   CREATE_PATIENT_CARD: '/create-patient-card',
   EDIT_PATIENT_CARD: '/edit-patient-card',
   SCHEDULER: '/scheduler',
+  APPOINTMENT: '/book-appointment'
+
 };
 
 
@@ -62,6 +66,7 @@ const AppRouter = () => {
         <Route path={PATH.DASHBOARD} element={<Profile />} />
         <Route path={PATH.SCHEDULER} element={<TempScheduler />} />
         <Route path="*" element={<NotFound />} />
+        <Route path={PATH.APPOINTMENT} element={<CreateAppointment />} />
       </Routes>
     </PageWrapper>
   );
