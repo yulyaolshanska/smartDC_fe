@@ -24,5 +24,11 @@ export const patientApi = createApi({
         body: data,
       }),
     }),
+    getPatientById: builder.query({
+      query: (id: number | string) => ({
+        url: `/patient/${id}`,
+        method: 'GET',
+      }),
+    }),
   }),
 });

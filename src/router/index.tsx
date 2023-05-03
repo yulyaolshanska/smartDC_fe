@@ -30,7 +30,7 @@ export const PATH = {
   CREATE_PATIENT_CARD: '/create-patient-card',
   EDIT_PATIENT_CARD: '/edit-patient-card',
   AVAILABILITY: '/availability',
-  PATIENT_CARD_INFO: '/patient',
+  PATIENT_CARD_INFO: '/patient/:id',
 };
 
 const AppRouter = () => {
