@@ -154,7 +154,8 @@
   "PatientCard": {
     "overview:": "Overview:",
     "lastAppointment": "Last Appointment:",
-    "viewProfile": "View Profile"
+    "viewProfile": "View Profile",
+    "years": "years"
   },
   "Patients": {
     "createPatient": "Create Patient",

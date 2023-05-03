@@ -6,3 +6,6 @@ export const avoidStartWithRenderArray = [
   '/auth',
 ];
 export const avoidExactRenderArray = ['/'];
+
+export const TWEETS_PER_PAGE = 30;
+export const TWEETS_PER_LOAD = 10;

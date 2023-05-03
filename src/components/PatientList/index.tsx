@@ -4,9 +4,7 @@ import PatientCard from '@components/PatientItem';
 import { LoadMoreButton } from '@components/general/styles';
 import { useGetPatientsQuery } from '../../services/PatientService';
 import { useState } from 'react';
-
-const TWEETS_PER_PAGE = 30;
-const TWEETS_PER_LOAD = 10;
+import { TWEETS_PER_LOAD, TWEETS_PER_PAGE } from '@constants/other';
 
 interface IProps {
   searchValue: string;
@@ -15,8 +13,9 @@ interface IProps {
 function PatientList({ searchValue }: IProps) {
   const { t } = useTranslation();
   const { data: patients } = useGetPatientsQuery('');
-  const [currentPage] = useState(1);
-  const [displayedTweets, setDisplayedTweets] = useState(TWEETS_PER_PAGE);
+  const [currentPage] = useState<number>(1);
+  const [displayedTweets, setDisplayedTweets] =
+    useState<number>(TWEETS_PER_PAGE);
   const startIndex = (currentPage - 1) * TWEETS_PER_PAGE;
   const endIndex = displayedTweets;
 
