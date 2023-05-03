@@ -1,7 +1,10 @@
 import {
+  ACTIVE,
   CORNFLOWER_BLUE,
   NAVY_BLUE,
   PINK_SWAN,
+  POP_UP_CONTENT_BACKGROUND,
+  POP_UP_CONTENT_BORDER,
   WHITE,
 } from '@constants/colors';
 import { SMALL_FONT_SIZE } from '@constants/fontSizes';
@@ -35,7 +38,7 @@ export const ExportButton = styled.button`
 export const RangeInput = styled.input.attrs({ type: 'range' })`
   width: 90%;
   height: 20px;
-  background: #ddd;
+  background: ${WHITE};
   outline: none;
   padding: 0;
   border-radius: 10px;
@@ -44,7 +47,7 @@ export const RangeInput = styled.input.attrs({ type: 'range' })`
     appearance: none;
     width: 20px;
     height: 20px;
-    background: #0077ff;
+    background: ${ACTIVE};
     cursor: pointer;
     border-radius: 50%;
   }
@@ -97,11 +100,11 @@ export const Overlay = styled.div`
 `;
 
 export const Content = styled.div`
-  border: 1px solid #e6e6e6;
+  border: 1px solid ${POP_UP_CONTENT_BORDER};
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
   border-radius: 16px;
   overflow: auto;
-  background-color: #f8f8f8;
+  background-color: ${POP_UP_CONTENT_BACKGROUND};
   z-index: 3000;
   min-width: 400px;
   min-height: 600px;
@@ -110,20 +113,4 @@ export const Content = styled.div`
   justify-content: center;
   align-items: center;
   gap: 20px;
-`;
-
-export const Buttons = styled.ul`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: relative;
-  top: 35%;
-  gap: 2rem;
-  list-style: none;
-  .addButton {
-    width: 90% !important;
-  }
-  .cartButton {
-    width: 90% !important;
-  }
 `;
