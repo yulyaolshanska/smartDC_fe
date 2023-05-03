@@ -11,7 +11,7 @@ import {
 } from '@components/general/styles';
 import { Form, InputInlineContainer, Text } from '@components/Patient/styles';
 import { FormValues, IPatient } from '@components/general/type';
-import { patientSchema } from '@validation/patient.validate';
+import patientSchema from '@validation/patient.validate';
 import { PATH } from '@router/index';
 import { useNavigate } from 'react-router-dom';
 import InputName from '@components/Patient/Inputs/InputName';
