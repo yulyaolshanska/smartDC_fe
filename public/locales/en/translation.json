@@ -148,7 +148,8 @@
     "deleteTime": "Delete time:",
     "saveSchedule": "Save schedule",
     "selectTimezone": "Time Zone:",
-    "successfullySubmited": "Your schedule has been successfully updated!"
+    "successfullySubmited": "Your schedule has been successfully updated!",
+    "calendar": "Calendar"
   },
   "PatientCard": {
     "overview:": "Overview:",

@@ -80,7 +80,7 @@ function PatientCard({ patient, searchValue }: IProps) {
             is measured through this test. Results outside of the normal range
             can be a sign of anemia or chronic fatigue.
           </LastAppointment>
-          <ViewLink to={PATH.CREATE_PATIENT_CARD}>
+          <ViewLink to={PATH.PATIENT_CARD_INFO}>
             {t('PatientCard.viewProfile')}
           </ViewLink>
         </>

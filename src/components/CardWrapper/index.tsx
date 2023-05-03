@@ -52,7 +52,7 @@ const CardWrapper: React.FC<Props> = ({
 
           <Arrow toggle={!toggle} />
         </PatientName>
-        <EditCardLink to={PATH.CREATE_PATIENT_CARD}>
+        <EditCardLink to={PATH.EDIT_PATIENT_CARD}>
           {t('Patients.editCard')}
         </EditCardLink>
       </Container>
