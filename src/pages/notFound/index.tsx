@@ -11,7 +11,7 @@ const NotFound = () => {
   return (
     <Wrapper>
         <EmotionSad/>
-      <ErrorNumber>404</ErrorNumber>
+      <ErrorNumber>{t('NotFoundPage.404')}</ErrorNumber>
       <ErrorText>{t('NotFoundPage.notFound')}</ErrorText>
       <p>{t('NotFoundPage.doesntExist')}</p>
       <BackToDashLink to={PATH.DASHBOARD}>
