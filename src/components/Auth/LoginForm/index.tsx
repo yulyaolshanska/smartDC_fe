@@ -85,6 +85,7 @@ function LoginForm() {
             token,
             import.meta.env.VITE_REACT_APP_ACCESS_TOKEN_MAXAGE
           );
+          sessionStorage.setItem('userStatus', 'loggedIn');
           navigate(PATH.DASHBOARD);
         }
       });

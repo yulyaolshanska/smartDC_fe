@@ -12,6 +12,8 @@
     "signIn": "Sign In",
     "logIn": "Log In",
     "logOut": "Log Out",
+    "logoutTitle": "Logout",
+    "logoutText": "Are you sure you want to log out?",
     "loginTitle": "Login",
     "loginText": "Please, login into your medical account",
     "activationText": "You have successfully verified your account. In order to enter the system, please go to the login form",
@@ -52,6 +54,7 @@
     "save": "Save",
     "submit": "Submit",
     "cancel": "Cancel",
+    "confirm": "Confirm",
     "delete": "Delete",
     "role": "Role",
     "enterRole": "Enter role...",
@@ -87,7 +90,9 @@
     "overviewRequired": "*Overview is required",
     "bothDatesRequired": "Validation error: both start and end dates are required",
     "endBeforeStartDateError": "Validation error: end date should be after start date",
-    "overlappingEventsError": "Validation error: working hours overlap"
+    "overlappingEventsError": "Validation error: working hours overlap",
+    "pastDateError": "You cannot create schedule on a past date!",
+    "calendarSlotError": "Something went wrong!"
   },
   "Patient": {
     "createPatientCard": "Create patient's card",
@@ -115,7 +120,8 @@
     "overview": "Overview",
     "enterOverview": "Enter patient's overview",
     "save": "Save",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "lastAppointment": "Last Appointment:"
   },
   "Profile": {
     "cancel": "Cancel",
@@ -123,7 +129,9 @@
     "editProfile": "Edit profile",
     "uploadYourPhoto": "Upload your photo",
     "export": "Export",
-    "scale": "Scale"
+    "scale": "Scale",
+    "showMore": "Show more",
+    "showLess": "Show less"
   },
 
   "Help": {
@@ -143,6 +151,7 @@
     "selectedDate": "Selected date:",
     "deleteTime": "Delete time:",
     "saveSchedule": "Save schedule",
-    "selectTimezone": "Time Zone:"
+    "selectTimezone": "Time Zone:",
+    "successfullySubmited": "Your schedule has been successfully updated!"
   }
 }

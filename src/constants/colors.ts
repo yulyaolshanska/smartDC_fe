@@ -53,3 +53,7 @@ export const LIGHT_GRAY = '#808080';
 export const POP_UP_CONTENT_BORDER = '#e6e6e6';
 
 export const POP_UP_CONTENT_BACKGROUND = '#f8f8f8';
+
+export const DARK_BLUE = '#060d33';
+
+export const LIGHT_BLUE = '#081972';

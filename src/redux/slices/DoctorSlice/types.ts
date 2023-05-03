@@ -14,4 +14,5 @@ export default interface DoctorInitialState {
   role?: string;
   specialityId?: number;
   timeZone?: string;
+  availabilities?: null | string;
 }
