@@ -1,4 +1,6 @@
-import { NAVY_BLUE, WHITE, RED, WHISPER, LIGHT_GRAY } from '@constants/colors';
+import {
+  NAVY_BLUE, WHITE, RED, WHISPER, LIGHT_GRAY,
+} from '@constants/colors';
 import styled from 'styled-components';
 import FONT_ROBOTO from '@constants/fonts';
 import { VERY_SMALL_FONT_SIZE } from '@constants/fontSizes';

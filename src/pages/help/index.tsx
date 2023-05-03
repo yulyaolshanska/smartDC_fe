@@ -1,6 +1,4 @@
 import Accordion from '@components/Accordion';
-import Wrapper from '@components/Wrapper';
-import React from 'react';
 import HelpContainer from './styles';
 
 const Help = () => {

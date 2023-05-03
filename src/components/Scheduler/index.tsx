@@ -4,17 +4,15 @@ import { v4 as uuidv4 } from 'uuid';
 import moment from 'moment';
 import 'moment-timezone';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
-import {
-  CancelButton,
-  ErrorText,
-  SaveButton,
-  SchedulerButtonsWrapper,
-} from './styles';
+import { ErrorText } from './styles';
 import { useTranslation } from 'react-i18next';
 import PopupDeleteContent from './Modals/PopupDeleteContent';
 import PopupCreateContent from './Modals/PopupCreateContent';
 import TimezoneSelect from './TimezoneSelect/TimezoneSelect';
-import { TFunction } from 'i18next';
+import { WHITE } from '@constants/colors';
+import { useAppDispatch, useAppSelector } from '@redux/hooks';
+import { ToastContainer, toast } from 'react-toastify';
+import { Availability, availabilityApi } from '../../services/AvailabilityService';
 
 const defaultTZ = moment.tz.guess();
 
@@ -30,8 +28,29 @@ export interface IScheduleItem {
   end: Date;
 }
 
+const calendarStyle = {
+  backgroundColor: WHITE,
+  height: '600px'
+};
+
 function Scheduler() {
-  const { t }: { t: TFunction } = useTranslation();
+  const { t } = useTranslation();
+  const doctorData = useAppSelector((state) => state.doctorReducer);
+  const [createAvailability] = availabilityApi.useCreateAvailabilityMutation();
+  const [deleteAvailability] = availabilityApi.useDeleteAvailabilityByIdMutation();
+
+  const {
+    data: availabilityData,
+    refetch: availabilityRefetch,
+    error: availabilityGetError,
+    isLoading: availabilityIsLoading,
+  } = availabilityApi.useGetAvailabilitiesForDoctorQuery(doctorData?.id || 0);
+
+  const initialEventsWithDateObject = availabilityData?.map((event: Availability) => ({
+    ...event,
+    start: new Date(event.start),
+    end: new Date(event.end)
+  }));
 
   const [showWarning, setShowWarning] = useState<boolean>(false);
   const [timezone, setTimezone] = useState<string>(defaultTZ);
@@ -41,7 +60,7 @@ function Scheduler() {
     start: null,
     end: null,
   });
-  const [eventsData, setEventsData] = useState<IScheduleItem[]>([]);
+  const [eventsData, setEventsData] = useState<IScheduleItem[]>(initialEventsWithDateObject as IScheduleItem[]);
   const [errorMessage, setErrorMessage] = useState('');
   const [selectedEvent, setSelectedEvent] = useState<IScheduleItem | null>(
     null
@@ -62,6 +81,12 @@ function Scheduler() {
     };
   }, []);
 
+  useEffect(() => {
+    if (initialEventsWithDateObject) {
+      setEventsData(initialEventsWithDateObject);
+    }
+  }, [initialEventsWithDateObject]);
+  
   const handleTimezoneChange = (newTimezone: string) => {
     setTimezone(newTimezone);
     if (!showWarning) {
@@ -75,14 +100,31 @@ function Scheduler() {
 
   const handleDeleteEvent = () => {
     if (!selectedEvent) return;
-    const updatedEvents = eventsData.filter(
-      (event) => event.uuid !== selectedEvent.uuid
-    );
     setSelectedEvent(null);
-    setEventsData(updatedEvents);
+    (async () => {
+      try {
+        await deleteAvailability({ doctorId: doctorData.id, uuid: selectedEvent.uuid }).unwrap();
+        toast.success(t('Calendar.successfullySubmited'), {
+          position: toast.POSITION.TOP_CENTER
+        });
+        availabilityRefetch();
+        const updatedEvents = eventsData.filter((event) => event.uuid !== selectedEvent.uuid);
+        setEventsData(updatedEvents);
+      } catch (err) {
+        toast.error(t('Error.calendarSlotError'), {
+          position: toast.POSITION.TOP_CENTER
+        });
+      }
+    })();
   };
 
   function handleSelectSlot(slotInfo: { start: Date; end: Date }): void {
+    if (moment(slotInfo.start).isBefore(moment(), 'day')) {
+      toast.error(t('Error.pastDateError'), {
+        position: toast.POSITION.TOP_CENTER
+      });
+      return;
+    }
     setSelectedDate(slotInfo.start);
     setShowCreatePopup(true);
     setSelectedRange({
@@ -126,79 +168,92 @@ function Scheduler() {
       dayEndValue.setMinutes(Number(endMinutes));
 
       const uuid = uuidv4();
-      setEventsData([
-        ...eventsData,
-        {
-          uuid: uuid,
-          title: `Working hours`,
-          start: dayStartValue,
-          end: dayEndValue,
-        },
-      ]);
       setShowCreatePopup(false);
       setErrorMessage('');
+
+      let newAvailability = {
+        uuid: uuid,
+        title: `Working hours`,
+        start: dayStartValue.toISOString(),
+        end: dayEndValue.toISOString(),
+      };
+      let newEventAvailability = {
+        uuid: uuid,
+        title: `Working hours`,
+        start: dayStartValue,
+        end: dayEndValue,
+      };
+
+      (async () => {
+        try {
+          await createAvailability({ doctorId: doctorData.id, availability: newAvailability }).unwrap();
+          toast.success(t('Calendar.successfullySubmited'), {
+            position: toast.POSITION.TOP_CENTER
+          });
+          availabilityRefetch()
+          setEventsData([...eventsData, newEventAvailability]);
+        } catch (err) {
+          toast.error(t('Error.calendarSlotError'), {
+            position: toast.POSITION.TOP_CENTER
+          });
+        }
+        const updatedEventsData = eventsData.map((event) => {
+          if (event.start.getTime() === dayStartValue.getTime() && event.end.getTime() === dayEndValue.getTime()) {
+            return {
+              ...event,
+              uuid: uuid
+            }
+          }
+          return event;
+        });
+        setEventsData(updatedEventsData);
+      })();
     }
   };
 
-  function handleSubmit() {
-    // TODO: send saved schedule to DB
-  }
-
-  function handleCancel() {
-    // TODO: clear saved schedule
+  if (availabilityIsLoading) {
+    return <div>Loading...</div>;
   }
 
   return (
     <>
-      <TimezoneSelect
-        defaultTZ={defaultTZ}
-        setTimezone={handleTimezoneChange}
-        timezone={timezone}
-      />
-      {showWarning && <ErrorText>{t('Warning.viewScheduleWarning')}</ErrorText>}
-      <Calendar
-        events={eventsData}
-        localizer={localizer}
-        selectable={true}
-        onSelectSlot={handleSelectSlot}
-        onSelectEvent={handleSelectEvent}
-        startAccessor="start"
-        endAccessor="end"
-        style={{ height: 500 }}
-        getNow={getNow}
-        scrollToTime={scrollToTime}
-      />
-      {showCreatePopup && (
-        <PopupCreateContent
-          handleSave={handleSave}
-          handleStartChange={handleStartChange}
-          handleEndChange={handleEndChange}
-          selectedRange={selectedRange}
-          selectedDate={selectedDate}
-          errorMessage={errorMessage}
-          setShowCreatePopup={setShowCreatePopup}
-          setErrorMessage={setErrorMessage}
+        <TimezoneSelect
+          defaultTZ={defaultTZ}
+          setTimezone={handleTimezoneChange}
+          timezone={timezone}
         />
-      )}
-      {selectedEvent && (
-        <PopupDeleteContent
-          setSelectedEvent={setSelectedEvent}
-          handleDeleteEvent={handleDeleteEvent}
+        {showWarning && <ErrorText>{t('Warning.viewScheduleWarning')}</ErrorText>}
+        <Calendar
+          events={eventsData}
+          localizer={localizer}
+          selectable={true}
+          onSelectSlot={handleSelectSlot}
+          onSelectEvent={handleSelectEvent}
+          startAccessor="start"
+          endAccessor="end"
+          style={calendarStyle}
+          getNow={getNow}
+          scrollToTime={scrollToTime}
         />
-      )}
-      <SchedulerButtonsWrapper>
-        <CancelButton
-          onClick={handleCancel}
-          type="button"
-          value={t('Auth.cancel') ?? ''}
-        />
-        <SaveButton
-          onClick={handleSubmit}
-          disabled={false}
-          type="submit"
-          value={t('Calendar.saveSchedule') ?? ''}
-        />
-      </SchedulerButtonsWrapper>
+        {showCreatePopup && (
+          <PopupCreateContent
+            handleSave={handleSave}
+            handleStartChange={handleStartChange}
+            handleEndChange={handleEndChange}
+            selectedRange={selectedRange}
+            selectedDate={selectedDate}
+            errorMessage={errorMessage}
+            setShowCreatePopup={setShowCreatePopup}
+            setErrorMessage={setErrorMessage}
+          />
+        )}
+        {selectedEvent && (
+          <PopupDeleteContent
+            setSelectedEvent={setSelectedEvent}
+            handleDeleteEvent={handleDeleteEvent}
+          />
+        )}
+      <ToastContainer />
     </>
   );
 }

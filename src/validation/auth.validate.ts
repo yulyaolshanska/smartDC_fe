@@ -35,17 +35,17 @@ export default function signUpSchema() {
       .matches(
         PASSWORD_PATTERN,
         `${tWithDefault(
-          'Error.mustContain'
+          'Error.mustContain',
         )} ${PASSWORD_REQUIRED_LENGTH} ${tWithDefault(
-          'Error.charactersUppercaseLowercase'
-        )}`
+          'Error.charactersUppercaseLowercase',
+        )}`,
       ),
     confirmPassword: yup
       .string()
       .required(tWithDefault('Error.confirmPasswordRequired'))
       .oneOf(
         [yup.ref('password')],
-        tWithDefault('Error.passwordsDoesNotMatch')
+        tWithDefault('Error.passwordsDoesNotMatch'),
       ),
   });
 
@@ -70,17 +70,17 @@ export default function signUpSchema() {
       .matches(
         PASSWORD_PATTERN,
         `${tWithDefault(
-          'Error.mustContain'
+          'Error.mustContain',
         )} ${PASSWORD_REQUIRED_LENGTH} ${tWithDefault(
-          'Error.charactersUppercaseLowercase'
-        )}`
+          'Error.charactersUppercaseLowercase',
+        )}`,
       ),
     confirmPassword: yup
       .string()
       .required(tWithDefault('Error.confirmPasswordRequired'))
       .oneOf(
         [yup.ref('password')],
-        tWithDefault('Error.passwordsDoesNotMatch')
+        tWithDefault('Error.passwordsDoesNotMatch'),
       ),
   });
 
@@ -102,10 +102,10 @@ export default function signUpSchema() {
       .matches(
         PASSWORD_PATTERN,
         `${tWithDefault(
-          'Error.mustContain'
+          'Error.mustContain',
         )} ${PASSWORD_REQUIRED_LENGTH} ${tWithDefault(
-          'Error.charactersUppercaseLowercase'
-        )}`
+          'Error.charactersUppercaseLowercase',
+        )}`,
       ),
   });
 

@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 
 const NAME_PATTERN = /^([A-Z][a-z]{1,11})/;
 
-export function patientSchema() {
+export default function patientSchema() {
   const { t } = useTranslation();
   const tWithDefault = (key: string) => {
     const translation = t(key);

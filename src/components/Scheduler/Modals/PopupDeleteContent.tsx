@@ -1,8 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { IScheduleItem } from '..';
-import { ModalButtonsWrapper, ModalContainer, ModalContent, ModalOverlay, Title } from './styles';
-import { CancelButton, SaveButton } from '../styles';
+import { CancelButton, ModalButtonsWrapper, ModalContainer, ModalContent, ModalOverlay, SaveButton, Title } from './styles';
 
 interface IPopupDeleteContentProps {
     setSelectedEvent: (event: IScheduleItem | null) => void;
@@ -18,7 +17,7 @@ const PopupDeleteContent = ({ setSelectedEvent, handleDeleteEvent }: IPopupDelet
                 <ModalContent>
                     <Title>{t('Calendar.deleteTime')}</Title>
                     <ModalButtonsWrapper>
-                        <CancelButton 
+                        <CancelButton
                             onClick={() => setSelectedEvent(null)}
                             type='button'
                             value={t('Auth.cancel') ?? ''}
@@ -26,7 +25,7 @@ const PopupDeleteContent = ({ setSelectedEvent, handleDeleteEvent }: IPopupDelet
                         <SaveButton
                             onClick={handleDeleteEvent}
                             disabled={false}
-                            type='submit'
+                            type='button'
                             value={t('Auth.delete') ?? ''}
                         />
                     </ModalButtonsWrapper>
