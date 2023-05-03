@@ -15,6 +15,7 @@ export interface IAuth {
   address: string;
   timeZone: string;
   isLoading?: boolean;
+  availabilities?: null | string;
   token?: string | null;
   error?: string | null;
 }

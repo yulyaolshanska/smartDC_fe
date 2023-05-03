@@ -1,10 +1,11 @@
 import cookie from 'utils/functions/cookies';
-import { createSlice } from '@reduxjs/toolkit';
+import { Dispatch, createSlice } from '@reduxjs/toolkit';
 
 import { persistor } from '@redux/store';
 import DoctorInitialState from '@redux/slices/DoctorSlice/types';
 
 const initialState: DoctorInitialState = {};
+
 const doctorSlice = createSlice({
   name: 'navigation',
   initialState,
@@ -14,11 +15,16 @@ const doctorSlice = createSlice({
     },
     logout() {
       localStorage.clear();
+      sessionStorage.clear();
       cookie.delete('accessToken');
-      persistor.purge();
       return initialState;
     },
   },
 });
 
 export const { reducer: doctorReducer, actions: doctorActions } = doctorSlice;
+
+export const clearPersist = () => async (dispatch: Dispatch) => {
+  dispatch(doctorActions.logout());
+  await persistor.purge();
+};

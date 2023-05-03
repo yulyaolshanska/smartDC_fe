@@ -20,7 +20,7 @@ export const patientApi = createApi({
   endpoints: (builder) => ({
     createPatient: builder.mutation({
       query: (data: CreatePatientDto) => ({
-        url: `/patient`,
+        url: '/patient',
         method: 'POST',
         body: data,
       }),
