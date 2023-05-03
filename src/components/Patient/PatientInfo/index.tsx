@@ -23,6 +23,7 @@ import {
 import { lastAppointmentInfo } from '@constants/mockData';
 import { patientApi } from 'services/PatientService';
 import { male, years } from '@constants/patient';
+import Spinner from '@components/Loaders/Spinner';
 
 function PatientCardInfo() {
   const { t } = useTranslation();
@@ -45,7 +46,7 @@ function PatientCardInfo() {
   return (
     <>
       {isLoading ? (
-        <div>{t('Dashboard.loading')}</div>
+        <Spinner />
       ) : (
         <PatientCardInfoContainer>
           <PatientInfoName>{patientFullName}</PatientInfoName>
