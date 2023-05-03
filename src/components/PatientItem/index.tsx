@@ -61,7 +61,9 @@ function PatientCard({ patient, searchValue }: IProps) {
               {gender === male ? <GenderMaleIcon /> : <GenderFemaleIcon />}
               <UserInfo>{gender}</UserInfo>
               <CalengarIcon />
-              <UserInfo>{patientAge} years</UserInfo>
+              <UserInfo>
+                {patientAge} {t('PatientCard.years')}
+              </UserInfo>
               <PinIcon />
               <UserInfo>
                 {city},{country}

@@ -1,5 +1,5 @@
 import { ViewLink } from '@components/PatientItem/styles';
-import { BORDER, ZAMBEZI } from '@constants/colors';
+import { BLACK, BORDER, ZAMBEZI } from '@constants/colors';
 import { SMALL_FONT_SIZE } from '@constants/fontSizes';
 import styled from 'styled-components';
 
@@ -8,13 +8,13 @@ export const Container = styled.div`
 `;
 
 export const Arrow = styled.div<{ toggle: boolean }>`
-  border: solid black;
+  border: solid ${BLACK};
   border-width: 0 1px 1px 0;
   display: inline-block;
   padding: 3px;
   margin-left: 8px;
   margin-top: ${(props) => (props.toggle ? '-3px' : '10px')};
-  color: black;
+  color: ${BLACK};
   transition: 0.5s all;
   transform: rotate(${(props) => (props.toggle ? '45deg' : '-135deg')});
   -webkit-transform: rotate(${(props) => (props.toggle ? '45deg' : '-135deg')});

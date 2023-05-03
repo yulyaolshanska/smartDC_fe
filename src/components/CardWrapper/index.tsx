@@ -1,6 +1,7 @@
-import { useTranslation } from 'react-i18next';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import Highlighter from 'react-highlight-words';
+import { PATH } from '@router/index';
 
 import {
   AccordionBody,
@@ -9,7 +10,6 @@ import {
   EditCardLink,
   PatientName,
 } from './styles';
-import { PATH } from '@router/index';
 
 type Props = {
   children: any;
@@ -40,6 +40,7 @@ const CardWrapper: React.FC<Props> = ({
   const toggleState = (): void => {
     setToggle(!toggle);
   };
+
   return (
     <>
       <Container>

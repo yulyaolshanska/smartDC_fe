@@ -1,4 +1,10 @@
-import { ACTIVE, BORDER, GHOST_WHITE } from '@constants/colors';
+import {
+  ACTIVE,
+  BORDER,
+  DARK_BLUE,
+  GHOST_WHITE,
+  LIGHT_BLUE,
+} from '@constants/colors';
 import { SMALL_FONT_SIZE, VERY_SMALL_FONT_SIZE } from '@constants/fontSizes';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
@@ -24,7 +30,7 @@ export const ContactInfo = styled.p`
   margin-left: 4px;
   font-size: ${SMALL_FONT_SIZE};
   line-height: 1.5;
-  color: #060d33;
+  color: ${DARK_BLUE};
 
   &:not(:last-child) {
     margin-right: 12px;
@@ -64,14 +70,14 @@ export const LastAppointmentTitle = styled.span`
   font-weight: 700;
   font-size: ${VERY_SMALL_FONT_SIZE};
   line-height: 1.43;
-  color: #081972;
+  color: ${LIGHT_BLUE};
 `;
 
 export const LastAppointment = styled.p`
   margin-bottom: 6px;
   font-size: ${VERY_SMALL_FONT_SIZE};
   line-height: 1.4;
-  color: #060d33;
+  color: ${DARK_BLUE};
 `;
 
 export const ViewLink = styled(Link)`

@@ -1,5 +1,3 @@
-// import PageWrapper from '@components/PageWrapper';
-
 import { AddButton, ArrowBack, Link } from '@components/general/styles';
 import { FormValues, ISearch } from '@components/general/type';
 import Input from '@components/Input';
@@ -14,7 +12,7 @@ import { Container, Form } from './styles';
 
 function Patients() {
   const { t } = useTranslation();
-  const [searchValue, setSearchValue] = useState('');
+  const [searchValue, setSearchValue] = useState<string>('');
 
   const { handleSubmit, control } = useForm<FormValues>({
     mode: 'onChange',
