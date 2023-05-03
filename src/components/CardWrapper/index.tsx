@@ -50,7 +50,7 @@ const CardWrapper: React.FC<Props> = ({
             textToHighlight={patientFullName}
           ></Highlighter>
 
-          <Arrow toggle={toggle} />
+          <Arrow toggle={!toggle} />
         </PatientName>
         <EditCardLink to={PATH.CREATE_PATIENT_CARD}>
           {t('Patients.editCard')}
