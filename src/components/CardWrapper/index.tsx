@@ -12,7 +12,7 @@ import {
 } from './styles';
 
 type Props = {
-  children: any;
+  children: React.ReactNode;
   patientFullName: string;
   searchValue: string;
 };

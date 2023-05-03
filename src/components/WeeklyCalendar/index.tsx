@@ -55,7 +55,7 @@ function WeeklyCalendar() {
     const randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
 
     return (
-      <EventContainer onClick={() => console.log('Show Appointments')}>
+      <EventContainer>
         <EventMain style={{ backgroundColor: randomColor }}>
           <AppointmentEvent></AppointmentEvent>
         </EventMain>
@@ -76,9 +76,7 @@ function WeeklyCalendar() {
     <CalendarContainer>
       <CalendarTitle>{t('Calendar.calendar')}</CalendarTitle>
       <FullCalendar
-        // ref={calendarRef}
         {...options}
-        eventClick={() => console.log('Click')}
         headerToolbar={{
           left: 'today',
           center: 'title',
