@@ -59,3 +59,11 @@ export const UPLOAD_BUTTON_COLOR = '#3498db';
 export const CONTENT_LOADER_BACKGROUND = '#f3f3f3';
 
 export const CONTENT_LOADER_FOREGROUND = '#ecebeb';
+
+export const POP_UP_CONTENT_BORDER = '#e6e6e6';
+
+export const POP_UP_CONTENT_BACKGROUND = '#f8f8f8';
+
+export const DARK_BLUE = '#060d33';
+
+export const LIGHT_BLUE = '#081972';

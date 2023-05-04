@@ -15,7 +15,7 @@ export function SelectInput({
   label,
   error,
   placeholder,
-  options,
+  options = [],
 }: Props & { control: Control<FormValues> }) {
   return (
     <InputContainer hasError={!!error}>
@@ -23,7 +23,7 @@ export function SelectInput({
       <Controller
         control={control}
         name={name as FieldName}
-        render={({ field: { ref, onChange, ...field } }) => (
+        render={({ field: { ref, onChange, value, ...field } }) => (
           <Autocomplete
             options={options}
             onChange={(_, data) => onChange(data?.value)}
@@ -36,6 +36,7 @@ export function SelectInput({
                 placeholder={placeholder}
               />
             )}
+            value={options?.find((option) => option.value === value) || null}
           />
         )}
       />

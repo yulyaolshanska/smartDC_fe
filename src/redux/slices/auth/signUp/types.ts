@@ -16,4 +16,5 @@ export default interface SignUpInitialState {
   isLoading: boolean;
   token?: null | string;
   error?: null | string;
+  availabilities?: null | string;
 }

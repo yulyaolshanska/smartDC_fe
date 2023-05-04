@@ -41,6 +41,7 @@
         "sourceType": "module"
       },
       "rules": {
+        "import/prefer-default-export": "off",
         "no-param-reassign": "off",
         "consistent-return": "off",
         "@typescript-eslint/no-shadow": "off",

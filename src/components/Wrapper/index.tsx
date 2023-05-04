@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-  ArrowBack,
-  LinkContainer,
-  WrapperElement,
-} from '@components/Wrapper/styles';
-import { PATH } from '@router/index';
-import { Link } from '@components/general/styles';
+import { WrapperElement } from '@components/Wrapper/styles';
 import { useTranslation } from 'react-i18next';
 
 interface WrapperProps {

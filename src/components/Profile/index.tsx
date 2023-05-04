@@ -72,6 +72,7 @@ const ProfileComponent = () => {
           address: doctor.address,
           timeZone: doctor.timeZone,
           specialization: doctor.specialization,
+          availabilities: doctor.availabilities,
         });
       }
     }, 0);
