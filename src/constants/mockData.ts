@@ -34,3 +34,16 @@ export const appointmentTime = [
   { value: 2, label: '10:00-11:00' },
   { value: 3, label: '11:00-12:00' },
 ];
+
+export const nameInfo = 'Patrick Beverley';
+export const phoneNumberInfo = '+380660012300';
+export const emailInfo = 'pat123beverley@gmail.com';
+export const genderInfo = 'Male';
+export const yearsInfo = '32 years';
+export const cityCountryInfo = 'Leova, Moldova';
+export const overviewInformation = 'overview information';
+export const lastAppointmentInfo =
+  'The average volume of RBCs, or the space each red blood cell fills, is measured through this test. ' +
+  'Results outside of the normal range can be a sign of anemia or chronic fatigue. The average volume of RBCs, or the space each red blood cell fills, is measured through this test.' +
+  'The average volume of RBCs, or the space each red blood cell fills, is measured through this test. ' +
+  'Results outside of the normal range can be a sign of anemia or chronic fatigue. The average volume of RBCs, or the space each red blood cell fills, is measured through this test.';
