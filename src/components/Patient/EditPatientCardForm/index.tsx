@@ -5,13 +5,12 @@ import { ToastContainer, toast } from 'react-toastify';
 import { yupResolver } from '@hookform/resolvers/yup';
 import {
   CancelButton,
-  FormContainer,
   SendButton,
   ButtonContainer,
 } from '@components/general/styles';
 import { Form, InputInlineContainer, Text } from '@components/Patient/styles';
 import { FormValues, IPatient } from '@components/general/type';
-import { patientSchema } from '@validation/patient.validate';
+import patientSchema  from '@validation/patient.validate';
 import { PATH } from '@router/index';
 import { useNavigate } from 'react-router-dom';
 import InputName from '@components/Patient/Inputs/InputName';
@@ -93,7 +92,6 @@ const EditPatientCardForm: React.FC = () => {
   };
 
   return (
-    <FormContainer>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <Text>{t('Patient.editPatientCard')}</Text>
         <InputInlineContainer>
@@ -124,7 +122,6 @@ const EditPatientCardForm: React.FC = () => {
         </ButtonContainer>
         <ToastContainer />
       </Form>
-    </FormContainer>
   );
 };
 

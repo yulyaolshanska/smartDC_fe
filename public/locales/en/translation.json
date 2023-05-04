@@ -161,6 +161,9 @@
     "youSelected": "You selected:",
     "date": "Date:",
     "selectTimezone": "Time Zone:",
-    "successfullySubmited": "Your schedule has been successfully updated!"
+    "successfullySubmited": "Your schedule has been successfully updated!",
+    "stepOne":"Step 1/2",
+    "prevStep":"Previous step",
+    "nextStep":"Next step"
   }
 }

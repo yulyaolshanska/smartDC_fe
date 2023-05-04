@@ -8,9 +8,9 @@ import {
   SendButton,
   ButtonContainer,
 } from '@components/general/styles';
-import { Form, InputInlineContainer, Text } from '@components/Patient/styles';
+import { Form } from '@components/Patient/styles';
 import { AppointmentFormValues, IPatient } from '@components/general/type';
-import { patientSchema } from '@validation/patient.validate';
+import patientSchema from '@validation/patient.validate';
 import { PATH } from '@router/index';
 import { useNavigate } from 'react-router-dom';
 import SpecializationInput from '@components/Appointment/SpecializationSelect';
@@ -19,7 +19,21 @@ import AppointmentTime from '@components/Appointment/TimeSelect';
 
 import { patientApi } from 'services/PatientService';
 import { Controller } from 'react-hook-form';
-import CalendarTest from '@components/Appointment/CalendarTests';
+import CancelBtn from '@components/Appointment/CancelBtn';
+import {
+  FormWrapper,
+  StepWrapper,
+  Text,
+  CalendarWrapper,
+  FormFooter,
+  FormInfo,
+  BntWrapper,
+  StepBtn,
+  YouSelected,
+  SelectedDayTime,
+} from '@components/Appointment/BookAppointmentForm/styles';
+
+import { ReactComponent as ArrowRight } from '@assets/arrowRight.svg';
 
 const BookAppointmentForm: React.FC = () => {
   const { t } = useTranslation();
@@ -29,8 +43,7 @@ const BookAppointmentForm: React.FC = () => {
   const [selectedDate, setSelectedDate] = useState<Date>(today);
   const [formattedDate, setFormattedDate] = useState('');
   const [formattedTime, setFormattedTime] = useState('');
-
-  console.log(`formattedTime`, formattedTime);
+  const [step, setStep] = useState(false);
 
   const {
     handleSubmit,
@@ -49,10 +62,6 @@ const BookAppointmentForm: React.FC = () => {
 
   //   const [updatePatient] = patientApi.useUpdatePatientMutation();
 
-  const onSubmit = (data) => {
-    console.log(data);
-  };
-
   //   to format a date in "June 02, 2022, Monday" type
   function formatDate(date: Date): string {
     const options = {
@@ -65,7 +74,7 @@ const BookAppointmentForm: React.FC = () => {
     const formattedDate = date.toLocaleDateString('en-US', options);
 
     const weekday = date.toLocaleDateString('en-US', { weekday: 'long' });
-    return formattedDate.replace(weekday, '').trim() + ', ' + weekday;
+    return formattedDate.replace(',' + weekday, '').trim() + ', ' + weekday;
   }
 
   const handleCalendarDayClick = (day: Date, modifiers: Modifiers) => {
@@ -79,54 +88,72 @@ const BookAppointmentForm: React.FC = () => {
     console.log(appointmentDate);
   };
 
+  const onSubmit = (data) => {
+    console.log(data);
+  };
+
   return (
-    <Form onSubmit={handleSubmit(onSubmit)}>
-      <SpecializationInput control={control} errors={errors} />
-
-      <Controller
-        control={control}
-        name="date"
-        render={({ field }) => (
-          <Calendar
-            onChange={(date) => field.onChange(date)}
-            value={field.value}
-            onDayClick={handleCalendarDayClick}
+    <>
+      <FormWrapper>
+        <StepWrapper>
+          <Text>{t('BookAppointment.stepOne')}</Text>
+          <CancelBtn />
+        </StepWrapper>
+        <SpecializationInput control={control} errors={errors} />
+        <CalendarWrapper>
+          <Controller
+            control={control}
+            name="date"
+            render={({ field }) => (
+              <Calendar
+                onChange={(date) => field.onChange(date)}
+                value={field.value}
+                onDayClick={handleCalendarDayClick}
+              />
+            )}
           />
-        )}
-      />
+        </CalendarWrapper>
 
-      <AppointmentTime
-        control={control}
-        errors={errors}
-        formattedTime={formattedTime}
-        onChange={(value) => {
-          console.log(value);
-          setFormattedTime(value);
-        }}
-      />
-
-      <div>
-        <p>{t('BookAppointment.youSelected')}</p>
-        {formattedDate && (
-          <p>
-            {t('BookAppointment.date')}
-            <span>{formattedDate} </span>
-            {formattedTime && <span>{formattedTime}</span>}
-          </p>
-        )}
-      </div>
-      <ButtonContainer>
-        <CancelButton to={PATH.DASHBOARD}>
-          {t('Patient.cancel') ?? ''}
-        </CancelButton>
-        <SendButton
-          disabled={!isValid}
-          type="submit"
-          value={t('Patient.save') ?? ''}
+        <AppointmentTime
+          control={control}
+          errors={errors}
+          formattedTime={formattedTime}
+          onChange={(value) => {
+            console.log(value);
+            setFormattedTime(value);
+          }}
         />
-      </ButtonContainer>
-      <ToastContainer />
-    </Form>
+
+        {/* <SendButton
+            disabled={!isValid}
+            type="submit"
+            value={t('Patient.save') ?? ''}
+          /> */}
+        <FormFooter>
+          <FormInfo>
+            <YouSelected>{t('BookAppointment.youSelected')}</YouSelected>
+            {formattedDate && (
+              <SelectedDayTime>
+                {t('BookAppointment.date')}
+                <span>{formattedDate} </span>
+                {formattedTime && <span>{formattedTime}</span>}
+              </SelectedDayTime>
+            )}
+          </FormInfo>
+          <BntWrapper>
+            <StepBtn onClick={() => setStep(true)}>
+              {' '}
+              {t('BookAppointment.nextStep')}
+              <ArrowRight />
+            </StepBtn>
+          </BntWrapper>
+        </FormFooter>
+
+        <button type="submit" onClick={handleSubmit(onSubmit)}>
+          submit
+        </button>
+      </FormWrapper>
+    </>
   );
 };
 

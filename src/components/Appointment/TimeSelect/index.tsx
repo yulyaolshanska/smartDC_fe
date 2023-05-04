@@ -4,8 +4,11 @@ import { InputProps } from '@components/Patient/Inputs/type';
 import SelectInput from '@components/Select';
 import { appointmentTime } from '@constants/mockData';
 
-function AppointmentTimeSelectInput({ control, errors, formattedTime }: InputProps) {
-    console.log(formattedTime)
+function AppointmentTimeSelectInput({
+  control,
+  errors,
+//   formattedTime
+}: InputProps) {
   const { t } = useTranslation();
   return (
     <SelectInput
@@ -17,7 +20,7 @@ function AppointmentTimeSelectInput({ control, errors, formattedTime }: InputPro
       error={Boolean(errors?.appointmentTimeRange)}
       options={appointmentTime}
       required={true}
-      value={formattedTime}
+    //   value={formattedTime}
     />
   );
 }

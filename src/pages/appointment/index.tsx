@@ -4,10 +4,10 @@ import { PATH } from '@router/index';
 import { useTranslation } from 'react-i18next';
 import { LinkContainer } from '@components/Patient/styles';
 import BookAppointmentForm from '@components/Appointment/BookAppointmentForm';
+import PatientCardInfoShort from '@components/Appointment/PatientCardInfoShort';
 
 import { ReactComponent as ArrowLeft } from '@assets/arrowLeft.svg';
 import { BackToDashLink } from './styles';
-
 const CreateAppointment: React.FC = () => {
   const { t } = useTranslation();
   return (
@@ -18,6 +18,9 @@ const CreateAppointment: React.FC = () => {
           {t('Dashboard.backToDashboard')}
         </BackToDashLink>
       </LinkContainer>
+      <Wrapper>
+        <PatientCardInfoShort />
+      </Wrapper>
       <Wrapper>
         <BookAppointmentForm />
       </Wrapper>

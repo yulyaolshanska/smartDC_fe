@@ -1,5 +1,5 @@
-
 import styled from 'styled-components';
+import { WHITE } from '@constants/colors';
 import { DayPicker } from 'react-day-picker';
 
 export const StyledDayPicker = styled(DayPicker)`
@@ -12,8 +12,7 @@ export const StyledDayPicker = styled(DayPicker)`
   .DayPicker-Months {
     display: flex;
     gap: 10px;
-    /* border: 1px solid red; */
-    width: 700px; //подивитись за макетом
+    width: 100%;
   }
 
   .DayPicker-Month {
@@ -27,6 +26,8 @@ export const StyledDayPicker = styled(DayPicker)`
 
     border-radius: 8px;
     box-shadow: 0px 25px 25px 0px rgba(53, 53, 53, 0.12);
+
+    background-color: ${WHITE};
   }
   .DayPicker-Month:hover {
     box-shadow: 0px 30px 30px 0px rgba(53, 53, 53, 0.16);
