@@ -98,7 +98,7 @@ export const PasswordImg = styled.img`
   height: 30px;
 `;
 
-export const SendButton = styled.button`
+export const SendButton = styled.input`
   :disabled {
     background: ${PINK_SWAN};
     color: ${WHITE};
@@ -272,7 +272,22 @@ export const AddButton = styled(CancelButton)`
   background: -webkit-linear-gradient(${NAVY_BLUE}, ${CORNFLOWER_BLUE});
 `;
 
-export const LoadMoreButton = styled(SendButton)`
+export const LoadMoreButton = styled.button`
+  :disabled {
+    background: ${PINK_SWAN};
+    color: ${WHITE};
+    cursor: inherit;
+  }
+  display: flex;
+  margin-right: auto;
+  margin-left: auto;
+  align-items: center;
+  justify-content: center;
+  font-family: ${FONT_ROBOTO};
+  margin-top: 20px;
+  font-weight: bold;
+  cursor: pointer;
+
   color: ${BLUE};
   background: ${WHITE};
   width: 131px;
