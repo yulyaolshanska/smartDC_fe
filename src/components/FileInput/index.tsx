@@ -84,6 +84,13 @@ const FileUpload = ({
     callUpdateFilesCb(toRemoveFiles);
   };
 
+  const getFileData = (files: { [key: string]: any }, fileName: string) => {
+    let previewFiles: { [key: string]: any } = { ...files };
+    let file = previewFiles[fileName];
+    let isImageFile = file.type.split('/')[0] === 'image';
+    return { file, isImageFile };
+  };
+
   return (
     <>
       <FileUploadContainer>
@@ -107,9 +114,7 @@ const FileUpload = ({
         <span> {t('Notes.ToUpload')}</span>
         <PreviewList>
           {Object.keys(files).map((fileName, index) => {
-            let previewFiles: { [key: string]: any } = { ...files };
-            let file = previewFiles[fileName];
-            let isImageFile = file.type.split('/')[0] === 'image';
+            const { file, isImageFile } = getFileData(files, fileName);
             return (
               <PreviewContainer key={fileName}>
                 <div>

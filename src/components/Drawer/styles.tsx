@@ -61,9 +61,10 @@ export const TopDrawer = styled.div`
 export const BottomDrawer = styled.div`
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: left;
   gap: 8px;
   margin-top: 20px;
+  padding-left: 12px;
 `;
 export const DoctorInfo = styled.div``;
 

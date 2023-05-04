@@ -83,7 +83,7 @@ const Note = ({ createdAt, note, doctor, file }: NoteProps) => {
           direction="row"
           gap="5px"
           alignItems="center"
-          onClick={() => handleDownload()}
+          onClick={handleDownload}
         >
           {file ? (
             <>

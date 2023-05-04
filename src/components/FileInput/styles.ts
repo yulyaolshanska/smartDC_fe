@@ -1,4 +1,9 @@
-import { BLACK, UPLOAD_BUTTON_COLOR, WHITE } from '@constants/colors';
+import {
+  BLACK,
+  NOT_ACTIVE_BACKGROUND_HOVER,
+  UPLOAD_BUTTON_COLOR,
+  WHITE,
+} from '@constants/colors';
 
 import FONT_ROBOTO from '@constants/fonts';
 import styled from 'styled-components';
@@ -61,7 +66,7 @@ export const UploadFileBtn = styled.button`
   box-sizing: border-box;
   appearance: none;
   background-color: transparent;
-  border: 2px solid #3498db;
+  border: 2px solid ${NOT_ACTIVE_BACKGROUND_HOVER};
   cursor: pointer;
   font-size: ${SMALL_FONT_SIZE};
   line-height: 1;
@@ -91,7 +96,7 @@ export const UploadFileBtn = styled.button`
     transform: translateX(-50%);
     width: 0;
     height: 100%;
-    background: #3498db;
+    background: ${NOT_ACTIVE_BACKGROUND_HOVER};
     z-index: -1;
     transition: width 250ms ease-in-out;
   }

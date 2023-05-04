@@ -21,14 +21,14 @@ interface SearchBarProps {
 
 const SearchBar = React.memo(({ setNotesLocal }: SearchBarProps) => {
   const dispatch = useAppDispatch();
+  const { t } = useTranslation();
+  const [value, setValue] = React.useState<string>('');
+  const prevProps = usePrevious(value);
+  const inputRef = React.useRef<HTMLInputElement>(null);
   const filterParams = useAppSelector((state) => state.noteFilterReducer);
   const { data: notes, refetch: refetchNotes } = noteApi.useGetPatientNoteQuery(
     { ...filterParams }
   );
-
-  const { t } = useTranslation();
-
-  const inputRef = React.useRef<HTMLInputElement>(null);
 
   const handleContainerClick = () => {
     if (inputRef.current) {
@@ -36,8 +36,6 @@ const SearchBar = React.memo(({ setNotesLocal }: SearchBarProps) => {
     }
   };
 
-  const [value, setValue] = React.useState<string>('');
-  const prevProps = usePrevious(value);
   const handleInputChange = React.useCallback(
     debounce(async (event: React.ChangeEvent<HTMLInputElement>) => {
       if (event.target.value === prevProps.current) {

@@ -1,6 +1,7 @@
 import React from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import { Stack, Typography } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 
 import { HINT, ZAMBEZI } from '@constants/colors';
 import {
@@ -13,6 +14,8 @@ import { noteApi } from 'services/NoteService';
 import { authApi } from 'services/AuthService';
 import { useAppSelector } from '@redux/hooks';
 import FileUpload from '@components/FileInput';
+import { useConditionalRender } from 'utils/hooks/useConditionalRender';
+
 import {
   Date as StyledDate,
   Doctor,
@@ -20,7 +23,6 @@ import {
   StyledTextArea,
   CreateNoteContainer,
 } from './styles';
-import { useTranslation } from 'react-i18next';
 
 interface CreateNoteResponse {
   error: string;
@@ -42,6 +44,7 @@ const CreateNote = ({
 }: CreateNoteProps) => {
   const [value, setValue] = React.useState<string>('');
   const [files, setFiles] = React.useState({});
+  const render = useConditionalRender(addNew);
 
   const filterParams = useAppSelector((state) => state.noteFilterReducer);
 
@@ -102,10 +105,7 @@ const CreateNote = ({
     .toString()
     .padStart(2, '0')}:${minute.toString().padStart(2, '0')} ${amOrPm}`;
 
-  if (!addNew) {
-    return null;
-  }
-  return (
+  return render(
     <Wrapper>
       <Stack direction="row" justifyContent="space-between" alignItems="center">
         <StyledDate>{formattedDate}</StyledDate>
@@ -140,7 +140,7 @@ const CreateNote = ({
         </Stack>
       </CreateNoteContainer>
       <Doctor>
-        {t('Notes.dr')} {doctor.firstName} {doctor.lastName}
+        {t('Notes.dr')} {doctor?.firstName} {doctor?.lastName}
       </Doctor>
     </Wrapper>
   );

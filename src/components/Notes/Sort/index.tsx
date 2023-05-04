@@ -14,6 +14,7 @@ import { useAppDispatch, useAppSelector } from '@redux/hooks';
 import { noteFilterActions } from '@redux/slices/NoteFilterSlice';
 import { noteApi } from 'services/NoteService';
 import { INotes } from '..';
+import { useHandleOutsideClick } from './hooksSort';
 interface SortProps {
   setNotesLocal: (arg: INotes[]) => void;
 }
@@ -57,29 +58,14 @@ const Sort = React.memo(({ setNotesLocal }: SortProps) => {
     refetchNotes();
   };
 
-  React.useEffect(() => {
-    const handleOutsideClick = (event: MouseEvent) => {
-      if (
-        (sortByRef.current &&
-          !sortByRef.current.contains(event.target as Node) &&
-          sortByStackRef.current &&
-          !sortByStackRef.current.contains(event.target as Node)) ||
-        (sortOrderRef.current &&
-          !sortOrderRef.current.contains(event.target as Node) &&
-          sortOrderStackRef.current &&
-          !sortOrderStackRef.current.contains(event.target as Node))
-      ) {
-        setToggleSortBy(false);
-        setToggleSortOrder(false);
-      }
-    };
-
-    document.addEventListener('mousedown', handleOutsideClick);
-
-    return () => {
-      document.removeEventListener('mousedown', handleOutsideClick);
-    };
-  }, []);
+  const handleOutsideClick = useHandleOutsideClick(
+    sortByRef,
+    sortByStackRef,
+    sortOrderRef,
+    sortOrderStackRef,
+    setToggleSortBy,
+    setToggleSortOrder
+  );
 
   return (
     <Stack direction="row">
