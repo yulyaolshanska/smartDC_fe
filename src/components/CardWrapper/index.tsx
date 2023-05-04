@@ -11,11 +11,11 @@ import {
   PatientName,
 } from './styles';
 
-type Props = {
+interface Props {
   children: React.ReactNode;
   patientFullName: string;
   searchValue: string;
-};
+}
 
 const CardWrapper: React.FC<Props> = ({
   children,

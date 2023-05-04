@@ -7,5 +7,5 @@ export const avoidStartWithRenderArray = [
 ];
 export const avoidExactRenderArray = ['/'];
 
-export const TWEETS_PER_PAGE = 30;
-export const TWEETS_PER_LOAD = 10;
+export const PATIENTS_PER_PAGE = 30;
+export const PATIENTS_PER_LOAD = 10;

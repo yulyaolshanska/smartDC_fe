@@ -1,7 +1,7 @@
+import styled from 'styled-components';
 import { ViewLink } from '@components/PatientItem/styles';
 import { BLACK, BORDER, ZAMBEZI } from '@constants/colors';
 import { SMALL_FONT_SIZE } from '@constants/fontSizes';
-import styled from 'styled-components';
 
 export const Container = styled.div`
   display: flex;
