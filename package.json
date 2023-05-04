@@ -59,6 +59,7 @@
     "@types/node": "18.11.9",
     "@types/react": "18.0.25",
     "@types/react-big-calendar": "^1.6.3",
+    "@types/react-day-picker": "5.3.0",
     "@types/react-dom": "18.0.9",
     "@types/react-i18next": "^8.1.0",
     "@types/react-router": "^5.1.20",
