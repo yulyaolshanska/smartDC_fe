@@ -1,4 +1,4 @@
-export interface CreatePatientDto {
+export interface PatientDto {
   firstName: string;
   lastName: string;
   email: string;
@@ -10,4 +10,5 @@ export interface CreatePatientDto {
   address: string;
   timeZone: string;
   overview: string;
+  id: string;
 }
