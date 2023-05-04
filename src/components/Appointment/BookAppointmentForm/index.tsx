@@ -48,7 +48,7 @@ const BookAppointmentForm: React.FC = () => {
   const {
     handleSubmit,
     control,
-    formState: { errors, isValid },
+    formState: { errors, isValid, isDirty },
   } = useForm<AppointmentFormValues>({
     mode: 'onChange',
     defaultValues: {
@@ -109,6 +109,7 @@ const BookAppointmentForm: React.FC = () => {
                 onChange={(date) => field.onChange(date)}
                 value={field.value}
                 onDayClick={handleCalendarDayClick}
+                formattedDate={formattedDate}
               />
             )}
           />
@@ -124,11 +125,6 @@ const BookAppointmentForm: React.FC = () => {
           }}
         />
 
-        {/* <SendButton
-            disabled={!isValid}
-            type="submit"
-            value={t('Patient.save') ?? ''}
-          /> */}
         <FormFooter>
           <FormInfo>
             <YouSelected>{t('BookAppointment.youSelected')}</YouSelected>
@@ -141,7 +137,10 @@ const BookAppointmentForm: React.FC = () => {
             )}
           </FormInfo>
           <BntWrapper>
-            <StepBtn onClick={() => setStep(true)}>
+            <StepBtn
+              onClick={() => console.log(`+`)}
+              disabled={!isValid || !isDirty}
+            >
               {' '}
               {t('BookAppointment.nextStep')}
               <ArrowRight />

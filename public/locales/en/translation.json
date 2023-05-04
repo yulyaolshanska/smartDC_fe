@@ -157,6 +157,7 @@
   },
   "BookAppointment": {
     "selectDoctorSpecialization": "Select doctor specialization",
+    "selectDay":"Select a day of appointment",
     "SelectAppointmentTime": "Select a time of appointment",
     "youSelected": "You selected:",
     "date": "Date:",

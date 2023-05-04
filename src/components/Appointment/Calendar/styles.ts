@@ -1,6 +1,7 @@
 import styled from 'styled-components';
-import { WHITE } from '@constants/colors';
+import { PINK_SWAN, WHITE, BORDER } from '@constants/colors';
 import { DayPicker } from 'react-day-picker';
+import { Container } from '@mui/material';
 
 export const StyledDayPicker = styled(DayPicker)`
   .DayPicker-wrapper {
@@ -13,6 +14,8 @@ export const StyledDayPicker = styled(DayPicker)`
     display: flex;
     gap: 10px;
     width: 100%;
+    border-top: 1.5px solid ${BORDER};
+    padding-top: 16px;
   }
 
   .DayPicker-Month {
@@ -39,4 +42,22 @@ export const StyledDayPicker = styled(DayPicker)`
   .rdp-head_row {
     color: #808080;
   }
+`;
+
+export const CalendarWrapper = styled(Container)`
+  margin-top: 14px;
+  padding-top: 20px;
+  padding-left: 0;
+  padding-right: 0;
+  background-color: ${WHITE};
+  border-radius: 8px;
+  border: 2px solid ${BORDER};
+`;
+export const SelectText = styled.p`
+  text-align: left;
+  padding-bottom: 16px;
+  color: ${PINK_SWAN};
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 `;

@@ -1,5 +1,4 @@
-import { InputContainer } from '@components/general/styles';
-// import Input from '@components/Input';
+import { Container } from '@mui/material';
 import { specialization } from '@constants/other';
 import { useTranslation } from 'react-i18next';
 import { InputProps } from '@components/Patient/Inputs/type';
@@ -9,7 +8,7 @@ import { specializations } from '@constants/mockData';
 function SpecializationSelectInput({ control, errors }: InputProps) {
   const { t } = useTranslation();
   return (
-   
+    <Container style={{ padding: '0' }}>
       <SelectInput
         control={control}
         fullWidth
@@ -20,7 +19,7 @@ function SpecializationSelectInput({ control, errors }: InputProps) {
         options={specializations}
         required={true}
       />
-  
+    </Container>
   );
 }
 
