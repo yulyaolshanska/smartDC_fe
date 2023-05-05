@@ -18,6 +18,7 @@ import NotFound from '@pages/notFound';
 import DoctorScheduler from '@pages/doctorScheduler';
 import ProtectedRoute from './protected-route';
 import PatientInfo from '@pages/patient/patientInfo';
+import Dashboard from '@pages/dashboard';
 
 export const PATH = {
   SIGN_UP: '/auth',
@@ -108,7 +109,7 @@ const AppRouter = () => {
           path={PATH.DASHBOARD}
           element={
             <ProtectedRoute allowedRoles={['Remote', 'Local']}>
-              <Profile />
+              <Dashboard />
             </ProtectedRoute>
           }
         />

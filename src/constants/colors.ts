@@ -57,3 +57,7 @@ export const POP_UP_CONTENT_BACKGROUND = '#f8f8f8';
 export const DARK_BLUE = '#060d33';
 
 export const LIGHT_BLUE = '#081972';
+
+export const APPOINTMENT_TIME = '#060A32';
+
+export const ANOTHER_FUCKING_BLUE = '#4C92FF';
