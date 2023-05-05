@@ -125,7 +125,7 @@ const AppRouter = () => {
         <Route path={PATH.EDIT_DOCTOR_PROFILE} element={<Profile />} />
         <Route path={PATH.HELP} element={<Help />} />
         <Route path={PATH.DASHBOARD} element={<Profile />} />
-        <Route path={PATH.SCHEDULER} element={<TempScheduler />} />
+        {/* <Route path={PATH.SCHEDULER} element={<TempScheduler />} /> */}
       </Routes>
     </PageWrapper>
   );
