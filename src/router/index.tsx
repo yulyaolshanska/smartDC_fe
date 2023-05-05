@@ -12,6 +12,9 @@ import Help from '@pages/help';
 import Activation from '@pages/auth/signUp/activation';
 import CreatePatientCard from '@pages/patient/createPatientCard';
 import EditPatientCard from '@pages/patient/EditPatientCard';
+
+// import TempScheduler from '@pages/tempScheduler';
+import NotFound from '@pages/notFound';
 import DoctorScheduler from '@pages/doctorScheduler';
 import ProtectedRoute from './protected-route';
 import PatientInfo from '@pages/patient/patientInfo';
@@ -57,6 +60,14 @@ const AppRouter = () => {
           element={
             <ProtectedRoute allowedRoles={['Remote', 'Local']}>
               <CreatePatientCard />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path={PATH.EDIT_PATIENT_CARD}
+          element={
+            <ProtectedRoute allowedRoles={['Remote', 'Local']}>
+              <EditPatientCard />
             </ProtectedRoute>
           }
         />
@@ -117,6 +128,14 @@ const AppRouter = () => {
             </ProtectedRoute>
           }
         />
+
+        <Route path={PATH.FORGOT_PASS} element={<ForgotPassword />} />
+        <Route path={PATH.CONFIRM} element={<Confirmation />} />
+        <Route path={PATH.EDIT_DOCTOR_PROFILE} element={<Profile />} />
+        <Route path={PATH.HELP} element={<Help />} />
+        <Route path={PATH.DASHBOARD} element={<Profile />} />
+        {/* <Route path={PATH.SCHEDULER} element={<TempScheduler />} /> */}
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </PageWrapper>
   );
