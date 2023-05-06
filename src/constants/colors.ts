@@ -57,3 +57,5 @@ export const POP_UP_CONTENT_BACKGROUND = '#f8f8f8';
 export const DARK_BLUE = '#060d33';
 
 export const LIGHT_BLUE = '#081972';
+
+export const BLUEBERRY_BLUE = '#4579EE';

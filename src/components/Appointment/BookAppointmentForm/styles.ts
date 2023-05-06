@@ -1,5 +1,13 @@
 import styled from 'styled-components';
-import { BORDER, DARK_BLUE, BLACK, PINK_SWAN, WHITE } from '@constants/colors';
+import {
+  BORDER,
+  DARK_BLUE,
+  BLACK,
+  PINK_SWAN,
+  WHITE,
+  NAVY_BLUE,
+  CORNFLOWER_BLUE,
+} from '@constants/colors';
 import { XS_FONT_SIZE } from '@constants/fontSizes';
 import FONT_ROBOTO from '@constants/fonts';
 
@@ -21,7 +29,7 @@ export const Text = styled.p`
   color: ${DARK_BLUE};
   font-weight: 100;
   font-style: italic;
-`;
+  `;
 
 export const CalendarWrapper = styled.div`
   display: flex;
@@ -34,6 +42,11 @@ export const BntWrapper = styled.div`
   justify-content: flex-end;
 `;
 export const StepBtn = styled.button`
+  :disabled {
+    background: ${PINK_SWAN};
+    color: ${WHITE};
+    cursor: inherit;
+  }
   display: flex;
   align-items: center;
   justify-content: center;
@@ -43,15 +56,17 @@ export const StepBtn = styled.button`
   font-family: ${FONT_ROBOTO};
   border: none;
   height: 36px;
-  width: 112px;
+  /* width: 112px; */
 
   line-height: 1.42;
   color: ${WHITE};
   font-size: ${XS_FONT_SIZE};
   font-weight: bold;
   cursor: pointer;
-  background: ${PINK_SWAN};
+  /* background: ${PINK_SWAN}; */
   text-decoration: none;
+
+  background: -webkit-linear-gradient(${NAVY_BLUE}, ${CORNFLOWER_BLUE});
 `;
 
 export const FormFooter = styled.div`

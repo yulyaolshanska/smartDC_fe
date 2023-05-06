@@ -35,9 +35,6 @@ import {
 
 import { ReactComponent as ArrowRight } from '@assets/arrowRight.svg';
 
-import FirstStepAppointment from '@components/Appointment/BookAppointmentForm/FirstStep';
-import SecondStepAppointment from '@components/Appointment/BookAppointmentForm/SecondStep';
-
 const BookAppointmentForm: React.FC = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -48,12 +45,11 @@ const BookAppointmentForm: React.FC = () => {
   const [selectedDate, setSelectedDate] = useState<Date>(today);
   const [formattedDate, setFormattedDate] = useState('');
   const [formattedTime, setFormattedTime] = useState('');
-  const [step, setStep] = useState<boolean>(false);
+  const [step, setStep] = useState(false);
 
   const {
     handleSubmit,
     control,
-    register,
     formState: { errors, isValid, isDirty },
   } = useForm<AppointmentFormValues>({
     mode: 'onChange',
@@ -61,10 +57,9 @@ const BookAppointmentForm: React.FC = () => {
       specialization: '',
       date: selectedDate,
       appointmentTimeRange: '',
-      doctor: '',
     },
 
-    // resolver: yupResolver(createBookAppointmentSchema),
+    resolver: yupResolver(createBookAppointmentSchema),
   });
 
   //   const [updatePatient] = patientApi.useUpdatePatientMutation();
@@ -102,31 +97,55 @@ const BookAppointmentForm: React.FC = () => {
   return (
     <>
       <FormWrapper>
-        {!setStep ? (
-          <FirstStepAppointment
-            formattedDate={formattedDate}
-            handleCalendarDayClick={handleCalendarDayClick}
-            formattedTime={formattedTime}
-            setFormattedTime={setFormattedTime}
-            isValid={isValid}
+        <StepWrapper>
+          <Text>{t('BookAppointment.stepOne')}</Text>
+          <CancelBtn />
+        </StepWrapper>
+        <SpecializationInput control={control} errors={errors} />
+        <CalendarWrapper>
+          <Controller
             control={control}
-            errors={errors}
-            setStep={setStep}
-            step={step}
+            name="date"
+            render={({ field }) => (
+              <Calendar
+                onChange={(date: any) => field.onChange(date)}
+                value={field.value}
+                onDayClick={handleCalendarDayClick}
+                formattedDate={formattedDate}
+              />
+            )}
           />
-        ) : (
-          <SecondStepAppointment
-            formattedDate={formattedDate}
-            handleCalendarDayClick={handleCalendarDayClick}
-            formattedTime={formattedTime}
-            setFormattedTime={setFormattedTime}
-            isValid={isValid}
-            control={control}
-            errors={errors}
-            setStep={setStep}
-            register={register}
-          />
-        )}
+        </CalendarWrapper>
+
+        <AppointmentTime
+          control={control}
+          errors={errors}
+          formattedTime={formattedTime}
+          onChange={(value) => {
+            console.log(value);
+            setFormattedTime(value);
+          }}
+        />
+
+        <FormFooter>
+          <FormInfo>
+            <YouSelected>{t('BookAppointment.youSelected')}</YouSelected>
+            {formattedDate && (
+              <SelectedDayTime>
+                {t('BookAppointment.date')}
+                <span>{formattedDate} </span>
+                {formattedTime && <span>{formattedTime}</span>}
+              </SelectedDayTime>
+            )}
+          </FormInfo>
+          <BntWrapper>
+            <StepBtn onClick={() => console.log(`+`)} disabled={!isValid}>
+              {' '}
+              {t('BookAppointment.nextStep')}
+              <ArrowRight />
+            </StepBtn>
+          </BntWrapper>
+        </FormFooter>
 
         <button type="submit" onClick={handleSubmit(onSubmit)}>
           submit

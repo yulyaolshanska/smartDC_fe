@@ -157,14 +157,23 @@
   },
   "BookAppointment": {
     "selectDoctorSpecialization": "Select doctor specialization",
-    "selectDay":"Select a day of appointment",
+    "selectDay": "Select a day of appointment",
     "SelectAppointmentTime": "Select a time of appointment",
     "youSelected": "You selected:",
     "date": "Date:",
     "selectTimezone": "Time Zone:",
     "successfullySubmited": "Your schedule has been successfully updated!",
-    "stepOne":"Step 1/2",
-    "prevStep":"Previous step",
-    "nextStep":"Next step"
+    "stepOne": "Step 1/2",
+    "stepTwo": "Step 2/2",
+    "prevStep": "Previous step",
+    "nextStep": "Next step",
+    "setectDoctor": "Select a",
+    "remoteDoctor": "Remote Doctor",
+    "name": "Name",
+    "speciality": "Speciality",
+    "located": "Located",
+    "rating": "Rating",
+    "loadMore":"Load more",
+    "noDoctors":"No doctor with that name is available"
   }
 }

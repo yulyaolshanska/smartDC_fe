@@ -44,4 +44,5 @@ export type AppointmentFormValues = {
   specialization: string;
   appointmentTimeRange: string;
   date: string;
+  doctor: string;
 };
