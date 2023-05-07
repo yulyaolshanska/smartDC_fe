@@ -29,7 +29,7 @@ export const Text = styled.p`
   color: ${DARK_BLUE};
   font-weight: 100;
   font-style: italic;
-  `;
+`;
 
 export const CalendarWrapper = styled.div`
   display: flex;
@@ -40,6 +40,8 @@ export const CalendarWrapper = styled.div`
 export const BntWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
+  width: 100%;
+  gap: 10px;
 `;
 export const StepBtn = styled.button`
   :disabled {
@@ -47,6 +49,7 @@ export const StepBtn = styled.button`
     color: ${WHITE};
     cursor: inherit;
   }
+  width: 140px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -85,9 +88,11 @@ export const FormInfo = styled.div`
 export const YouSelected = styled.p`
   font-weight: 500;
   font-size: ${XS_FONT_SIZE};
+  width: max-content;
 `;
 
 export const SelectedDayTime = styled.p`
+  width: max-content;
   font-weight: 100;
   font-style: italic;
   font-size: ${XS_FONT_SIZE};

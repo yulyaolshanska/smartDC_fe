@@ -64,6 +64,8 @@ const SecondStepAppointment = ({
   errors,
   setStep,
   register,
+  handleSubmit,
+  onSubmit,
 }) => {
   const { t } = useTranslation();
 
@@ -161,12 +163,13 @@ const SecondStepAppointment = ({
                 <Controller
                   control={control}
                   name="doctor"
-                  render={({ field: { value, onChange } }) => (
+                  render={({ field: { _, onChange } }) => (
                     <input
                       {...register('doctor')}
                       type="radio"
                       value={doc.id}
                       onChange={(e) => onChange(e.target.value)}
+                      errors={errors}
                     />
                   )}
                 />
@@ -197,10 +200,11 @@ const SecondStepAppointment = ({
 
       <FormFooter>
         <BntWrapper>
-          <StepBtn onClick={() => setStep(true)} disabled={!isValid}>
-            <ArrowLeft />
-            {' '}
-            {t('BookAppointment.prevStep')}
+          <StepBtn onClick={() => setStep(false)} disabled={!isValid}>
+            <ArrowLeft /> {t('BookAppointment.prevStep')}
+          </StepBtn>
+          <StepBtn type="submit" onClick={handleSubmit(onSubmit)} disabled={!isValid}>
+            {t('BookAppointment.confirm')}
           </StepBtn>
         </BntWrapper>
       </FormFooter>

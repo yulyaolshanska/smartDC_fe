@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { DayClickEventHandler } from 'react-day-picker';
-
-import { StyledDayPicker, CalendarWrapper, SelectText } from './styles';
 import { addMonths } from 'date-fns';
+
+import { StyledDayPicker, CalendarWrapper, SelectText, TextinCalendarInput } from './styles';
 import { ReactComponent as ArrowMui } from '@assets/arrowMui.svg';
 
 import 'react-day-picker/dist/style.css';
@@ -48,7 +48,7 @@ const DayPickerCalendar: React.FC<Props> = ({ onDayClick, formattedDate }) => {
         {!formattedDate ? (
           t('BookAppointment.selectDay')
         ) : (
-          <span>{formattedDate}</span>
+          <TextinCalendarInput>{formattedDate}</TextinCalendarInput>
         )}
 
         <ArrowMui />

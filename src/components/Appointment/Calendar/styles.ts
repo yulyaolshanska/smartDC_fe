@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { PINK_SWAN, WHITE, BORDER } from '@constants/colors';
+import { PINK_SWAN, WHITE, BORDER, BLACK } from '@constants/colors';
 import { DayPicker } from 'react-day-picker';
 import { Container } from '@mui/material';
 
@@ -52,6 +52,10 @@ export const CalendarWrapper = styled(Container)`
   background-color: ${WHITE};
   border-radius: 8px;
   border: 2px solid ${BORDER};
+`;
+
+export const TextinCalendarInput = styled.span`
+  color: ${BLACK};
 `;
 export const SelectText = styled.p`
   text-align: left;

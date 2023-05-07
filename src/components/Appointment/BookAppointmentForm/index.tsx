@@ -42,7 +42,10 @@ const BookAppointmentForm: React.FC = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
-  const { createBookAppointmentSchema } = appointmentSchema();
+  const {
+    createBookAppointmentSchemaStepOne,
+    createBookAppointmentSchemaStepTwo,
+  } = appointmentSchema();
 
   const today = new Date();
   const [selectedDate, setSelectedDate] = useState<Date>(today);
@@ -64,7 +67,11 @@ const BookAppointmentForm: React.FC = () => {
       doctor: '',
     },
 
-    // resolver: yupResolver(createBookAppointmentSchema),
+    resolver: yupResolver(
+      !step
+        ? createBookAppointmentSchemaStepOne
+        : createBookAppointmentSchemaStepTwo
+    ),
   });
 
   //   const [updatePatient] = patientApi.useUpdatePatientMutation();
@@ -97,12 +104,19 @@ const BookAppointmentForm: React.FC = () => {
 
   const onSubmit = (data) => {
     console.log(data);
+
+    toast.success(t('BookAppointment.appointmentCreated'), {
+      position: toast.POSITION.TOP_CENTER,
+    });
+    setTimeout(() => {
+      navigate(PATH.DASHBOARD);
+    }, 2000);
   };
 
   return (
     <>
       <FormWrapper>
-        {!setStep ? (
+        {!step ? (
           <FirstStepAppointment
             formattedDate={formattedDate}
             handleCalendarDayClick={handleCalendarDayClick}
@@ -125,13 +139,12 @@ const BookAppointmentForm: React.FC = () => {
             errors={errors}
             setStep={setStep}
             register={register}
+            onSubmit={onSubmit}
+            handleSubmit={handleSubmit}
           />
         )}
-
-        <button type="submit" onClick={handleSubmit(onSubmit)}>
-          submit
-        </button>
-      </FormWrapper>
+      </FormWrapper>{' '}
+      <ToastContainer />
     </>
   );
 };

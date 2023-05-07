@@ -8,7 +8,7 @@ export default function appointmentSchema() {
     return translation || '';
   };
 
-  const createBookAppointmentSchema = yup.object().shape({
+  const createBookAppointmentSchemaStepOne = yup.object().shape({
     specialization: yup
       .string()
       .required(tWithDefault('Error.Error.fieldRequired')),
@@ -16,10 +16,15 @@ export default function appointmentSchema() {
     appointmentTimeRange: yup
       .string()
       .required(tWithDefault('Error.Error.fieldRequired')),
-    // doctor: yup.string().required(tWithDefault('Error.doctor')),
   });
 
+  const createBookAppointmentSchemaStepTwo = yup.object().shape({
+    doctor: yup.string().required(tWithDefault('Error.doctor')),
+  });
+
+
   return {
-    createBookAppointmentSchema,
+    createBookAppointmentSchemaStepOne,
+    createBookAppointmentSchemaStepTwo
   };
 }
