@@ -10,6 +10,7 @@ import {
   EditCardLink,
   PatientName,
 } from './styles';
+import { useAppSelector } from '@redux/hooks';
 
 interface Props {
   children: React.ReactNode;
@@ -28,6 +29,7 @@ const CardWrapper: React.FC<Props> = ({
   const [heightEl, setHeightEl] = React.useState<string>();
 
   const refHeight = React.useRef<HTMLDivElement>(null);
+  const doctorData = useAppSelector((state) => state.doctorReducer);
 
   const MARGIN_TOP = 20;
   const PADDING = 16;
@@ -53,9 +55,11 @@ const CardWrapper: React.FC<Props> = ({
 
           <Arrow toggle={!toggle} />
         </PatientName>
-        <EditCardLink to={PATH.EDIT_PATIENT_CARD}>
-          {t('Patients.editCard')}
-        </EditCardLink>
+        {doctorData.role === 'Local' && (
+          <EditCardLink to={PATH.EDIT_PATIENT_CARD}>
+            {t('Patients.editCard')}
+          </EditCardLink>
+        )}
       </Container>
       <AccordionBody
         toggle={toggle}

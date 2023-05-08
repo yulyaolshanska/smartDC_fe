@@ -4,6 +4,7 @@ import Input from '@components/Input';
 import { LinkContainer } from '@components/Patient/styles';
 import PatientList from '@components/PatientList';
 import { search } from '@constants/patient';
+import { useAppSelector } from '@redux/hooks';
 import { PATH } from '@router/index';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -13,6 +14,7 @@ import { Container, Form } from './styles';
 function Patients() {
   const { t } = useTranslation();
   const [searchValue, setSearchValue] = useState<string>('');
+  const doctorData = useAppSelector((state) => state.doctorReducer);
 
   const { handleSubmit, control } = useForm<FormValues>({
     mode: 'onChange',
@@ -40,10 +42,11 @@ function Patients() {
             placeholder={t('Patients.search') ?? ''}
           />
         </Form>
-
-        <AddButton to={PATH.CREATE_PATIENT_CARD}>
-          {t('Patients.createPatient')}
-        </AddButton>
+        {doctorData.role === 'Local' && (
+          <AddButton to={PATH.CREATE_PATIENT_CARD}>
+            {t('Patients.createPatient')}
+          </AddButton>
+        )}
       </Container>
       <PatientList searchValue={searchValue} />
     </>

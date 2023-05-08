@@ -267,6 +267,7 @@ export const AddButton = styled(CancelButton)`
   padding: 12px;
   line-height: 1.7;
   font-size: ${VERY_SMALL_FONT_SIZE};
+  margin-left: 16px;
   margin-right: 0px;
   margin-top: 0px;
   background: -webkit-linear-gradient(${NAVY_BLUE}, ${CORNFLOWER_BLUE});

@@ -7,6 +7,5 @@ export const Container = styled.div`
 
 export const Form = styled.form`
   text-align: center;
-  width: 90%;
-  margin-right: 16px;
+  width: 100%;
 `;
