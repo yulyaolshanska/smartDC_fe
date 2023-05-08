@@ -1,56 +1,41 @@
-import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useForm } from 'react-hook-form';
-import { ToastContainer, toast } from 'react-toastify';
-import { yupResolver } from '@hookform/resolvers/yup';
-import {
-  CancelButton,
-  SendButton,
-  ButtonContainer,
-} from '@components/general/styles';
-import { Form } from '@components/Patient/styles';
-import { AppointmentFormValues, IPatient } from '@components/general/type';
-import appointmentSchema from '@validation/bookAppointment.validate';
-import { PATH } from '@router/index';
-import { useNavigate } from 'react-router-dom';
+import { Controller, Control, FieldErrors } from 'react-hook-form';
 import SpecializationInput from '@components/Appointment/SpecializationSelect';
 import Calendar from '@components/Appointment/Calendar';
 import AppointmentTime from '@components/Appointment/TimeSelect';
-
-import { patientApi } from 'services/PatientService';
-import { Controller } from 'react-hook-form';
-import CancelBtn from '@components/Appointment/CancelBtn';
-import {
-  FormWrapper,
-  StepWrapper,
-  Text,
-  CalendarWrapper,
-  FormFooter,
-  FormInfo,
-  BntWrapper,
-  StepBtn,
-  YouSelected,
-  SelectedDayTime,
-} from '@components/Appointment/BookAppointmentForm/styles';
-
+import { date } from '@constants/other';
 import { ReactComponent as ArrowRight } from '@assets/arrowRight.svg';
 
-interface IProps {
-  formattedDate: string;
-  //   handleCalendarDayClick:function name(params:type) {
+import CancelBtn from '@components/Appointment/CancelBtn';
+import {
+  StepWrapper,
+  Text,
+  FormFooter,
+  BntWrapper,
+  StepBtn,
+} from '@components/Appointment/BookAppointmentForm/styles';
+import {
+  CalendarWrapper,
+  FormInfo,
+  YouSelected,
+  SelectedDayTime,
+} from '@components/Appointment/BookAppointmentForm/FirstStep/styles';
 
-  //   }
+interface Props {
+  formattedDate: string;
+  handleCalendarDayClick: (day: Date) => void;
+  setFormattedDate: React.Dispatch<React.SetStateAction<string>>;
   formattedTime: string;
-  setFormattedTime: string;
+  setFormattedTime: React.Dispatch<React.SetStateAction<string>>;
   isValid: boolean;
-  control: string;
-  errors: string;
-  setStep: string;
-  step: boolean;
+  control: Control;
+  errors: FieldErrors;
+  setStep: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const FirstStepAppointment = ({
   formattedDate,
+  setFormattedDate,
   handleCalendarDayClick,
   formattedTime,
   setFormattedTime,
@@ -58,10 +43,9 @@ const FirstStepAppointment = ({
   control,
   errors,
   setStep,
-  step,
-}: IProps) => {
+}: Props) => {
   const { t } = useTranslation();
-  console.log(`step`, step);
+
   return (
     <>
       <StepWrapper>
@@ -72,13 +56,14 @@ const FirstStepAppointment = ({
       <CalendarWrapper>
         <Controller
           control={control}
-          name="date"
+          name={date}
           render={({ field }) => (
             <Calendar
               onChange={(date: any) => field.onChange(date)}
               value={field.value}
               onDayClick={handleCalendarDayClick}
               formattedDate={formattedDate}
+              setFormattedDate={setFormattedDate}
             />
           )}
         />
@@ -89,7 +74,6 @@ const FirstStepAppointment = ({
         errors={errors}
         formattedTime={formattedTime}
         onChange={(value) => {
-          console.log(value);
           setFormattedTime(value);
         }}
       />

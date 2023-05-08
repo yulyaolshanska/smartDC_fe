@@ -8,7 +8,7 @@ import {
 function CancelBtn() {
   const { t } = useTranslation();
   return (
-    <CancelBtnSmall to={PATH.DASHBOARD}>
+    <CancelBtnSmall to={PATH.PATIENT_CARD_INFO}>
       <CancelIcon />
       {t('Patient.cancel') ?? ''}
     </CancelBtnSmall>

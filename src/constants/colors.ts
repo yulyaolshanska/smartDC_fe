@@ -59,3 +59,11 @@ export const DARK_BLUE = '#060d33';
 export const LIGHT_BLUE = '#081972';
 
 export const BLUEBERRY_BLUE = '#4579EE';
+
+export const BLACK_TRANSPORT = 'rgba(0, 0, 0, 0.54)';
+
+export const BLACK_ARROW_HOVER = 'rgba(0, 0, 0, 0.04)';
+
+export const CALENDAR_BOX_SHADOW = 'rgba(53, 53, 53, 0.12)';
+
+export const CALENDAR_HOVER_SHADOW = 'rgba(53, 53, 53, 0.16)';

@@ -1,6 +1,6 @@
+import { useTranslation } from 'react-i18next';
 import { Container } from '@mui/material';
 import { specialization } from '@constants/other';
-import { useTranslation } from 'react-i18next';
 import { InputProps } from '@components/Patient/Inputs/type';
 import SelectInput from '@components/Select';
 import { specializations } from '@constants/mockData';

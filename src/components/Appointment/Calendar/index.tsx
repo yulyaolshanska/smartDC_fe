@@ -1,46 +1,41 @@
-import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { DayClickEventHandler } from 'react-day-picker';
-import { addMonths } from 'date-fns';
-
-import { StyledDayPicker, CalendarWrapper, SelectText, TextinCalendarInput } from './styles';
-import { ReactComponent as ArrowMui } from '@assets/arrowMui.svg';
-
+import useAppointmentCalendarHook from 'hooks/BookAppointment/useAppointmentCalendar.hook';
+import {
+  StyledDayPicker,
+  CalendarWrapper,
+  SelectText,
+  TextinCalendarInput,
+  ArrowIcon,
+  ArrowIconShown,
+  CancelIcon,
+} from './styles';
 import 'react-day-picker/dist/style.css';
 
-type Props = {
+interface Props {
   onDayClick: (day: Date) => void;
   formattedDate: string;
-};
+  setFormattedDate: React.Dispatch<React.SetStateAction<string>>;
+}
 
-const DayPickerCalendar: React.FC<Props> = ({ onDayClick, formattedDate }) => {
+const DayPickerCalendar: React.FC<Props> = ({
+  onDayClick,
+  formattedDate,
+  setFormattedDate,
+}) => {
   const { t } = useTranslation();
-  const today = new Date();
-  const [selectedDay, setSelectedDay] = useState<Date>(today);
-  const nextMonth = addMonths(new Date(), 0);
-  const [month, setMonth] = useState(nextMonth);
-  const currentStyle = { backgroundColor: '#4579EE' };
 
-  const [showCalendar, setShowCalendar] = useState(false);
-
-  //   hardcode, just an example
-  const bookedDays = [
-    new Date(2023, 4, 10),
-    new Date(2023, 4, 12),
-    new Date(2023, 5, 20),
-  ];
-
-  // just an example
-  //  styles for days without empty slots. not sure if we need them, maybe in next sprint will be deleted or moved to styles
-  const bookedStyle = { color: '#808080' };
-
-  const handleDayClick: DayClickEventHandler = (day, modifiers) => {
-    onDayClick(day, modifiers);
-  };
-
-  const toggleState = (): void => {
-    setShowCalendar(!showCalendar);
-  };
+  const {
+    handleDayClick,
+    toggleState,
+    bookedDays,
+    bookedStyle,
+    selectedDay,
+    setSelectedDay,
+    month,
+    setMonth,
+    currentStyle,
+    showCalendar,
+  } = useAppointmentCalendarHook({ onDayClick });
 
   return (
     <CalendarWrapper>
@@ -50,8 +45,9 @@ const DayPickerCalendar: React.FC<Props> = ({ onDayClick, formattedDate }) => {
         ) : (
           <TextinCalendarInput>{formattedDate}</TextinCalendarInput>
         )}
+        {formattedDate && <CancelIcon onClick={() => setFormattedDate('')} />}
 
-        <ArrowMui />
+        {!showCalendar ? <ArrowIcon /> : <ArrowIconShown />}
       </SelectText>
       {showCalendar && (
         <StyledDayPicker

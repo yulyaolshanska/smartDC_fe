@@ -1,40 +1,14 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { ToastContainer, toast } from 'react-toastify';
-import { yupResolver } from '@hookform/resolvers/yup';
-import {
-  CancelButton,
-  SendButton,
-  ButtonContainer,
-} from '@components/general/styles';
-import { Form } from '@components/Patient/styles';
-import { AppointmentFormValues, IPatient } from '@components/general/type';
+
 import appointmentSchema from '@validation/bookAppointment.validate';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { AppointmentFormValues } from '@components/general/type';
 import { PATH } from '@router/index';
-import { useNavigate } from 'react-router-dom';
-import SpecializationInput from '@components/Appointment/SpecializationSelect';
-import Calendar from '@components/Appointment/Calendar';
-import AppointmentTime from '@components/Appointment/TimeSelect';
-
-import { patientApi } from 'services/PatientService';
-import { Controller } from 'react-hook-form';
-import CancelBtn from '@components/Appointment/CancelBtn';
-import {
-  FormWrapper,
-  StepWrapper,
-  Text,
-  CalendarWrapper,
-  FormFooter,
-  FormInfo,
-  BntWrapper,
-  StepBtn,
-  YouSelected,
-  SelectedDayTime,
-} from '@components/Appointment/BookAppointmentForm/styles';
-
-import { ReactComponent as ArrowRight } from '@assets/arrowRight.svg';
-
+import { FormWrapper } from '@components/Appointment/BookAppointmentForm/styles';
 import FirstStepAppointment from '@components/Appointment/BookAppointmentForm/FirstStep';
 import SecondStepAppointment from '@components/Appointment/BookAppointmentForm/SecondStep';
 
@@ -57,12 +31,12 @@ const BookAppointmentForm: React.FC = () => {
     handleSubmit,
     control,
     register,
-    formState: { errors, isValid, isDirty },
+    formState: { errors, isValid },
   } = useForm<AppointmentFormValues>({
     mode: 'onChange',
     defaultValues: {
       specialization: '',
-      date: selectedDate,
+      date: selectedDate.toISOString(),
       appointmentTimeRange: '',
       doctor: '',
     },
@@ -73,8 +47,6 @@ const BookAppointmentForm: React.FC = () => {
         : createBookAppointmentSchemaStepTwo
     ),
   });
-
-  //   const [updatePatient] = patientApi.useUpdatePatientMutation();
 
   //   to format a date in "June 02, 2022, Monday" type
   function formatDate(date: Date): string {
@@ -99,7 +71,6 @@ const BookAppointmentForm: React.FC = () => {
 
     const appointmentDate = formatDate(day);
     setFormattedDate(appointmentDate);
-    console.log(appointmentDate);
   };
 
   const onSubmit = (data) => {
@@ -119,6 +90,7 @@ const BookAppointmentForm: React.FC = () => {
         {!step ? (
           <FirstStepAppointment
             formattedDate={formattedDate}
+            setFormattedDate={setFormattedDate}
             handleCalendarDayClick={handleCalendarDayClick}
             formattedTime={formattedTime}
             setFormattedTime={setFormattedTime}
@@ -126,14 +98,9 @@ const BookAppointmentForm: React.FC = () => {
             control={control}
             errors={errors}
             setStep={setStep}
-            step={step}
           />
         ) : (
           <SecondStepAppointment
-            formattedDate={formattedDate}
-            handleCalendarDayClick={handleCalendarDayClick}
-            formattedTime={formattedTime}
-            setFormattedTime={setFormattedTime}
             isValid={isValid}
             control={control}
             errors={errors}

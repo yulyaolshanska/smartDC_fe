@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import {
   BORDER,
   DARK_BLUE,
-  BLACK,
   PINK_SWAN,
   WHITE,
   NAVY_BLUE,
@@ -31,12 +30,6 @@ export const Text = styled.p`
   font-style: italic;
 `;
 
-export const CalendarWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  margin-bottom: 16px;
-`;
-
 export const BntWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
@@ -59,14 +52,11 @@ export const StepBtn = styled.button`
   font-family: ${FONT_ROBOTO};
   border: none;
   height: 36px;
-  /* width: 112px; */
-
   line-height: 1.42;
   color: ${WHITE};
   font-size: ${XS_FONT_SIZE};
   font-weight: bold;
   cursor: pointer;
-  /* background: ${PINK_SWAN}; */
   text-decoration: none;
 
   background: -webkit-linear-gradient(${NAVY_BLUE}, ${CORNFLOWER_BLUE});
@@ -77,23 +67,4 @@ export const FormFooter = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-`;
-
-export const FormInfo = styled.div`
-  text-align: left;
-  border-left: 2px solid ${BLACK};
-  padding-left: 7px;
-`;
-
-export const YouSelected = styled.p`
-  font-weight: 500;
-  font-size: ${XS_FONT_SIZE};
-  width: max-content;
-`;
-
-export const SelectedDayTime = styled.p`
-  width: max-content;
-  font-weight: 100;
-  font-style: italic;
-  font-size: ${XS_FONT_SIZE};
 `;
