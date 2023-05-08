@@ -21,6 +21,7 @@ import {
 } from '@constants/mockData';
 
 function PatientCardInfoShort() {
+
   return (
     <PatientCardInfoContainer>
       <PatientInfoName>{nameInfo}</PatientInfoName>

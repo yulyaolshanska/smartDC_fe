@@ -3,14 +3,13 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { ToastContainer, toast } from 'react-toastify';
-
-import appointmentSchema from '@validation/bookAppointment.validate';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { AppointmentFormValues } from '@components/general/type';
 import { PATH } from '@router/index';
 import { FormWrapper } from '@components/Appointment/BookAppointmentForm/styles';
 import FirstStepAppointment from '@components/Appointment/BookAppointmentForm/FirstStep';
 import SecondStepAppointment from '@components/Appointment/BookAppointmentForm/SecondStep';
+import appointmentSchema from '@validation/bookAppointment.validate';
 
 const BookAppointmentForm: React.FC = () => {
   const { t } = useTranslation();
@@ -48,7 +47,6 @@ const BookAppointmentForm: React.FC = () => {
     ),
   });
 
-  //   to format a date in "June 02, 2022, Monday" type
   function formatDate(date: Date): string {
     const options = {
       weekday: 'long',
@@ -74,8 +72,6 @@ const BookAppointmentForm: React.FC = () => {
   };
 
   const onSubmit = (data) => {
-    console.log(data);
-
     toast.success(t('BookAppointment.appointmentCreated'), {
       position: toast.POSITION.TOP_CENTER,
     });

@@ -8,8 +8,10 @@ import PatientCardInfoShort from '@components/Appointment/PatientCardInfoShort';
 
 import { ReactComponent as ArrowLeft } from '@assets/arrowLeft.svg';
 import { BackToDashLink } from './styles';
+
 const CreateAppointment: React.FC = () => {
   const { t } = useTranslation();
+
   return (
     <>
       <LinkContainer>

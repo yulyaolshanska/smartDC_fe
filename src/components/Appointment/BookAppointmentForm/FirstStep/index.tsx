@@ -5,7 +5,6 @@ import Calendar from '@components/Appointment/Calendar';
 import AppointmentTime from '@components/Appointment/TimeSelect';
 import { date } from '@constants/other';
 import { ReactComponent as ArrowRight } from '@assets/arrowRight.svg';
-
 import CancelBtn from '@components/Appointment/CancelBtn';
 import {
   StepWrapper,

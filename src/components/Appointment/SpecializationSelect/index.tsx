@@ -7,6 +7,7 @@ import { specializations } from '@constants/mockData';
 
 function SpecializationSelectInput({ control, errors }: InputProps) {
   const { t } = useTranslation();
+  
   return (
     <Container style={{ padding: '0' }}>
       <SelectInput

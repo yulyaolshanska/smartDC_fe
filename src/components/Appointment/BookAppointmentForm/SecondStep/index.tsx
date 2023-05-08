@@ -25,9 +25,9 @@ import {
   DoctorImg,
   LoadMoreBtn,
 } from '@components/Appointment/BookAppointmentForm/SecondStep/styles';
-
 import { ReactComponent as ArrowLeft } from '@assets/arrowLeftIcon.svg';
 import defaultDoctorPhoto from '@assets/mockDoctorPhoto.png';
+import useAppointmentSecondStepHook from 'hooks/BookAppointment/useAppointmentSecondStep.hook';
 
 interface Props {
   isValid: boolean;
@@ -39,7 +39,6 @@ interface Props {
   onSubmit: (param: string) => void;
 }
 
-import useAppointmentSecondStepHook from 'hooks/BookAppointment/useAppointmentSecondStep.hook';
 
 const SecondStepAppointment = ({
   isValid,
