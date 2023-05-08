@@ -91,6 +91,7 @@
     "bothDatesRequired": "Validation error: both start and end dates are required",
     "endBeforeStartDateError": "Validation error: end date should be after start date",
     "overlappingEventsError": "Validation error: working hours overlap",
+    "somethingWasWrong": "Sorry, something was wrong!",
     "pastDateError": "You cannot create schedule on a past date!",
     "calendarSlotError": "Something went wrong!"
   },
@@ -121,6 +122,7 @@
     "enterOverview": "Enter patient's overview",
     "save": "Save",
     "cancel": "Cancel",
+    "cardUpdetedSuccess": "Patient's card updated successfully",
     "lastAppointment": "Last Appointment:"
   },
   "Profile": {
@@ -139,7 +141,7 @@
     "lorem": " Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore"
   },
   "Dashboard": {
-    "backToDashboard": "Back to dashboard"
+    "backToDashboard": "Back to Dashboard"
   },
   "Warning": {
     "viewScheduleWarning": "Warning: you are in view mode and creating new schedule will be done according to your local time!"
@@ -154,6 +156,11 @@
     "selectTimezone": "Time Zone:",
     "successfullySubmited": "Your schedule has been successfully updated!",
     "calendar": "Calendar"
+  },
+  "NotFoundPage": {
+    "notFound": "Page not found ",
+    "doesntExist": "This page you are looking for doesn’t exist or an other occurred.",
+    "404": "404"
   },
   "PatientCard": {
     "overview:": "Overview:",
