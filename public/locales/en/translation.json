@@ -162,5 +162,8 @@
     "notFound":"Page not found ",
     "doesntExist":"This page you are looking for doesn’t exist or an other occurred.",
     "404":"404"
+  },
+  "Appointments": {
+    "myAppointments" : "My appointments:"
   }
 }
