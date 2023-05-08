@@ -2,14 +2,19 @@ import React from 'react';
 import Wrapper from '@components/Wrapper';
 import { Stack, Box } from '@mui/system';
 import { Typography } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 import { authApi } from 'services/AuthService';
 
 import { ReactComponent as CameraIcon } from '@assets/Camera.svg';
-import { ANOTHER_FUCKING_BLUE, BORDER } from '@constants/colors';
+import { ACTIVE, ANOTHER_FUCKING_BLUE, BORDER } from '@constants/colors';
 import { VERY_SMALL_FONT_SIZE } from '@constants/fontSizes';
 
 const AppointmentElement = () => {
+  const [show, setShow] = React.useState<boolean>(false);
   const { data: doctor } = authApi.useGetMeQuery({});
+
+  const { t } = useTranslation();
+  const note = 'something that';
   return (
     <Wrapper>
       <Stack>
@@ -67,13 +72,22 @@ const AppointmentElement = () => {
           >
             Last Apponitment:
           </Typography>
-          <Typography display="inline">
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Labore,
-            illum quod qui est illo laudantium atque, veritatis recusandae ab
-            voluptatibus, repudiandae ipsa delectus quas aspernatur repellendus
-            sapiente. Reprehenderit, quod necessitatibus.
-          </Typography>
+          {note.length > 100 && !show ? (
+            <Typography display="inline">
+              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Labore,
+              illum quod qui est illo laudantium atque, veritatis recusandae ab
+              voluptatibus, repudiandae ipsa delectus quas aspernatur
+              repellendus sapiente. Reprehenderit, quod necessitatibus.
+            </Typography>
+          ) : (
+            <p>smaller</p>
+          )}
         </Box>
+        {note.length > 100 && (
+          <Box color={ACTIVE} onClick={() => setShow(!show)}>
+            {t('Show')} {show ? 'less' : 'more'}
+          </Box>
+        )}
       </Stack>
     </Wrapper>
   );
