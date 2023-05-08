@@ -27,6 +27,7 @@ export const patientApi = createApi({
     }),
     getPatients: builder.query<IPatient[], string>({
       query: () => '/patient',
+      providesTags: ['Patient'],
     }),
     updatePatient: builder.mutation({
       query: (data: PatientDto) => ({
@@ -34,6 +35,9 @@ export const patientApi = createApi({
         method: 'PATCH',
         body: data,
       }),
+      invalidatesTags: ['Patient'],
     }),
   }),
 });
+
+export const { useGetPatientsQuery } = patientApi;
