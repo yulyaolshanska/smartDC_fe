@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import cookie from 'utils/functions/cookies';
-import { CreatePatientDto } from 'services/types/patient.type';
+import { PatientDto } from 'services/types/patient.type';
 
 export const patientApi = createApi({
   reducerPath: 'patientApi',
@@ -18,8 +18,8 @@ export const patientApi = createApi({
   }),
   endpoints: (builder) => ({
     createPatient: builder.mutation({
-      query: (data: CreatePatientDto) => ({
-        url: '/patient',
+      query: (data: PatientDto) => ({
+        url: `/patient`,
         method: 'POST',
         body: data,
       }),
@@ -28,6 +28,11 @@ export const patientApi = createApi({
       query: (id: number | string) => ({
         url: `/patient/${id}`,
         method: 'GET',
+    updatePatient: builder.mutation({
+      query: (data: PatientDto) => ({
+        url: `/patient/${data.id}`,
+        method: 'PATCH',
+        body: data,
       }),
     }),
   }),
