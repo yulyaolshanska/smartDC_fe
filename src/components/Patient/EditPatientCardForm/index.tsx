@@ -10,7 +10,7 @@ import {
 } from '@components/general/styles';
 import { Form, InputInlineContainer, Text } from '@components/Patient/styles';
 import { FormValues, IPatient } from '@components/general/type';
-import patientSchema  from '@validation/patient.validate';
+import patientSchema from '@validation/patient.validate';
 import { PATH } from '@router/index';
 import { useNavigate } from 'react-router-dom';
 import InputName from '@components/Patient/Inputs/InputName';
@@ -36,7 +36,7 @@ const EditPatientCardForm: React.FC = () => {
     email: 'john_nedoe@gmail.com',
     gender: 'Male',
     birthDate: '2000-10-10',
-    country: 'UA',
+    country: 'DE',
     city: 'Berlin',
     address: 'Berger Str. 22',
     timeZone: '(GMT+2) Europe/Berlin',

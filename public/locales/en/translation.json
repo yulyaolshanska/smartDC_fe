@@ -91,7 +91,9 @@
     "bothDatesRequired": "Validation error: both start and end dates are required",
     "endBeforeStartDateError": "Validation error: end date should be after start date",
     "overlappingEventsError": "Validation error: working hours overlap",
+
     "somethingWasWrong": "Sorry, something was wrong!",
+
     "pastDateError": "You cannot create schedule on a past date!",
     "calendarSlotError": "Something went wrong!"
   },
@@ -122,8 +124,11 @@
     "enterOverview": "Enter patient's overview",
     "save": "Save",
     "cancel": "Cancel",
+
     "cardUpdetedSuccess": "Patient's card updated successfully",
+
     "lastAppointment": "Last Appointment:"
+
   },
   "Profile": {
     "cancel": "Cancel",
@@ -162,6 +167,7 @@
     "youSelected": "You selected:",
     "date": "Date:",
     "selectTimezone": "Time Zone:",
+
     "successfullySubmited": "Your schedule has been successfully updated!",
     "stepOne": "Step 1/2",
     "stepTwo": "Step 2/2",
@@ -178,5 +184,11 @@
     "confirm": "Confirm",
     "appointmentCreated": "Appointment successfully created",
     "search": "Search"
+
+  },
+  "NotFoundPage":{
+    "notFound":"Page not found ",
+    "doesntExist":"This page you are looking for doesn’t exist or an other occurred.",
+    "404":"404"
   }
 }
