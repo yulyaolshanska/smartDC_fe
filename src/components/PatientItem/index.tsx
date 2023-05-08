@@ -23,6 +23,7 @@ import CardWrapper from '@components/CardWrapper';
 
 import { IPatient } from '@components/general/type';
 import { male } from '@constants/patient';
+import { lastAppointmentInfo } from '@constants/mockData';
 
 interface IProps {
   patient: IPatient;
@@ -78,9 +79,7 @@ function PatientCard({ patient, searchValue }: IProps) {
             <LastAppointmentTitle>
               {t('PatientCard.lastAppointment')}
             </LastAppointmentTitle>
-            The average volume of RBCs, or the space each red blood cell fills,
-            is measured through this test. Results outside of the normal range
-            can be a sign of anemia or chronic fatigue.
+            {lastAppointmentInfo.substring(0, 250)}
           </LastAppointment>
           <ViewLink to={PATH.PATIENT_CARD_INFO}>
             {t('PatientCard.viewProfile')}
