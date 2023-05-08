@@ -12,12 +12,11 @@ import Help from '@pages/help';
 import Activation from '@pages/auth/signUp/activation';
 import CreatePatientCard from '@pages/patient/createPatientCard';
 import EditPatientCard from '@pages/patient/EditPatientCard';
-
-// import TempScheduler from '@pages/tempScheduler';
 import NotFound from '@pages/notFound';
 import DoctorScheduler from '@pages/doctorScheduler';
 import ProtectedRoute from './protected-route';
 import PatientInfo from '@pages/patient/patientInfo';
+import AppointmentsDoctorScheduler from '@pages/doctorScheduler/appointmentsScheduler';
 
 export const PATH = {
   SIGN_UP: '/auth',
@@ -33,6 +32,7 @@ export const PATH = {
   CREATE_PATIENT_CARD: '/create-patient-card',
   EDIT_PATIENT_CARD: '/edit-patient-card',
   AVAILABILITY: '/availability',
+  APPOINTMENTS: '/appointment',
   PATIENT_CARD_INFO: '/patient',
 };
 
@@ -121,6 +121,14 @@ const AppRouter = () => {
           }
         />
         <Route
+          path={PATH.APPOINTMENTS}
+          element={
+            <ProtectedRoute allowedRoles={['Remote', 'Local']}>
+              <AppointmentsDoctorScheduler />
+            </ProtectedRoute>
+          }
+        />
+        <Route
           path={PATH.PATIENT_CARD_INFO}
           element={
             <ProtectedRoute allowedRoles={['Remote', 'Local']}>
@@ -134,7 +142,6 @@ const AppRouter = () => {
         <Route path={PATH.EDIT_DOCTOR_PROFILE} element={<Profile />} />
         <Route path={PATH.HELP} element={<Help />} />
         <Route path={PATH.DASHBOARD} element={<Profile />} />
-        {/* <Route path={PATH.SCHEDULER} element={<TempScheduler />} /> */}
         <Route path="*" element={<NotFound />} />
       </Routes>
     </PageWrapper>
