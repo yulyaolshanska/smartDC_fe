@@ -58,6 +58,22 @@ const AppointmentElement = () => {
             </Typography>
           </Stack>
         </Stack>
+        <Box>
+          <Typography
+            display="inline"
+            fontStyle="italic"
+            fontWeight="100"
+            marginRight="5px"
+          >
+            Last Apponitment:
+          </Typography>
+          <Typography display="inline">
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Labore,
+            illum quod qui est illo laudantium atque, veritatis recusandae ab
+            voluptatibus, repudiandae ipsa delectus quas aspernatur repellendus
+            sapiente. Reprehenderit, quod necessitatibus.
+          </Typography>
+        </Box>
       </Stack>
     </Wrapper>
   );
