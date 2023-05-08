@@ -1,7 +1,6 @@
 import * as yup from 'yup';
 import { useTranslation } from 'react-i18next';
-
-const NAME_PATTERN = /^([A-Z][a-z]{1,11})/;
+import { EMAIL_PATTERN, NAME_PATTERN } from '@constants/validation';
 
 export default function patientSchema() {
   const { t } = useTranslation();
@@ -21,7 +20,9 @@ export default function patientSchema() {
       .required(tWithDefault('Error.lastNameRequired'))
       .min(2, tWithDefault('Error.tooShort'))
       .matches(NAME_PATTERN, tWithDefault('Error.nameFormat')),
-    email: yup.string().email(tWithDefault('Error.invalidEmailFormat')),
+    email: yup
+      .string()
+      .matches(EMAIL_PATTERN, tWithDefault('Error.invalidEmailFormat')),
     phoneNumber: yup
       .string()
       .required(tWithDefault('Error.phoneNumberRequired'))
@@ -39,7 +40,9 @@ export default function patientSchema() {
       .required(tWithDefault('Error.lastNameRequired'))
       .min(2, tWithDefault('Error.tooShort'))
       .matches(NAME_PATTERN, tWithDefault('Error.nameFormat')),
-    email: yup.string().email(tWithDefault('Error.invalidEmailFormat')),
+    email: yup
+      .string()
+      .matches(EMAIL_PATTERN, tWithDefault('Error.invalidEmailFormat')),
     phoneNumber: yup
       .string()
       .required(tWithDefault('Error.phoneNumberRequired'))
