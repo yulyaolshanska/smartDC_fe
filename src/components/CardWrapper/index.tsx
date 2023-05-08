@@ -11,6 +11,7 @@ import {
   PatientName,
 } from './styles';
 import { useAppSelector } from '@redux/hooks';
+import { MARGIN_TOP, PADDING } from '@constants/other';
 
 interface Props {
   children: React.ReactNode;
@@ -30,9 +31,6 @@ const CardWrapper: React.FC<Props> = ({
 
   const refHeight = React.useRef<HTMLDivElement>(null);
   const doctorData = useAppSelector((state) => state.doctorReducer);
-
-  const MARGIN_TOP = 20;
-  const PADDING = 16;
 
   React.useEffect(() => {
     if (refHeight.current)
