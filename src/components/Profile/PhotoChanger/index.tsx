@@ -20,7 +20,7 @@ const PhotoChanger = () => {
 
   const avatar = async () => {
     setAvatarLoading(true);
-    const avatarStatic = await getDoctorAvatar(1);
+    const avatarStatic = await getDoctorAvatar(doctor.id);
     setAvatarUrl(avatarStatic);
     setAvatarLoading(false);
   };
