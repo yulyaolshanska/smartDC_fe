@@ -88,22 +88,26 @@ const CreateNote = ({
 
   const { t } = useTranslation();
 
-  const dateObj = new Date();
-  const month = dateObj.toLocaleString('en-US', { month: 'long' });
-  const date = dateObj.getDate();
-  const year = dateObj.getFullYear();
-  let hour = dateObj.getHours();
-  const minute = dateObj.getMinutes();
-  let amOrPm = 'AM';
+  const getCurrentFormattedDate = () => {
+    const dateObj = new Date();
+    const month = dateObj.toLocaleString('en-US', { month: 'long' });
+    const date = dateObj.getDate();
+    const year = dateObj.getFullYear();
+    let hour = dateObj.getHours();
+    const minute = dateObj.getMinutes();
+    let amOrPm = 'AM';
 
-  if (hour > 12) {
-    hour -= 12;
-    amOrPm = 'PM';
-  }
+    if (hour > 12) {
+      hour -= 12;
+      amOrPm = 'PM';
+    }
 
-  const formattedDate = `${month} ${date}, ${year} at ${hour
-    .toString()
-    .padStart(2, '0')}:${minute.toString().padStart(2, '0')} ${amOrPm}`;
+    return `${month} ${date}, ${year} at ${hour
+      .toString()
+      .padStart(2, '0')}:${minute.toString().padStart(2, '0')} ${amOrPm}`;
+  };
+
+  const formattedDate = React.useMemo(() => getCurrentFormattedDate(), []);
 
   return render(
     <Wrapper>

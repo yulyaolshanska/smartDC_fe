@@ -10,7 +10,7 @@ export const Container = styled.div`
   font-family: ${FONT_ROBOTO};
   background-color: ${GHOST_WHITE};
   height: 56px;
-  border: 1.5px solid #085dd7;
+  border: 1.5px solid ${ACTIVE};
   border-radius: 16px;
   padding: 30px 16px;
   width: 100%;
