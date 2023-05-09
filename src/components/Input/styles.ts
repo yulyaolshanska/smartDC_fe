@@ -1,6 +1,4 @@
-import {
-  NAVY_BLUE, WHITE, RED, WHISPER,
-} from '@constants/colors';
+import { NAVY_BLUE, WHITE, RED, WHISPER } from '@constants/colors';
 import styled from 'styled-components';
 import FONT_ROBOTO from '@constants/fonts';
 import { VERY_SMALL_FONT_SIZE } from '@constants/fontSizes';
@@ -13,10 +11,15 @@ const InputContainer = styled.div<{ hasError: boolean }>`
   border-radius: 8px;
   font-family: ${FONT_ROBOTO};
 
+  @media (max-width: 1600px) {
+    margin-bottom: ${(props) => (props.hasError ? '20px' : '0px')};
+  }
+
   & .MuiInputBase-root {
     height: 60px;
     border-radius: 8px !important;
-    border: ${(props) => (props.hasError ? `2px solid ${RED}` : '2px solid transparent')};
+    border: ${(props) =>
+      props.hasError ? `2px solid ${RED}` : '2px solid transparent'};
     border-color: ${(props) => (props.hasError ? `${RED}` : `${WHISPER}`)};
     margin-bottom: ${(props) => (props.hasError ? '0px' : '20px')};
 

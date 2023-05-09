@@ -8,16 +8,21 @@ import { useMount } from '../AvatarEditor/hooksAvatarEditor';
 import { Photo, PhotoChangerWrapper, EditIconContainer } from './styles';
 import AvatarChanger from '../AvatarEditor';
 import { getDoctorAvatar } from '../api/getPhoto';
+import axios from '../api/axios';
+import AvatarLoader from './Skeleton';
 
 const PhotoChanger = () => {
   const [opened, setOpened] = React.useState<boolean>(false);
   const { mounted } = useMount({ opened });
   const { data: doctor } = authApi.useGetMeQuery({});
   const [avatarUrl, setAvatarUrl] = React.useState<string>('');
+  const [avatarLoading, setAvatarLoading] = React.useState<boolean>(false);
 
   const avatar = async () => {
-    const avatarUrl = await getDoctorAvatar(doctor?.id);
-    setAvatarUrl(avatarUrl);
+    setAvatarLoading(true);
+    const avatarStatic = await getDoctorAvatar(1);
+    setAvatarUrl(avatarStatic);
+    setAvatarLoading(false);
   };
 
   React.useEffect(() => {
@@ -30,11 +35,21 @@ const PhotoChanger = () => {
   return (
     <PhotoChangerWrapper>
       <p> {t('Profile.editProfile') ?? ''}</p>
+      {!doctor?.photoUrl ? (
+        <Photo>
+          <img src={defaultDoctorPhoto} alt="Photo" width="160px" />
+        </Photo>
+      ) : null}
+
       <Photo>
         {doctor?.photoUrl ? (
           <img src={finalUrl} alt="Photo" width="160px" />
         ) : (
-          <img src={defaultDoctorPhoto} alt="Photo" width="160px" />
+          <img
+            src={import.meta.env.VITE_REACT_APP_BASE_URL_SERVER + avatarUrl}
+            alt="Photo"
+            width="160px"
+          />
         )}
         <EditIconContainer onClick={() => setOpened(true)}>
           <img src={editIcon} />
