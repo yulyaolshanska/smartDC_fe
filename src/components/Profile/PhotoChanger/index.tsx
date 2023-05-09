@@ -16,7 +16,7 @@ const PhotoChanger = () => {
   const [avatarUrl, setAvatarUrl] = React.useState<string>('');
 
   const avatar = async () => {
-    const avatarUrl = await getDoctorAvatar(1);
+    const avatarUrl = await getDoctorAvatar(doctor?.id);
     setAvatarUrl(avatarUrl);
   };
 
@@ -25,13 +25,14 @@ const PhotoChanger = () => {
   }, []);
 
   const { t } = useTranslation();
+  const finalUrl = import.meta.env.VITE_REACT_APP_BASE_URL_SERVER + avatarUrl;
 
   return (
     <PhotoChangerWrapper>
       <p> {t('Profile.editProfile') ?? ''}</p>
       <Photo>
         {doctor?.photoUrl ? (
-          <img src={avatarUrl} alt="Photo" width="160px" />
+          <img src={finalUrl} alt="Photo" width="160px" />
         ) : (
           <img src={defaultDoctorPhoto} alt="Photo" width="160px" />
         )}

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import SignUpFirstStep from '@pages/auth/signUp/signUpFirstStep';
 import SignUpSecondFormGoogle from '@components/Auth/SignUpForm/SignUpSecondStepFormGoogle';
@@ -18,6 +18,7 @@ import NotFound from '@pages/notFound';
 import DoctorScheduler from '@pages/doctorScheduler';
 import ProtectedRoute from './protected-route';
 import PatientInfo from '@pages/patient/patientInfo';
+import cookie from 'utils/functions/cookies';
 
 export const PATH = {
   SIGN_UP: '/auth',
@@ -50,9 +51,9 @@ const AppRouter = () => {
         <Route
           path={PATH.SIGN_UP_SECOND_STEP_GOOGLE}
           element={
-            <ProtectedRoute allowedRoles={['']}>
-              <SignUpSecondFormGoogle />
-            </ProtectedRoute>
+            // <ProtectedRoute allowedRoles={['']}>
+            <SignUpSecondFormGoogle />
+            // </ProtectedRoute>
           }
         />
         <Route
