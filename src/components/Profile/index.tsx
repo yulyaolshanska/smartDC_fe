@@ -213,12 +213,11 @@ const ProfileComponent = () => {
             <Typography fontSize={SMALL_FONT_SIZE} color={ZAMBEZI}>
               {t('Auth.city') ?? ''}
             </Typography>
-            <SelectInput
+            <Input
               control={control}
               fullWidth
               name={city}
               placeholder={t('Auth.enterCity') ?? ''}
-              options={cities}
               helperText={errors.city?.message}
               error={Boolean(errors?.city)}
               required={true}

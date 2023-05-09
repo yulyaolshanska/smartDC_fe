@@ -66,29 +66,25 @@ function LoginForm() {
   const [login] = authApi.useLoginMutation();
 
   const onSubmit = async (data: IAuth) => {
-    await login(data)
-      .unwrap()
-      .then((res) => {
-        if (error in res && res.error) {
-          toast.error(
-            'Sorry, something was wrong! Check your email and password!',
-            {
-              position: toast.POSITION.TOP_CENTER,
-            }
-          );
-        } else {
-          const token = res.token;
-          const doctor = res.userInfo;
-          dispatch(doctorActions.getDoctor(doctor));
-          cookie.set(
-            'accessToken',
-            token,
-            import.meta.env.VITE_REACT_APP_ACCESS_TOKEN_MAXAGE
-          );
-          sessionStorage.setItem('userStatus', 'loggedIn');
-          navigate(PATH.DASHBOARD);
+    try {
+      const res = await login(data).unwrap();
+      const { token, userInfo } = res;
+      dispatch(doctorActions.getDoctor(userInfo));
+      cookie.set(
+        'accessToken',
+        token,
+        import.meta.env.VITE_REACT_APP_ACCESS_TOKEN_MAXAGE
+      );
+      sessionStorage.setItem('userStatus', 'loggedIn');
+      navigate(PATH.DASHBOARD);
+    } catch (error) {
+      toast.error(
+        'Sorry, something was wrong! Check your email and password!',
+        {
+          position: toast.POSITION.TOP_CENTER,
         }
-      });
+      );
+    }
   };
 
   return (

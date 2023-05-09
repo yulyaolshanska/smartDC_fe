@@ -13,6 +13,9 @@ import Activation from '@pages/auth/signUp/activation';
 import PatientPage from '@pages/patient';
 import CreatePatientCard from '@pages/patient/createPatientCard';
 import EditPatientCard from '@pages/patient/EditPatientCard';
+
+// import TempScheduler from '@pages/tempScheduler';
+import NotFound from '@pages/notFound';
 import DoctorScheduler from '@pages/doctorScheduler';
 import ProtectedRoute from './protected-route';
 import PatientInfo from '@pages/patient/patientInfo';
@@ -44,6 +47,8 @@ const AppRouter = () => {
         <Route path={PATH.VERIFICATION} element={<Activation />} />
         <Route path={PATH.LOGIN} element={<Login />} />
         <Route path={PATH.RESET_PASS} element={<ResetPassword />} />
+        <Route path={PATH.FORGOT_PASS} element={<ForgotPassword />} />
+        <Route path={PATH.CONFIRM} element={<Confirmation />} />
 
         {/* Private Routes */}
         <Route
@@ -63,21 +68,13 @@ const AppRouter = () => {
           }
         />
         <Route
-          path={PATH.FORGOT_PASS}
+          path={PATH.EDIT_PATIENT_CARD}
           element={
             <ProtectedRoute allowedRoles={['Remote', 'Local']}>
-              <ForgotPassword />
+              <EditPatientCard />
             </ProtectedRoute>
           }
-        />
-        <Route
-          path={PATH.CONFIRM}
-          element={
-            <ProtectedRoute allowedRoles={['Remote', 'Local']}>
-              <Confirmation />
-            </ProtectedRoute>
-          }
-        />
+        /
         <Route
           path={PATH.EDIT_DOCTOR_PROFILE}
           element={
@@ -119,13 +116,21 @@ const AppRouter = () => {
             </ProtectedRoute>
           }
         />
+<<<<<<< HEAD
         <Route path={PATH.PATIENT} element={<PatientPage />} />
+=======
+
+>>>>>>> aff26228e9d278823c4b016a9a19f436df6a3318
         <Route path={PATH.FORGOT_PASS} element={<ForgotPassword />} />
         <Route path={PATH.CONFIRM} element={<Confirmation />} />
         <Route path={PATH.EDIT_DOCTOR_PROFILE} element={<Profile />} />
         <Route path={PATH.HELP} element={<Help />} />
         <Route path={PATH.DASHBOARD} element={<Profile />} />
         {/* <Route path={PATH.SCHEDULER} element={<TempScheduler />} /> */}
+<<<<<<< HEAD
+=======
+        <Route path="*" element={<NotFound />} />
+>>>>>>> aff26228e9d278823c4b016a9a19f436df6a3318
       </Routes>
     </PageWrapper>
   );
