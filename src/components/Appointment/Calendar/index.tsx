@@ -46,7 +46,6 @@ const DayPickerCalendar: React.FC<Props> = ({
           <TextinCalendarInput>{formattedDate}</TextinCalendarInput>
         )}
         {formattedDate && <CancelIcon onClick={() => setFormattedDate('')} />}
-
         {!showCalendar ? <ArrowIcon /> : <ArrowIconShown />}
       </SelectText>
       {showCalendar && (

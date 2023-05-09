@@ -39,7 +39,6 @@ interface Props {
   onSubmit: (param: string) => void;
 }
 
-
 const SecondStepAppointment = ({
   isValid,
   control,
@@ -76,7 +75,7 @@ const SecondStepAppointment = ({
         <FilterInput
           inputProps={{
             style: {
-              paddingLeft: 52,
+              paddingLeft: 52, //Only inline styles have influence(Mui library)
             },
           }}
           fullWidth
@@ -89,13 +88,11 @@ const SecondStepAppointment = ({
         />
         <SearchIcon />
       </FilterWrapper>
-
       <TitlesWrapper>
         <TitleItem> {t('BookAppointment.name')} </TitleItem>
         <TitleItem> {t('BookAppointment.speciality')} </TitleItem>
         <TitleItem> {t('BookAppointment.located')} </TitleItem>
       </TitlesWrapper>
-
       <DoctorsList>
         {filtered.length > 0 ? (
           filtered.map((doc) => (
@@ -116,7 +113,6 @@ const SecondStepAppointment = ({
                       />
                     )}
                   />
-
                   <DoctorImg
                     src={defaultDoctorPhoto}
                     alt={doctor}
@@ -140,7 +136,6 @@ const SecondStepAppointment = ({
           {t('BookAppointment.loadMore')}
         </LoadMoreBtn>
       )}
-
       <FormFooter>
         <BntWrapper>
           <StepBtn onClick={() => setStep(false)} disabled={!isValid}>

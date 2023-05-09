@@ -50,7 +50,7 @@ export const lastAppointmentInfo =
 
 export const ListOfDoctors = [
   {
-    id: 1,
+    id: '1',
     img: '',
     name: 'Dr. J. Bolsonaro',
     speciality: 'Pediatrics',
@@ -58,7 +58,7 @@ export const ListOfDoctors = [
     rating: '4',
   },
   {
-    id: 2,
+    id: '2',
     img: '',
     name: 'Dr. N. Stauskas',
     speciality: 'Anesthesiology',
@@ -66,7 +66,7 @@ export const ListOfDoctors = [
     rating: '2',
   },
   {
-    id: 3,
+    id: '3',
     img: '',
     name: 'Dr. M. Wagner',
     speciality: 'Pediatrics',
@@ -74,7 +74,7 @@ export const ListOfDoctors = [
     rating: '1',
   },
   {
-    id: 4,
+    id: '4',
     img: '',
     name: 'Dr. M. Wagner',
     speciality: 'Pediatrics, Anesthesiology',
@@ -82,7 +82,7 @@ export const ListOfDoctors = [
     rating: '1',
   },
   {
-    id: 5,
+    id: '5',
     img: '',
     name: 'Dr. M. Wagner',
     speciality: 'Pediatrics, Anesthesiology',
@@ -90,7 +90,7 @@ export const ListOfDoctors = [
     rating: '1',
   },
   {
-    id: 6,
+    id: '6',
     img: '',
     name: 'Dr. M. Wagner',
     speciality: 'Pediatrics, Anesthesiology',
@@ -98,7 +98,7 @@ export const ListOfDoctors = [
     rating: '1',
   },
   {
-    id: 7,
+    id: '7',
     img: '',
     name: 'Dr. M. Wagner',
     speciality: 'Pediatrics, Anesthesiology',
@@ -106,7 +106,7 @@ export const ListOfDoctors = [
     rating: '1',
   },
   {
-    id: 8,
+    id: '8',
     img: '',
     name: 'Dr. M. Wagner',
     speciality: 'Pediatrics, Anesthesiology',
@@ -114,7 +114,7 @@ export const ListOfDoctors = [
     rating: '1',
   },
   {
-    id: 9,
+    id: '9',
     img: '',
     name: 'Dr. M. Wagner',
     speciality: 'Pediatrics, Anesthesiology',
@@ -122,7 +122,7 @@ export const ListOfDoctors = [
     rating: '1',
   },
   {
-    id: 10,
+    id: '10',
     img: '',
     name: 'Dr. M. Wagner',
     speciality: 'Pediatrics, Anesthesiology',
@@ -130,7 +130,7 @@ export const ListOfDoctors = [
     rating: '1',
   },
   {
-    id: 11,
+    id: '11',
     img: '',
     name: 'Dr. M. Wagner',
     speciality: 'Pediatrics, Anesthesiology',

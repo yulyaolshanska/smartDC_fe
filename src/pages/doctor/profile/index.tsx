@@ -5,7 +5,7 @@ import PhotoChanger from '@components/Profile/PhotoChanger';
 const Profile = () => {
   return (
     <Wrapper>
-      <PhotoChanger /> <ProfileComponent />;
+      <PhotoChanger /> <ProfileComponent />
     </Wrapper>
   );
 };

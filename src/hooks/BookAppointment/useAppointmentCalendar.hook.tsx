@@ -16,9 +16,10 @@ const useAppointmentCalendarHook = ({ onDayClick }: Props) => {
   const [showCalendar, setShowCalendar] = useState(false);
 
   // Todo :  hardcode, just an example till connection with backend
-  const isDisabled = (day) => {
+  const isDisabled = (day: Date) => {
     return day > new Date();
   };
+
   const bookedDays = [
     new Date(2023, 4, 10),
     new Date(2023, 4, 12),

@@ -4,6 +4,7 @@ import SpecializationInput from '@components/Appointment/SpecializationSelect';
 import Calendar from '@components/Appointment/Calendar';
 import AppointmentTime from '@components/Appointment/TimeSelect';
 import { date } from '@constants/other';
+import { InputProps } from '@components/Patient/Inputs/type';
 import { ReactComponent as ArrowRight } from '@assets/arrowRight.svg';
 import CancelBtn from '@components/Appointment/CancelBtn';
 import {
@@ -42,7 +43,7 @@ const FirstStepAppointment = ({
   control,
   errors,
   setStep,
-}: Props) => {
+}: InputProps & Props) => {
   const { t } = useTranslation();
 
   return (
@@ -58,7 +59,7 @@ const FirstStepAppointment = ({
           name={date}
           render={({ field }) => (
             <Calendar
-              onChange={(date: any) => field.onChange(date)}
+              onChange={(date: Date) => field.onChange(date)}
               value={field.value}
               onDayClick={handleCalendarDayClick}
               formattedDate={formattedDate}

@@ -39,7 +39,6 @@ const BookAppointmentForm: React.FC = () => {
       appointmentTimeRange: '',
       doctor: '',
     },
-
     resolver: yupResolver(
       !step
         ? createBookAppointmentSchemaStepOne

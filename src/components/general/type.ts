@@ -43,8 +43,7 @@ export type AppointmentFormValues = {
   appointmentTimeRange: string;
   date: string;
   doctor: string;
-  error?: string | null;
 };
 
-export type FormValues = IPatient & IAuth;
+export type FormValues = IPatient & IAuth & AppointmentFormValues;
 
