@@ -225,7 +225,7 @@ const ProfileComponent = () => {
               control={control}
               fullWidth
               name={city}
-              placeholder={t('Auth.city') ?? ''}
+              placeholder={t('Auth.enterCity') ?? ''}
               helperText={errors.city?.message}
               error={Boolean(errors?.city)}
               required={true}
