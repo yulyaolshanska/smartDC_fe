@@ -48,7 +48,6 @@ export const lastAppointmentInfo =
   'The average volume of RBCs, or the space each red blood cell fills, is measured through this test. ' +
   'Results outside of the normal range can be a sign of anemia or chronic fatigue. The average volume of RBCs, or the space each red blood cell fills, is measured through this test.';
 
-
 export const defaultAppointments = [
   {
     title: 'Appointment 1',
@@ -79,7 +78,8 @@ export const defaultAppointments = [
     uuid: 'sssasc',
     start: new Date('2023-05-12T18:00:00'),
     end: new Date('2023-05-12T19:00:00'),
-
+  },
+];
 export const ListOfDoctors = [
   {
     id: '1',
