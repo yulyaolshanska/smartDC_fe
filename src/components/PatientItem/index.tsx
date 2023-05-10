@@ -50,7 +50,11 @@ function PatientCard({ patient, searchValue }: IProps) {
 
   return (
     <PatientItem>
-      <CardWrapper patientFullName={patientFullName} searchValue={searchValue}>
+      <CardWrapper
+        patientFullName={patientFullName}
+        searchValue={searchValue}
+        id={id}
+      >
         <>
           <ContactsContainer>
             <CallIcon />
