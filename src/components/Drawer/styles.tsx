@@ -44,7 +44,7 @@ export const PositionContainer = styled.div<{ selected?: boolean | string }>`
     fill: ${({ selected }) => (selected ? ACTIVE : NOT_ACTIVE)};
   }
   cursor: ${({ selected }) => (selected ? 'default' : 'pointer')};
-  transition: 0.3s all;
+  transition: 0.2s all;
   &:nth-child(2) {
     margin-top: 40px;
   }
@@ -61,9 +61,10 @@ export const TopDrawer = styled.div`
 export const BottomDrawer = styled.div`
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: left;
   gap: 8px;
   margin-top: 20px;
+  padding-left: 12px;
 `;
 export const DoctorInfo = styled.div``;
 

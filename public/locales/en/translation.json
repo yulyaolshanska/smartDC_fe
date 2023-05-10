@@ -91,7 +91,7 @@
     "bothDatesRequired": "Validation error: both start and end dates are required",
     "endBeforeStartDateError": "Validation error: end date should be after start date",
     "overlappingEventsError": "Validation error: working hours overlap",
-    "somethingWasWrong": "Sorry, something was wrong!",
+    "somethingWasWrong":  "Sorry, something was wrong!",
     "pastDateError": "You cannot create schedule on a past date!",
     "calendarSlotError": "Something went wrong!",
     "noEvents": "No events for this day",
@@ -124,6 +124,8 @@
     "enterOverview": "Enter patient's overview",
     "save": "Save",
     "cancel": "Cancel",
+    "cardUpdetedSuccess": "Patient's card updated successfully",
+    "lastAppointment": "Last Appointment:"
     "lastAppointment": "Last Appointment:",
     "cardCreatedSuccess": "Patient's card created successfully",
     "cardUpdetedSuccess":"Patient's card updated successfully",
@@ -184,10 +186,27 @@
     "appointmentCreated": "Appointment successfully created",
     "search": "Search"
   },
-  "NotFoundPage":{
-    "notFound":"Page not found ",
-    "doesntExist":"This page you are looking for doesn’t exist or an other occurred.",
-    "404":"404"
+
+  "Notes": {
+    "downloadAnAttachedFile": "Download an attached file",
+    "show": "Show",
+    "dr": "Dr.",
+    "theNoteShouldContainAtLeastSymbols": "The note should contain at least 10 symbols",
+    "hint": "Hint",
+    "description": "Description",
+    "add": "Add",
+    "addAppointmentNote": "Add appointment note",
+    "discardAdding": "Discard adding",
+    "loadMore": "Load More",
+    "Draganddropyourfilesanywhereor": "Drag and drop your files anywhere or",
+    "Upload": "Upload",
+    "ToUpload": "To Upload",
+    "Search": "Search"
+  },
+  "NotFoundPage": {
+    "notFound": "Page not found ",
+    "doesntExist": "This page you are looking for doesn’t exist or an other occurred.",
+    "404": "404"
   },
   "Appointments": {
     "myAppointments" : "My appointments:"
