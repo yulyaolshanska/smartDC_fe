@@ -28,24 +28,26 @@ const EditPatientCardForm: React.FC = () => {
   const { id } = useParams();
   const { editPatientCardSchema } = patientSchema();
 
-  //   hardcoded values Patient (i need props from patientprofile)
+  const { data: patient, isLoading } = patientApi.useGetPatientByIdQuery(
+    Number(id)
+  );
 
-  console.log(`id`, id)
-  
-  const patCard = {
-    firstName: 'John',
-    lastName: 'Nedoe',
-    phoneNumber: '+380992598283',
-    email: 'john_nedoe@gmail.com',
-    gender: 'Male',
-    birthDate: '2000-10-10',
-    country: 'DE',
-    city: 'Berlin',
-    address: 'Berger Str. 22',
-    timeZone: '(GMT+2) Europe/Berlin',
-    overview: 'Some issue',
-    id: "1",
-  };
+  console.log(`patientT`, isLoading);
+
+  // const patientT = {
+  //   firstName: 'John',
+  //   lastName: 'Nedoe',
+  //   phoneNumber: '+380992598283',
+  //   email: 'john_nedoe@gmail.com',
+  //   gender: 'Male',
+  //   birthDate: '2000-10-10',
+  //   country: 'DE',
+  //   city: 'Berlin',
+  //   address: 'Berger Str. 22',
+  //   timeZone: '(GMT+2) Europe/Berlin',
+  //   overview: 'Some issue',
+  //   id: 1,
+  // };
 
   const {
     handleSubmit,
@@ -54,17 +56,17 @@ const EditPatientCardForm: React.FC = () => {
   } = useForm<FormValues>({
     mode: 'onChange',
     defaultValues: {
-      firstName: patCard.firstName,
-      lastName: patCard.lastName,
-      phoneNumber: patCard.phoneNumber,
-      email: patCard.email,
-      gender: patCard.gender,
-      birthDate: patCard.birthDate,
-      country: patCard.country,
-      city: patCard.city,
-      address: patCard.address,
-      timeZone: patCard.timeZone,
-      overview: patCard.overview,
+      firstName: patient ? patient.firstName : '',
+      lastName: patient ? patient.lastName : '',
+      phoneNumber: patient ? patient.phoneNumber : '',
+      email: patient ? patient.email : '',
+      gender: patient ? patient.gender : '',
+      birthDate: patient ? patient.birthDate : '',
+      country: patient ? patient.country : '',
+      city: patient ? patient.city : '',
+      address: patient ? patient.address : '',
+      timeZone: patient ? patient.timeZone : '',
+      overview: patient ? patient.overview : '',
     },
 
     resolver: yupResolver(editPatientCardSchema),
@@ -74,19 +76,21 @@ const EditPatientCardForm: React.FC = () => {
 
   const onSubmit = async (data: IPatient) => {
     data.phoneNumber = plus + data.phoneNumber.replace(/\D/g, '');
-
-    const updatedPatientInfo = {
-      id: patCard.id,
-      ...data,
-    };
     try {
+      const updatedPatientInfo = {
+        id: patient.id,
+        ...data,
+      };
       await updatePatient(updatedPatientInfo);
-      toast.success(t('Patient.cardUpdetedSuccess'), {
-        position: toast.POSITION.TOP_CENTER,
-      });
-      setTimeout(() => {
-        navigate(PATH.DASHBOARD);
-      }, 2000);
+      console.log(`dataPatient`, data);
+      navigate(PATH.DASHBOARD);
+
+      //   toast.success(t('Patient.cardUpdetedSuccess'), {
+      //     position: toast.POSITION.TOP_CENTER,
+      //   });
+      //   setTimeout(() => {
+      //     navigate(PATH.DASHBOARD);
+      //   }, 2000);
     } catch (error) {
       toast.error(t('Error.somethingWasWrong'), {
         position: toast.POSITION.TOP_CENTER,
@@ -95,36 +99,36 @@ const EditPatientCardForm: React.FC = () => {
   };
 
   return (
-      <Form onSubmit={handleSubmit(onSubmit)}>
-        <Text>{t('Patient.editPatientCard')}</Text>
-        <InputInlineContainer>
-          <InputName control={control} errors={errors} />
-        </InputInlineContainer>
-        <InputInlineContainer>
-          <InputPhoneNumberEmail control={control} errors={errors} />
-        </InputInlineContainer>
-        <InputInlineContainer>
-          <InputGenderBirthDate control={control} errors={errors} />
-        </InputInlineContainer>
-        <InputInlineContainer>
-          <InputCountryCity control={control} errors={errors} />
-        </InputInlineContainer>
-        <InputInlineContainer>
-          <InputAddressTimeZone control={control} errors={errors} />
-        </InputInlineContainer>
-        <InputOverview control={control} errors={errors} />
-        <ButtonContainer>
-          <CancelButton to={PATH.DASHBOARD}>
-            {t('Patient.cancel') ?? ''}
-          </CancelButton>
-          <SendButton
-            disabled={!isValid}
-            type="submit"
-            value={t('Patient.save') ?? ''}
-          />
-        </ButtonContainer>
-        <ToastContainer />
-      </Form>
+    <Form onSubmit={handleSubmit(onSubmit)}>
+      <Text>{t('Patient.editPatientCard')}</Text>
+      <InputInlineContainer>
+        <InputName control={control} errors={errors} />
+      </InputInlineContainer>
+      <InputInlineContainer>
+        <InputPhoneNumberEmail control={control} errors={errors} />
+      </InputInlineContainer>
+      <InputInlineContainer>
+        <InputGenderBirthDate control={control} errors={errors} />
+      </InputInlineContainer>
+      <InputInlineContainer>
+        <InputCountryCity control={control} errors={errors} />
+      </InputInlineContainer>
+      <InputInlineContainer>
+        <InputAddressTimeZone control={control} errors={errors} />
+      </InputInlineContainer>
+      <InputOverview control={control} errors={errors} />
+      <ButtonContainer>
+        <CancelButton to={PATH.DASHBOARD}>
+          {t('Patient.cancel') ?? ''}
+        </CancelButton>
+        <SendButton
+          disabled={!isValid}
+          type="submit"
+          value={t('Patient.save') ?? ''}
+        />
+      </ButtonContainer>
+      <ToastContainer />
+    </Form>
   );
 };
 

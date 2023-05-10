@@ -4,6 +4,7 @@ import { PATH } from '@router/index';
 import { useTranslation } from 'react-i18next';
 import { LinkContainer } from '@components/Patient/styles';
 import PatientCardInfo from '@components/Patient/PatientInfo';
+import WeeklyCalendar from '@components/WeeklyCalendar';
 
 const PatientInfo = () => {
   const { t } = useTranslation();
@@ -17,6 +18,7 @@ const PatientInfo = () => {
         </Link>
       </LinkContainer>
       <PatientCardInfo />
+      <WeeklyCalendar />
     </>
   );
 };
