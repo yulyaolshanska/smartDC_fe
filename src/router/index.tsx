@@ -12,6 +12,7 @@ import Help from '@pages/help';
 import Activation from '@pages/auth/signUp/activation';
 import CreatePatientCard from '@pages/patient/createPatientCard';
 import EditPatientCard from '@pages/patient/EditPatientCard';
+import CreateAppointment from '@pages/appointment';
 import NotFound from '@pages/notFound';
 import DoctorScheduler from '@pages/doctorScheduler';
 import ProtectedRoute from './protected-route';
@@ -31,9 +32,10 @@ export const PATH = {
   DASHBOARD: '/dashboard',
   CREATE_PATIENT_CARD: '/create-patient-card',
   EDIT_PATIENT_CARD: '/edit-patient-card',
+  SCHEDULER: '/scheduler',
+  APPOINTMENT: '/book-appointment',
   AVAILABILITY: '/availability',
-  APPOINTMENTS: '/appointment',
-  PATIENT_CARD_INFO: '/patient',
+  PATIENT_CARD_INFO: '/patient/:id',
 };
 
 const AppRouter = () => {
@@ -45,6 +47,8 @@ const AppRouter = () => {
         <Route path={PATH.VERIFICATION} element={<Activation />} />
         <Route path={PATH.LOGIN} element={<Login />} />
         <Route path={PATH.RESET_PASS} element={<ResetPassword />} />
+        <Route path={PATH.FORGOT_PASS} element={<ForgotPassword />} />
+        <Route path={PATH.CONFIRM} element={<Confirmation />} />
 
         {/* Private Routes */}
         <Route
@@ -72,22 +76,6 @@ const AppRouter = () => {
           }
         />
         <Route
-          path={PATH.FORGOT_PASS}
-          element={
-            <ProtectedRoute allowedRoles={['Remote', 'Local']}>
-              <ForgotPassword />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path={PATH.CONFIRM}
-          element={
-            <ProtectedRoute allowedRoles={['Remote', 'Local']}>
-              <Confirmation />
-            </ProtectedRoute>
-          }
-        />
-        <Route
           path={PATH.EDIT_DOCTOR_PROFILE}
           element={
             <ProtectedRoute allowedRoles={['Remote', 'Local']}>
@@ -103,7 +91,6 @@ const AppRouter = () => {
             </ProtectedRoute>
           }
         />
-
         <Route
           path={PATH.DASHBOARD}
           element={
@@ -136,7 +123,14 @@ const AppRouter = () => {
             </ProtectedRoute>
           }
         />
-
+        <Route
+          path={PATH.APPOINTMENT}
+          element={
+            <ProtectedRoute allowedRoles={['Remote', 'Local']}>
+              <CreateAppointment />
+            </ProtectedRoute>
+          }
+        />
         <Route path={PATH.FORGOT_PASS} element={<ForgotPassword />} />
         <Route path={PATH.CONFIRM} element={<Confirmation />} />
         <Route path={PATH.EDIT_DOCTOR_PROFILE} element={<Profile />} />
