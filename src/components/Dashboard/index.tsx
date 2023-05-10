@@ -6,6 +6,7 @@ import { Typography } from '@mui/material';
 
 import { ReactComponent as PersonIcon } from '@assets/person-icon.svg';
 import { ReactComponent as TimeIcon } from '@assets/Time.svg';
+import { appointmentsApi } from 'services/AppointmentService';
 import AppointmentElement from './AppointmentElement';
 import {
   A_LITTLE_BIT_LARGER_THAN_LARGE_FONT_SIZE,
@@ -16,6 +17,12 @@ import { ACTIVE, APPOINTMENT_TIME } from '@constants/colors';
 
 const DashboardComponent = () => {
   const { data: doctor } = authApi.useGetMeQuery({});
+  console.log(doctor);
+  const { data: appointments } = appointmentsApi.useGetTodayAppointmentQuery({
+    doctorId: doctor?.id,
+    all: false,
+  });
+  console.log(appointments);
   return (
     <Stack justifyContent="center" width="100%" alignItems="center">
       <Stack
