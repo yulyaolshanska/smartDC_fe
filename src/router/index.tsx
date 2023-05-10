@@ -125,9 +125,8 @@ const AppRouter = () => {
             </ProtectedRoute>
           }
         />
-<<<<<<< HEAD
+
         <Route path={PATH.PATIENT} element={<PatientPage />} />
-=======
         <Route
           path={PATH.APPOINTMENT}
           element={
@@ -136,16 +135,14 @@ const AppRouter = () => {
             </ProtectedRoute>
           }
         />
->>>>>>> aff26228e9d278823c4b016a9a19f436df6a3318
         <Route path={PATH.FORGOT_PASS} element={<ForgotPassword />} />
         <Route path={PATH.CONFIRM} element={<Confirmation />} />
         <Route path={PATH.EDIT_DOCTOR_PROFILE} element={<Profile />} />
         <Route path={PATH.HELP} element={<Help />} />
         <Route path={PATH.DASHBOARD} element={<Profile />} />
-<<<<<<< HEAD
-=======
+
         <Route path="*" element={<NotFound />} />
->>>>>>> aff26228e9d278823c4b016a9a19f436df6a3318
+
       </Routes>
     </PageWrapper>
   );
