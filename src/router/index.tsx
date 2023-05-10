@@ -72,7 +72,7 @@ const AppRouter = () => {
               <EditPatientCard />
             </ProtectedRoute>
           }
-        /
+        />
         <Route
           path={PATH.EDIT_DOCTOR_PROFILE}
           element={
