@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import SignUpFirstStep from '@pages/auth/signUp/signUpFirstStep';
 import SignUpSecondFormGoogle from '@components/Auth/SignUpForm/SignUpSecondStepFormGoogle';
@@ -18,6 +18,7 @@ import NotFound from '@pages/notFound';
 import DoctorScheduler from '@pages/doctorScheduler';
 import ProtectedRoute from './protected-route';
 import PatientInfo from '@pages/patient/patientInfo';
+import cookie from 'utils/functions/cookies';
 import AppointmentsDoctorScheduler from '@pages/doctorScheduler/appointmentsScheduler';
 
 export const PATH = {
@@ -49,16 +50,14 @@ const AppRouter = () => {
         <Route path={PATH.VERIFICATION} element={<Activation />} />
         <Route path={PATH.LOGIN} element={<Login />} />
         <Route path={PATH.RESET_PASS} element={<ResetPassword />} />
-        <Route path={PATH.FORGOT_PASS} element={<ForgotPassword />} />
-        <Route path={PATH.CONFIRM} element={<Confirmation />} />
 
         {/* Private Routes */}
         <Route
           path={PATH.SIGN_UP_SECOND_STEP_GOOGLE}
           element={
-            <ProtectedRoute allowedRoles={['']}>
-              <SignUpSecondFormGoogle />
-            </ProtectedRoute>
+            // <ProtectedRoute allowedRoles={['']}>
+            <SignUpSecondFormGoogle />
+            // </ProtectedRoute>
           }
         />
         <Route
@@ -76,8 +75,23 @@ const AppRouter = () => {
               <EditPatientCard />
             </ProtectedRoute>
           }
+        />        <Route
+          path={PATH.FORGOT_PASS}
+          element={
+            <ProtectedRoute allowedRoles={['Remote', 'Local']}>
+              <ForgotPassword />
+            </ProtectedRoute>
+          }
         />
         <Route
+          path={PATH.CONFIRM}
+          element={
+            <ProtectedRoute allowedRoles={['Remote', 'Local']}>
+              <Confirmation />
+            </ProtectedRoute>
+          }
+        />
+       <Route
           path={PATH.EDIT_DOCTOR_PROFILE}
           element={
             <ProtectedRoute allowedRoles={['Remote', 'Local']}>
