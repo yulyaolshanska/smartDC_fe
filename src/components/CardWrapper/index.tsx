@@ -17,12 +17,14 @@ interface Props {
   children: React.ReactNode;
   patientFullName: string;
   searchValue: string;
+  id: string;
 }
 
 const CardWrapper: React.FC<Props> = ({
   children,
   patientFullName,
   searchValue,
+  id,
 }) => {
   const { t } = useTranslation();
 
@@ -54,7 +56,7 @@ const CardWrapper: React.FC<Props> = ({
           <Arrow toggle={!toggle} />
         </PatientName>
         {doctorData.role === 'Local' && (
-          <EditCardLink to={PATH.EDIT_PATIENT_CARD}>
+          <EditCardLink to={`/edit-patient-card/${id}`}>
             {t('Patients.editCard')}
           </EditCardLink>
         )}
