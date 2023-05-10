@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useForm } from 'react-hook-form';
+import { useNavigate, useParams } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import { yupResolver } from '@hookform/resolvers/yup';
 import {
@@ -12,7 +13,6 @@ import { Form, InputInlineContainer, Text } from '@components/Patient/styles';
 import { FormValues, IPatient } from '@components/general/type';
 import patientSchema from '@validation/patient.validate';
 import { PATH } from '@router/index';
-import { useNavigate, useParams } from 'react-router-dom';
 import InputName from '@components/Patient/Inputs/InputName';
 import InputPhoneNumberEmail from '@components/Patient/Inputs/InputPhoneNumberEmail';
 import InputGenderBirthDate from '@components/Patient/Inputs/InputGenderBirthDate';
