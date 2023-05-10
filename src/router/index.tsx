@@ -34,7 +34,7 @@ export const PATH = {
   SCHEDULER: '/scheduler',
   APPOINTMENT: '/book-appointment',
   AVAILABILITY: '/availability',
-  PATIENT_CARD_INFO: '/patient',
+  PATIENT_CARD_INFO: '/patient/:id',
 };
 
 const AppRouter = () => {

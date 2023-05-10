@@ -38,6 +38,7 @@ import {
 import { SMALL_FONT_SIZE } from '@constants/fontSizes';
 import { ZAMBEZI } from '@constants/colors';
 import { FormValues, IAuth } from '@components/general/type';
+import { toast, ToastContainer } from 'react-toastify';
 
 export interface IEditProfileRemote {}
 const ProfileComponent = () => {
@@ -94,7 +95,14 @@ const ProfileComponent = () => {
     try {
       const doctor = { ...data, id: doctorData.id };
       await updateDoctorProfile(doctor);
-    } catch (error) {}
+      toast.success(t('Profile.profileUpdatedSuccess'), {
+        position: toast.POSITION.TOP_CENTER,
+      });
+    } catch (error) {
+      toast.error(t('Error.somethingWasWrong'), {
+        position: toast.POSITION.TOP_CENTER,
+      });
+    }
   };
 
   return (
@@ -279,6 +287,7 @@ const ProfileComponent = () => {
           <CustomButton type="submit"> {t('Profile.save') ?? ''}</CustomButton>
         </ButtonsWrapepr>
         <DevTool control={control} />
+        <ToastContainer />
       </form>
     </>
   );

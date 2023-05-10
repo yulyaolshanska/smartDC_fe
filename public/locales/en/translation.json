@@ -93,7 +93,8 @@
     "overlappingEventsError": "Validation error: working hours overlap",
     "somethingWasWrong": "Sorry, something was wrong!",
     "pastDateError": "You cannot create schedule on a past date!",
-    "calendarSlotError": "Something went wrong!"
+    "calendarSlotError": "Something went wrong!",
+    "somethingWasWrong": "Something was wrong!"
   },
   "Patient": {
     "createPatientCard": "Create patient's card",
@@ -122,8 +123,10 @@
     "enterOverview": "Enter patient's overview",
     "save": "Save",
     "cancel": "Cancel",
-    "cardUpdetedSuccess": "Patient's card updated successfully",
-    "lastAppointment": "Last Appointment:"  },
+    "lastAppointment": "Last Appointment:",
+    "cardCreatedSuccess": "Patient's card created successfully",
+    "cardUpdetedSuccess":"Patient's card updated successfully",
+  },
   "Profile": {
     "cancel": "Cancel",
     "save": "Save",
@@ -132,7 +135,8 @@
     "export": "Export",
     "scale": "Scale",
     "showMore": "Show more",
-    "showLess": "Show less"
+    "showLess": "Show less",
+    "profileUpdatedSuccess": "Doctor's profile updated successfully"
   },
 
   "Help": {
@@ -140,7 +144,8 @@
     "lorem": " Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore"
   },
   "Dashboard": {
-    "backToDashboard": "Back to Dashboard"
+    "backToDashboard": "Back to dashboard",
+    "loading": "Loading..."
   },
   "Warning": {
     "viewScheduleWarning": "Warning: you are in view mode and creating new schedule will be done according to your local time!"
