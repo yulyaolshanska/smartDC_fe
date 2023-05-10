@@ -71,7 +71,6 @@ const EditPatientCardForm: React.FC = () => {
         ...data,
       };
       await updatePatient(updatedPatientInfo);
-      console.log(`dataPatient`, data);
 
       toast.success(t('Patient.cardUpdetedSuccess'), {
         position: toast.POSITION.TOP_CENTER,
