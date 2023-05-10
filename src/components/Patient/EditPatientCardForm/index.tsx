@@ -12,7 +12,7 @@ import { Form, InputInlineContainer, Text } from '@components/Patient/styles';
 import { FormValues, IPatient } from '@components/general/type';
 import patientSchema from '@validation/patient.validate';
 import { PATH } from '@router/index';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import InputName from '@components/Patient/Inputs/InputName';
 import InputPhoneNumberEmail from '@components/Patient/Inputs/InputPhoneNumberEmail';
 import InputGenderBirthDate from '@components/Patient/Inputs/InputGenderBirthDate';
@@ -25,10 +25,13 @@ import { plus } from '@constants/auth';
 const EditPatientCardForm: React.FC = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const { id } = useParams();
   const { editPatientCardSchema } = patientSchema();
 
   //   hardcoded values Patient (i need props from patientprofile)
 
+  console.log(`id`, id)
+  
   const patCard = {
     firstName: 'John',
     lastName: 'Nedoe',
