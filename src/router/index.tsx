@@ -17,6 +17,7 @@ import NotFound from '@pages/notFound';
 import DoctorScheduler from '@pages/doctorScheduler';
 import ProtectedRoute from './protected-route';
 import PatientInfo from '@pages/patient/patientInfo';
+import AppointmentsDoctorScheduler from '@pages/doctorScheduler/appointmentsScheduler';
 
 export const PATH = {
   SIGN_UP: '/auth',
@@ -103,6 +104,14 @@ const AppRouter = () => {
           element={
             <ProtectedRoute allowedRoles={['Remote']}>
               <DoctorScheduler />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path={PATH.APPOINTMENTS}
+          element={
+            <ProtectedRoute allowedRoles={['Remote', 'Local']}>
+              <AppointmentsDoctorScheduler />
             </ProtectedRoute>
           }
         />
