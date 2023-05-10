@@ -16,10 +16,12 @@ import {
 import storage from 'redux-persist/lib/storage';
 import { loginReducer } from '@redux/slices/auth/login';
 import { activationAccountReducer } from '@redux/slices/auth/activation';
+import { noteApi } from 'services/NoteService';
 import { navigationReducer } from 'redux/slices/NavigationSlice';
 import { doctorReducer } from 'redux/slices/DoctorSlice';
 import { resetPasswordReducer } from '@redux/slices/auth/resetPassword';
 import { createPatientReducer } from '@redux/slices/patient/createPatient';
+import { noteFilterReducer } from './slices/NoteFilterSlice';
 import { patientApi } from '../services/PatientService';
 import { availabilityApi } from '../services/AvailabilityService';
 
@@ -32,6 +34,8 @@ const rootReducer = combineReducers({
   resetPasswordReducer,
   activationAccountReducer,
   createPatientReducer,
+  noteFilterReducer,
+  [noteApi.reducerPath]: noteApi.reducer,
   [doctorApi.reducerPath]: doctorApi.reducer,
   [authApi.reducerPath]: authApi.reducer,
   [patientApi.reducerPath]: patientApi.reducer,
@@ -47,6 +51,9 @@ const persistConfig = {
     'forgotPassword',
     'loginReducer',
     'signUpReducer',
+    'noteFilterReducer',
+    'authApi',
+    'noteApi',
   ],
 };
 
@@ -63,6 +70,7 @@ export const setupStore = () =>
       }).concat(
         doctorApi.middleware,
         authApi.middleware,
+        noteApi.middleware,
         patientApi.middleware,
         availabilityApi.middleware
       ),
