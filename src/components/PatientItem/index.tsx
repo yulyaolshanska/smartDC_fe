@@ -42,6 +42,7 @@ function PatientCard({ patient, searchValue }: IProps) {
     city,
     birthDate,
     overview,
+    id,
   } = patient;
   const patientFullName = `${firstName} ${lastName}`;
   const patientAge: number =
@@ -81,7 +82,7 @@ function PatientCard({ patient, searchValue }: IProps) {
             </LastAppointmentTitle>
             {lastAppointmentInfo.substring(0, 250)}
           </LastAppointment>
-          <ViewLink to={PATH.PATIENT_CARD_INFO}>
+          <ViewLink to={`/patient/${id}`}>
             {t('PatientCard.viewProfile')}
           </ViewLink>
         </>
