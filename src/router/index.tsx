@@ -18,6 +18,7 @@ import NotFound from '@pages/notFound';
 import DoctorScheduler from '@pages/doctorScheduler';
 import ProtectedRoute from './protected-route';
 import PatientInfo from '@pages/patient/patientInfo';
+import Patients from '@pages/patients';
 import cookie from 'utils/functions/cookies';
 import AppointmentsDoctorScheduler from '@pages/doctorScheduler/appointmentsScheduler';
 
@@ -37,8 +38,8 @@ export const PATH = {
   SCHEDULER: '/scheduler',
   APPOINTMENT: '/book-appointment',
   AVAILABILITY: '/availability',
+  PATIENTS_LIST: '/patients',
   PATIENT_CARD_INFO: '/patient/:id',
-  PATIENT: '/patients',
 };
 
 const AppRouter = () => {
@@ -139,9 +140,14 @@ const AppRouter = () => {
             </ProtectedRoute>
           }
         />
-<<<<<<< HEAD
-        <Route path={PATH.PATIENT} element={<PatientPage />} />
-=======
+        <Route
+          path={PATH.PATIENTS_LIST}
+          element={
+            <ProtectedRoute allowedRoles={['Remote', 'Local']}>
+              <Patients />
+            </ProtectedRoute>
+          }
+        />
         <Route
           path={PATH.APPOINTMENT}
           element={
@@ -150,16 +156,14 @@ const AppRouter = () => {
             </ProtectedRoute>
           }
         />
->>>>>>> aff26228e9d278823c4b016a9a19f436df6a3318
+
+        <Route path={PATH.PATIENT} element={<PatientPage />} />
         <Route path={PATH.FORGOT_PASS} element={<ForgotPassword />} />
         <Route path={PATH.CONFIRM} element={<Confirmation />} />
         <Route path={PATH.EDIT_DOCTOR_PROFILE} element={<Profile />} />
         <Route path={PATH.HELP} element={<Help />} />
         <Route path={PATH.DASHBOARD} element={<Profile />} />
-<<<<<<< HEAD
-=======
         <Route path="*" element={<NotFound />} />
->>>>>>> aff26228e9d278823c4b016a9a19f436df6a3318
       </Routes>
     </PageWrapper>
   );

@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import {
   BLACK,
+  BLUE,
   CORNFLOWER_BLUE,
   DARK_GREEN,
   GHOST_WHITE,
@@ -16,6 +17,7 @@ import {
   MEDIUM_FONT_SIZE,
   NORMAL_FONT_SIZE,
   SMALL_FONT_SIZE,
+  VERY_SMALL_FONT_SIZE,
 } from '@constants/fontSizes';
 
 import { NavLink } from 'react-router-dom';
@@ -252,4 +254,47 @@ export const ButtonContainer = styled.div`
   width: 70%;
   margin-right: auto;
   margin-left: auto;
+`;
+
+export const AddButton = styled(CancelButton)`
+  :disabled {
+    background: ${PINK_SWAN};
+    color: ${WHITE};
+    cursor: inherit;
+  }
+  width: 140px;
+  height: 48px;
+  padding: 12px;
+  line-height: 1.7;
+  font-size: ${VERY_SMALL_FONT_SIZE};
+  margin-left: 16px;
+  margin-right: 0px;
+  margin-top: 0px;
+  background: -webkit-linear-gradient(${NAVY_BLUE}, ${CORNFLOWER_BLUE});
+`;
+
+export const LoadMoreButton = styled.button`
+  :disabled {
+    background: ${PINK_SWAN};
+    color: ${WHITE};
+    cursor: inherit;
+  }
+  display: flex;
+  margin-right: auto;
+  margin-left: auto;
+  align-items: center;
+  justify-content: center;
+  font-family: ${FONT_ROBOTO};
+  margin-top: 20px;
+  font-weight: bold;
+  cursor: pointer;
+
+  color: ${BLUE};
+  background: ${WHITE};
+  width: 131px;
+  height: 44px;
+  border: 1.5px solid ${BLUE};
+  border-radius: 4px;
+  font-size: ${VERY_SMALL_FONT_SIZE};
+  line-height: 1.4;
 `;
