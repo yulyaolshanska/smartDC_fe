@@ -18,6 +18,7 @@ import NotFound from '@pages/notFound';
 import DoctorScheduler from '@pages/doctorScheduler';
 import ProtectedRoute from './protected-route';
 import PatientInfo from '@pages/patient/patientInfo';
+import ZoomPage from '@pages/zoom';
 
 export const PATH = {
   SIGN_UP: '/auth',
@@ -34,6 +35,7 @@ export const PATH = {
   EDIT_PATIENT_CARD: '/edit-patient-card',
   AVAILABILITY: '/availability',
   PATIENT_CARD_INFO: '/patient',
+  ZOOM: '/zoom',
 };
 
 const AppRouter = () => {
@@ -47,6 +49,7 @@ const AppRouter = () => {
         <Route path={PATH.RESET_PASS} element={<ResetPassword />} />
         <Route path={PATH.FORGOT_PASS} element={<ForgotPassword />} />
         <Route path={PATH.CONFIRM} element={<Confirmation />} />
+        <Route path={PATH.ZOOM} element={<ZoomPage />} />
 
         {/* Private Routes */}
         <Route
@@ -72,7 +75,7 @@ const AppRouter = () => {
               <EditPatientCard />
             </ProtectedRoute>
           }
-        /
+        />
         <Route
           path={PATH.EDIT_DOCTOR_PROFILE}
           element={
