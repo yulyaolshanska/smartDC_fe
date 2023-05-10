@@ -20,7 +20,7 @@ const PhotoChanger = () => {
 
   const avatar = async () => {
     setAvatarLoading(true);
-    const avatarStatic = await getDoctorAvatar(1);
+    const avatarStatic = await getDoctorAvatar(doctor.id);
     setAvatarUrl(avatarStatic);
     setAvatarLoading(false);
   };
@@ -30,6 +30,7 @@ const PhotoChanger = () => {
   }, []);
 
   const { t } = useTranslation();
+  const finalUrl = import.meta.env.VITE_REACT_APP_BASE_URL_SERVER + avatarUrl;
 
   return (
     <PhotoChangerWrapper>
@@ -41,8 +42,8 @@ const PhotoChanger = () => {
       ) : null}
 
       <Photo>
-        {avatarLoading && doctor?.photoUrl ? (
-          <AvatarLoader />
+        {doctor?.photoUrl ? (
+          <img src={finalUrl} alt="Photo" width="160px" />
         ) : (
           <img
             src={import.meta.env.VITE_REACT_APP_BASE_URL_SERVER + avatarUrl}

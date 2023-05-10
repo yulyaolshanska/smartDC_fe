@@ -16,4 +16,3 @@ export const country = 'country';
 export const date = 'date';
 export const error = 'error';
 export const plus = '+';
-export const PASSWORD_REQUIRED_LENGTH = 10;

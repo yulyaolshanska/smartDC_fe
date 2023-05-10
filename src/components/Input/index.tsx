@@ -32,6 +32,7 @@ export function Input({
               value={rest.field.value}
               sx={{ input: { color: type == 'date' ? `${BLACK}` : null } }}
               onChange={rest.field.onChange}
+              autoComplete="new-password"
             />
           </>
         )}

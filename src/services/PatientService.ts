@@ -29,6 +29,12 @@ export const patientApi = createApi({
       query: () => '/patient',
       providesTags: ['Patient'],
     }),
+    getPatientById: builder.query({
+      query: (id: number | string) => ({
+        url: `/patient/${id}`,
+        method: 'GET',
+         }),
+         }),
     updatePatient: builder.mutation({
       query: (data: PatientDto) => ({
         url: `/patient/${data.id}`,
