@@ -5,7 +5,6 @@ import { ToastContainer, toast } from 'react-toastify';
 import { yupResolver } from '@hookform/resolvers/yup';
 import {
   CancelButton,
-  FormContainer,
   SendButton,
   ButtonContainer,
 } from '@components/general/styles';
@@ -93,7 +92,6 @@ const EditPatientCardForm: React.FC = () => {
   };
 
   return (
-    <FormContainer>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <Text>{t('Patient.editPatientCard')}</Text>
         <InputInlineContainer>
@@ -124,7 +122,6 @@ const EditPatientCardForm: React.FC = () => {
         </ButtonContainer>
         <ToastContainer />
       </Form>
-    </FormContainer>
   );
 };
 

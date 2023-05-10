@@ -91,7 +91,7 @@
     "bothDatesRequired": "Validation error: both start and end dates are required",
     "endBeforeStartDateError": "Validation error: end date should be after start date",
     "overlappingEventsError": "Validation error: working hours overlap",
-    "somethingWasWrong":"Sorry, something was wrong!",
+    "somethingWasWrong": "Sorry, something was wrong!",
     "pastDateError": "You cannot create schedule on a past date!",
     "calendarSlotError": "Something went wrong!"
   },
@@ -122,10 +122,8 @@
     "enterOverview": "Enter patient's overview",
     "save": "Save",
     "cancel": "Cancel",
-    "cardUpdetedSuccess":"Patient's card updated successfully",
-    "lastAppointment": "Last Appointment:"
-
-  },
+    "cardUpdetedSuccess": "Patient's card updated successfully",
+    "lastAppointment": "Last Appointment:"  },
   "Profile": {
     "cancel": "Cancel",
     "save": "Save",
@@ -154,8 +152,31 @@
     "selectedDate": "Selected date:",
     "deleteTime": "Delete time:",
     "saveSchedule": "Save schedule",
+    "selectTimezone": "Time Zone:"
+  },
+  "BookAppointment": {
+    "selectDoctorSpecialization": "Select doctor specialization",
+    "selectDay": "Select a day of appointment",
+    "SelectAppointmentTime": "Select a time of appointment",
+    "youSelected": "You selected:",
+    "date": "Date:",
     "selectTimezone": "Time Zone:",
-    "successfullySubmited": "Your schedule has been successfully updated!"
+    "successfullySubmited": "Your schedule has been successfully updated!",
+    "stepOne": "Step 1/2",
+    "stepTwo": "Step 2/2",
+    "prevStep": "Previous step",
+    "nextStep": "Next step",
+    "setectDoctor": "Select a",
+    "remoteDoctor": "Remote Doctor",
+    "name": "Name",
+    "speciality": "Speciality",
+    "located": "Located",
+    "rating": "Rating",
+    "loadMore":"Load more",
+    "noDoctors":"No doctor with that name is available",
+    "confirm": "Confirm",
+    "appointmentCreated": "Appointment successfully created",
+    "search": "Search"
   },
   "NotFoundPage":{
     "notFound":"Page not found ",
