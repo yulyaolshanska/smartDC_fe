@@ -1,7 +1,8 @@
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import { CalendarOptions } from '@fullcalendar/core';
+import { getISOWeek } from 'date-fns';
 import {
   AppointmentEvent,
   CalendarContainer,
@@ -11,47 +12,50 @@ import {
 } from './styles';
 import './index.css';
 import { useTranslation } from 'react-i18next';
+import { useGetAppointmentForWeekQuery } from '../../services/AppointmentService';
+import { useAppSelector } from '@redux/hooks';
 
 interface Event {
-  title: string;
   start: Date;
   end: Date;
-  color?: string;
 }
 
-const events: Event[] = [
-  {
-    title: 'Event 1',
-    start: new Date(2023, 4, 3),
-    end: new Date(2023, 4, 3),
-  },
-  {
-    title: 'Event 2',
-    start: new Date(2023, 4, 4),
-    end: new Date(2023, 4, 4),
-  },
-  {
-    title: 'Event 3',
-    start: new Date(2023, 4, 5),
-    end: new Date(2023, 4, 5),
-  },
-  {
-    title: 'Event 4',
-    start: new Date(2023, 4, 5),
-    end: new Date(2023, 4, 5),
-  },
-  {
-    title: 'Event 5',
-    start: new Date(2023, 4, 5),
-    end: new Date(2023, 4, 5),
-  },
-];
-
 function WeeklyCalendar() {
+  const id = useAppSelector((state) => state.doctorReducer.id) ?? 1;
   const { t } = useTranslation();
-  const calendarRef = useRef<HTMLDivElement>(null);
+  const calendarRef = useRef<FullCalendar>(null);
+  const date = new Date();
+  const year = date.getFullYear();
+  const week = getISOWeek(date);
+  const [currentYear, setCurrentYear] = useState(year);
+  const [currentWeek, setCurrentWeek] = useState(week);
+  const { data: appointments = [] } = useGetAppointmentForWeekQuery({
+    id: id,
+    year: currentYear,
+    week: currentWeek,
+  });
+  const appointmentEvents: Event[] = appointments.map((appointment) => ({
+    start: appointment.startTime,
+    end: appointment.endTime,
+  }));
 
-  const EventContent = ({ event }: any) => {
+  useEffect(() => {
+    const calendarApi = calendarRef.current?.getApi();
+    if (calendarApi) {
+      const handleDatesSet = (arg: any) => {
+        const view = arg.view;
+        const startDate = view.activeStart;
+        setCurrentYear(startDate.getFullYear());
+        setCurrentWeek(getISOWeek(startDate) + 1);
+      };
+      calendarApi.on('datesSet', handleDatesSet);
+      return () => {
+        calendarApi.off('datesSet', handleDatesSet);
+      };
+    }
+  }, []);
+
+  const EventContent = () => {
     const randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
 
     return (
@@ -66,7 +70,7 @@ function WeeklyCalendar() {
   const options: CalendarOptions = {
     plugins: [dayGridPlugin],
     initialView: 'dayGridWeek',
-    events: events,
+    events: appointmentEvents,
     eventContent: EventContent,
     height: '210px',
     dayHeaderFormat: { weekday: 'short', day: 'numeric' },
@@ -82,6 +86,8 @@ function WeeklyCalendar() {
           center: 'title',
           right: 'prev,next',
         }}
+        eventClick={() => console.log('Click on appointment')}
+        ref={calendarRef}
       />
     </CalendarContainer>
   );
