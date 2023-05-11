@@ -21,14 +21,14 @@ const DEFAULT_MAX_FILE_SIZE_IN_BYTES = 500000;
 
 const useFileUpload = (
   updateFilesCb: (files: File[]) => void,
-  options: UseFileUploadOptions = {}
+  options: UseFileUploadOptions = {},
 ): UseFileUploadResult => {
   const fileInputField = React.useRef<HTMLInputElement>(null);
   const [files, setFiles] = React.useState<FileMap>({});
 
   const addNewFiles = (newFiles: File[]): FileMap => {
     const updatedFiles: FileMap = { ...files };
-    for (let file of newFiles) {
+    for (const file of newFiles) {
       if (file.size < DEFAULT_MAX_FILE_SIZE_IN_BYTES) {
         updatedFiles[file.name] = file;
       }
