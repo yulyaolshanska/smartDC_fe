@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import SignUpFirstStep from '@pages/auth/signUp/signUpFirstStep';
 import SignUpSecondFormGoogle from '@components/Auth/SignUpForm/SignUpSecondStepFormGoogle';
@@ -10,15 +10,17 @@ import Profile from '@pages/doctor/profile';
 import PageWrapper from '@components/PageWrapper';
 import Help from '@pages/help';
 import Activation from '@pages/auth/signUp/activation';
+import PatientPage from '@pages/patient';
 import CreatePatientCard from '@pages/patient/createPatientCard';
 import EditPatientCard from '@pages/patient/EditPatientCard';
-
-// import TempScheduler from '@pages/tempScheduler';
+import CreateAppointment from '@pages/appointment';
 import NotFound from '@pages/notFound';
 import DoctorScheduler from '@pages/doctorScheduler';
 import ProtectedRoute from './protected-route';
 import PatientInfo from '@pages/patient/patientInfo';
 import Dashboard from '@pages/dashboard';
+import cookie from 'utils/functions/cookies';
+import AppointmentsDoctorScheduler from '@pages/doctorScheduler/appointmentsScheduler';
 
 export const PATH = {
   SIGN_UP: '/auth',
@@ -33,8 +35,11 @@ export const PATH = {
   DASHBOARD: '/dashboard',
   CREATE_PATIENT_CARD: '/create-patient-card',
   EDIT_PATIENT_CARD: '/edit-patient-card',
+  SCHEDULER: '/scheduler',
+  APPOINTMENT: '/book-appointment',
   AVAILABILITY: '/availability',
-  PATIENT_CARD_INFO: '/patient',
+  PATIENT_CARD_INFO: '/patient/:id',
+  PATIENT: '/patients',
 };
 
 const AppRouter = () => {
@@ -46,7 +51,6 @@ const AppRouter = () => {
         <Route path={PATH.VERIFICATION} element={<Activation />} />
         <Route path={PATH.LOGIN} element={<Login />} />
         <Route path={PATH.RESET_PASS} element={<ResetPassword />} />
-
         {/* Private Routes */}
         <Route
           path={PATH.SIGN_UP_SECOND_STEP_GOOGLE}
@@ -71,7 +75,7 @@ const AppRouter = () => {
               <EditPatientCard />
             </ProtectedRoute>
           }
-        />
+        />{' '}
         <Route
           path={PATH.FORGOT_PASS}
           element={
@@ -104,7 +108,6 @@ const AppRouter = () => {
             </ProtectedRoute>
           }
         />
-
         <Route
           path={PATH.DASHBOARD}
           element={
@@ -122,6 +125,14 @@ const AppRouter = () => {
           }
         />
         <Route
+          path={PATH.APPOINTMENT}
+          element={
+            <ProtectedRoute allowedRoles={['Remote', 'Local']}>
+              <AppointmentsDoctorScheduler />
+            </ProtectedRoute>
+          }
+        />
+        <Route
           path={PATH.PATIENT_CARD_INFO}
           element={
             <ProtectedRoute allowedRoles={['Remote', 'Local']}>
@@ -129,13 +140,19 @@ const AppRouter = () => {
             </ProtectedRoute>
           }
         />
-
+        <Route
+          path={PATH.APPOINTMENT}
+          element={
+            <ProtectedRoute allowedRoles={['Remote', 'Local']}>
+              <CreateAppointment />
+            </ProtectedRoute>
+          }
+        />
         <Route path={PATH.FORGOT_PASS} element={<ForgotPassword />} />
         <Route path={PATH.CONFIRM} element={<Confirmation />} />
         <Route path={PATH.EDIT_DOCTOR_PROFILE} element={<Profile />} />
         <Route path={PATH.HELP} element={<Help />} />
         <Route path={PATH.DASHBOARD} element={<Profile />} />
-        {/* <Route path={PATH.SCHEDULER} element={<TempScheduler />} /> */}
         <Route path="*" element={<NotFound />} />
       </Routes>
     </PageWrapper>

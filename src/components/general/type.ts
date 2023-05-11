@@ -38,4 +38,12 @@ export type Option = {
   value: string | number;
 };
 
-export type FormValues = IPatient & IAuth;
+export type AppointmentFormValues = {
+  specialization: string;
+  appointmentTimeRange: string;
+  date: string;
+  doctor: string;
+};
+
+export type FormValues = IPatient & IAuth & AppointmentFormValues;
+

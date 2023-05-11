@@ -19,7 +19,7 @@ export const appointmentsApi = createApi({
   endpoints: ({ query }) => ({
     getTodayAppointment: query({
       query: ({ doctorId, all }) => ({
-        url: `appointment/doctor/${doctorId}/today/all`,
+        url: `appointment/doctor/${doctorId}/today/${all}`,
         method: 'GET',
       }),
     }),

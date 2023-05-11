@@ -46,9 +46,19 @@ export const NOT_ACTIVE_BACKGROUND_HOVER = '#e2edfd';
 
 export const BORDER = '#d8dbe8';
 
+export const NOTE_DOCTOR = '#4579EE';
+
+export const HINT = '#808080';
+
 export const GRAY_SHADOW = '#66666666';
 
 export const LIGHT_GRAY = '#808080';
+
+export const UPLOAD_BUTTON_COLOR = '#3498db';
+
+export const CONTENT_LOADER_BACKGROUND = '#f3f3f3';
+
+export const CONTENT_LOADER_FOREGROUND = '#ecebeb';
 
 export const POP_UP_CONTENT_BORDER = '#e6e6e6';
 
@@ -61,3 +71,13 @@ export const LIGHT_BLUE = '#081972';
 export const APPOINTMENT_TIME = '#060A32';
 
 export const ANOTHER_FUCKING_BLUE = '#4C92FF';
+
+export const BLUEBERRY_BLUE = '#4579EE';
+
+export const BLACK_TRANSPORT = 'rgba(0, 0, 0, 0.54)';
+
+export const BLACK_ARROW_HOVER = 'rgba(0, 0, 0, 0.04)';
+
+export const CALENDAR_BOX_SHADOW = 'rgba(53, 53, 53, 0.12)';
+
+export const CALENDAR_HOVER_SHADOW = 'rgba(53, 53, 53, 0.16)';

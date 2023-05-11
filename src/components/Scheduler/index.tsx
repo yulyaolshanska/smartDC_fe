@@ -4,6 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 import moment from 'moment';
 import 'moment-timezone';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
+
 import { ErrorText } from './styles';
 import { useTranslation } from 'react-i18next';
 import PopupDeleteContent from './Modals/PopupDeleteContent';
