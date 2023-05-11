@@ -74,6 +74,10 @@ function WeeklyCalendar() {
     eventContent: EventContent,
     height: '210px',
     dayHeaderFormat: { weekday: 'short', day: 'numeric' },
+    eventClick: (info) => {
+      const day = info.event._instance?.range.start.getDay();
+      console.log('Clicked on day: ', day);
+    },
   };
 
   return (
@@ -86,7 +90,6 @@ function WeeklyCalendar() {
           center: 'title',
           right: 'prev,next',
         }}
-        eventClick={() => console.log('Click on appointment')}
         ref={calendarRef}
       />
     </CalendarContainer>
