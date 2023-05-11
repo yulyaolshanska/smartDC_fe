@@ -11,6 +11,8 @@ import { useAppSelector } from '@redux/hooks';
 import Skeleton from './Skeleton';
 import { ToastContainer, toast } from 'react-toastify';
 import Error from './Error';
+import { patientApi } from 'services/PatientService';
+import { useParams } from 'react-router';
 
 export interface INotes {
   id: number;
@@ -27,13 +29,14 @@ const Notes = () => {
   const [created, setCreated] = React.useState<boolean>(false);
   const [mounted, setMounted] = React.useState<boolean>(false);
 
+  const { id: patientId } = useParams();
+
   const filterParams = useAppSelector((state) => state.noteFilterReducer);
   const {
     data: notes,
-    error: getPatientError,
     refetch,
     isLoading,
-  } = noteApi.useGetPatientNoteQuery({ ...filterParams });
+  } = noteApi.useGetPatientNoteQuery({ ...filterParams, patientId });
 
   const handleAddNew = () => {
     setAddNew(!addNew);
@@ -71,28 +74,29 @@ const Notes = () => {
       {isLoading &&
         Array(4)
           .fill(null)
-          .map((index) => <Skeleton key={index} />)}
-      {notes?.count &&
-        notes?.countWithoutAnyParams &&
-        notesLocal
-          .filter(
-            (note, index, self) =>
-              self.findIndex((n) => n.id === note.id) === index
-          )
-          .map((note) => <Note key={note.id} {...note} />)}
+          .map((_, index) => <Skeleton key={index} />)}
+      {notes?.count && notes?.countWithoutAnyParams
+        ? notesLocal
+            .filter(
+              (note, index, self) =>
+                self.findIndex((n) => n.id === note.id) === index
+            )
+            .map((note) => <Note key={note.id} {...note} />)
+        : null}
       <Stack alignItems="center">
-        {notes?.count && notes?.countWithoutAnyParams && (
+        {notes?.count && notes?.countWithoutAnyParams ? (
           <LoadMoreButton notesLocal={notesLocal} />
-        )}
+        ) : null}
 
-        {!notes?.count && notes?.countWithoutAnyParams && (
+        {(!notes?.count || !notes?.countWithoutAnyParams) && (
           <Error
-            text={'No notes are matching search params! Try to change them!'}
+            text={
+              !notes?.count && !notes?.countWithoutAnyParams
+                ? 'There are no notes! Add some!'
+                : 'No notes are matching search params! Try to change them!'
+            }
           />
         )}
-        {!notes?.countWithoutAnyParams ? (
-          <Error text={'There are no notes! Add some!'} />
-        ) : null}
       </Stack>
     </Stack>
   );

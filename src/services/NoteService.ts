@@ -32,8 +32,8 @@ export const noteApi = createApi({
   }),
   endpoints: (builder) => ({
     getPatientNote: builder.query({
-      query: (params) => ({
-        url: '/notes/all',
+      query: ({ patientId, ...params }) => ({
+        url: `/notes/all/${patientId}`,
         method: 'GET',
         params,
       }),

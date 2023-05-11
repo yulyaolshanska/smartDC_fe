@@ -19,6 +19,9 @@ const LoadMoreButton = ({ notesLocal }: LoadMoreButtonProps) => {
   );
 
   const notesLocalLength = notesLocal.length;
+  console.log(notesLocalLength);
+  console.log(notes);
+  console.log(notes.count);
 
   const fetchMore = React.useCallback(() => {
     dispatch(noteFilterActions.setSkipAmount());
@@ -27,7 +30,7 @@ const LoadMoreButton = ({ notesLocal }: LoadMoreButtonProps) => {
   return (
     <LoadButton
       onClick={fetchMore}
-      disabled={notes?.count === notesLocalLength}
+      disabled={notes?.count === notesLocalLength || notes?.count === 0}
     >
       Load More
     </LoadButton>
