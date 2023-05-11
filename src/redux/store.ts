@@ -24,6 +24,7 @@ import { createPatientReducer } from '@redux/slices/patient/createPatient';
 import { noteFilterReducer } from './slices/NoteFilterSlice';
 import { patientApi } from '../services/PatientService';
 import { availabilityApi } from '../services/AvailabilityService';
+import { appointmentApi } from '../services/AppointmentService';
 
 const rootReducer = combineReducers({
   loginReducer,
@@ -40,6 +41,7 @@ const rootReducer = combineReducers({
   [authApi.reducerPath]: authApi.reducer,
   [patientApi.reducerPath]: patientApi.reducer,
   [availabilityApi.reducerPath]: availabilityApi.reducer,
+  [appointmentApi.reducerPath]: appointmentApi.reducer,
 });
 const persistConfig = {
   key: 'root',
@@ -72,7 +74,8 @@ export const setupStore = () =>
         authApi.middleware,
         noteApi.middleware,
         patientApi.middleware,
-        availabilityApi.middleware
+        availabilityApi.middleware,
+        appointmentApi.middleware
       ),
   });
 export const store = setupStore();
