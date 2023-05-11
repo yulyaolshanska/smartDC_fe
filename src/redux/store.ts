@@ -56,7 +56,7 @@ const persistConfig = {
     'noteFilterReducer',
     'authApi',
     'noteApi',
-    'appointmentApi',
+    'appointmentsApi',
   ],
 };
 
