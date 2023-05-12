@@ -20,8 +20,9 @@ import { navigationReducer } from 'redux/slices/NavigationSlice';
 import { doctorReducer } from 'redux/slices/DoctorSlice';
 import { resetPasswordReducer } from '@redux/slices/auth/resetPassword';
 import { createPatientReducer } from '@redux/slices/patient/createPatient';
-import { patientApi } from '../services/PatientService';
-import { availabilityApi } from '../services/AvailabilityService';
+import { patientApi } from 'services/PatientService';
+import { availabilityApi } from 'services/AvailabilityService';
+import { zoomApi } from 'services/ZoomService';
 
 const rootReducer = combineReducers({
   loginReducer,
@@ -36,6 +37,7 @@ const rootReducer = combineReducers({
   [authApi.reducerPath]: authApi.reducer,
   [patientApi.reducerPath]: patientApi.reducer,
   [availabilityApi.reducerPath]: availabilityApi.reducer,
+  [zoomApi.reducerPath]: zoomApi.reducer,
 });
 const persistConfig = {
   key: 'root',
@@ -47,6 +49,7 @@ const persistConfig = {
     'forgotPassword',
     'loginReducer',
     'signUpReducer',
+    'zoomApi',
   ],
 };
 
@@ -64,7 +67,8 @@ export const setupStore = () =>
         doctorApi.middleware,
         authApi.middleware,
         patientApi.middleware,
-        availabilityApi.middleware
+        availabilityApi.middleware,
+        zoomApi.middleware
       ),
   });
 export const store = setupStore();

@@ -1,12 +1,7 @@
-import ZoomComponent from '@components/Zoom';
 import React from 'react';
 
 const ZoomPage = () => {
-  return (
-    <div>
-      <ZoomComponent />
-    </div>
-  );
+  return <div>ZoomPage</div>;
 };
 
 export default ZoomPage;

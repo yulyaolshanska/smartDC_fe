@@ -1,100 +1,163 @@
-import React from 'react';
+import ZoomComponent from '@components/Zoom';
+import { zoomApi } from 'services/ZoomService';
+import React, { useEffect } from 'react';
+import axios from 'axios';
+import ZoomVideo from '@zoom/videosdk';
+import { Stack } from '@mui/system';
+import { SendButton } from '@components/general/styles';
+import { Grid, Typography } from '@mui/material';
+import './index.css';
 
-import './App.css';
-import ZoomMtgEmbedded from '@zoomus/websdk/embedded';
+const ZoomComponent = () => {
+  const [getSignature, { data: zoomToken }] = zoomApi.useGetSignatureMutation();
 
-function ZoomComponent() {
-  const client = ZoomMtgEmbedded.createClient();
+  const videoRef = React.useRef<HTMLVideoElement>(null);
+  const [stream, setStream] = React.useState<any>(null);
+  const [mounted, setMounted] = React.useState<any>(null);
 
-  var authEndpoint = '';
-  var sdkKey = '';
-  var meetingNumber = '123456789';
-  var passWord = '';
-  var role = 0;
-  var userName = 'React';
-  var userEmail = '';
-  var registrantToken = '';
-  var zakToken = '';
+  const client = ZoomVideo.createClient();
 
-  function getSignature(e) {
-    e.preventDefault();
+  const topic = 'something';
+  const token = '';
+  const userName = 'doqwewqe';
 
-    fetch(authEndpoint, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        meetingNumber: meetingNumber,
-        role: role,
-      }),
-    })
-      .then((res) => res.json())
-      .then((response) => {
-        startMeeting(response.signature);
-      })
-      .catch((error) => {
-        console.error(error);
+  const handleSignature = async () => {
+    return await getSignature({
+      tpc: 'something',
+      role_type: 1,
+      user_identity: 'doctor_id',
+      session_key: '123',
+    }).then((res) => {
+      return res.error.data;
+    });
+  };
+
+  const initAndJoinSession = async () => {
+    await client.init('en-US', 'CDN');
+    const token = await handleSignature();
+    try {
+      await client.join(topic, token, userName);
+      setStream(client.getMediaStream());
+      console.log('allUsers', client.getAllUser());
+
+      console.log('client', client);
+
+      client.getAllUser().forEach((user) => {
+        console.log('user', user);
+        if (user.bVideoOn) {
+          console.log('user.bVideoOn', user?.bVideoOn);
+          if (stream)
+            stream?.renderVideo(
+              document.querySelector('#participant-videos-canvas'),
+              user.userId
+            );
+        }
       });
-  }
+    } catch (e) {
+      console.error(e);
+    }
+  };
 
-  function startMeeting(signature) {
-    let meetingSDKElement = document.getElementById('meetingSDKElement');
+  const startSelfVideo = () => {
+    console.log(stream);
+    if (stream && stream.isRenderSelfViewWithVideoElement()) {
+      stream
+        .startVideo({
+          videoElement: videoRef.current,
+        })
+        .then(() => {
+          videoRef.current.style.display = 'block';
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  };
 
-    client.init({
-      debug: true,
-      zoomAppRoot: meetingSDKElement,
-      language: 'en-US',
-      customize: {
-        meetingInfo: [
-          'topic',
-          'host',
-          'mn',
-          'pwd',
-          'telPwd',
-          'invite',
-          'participant',
-          'dc',
-          'enctype',
-        ],
-        toolbar: {
-          buttons: [
-            {
-              text: 'Custom Button',
-              className: 'CustomButton',
-              onClick: () => {
-                console.log('custom button');
-              },
-            },
-          ],
-        },
-      },
-    });
+  const stopSelfVideo = () => {
+    console.log(stream);
+    if (stream && stream.isRenderSelfViewWithVideoElement()) {
+      stream
+        .stopVideo({
+          videoElement: videoRef.current,
+        })
 
-    client.join({
-      signature: signature,
-      sdkKey: sdkKey,
-      meetingNumber: meetingNumber,
-      password: passWord,
-      userName: userName,
-      userEmail: userEmail,
-      tk: registrantToken,
-      zak: zakToken,
-    });
-  }
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  };
+
+  React.useEffect(() => {
+    const onPeerVideoStateChange = (payload: any) => {
+      console.log('payload', payload);
+
+      if (payload.action === 'Start' && stream) {
+        stream?.renderVideo(
+          document.querySelector('#participant-videos-canvas'),
+          payload.userId
+        );
+
+        // participants.map((p, index) => {
+        //   stream.renderVideo(
+        //     document.querySelector('#participant-videos-canvas'),
+        //     p[index].userId,
+        //     960,
+        //     540,
+        //     0,
+        //     540,
+        //     2
+        //   );
+        // });
+        // stream.renderVideo(
+        //   document.querySelector('#participant-videos-canvas'),
+        //   payload.userId,
+        //   960,
+        //   540,
+        //   100,
+        //   100,
+        //   2
+        // );
+      } else if (payload.action === 'Stop') {
+        stream?.stopRenderVideo(
+          document.querySelector('#participant-videos-canvas'),
+          payload.userId
+        );
+      }
+    };
+    initAndJoinSession();
+
+    client.on('peer-video-state-change', onPeerVideoStateChange);
+
+    return () => {
+      client.off('peer-video-state-change', onPeerVideoStateChange);
+    };
+  }, []);
 
   return (
-    <div className="App">
-      <main>
-        <h1>Zoom Meeting SDK Sample React</h1>
+    <div>
+      <Stack direction="column">
+        <video
+          id="my-self-view-video"
+          ref={videoRef}
+          width={500}
+          height={500}
+        ></video>
+        <Typography>Participant video</Typography>
 
-        {/* For Component View */}
-        <div id="meetingSDKElement">
-          {/* Zoom Meeting SDK Component View Rendered Here */}
-        </div>
+        <canvas
+          id="participant-videos-canvas"
+          width="960px"
+          height="540px"
+        ></canvas>
+      </Stack>
 
-        <button onClick={getSignature}>Join Meeting</button>
-      </main>
+      <Stack gap="10px">
+        <button onClick={startSelfVideo}>Start</button>
+        <button onClick={stopSelfVideo}>Stop</button>
+      </Stack>
     </div>
   );
-}
+};
 
 export default ZoomComponent;
