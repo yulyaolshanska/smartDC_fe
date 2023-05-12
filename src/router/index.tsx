@@ -37,6 +37,7 @@ export const PATH = {
   EDIT_PATIENT_CARD: '/edit-patient-card',
   SCHEDULER: '/scheduler',
   APPOINTMENT: '/book-appointment',
+  APPOINTMENTS: '/appointment',
   AVAILABILITY: '/availability',
   PATIENTS_LIST: '/patients',
   PATIENT_CARD_INFO: '/patient/:id',
@@ -76,7 +77,8 @@ const AppRouter = () => {
               <EditPatientCard />
             </ProtectedRoute>
           }
-        />        <Route
+        />
+        <Route
           path={PATH.FORGOT_PASS}
           element={
             <ProtectedRoute allowedRoles={['Remote', 'Local']}>
@@ -92,7 +94,7 @@ const AppRouter = () => {
             </ProtectedRoute>
           }
         />
-       <Route
+        <Route
           path={PATH.EDIT_DOCTOR_PROFILE}
           element={
             <ProtectedRoute allowedRoles={['Remote', 'Local']}>
