@@ -34,10 +34,10 @@ export const PATH = {
   HELP: '/help',
   DASHBOARD: '/dashboard',
   CREATE_PATIENT_CARD: '/create-patient-card',
-  EDIT_PATIENT_CARD: '/edit-patient-card',
+  EDIT_PATIENT_CARD: '/edit-patient-card/:id',
   SCHEDULER: '/scheduler',
-  APPOINTMENT: '/book-appointment',
   APPOINTMENTS: '/appointment',
+  BOOK_APPOINTMENT: '/book-appointment',
   AVAILABILITY: '/availability',
   PATIENTS_LIST: '/patients',
   PATIENT_CARD_INFO: '/patient/:id',
@@ -52,7 +52,6 @@ const AppRouter = () => {
         <Route path={PATH.VERIFICATION} element={<Activation />} />
         <Route path={PATH.LOGIN} element={<Login />} />
         <Route path={PATH.RESET_PASS} element={<ResetPassword />} />
-
         {/* Private Routes */}
         <Route
           path={PATH.SIGN_UP_SECOND_STEP_GOOGLE}
@@ -151,20 +150,20 @@ const AppRouter = () => {
           }
         />
         <Route
-          path={PATH.APPOINTMENT}
+          path={PATH.BOOK_APPOINTMENT}
           element={
             <ProtectedRoute allowedRoles={['Remote', 'Local']}>
               <CreateAppointment />
             </ProtectedRoute>
           }
         />
-
-        <Route path={PATH.PATIENT} element={<PatientPage />} />
+        {/* <Route path={PATH.PATIENT} element={<PatientPage />} /> */}
         <Route path={PATH.FORGOT_PASS} element={<ForgotPassword />} />
         <Route path={PATH.CONFIRM} element={<Confirmation />} />
         <Route path={PATH.EDIT_DOCTOR_PROFILE} element={<Profile />} />
         <Route path={PATH.HELP} element={<Help />} />
         <Route path={PATH.DASHBOARD} element={<Profile />} />
+        {/* <Route path={PATH.EDIT_PATIENT_CARD} element={<EditPatientCard />} /> */}
         <Route path="*" element={<NotFound />} />
       </Routes>
     </PageWrapper>

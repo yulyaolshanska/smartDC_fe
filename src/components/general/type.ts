@@ -21,7 +21,7 @@ export interface IAuth {
 }
 
 export interface IPatient {
-  id: string;
+  id?: number;
   firstName: string;
   lastName: string;
   email: string;
