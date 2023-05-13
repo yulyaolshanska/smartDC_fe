@@ -1,6 +1,13 @@
 import { NORMAL_FONT_SIZE } from '@constants/fontSizes';
 import styled from 'styled-components';
 
+export const Wrapper = styled.div`
+  background: #f5f7fd;
+  border: 1.5px solid #cbd8ff;
+  border-radius: 4px;
+  padding: 12px;
+`;
+
 export const CalendarContainer = styled.div`
   margin: 8px 0px 60px 0px;
   height: 210px;

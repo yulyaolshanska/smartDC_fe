@@ -14,6 +14,13 @@ import './index.css';
 import { useTranslation } from 'react-i18next';
 import { useGetAppointmentForWeekQuery } from '../../services/AppointmentService';
 import { useAppSelector } from '@redux/hooks';
+import AppointmentCard from './AppointmentCard';
+import {
+  patientApi,
+  useGetPatientByIdQuery,
+} from '../../services/PatientService';
+import { useParams } from 'react-router';
+import { doctorApi } from '../../services/DoctorService';
 
 interface Event {
   start: Date;
@@ -21,16 +28,19 @@ interface Event {
 }
 
 function WeeklyCalendar() {
-  const id = useAppSelector((state) => state.doctorReducer.id) ?? 1;
+  const doctorData = useAppSelector((state) => state.doctorReducer);
   const { t } = useTranslation();
+  const { id } = useParams();
+  const { data: patient } = patientApi.useGetPatientByIdQuery(Number(id));
   const calendarRef = useRef<FullCalendar>(null);
   const date = new Date();
   const year = date.getFullYear();
   const week = getISOWeek(date);
   const [currentYear, setCurrentYear] = useState(year);
   const [currentWeek, setCurrentWeek] = useState(week);
+  const [currentDay, setCurrentDay] = useState<Date>(new Date());
   const { data: appointments = [] } = useGetAppointmentForWeekQuery({
-    id: id,
+    id: doctorData.id,
     year: currentYear,
     week: currentWeek,
   });
@@ -66,7 +76,6 @@ function WeeklyCalendar() {
       </EventContainer>
     );
   };
-
   const options: CalendarOptions = {
     plugins: [dayGridPlugin],
     initialView: 'dayGridWeek',
@@ -75,24 +84,42 @@ function WeeklyCalendar() {
     height: '210px',
     dayHeaderFormat: { weekday: 'short', day: 'numeric' },
     eventClick: (info) => {
-      const day = info.event._instance?.range.start.getDay();
-      console.log('Clicked on day: ', day);
+      setCurrentDay(info.event._instance?.range.start || new Date());
     },
   };
 
+  const getCurrentAppointments = () => {
+    return appointments.filter((appointment) => {
+      const startTime = new Date(appointment.startTime);
+      return startTime.getDay() === currentDay.getDay();
+    });
+  };
+  const currentAppointments = getCurrentAppointments();
+
   return (
-    <CalendarContainer>
-      <CalendarTitle>{t('Calendar.calendar')}</CalendarTitle>
-      <FullCalendar
-        {...options}
-        headerToolbar={{
-          left: 'today',
-          center: 'title',
-          right: 'prev,next',
-        }}
-        ref={calendarRef}
-      />
-    </CalendarContainer>
+    <>
+      <CalendarContainer>
+        <CalendarTitle>{t('Calendar.calendar')}</CalendarTitle>
+        <FullCalendar
+          {...options}
+          headerToolbar={{
+            left: 'today',
+            center: 'title',
+            right: 'prev,next',
+          }}
+          ref={calendarRef}
+        />
+      </CalendarContainer>
+      {currentAppointments.map((appointment) => (
+        <AppointmentCard
+          remoteDoctor={doctorData}
+          patient={patient}
+          start={appointment.startTime}
+          end={appointment.endTime}
+          counter={appointment.id}
+        />
+      ))}
+    </>
   );
 }
 

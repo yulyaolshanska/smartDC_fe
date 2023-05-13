@@ -6,7 +6,7 @@ export default interface DoctorInitialState {
   email?: string;
   firstName?: string;
   gender?: string;
-  id?: number;
+  id: number;
   isVerified?: boolean;
   lastName?: string;
   phoneNumber?: string;

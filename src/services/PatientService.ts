@@ -47,4 +47,4 @@ export const patientApi = createApi({
   }),
 });
 
-export const { useGetPatientsQuery } = patientApi;
+export const { useGetPatientsQuery, useGetPatientByIdQuery } = patientApi;
