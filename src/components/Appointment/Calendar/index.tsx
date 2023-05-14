@@ -15,12 +15,16 @@ interface Props {
   onDayClick: (day: Date) => void;
   formattedDate: string;
   setFormattedDate: React.Dispatch<React.SetStateAction<string>>;
+  specialization: number;
+  setAvalibleTimeRange: React.Dispatch<React.SetStateAction<any>>
 }
 
 const DayPickerCalendar: React.FC<Props> = ({
   onDayClick,
   formattedDate,
   setFormattedDate,
+  specialization,
+  setAvalibleTimeRange
 }) => {
   const { t } = useTranslation();
 
@@ -35,7 +39,7 @@ const DayPickerCalendar: React.FC<Props> = ({
     setMonth,
     currentStyle,
     showCalendar,
-  } = useAppointmentCalendarHook({ onDayClick });
+  } = useAppointmentCalendarHook({ onDayClick, specialization, setAvalibleTimeRange });
 
   return (
     <CalendarWrapper>

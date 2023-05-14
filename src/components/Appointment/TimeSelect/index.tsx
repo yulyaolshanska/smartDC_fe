@@ -3,13 +3,17 @@ import { Container } from '@mui/material';
 import { appointmentTimeRange } from '@constants/other';
 import { InputProps } from '@components/Patient/Inputs/type';
 import SelectInput from '@components/Select';
-import { appointmentTime } from '@constants/mockData';
 import { AppointmentFormValues } from '@components/general/type';
+
+interface Prop {
+  avalibleTimeRange: any;
+}
 
 function AppointmentTimeSelectInput({
   control,
   errors,
-}: InputProps & AppointmentFormValues) {
+  avalibleTimeRange,
+}: InputProps & Prop) {
   const { t } = useTranslation();
 
   return (
@@ -21,7 +25,7 @@ function AppointmentTimeSelectInput({
         placeholder={t('BookAppointment.SelectAppointmentTime') ?? ''}
         helperText={errors.appointmentTimeRange?.message}
         error={Boolean(errors?.appointmentTimeRange)}
-        options={appointmentTime}
+        options={avalibleTimeRange}
         required={true}
       />
     </Container>

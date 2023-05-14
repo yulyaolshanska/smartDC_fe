@@ -2,6 +2,11 @@ import styled from 'styled-components';
 import { BLACK } from '@constants/colors';
 import { XS_FONT_SIZE } from '@constants/fontSizes';
 
+export const TextInfo =styled.p`
+margin-bottom: 10px;
+font-weight:500;
+`
+
 export const CalendarWrapper = styled.div`
   display: flex;
   justify-content: center;
@@ -26,3 +31,4 @@ export const SelectedDayTime = styled.p`
   font-style: italic;
   font-size: ${XS_FONT_SIZE};
 `;
+

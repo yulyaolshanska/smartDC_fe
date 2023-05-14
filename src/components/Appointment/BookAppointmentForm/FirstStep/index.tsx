@@ -19,6 +19,7 @@ import {
   FormInfo,
   YouSelected,
   SelectedDayTime,
+  TextInfo
 } from '@components/Appointment/BookAppointmentForm/FirstStep/styles';
 
 interface Props {
@@ -31,6 +32,10 @@ interface Props {
   control: Control;
   errors: FieldErrors;
   setStep: React.Dispatch<React.SetStateAction<boolean>>;
+  setSpecialization: React.Dispatch<React.SetStateAction<number>>;
+  specialization: number;
+  setAvalibleTimeRange:  React.Dispatch<React.SetStateAction<any>>;
+  avalibleTimeRange: any;
 }
 
 const FirstStepAppointment = ({
@@ -43,16 +48,21 @@ const FirstStepAppointment = ({
   control,
   errors,
   setStep,
+  setSpecialization,
+  specialization,
+  setAvalibleTimeRange,
+  avalibleTimeRange
 }: InputProps & Props) => {
   const { t } = useTranslation();
 
   return (
     <>
+        <TextInfo>{t('BookAppointment.instruction')}</TextInfo>
       <StepWrapper>
         <Text>{t('BookAppointment.stepOne')}</Text>
         <CancelBtn />
       </StepWrapper>
-      <SpecializationInput control={control} errors={errors} />
+      <SpecializationInput control={control} errors={errors} setSpecialization={setSpecialization}/>
       <CalendarWrapper>
         <Controller
           control={control}
@@ -64,6 +74,8 @@ const FirstStepAppointment = ({
               onDayClick={handleCalendarDayClick}
               formattedDate={formattedDate}
               setFormattedDate={setFormattedDate}
+              specialization={specialization}
+              setAvalibleTimeRange={setAvalibleTimeRange}
             />
           )}
         />
@@ -73,9 +85,9 @@ const FirstStepAppointment = ({
         control={control}
         errors={errors}
         formattedTime={formattedTime}
-        onChange={(value) => {
-          setFormattedTime(value);
-        }}
+        setFormattedTime={setFormattedTime}
+
+        avalibleTimeRange={avalibleTimeRange}
       />
 
       <FormFooter>

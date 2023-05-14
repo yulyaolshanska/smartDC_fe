@@ -2,15 +2,23 @@ import { useTranslation } from 'react-i18next';
 import { Container } from '@mui/material';
 import { specialization } from '@constants/other';
 import { InputProps } from '@components/Patient/Inputs/type';
-import SelectInput from '@components/Select';
+import SelectSpecInput from '@components/Appointment/BookAppointmentForm/Selects/SelectSpecInput';
 import { specializations } from '@constants/mockData';
 
-function SpecializationSelectInput({ control, errors }: InputProps) {
+interface Prop {
+  setSpecialization: React.Dispatch<React.SetStateAction<number>>;
+}
+
+function SpecializationSelectInput({
+  control,
+  errors,
+  setSpecialization,
+}: InputProps & Prop) {
   const { t } = useTranslation();
-  
+
   return (
     <Container style={{ padding: '0' }}>
-      <SelectInput
+      <SelectSpecInput
         control={control}
         fullWidth
         name={specialization}
@@ -19,6 +27,7 @@ function SpecializationSelectInput({ control, errors }: InputProps) {
         error={Boolean(errors?.specialization)}
         options={specializations}
         required={true}
+        setSpecialization={setSpecialization}
       />
     </Container>
   );
