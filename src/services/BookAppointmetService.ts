@@ -31,7 +31,14 @@ export const appointmentApi = createApi({
         method: 'GET',
       }),
     }),
+
+    getAllAvalibleDoctors: builder.mutation({
+      query: (args: { start: any, end: any, specialization: number, limit: number }) => ({
+        url: `/availability?${args.start}&${args.end}&${args.specialization}&${args.limit}`,
+        method: 'GET',
+      }),
+    }),
   }),
 });
 
-export const { useGetSpecializationByIdQuery } = appointmentApi;
+export const { useGetSpecializationByIdQuery, useGetAllAvalibleDoctorsMutation } = appointmentApi;

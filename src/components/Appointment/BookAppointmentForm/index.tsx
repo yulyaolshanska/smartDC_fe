@@ -28,18 +28,25 @@ const BookAppointmentForm: React.FC = () => {
   const [step, setStep] = useState<boolean>(false);
   const [avalibleTimeRange, setAvalibleTimeRange] = useState([]);
 
-  console.log(`avalibleTimeRange`,avalibleTimeRange);
+  //
+  const [selectedDay, setSelectedDay] = useState<Date | null>(null);
+  console.log(`selectedDay`, selectedDay);
+
+  console.log(`avalibleTimeRange`, avalibleTimeRange);
+
+  console.log(`selectedDate`, selectedDate);
 
   const {
     handleSubmit,
     control,
     register,
-    formState: { errors, isValid },
+    formState: { errors, isValid, isDirty },
   } = useForm<AppointmentFormValues>({
     mode: 'onChange',
     defaultValues: {
       specialization: '',
-      date: selectedDate.toISOString(),
+      date: selectedDate.toISOString() || '',
+
       appointmentTimeRange: '',
       doctor: '',
     },
@@ -75,6 +82,7 @@ const BookAppointmentForm: React.FC = () => {
   };
 
   const onSubmit = (data) => {
+    console.log(`DATA`, data);
     toast.success(t('BookAppointment.appointmentCreated'), {
       position: toast.POSITION.TOP_CENTER,
     });
@@ -101,10 +109,14 @@ const BookAppointmentForm: React.FC = () => {
             specialization={specialization}
             setAvalibleTimeRange={setAvalibleTimeRange}
             avalibleTimeRange={avalibleTimeRange}
+            setSelectedDate={setSelectedDate}
+            selectedDay={selectedDay}
+            setSelectedDay={setSelectedDay}
           />
         ) : (
           <SecondStepAppointment
             isValid={isValid}
+            isDirty={isDirty}
             control={control}
             errors={errors}
             setStep={setStep}

@@ -6,15 +6,19 @@ type Props = {
   onDayClick: (day: Date) => void;
   specialization: number;
   setAvalibleTimeRange: React.Dispatch<React.SetStateAction<any>>;
+  selectedDay: Date | null;
+  setSelectedDay: React.Dispatch<React.SetStateAction<Date | null>>;
 };
 
 const useAppointmentCalendarHook = ({
   onDayClick,
   specialization,
   setAvalibleTimeRange,
+  selectedDay,
+  setSelectedDay,
 }: Props) => {
   const today = new Date();
-  const [selectedDay, setSelectedDay] = useState<Date>(today);
+  //   const [selectedDay, setSelectedDay] = useState<Date | null>(null); //спробую підняти в форму
   const nextMonth = addMonths(new Date(), 0);
   const [month, setMonth] = useState(nextMonth);
   const currentStyle = { backgroundColor: '#4579EE' };
@@ -31,7 +35,13 @@ const useAppointmentCalendarHook = ({
     }
   }, [specialization, data]);
 
-  console.log(`freeslots from back`, freeSlots);
+  useEffect(() => {
+    if (freeSlots.length === 0) {
+      setSelectedDay(null);
+    }
+  }, [freeSlots]);
+
+  //   console.log(`freeslots from back`, freeSlots);
 
   const TwoMothPeriod = [];
   // створити обєкт на 3 мясяці починаючи з поточного
@@ -53,14 +63,12 @@ const useAppointmentCalendarHook = ({
     return date.getTime();
   });
 
-  //effect
   const formattedFreeSlots = freeSlots.map((item) => {
     const date = new Date(item.start);
     date.setHours(0, 0, 0, 0);
     return date.getTime();
   });
 
-  //effect
   //   створити масив всіх днів, які заброньовані
   const allBookedDates = formattedTwoMothPeriod.filter(
     (date) => !formattedFreeSlots.includes(date)
@@ -86,10 +94,9 @@ const useAppointmentCalendarHook = ({
   ];
   // Todo :  hardcode, just an example till connection with backend
 
-  //   фільтрую слоти по даті
+  //   фільтрую вільні слоти по даті
   const selectedDate = new Date(selectedDay);
 
-  //effect
   const filteredSlots = freeSlots.filter((slot) => {
     const slotDate = new Date(slot.start);
     return (
@@ -122,16 +129,23 @@ const useAppointmentCalendarHook = ({
   }
 
   //effect
-  const formattedAppointments = transformedSlots.map((appointment, index) => ({
+
+  console.log(`transformedSlots`,transformedSlots)
+  const formattedAppointments = transformedSlots.map((appointment, index) => (
+    {
     value: Number(index + 1),
     label: formatTimeRange(appointment.start, appointment.end),
+    doctorId: appointment.doctor,
   }));
+
+  console.log(`formattedAppointments`,formattedAppointments)
+
 
   useEffect(() => {
     if (data && specialization !== undefined) {
       setAvalibleTimeRange(formattedAppointments);
     }
-  }, [ selectedDay, data, specialization]);
+  }, [selectedDay, data, specialization]);
 
   // Todo: styles for days without empty slots. not sure if we need them at this moment, maybe in next sprint will be deleted or moved to styles
   const bookedStyle = { color: '#808080' };
@@ -150,7 +164,8 @@ const useAppointmentCalendarHook = ({
     bookedDays,
     bookedStyle,
     selectedDay,
-    setSelectedDay,
+    // setSelectedDay,
+
     month,
     setMonth,
     currentStyle,

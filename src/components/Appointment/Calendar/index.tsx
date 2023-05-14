@@ -16,7 +16,10 @@ interface Props {
   formattedDate: string;
   setFormattedDate: React.Dispatch<React.SetStateAction<string>>;
   specialization: number;
-  setAvalibleTimeRange: React.Dispatch<React.SetStateAction<any>>
+  setAvalibleTimeRange: React.Dispatch<React.SetStateAction<any>>;
+  setSelectedDate: React.Dispatch<React.SetStateAction<Date | null>>;
+  selectedDay: Date| null;
+  setSelectedDay: React.Dispatch<React.SetStateAction<Date | null>>;
 }
 
 const DayPickerCalendar: React.FC<Props> = ({
@@ -24,7 +27,10 @@ const DayPickerCalendar: React.FC<Props> = ({
   formattedDate,
   setFormattedDate,
   specialization,
-  setAvalibleTimeRange
+  setAvalibleTimeRange,
+  selectedDay,
+  setSelectedDay
+  
 }) => {
   const { t } = useTranslation();
 
@@ -33,13 +39,20 @@ const DayPickerCalendar: React.FC<Props> = ({
     toggleState,
     bookedDays,
     bookedStyle,
-    selectedDay,
-    setSelectedDay,
+    // selectedDay,
+    // setSelectedDay,
+
     month,
     setMonth,
     currentStyle,
     showCalendar,
-  } = useAppointmentCalendarHook({ onDayClick, specialization, setAvalibleTimeRange });
+  } = useAppointmentCalendarHook({
+    onDayClick,
+    specialization,
+    setAvalibleTimeRange,
+    selectedDay,
+    setSelectedDay
+  });
 
   return (
     <CalendarWrapper>
@@ -49,7 +62,14 @@ const DayPickerCalendar: React.FC<Props> = ({
         ) : (
           <TextinCalendarInput>{formattedDate}</TextinCalendarInput>
         )}
-        {formattedDate && <CancelIcon onClick={() => setFormattedDate('')} />}
+        {formattedDate && (
+          <CancelIcon
+            onClick={() => {
+            setSelectedDay(null);
+              setFormattedDate('');
+            }}
+          />
+        )}
         {!showCalendar ? <ArrowIcon /> : <ArrowIconShown />}
       </SelectText>
       {showCalendar && (

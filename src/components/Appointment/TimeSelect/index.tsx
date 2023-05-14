@@ -3,7 +3,6 @@ import { Container } from '@mui/material';
 import { appointmentTimeRange } from '@constants/other';
 import { InputProps } from '@components/Patient/Inputs/type';
 import SelectInput from '@components/Select';
-import { AppointmentFormValues } from '@components/general/type';
 
 interface Prop {
   avalibleTimeRange: any;

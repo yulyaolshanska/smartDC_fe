@@ -19,7 +19,7 @@ import {
   FormInfo,
   YouSelected,
   SelectedDayTime,
-  TextInfo
+  TextInfo,
 } from '@components/Appointment/BookAppointmentForm/FirstStep/styles';
 
 interface Props {
@@ -29,13 +29,19 @@ interface Props {
   formattedTime: string;
   setFormattedTime: React.Dispatch<React.SetStateAction<string>>;
   isValid: boolean;
+  isDirty: boolean;
   control: Control;
   errors: FieldErrors;
   setStep: React.Dispatch<React.SetStateAction<boolean>>;
   setSpecialization: React.Dispatch<React.SetStateAction<number>>;
   specialization: number;
-  setAvalibleTimeRange:  React.Dispatch<React.SetStateAction<any>>;
+  setAvalibleTimeRange: React.Dispatch<React.SetStateAction<any>>;
   avalibleTimeRange: any;
+
+  setSelectedDate: React.Dispatch<React.SetStateAction<Date | null>>;
+
+  setSelectedDay: React.Dispatch<React.SetStateAction<Date | null>>;
+  selectedDay: Date | null;
 }
 
 const FirstStepAppointment = ({
@@ -45,24 +51,34 @@ const FirstStepAppointment = ({
   formattedTime,
   setFormattedTime,
   isValid,
+  isDirty,
   control,
   errors,
   setStep,
   setSpecialization,
   specialization,
   setAvalibleTimeRange,
-  avalibleTimeRange
+  avalibleTimeRange,
+
+  setSelectedDate,
+
+  selectedDay,
+  setSelectedDay,
 }: InputProps & Props) => {
   const { t } = useTranslation();
 
   return (
     <>
-        <TextInfo>{t('BookAppointment.instruction')}</TextInfo>
+      <TextInfo>{t('BookAppointment.instruction')}</TextInfo>
       <StepWrapper>
         <Text>{t('BookAppointment.stepOne')}</Text>
         <CancelBtn />
       </StepWrapper>
-      <SpecializationInput control={control} errors={errors} setSpecialization={setSpecialization}/>
+      <SpecializationInput
+        control={control}
+        errors={errors}
+        setSpecialization={setSpecialization}
+      />
       <CalendarWrapper>
         <Controller
           control={control}
@@ -76,6 +92,9 @@ const FirstStepAppointment = ({
               setFormattedDate={setFormattedDate}
               specialization={specialization}
               setAvalibleTimeRange={setAvalibleTimeRange}
+              setSelectedDate={setSelectedDate}
+              selectedDay={selectedDay}
+              setSelectedDay={setSelectedDay}
             />
           )}
         />
@@ -86,7 +105,6 @@ const FirstStepAppointment = ({
         errors={errors}
         formattedTime={formattedTime}
         setFormattedTime={setFormattedTime}
-
         avalibleTimeRange={avalibleTimeRange}
       />
 
@@ -102,7 +120,12 @@ const FirstStepAppointment = ({
           )}
         </FormInfo>
         <BntWrapper>
-          <StepBtn onClick={() => setStep(true)} disabled={!isValid}>
+          <StepBtn
+            onClick={() => {
+              setStep(true);
+            }}
+            disabled={!isValid || selectedDay === null}
+          >
             {' '}
             {t('BookAppointment.nextStep')}
             <ArrowRight />
