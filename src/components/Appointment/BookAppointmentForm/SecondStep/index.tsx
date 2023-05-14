@@ -1,4 +1,5 @@
 import React from 'react';
+import { useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Controller, Control, FieldErrors } from 'react-hook-form';
 import CancelBtn from '@components/Appointment/CancelBtn';
@@ -28,6 +29,9 @@ import {
 import { ReactComponent as ArrowLeft } from '@assets/arrowLeftIcon.svg';
 import defaultDoctorPhoto from '@assets/mockDoctorPhoto.png';
 import useAppointmentSecondStepHook from 'hooks/BookAppointment/useAppointmentSecondStep.hook';
+import { appointmentApi } from '../../../../services/BookAppointmetService';
+import { specialization } from '@constants/auth';
+
 
 interface Props {
   isValid: boolean;
@@ -37,6 +41,8 @@ interface Props {
   register: (param: string) => void;
   handleSubmit: (param: string) => void;
   onSubmit: (param: string) => void;
+  selectedDate: Date;
+  formattedTime: string;
 }
 
 const SecondStepAppointment = ({
@@ -47,6 +53,8 @@ const SecondStepAppointment = ({
   register,
   handleSubmit,
   onSubmit,
+  selectedDate,
+  formattedTime
 }: Props) => {
   const { t } = useTranslation();
 
@@ -57,8 +65,20 @@ const SecondStepAppointment = ({
     filter,
     filtered,
     visibledoctorsLists,
-  } = useAppointmentSecondStepHook();
+    selectedDateTime
+  } = useAppointmentSecondStepHook({selectedDate, formattedTime});
 
+  const { id } = useParams();
+const specialization = 0;
+const { data: allDoctors, isLoading } = appointmentApi.useGetAllAvalibleDoctorsQuery({
+    start: selectedDateTime.start,
+    end: selectedDateTime.end,
+    specialization: 0,
+    limit: 10 
+  });
+
+
+  console.log(`DATA`, allDoctors)
   return (
     <>
       <StepWrapper>

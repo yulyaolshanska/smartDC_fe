@@ -27,14 +27,8 @@ const BookAppointmentForm: React.FC = () => {
   const [specialization, setSpecialization] = useState(null);
   const [step, setStep] = useState<boolean>(false);
   const [avalibleTimeRange, setAvalibleTimeRange] = useState([]);
-
-  //
   const [selectedDay, setSelectedDay] = useState<Date | null>(null);
-  console.log(`selectedDay`, selectedDay);
 
-  console.log(`avalibleTimeRange`, avalibleTimeRange);
-
-  console.log(`selectedDate`, selectedDate);
 
   const {
     handleSubmit,
@@ -123,6 +117,8 @@ const BookAppointmentForm: React.FC = () => {
             register={register}
             onSubmit={onSubmit}
             handleSubmit={handleSubmit}
+            selectedDate={selectedDate}
+            formattedTime={formattedTime}
           />
         )}
       </FormWrapper>{' '}

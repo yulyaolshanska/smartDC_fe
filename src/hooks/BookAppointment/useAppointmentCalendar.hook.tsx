@@ -74,7 +74,7 @@ const useAppointmentCalendarHook = ({
     (date) => !formattedFreeSlots.includes(date)
   );
 
-  //effect
+
   const formattedBookedDates = allBookedDates.map((date) => {
     const d = new Date(date);
     const year = d.getFullYear();
@@ -87,7 +87,7 @@ const useAppointmentCalendarHook = ({
     return day > new Date();
   };
 
-  //effect
+  
   const bookedDays = [
     ...formattedBookedDates,
     { before: new Date(), modifiers: { disabled: isDisabled } },

@@ -29,7 +29,7 @@ export function SelectTimeInput({
           <Autocomplete
             options={options}
             onChange={(_, data) => {
-                setFormattedTime(data?.value);
+              setFormattedTime(data?.label);
               return onChange(data?.value);
             }}
             renderInput={(params) => (
