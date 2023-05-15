@@ -33,10 +33,16 @@ export const appointmentApi = createApi({
     }),
 
     getAllAvalibleDoctors: builder.query({
-      query: ({ start, end, specialization, limit }) => ({
-        url: `/availability?${start}&${end}&${specialization}&${limit}`,
-        method: 'GET',
-      }),
+        query: ({ start, end, specialization, limit }) => ({
+            url: '/availability',
+            method: 'GET',
+            params: {
+              start,
+              end,
+              specialization,
+              limit,
+            },
+          }),
     }),
   }),
 });

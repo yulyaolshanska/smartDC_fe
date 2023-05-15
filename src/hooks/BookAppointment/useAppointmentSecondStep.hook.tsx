@@ -70,26 +70,33 @@ const useAppointmentSecondStepHook = ({ selectedDate, formattedTime }) => {
     endDate.setMinutes(getMinutesFromTime(end));
   
     return {
-      startTime: startDate.toISOString(),
-      endTime: endDate.toISOString(),
+      start: startDate.toISOString(),
+      end: endDate.toISOString(),
     };
   }
   
   function getHoursFromTime(time) {
     const [hour] = time.split(':');
     const isPM = time.includes('PM');
-    const formattedHour = parseInt(hour.trim());
+    let formattedHour = parseInt(hour.trim());
   
     if (formattedHour === 12) {
-      return isPM ? formattedHour : 0;
+      formattedHour = isPM ? formattedHour : 0;
     } else {
-      return isPM ? formattedHour + 12 : formattedHour;
+      formattedHour = isPM ? formattedHour + 12 : formattedHour;
     }
+  
+    // Отримання локального часового поясу
+    const localTimezoneOffset = new Date().getTimezoneOffset() / 60;
+    formattedHour -= localTimezoneOffset;
+  
+    return formattedHour;
   }
   
   function getMinutesFromTime(time) {
     const [, minutes] = time.split(':');
     return parseInt(minutes.trim());
+    
   }
   const selectedDateTime = reverseFormatTimeRange(formattedTime);
   console.log(selectedDateTime);  

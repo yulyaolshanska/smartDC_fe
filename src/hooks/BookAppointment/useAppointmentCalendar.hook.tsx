@@ -74,7 +74,6 @@ const useAppointmentCalendarHook = ({
     (date) => !formattedFreeSlots.includes(date)
   );
 
-
   const formattedBookedDates = allBookedDates.map((date) => {
     const d = new Date(date);
     const year = d.getFullYear();
@@ -87,7 +86,6 @@ const useAppointmentCalendarHook = ({
     return day > new Date();
   };
 
-  
   const bookedDays = [
     ...formattedBookedDates,
     { before: new Date(), modifiers: { disabled: isDisabled } },
@@ -106,14 +104,48 @@ const useAppointmentCalendarHook = ({
     );
   });
 
+  // Сортуємо слоти за часом
+  filteredSlots.sort((a, b) => {
+    const timeA = new Date(a.start).getTime();
+    const timeB = new Date(b.start).getTime();
+    return timeA - timeB;
+  });
+
+  console.log(`filteredSlots`, filteredSlots);
+
+  // Фільтруємо та залишаємо унікальні слоти
+  const uniqueSlots = [];
+  const uniqueKeys = new Set();
+  
+  for (const slot of filteredSlots) {
+    const slotDate = new Date(slot.start);
+  
+    if (
+      slotDate.getDate() === selectedDate.getDate() &&
+      slotDate.getMonth() === selectedDate.getMonth() &&
+      slotDate.getFullYear() === selectedDate.getFullYear()
+    ) {
+      const key = `${slot.doctor.id}-${slot.start}-${slot.end}`;
+  
+      if (!uniqueKeys.has(key)) {
+        uniqueSlots.push({
+          doctor: slot.doctor.id,
+          start: slot.start,
+          end: slot.end,
+        });
+        uniqueKeys.add(key);
+      }
+    }
+  }
+  
+
+  console.log(`uniqueSlots`, uniqueSlots);
   // трансофрмую в обєкт
-  const transformedSlots = Object.entries(filteredSlots).map(
-    ([key, value]) => ({
-      doctor: value.doctor.id,
-      start: value.start,
-      end: value.end,
-    })
-  );
+  const transformedSlots = Object.entries(uniqueSlots).map(([key, value]) => ({
+    doctor: value.doctor.id,
+    start: value.start,
+    end: value.end,
+  }));
 
   // перетворити слоти на формат для селект інпуту
   function formatTimeRange(startTime, endTime) {
@@ -128,18 +160,10 @@ const useAppointmentCalendarHook = ({
     return `${start}-${end}`;
   }
 
-  //effect
-
-  console.log(`transformedSlots`,transformedSlots)
-  const formattedAppointments = transformedSlots.map((appointment, index) => (
-    {
+  const formattedAppointments = transformedSlots.map((appointment, index) => ({
     value: Number(index + 1),
     label: formatTimeRange(appointment.start, appointment.end),
-    doctorId: appointment.doctor,
   }));
-
-  console.log(`formattedAppointments`,formattedAppointments)
-
 
   useEffect(() => {
     if (data && specialization !== undefined) {

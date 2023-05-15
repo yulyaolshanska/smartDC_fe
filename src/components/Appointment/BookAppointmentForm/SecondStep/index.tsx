@@ -70,12 +70,17 @@ const SecondStepAppointment = ({
 
   const { id } = useParams();
 const specialization = 0;
+
 const { data: allDoctors, isLoading } = appointmentApi.useGetAllAvalibleDoctorsQuery({
     start: selectedDateTime.start,
     end: selectedDateTime.end,
     specialization: 0,
     limit: 10 
-  });
+});
+
+console.log(`start`, new Date (selectedDateTime.start).toISOString())
+console.log(`end`, selectedDateTime.end)
+
 
 
   console.log(`DATA`, allDoctors)
