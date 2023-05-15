@@ -3,7 +3,7 @@ import { Container } from '@mui/material';
 import { appointmentTimeRange } from '@constants/other';
 import { InputProps } from '@components/Patient/Inputs/type';
 import SelectInput from '@components/Select';
-import SelectTimeInput from '@components/Appointment/BookAppointmentForm/Selects/SelectTimeInput'
+import SelectTimeInput from '@components/Appointment/BookAppointmentForm/Selects/SelectTimeInput';
 
 interface Prop {
   avalibleTimeRange: any;
@@ -14,7 +14,7 @@ function AppointmentTimeSelectInput({
   control,
   errors,
   avalibleTimeRange,
-  setFormattedTime
+  setFormattedTime,
 }: InputProps & Prop) {
   const { t } = useTranslation();
 

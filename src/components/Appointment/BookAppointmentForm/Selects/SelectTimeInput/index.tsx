@@ -30,7 +30,7 @@ export function SelectTimeInput({
             options={options}
             onChange={(_, data) => {
               setFormattedTime(data?.label);
-              return onChange(data?.value);
+              return onChange(data?.label);
             }}
             renderInput={(params) => (
               <TextField

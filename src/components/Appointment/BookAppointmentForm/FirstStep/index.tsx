@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Controller, Control, FieldErrors } from 'react-hook-form';
 import SpecializationInput from '@components/Appointment/SpecializationSelect';
@@ -21,6 +22,13 @@ import {
   SelectedDayTime,
   TextInfo,
 } from '@components/Appointment/BookAppointmentForm/FirstStep/styles';
+import { Date } from '@components/Notes/Note/styles';
+import { use } from 'i18next';
+import { useForm } from 'react-hook-form';
+import Input from '@components/Input';
+
+// import { Conroller, useForm } from 'react-hook-form'
+import DatePicker from 'react-datepicker';
 
 interface Props {
   formattedDate: string;
@@ -42,6 +50,11 @@ interface Props {
 
   setSelectedDay: React.Dispatch<React.SetStateAction<Date | null>>;
   selectedDay: Date | null;
+
+  //   onChange: any;
+  register: (value: Date | null) => void;
+  setValue: any;
+  selectedDate: any;
 }
 
 const FirstStepAppointment = ({
@@ -61,11 +74,21 @@ const FirstStepAppointment = ({
   avalibleTimeRange,
 
   setSelectedDate,
+  selectedDate,
 
   selectedDay,
   setSelectedDay,
-}: InputProps & Props) => {
+  register,
+  setValue,
+}: //   onChange
+
+InputProps & Props) => {
   const { t } = useTranslation();
+
+  console.log(`FIRST`, selectedDate);
+  useEffect(() => {
+    setValue('date', selectedDate); // this will result a type error
+  }, [selectedDate]);
 
   return (
     <>
@@ -79,26 +102,81 @@ const FirstStepAppointment = ({
         errors={errors}
         setSpecialization={setSpecialization}
       />
+
+      <Controller
+        control={control}
+        name="date"
+        render={() => (
+          <input
+            {...register(`date`)}
+            value={selectedDate}
+           
+          />
+        )}
+      />
+
       <CalendarWrapper>
-        <Controller
-          control={control}
-          name={date}
-          render={({ field }) => (
-            <Calendar
-              onChange={(date: Date) => field.onChange(date)}
-              value={field.value}
-              onDayClick={handleCalendarDayClick}
-              formattedDate={formattedDate}
-              setFormattedDate={setFormattedDate}
-              specialization={specialization}
-              setAvalibleTimeRange={setAvalibleTimeRange}
-              setSelectedDate={setSelectedDate}
-              selectedDay={selectedDay}
-              setSelectedDay={setSelectedDay}
-            />
-          )}
+        <Calendar
+          // selected={field.value}
+          //   onChange={(date: any) => {
+          //     console.log(`Date`, date);
+
+          //     setSelectedDate(date);
+          //     // setValue(`date`, date);
+          //     return field.onChange(date);
+          //   }}
+          // value={field.value}
+          onDayClick={handleCalendarDayClick}
+          formattedDate={formattedDate}
+          setFormattedDate={setFormattedDate}
+          specialization={specialization}
+          setAvalibleTimeRange={setAvalibleTimeRange}
+          setSelectedDate={setSelectedDate}
+          selectedDay={selectedDay}
+          setSelectedDay={setSelectedDay}
         />
+        {/* <Controller
+                    control={control}
+                    name="date1"
+                    render={({ field }) => (
+                        <Calendar
+                            selected={field.value}
+                            //   onChange={(date: any) => {
+                            //     console.log(`Date`, date);
+
+                            //     setSelectedDate(date);
+                            //     // setValue(`date`, date);
+                            //     return field.onChange(date);
+                            //   }}
+                            value={field.value}
+                            onDayClick={handleCalendarDayClick}
+                            formattedDate={formattedDate}
+                            setFormattedDate={setFormattedDate}
+                            specialization={specialization}
+                            setAvalibleTimeRange={setAvalibleTimeRange}
+                            setSelectedDate={setSelectedDate}
+                            selectedDay={selectedDay}
+                            setSelectedDay={setSelectedDay}
+                        />
+                    )}
+                /> */}
       </CalendarWrapper>
+
+      {/* <Controller
+        control={control}
+        name="date-input"
+        render={({ field }) => (
+          <DatePicker
+            placeholderText="Select date"
+            onChange={(date) => field.onChange(date)}
+            selected={field.value}
+            // selected={date}
+            onChange={handleDateChange}
+            showTimeSelect
+            dateFormat="Pp"
+          />
+        )}
+      /> */}
 
       <AppointmentTime
         control={control}

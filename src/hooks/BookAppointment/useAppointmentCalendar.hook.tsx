@@ -8,6 +8,7 @@ type Props = {
   setAvalibleTimeRange: React.Dispatch<React.SetStateAction<any>>;
   selectedDay: Date | null;
   setSelectedDay: React.Dispatch<React.SetStateAction<Date | null>>;
+  setSelectedDate: React.Dispatch<React.SetStateAction<Date | null>>;
 };
 
 const useAppointmentCalendarHook = ({
@@ -16,6 +17,7 @@ const useAppointmentCalendarHook = ({
   setAvalibleTimeRange,
   selectedDay,
   setSelectedDay,
+  setSelectedDate
 }: Props) => {
   const today = new Date();
   //   const [selectedDay, setSelectedDay] = useState<Date | null>(null); //спробую підняти в форму
@@ -116,17 +118,17 @@ const useAppointmentCalendarHook = ({
   // Фільтруємо та залишаємо унікальні слоти
   const uniqueSlots = [];
   const uniqueKeys = new Set();
-  
+
   for (const slot of filteredSlots) {
     const slotDate = new Date(slot.start);
-  
+
     if (
       slotDate.getDate() === selectedDate.getDate() &&
       slotDate.getMonth() === selectedDate.getMonth() &&
       slotDate.getFullYear() === selectedDate.getFullYear()
     ) {
       const key = `${slot.doctor.id}-${slot.start}-${slot.end}`;
-  
+
       if (!uniqueKeys.has(key)) {
         uniqueSlots.push({
           doctor: slot.doctor.id,
@@ -137,7 +139,6 @@ const useAppointmentCalendarHook = ({
       }
     }
   }
-  
 
   console.log(`uniqueSlots`, uniqueSlots);
   // трансофрмую в обєкт
@@ -176,6 +177,8 @@ const useAppointmentCalendarHook = ({
 
   const handleDayClick: DayClickEventHandler = (day, modifiers) => {
     onDayClick(day, modifiers);
+    setSelectedDate(day)
+
   };
 
   const toggleState = (): void => {

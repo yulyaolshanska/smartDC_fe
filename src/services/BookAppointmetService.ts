@@ -2,12 +2,12 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import cookie from 'utils/functions/cookies';
 
 export interface Appointment {
-  id: number;
-  uuid: string;
-  title: string;
-  start: string;
-  end: string;
-  doctor: object;
+  patientId: number;
+  localDoctorId: number;
+  remoteDoctorId: number;
+  zoomLink: string;
+  endTime: string;
+  startTime: string;
 }
 
 export const appointmentApi = createApi({
@@ -33,18 +33,31 @@ export const appointmentApi = createApi({
     }),
 
     getAllAvalibleDoctors: builder.query({
-        query: ({ start, end, specialization, limit }) => ({
-            url: '/availability',
-            method: 'GET',
-            params: {
-              start,
-              end,
-              specialization,
-              limit,
-            },
-          }),
+      query: ({ start, end, specialization, limit }) => ({
+        url: '/availability',
+        method: 'GET',
+        params: {
+          start,
+          end,
+          specialization,
+          limit,
+        },
+      }),
+    }),
+
+    createAppointment: builder.mutation({
+      query: (data) => ({
+        url: `/appointment`,
+        method: 'POST',
+        body: data,
+      }),
+      invalidatesTags: ['Appointment'],
     }),
   }),
 });
 
-export const { useGetSpecializationByIdQuery, useGetAllAvalibleDoctorsQuery } = appointmentApi;
+export const {
+  useGetSpecializationByIdQuery,
+  useGetAllAvalibleDoctorsQuery,
+  useCreateAppointmentMutation,
+} = appointmentApi;

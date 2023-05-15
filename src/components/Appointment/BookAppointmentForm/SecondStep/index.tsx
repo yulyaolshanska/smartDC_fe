@@ -68,8 +68,7 @@ const SecondStepAppointment = ({
     selectedDateTime
   } = useAppointmentSecondStepHook({selectedDate, formattedTime});
 
-  const { id } = useParams();
-const specialization = 0;
+
 
 const { data: allDoctors, isLoading } = appointmentApi.useGetAllAvalibleDoctorsQuery({
     start: selectedDateTime.start,
@@ -83,7 +82,7 @@ console.log(`end`, selectedDateTime.end)
 
 
 
-  console.log(`DATA`, allDoctors)
+  console.log(`allDoctors`, allDoctors)
   return (
     <>
       <StepWrapper>

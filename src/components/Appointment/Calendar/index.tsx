@@ -18,7 +18,7 @@ interface Props {
   specialization: number;
   setAvalibleTimeRange: React.Dispatch<React.SetStateAction<any>>;
   setSelectedDate: React.Dispatch<React.SetStateAction<Date | null>>;
-  selectedDay: Date| null;
+  selectedDay: Date | null;
   setSelectedDay: React.Dispatch<React.SetStateAction<Date | null>>;
 }
 
@@ -29,8 +29,8 @@ const DayPickerCalendar: React.FC<Props> = ({
   specialization,
   setAvalibleTimeRange,
   selectedDay,
-  setSelectedDay
-  
+  setSelectedDay,
+  setSelectedDate,
 }) => {
   const { t } = useTranslation();
 
@@ -51,9 +51,12 @@ const DayPickerCalendar: React.FC<Props> = ({
     specialization,
     setAvalibleTimeRange,
     selectedDay,
-    setSelectedDay
+    setSelectedDay,
+
+    setSelectedDate,
   });
 
+  console.log(`selectedDay`, selectedDay);
   return (
     <CalendarWrapper>
       <SelectText onClick={toggleState}>
@@ -65,7 +68,7 @@ const DayPickerCalendar: React.FC<Props> = ({
         {formattedDate && (
           <CancelIcon
             onClick={() => {
-            setSelectedDay(null);
+              setSelectedDay(null);
               setFormattedDate('');
             }}
           />
