@@ -16,8 +16,7 @@ import { useGetAppointmentForWeekQuery } from '../../services/AppointmentService
 import { useAppSelector } from '@redux/hooks';
 import AppointmentCard from './AppointmentCard';
 import {
-  patientApi,
-  useGetPatientByIdQuery,
+  patientApi
 } from '../../services/PatientService';
 import { useParams } from 'react-router';
 import { doctorApi } from '../../services/DoctorService';

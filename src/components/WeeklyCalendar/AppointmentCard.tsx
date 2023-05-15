@@ -2,7 +2,7 @@ import React from 'react';
 import { Stack, Box } from '@mui/system';
 import { Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-// import { ReactComponent as CameraIcon } from '@assets/Camera.svg';
+import { ReactComponent as CameraIcon } from '@assets/Camera.svg';
 import { ACTIVE, BORDER, CARLO_BLUE, NAVY_BLUE } from '@constants/colors';
 import { NORMAL_FONT_SIZE } from '@constants/fontSizes';
 import { IPatient } from '@components/general/type';
@@ -74,6 +74,7 @@ const AppointmentCard = ({
                 fontSize={NORMAL_FONT_SIZE}
                 fontWeight="700"
                 color={CARLO_BLUE}
+                marginRight="8px"
               >
                 {patientFullName}
               </Typography>
@@ -82,7 +83,7 @@ const AppointmentCard = ({
               </Typography>
             </Stack>
             <Stack direction="row" alignItems="center">
-              {/* <CameraIcon /> */}
+              <CameraIcon />
               <Typography
                 marginLeft="5px"
                 marginRight="5px"
