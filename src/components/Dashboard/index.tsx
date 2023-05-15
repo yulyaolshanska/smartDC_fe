@@ -50,8 +50,6 @@ const DashboardComponent = () => {
     return copyAppointments as AppointmentElement[];
   };
 
-  const groupAppointments = () => {};
-
   const sortedAppointments = getItterableAppointments().sort(
     (a: AppointmentElement, b: AppointmentElement) => {
       const startTimeA = new Date(a.startTime);
