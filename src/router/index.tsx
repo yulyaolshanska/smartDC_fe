@@ -36,11 +36,11 @@ export const PATH = {
   CREATE_PATIENT_CARD: '/create-patient-card',
   EDIT_PATIENT_CARD: '/edit-patient-card/:id',
   SCHEDULER: '/scheduler',
+  APPOINTMENTS: '/appointment',
   BOOK_APPOINTMENT: '/book-appointment',
   AVAILABILITY: '/availability',
   PATIENTS_LIST: '/patients',
   PATIENT_CARD_INFO: '/patient/:id',
-  APPOINTMENTS: '/appointment',
 };
 
 const AppRouter = () => {
@@ -76,7 +76,7 @@ const AppRouter = () => {
               <EditPatientCard />
             </ProtectedRoute>
           }
-        />{' '}
+        />
         <Route
           path={PATH.FORGOT_PASS}
           element={
