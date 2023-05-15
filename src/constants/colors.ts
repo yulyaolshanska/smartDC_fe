@@ -29,6 +29,10 @@ export const DODGE_BLUE = 'dodgerblue';
 export const DARK_GREEN = '#188038';
 
 export const LIGHT_GREEN = '#BFE8CA';
+/**
+ * @deprecated
+ */
+export const BLUE = '#4579EE';
 
 export const DRAWER_CONT = '#f4f6fd';
 
@@ -46,9 +50,19 @@ export const NOT_ACTIVE_BACKGROUND_HOVER = '#e2edfd';
 
 export const BORDER = '#d8dbe8';
 
+export const NOTE_DOCTOR = '#4579EE';
+
+export const HINT = '#808080';
+
 export const GRAY_SHADOW = '#66666666';
 
 export const LIGHT_GRAY = '#808080';
+
+export const UPLOAD_BUTTON_COLOR = '#3498db';
+
+export const CONTENT_LOADER_BACKGROUND = '#f3f3f3';
+
+export const CONTENT_LOADER_FOREGROUND = '#ecebeb';
 
 export const POP_UP_CONTENT_BORDER = '#e6e6e6';
 
@@ -57,3 +71,13 @@ export const POP_UP_CONTENT_BACKGROUND = '#f8f8f8';
 export const DARK_BLUE = '#060d33';
 
 export const LIGHT_BLUE = '#081972';
+
+export const BLUEBERRY_BLUE = '#4579EE';
+
+export const BLACK_TRANSPORT = 'rgba(0, 0, 0, 0.54)';
+
+export const BLACK_ARROW_HOVER = 'rgba(0, 0, 0, 0.04)';
+
+export const CALENDAR_BOX_SHADOW = 'rgba(53, 53, 53, 0.12)';
+
+export const CALENDAR_HOVER_SHADOW = 'rgba(53, 53, 53, 0.16)';

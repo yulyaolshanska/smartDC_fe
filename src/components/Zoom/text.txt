@@ -1,0 +1,158 @@
+ <VideoContainer>
+      <Stack direction={'row'} gap={'8px'} width={'100%'} marginBottom={'12px'}>
+        <FinishCallButton />
+        <ChatButton />
+      </Stack>
+
+      <StartCallButton />
+
+      <Stack direction="row" gap="12px">
+        <SelfVideo ref={videoRef} />
+        <Box position={'relative'} width={'50%'}>
+          <NameTip />
+          <GoToFullScreenButton />
+          <ParticipantCanvas id="participant-videos-canvas" />
+        </Box>
+
+        {/* <canvas id="participant-videos-canvas" /> */}
+
+        {/* <canvas
+          id="participant-videos-canvas"
+          width="50%"
+          height="20%"
+        ></canvas> */}
+      </Stack>
+
+      <Stack gap="10px">
+        <button onClick={startSelfVideo}>Start</button>
+        <button onClick={() => stopSelfVideo()}>Stop</button>
+      </Stack>
+    </VideoContainer>
+  );
+
+  const videoRef = React.useRef<HTMLVideoElement>(null);
+
+const [stream, setStream] = React.useState<any>(null);
+// const [zmClient, setZmClient] = React.useState<any>(ZoomVideo.createClient());
+
+const client = ZoomVideo.createClient();
+
+const topic = 'something';
+const token = '';
+const userName = 'doqwewqe';
+
+const handleSignature = async () => {
+  return await getSignature({
+    tpc: 'something',
+    role_type: 1,
+    user_identity: 'doctor_id',
+    session_key: '123',
+  }).then((res) => {
+    return res.error.data;
+  });
+};
+client.init('en-US', 'CDN');
+const initAndJoinSession = async () => {
+  console.log(client.getCurrentUserInfo());
+  const token = await handleSignature();
+  try {
+    await client.join(topic, token, userName);
+    setStream(client.getMediaStream());
+    console.log('allUsers', client.getAllUser());
+
+    console.log('client', client);
+
+    client.getAllUser().forEach((user) => {
+      console.log('user', user);
+      if (user.bVideoOn) {
+        console.log('user.bVideoOn', user?.bVideoOn);
+        if (stream)
+          stream?.renderVideo(
+            document.querySelector('#participant-videos-canvas'),
+            user.userId
+          );
+      }
+    });
+  } catch (e) {
+    console.error(e);
+  }
+};
+
+const startSelfVideo = () => {
+  console.log(stream);
+  if (stream.isRenderSelfViewWithVideoElement()) {
+    stream
+      .startVideo({
+        videoElement: videoRef.current,
+      })
+      .then(() => {
+        console.log('hhjthth', stream);
+        videoRef.current.style.display = 'block';
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+};
+
+const stopSelfVideo = () => {
+  console.log(stream);
+  if (stream && stream.isRenderSelfViewWithVideoElement()) {
+    stream
+      .stopVideo({
+        videoElement: videoRef.current,
+      })
+      .then(() => {
+        videoRef.current.style.display = 'none';
+      })
+
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+};
+
+React.useEffect(() => {
+  const onPeerVideoStateChange = (payload: any) => {
+    console.log('payload', payload);
+
+    if (payload.action === 'Start') {
+      stream?.renderVideo(
+        document.querySelector('#participant-videos-canvas'),
+        payload.userId
+      );
+
+      participants.map((p, index) => {
+        stream.renderVideo(
+          document.querySelector('#participant-videos-canvas'),
+          p[index].userId,
+          960,
+          540,
+          0,
+          540,
+          2
+        );
+      });
+      stream.renderVideo(
+        document.querySelector('#participant-videos-canvas'),
+        payload.userId,
+        960,
+        540,
+        100,
+        100,
+        2
+      );
+    } else if (payload.action === 'Stop') {
+      stream?.stopRenderVideo(
+        document.querySelector('#participant-videos-canvas'),
+        payload.userId
+      );
+    }
+  };
+
+  client.on('peer-video-state-change', onPeerVideoStateChange);
+
+  return () => {
+    client.off('peer-video-state-change', onPeerVideoStateChange);
+  };
+}, [client.getAllUser.length]);

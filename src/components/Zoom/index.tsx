@@ -1,162 +1,143 @@
-import ZoomComponent from '@components/Zoom';
 import { zoomApi } from 'services/ZoomService';
-import React, { useEffect } from 'react';
-import axios from 'axios';
+import { devConfig } from './config/dev';
+import React from 'react';
+import { store } from '@redux/store';
 import ZoomVideo from '@zoom/videosdk';
-import { Stack } from '@mui/system';
-import { SendButton } from '@components/general/styles';
-import { Grid, Typography } from '@mui/material';
-import './index.css';
+import Video from './Video';
+import usePeerVideoStateChange from './utils/usePeerVideoStateChange';
+import useActiveShareChange from './utils/useActiveShareChange';
+import { Stack } from '@mui/material';
+import FinishCallButton from './FinishCallButton';
+import ChatButton from './ChatButton';
+import { VideoContainer } from './styles';
+import './index.scss';
+import StartCallButton from './StartCallButton';
+import { ToastContainer, toast } from 'react-toastify';
+
+const dispatch = store.dispatch;
+let meetingArgs = { ...devConfig };
+
+const getToken = async () => {
+  let token = await dispatch(
+    zoomApi.endpoints.getSignature.initiate(meetingArgs)
+  );
+  return token;
+};
+
+if (!meetingArgs.signature && meetingArgs.tpc) {
+  getToken().then((res) => {
+    meetingArgs.signature = res.error.data;
+  });
+}
+
+const client = ZoomVideo.createClient();
+// dispatch(zoomActions.setClient(client));
 
 const ZoomComponent = () => {
-  const [getSignature, { data: zoomToken }] = zoomApi.useGetSignatureMutation();
+  const [loading, setLoading] = React.useState(false);
+  const [loadingText, setLoadingText] = React.useState('');
+  const [mediaScreen, setMediaScreen] = React.useState();
+  const [status, setStatus] = React.useState(false);
 
-  const videoRef = React.useRef<HTMLVideoElement>(null);
-  const [stream, setStream] = React.useState<any>(null);
-  const [mounted, setMounted] = React.useState<any>(null);
+  const participantCanvasRef = React.useRef(null);
+  const participantShareScreenRef = React.useRef(null);
 
-  const client = ZoomVideo.createClient();
+  React.useEffect(() => {}, []);
 
-  const topic = 'something';
-  const token = '';
-  const userName = 'doqwewqe';
+  const init = async () => {
+    client.init('US-EN', 'CDN');
 
-  const handleSignature = async () => {
-    return await getSignature({
-      tpc: 'something',
-      role_type: 1,
-      user_identity: 'doctor_id',
-      session_key: '123',
-    }).then((res) => {
-      return res.error.data;
+    try {
+      setLoadingText('Joining the session');
+      await client
+        .join(meetingArgs.tpc, meetingArgs.signature, meetingArgs.name)
+        .then(() => {
+          setStatus(true);
+          toast.success('You joined the session');
+        });
+      const stream = client.getMediaStream();
+      setMediaScreen(stream);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const leaveSession = async () => {
+    await client.leave().then(() => {
+      setStatus(false);
+      toast.info('You left the session');
     });
   };
 
-  const initAndJoinSession = async () => {
-    await client.init('en-US', 'CDN');
-    const token = await handleSignature();
-    try {
-      await client.join(topic, token, userName);
-      setStream(client.getMediaStream());
-      console.log('allUsers', client.getAllUser());
-
-      console.log('client', client);
-
-      client.getAllUser().forEach((user) => {
-        console.log('user', user);
+  React.useEffect(() => {
+    const renderForNewParticipants = async () => {
+      client.getAllUser().forEach(async (user) => {
+        console.log('qwerty', participantCanvasRef);
         if (user.bVideoOn) {
-          console.log('user.bVideoOn', user?.bVideoOn);
-          if (stream)
-            stream?.renderVideo(
-              document.querySelector('#participant-videos-canvas'),
-              user.userId
-            );
+          await mediaScreen.renderVideo(
+            participantCanvasRef.current,
+            user.userId,
+            960,
+            540,
+            0,
+            0,
+            3
+          );
         }
       });
-    } catch (e) {
-      console.error(e);
-    }
-  };
-
-  const startSelfVideo = () => {
-    console.log(stream);
-    if (stream && stream.isRenderSelfViewWithVideoElement()) {
-      stream
-        .startVideo({
-          videoElement: videoRef.current,
-        })
-        .then(() => {
-          videoRef.current.style.display = 'block';
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }
-  };
-
-  const stopSelfVideo = () => {
-    console.log(stream);
-    if (stream && stream.isRenderSelfViewWithVideoElement()) {
-      stream
-        .stopVideo({
-          videoElement: videoRef.current,
-        })
-
-        .catch((error) => {
-          console.log(error);
-        });
-    }
-  };
+      client.getAllUser().forEach(async (user) => {
+        if (user.sharerOn) {
+          await mediaScreen.startShareView(
+            participantShareScreenRef.current,
+            user.userId
+          );
+        }
+      });
+    };
+    renderForNewParticipants();
+  }, [meetingArgs, mediaScreen]);
 
   React.useEffect(() => {
-    const onPeerVideoStateChange = (payload: any) => {
-      console.log('payload', payload);
-
-      if (payload.action === 'Start' && stream) {
-        stream?.renderVideo(
-          document.querySelector('#participant-videos-canvas'),
-          payload.userId
-        );
-
-        // participants.map((p, index) => {
-        //   stream.renderVideo(
-        //     document.querySelector('#participant-videos-canvas'),
-        //     p[index].userId,
-        //     960,
-        //     540,
-        //     0,
-        //     540,
-        //     2
-        //   );
-        // });
-        // stream.renderVideo(
-        //   document.querySelector('#participant-videos-canvas'),
-        //   payload.userId,
-        //   960,
-        //   540,
-        //   100,
-        //   100,
-        //   2
-        // );
-      } else if (payload.action === 'Stop') {
-        stream?.stopRenderVideo(
-          document.querySelector('#participant-videos-canvas'),
-          payload.userId
-        );
-      }
+    const handlePeerVideoStateChange = () => {
+      usePeerVideoStateChange(client, mediaScreen, participantCanvasRef);
     };
-    initAndJoinSession();
 
-    client.on('peer-video-state-change', onPeerVideoStateChange);
-
-    return () => {
-      client.off('peer-video-state-change', onPeerVideoStateChange);
+    const handlePeerShareScreen = () => {
+      useActiveShareChange(client, mediaScreen, participantShareScreenRef);
     };
-  }, []);
+
+    handlePeerVideoStateChange();
+    handlePeerShareScreen();
+  }, [mediaScreen, participantCanvasRef, participantShareScreenRef]);
 
   return (
-    <div>
-      <Stack direction="column">
-        <video
-          id="my-self-view-video"
-          ref={videoRef}
-          width={500}
-          height={500}
-        ></video>
-        <Typography>Participant video</Typography>
+    <VideoContainer>
+      <ToastContainer />
+      <Stack
+        direction={'row'}
+        alignItems={'center'}
+        gap={'8px'}
+        width={'100%'}
+        marginBottom={status ? '12px' : 0}
+      >
+        {status ? (
+          <FinishCallButton leaveSession={leaveSession} />
+        ) : (
+          <StartCallButton init={init}></StartCallButton>
+        )}
 
-        <canvas
-          id="participant-videos-canvas"
-          width="960px"
-          height="540px"
-        ></canvas>
+        <ChatButton />
       </Stack>
-
-      <Stack gap="10px">
-        <button onClick={startSelfVideo}>Start</button>
-        <button onClick={stopSelfVideo}>Stop</button>
-      </Stack>
-    </div>
+      {status ? (
+        <Video
+          client={client}
+          mediaScreen={mediaScreen}
+          participantCanvasRef={participantCanvasRef}
+          participantShareScreenRef={participantShareScreenRef}
+          setStatus={setStatus}
+        />
+      ) : null}
+    </VideoContainer>
   );
 };
 

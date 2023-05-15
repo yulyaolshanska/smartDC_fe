@@ -20,8 +20,6 @@ import InputCountryCity from '@components/Patient/Inputs/InputCountryCity';
 import InputOverview from '@components/Patient/Inputs/InputOverview';
 import { error, plus } from '@constants/auth';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { AppDispatch } from '@redux/store';
 import { patientApi } from 'services/PatientService';
 
 function CreatePatientCardForm() {
@@ -29,7 +27,7 @@ function CreatePatientCardForm() {
 
   const { createPatientCardSchema } = patientSchema();
   const navigate = useNavigate();
-  const dispatch = useDispatch<AppDispatch>();
+
   const {
     handleSubmit,
     control,
@@ -59,11 +57,16 @@ function CreatePatientCardForm() {
     data.phoneNumber = plus + data.phoneNumber;
     await createPatient(data).then((res) => {
       if (error in res && res.error) {
-        toast.error(`Sorry, something was wrong!`, {
+        toast.error(t('Error.somethingWasWrong'), {
           position: toast.POSITION.TOP_CENTER,
         });
       } else {
-        navigate(PATH.DASHBOARD);
+        toast.success(t('Patient.cardCreatedSuccess'), {
+          position: toast.POSITION.TOP_CENTER,
+        });
+        setTimeout(() => {
+          navigate(PATH.DASHBOARD);
+        }, 2000);
       }
     });
   };

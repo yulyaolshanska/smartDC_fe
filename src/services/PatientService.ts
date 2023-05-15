@@ -1,5 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import cookie from 'utils/functions/cookies';
+import { IPatient } from '@components/general/type';
 import { PatientDto } from 'services/types/patient.type';
 
 export const patientApi = createApi({
@@ -24,12 +25,26 @@ export const patientApi = createApi({
         body: data,
       }),
     }),
+    getPatients: builder.query<IPatient[], string>({
+      query: () => '/patient',
+      providesTags: ['Patient'],
+    }),
+    getPatientById: builder.query({
+      query: (id: number | string) => ({
+        url: `/patient/${id}`,
+        method: 'GET',
+      }),
+    }),
+
     updatePatient: builder.mutation({
       query: (data: PatientDto) => ({
         url: `/patient/${data.id}`,
         method: 'PATCH',
         body: data,
       }),
+      invalidatesTags: ['Patient'],
     }),
   }),
 });
+
+export const { useGetPatientsQuery } = patientApi;
