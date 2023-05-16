@@ -30,13 +30,14 @@ const EditPatientCardForm: React.FC = () => {
   const { editPatientCardSchema } = patientSchema();
   const [updatePatient] = patientApi.useUpdatePatientMutation();
 
-  const { data: patient, isLoading, refetch: patientRefetch} = patientApi.useGetPatientByIdQuery(
-    Number(id)
-  );
+  const {
+    data: patient,
+    isLoading,
+    refetch: patientRefetch,
+  } = patientApi.useGetPatientByIdQuery(Number(id));
 
- 
   useEffect(() => {
-    patientRefetch()
+    patientRefetch();
     if (patient) {
       reset({
         firstName: patient.firstName,
@@ -54,8 +55,6 @@ const EditPatientCardForm: React.FC = () => {
     }
   }, [patient]);
 
-
-  
   const {
     handleSubmit,
     control,
@@ -66,7 +65,6 @@ const EditPatientCardForm: React.FC = () => {
     defaultValues: async () => await { ...patient },
     resolver: yupResolver(editPatientCardSchema),
   });
-
 
   const onSubmit = async (data: IPatient) => {
     data.phoneNumber = plus + data.phoneNumber.replace(/\D/g, '');
@@ -92,7 +90,7 @@ const EditPatientCardForm: React.FC = () => {
 
   return (
     <>
-      {isLoading && !patient? (
+      {isLoading && !patient ? (
         <Spinner />
       ) : (
         <Form onSubmit={handleSubmit(onSubmit)}>
