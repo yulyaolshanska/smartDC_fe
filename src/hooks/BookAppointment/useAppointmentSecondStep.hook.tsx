@@ -10,14 +10,20 @@ interface Doctor {
   rating: string;
   selectedDate: Date;
   formattedTime: string;
+  avalibelDoctors: any;
 }
 
-const useAppointmentSecondStepHook = ({ selectedDate, formattedTime }) => {
+const useAppointmentSecondStepHook = ({
+  selectedDate,
+  formattedTime,
+  avalibelDoctors,
+}) => {
   const [filter, setFilter] = useState(``);
   const [page, setPage] = useState(0);
-  const [allDoctors, setAllDoctors] = useState<Doctor[]>([]);
+  const [allDoctors, setAllDoctors] = useState<Doctor[]>(avalibelDoctors || []);
 
-  console.log(`secondHook`, selectedDate);
+  console.log(`allDoctors`, avalibelDoctors);
+
   let filtered = allDoctors;
 
   const chunkSize = 10;
@@ -59,49 +65,48 @@ const useAppointmentSecondStepHook = ({ selectedDate, formattedTime }) => {
   //   робота з часом і датою
   function reverseFormatTimeRange(timeRange) {
     const [start, end] = timeRange.split('-').map((time) => time.trim());
-  
+
     const startDate = new Date(selectedDate);
     const endDate = new Date(selectedDate);
-  
+
     startDate.setHours(getHoursFromTime(start));
     startDate.setMinutes(getMinutesFromTime(start));
-  
+
     endDate.setHours(getHoursFromTime(end));
     endDate.setMinutes(getMinutesFromTime(end));
-  
+
     return {
       start: startDate.toISOString(),
       end: endDate.toISOString(),
     };
   }
-  
+
   function getHoursFromTime(time) {
     const [hour] = time.split(':');
     const isPM = time.includes('PM');
     let formattedHour = parseInt(hour.trim());
-  
+
     if (formattedHour === 12) {
       formattedHour = isPM ? formattedHour : 0;
     } else {
       formattedHour = isPM ? formattedHour + 12 : formattedHour;
     }
-  
+
     // Отримання локального часового поясу
     const localTimezoneOffset = new Date().getTimezoneOffset() / 60;
     formattedHour -= localTimezoneOffset;
-  
+
     return formattedHour;
   }
-  
+
   function getMinutesFromTime(time) {
     const [, minutes] = time.split(':');
     return parseInt(minutes.trim());
-    
   }
   const selectedDateTime = reverseFormatTimeRange(formattedTime);
-  console.log(selectedDateTime);  
+  console.log(`filtered`, filtered);
 
-//   console.log(`HOOK`, selectedDateTime.start, selectedDateTime.end)
+  //   console.log(`HOOK`, selectedDateTime.start, selectedDateTime.end)
   return {
     page,
     filterName,

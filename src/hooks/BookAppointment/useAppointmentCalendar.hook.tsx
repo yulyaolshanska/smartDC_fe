@@ -20,7 +20,7 @@ const useAppointmentCalendarHook = ({
   setSelectedDate
 }: Props) => {
   const today = new Date();
-  //   const [selectedDay, setSelectedDay] = useState<Date | null>(null); //спробую підняти в форму
+    // const [selectedDay, setSelectedDay] = useState<Date | null>(null); //спробую підняти в форму
   const nextMonth = addMonths(new Date(), 0);
   const [month, setMonth] = useState(nextMonth);
   const currentStyle = { backgroundColor: '#4579EE' };
@@ -97,6 +97,8 @@ const useAppointmentCalendarHook = ({
   //   фільтрую вільні слоти по даті
   const selectedDate = new Date(selectedDay);
 
+  console.log(selectedDate)
+
   const filteredSlots = freeSlots.filter((slot) => {
     const slotDate = new Date(slot.start);
     return (
@@ -127,7 +129,7 @@ const useAppointmentCalendarHook = ({
       slotDate.getMonth() === selectedDate.getMonth() &&
       slotDate.getFullYear() === selectedDate.getFullYear()
     ) {
-      const key = `${slot.doctor.id}-${slot.start}-${slot.end}`;
+      const key = `${slot.start}-${slot.end}`;
 
       if (!uniqueKeys.has(key)) {
         uniqueSlots.push({
