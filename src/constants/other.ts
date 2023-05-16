@@ -21,3 +21,4 @@ export const date = 'date';
 export const search = 'search';
 
 export const doctor = 'doctor';
+export const local = 'Local';
