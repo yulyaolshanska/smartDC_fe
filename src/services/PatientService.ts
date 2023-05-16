@@ -24,6 +24,7 @@ export const patientApi = createApi({
         method: 'POST',
         body: data,
       }),
+      invalidatesTags: ['Patient'],
     }),
     getPatients: builder.query<IPatient[], string>({
       query: () => '/patient',
