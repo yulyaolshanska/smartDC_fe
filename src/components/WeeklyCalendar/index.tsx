@@ -110,6 +110,7 @@ function WeeklyCalendar() {
       </CalendarContainer>
       {currentAppointments.map((appointment, index) => (
         <AppointmentCard
+          key={appointment.id}
           remoteDoctor={appointment.remoteDoctor}
           localDoctor={appointment.localDoctor}
           patient={appointment.patient}
