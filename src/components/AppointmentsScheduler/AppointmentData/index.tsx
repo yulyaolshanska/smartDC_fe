@@ -7,10 +7,10 @@ import { ACTIVE, BORDER, CARLO_BLUE, NAVY_BLUE } from '@constants/colors';
 import { MEDIUM_FONT_SIZE } from '@constants/fontSizes';
 import { IAuth, IPatient } from '@components/general/type';
 import moment from 'moment';
-import { lastAppointmentInfo } from '@constants/mockData';
+import { lastAppointmentInfo, roles } from '@constants/mockData';
 import { Wrapper } from 'components/AppointmentsScheduler/AppointmentData/styles';
 import DoctorInitialState from '@redux/slices/DoctorSlice/types';
-import { hash } from '@constants/other';
+import { hash, local } from '@constants/other';
 
 interface IAppointmentElement {
   doctor: DoctorInitialState;
@@ -46,12 +46,12 @@ const AppointmentData = ({
   const patientGenderAge = `${patient.gender}, ${patientAge}`;
 
   const doctorRole =
-    doctor.role === 'Local'
+    doctor.role === local
       ? t('Appointments.remoteDoctor')
       : t('Appointments.localDoctor');
 
   const doctorLastName = `${t('Appointments.doctor')} ${
-    doctor.role === 'Local' ? remoteDoctor.lastName : localDoctor.lastName
+    doctor.role === local ? remoteDoctor.lastName : localDoctor.lastName
   }`;
 
   return (

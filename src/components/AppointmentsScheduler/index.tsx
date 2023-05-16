@@ -11,6 +11,7 @@ import SelectedEvent from '@components/AppointmentsScheduler/SelectedInfo/Select
 import { useAppSelector } from '@redux/hooks';
 import { Appointment, appointmentApi } from 'services/AppointmentService';
 import { IAuth, IPatient } from '@components/general/type';
+import { local } from '@constants/other';
 
 export interface IScheduleItem {
   start: Date;
@@ -99,12 +100,12 @@ function AppointmentsScheduler() {
     const patientGenderAge = `${event?.patient.gender}, ${patientAge}`;
 
     const doctorName =
-      doctorData.role === 'Local'
+      doctorData.role === local
         ? event.remoteDoctor?.lastName
         : event.localDoctor?.lastName;
 
     const doctorRole =
-      doctorData.role === 'Local'
+      doctorData.role === local
         ? t('Appointments.remoteDoctorAgenda')
         : t('Appointments.localDoctorAgenda');
 
