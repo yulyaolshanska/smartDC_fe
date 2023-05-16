@@ -217,13 +217,16 @@
     "viewCard": "View card",
     "editCard": "Edit card",
     "search": "Search",
-    "loadMore": "Load More"
+    "loadMore": "Load More",
+    "PatientWithName": "Patient with name",
+    "notFound": "not fond"
   },
   "Appointments": {
     "myAppointments": "My appointments:",
     "years": "y.o.",
     "doctor": "Dr.",
     "remoteDoctor": "Remote",
+    "localDoctor": "Local",
     "lastAppointment": "Last Appointment:"
   }
 }

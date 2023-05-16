@@ -1,9 +1,17 @@
+import { IPatient } from '@components/general/type';
+
 export interface Appointment {
-  startTime: Date;
-  endTime: Date;
+  id: string;
+  startTime: string;
+  endTime: string;
+  patient: IPatient;
+  localDoctor: IDoctor;
+  remoteDoctor: IDoctor;
   zoomLink: string;
-  localDoctor: { id: number };
-  remoteDoctor: { id: number };
-  patient: { id: number };
-  id: number;
+}
+
+export interface IDoctor {
+  id: string;
+  firstName: string;
+  lastName: string;
 }

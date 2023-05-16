@@ -17,7 +17,7 @@ interface Props {
   children: React.ReactNode;
   patientFullName: string;
   searchValue: string;
-  id: string;
+  id: number;
 }
 
 const CardWrapper: React.FC<Props> = ({

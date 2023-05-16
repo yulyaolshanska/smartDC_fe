@@ -2,8 +2,6 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import cookie from 'utils/functions/cookies';
 import { Appointment } from 'services/types/appointment.type';
 
-export type AppointmentResponse = Appointment[];
-
 export const appointmentApi = createApi({
   reducerPath: 'appointmentApi',
   tagTypes: ['Appointment'],
@@ -27,7 +25,7 @@ export const appointmentApi = createApi({
       providesTags: ['Appointment'],
     }),
     getAppointmentForWeek: builder.query<
-      AppointmentResponse,
+      Appointment[],
       { id: number; year: number; week: number }
     >({
       query: ({ id, year, week }) => ({

@@ -1,11 +1,11 @@
 import { useTranslation } from 'react-i18next';
-import { PatientsList } from './styles';
+import { NotFound, PatientsList } from './styles';
 import PatientCard from '@components/PatientItem';
 import { LoadMoreButton } from '@components/general/styles';
 import {
   useGetAllPatientsQuery,
   useGetPatientsForRemoteQuery,
-} from '../../services/PatientService';
+} from 'services/PatientService';
 import { useState } from 'react';
 import { PATIENTS_PER_PAGE, PATIENTS_PER_LOAD } from '@constants/other';
 import { useAppSelector } from '@redux/hooks';
@@ -49,15 +49,22 @@ function PatientList({ searchValue }: IProps) {
 
   return (
     <>
-      <PatientsList>
-        {filteredPatients?.slice(startIndex, endIndex).map((patient) => (
-          <PatientCard
-            key={patient.id}
-            patient={patient}
-            searchValue={searchValue}
-          />
-        ))}
-      </PatientsList>
+      {filteredPatients.length ? (
+        <PatientsList>
+          {filteredPatients?.slice(startIndex, endIndex).map((patient) => (
+            <PatientCard
+              key={patient.id}
+              patient={patient}
+              searchValue={searchValue}
+            />
+          ))}
+        </PatientsList>
+      ) : (
+        <NotFound>{`${t('Patients.PatientWithName')} "${searchValue}" ${t(
+          'Patients.notFound'
+        )}.`}</NotFound>
+      )}
+
       {filteredPatients && endIndex < filteredPatients.length && (
         <LoadMoreButton onClick={handleLoadMoreClick}>
           {t('Patients.loadMore')}

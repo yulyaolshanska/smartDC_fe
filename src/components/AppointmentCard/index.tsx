@@ -8,20 +8,24 @@ import { NORMAL_FONT_SIZE } from '@constants/fontSizes';
 import { IPatient } from '@components/general/type';
 import moment from 'moment';
 import { lastAppointmentInfo } from '@constants/mockData';
-import DoctorInitialState from '@redux/slices/DoctorSlice/types';
 import { Wrapper } from './styles';
+import { useAppSelector } from '@redux/hooks';
+import { hash, local } from '@constants/other';
+import { IDoctor } from 'services/types/appointment.type';
 
 interface IAppointmentElement {
   patient: IPatient;
-  remoteDoctor: DoctorInitialState;
-  start: Date;
-  end: Date;
+  remoteDoctor: IDoctor;
+  localDoctor: IDoctor;
+  start: string;
+  end: string;
   counter: number;
 }
 
 const AppointmentCard = ({
   patient,
   remoteDoctor,
+  localDoctor,
   start,
   end,
   counter,
@@ -29,19 +33,21 @@ const AppointmentCard = ({
   const { t } = useTranslation();
 
   const [show, setShow] = React.useState<boolean>(false);
-
+  const doctor = useAppSelector((state) => state.doctorReducer);
   const text = lastAppointmentInfo;
 
   const patientAge = `${
     new Date().getFullYear() - new Date(patient?.birthDate).getFullYear()
   } ${t('Appointments.years')}`;
-
   const patientFullName = `${patient.firstName.charAt(0)}. ${patient.lastName}`;
-
   const patientGenderAge = `${patient.gender}, ${patientAge}`;
 
-  const remoteDoctorLastName = `${t('Appointments.doctor')} ${
-    remoteDoctor.lastName
+  const doctorRole =
+    doctor.role === local
+      ? t('Appointments.remoteDoctor')
+      : t('Appointments.localDoctor');
+  const doctorLastName = `${t('Appointments.doctor')} ${
+    doctor.role === local ? remoteDoctor.lastName : localDoctor.lastName
   }`;
 
   return (
@@ -61,7 +67,7 @@ const AppointmentCard = ({
               fontWeight="100"
               fontStyle="italic"
             >
-              # {counter}
+              {hash} {counter}
             </Box>
             <Stack direction="row" gap="5px">
               <Typography fontSize={NORMAL_FONT_SIZE} fontWeight="500">
@@ -72,7 +78,7 @@ const AppointmentCard = ({
             <Stack direction="row" gap="5px">
               <Typography
                 fontSize={NORMAL_FONT_SIZE}
-                fontWeight="700"
+                fontWeight="600"
                 color={CARLO_BLUE}
                 marginRight="8px"
               >
@@ -90,14 +96,14 @@ const AppointmentCard = ({
                 fontSize={NORMAL_FONT_SIZE}
                 fontWeight="700"
               >
-                {`${t('Appointments.remoteDoctor')} -`}
+                {`${doctorRole} -`}
               </Typography>
               <Typography
                 fontSize={NORMAL_FONT_SIZE}
-                fontWeight="700"
+                fontWeight="600"
                 color={CARLO_BLUE}
               >
-                {remoteDoctorLastName}
+                {doctorLastName}
               </Typography>
             </Stack>
           </Stack>

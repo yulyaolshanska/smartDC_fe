@@ -83,3 +83,5 @@ export const CALENDAR_BOX_SHADOW = 'rgba(53, 53, 53, 0.12)';
 export const CALENDAR_HOVER_SHADOW = 'rgba(53, 53, 53, 0.16)';
 
 export const CARLO_BLUE = '#4D84E7';
+
+export const PERIWINKLE = '#cbd8ff';
