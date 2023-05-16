@@ -30,27 +30,32 @@ const EditPatientCardForm: React.FC = () => {
   const { editPatientCardSchema } = patientSchema();
   const [updatePatient] = patientApi.useUpdatePatientMutation();
 
-  const { data: patient, isLoading } = patientApi.useGetPatientByIdQuery(
+  const { data: patient, isLoading, refetch: patientRefetch} = patientApi.useGetPatientByIdQuery(
     Number(id)
   );
+
+ 
   useEffect(() => {
+    patientRefetch()
     if (patient) {
       reset({
-        firstName: patient,
-        lastName: patient,
-        phoneNumber: patient,
-        email: patient,
-        gender: patient,
-        birthDate: patient,
-        country: patient,
-        city: patient,
-        address: patient,
-        timeZone: patient,
-        overview: patient,
+        firstName: patient.firstName,
+        lastName: patient.lastName,
+        phoneNumber: patient.phoneNumber,
+        email: patient.email,
+        gender: patient.gender,
+        birthDate: patient.birthDate,
+        country: patient.country,
+        city: patient.city,
+        address: patient.address,
+        timeZone: patient.timeZone,
+        overview: patient.overview,
       });
     }
-  }, []);
+  }, [patient]);
 
+
+  
   const {
     handleSubmit,
     control,
@@ -87,7 +92,7 @@ const EditPatientCardForm: React.FC = () => {
 
   return (
     <>
-      {isLoading ? (
+      {isLoading && !patient? (
         <Spinner />
       ) : (
         <Form onSubmit={handleSubmit(onSubmit)}>
