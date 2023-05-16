@@ -22,49 +22,49 @@ const useAppointmentSecondStepHook = ({
   const [page, setPage] = useState(0);
   const [allDoctors, setAllDoctors] = useState<Doctor[]>(avalibelDoctors || []);
 
-  console.log(`allDoctors`, avalibelDoctors);
+//   console.log(`allDoctors`, avalibelDoctors);
 
-  let filtered = allDoctors;
+//   let filtered = allDoctors;
 
-  const chunkSize = 10;
-  const visibledoctorsLists = Array.from(
-    { length: Math.ceil(ListOfDoctors.length / chunkSize) },
-    (_, index) =>
-      ListOfDoctors.slice(index * chunkSize, (index + 1) * chunkSize)
-  );
+//   const chunkSize = 10;
+//   const visibledoctorsLists = Array.from(
+//     { length: Math.ceil(ListOfDoctors.length / chunkSize) },
+//     (_, index) =>
+//       ListOfDoctors.slice(index * chunkSize, (index + 1) * chunkSize)
+//   );
 
-  useEffect(() => {
-    setAllDoctors(visibledoctorsLists[0]);
-  }, []);
+//   useEffect(() => {
+//     setAllDoctors(visibledoctorsLists[0]);
+//   }, []);
 
-  function filterName(event: React.ChangeEvent<HTMLInputElement>) {
-    setFilter(event.currentTarget.value);
-  }
+//   function filterName(event: React.ChangeEvent<HTMLInputElement>) {
+//     setFilter(event.currentTarget.value);
+//   }
 
-  const filterNormilized = filter.toLowerCase().trim();
+//   const filterNormilized = filter.toLowerCase().trim();
 
-  if (allDoctors.length > 0) {
-    filtered = allDoctors.filter((doctor) =>
-      doctor.name.toLowerCase().includes(filterNormilized)
-    );
-  }
+//   if (allDoctors.length > 0) {
+//     filtered = allDoctors.filter((doctor) =>
+//       doctor.name.toLowerCase().includes(filterNormilized)
+//     );
+//   }
 
-  const handleClickLoadMore = async () => {
-    setPage((prev) => (prev += 1));
-  };
+//   const handleClickLoadMore = async () => {
+//     setPage((prev) => (prev += 1));
+//   };
 
-  useEffect(() => {
-    if (page !== 0) {
-      setAllDoctors((prev: Doctor[]) => [
-        ...prev,
-        ...visibledoctorsLists[page],
-      ]);
-    }
-  }, [page]);
+//   useEffect(() => {
+//     if (page !== 0) {
+//       setAllDoctors((prev: Doctor[]) => [
+//         ...prev,
+//         ...visibledoctorsLists[page],
+//       ]);
+//     }
+//   }, [page]);
 
   //   робота з часом і датою
-  function reverseFormatTimeRange(timeRange) {
-    const [start, end] = timeRange.split('-').map((time) => time.trim());
+  function reverseFormatTimeRange(timeRange: string) {
+    const [start, end] = timeRange.split('-').map((time: string) => time.trim());
 
     const startDate = new Date(selectedDate);
     const endDate = new Date(selectedDate);
@@ -81,7 +81,7 @@ const useAppointmentSecondStepHook = ({
     };
   }
 
-  function getHoursFromTime(time) {
+  function getHoursFromTime(time:string) {
     const [hour] = time.split(':');
     const isPM = time.includes('PM');
     let formattedHour = parseInt(hour.trim());
@@ -99,21 +99,20 @@ const useAppointmentSecondStepHook = ({
     return formattedHour;
   }
 
-  function getMinutesFromTime(time) {
+  function getMinutesFromTime(time: string) {
     const [, minutes] = time.split(':');
     return parseInt(minutes.trim());
   }
   const selectedDateTime = reverseFormatTimeRange(formattedTime);
-  console.log(`filtered`, filtered);
 
-  //   console.log(`HOOK`, selectedDateTime.start, selectedDateTime.end)
+
   return {
     page,
-    filterName,
-    handleClickLoadMore,
-    filter,
-    filtered,
-    visibledoctorsLists,
+    // filterName,
+    // handleClickLoadMore,
+    // filter,
+    // filtered,
+    // visibledoctorsLists,
     selectedDateTime,
   };
 };

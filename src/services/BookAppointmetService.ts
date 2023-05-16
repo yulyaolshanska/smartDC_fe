@@ -12,7 +12,7 @@ export interface Appointment {
 
 export const appointmentApi = createApi({
   reducerPath: 'appointmentApi',
-  tagTypes: ['Appointment'],
+  tagTypes: ['Appointment', 'Availability'],
   baseQuery: fetchBaseQuery({
     baseUrl: import.meta.env.VITE_REACT_APP_BASE_URL_SERVER,
     prepareHeaders: (headers) => {
@@ -51,7 +51,7 @@ export const appointmentApi = createApi({
         method: 'POST',
         body: data,
       }),
-      invalidatesTags: ['Appointment'],
+      invalidatesTags: ['Availability'],
     }),
   }),
 });

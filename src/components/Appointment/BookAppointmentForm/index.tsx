@@ -11,9 +11,18 @@ import FirstStepAppointment from '@components/Appointment/BookAppointmentForm/Fi
 import SecondStepAppointment from '@components/Appointment/BookAppointmentForm/SecondStep';
 import appointmentSchema from '@validation/bookAppointment.validate';
 import { appointmentApi } from '../../../services/BookAppointmetService';
-import { useAppSelector, useAppDispatch } from '@redux/hooks';
+import { useAppSelector } from '@redux/hooks';
 
 import { parse, format } from 'date-fns';
+import { Modifiers } from 'react-day-picker';
+
+interface DateObject {
+    appointmentTimeRange: string;
+    date: Date;
+    doctor: string;
+    specialization: number;
+  }
+
 
 const BookAppointmentForm: React.FC = () => {
   const { t } = useTranslation();
@@ -45,13 +54,6 @@ const BookAppointmentForm: React.FC = () => {
     formState: { errors, isValid, isDirty },
   } = useForm<AppointmentFormValues>({
     mode: 'onChange',
-    // defaultValues: {
-    //   specialization: '',
-    //     // date: selectedDate.toString(),
-    // //   date: "",
-    //   appointmentTimeRange: '',
-    //   doctor: '',
-    // },
     resolver: yupResolver(
       !step
         ? createBookAppointmentSchemaStepOne
@@ -60,7 +62,7 @@ const BookAppointmentForm: React.FC = () => {
   });
 
   function formatDate(date: Date): string {
-    const options = {
+    const options :Intl.DateTimeFormatOptions= {
       weekday: 'long',
       month: 'long',
       day: '2-digit',
@@ -82,7 +84,7 @@ const BookAppointmentForm: React.FC = () => {
     setFormattedDate(appointmentDate);
   };
 
-  const onSubmit = async (data) => {
+  const onSubmit = async (data: DateObject) => {
     // Розбиваємо рядок appointmentTimeRange на початковий і кінцевий час
     const [startTime, endTime] = data.appointmentTimeRange.split('-');
 
@@ -98,7 +100,7 @@ const BookAppointmentForm: React.FC = () => {
       new Date()
     );
 
-    console.log('start', start);
+    console.log('data', data);
     //
     const appointmentInfo = {
       localDoctorId: Number(doctorData.id),

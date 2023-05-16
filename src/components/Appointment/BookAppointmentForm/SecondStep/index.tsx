@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useMemo } from 'react';
-import { useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Controller, Control, FieldErrors } from 'react-hook-form';
 import CancelBtn from '@components/Appointment/CancelBtn';
@@ -30,7 +29,6 @@ import { ReactComponent as ArrowLeft } from '@assets/arrowLeftIcon.svg';
 import defaultDoctorPhoto from '@assets/mockDoctorPhoto.png';
 import useAppointmentSecondStepHook from 'hooks/BookAppointment/useAppointmentSecondStep.hook';
 import { appointmentApi } from '../../../../services/BookAppointmetService';
-import { specialization } from '@constants/auth';
 import { specializations } from '@constants/mockData';
 
 interface Props {
@@ -64,10 +62,10 @@ const SecondStepAppointment = ({
   const {
     page,
     // filterName,
-    handleClickLoadMore,
+    // handleClickLoadMore,
     // filter,
     // filtered,
-    visibledoctorsLists,
+    // visibledoctorsLists,
     selectedDateTime,
   } = useAppointmentSecondStepHook({
     selectedDate,
@@ -187,7 +185,7 @@ const SecondStepAppointment = ({
                         {doc.doctor.firstName}, {doc.doctor.lastName}
                       </DoctorName>
                     </DoctorItemInfo>
-                    {/* <DoctorItemInfo>{doc.doctor.specialization}</DoctorItemInfo> */}
+
                     <DoctorItemInfo>
                       {memoizedGetSpecializationLabel(
                         doc.doctor.specialization
