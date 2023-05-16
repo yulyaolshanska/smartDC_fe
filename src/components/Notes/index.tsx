@@ -31,6 +31,12 @@ const Notes = () => {
 
   const { id: patientId } = useParams();
 
+  const notDuplicatedArray = notesLocal.filter(
+    (note, index, self) => self.findIndex((n) => n.id === note.id) === index
+  );
+
+  const emptyArray = Array(4).fill(null);
+
   const filterParams = useAppSelector((state) => state.noteFilterReducer);
   const {
     data: notes,
@@ -71,17 +77,9 @@ const Notes = () => {
         setCreated={setCreated}
         created={created}
       />
-      {isLoading &&
-        Array(4)
-          .fill(null)
-          .map((_, index) => <Skeleton key={index} />)}
+      {isLoading && emptyArray.map((_, index) => <Skeleton key={index} />)}
       {notes?.count && notes?.countWithoutAnyParams
-        ? notesLocal
-            .filter(
-              (note, index, self) =>
-                self.findIndex((n) => n.id === note.id) === index
-            )
-            .map((note) => <Note key={note.id} {...note} />)
+        ? notDuplicatedArray.map((note) => <Note key={note.id} {...note} />)
         : null}
       <Stack alignItems="center">
         {notes?.count && notes?.countWithoutAnyParams ? (
