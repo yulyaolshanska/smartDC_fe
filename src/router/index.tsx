@@ -76,7 +76,7 @@ const AppRouter = () => {
               <EditPatientCard />
             </ProtectedRoute>
           }
-        />{' '}
+        />
         <Route
           path={PATH.FORGOT_PASS}
           element={
