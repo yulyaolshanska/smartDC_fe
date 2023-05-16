@@ -5,7 +5,6 @@ import { ReactComponent as PinIcon } from '@assets/patients/pin.svg';
 import { ReactComponent as GenderMaleIcon } from '@assets/patients/genderMale.svg';
 import { ReactComponent as GenderFemaleIcon } from '@assets/patients/genderFemale.svg';
 import { ReactComponent as CalengarIcon } from '@assets/patients/calendar.svg';
-import { PATH } from '@router/index';
 
 import {
   ContactInfo,
