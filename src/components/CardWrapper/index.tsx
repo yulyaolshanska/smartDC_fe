@@ -1,7 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import Highlighter from 'react-highlight-words';
-import { PATH } from '@router/index';
 
 import {
   AccordionBody,

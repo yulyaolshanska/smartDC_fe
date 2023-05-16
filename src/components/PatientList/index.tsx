@@ -1,3 +1,5 @@
+import { useState } from 'react';
+import { useAppSelector } from '@redux/hooks';
 import { useTranslation } from 'react-i18next';
 import { NotFound, PatientsList } from './styles';
 import PatientCard from '@components/PatientItem';
@@ -6,9 +8,7 @@ import {
   useGetAllPatientsQuery,
   useGetPatientsForRemoteQuery,
 } from 'services/PatientService';
-import { useState } from 'react';
-import { PATIENTS_PER_PAGE, PATIENTS_PER_LOAD } from '@constants/other';
-import { useAppSelector } from '@redux/hooks';
+import { PATIENTS_PER_PAGE, PATIENTS_PER_LOAD, local } from '@constants/other';
 import { IPatient } from '@components/general/type';
 
 interface IProps {
@@ -32,7 +32,10 @@ function PatientList({ searchValue }: IProps) {
     setDisplayedPatients(displayedPatients + PATIENTS_PER_LOAD);
   };
 
-  const getFilteredPatients = (search: string, patients?: IPatient[]) => {
+  const getFilteredPatients = (
+    search: string,
+    patients?: IPatient[]
+  ): IPatient[] => {
     if (search.trim() !== '') {
       return (patients || []).filter(
         ({ firstName, lastName }) =>
@@ -43,8 +46,7 @@ function PatientList({ searchValue }: IProps) {
     return patients || [];
   };
 
-  const patients =
-    doctorData.role === 'Local' ? allPatients : patientsForRemote;
+  const patients = doctorData.role === local ? allPatients : patientsForRemote;
   const filteredPatients = getFilteredPatients(searchValue, patients) || [];
 
   return (
