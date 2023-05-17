@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { useParams } from 'react-router';
 import { getISOWeek } from 'date-fns';
 import { useTranslation } from 'react-i18next';
@@ -26,16 +26,16 @@ function WeeklyCalendar() {
   const { t } = useTranslation();
   const { id } = useParams();
   const calendarRef = useRef<FullCalendar>(null);
-  const date = new Date();
-  const year = date.getFullYear();
-  const week = getISOWeek(date);
-  const [currentYear, setCurrentYear] = useState(year);
-  const [currentWeek, setCurrentWeek] = useState(week);
-  const [currentDay, setCurrentDay] = useState<Date>(new Date());
+  const [currentDate, setCurrentDate] = useState(() => {
+    const day = new Date();
+    const week = getISOWeek(new Date());
+    const year = new Date().getFullYear();
+    return { day, week, year };
+  });
   const { data: appointments = [] } = useGetAppointmentForWeekQuery({
     id: Number(id),
-    year: currentYear,
-    week: currentWeek,
+    year: currentDate.year,
+    week: currentDate.week,
   });
 
   const appointmentEvents: Event[] = appointments.map(
@@ -51,8 +51,13 @@ function WeeklyCalendar() {
       const handleDatesSet = (arg: any) => {
         const view = arg.view;
         const startDate = view.activeStart;
-        setCurrentYear(startDate.getFullYear());
-        setCurrentWeek(getISOWeek(startDate) + 1);
+        setCurrentDate((prev) => {
+          return {
+            ...prev,
+            week: getISOWeek(startDate) + 1,
+            year: startDate.getFullYear(),
+          };
+        });
       };
       calendarApi.on('datesSet', handleDatesSet);
       return () => {
@@ -80,19 +85,29 @@ function WeeklyCalendar() {
     height: '210px',
     dayHeaderFormat: { weekday: 'short', day: 'numeric' },
     eventClick: (info) => {
-      setCurrentDay(info.event._instance?.range.start || new Date());
+      setCurrentDate((prev) => {
+        return {
+          ...prev,
+          day: info.event._instance?.range.start || new Date(),
+        };
+      });
     },
   };
 
   const getCurrentAppointments = (
-    appointments: Appointment[]
+    appointments: Appointment[],
+    currentDay: Date
   ): Appointment[] => {
     return appointments.filter((appointment) => {
       const startTime = new Date(appointment.startTime);
       return startTime.getDay() === currentDay.getDay();
     });
   };
-  const currentAppointments = getCurrentAppointments(appointments);
+
+  const currentAppointments = useMemo(
+    () => getCurrentAppointments(appointments, currentDate.day),
+    [appointments, currentDate.day]
+  );
 
   return (
     <>

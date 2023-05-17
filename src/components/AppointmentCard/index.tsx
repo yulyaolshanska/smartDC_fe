@@ -12,6 +12,7 @@ import { Wrapper } from './styles';
 import { useAppSelector } from '@redux/hooks';
 import { hash, local } from '@constants/other';
 import { IDoctor } from 'services/types/appointment.type';
+import { timeFormat } from '@constants/format';
 
 interface IAppointmentElement {
   patient: IPatient;
@@ -71,8 +72,8 @@ const AppointmentCard = ({
             </Box>
             <Stack direction="row" gap="5px">
               <Typography fontSize={NORMAL_FONT_SIZE} fontWeight="500">
-                {moment(start).format('hh:mm A ')}-{' '}
-                {moment(end).format('hh:mm A')}
+                {moment(start).format(timeFormat)}-{' '}
+                {moment(end).format(timeFormat)}
               </Typography>
             </Stack>
             <Stack direction="row" gap="5px">
