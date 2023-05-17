@@ -9,6 +9,7 @@ import {
   LIGHT_BLUE,
   NAVY_BLUE,
 } from '@constants/colors';
+
 export const Form = styled.form`
   margin: 35px;
   text-align: center;
