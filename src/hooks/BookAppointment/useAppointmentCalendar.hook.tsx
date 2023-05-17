@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { DayClickEventHandler } from 'react-day-picker';
 import { addMonths } from 'date-fns';
 import { appointmentApi } from 'services/BookAppointmetService';
-
+import { BLUE, HINT } from '@constants/colors';
 interface Props {
   onDayClick: (day: Date) => void;
   specialization: number;
@@ -38,7 +38,8 @@ const useAppointmentCalendarHook = ({
   const [month, setMonth] = useState<Date>(nextMonth);
   const [showCalendar, setShowCalendar] = useState<boolean>(false);
   const [freeSlots, setFreeSlots] = useState<FreeSlotProps[]>([]);
-  const currentStyle = { backgroundColor: '#4579EE' };
+  const currentStyle = { backgroundColor: `${BLUE}` };
+  const bookedStyle = { color: `${HINT}` };
   const { data } = appointmentApi.useGetSpecializationByIdQuery(specialization);
 
   useEffect(() => {
@@ -172,10 +173,7 @@ const useAppointmentCalendarHook = ({
     }
   }, [selectedDay, data, specialization]);
 
-  // Todo: styles for days without empty slots
-  const bookedStyle = { color: '#808080' };
-
-  const handleDayClick: DayClickEventHandler = (day, modifiers) => {
+   const handleDayClick: DayClickEventHandler = (day, modifiers) => {
     onDayClick(day, modifiers);
     setSelectedDate(day);
   };
