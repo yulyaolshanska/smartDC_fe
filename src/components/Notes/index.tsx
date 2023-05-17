@@ -23,6 +23,8 @@ export interface INotes {
   doctor: { firstName: string; lastName: string };
 }
 
+const emptyArray = Array(4).fill(null);
+
 const Notes = () => {
   const [addNew, setAddNew] = React.useState<boolean>(false);
   const [notesLocal, setNotesLocal] = React.useState<INotes[] | []>([]);
@@ -34,8 +36,6 @@ const Notes = () => {
   const notDuplicatedArray = notesLocal.filter(
     (note, index, self) => self.findIndex((n) => n.id === note.id) === index
   );
-
-  const emptyArray = Array(4).fill(null);
 
   const filterParams = useAppSelector((state) => state.noteFilterReducer);
   const {
