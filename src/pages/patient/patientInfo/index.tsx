@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { LinkContainer } from '@components/Patient/styles';
 import PatientCardInfo from '@components/Patient/PatientInfo';
 import WeeklyCalendar from '@components/WeeklyCalendar';
+import Notes from '@components/Notes';
 
 const PatientInfo = () => {
   const { t } = useTranslation();
@@ -19,6 +20,7 @@ const PatientInfo = () => {
       </LinkContainer>
       <PatientCardInfo />
       <WeeklyCalendar />
+      <Notes />
     </>
   );
 };

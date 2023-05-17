@@ -9,30 +9,6 @@ import {
   AuthSignUpDto,
 } from 'services/types/auth.type';
 
-// const baseQuery = fetchBaseQuery({
-//   baseUrl: import.meta.env.VITE_REACT_APP_BASE_URL_SERVER,
-//   prepareHeaders: (headers) => {
-//     const token = cookie.get('accessToken');
-//     if (token) {
-//       headers.set('authorization', `Bearer ${token}`);
-//     }
-//     headers.set('Content-Type', 'application/json');
-//     return headers;
-//   },
-// });
-// const baseQueryWithReauth = async (args, api, extraOptions) => {
-//   console.log('params');
-
-//   console.log(args, api, extraOptions);
-//   const result = await baseQuery(args, api, extraOptions);
-//   console.log(result);
-//   if (cookie.get('accessToken')) {
-//     // Save the item in session storage
-//     sessionStorage.setItem('userStatus', 'loggedIn');
-//   }
-//   return result;
-// };
-
 export const authApi = createApi({
   reducerPath: 'authApi',
   tagTypes: ['Auth'],
