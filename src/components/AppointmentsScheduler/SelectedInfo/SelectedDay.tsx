@@ -9,6 +9,7 @@ import {
 } from '@components/AppointmentsScheduler/SelectedInfo/styles';
 import AppointmentData from '@components/AppointmentsScheduler/AppointmentData';
 import DoctorInitialState from '@redux/slices/DoctorSlice/types';
+import { fullDateFormat } from '@constants/format';
 
 interface ISelectedDateProps {
   selectedDate: Date | undefined;
@@ -26,7 +27,7 @@ function SelectedDay({
   return (
     <>
       <SelectedDayInfo>
-        {moment(selectedDate).format('dddd, D MMMM YYYY')}
+        {moment(selectedDate).format(fullDateFormat)}
       </SelectedDayInfo>
       {appointments.length > 0 ? (
         appointments.map((appointment, index) => (

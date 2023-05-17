@@ -7,6 +7,7 @@ import {
 } from '@components/AppointmentsScheduler/SelectedInfo/styles';
 import AppointmentData from '@components/AppointmentsScheduler/AppointmentData';
 import DoctorInitialState from '@redux/slices/DoctorSlice/types';
+import { fullDateFormat } from '@constants/format';
 
 interface ISelectedEventProps {
   selectedEvent: IScheduleItem;
@@ -17,7 +18,7 @@ function SelectedEvent({ selectedEvent, doctor }: ISelectedEventProps) {
   return (
     <>
       <SelectedDayInfo>
-        {moment(selectedEvent.start).format('dddd, D MMMM YYYY')}
+        {moment(selectedEvent.start).format(fullDateFormat)}
       </SelectedDayInfo>
       <SelectedInfo>
         <AppointmentData

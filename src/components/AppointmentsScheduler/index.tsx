@@ -12,6 +12,7 @@ import { useAppSelector } from '@redux/hooks';
 import { Appointment, appointmentApi } from 'services/AppointmentService';
 import { IAuth, IPatient } from '@components/general/type';
 import { local } from '@constants/other';
+import { timeFormat } from '@constants/format';
 
 export interface IScheduleItem {
   start: Date;
@@ -81,8 +82,8 @@ function AppointmentsScheduler() {
   function eventComponent({ event }: { event: IScheduleItem }) {
     return (
       <div>
-        {moment(event.start).format('hh:mm A ')}-{' '}
-        {moment(event.end).format('hh:mm A')}
+        {moment(event.start).format(timeFormat)} -{' '}
+        {moment(event.end).format(timeFormat)}
       </div>
     );
   }

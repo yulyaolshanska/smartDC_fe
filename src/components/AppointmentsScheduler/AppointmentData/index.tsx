@@ -11,6 +11,7 @@ import { lastAppointmentInfo, roles } from '@constants/mockData';
 import { Wrapper } from 'components/AppointmentsScheduler/AppointmentData/styles';
 import DoctorInitialState from '@redux/slices/DoctorSlice/types';
 import { hash, local } from '@constants/other';
+import { timeFormat } from '@constants/format';
 
 interface IAppointmentElement {
   doctor: DoctorInitialState;
@@ -75,8 +76,8 @@ const AppointmentData = ({
             </Box>
             <Stack direction="row" gap="5px">
               <Typography fontSize={MEDIUM_FONT_SIZE} fontWeight="500">
-                {moment(start).format('hh:mm A ')}-{' '}
-                {moment(end).format('hh:mm A')}
+                {moment(start).format(timeFormat)} -{' '}
+                {moment(end).format(timeFormat)}
               </Typography>
             </Stack>
             <Link
