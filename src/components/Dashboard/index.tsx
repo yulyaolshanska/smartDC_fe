@@ -31,7 +31,7 @@ const DashboardComponent = () => {
   const { data: doctor } = authApi.useGetMeQuery({});
 
   const {
-    data: appointments,
+    data: appointmentsArray,
     refetch: refetchAppointments,
     isLoading: isLoadingAppointments,
   } = appointmentsApi.useGetTodayAppointmentQuery({
@@ -42,10 +42,12 @@ const DashboardComponent = () => {
   const getItterableAppointments = (): AppointmentElement[] => {
     let copyAppointments;
 
-    if (appointments) {
+    if (appointmentsArray) {
+      const appointments = appointmentsArray.appointments;
+
       copyAppointments = [...appointments];
     }
-    if (!appointments) return [];
+    if (!appointmentsArray) return [];
 
     return copyAppointments as AppointmentElement[];
   };
@@ -86,7 +88,7 @@ const DashboardComponent = () => {
     {}
   );
 
-  if (!appointments) {
+  if (!appointmentsArray) {
     return (
       <div>
         <Skeleton />
@@ -123,7 +125,7 @@ const DashboardComponent = () => {
               fontStyle="italic"
               color={ACTIVE}
             >
-              20
+              {appointmentsArray.count}
             </Typography>
           </Stack>
         </Stack>
@@ -150,9 +152,13 @@ const DashboardComponent = () => {
                     {timeRange}
                   </Typography>
                 </Stack>
-                {appointments?.map((appointment) => {
+                {appointments?.map((appointment, index) => {
                   return (
-                    <AppointmentElement key={appointment.id} {...appointment} />
+                    <AppointmentElement
+                      key={appointment.id}
+                      {...appointment}
+                      index={index}
+                    />
                   );
                 })}
               </Stack>

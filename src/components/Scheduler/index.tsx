@@ -44,8 +44,6 @@ function Scheduler() {
   const [deleteAvailability] =
     availabilityApi.useDeleteAvailabilityByIdMutation();
 
-  console.log(111);
-
   const {
     data: availabilityData,
     refetch: availabilityRefetch,

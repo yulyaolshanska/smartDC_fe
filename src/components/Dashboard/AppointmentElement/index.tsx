@@ -9,12 +9,39 @@ import { ReactComponent as CameraIcon } from '@assets/Camera.svg';
 import { ACTIVE, ANOTHER_FUCKING_BLUE, BORDER } from '@constants/colors';
 import { VERY_SMALL_FONT_SIZE } from '@constants/fontSizes';
 
-const AppointmentElement = () => {
+interface AppointmentElementProps {
+  index: number;
+  remoteDoctor: Record<string, any>;
+  patient: Record<string, any>;
+}
+
+const AppointmentElement = ({
+  index,
+  remoteDoctor,
+  patient,
+}: AppointmentElementProps) => {
   const [show, setShow] = React.useState<boolean>(false);
-  const { data: doctor } = authApi.useGetMeQuery({});
 
   const { t } = useTranslation();
-  const note = 'something that';
+
+  const fullText = patient.notes[0].note;
+  const cuttedText = patient.notes[0].note.slice(0, 100).trim();
+
+  const getPatientAge = () => {
+    const birthdate = new Date(patient.birthDate);
+    const today = new Date();
+    const diffTime = Number(today) - Number(birthdate);
+    return Math.floor(diffTime / (1000 * 60 * 60 * 24 * 365));
+  };
+
+  const getPatientInfo = React.useCallback(() => {
+    {
+      return `${patient.gender}, ${patient.lastName} ${getPatientAge()} y.o`;
+    }
+  }, []);
+
+  const patientName = `${patient.firstName.charAt(0)}. ${patient.lastName}`;
+
   return (
     <Box marginBottom="8px">
       <Wrapper>
@@ -31,7 +58,7 @@ const AppointmentElement = () => {
               fontWeight="100"
               fontStyle="italic"
             >
-              # 1
+              # {index + 1}
             </Box>
             <Stack direction="row" gap="5px">
               <Typography
@@ -39,10 +66,10 @@ const AppointmentElement = () => {
                 fontWeight="700"
                 color={ANOTHER_FUCKING_BLUE}
               >
-                Patient Name
+                {patientName}
               </Typography>
               <Typography fontSize={VERY_SMALL_FONT_SIZE} fontWeight="500">
-                Patient Info
+                {getPatientInfo()}
               </Typography>
             </Stack>
             <Stack direction="row" alignItems="center">
@@ -60,7 +87,7 @@ const AppointmentElement = () => {
                 fontWeight="700"
                 color={ANOTHER_FUCKING_BLUE}
               >
-                Dr. Wizards
+                Dr. {remoteDoctor.lastName}
               </Typography>
             </Stack>
           </Stack>
@@ -73,19 +100,13 @@ const AppointmentElement = () => {
             >
               Last Apponitment:
             </Typography>
-            {note.length > 100 && !show ? (
-              <Typography display="inline">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                Labore, illum quod qui est illo laudantium atque, veritatis
-                recusandae ab voluptatibus, repudiandae ipsa delectus quas
-                aspernatur repellendus sapiente. Reprehenderit, quod
-                necessitatibus.
-              </Typography>
+            {fullText.length > 100 && !show ? (
+              <Typography display="inline">{fullText}</Typography>
             ) : (
-              <p>smaller</p>
+              <p>{cuttedText}</p>
             )}
           </Box>
-          {note.length > 100 && (
+          {fullText.length > 100 && (
             <Box color={ACTIVE} onClick={() => setShow(!show)}>
               {t('Show')} {show ? 'less' : 'more'}
             </Box>
@@ -95,5 +116,4 @@ const AppointmentElement = () => {
     </Box>
   );
 };
-
 export default AppointmentElement;
