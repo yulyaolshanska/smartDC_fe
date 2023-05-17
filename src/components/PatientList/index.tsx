@@ -63,11 +63,11 @@ function PatientList({ searchValue }: IProps) {
         </PatientsList>
       ) : (
         <NotFound>
-          {searchValue !== ' '
+          {searchValue !== ''
             ? `${t('Patients.PatientWithName')} "${searchValue}" ${t(
                 'Patients.notFound'
               )}.`
-            : `${t('Patients.PatientWithName')}  ${t('Patients.notFound')}.`}
+            : `${t('Patients.patients')}  ${t('Patients.notFound')}.`}
         </NotFound>
       )}
 
