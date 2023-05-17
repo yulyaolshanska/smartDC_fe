@@ -23,6 +23,7 @@ import {
   StyledTextArea,
   CreateNoteContainer,
 } from './styles';
+import { useParams } from 'react-router';
 
 interface CreateNoteResponse {
   error: string;
@@ -45,6 +46,8 @@ const CreateNote = ({
   const [value, setValue] = React.useState<string>('');
   const [files, setFiles] = React.useState({});
   const render = useConditionalRender(addNew);
+
+  const { id: patientId } = useParams();
 
   const filterParams = useAppSelector((state) => state.noteFilterReducer);
 
@@ -69,7 +72,7 @@ const CreateNote = ({
   const createNote = async (): Promise<void> => {
     await createPatientNote({
       doctorId: doctor.id,
-      patientId: 1,
+      patientId: patientId,
       note: value,
       file: files ? files : null,
     }).then(async (res) => {

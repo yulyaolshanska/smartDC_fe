@@ -1,5 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import cookie from 'utils/functions/cookies';
+import { IPatient } from '@components/general/type';
 import { PatientDto } from 'services/types/patient.type';
 
 export const patientApi = createApi({
@@ -19,23 +20,36 @@ export const patientApi = createApi({
   endpoints: (builder) => ({
     createPatient: builder.mutation({
       query: (data: PatientDto) => ({
-        url: `/patient`,
+        url: '/patient',
         method: 'POST',
         body: data,
       }),
+      invalidatesTags: ['Patient'],
+    }),
+    getAllPatients: builder.query<IPatient[], string>({
+      query: () => '/patient',
+      providesTags: ['Patient'],
     }),
     getPatientById: builder.query({
       query: (id: number | string) => ({
         url: `/patient/${id}`,
         method: 'GET',
-        updatePatient: builder.mutation({
-          query: (data: PatientDto) => ({
-            url: `/patient/${data.id}`,
-            method: 'PATCH',
-            body: data,
-          }),
-        }),
       }),
+    }),
+    updatePatient: builder.mutation({
+      query: (data: PatientDto) => ({
+        url: `/patient/${data.id}`,
+        method: 'PATCH',
+        body: data,
+      }),
+      invalidatesTags: ['Patient'],
+    }),
+    getPatientsForRemote: builder.query<IPatient[], number>({
+      query: (id) => `appointment/doctor/${id}/patients`,
+      providesTags: ['Patient'],
     }),
   }),
 });
+
+export const { useGetAllPatientsQuery, useGetPatientsForRemoteQuery } =
+  patientApi;

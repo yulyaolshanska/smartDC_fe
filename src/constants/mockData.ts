@@ -80,6 +80,7 @@ export const defaultAppointments = [
     end: new Date('2023-05-12T19:00:00'),
   },
 ];
+
 export const ListOfDoctors = [
   {
     id: '1',

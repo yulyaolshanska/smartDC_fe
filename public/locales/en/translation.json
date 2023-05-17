@@ -158,7 +158,9 @@
     "selectedDate": "Selected date:",
     "deleteTime": "Delete time:",
     "saveSchedule": "Save schedule",
-    "selectTimezone": "Time Zone:"
+    "selectTimezone": "Time Zone:",
+    "successfullySubmited": "Your schedule has been successfully updated!",
+    "calendar": "Calendar"
   },
   "BookAppointment": {
     "selectDoctorSpecialization": "Select doctor specialization",
@@ -205,6 +207,19 @@
     "notFound": "Page not found ",
     "doesntExist": "This page you are looking for doesn’t exist or an other occurred.",
     "404": "404"
+  },
+  "PatientCard": {
+    "overview:": "Overview:",
+    "lastAppointment": "Last Appointment:",
+    "viewProfile": "View Profile",
+    "years": "years"
+  },
+  "Patients": {
+    "createPatient": "Create Patient",
+    "viewCard": "View card",
+    "editCard": "Edit card",
+    "search": "Search",
+    "loadMore": "Load More"
   },
   "Appointments": {
     "myAppointments": "My appointments:"

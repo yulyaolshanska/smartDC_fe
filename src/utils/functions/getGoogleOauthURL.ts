@@ -1,9 +1,8 @@
 function getGoogleOauthURL(): string {
-  const rootUrl = 'https://accounts.google.com/o/oauth2/v2/auth';
+  const rootUrl = import.meta.env.VITE_REACT_APP_GOOGLE_ROOT_URL;
   const options = {
-    redirect_uri: 'http://localhost:5000/auth/google/redirect',
-    client_id:
-      '922767752665-vnleaigg45gddmdb90rkbvq6r4ce9c6k.apps.googleusercontent.com',
+    redirect_uri: import.meta.env.VITE_REACT_APP_GOOGLE_REDIRECT_URI,
+    client_id: import.meta.env.VITE_REACT_APP_GOOGLE_CLIENT_ID,
     access_type: 'offline',
     response_type: 'code',
     prompt: 'consent',

@@ -19,6 +19,7 @@ import DoctorScheduler from '@pages/doctorScheduler';
 import ProtectedRoute from './protected-route';
 import PatientInfo from '@pages/patient/patientInfo';
 import Dashboard from '@pages/dashboard';
+import Patients from '@pages/patients';
 import cookie from 'utils/functions/cookies';
 import AppointmentsDoctorScheduler from '@pages/doctorScheduler/appointmentsScheduler';
 
@@ -34,12 +35,13 @@ export const PATH = {
   HELP: '/help',
   DASHBOARD: '/dashboard',
   CREATE_PATIENT_CARD: '/create-patient-card',
-  EDIT_PATIENT_CARD: '/edit-patient-card',
+  EDIT_PATIENT_CARD: '/edit-patient-card/:id',
   SCHEDULER: '/scheduler',
-  APPOINTMENT: '/book-appointment',
+  BOOK_APPOINTMENT: '/book-appointment',
   AVAILABILITY: '/availability',
+  PATIENTS_LIST: '/patients',
   PATIENT_CARD_INFO: '/patient/:id',
-  PATIENT: '/patients',
+  APPOINTMENTS: '/appointment',
 };
 
 const AppRouter = () => {
@@ -75,7 +77,7 @@ const AppRouter = () => {
               <EditPatientCard />
             </ProtectedRoute>
           }
-        />{' '}
+        />
         <Route
           path={PATH.FORGOT_PASS}
           element={
@@ -141,7 +143,15 @@ const AppRouter = () => {
           }
         />
         <Route
-          path={PATH.APPOINTMENT}
+          path={PATH.PATIENTS_LIST}
+          element={
+            <ProtectedRoute allowedRoles={['Remote', 'Local']}>
+              <Patients />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path={PATH.BOOK_APPOINTMENT}
           element={
             <ProtectedRoute allowedRoles={['Remote', 'Local']}>
               <CreateAppointment />

@@ -1,0 +1,47 @@
+.fc .fc-toolbar-title {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #000000;
+}
+
+.fc-direction-ltr .fc-button-group > .fc-button {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  color: #4d84e7;
+  background-color: transparent;
+  /* border-color: #4d84e7;
+   */
+  border: none;
+}
+
+.fc .fc-col-header-cell-cushion {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #585858;
+}
+
+.fc-theme-standard td,
+.fc-theme-standard th {
+  border: 1.5px solid #d8dbe8;
+}
+
+.fc .fc-button-primary {
+  color: #4d84e7;
+  background-color: transparent;
+  border-color: #4d84e7;
+}
+
+.fc .fc-button:disabled {
+  cursor: none;
+  background-color: #aaabac;
+  border-color: #85909a;
+}
+
+.fc .fc-toolbar.fc-header-toolbar {
+  border: 1.5px solid #d8dbe8;
+  margin-bottom: 0px;
+  padding: 10px;
+}

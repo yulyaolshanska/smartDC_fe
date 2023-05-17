@@ -10,5 +10,5 @@ export interface PatientDto {
   address: string;
   timeZone: string;
   overview: string;
-  id: string;
+  id?:number;
 }

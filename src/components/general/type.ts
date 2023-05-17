@@ -1,5 +1,5 @@
 export interface IAuth {
-  id?: number;
+  id: number;
   firstName: string;
   lastName: string;
   email: string;
@@ -21,6 +21,7 @@ export interface IAuth {
 }
 
 export interface IPatient {
+  id: number;
   firstName: string;
   lastName: string;
   email: string;
@@ -47,3 +48,6 @@ export type AppointmentFormValues = {
 
 export type FormValues = IPatient & IAuth & AppointmentFormValues;
 
+export interface ISearch {
+  search: string;
+}
