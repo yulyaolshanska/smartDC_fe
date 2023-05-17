@@ -27,7 +27,7 @@ const LoadMoreButton = ({ notesLocal }: LoadMoreButtonProps) => {
   return (
     <LoadButton
       onClick={fetchMore}
-      disabled={notes?.count === notesLocalLength}
+      disabled={notes?.count === notesLocalLength || notes?.count === 0}
     >
       Load More
     </LoadButton>
