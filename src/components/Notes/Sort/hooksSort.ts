@@ -21,18 +21,18 @@ export const useHandleOutsideClick: UseHandleOutsideClick = (
   sortOrderRef,
   sortOrderStackRef,
   setToggleSortBy,
-  setToggleSortOrder
+  setToggleSortOrder,
 ) => {
   const handleOutsideClick = (event: MouseEvent) => {
     if (
-      (sortByRef.current &&
-        !sortByRef.current.contains(event.target as Node) &&
-        sortByStackRef.current &&
-        !sortByStackRef.current.contains(event.target as Node)) ||
-      (sortOrderRef.current &&
-        !sortOrderRef.current.contains(event.target as Node) &&
-        sortOrderStackRef.current &&
-        !sortOrderStackRef.current.contains(event.target as Node))
+      (sortByRef.current
+        && !sortByRef.current.contains(event.target as Node)
+        && sortByStackRef.current
+        && !sortByStackRef.current.contains(event.target as Node))
+      || (sortOrderRef.current
+        && !sortOrderRef.current.contains(event.target as Node)
+        && sortOrderStackRef.current
+        && !sortOrderStackRef.current.contains(event.target as Node))
     ) {
       setToggleSortBy(false);
       setToggleSortOrder(false);
