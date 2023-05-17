@@ -51,7 +51,7 @@ function PatientList({ searchValue }: IProps) {
 
   return (
     <>
-      {filteredPatients.length ? (
+      {filteredPatients.length > 0 ? (
         <PatientsList>
           {filteredPatients?.slice(startIndex, endIndex).map((patient) => (
             <PatientCard
@@ -62,9 +62,13 @@ function PatientList({ searchValue }: IProps) {
           ))}
         </PatientsList>
       ) : (
-        <NotFound>{`${t('Patients.PatientWithName')} "${searchValue}" ${t(
-          'Patients.notFound'
-        )}.`}</NotFound>
+        <NotFound>
+          {searchValue !== ' '
+            ? `${t('Patients.PatientWithName')} "${searchValue}" ${t(
+                'Patients.notFound'
+              )}.`
+            : `${t('Patients.PatientWithName')}  ${t('Patients.notFound')}.`}
+        </NotFound>
       )}
 
       {filteredPatients && endIndex < filteredPatients.length && (
