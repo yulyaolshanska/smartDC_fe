@@ -224,9 +224,13 @@
   "Appointments": {
     "myAppointments": "My appointments:",
     "years": "y.o.",
-    "doctor": "Dr.",
     "remoteDoctor": "Remote",
     "localDoctor": "Local",
-    "lastAppointment": "Last Appointment:"
+    "localDoctorAgenda": "Local doctor",
+    "remoteDoctorAgenda": "Remote doctor",
+    "doctor": "Dr.",
+    "patient": "Patient",
+    "lastAppointment": "Last Appointment",
+    "noAppointmentsYet": "The patient has no appointments yet"
   }
 }

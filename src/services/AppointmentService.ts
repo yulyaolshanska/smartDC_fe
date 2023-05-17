@@ -1,6 +1,17 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import cookie from 'utils/functions/cookies';
 import { Appointment } from 'services/types/appointment.type';
+import { IAuth, IPatient } from '@components/general/type';
+
+export interface IAppointment {
+  id: string;
+  startTime: string;
+  endTime: string;
+  patient: IPatient;
+  localDoctor: IAuth;
+  remoteDoctor: IAuth;
+  zoomLink: string;
+}
 
 export const appointmentApi = createApi({
   reducerPath: 'appointmentApi',
@@ -33,6 +44,15 @@ export const appointmentApi = createApi({
         method: 'GET',
       }),
       providesTags: ['Appointment'],
+    }),
+    getAppointmentsForDoctor: builder.query<IAppointment[], number>({
+      query: (doctorId) => ({
+        url: `/appointment/doctor/${doctorId}`,
+        method: 'GET',
+      }),
+      providesTags: (result, error, doctorId) => [
+        { type: 'Appointment', doctorId },
+      ],
     }),
   }),
 });

@@ -21,9 +21,9 @@ import { navigationReducer } from 'redux/slices/NavigationSlice';
 import { doctorReducer } from 'redux/slices/DoctorSlice';
 import { resetPasswordReducer } from '@redux/slices/auth/resetPassword';
 import { createPatientReducer } from '@redux/slices/patient/createPatient';
-import { noteFilterReducer } from './slices/NoteFilterSlice';
+import { noteFilterReducer } from 'redux/slices/NoteFilterSlice';
 import { patientApi } from 'services/PatientService';
-import { availabilityApi } from '../services/AvailabilityService';
+import { availabilityApi } from 'services/AvailabilityService';
 import { appointmentApi } from 'services/AppointmentService';
 
 const rootReducer = combineReducers({
@@ -56,6 +56,7 @@ const persistConfig = {
     'noteFilterReducer',
     'authApi',
     'noteApi',
+    'appointmentApi',
   ],
 };
 
