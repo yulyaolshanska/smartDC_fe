@@ -1,5 +1,6 @@
 import React from 'react';
 import { LoadButton } from './styles';
+import { useTranslation } from 'react-i18next';
 import { noteApi } from 'services/NoteService';
 import { useAppDispatch, useAppSelector } from '@redux/hooks';
 import { noteFilterActions } from '@redux/slices/NoteFilterSlice';
@@ -14,9 +15,11 @@ interface LoadMoreButtonProps {
 }
 
 const LoadMoreButton = ({ setFetchAll, disabled }: LoadMoreButtonProps) => {
+  const { t } = useTranslation();
+
   return (
     <LoadButton onClick={() => setFetchAll(true)} disabled={disabled}>
-      Load More
+      {t('Dashboard.LoadMore')}
     </LoadButton>
   );
 };

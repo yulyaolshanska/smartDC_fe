@@ -3,6 +3,7 @@ import React from 'react';
 import { Box, Stack } from '@mui/system';
 import { authApi } from 'services/AuthService';
 import { Typography } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 
 import { ReactComponent as PersonIcon } from '@assets/person-icon.svg';
 import { ReactComponent as TimeIcon } from '@assets/Time.svg';
@@ -29,6 +30,8 @@ interface AppointmentElement {
 const DashboardComponent = () => {
   const [fetchAll, setFetchAll] = React.useState<boolean>(false);
   const { data: doctor } = authApi.useGetMeQuery({});
+
+  const { t } = useTranslation();
 
   const {
     data: appointmentsArray,
@@ -108,14 +111,14 @@ const DashboardComponent = () => {
           fontWeight="700"
           fontSize={A_LITTLE_BIT_LARGER_THAN_LARGE_FONT_SIZE}
         >
-          Welcome, Dr. {doctor.lastName}
+          {t('Dashboard.WelcomeDr')} {doctor.lastName}
         </Typography>
       </Stack>
-      <Box marginBottom="20px">Notification</Box>
+      <Box marginBottom="20px"> {t('Dashboard.Notification')}</Box>
       <Stack alignSelf="start">
         <Stack direction="row" gap="20px" marginBottom="10px">
           <Typography fontSize={LARGE_FONT_SIZE} fontWeight="700">
-            Latest Appointments
+            {t('Dashboard.LatestAppointments')}
           </Typography>
           <Stack direction="row" alignItems="center" gap="5px">
             <PersonIcon />

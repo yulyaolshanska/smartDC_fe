@@ -80,14 +80,14 @@ const AppointmentElement = ({
                 fontSize={VERY_SMALL_FONT_SIZE}
                 fontWeight="700"
               >
-                Remote -
+                {t('Dashboard.Remote')} -
               </Typography>
               <Typography
                 fontSize={VERY_SMALL_FONT_SIZE}
                 fontWeight="700"
                 color={ANOTHER_FUCKING_BLUE}
               >
-                Dr. {remoteDoctor.lastName}
+                {t('Dashboard.Dr.')} {remoteDoctor.lastName}
               </Typography>
             </Stack>
           </Stack>
@@ -98,7 +98,7 @@ const AppointmentElement = ({
               fontWeight="100"
               marginRight="5px"
             >
-              Last Apponitment:
+              {t('Dashboard.LastAppointment')}
             </Typography>
             {fullText.length > 100 && !show ? (
               <Typography display="inline">{fullText}</Typography>

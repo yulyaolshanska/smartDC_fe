@@ -223,5 +223,15 @@
   },
   "Appointments": {
     "myAppointments": "My appointments:"
+  },
+
+  "Dahboard": {
+    "WelcomeDr": "Welcome, Dr.",
+    "Notification": "Notification",
+    "LatestAppointments": " Latest Appointments",
+    "LoadMore": "Load More",
+    "Remote": "Remote",
+    "Dr.": "Dr.",
+    "LastAppointment": "LastAppointment"
   }
 }
