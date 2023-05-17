@@ -1,15 +1,29 @@
 import { useState, useEffect } from 'react';
 import { DayClickEventHandler } from 'react-day-picker';
 import { addMonths } from 'date-fns';
-import { appointmentApi } from '../../services/BookAppointmetService';
-type Props = {
+import { appointmentApi } from 'services/BookAppointmetService';
+
+interface Props {
   onDayClick: (day: Date) => void;
   specialization: number;
   setAvalibleTimeRange: React.Dispatch<React.SetStateAction<any>>;
   selectedDay: Date | null;
   setSelectedDay: React.Dispatch<React.SetStateAction<Date | null>>;
   setSelectedDate: React.Dispatch<React.SetStateAction<Date | null>>;
-};
+}
+
+interface FreeSlotProps {
+  doctor: {
+    id: number;
+    role: string;
+    specialization: number;
+  };
+  start: string;
+  end: string;
+  id: number;
+  title: string;
+  uuid: string;
+}
 
 const useAppointmentCalendarHook = ({
   onDayClick,
@@ -17,19 +31,15 @@ const useAppointmentCalendarHook = ({
   setAvalibleTimeRange,
   selectedDay,
   setSelectedDay,
-  setSelectedDate
+  setSelectedDate,
 }: Props) => {
   const today = new Date();
-    // const [selectedDay, setSelectedDay] = useState<Date | null>(null); //спробую підняти в форму
   const nextMonth = addMonths(new Date(), 0);
-  const [month, setMonth] = useState(nextMonth);
+  const [month, setMonth] = useState<Date>(nextMonth);
+  const [showCalendar, setShowCalendar] = useState<boolean>(false);
+  const [freeSlots, setFreeSlots] = useState<FreeSlotProps[]>([]);
   const currentStyle = { backgroundColor: '#4579EE' };
-
-  const [showCalendar, setShowCalendar] = useState(false);
-
   const { data } = appointmentApi.useGetSpecializationByIdQuery(specialization);
-
-  const [freeSlots, setFreeSlots] = useState([]);
 
   useEffect(() => {
     if (specialization !== undefined && data) {
@@ -43,10 +53,8 @@ const useAppointmentCalendarHook = ({
     }
   }, [freeSlots]);
 
-  //   console.log(`freeslots from back`, freeSlots);
-
-  const TwoMothPeriod = [];
-  // створити обєкт на 3 мясяці починаючи з поточного
+  // work with calendar
+  const ThreeMothPeriod = [];
   for (let i = 0; i < 3; i++) {
     const year = today.getFullYear();
     const month = today.getMonth() + i;
@@ -55,12 +63,12 @@ const useAppointmentCalendarHook = ({
     for (let day = 1; day <= daysInMonth; day++) {
       const date = new Date(year, month, day);
       date.setHours(0, 0, 0, 0);
-      TwoMothPeriod.push(date);
+      ThreeMothPeriod.push(date);
     }
   }
 
   // Set all time to 0 and receive the number equivalent by getTime() function
-  const formattedTwoMothPeriod = TwoMothPeriod.map((date) => {
+  const formattedThreeMothPeriod = ThreeMothPeriod.map((date) => {
     date.setHours(0, 0, 0, 0);
     return date.getTime();
   });
@@ -71,11 +79,11 @@ const useAppointmentCalendarHook = ({
     return date.getTime();
   });
 
-  //   створити масив всіх днів, які заброньовані
-  const allBookedDates = formattedTwoMothPeriod.filter(
+  const allBookedDates = formattedThreeMothPeriod.filter(
     (date) => !formattedFreeSlots.includes(date)
   );
 
+  //array with not avalible dates
   const formattedBookedDates = allBookedDates.map((date) => {
     const d = new Date(date);
     const year = d.getFullYear();
@@ -92,12 +100,8 @@ const useAppointmentCalendarHook = ({
     ...formattedBookedDates,
     { before: new Date(), modifiers: { disabled: isDisabled } },
   ];
-  // Todo :  hardcode, just an example till connection with backend
 
-  //   фільтрую вільні слоти по даті
   const selectedDate = new Date(selectedDay);
-
-  console.log(selectedDate)
 
   const filteredSlots = freeSlots.filter((slot) => {
     const slotDate = new Date(slot.start);
@@ -108,16 +112,13 @@ const useAppointmentCalendarHook = ({
     );
   });
 
-  // Сортуємо слоти за часом
+  // Sort all slots by time and leave only unique slots
   filteredSlots.sort((a, b) => {
     const timeA = new Date(a.start).getTime();
     const timeB = new Date(b.start).getTime();
     return timeA - timeB;
   });
 
-  console.log(`filteredSlots`, filteredSlots);
-
-  // Фільтруємо та залишаємо унікальні слоти
   const uniqueSlots = [];
   const uniqueKeys = new Set();
 
@@ -142,15 +143,12 @@ const useAppointmentCalendarHook = ({
     }
   }
 
-  console.log(`uniqueSlots`, uniqueSlots);
-  // трансофрмую в обєкт
   const transformedSlots = Object.entries(uniqueSlots).map(([key, value]) => ({
     doctor: value.doctor.id,
     start: value.start,
     end: value.end,
   }));
 
-  // перетворити слоти на формат для селект інпуту
   function formatTimeRange(startTime, endTime) {
     const start = new Date(startTime).toLocaleTimeString([], {
       hour: '2-digit',
@@ -174,13 +172,12 @@ const useAppointmentCalendarHook = ({
     }
   }, [selectedDay, data, specialization]);
 
-  // Todo: styles for days without empty slots. not sure if we need them at this moment, maybe in next sprint will be deleted or moved to styles
+  // Todo: styles for days without empty slots
   const bookedStyle = { color: '#808080' };
 
   const handleDayClick: DayClickEventHandler = (day, modifiers) => {
     onDayClick(day, modifiers);
-    setSelectedDate(day)
-
+    setSelectedDate(day);
   };
 
   const toggleState = (): void => {
@@ -193,8 +190,6 @@ const useAppointmentCalendarHook = ({
     bookedDays,
     bookedStyle,
     selectedDay,
-    // setSelectedDay,
-
     month,
     setMonth,
     currentStyle,

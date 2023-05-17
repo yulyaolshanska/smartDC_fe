@@ -4,10 +4,10 @@ import { Controller, Control, FieldErrors } from 'react-hook-form';
 import SpecializationInput from '@components/Appointment/SpecializationSelect';
 import Calendar from '@components/Appointment/Calendar';
 import AppointmentTime from '@components/Appointment/TimeSelect';
-import { date } from '@constants/other';
 import { InputProps } from '@components/Patient/Inputs/type';
 import { ReactComponent as ArrowRight } from '@assets/arrowRight.svg';
 import CancelBtn from '@components/Appointment/CancelBtn';
+import { date } from 'constants/other';
 import {
   StepWrapper,
   Text,
@@ -21,14 +21,13 @@ import {
   YouSelected,
   SelectedDayTime,
   TextInfo,
+  HiddenInput,
 } from '@components/Appointment/BookAppointmentForm/FirstStep/styles';
-import { Date } from '@components/Notes/Note/styles';
-import { use } from 'i18next';
-import { useForm } from 'react-hook-form';
-import Input from '@components/Input';
 
-// import { Conroller, useForm } from 'react-hook-form'
-import DatePicker from 'react-datepicker';
+interface AvalibleTimeRange {
+  label: string;
+  value: number;
+}
 
 interface Props {
   formattedDate: string;
@@ -37,24 +36,21 @@ interface Props {
   formattedTime: string;
   setFormattedTime: React.Dispatch<React.SetStateAction<string>>;
   isValid: boolean;
-  isDirty: boolean;
   control: Control;
   errors: FieldErrors;
   setStep: React.Dispatch<React.SetStateAction<boolean>>;
   setSpecialization: React.Dispatch<React.SetStateAction<number>>;
   specialization: number;
-  setAvalibleTimeRange: React.Dispatch<React.SetStateAction<any>>;
-  avalibleTimeRange: any;
-
+  setAvalibleTimeRange: React.Dispatch<
+    React.SetStateAction<AvalibleTimeRange[]>
+  >;
+  avalibleTimeRange: AvalibleTimeRange[];
   setSelectedDate: React.Dispatch<React.SetStateAction<Date | null>>;
-
   setSelectedDay: React.Dispatch<React.SetStateAction<Date | null>>;
   selectedDay: Date | null;
-
-  //   onChange: any;
   register: (value: Date | null) => void;
-  setValue: any;
-  selectedDate: any;
+  setValue: React.Dispatch<React.SetStateAction<Date | null>>;
+  selectedDate: Date;
 }
 
 const FirstStepAppointment = ({
@@ -64,7 +60,6 @@ const FirstStepAppointment = ({
   formattedTime,
   setFormattedTime,
   isValid,
-  isDirty,
   control,
   errors,
   setStep,
@@ -72,22 +67,17 @@ const FirstStepAppointment = ({
   specialization,
   setAvalibleTimeRange,
   avalibleTimeRange,
-
   setSelectedDate,
   selectedDate,
-
   selectedDay,
   setSelectedDay,
   register,
   setValue,
-}: //   onChange
-
-InputProps & Props) => {
+}: InputProps & Props) => {
   const { t } = useTranslation();
 
-  console.log(`FIRST`, selectedDate);
   useEffect(() => {
-    setValue('date', selectedDate); // this will result a type error
+    setValue(`${date}`, selectedDate);
   }, [selectedDate]);
 
   return (
@@ -102,30 +92,15 @@ InputProps & Props) => {
         errors={errors}
         setSpecialization={setSpecialization}
       />
-
       <Controller
         control={control}
         name="date"
         render={() => (
-          <input
-            {...register(`date`)}
-            value={selectedDate}
-           
-          />
+          <HiddenInput {...register(`${date}`)} value={selectedDate} />
         )}
       />
-
       <CalendarWrapper>
         <Calendar
-          // selected={field.value}
-          //   onChange={(date: any) => {
-          //     console.log(`Date`, date);
-
-          //     setSelectedDate(date);
-          //     // setValue(`date`, date);
-          //     return field.onChange(date);
-          //   }}
-          // value={field.value}
           onDayClick={handleCalendarDayClick}
           formattedDate={formattedDate}
           setFormattedDate={setFormattedDate}
@@ -135,49 +110,7 @@ InputProps & Props) => {
           selectedDay={selectedDay}
           setSelectedDay={setSelectedDay}
         />
-        {/* <Controller
-                    control={control}
-                    name="date1"
-                    render={({ field }) => (
-                        <Calendar
-                            selected={field.value}
-                            //   onChange={(date: any) => {
-                            //     console.log(`Date`, date);
-
-                            //     setSelectedDate(date);
-                            //     // setValue(`date`, date);
-                            //     return field.onChange(date);
-                            //   }}
-                            value={field.value}
-                            onDayClick={handleCalendarDayClick}
-                            formattedDate={formattedDate}
-                            setFormattedDate={setFormattedDate}
-                            specialization={specialization}
-                            setAvalibleTimeRange={setAvalibleTimeRange}
-                            setSelectedDate={setSelectedDate}
-                            selectedDay={selectedDay}
-                            setSelectedDay={setSelectedDay}
-                        />
-                    )}
-                /> */}
       </CalendarWrapper>
-
-      {/* <Controller
-        control={control}
-        name="date-input"
-        render={({ field }) => (
-          <DatePicker
-            placeholderText="Select date"
-            onChange={(date) => field.onChange(date)}
-            selected={field.value}
-            // selected={date}
-            onChange={handleDateChange}
-            showTimeSelect
-            dateFormat="Pp"
-          />
-        )}
-      /> */}
-
       <AppointmentTime
         control={control}
         errors={errors}
@@ -185,7 +118,6 @@ InputProps & Props) => {
         setFormattedTime={setFormattedTime}
         avalibleTimeRange={avalibleTimeRange}
       />
-
       <FormFooter>
         <FormInfo>
           <YouSelected>{t('BookAppointment.youSelected')}</YouSelected>

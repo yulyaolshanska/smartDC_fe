@@ -1,70 +1,25 @@
-import React, { useState, useEffect } from 'react';
-import { ListOfDoctors } from '@constants/mockData';
+import React, { useState, useMemo } from 'react';
+import { appointmentApi } from 'services/BookAppointmetService';
+import { specializations } from '@constants/mockData';
 
-interface Doctor {
-  id: string;
-  img: string;
-  name: string;
-  speciality: string;
-  located: string;
-  rating: string;
+interface Prop {
   selectedDate: Date;
   formattedTime: string;
-  avalibelDoctors: any;
 }
 
 const useAppointmentSecondStepHook = ({
   selectedDate,
   formattedTime,
-  avalibelDoctors,
-}) => {
-  const [filter, setFilter] = useState(``);
-  const [page, setPage] = useState(0);
-  const [allDoctors, setAllDoctors] = useState<Doctor[]>(avalibelDoctors || []);
+}: Prop) => {
+  const [limit, setLimit] = useState<number>(10);
+  const [selectedDoctor, setSelectedDoctor] = useState<number | null>(null);
+  const [filter, setFilter] = useState<string>(``);
 
-//   console.log(`allDoctors`, avalibelDoctors);
-
-//   let filtered = allDoctors;
-
-//   const chunkSize = 10;
-//   const visibledoctorsLists = Array.from(
-//     { length: Math.ceil(ListOfDoctors.length / chunkSize) },
-//     (_, index) =>
-//       ListOfDoctors.slice(index * chunkSize, (index + 1) * chunkSize)
-//   );
-
-//   useEffect(() => {
-//     setAllDoctors(visibledoctorsLists[0]);
-//   }, []);
-
-//   function filterName(event: React.ChangeEvent<HTMLInputElement>) {
-//     setFilter(event.currentTarget.value);
-//   }
-
-//   const filterNormilized = filter.toLowerCase().trim();
-
-//   if (allDoctors.length > 0) {
-//     filtered = allDoctors.filter((doctor) =>
-//       doctor.name.toLowerCase().includes(filterNormilized)
-//     );
-//   }
-
-//   const handleClickLoadMore = async () => {
-//     setPage((prev) => (prev += 1));
-//   };
-
-//   useEffect(() => {
-//     if (page !== 0) {
-//       setAllDoctors((prev: Doctor[]) => [
-//         ...prev,
-//         ...visibledoctorsLists[page],
-//       ]);
-//     }
-//   }, [page]);
-
-  //   робота з часом і датою
+  // reverse time range for sending to backend
   function reverseFormatTimeRange(timeRange: string) {
-    const [start, end] = timeRange.split('-').map((time: string) => time.trim());
+    const [start, end] = timeRange
+      .split('-')
+      .map((time: string) => time.trim());
 
     const startDate = new Date(selectedDate);
     const endDate = new Date(selectedDate);
@@ -81,7 +36,7 @@ const useAppointmentSecondStepHook = ({
     };
   }
 
-  function getHoursFromTime(time:string) {
+  function getHoursFromTime(time: string) {
     const [hour] = time.split(':');
     const isPM = time.includes('PM');
     let formattedHour = parseInt(hour.trim());
@@ -92,10 +47,8 @@ const useAppointmentSecondStepHook = ({
       formattedHour = isPM ? formattedHour + 12 : formattedHour;
     }
 
-    // Отримання локального часового поясу
     const localTimezoneOffset = new Date().getTimezoneOffset() / 60;
     formattedHour -= localTimezoneOffset;
-
     return formattedHour;
   }
 
@@ -105,15 +58,61 @@ const useAppointmentSecondStepHook = ({
   }
   const selectedDateTime = reverseFormatTimeRange(formattedTime);
 
+  //   send info to backend
+  const { data: doctors, isLoading } =
+    appointmentApi.useGetAllAvalibleDoctorsQuery({
+      start: selectedDateTime.start,
+      end: selectedDateTime.end,
+      specialization: 0,
+      limit: limit,
+    });
+
+  //work with filter input
+  let filtered = doctors;
+
+  function filterName(event: React.ChangeEvent<HTMLInputElement>) {
+    setFilter(event.currentTarget.value);
+  }
+
+  if (!isLoading && doctors?.length > 0) {
+    const filterNormilized = filter.toLowerCase().trim();
+
+    filtered = doctors?.filter(
+      (doc) =>
+        doc?.doctor.firstName.toLowerCase().includes(filterNormilized) ||
+        doc?.doctor.lastName.toLowerCase().includes(filterNormilized)
+    );
+  }
+
+  function getSpecializationLabel(value) {
+    const spec = specializations.find((spec) => spec.value === value);
+    return spec ? spec.label : '';
+  }
+  const memoizedGetSpecializationLabel = useMemo(
+    () => getSpecializationLabel,
+    []
+  );
+
+  function handleLoadMore() {
+    setLimit((prev) => prev + 10);
+  }
+
+  const handleDoctorChange = (value: string, onChange) => {
+    setSelectedDoctor(value);
+    onChange(value);
+  };
 
   return {
-    page,
-    // filterName,
-    // handleClickLoadMore,
-    // filter,
-    // filtered,
-    // visibledoctorsLists,
-    selectedDateTime,
+    filtered,
+    isLoading,
+    filter,
+    filterName,
+    limit,
+    memoizedGetSpecializationLabel,
+    handleLoadMore,
+    handleDoctorChange,
+    selectedDoctor,
+    setSelectedDoctor,
   };
 };
 

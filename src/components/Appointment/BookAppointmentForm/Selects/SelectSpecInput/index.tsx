@@ -7,7 +7,7 @@ import { FieldName } from '@types';
 
 export type Props = {
   options: Option[];
-  setSpecialization: React.Dispatch<React.SetStateAction<any>>;
+  setSpecialization: React.Dispatch<React.SetStateAction<number>>;
 } & TextFieldProps;
 
 export function SelectSpecInput({

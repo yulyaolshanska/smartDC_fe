@@ -41,9 +41,7 @@ export function SelectTimeInput({
                 placeholder={placeholder}
               />
             )}
-            // value={options?.find((option) => option.label === label) || null}
             value={value || null}
-
           />
         )}
       />

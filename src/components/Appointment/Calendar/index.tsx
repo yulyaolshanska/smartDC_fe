@@ -39,9 +39,6 @@ const DayPickerCalendar: React.FC<Props> = ({
     toggleState,
     bookedDays,
     bookedStyle,
-    // selectedDay,
-    // setSelectedDay,
-
     month,
     setMonth,
     currentStyle,
@@ -52,11 +49,9 @@ const DayPickerCalendar: React.FC<Props> = ({
     setAvalibleTimeRange,
     selectedDay,
     setSelectedDay,
-
     setSelectedDate,
   });
 
-  console.log(`selectedDay`, selectedDay);
   return (
     <CalendarWrapper>
       <SelectText onClick={toggleState}>

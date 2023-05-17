@@ -2,7 +2,6 @@ import { useTranslation } from 'react-i18next';
 import { Container } from '@mui/material';
 import { appointmentTimeRange } from '@constants/other';
 import { InputProps } from '@components/Patient/Inputs/type';
-import SelectInput from '@components/Select';
 import SelectTimeInput from '@components/Appointment/BookAppointmentForm/Selects/SelectTimeInput';
 
 interface Prop {
