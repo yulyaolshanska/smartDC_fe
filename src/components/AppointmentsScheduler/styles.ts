@@ -3,6 +3,7 @@ import {
   BLACK,
   CORNFLOWER_BLUE,
   NAVY_BLUE,
+  VERY_LIGHT_GREY,
   WHITE,
   ZAMBEZI,
 } from '@constants/colors';
@@ -84,7 +85,8 @@ export const CalendarContainer = styled.div`
     font-size: ${MEDIUM_FONT_SIZE};
   }
 
-  .rbc-agenda-view {
-    overflow: unset;
+  .rbc-agenda-event-cell:hover {
+    background-color: ${VERY_LIGHT_GREY};
+    cursor: pointer;
   }
 `;
