@@ -1,11 +1,11 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 import {
   BLACK, CORNFLOWER_BLUE,
   GRAY_SHADOW,
   NAVY_BLUE,
   PINK_SWAN,
   WHISPER,
-  WHITE
+  WHITE,
 } from '@constants/colors';
 import { SMALL_FONT_SIZE } from '@constants/fontSizes';
 import FONT_ROBOTO from '@constants/fonts';
@@ -77,17 +77,17 @@ export const ModalContainer = styled.div`
   font-size: ${SMALL_FONT_SIZE};
   font-weight: bold;
   transition: all 0.2s ease-in-out;
-`
+`;
 
 export const ModalContent = styled.div`
   height: fit-content;
   width: fit-content;
-`
+`;
 
 export const ModalButtonsWrapper = styled.div`
   display: flex;
   width: max-width;
-`
+`;
 
 export const ModalOverlay = styled.div`
   position: fixed;
@@ -98,7 +98,7 @@ export const ModalOverlay = styled.div`
   height: 100%;
   overflow: auto;
   background-color: ${GRAY_SHADOW};
-`
+`;
 
 export const Title = styled.h2`
   color: ${BLACK}; 

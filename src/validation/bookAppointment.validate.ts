@@ -22,9 +22,8 @@ export default function appointmentSchema() {
     doctor: yup.string().required(tWithDefault('Error.doctor')),
   });
 
-
   return {
     createBookAppointmentSchemaStepOne,
-    createBookAppointmentSchemaStepTwo
+    createBookAppointmentSchemaStepTwo,
   };
 }
