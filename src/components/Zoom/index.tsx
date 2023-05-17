@@ -13,6 +13,7 @@ import { VideoContainer } from './styles';
 import './index.scss';
 import StartCallButton from './StartCallButton';
 import { ToastContainer, toast } from 'react-toastify';
+import useSpeakerDeviceChange from './utils/useSpeakerDeviceChange';
 
 const dispatch = store.dispatch;
 let meetingArgs = { ...devConfig };
@@ -31,7 +32,6 @@ if (!meetingArgs.signature && meetingArgs.tpc) {
 }
 
 const client = ZoomVideo.createClient();
-// dispatch(zoomActions.setClient(client));
 
 const ZoomComponent = () => {
   const [loading, setLoading] = React.useState(false);
@@ -41,8 +41,6 @@ const ZoomComponent = () => {
 
   const participantCanvasRef = React.useRef(null);
   const participantShareScreenRef = React.useRef(null);
-
-  React.useEffect(() => {}, []);
 
   const init = async () => {
     client.init('US-EN', 'CDN');
@@ -106,8 +104,13 @@ const ZoomComponent = () => {
       useActiveShareChange(client, mediaScreen, participantShareScreenRef);
     };
 
+    const handleSpeakerDeviceChange = () => {
+      useSpeakerDeviceChange(client, mediaScreen);
+    };
+    console.log('-----------Event listeners connection--------------');
     handlePeerVideoStateChange();
     handlePeerShareScreen();
+    // handleSpeakerDeviceChange();
   }, [mediaScreen, participantCanvasRef, participantShareScreenRef]);
 
   return (

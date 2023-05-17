@@ -65,7 +65,8 @@ const Video = ({
   }, [mediaScreen, videoStarted, client, isSab]);
 
   const startAudioButton = useCallback(async () => {
-    if (!audioStarted) {
+    if (audioStarted) {
+      console.log('-----------MutingAudio--------------');
       if (isMuted) {
         await mediaScreen.unmuteAudio();
         setIsMuted(false);
@@ -74,6 +75,7 @@ const Video = ({
         setIsMuted(true);
       }
     } else {
+      console.log('-----------Connecting the audio--------------');
       await mediaScreen.startAudio();
       setAudioStarted(true);
     }
@@ -143,6 +145,10 @@ const Video = ({
                 client={client}
                 setStatus={setStatus}
                 startVideoButton={startVideoButton}
+                startAudioButton={startAudioButton}
+                audioStarted={audioStarted}
+                isMuted={isMuted}
+                videoStarted={videoStarted}
               />
             ) : null}
           </Box>
@@ -170,6 +176,8 @@ const Video = ({
               setIsSelfFullScreen={setIsSelfFullScreen}
               client={client}
               setStatus={setStatus}
+              startVideoButton={startVideoButton}
+              startAudioButton={startAudioButton}
             />
           ) : null}
         </Box>

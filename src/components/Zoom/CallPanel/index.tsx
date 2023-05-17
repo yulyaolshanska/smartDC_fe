@@ -1,11 +1,14 @@
 import { Stack } from '@mui/material';
 import React from 'react';
 import ZoomVideo from '@zoom/videosdk';
+import VideocamOffIcon from '@mui/icons-material/VideocamOff';
+import MicOffIcon from '@mui/icons-material/MicOff';
+import SpeakerIcon from '@mui/icons-material/Speaker';
+import CloseFullscreenIcon from '@mui/icons-material/CloseFullscreen';
 import { ReactComponent as ChatInCallIcon } from '@assets/chatInCall.svg';
 import { ReactComponent as EndCallIcon } from '@assets/endCall.svg';
 import { ReactComponent as MicrophoneIcon } from '@assets/microphone.svg';
 import { ReactComponent as CameraIcon } from '@assets/cameraCall.svg';
-import { ReactComponent as FullScreenIcon } from '@assets/fullScreenCall.svg';
 
 import {
   CallPanelWrapper,
@@ -20,6 +23,10 @@ const CallPanel = ({
   setIsSelfFullScreen,
   setStatus,
   startVideoButton,
+  startAudioButton,
+  audioStarted,
+  isMuted,
+  videoStarted,
 }) => {
   const leaveSession = async () => {
     try {
@@ -38,8 +45,8 @@ const CallPanel = ({
       isSelfFullScreen={isSelfFullScreen}
       isParticipantFullScreen={isParticipantFullScreen}
     >
-      <PanelButtonStyle>
-        <CameraIcon />
+      <PanelButtonStyle onClick={startVideoButton}>
+        {videoStarted ? <VideocamOffIcon /> : <CameraIcon />}
       </PanelButtonStyle>
       <PanelButtonStyle>
         <ChatInCallIcon />
@@ -47,11 +54,15 @@ const CallPanel = ({
       <EndCallButtonStyle onClick={leaveSession}>
         <EndCallIcon />
       </EndCallButtonStyle>
-      <PanelButtonStyle>
-        <FullScreenIcon />
+      <PanelButtonStyle
+        onClick={() => setIsSelfFullScreen(!setIsSelfFullScreen)}
+      >
+        <CloseFullscreenIcon />
       </PanelButtonStyle>
-      <PanelButtonStyle>
-        <MicrophoneIcon />
+      <PanelButtonStyle onClick={startAudioButton}>
+        {!audioStarted ? <SpeakerIcon /> : null}
+        {audioStarted && !isMuted ? <MicOffIcon /> : null}
+        {audioStarted && isMuted ? <MicrophoneIcon /> : null}
       </PanelButtonStyle>
     </CallPanelWrapper>
   );
