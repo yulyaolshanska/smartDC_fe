@@ -7,7 +7,6 @@ import { ACTIVE, BORDER, CARLO_BLUE, NAVY_BLUE } from '@constants/colors';
 import { MEDIUM_FONT_SIZE } from '@constants/fontSizes';
 import { IAuth, IPatient } from '@components/general/type';
 import moment from 'moment';
-import { lastAppointmentInfo, roles } from '@constants/mockData';
 import { Wrapper } from 'components/AppointmentsScheduler/AppointmentData/styles';
 import DoctorInitialState from '@redux/slices/DoctorSlice/types';
 import { hash, local } from '@constants/other';
@@ -36,8 +35,6 @@ const AppointmentData = ({
 
   const [show, setShow] = React.useState<boolean>(false);
 
-  const text = lastAppointmentInfo;
-
   const patientAge = `${
     new Date().getFullYear() - new Date(patient?.birthDate).getFullYear()
   } ${t('Appointments.years')}`;
@@ -54,6 +51,17 @@ const AppointmentData = ({
   const doctorLastName = `${t('Appointments.doctor')} ${
     doctor.role === local ? remoteDoctor.lastName : localDoctor.lastName
   }`;
+
+  const showLastAppointment = () => {
+    const lastAppointment = patient.notes[0]?.note;
+
+    if (lastAppointment) {
+      return show
+        ? lastAppointment
+        : `${lastAppointment?.substring(0, 250)}...`;
+    }
+    return t('Appointments.noAppointmentsYet');
+  };
 
   return (
     <Box marginBottom="8px">
@@ -128,7 +136,7 @@ const AppointmentData = ({
             >
               {`${t('Appointments.lastAppointment')}:`}
             </Typography>
-            {show ? text : `${text.substring(0, 250)}...`}
+            {showLastAppointment()}
           </Box>
           <Box
             style={{ cursor: 'pointer' }}

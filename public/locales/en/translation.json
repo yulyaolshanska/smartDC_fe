@@ -228,6 +228,7 @@
     "remoteDoctorAgenda": "Remote doctor",
     "doctor": "Dr.",
     "patient": "Patient",
-    "lastAppointment": "Last Appointment"
+    "lastAppointment": "Last Appointment",
+    "noAppointmentsYet": "The patient has no appointments yet"
   }
 }
