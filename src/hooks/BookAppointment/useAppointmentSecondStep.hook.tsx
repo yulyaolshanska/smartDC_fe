@@ -111,7 +111,6 @@ const useAppointmentSecondStepHook = ({
     setSelectedDoctor(null);
     setStep(false);
   };
-  console.log(`selectedDoctor`, selectedDoctor);
 
   return {
     filtered,
