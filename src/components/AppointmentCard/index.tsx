@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Stack, Box } from '@mui/system';
 import { Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
@@ -37,19 +37,39 @@ const AppointmentCard = ({
   const doctor = useAppSelector((state) => state.doctorReducer);
   const text = lastAppointmentInfo;
 
-  const patientAge = `${
-    new Date().getFullYear() - new Date(patient?.birthDate).getFullYear()
-  } ${t('Appointments.years')}`;
-  const patientFullName = `${patient.firstName.charAt(0)}. ${patient.lastName}`;
-  const patientGenderAge = `${patient.gender}, ${patientAge}`;
+  const getPatientAge = useMemo(
+    () =>
+      `${
+        new Date().getFullYear() - new Date(patient?.birthDate).getFullYear()
+      } ${t('Appointments.years')}`,
+    [patient]
+  );
 
-  const doctorRole =
-    doctor.role === local
-      ? t('Appointments.remoteDoctor')
-      : t('Appointments.localDoctor');
-  const doctorLastName = `${t('Appointments.doctor')} ${
-    doctor.role === local ? remoteDoctor.lastName : localDoctor.lastName
-  }`;
+  const getPatientFullName = useMemo(
+    () => `${patient.firstName.charAt(0)}. ${patient.lastName}`,
+    [patient]
+  );
+
+  const getPatientGenderAge = useMemo(
+    () => `${patient.gender}, ${getPatientAge}`,
+    [patient]
+  );
+
+  const getDoctorRole = useMemo(
+    () =>
+      doctor.role === local
+        ? t('Appointments.remoteDoctor')
+        : t('Appointments.localDoctor'),
+    [doctor]
+  );
+
+  const getDoctorLastName = useMemo(
+    () =>
+      `${t('Appointments.doctor')} ${
+        doctor.role === local ? remoteDoctor.lastName : localDoctor.lastName
+      }`,
+    [doctor]
+  );
 
   return (
     <Box marginBottom="8px">
@@ -83,10 +103,10 @@ const AppointmentCard = ({
                 color={CARLO_BLUE}
                 marginRight="8px"
               >
-                {patientFullName}
+                {getPatientFullName}
               </Typography>
               <Typography fontSize={NORMAL_FONT_SIZE} fontWeight="500">
-                {patientGenderAge}
+                {getPatientGenderAge}
               </Typography>
             </Stack>
             <Stack direction="row" alignItems="center">
@@ -97,14 +117,14 @@ const AppointmentCard = ({
                 fontSize={NORMAL_FONT_SIZE}
                 fontWeight="700"
               >
-                {`${doctorRole} -`}
+                {`${getDoctorRole} -`}
               </Typography>
               <Typography
                 fontSize={NORMAL_FONT_SIZE}
                 fontWeight="600"
                 color={CARLO_BLUE}
               >
-                {doctorLastName}
+                {getDoctorLastName}
               </Typography>
             </Stack>
           </Stack>
