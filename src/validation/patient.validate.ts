@@ -46,7 +46,7 @@ export default function patientSchema() {
     phoneNumber: yup
       .string()
       .required(tWithDefault('Error.phoneNumberRequired'))
-      .min(6, tWithDefault('Error.tooShort')),
+      .min(10, tWithDefault('Error.tooShort')),
   });
 
   return {
