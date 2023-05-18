@@ -5,11 +5,13 @@ import { specializations } from '@constants/mockData';
 interface Prop {
   selectedDate: Date;
   formattedTime: string;
+  setStep: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const useAppointmentSecondStepHook = ({
   selectedDate,
   formattedTime,
+  setStep,
 }: Prop) => {
   const [limit, setLimit] = useState<number>(10);
   const [selectedDoctor, setSelectedDoctor] = useState<number | null>(null);
@@ -84,7 +86,7 @@ const useAppointmentSecondStepHook = ({
     );
   }
 
-  function getSpecializationLabel(value) {
+  function getSpecializationLabel(value: number) {
     const spec = specializations.find((spec) => spec.value === value);
     return spec ? spec.label : '';
   }
@@ -97,10 +99,19 @@ const useAppointmentSecondStepHook = ({
     setLimit((prev) => prev + 10);
   }
 
-  const handleDoctorChange = (value: string, onChange) => {
+  const handleDoctorChange = (
+    value: string,
+    onChange: (value: string) => void
+  ) => {
     setSelectedDoctor(value);
     onChange(value);
   };
+
+  const onPreviuosStepClick = () => {
+    setSelectedDoctor(null);
+    setStep(false);
+  };
+  console.log(`selectedDoctor`, selectedDoctor);
 
   return {
     filtered,
@@ -112,7 +123,8 @@ const useAppointmentSecondStepHook = ({
     handleLoadMore,
     handleDoctorChange,
     selectedDoctor,
-    setSelectedDoctor,
+    onPreviuosStepClick,
+    setStep,
   };
 };
 

@@ -6,6 +6,7 @@ import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
 import { useAppSelector } from '@redux/hooks';
 import { appointmentApi } from 'services/BookAppointmetService';
+import { zoomLink } from '@constants/other';
 
 interface DateObject {
   appointmentTimeRange: string;
@@ -50,6 +51,8 @@ const useAppointmentBookFormHook = () => {
   const onSubmit = async (data: DateObject) => {
     const [startTime, endTime] = data.appointmentTimeRange.split('-');
 
+
+    console.log(`data`,data)
     const start = parse(
       `${format(data.date, 'yyyy-MM-dd')} ${startTime.trim()}`,
       'yyyy-MM-dd hh:mm aa',
@@ -65,7 +68,7 @@ const useAppointmentBookFormHook = () => {
       localDoctorId: Number(doctorData.id),
       remoteDoctorId: Number(data?.doctor),
       patientId: Number(patientId),
-      zoomLink: 'https://zoom.us/meetingid',
+      zoomLink: zoomLink,
       endTime: end.toISOString(),
       startTime: start.toISOString(),
     };

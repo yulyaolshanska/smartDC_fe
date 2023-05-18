@@ -65,10 +65,11 @@ const SecondStepAppointment = ({
     handleLoadMore,
     handleDoctorChange,
     selectedDoctor,
-    setSelectedDoctor,
+    onPreviuosStepClick,
   } = useAppointmentSecondStepHook({
     selectedDate,
     formattedTime,
+    setStep,
   });
 
   return (
@@ -124,7 +125,7 @@ const SecondStepAppointment = ({
                             value={doc.doctor.id}
                             checked={selectedDoctor == doc.doctor.id}
                             onChange={(e) =>
-                              handleDoctorChange(e.target.value, onChange)
+                              handleDoctorChange(e.target.value, onChange!)
                             }
                             errors={errors}
                           />
@@ -175,13 +176,7 @@ const SecondStepAppointment = ({
           )}
           <FormFooter>
             <BntWrapper>
-              <StepBtn
-                onClick={() => {
-                  setSelectedDoctor(null);
-                  setStep(false);
-                }}
-                disabled={!isValid}
-              >
+              <StepBtn onClick={onPreviuosStepClick} disabled={!isValid}>
                 <ArrowLeft /> {t('BookAppointment.prevStep')}
               </StepBtn>
               <StepBtn

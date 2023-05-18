@@ -21,4 +21,12 @@ export const date = 'date';
 export const search = 'search';
 
 export const doctor = 'doctor';
+
 export const local = 'Local';
+
+export const zoomLink = 'https://zoom.us/meetingid';
+
+export const TIME_OPTIONS = {
+    hour: '2-digit',
+    minute: '2-digit',
+  };

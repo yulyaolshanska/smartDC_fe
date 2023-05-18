@@ -1,5 +1,4 @@
-import { useState } from 'react';
-
+import { useMemo } from 'react';
 import { useParams } from 'react-router-dom';
 import { ReactComponent as CallIcon } from '@assets/patients/call.svg';
 import { ReactComponent as EmailIcon } from '@assets/patients/email.svg';
@@ -26,11 +25,19 @@ function PatientCardInfo() {
     Number(id)
   );
 
-  const patientFullName = `${patient?.firstName} ${patient?.lastName}`;
-  const patientCityCountry = `${patient?.city}, ${patient?.country}`;
-  const patientAge = `${
-    new Date().getFullYear() - new Date(patient?.birthDate).getFullYear()
-  } ${years}`;
+  const patientFullName = useMemo(() => {
+    return `${patient?.firstName} ${patient?.lastName}`;
+  }, [patient]);
+
+  const patientCityCountry = useMemo(() => {
+    return `${patient?.city}, ${patient?.country}`;
+  }, [patient]);
+
+  const patientAge = useMemo(() => {
+    return `${
+      new Date().getFullYear() - new Date(patient?.birthDate).getFullYear()
+    } ${years}`;
+  }, [patient, years]);
 
   return (
     <>

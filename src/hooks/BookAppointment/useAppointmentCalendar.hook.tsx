@@ -1,8 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { DayClickEventHandler } from 'react-day-picker';
 import { addMonths } from 'date-fns';
 import { appointmentApi } from 'services/BookAppointmetService';
 import { BLUE, HINT } from '@constants/colors';
+import { TIME_OPTIONS } from '@constants/other';
 interface Props {
   onDayClick: (day: Date) => void;
   specialization: number;
@@ -54,22 +55,26 @@ const useAppointmentCalendarHook = ({
     }
   }, [freeSlots]);
 
-  // work with calendar
-  const ThreeMothPeriod = [];
-  for (let i = 0; i < 3; i++) {
-    const year = today.getFullYear();
-    const month = today.getMonth() + i;
-    const daysInMonth = new Date(year, month + 1, 0).getDate();
+  const ThreeMonthPeriod = useMemo(() => {
+    const result = [];
 
-    for (let day = 1; day <= daysInMonth; day++) {
-      const date = new Date(year, month, day);
-      date.setHours(0, 0, 0, 0);
-      ThreeMothPeriod.push(date);
+    for (let i = 0; i < 3; i++) {
+      const year = today.getFullYear();
+      const month = today.getMonth() + i;
+      const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+      for (let day = 1; day <= daysInMonth; day++) {
+        const date = new Date(year, month, day);
+        date.setHours(0, 0, 0, 0);
+        result.push(date);
+      }
     }
-  }
+
+    return result;
+  }, []);
 
   // Set all time to 0 and receive the number equivalent by getTime() function
-  const formattedThreeMothPeriod = ThreeMothPeriod.map((date) => {
+  const formattedThreeMonthPeriod = ThreeMonthPeriod.map((date) => {
     date.setHours(0, 0, 0, 0);
     return date.getTime();
   });
@@ -80,7 +85,7 @@ const useAppointmentCalendarHook = ({
     return date.getTime();
   });
 
-  const allBookedDates = formattedThreeMothPeriod.filter(
+  const allBookedDates = formattedThreeMonthPeriod.filter(
     (date) => !formattedFreeSlots.includes(date)
   );
 
@@ -104,45 +109,52 @@ const useAppointmentCalendarHook = ({
 
   const selectedDate = new Date(selectedDay);
 
-  const filteredSlots = freeSlots.filter((slot) => {
-    const slotDate = new Date(slot.start);
-    return (
-      slotDate.getDate() === selectedDate.getDate() &&
-      slotDate.getMonth() === selectedDate.getMonth() &&
-      slotDate.getFullYear() === selectedDate.getFullYear()
-    );
-  });
+  const filteredSlots = useMemo(() => {
+    return freeSlots.filter((slot) => {
+      const slotDate = new Date(slot.start);
+      return (
+        slotDate.getDate() === selectedDate.getDate() &&
+        slotDate.getMonth() === selectedDate.getMonth() &&
+        slotDate.getFullYear() === selectedDate.getFullYear()
+      );
+    });
+  }, [freeSlots, selectedDate]);
 
-  // Sort all slots by time and leave only unique slots
-  filteredSlots.sort((a, b) => {
-    const timeA = new Date(a.start).getTime();
-    const timeB = new Date(b.start).getTime();
-    return timeA - timeB;
-  });
+  const sortedSlots = useMemo(() => {
+    return [...filteredSlots].sort((a, b) => {
+      const timeA = new Date(a.start).getTime();
+      const timeB = new Date(b.start).getTime();
+      return timeA - timeB;
+    });
+  }, [filteredSlots]);
 
-  const uniqueSlots = [];
-  const uniqueKeys = new Set();
+  const uniqueSlots = useMemo(() => {
+    const slots = [];
+    const uniqueKeys = new Set();
 
-  for (const slot of filteredSlots) {
-    const slotDate = new Date(slot.start);
+    for (const slot of sortedSlots) {
+      const slotDate = new Date(slot.start);
 
-    if (
-      slotDate.getDate() === selectedDate.getDate() &&
-      slotDate.getMonth() === selectedDate.getMonth() &&
-      slotDate.getFullYear() === selectedDate.getFullYear()
-    ) {
-      const key = `${slot.start}-${slot.end}`;
+      if (
+        slotDate.getDate() === selectedDate.getDate() &&
+        slotDate.getMonth() === selectedDate.getMonth() &&
+        slotDate.getFullYear() === selectedDate.getFullYear()
+      ) {
+        const key = `${slot.start}-${slot.end}`;
 
-      if (!uniqueKeys.has(key)) {
-        uniqueSlots.push({
-          doctor: slot.doctor.id,
-          start: slot.start,
-          end: slot.end,
-        });
-        uniqueKeys.add(key);
+        if (!uniqueKeys.has(key)) {
+          slots.push({
+            doctor: slot.doctor.id,
+            start: slot.start,
+            end: slot.end,
+          });
+          uniqueKeys.add(key);
+        }
       }
     }
-  }
+
+    return slots;
+  }, [sortedSlots, selectedDate]);
 
   const transformedSlots = Object.entries(uniqueSlots).map(([key, value]) => ({
     doctor: value.doctor.id,
@@ -151,14 +163,8 @@ const useAppointmentCalendarHook = ({
   }));
 
   function formatTimeRange(startTime, endTime) {
-    const start = new Date(startTime).toLocaleTimeString([], {
-      hour: '2-digit',
-      minute: '2-digit',
-    });
-    const end = new Date(endTime).toLocaleTimeString([], {
-      hour: '2-digit',
-      minute: '2-digit',
-    });
+    const start = new Date(startTime).toLocaleTimeString([], TIME_OPTIONS);
+    const end = new Date(endTime).toLocaleTimeString([], TIME_OPTIONS);
     return `${start}-${end}`;
   }
 
@@ -173,7 +179,7 @@ const useAppointmentCalendarHook = ({
     }
   }, [selectedDay, data, specialization]);
 
-   const handleDayClick: DayClickEventHandler = (day, modifiers) => {
+  const handleDayClick: DayClickEventHandler = (day, modifiers) => {
     onDayClick(day, modifiers);
     setSelectedDate(day);
   };
