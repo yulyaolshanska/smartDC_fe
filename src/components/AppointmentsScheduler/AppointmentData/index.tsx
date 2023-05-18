@@ -1,6 +1,6 @@
 import React from 'react';
 import { Stack, Box } from '@mui/system';
-import { Link, Typography } from '@mui/material';
+import { Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { ReactComponent as CameraIcon } from '@assets/Camera.svg';
 import {
