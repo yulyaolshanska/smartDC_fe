@@ -8,6 +8,8 @@ import { ReactComponent as GenderMaleIcon } from '@assets/patients/genderMale.sv
 import { ReactComponent as GenderFemaleIcon } from '@assets/patients/genderFemale.svg';
 import { ReactComponent as CalendarIcon } from '@assets/patients/сalendar.svg';
 import {
+  BookAppointmentButton,
+  ButtonContainer,
   ContactInfo,
   ContactsContainer,
   InfoContainer,
@@ -20,16 +22,17 @@ import {
   ShowMoreLessButton,
   UserInfo,
 } from '@components/Patient/styles';
-import { lastAppointmentInfo } from '@constants/mockData';
 import { patientApi } from 'services/PatientService';
 import { male, years } from '@constants/patient';
 import Spinner from '@components/Loaders/Spinner';
+import { useAppSelector } from '@redux/hooks';
+import { local } from '@constants/other';
 
 function PatientCardInfo() {
   const { t } = useTranslation();
   const [showMore, setShowMore] = useState<boolean>(false);
 
-  const text = lastAppointmentInfo;
+  const doctorData = useAppSelector((state) => state.doctorReducer);
 
   const { id } = useParams();
 
@@ -43,45 +46,65 @@ function PatientCardInfo() {
     new Date().getFullYear() - new Date(patient?.birthDate).getFullYear()
   } ${years}`;
 
+  const showLastAppointment = () => {
+    const lastAppointment = patient.notes[0]?.note;
+
+    if (lastAppointment) {
+      return showMore
+        ? lastAppointment
+        : `${lastAppointment?.substring(0, 250)}...`;
+    }
+    return t('Appointments.noAppointmentsYet');
+  };
+
   return (
     <>
       {isLoading ? (
         <Spinner />
       ) : (
-        <PatientCardInfoContainer>
-          <PatientInfoName>{patientFullName}</PatientInfoName>
-          <ContactsContainer>
-            <CallIcon />
-            <ContactInfo>{patient?.phoneNumber}</ContactInfo>
-            <EmailIcon />
-            <ContactInfo>{patient?.email}</ContactInfo>
-          </ContactsContainer>
-          <InfoContainer>
-            {patient?.gender === male ? (
-              <GenderMaleIcon />
-            ) : (
-              <GenderFemaleIcon />
-            )}
-            <UserInfo>{patient?.gender}</UserInfo>
-            <CalendarIcon />
-            <UserInfo>{patientAge}</UserInfo>
-            <PinIcon />
-            <UserInfo>{patientCityCountry}</UserInfo>
-          </InfoContainer>
-          <Overview>
-            <OverviewTitle>{t('Patient.overview')}:</OverviewTitle>
-            {patient?.overview}
-          </Overview>
-          <LastAppointment>
-            <LastAppointmentTitle>
-              {t('Patient.lastAppointment')}
-            </LastAppointmentTitle>
-            {showMore ? text : `${text.substring(0, 250)}...`}
-          </LastAppointment>
-          <ShowMoreLessButton onClick={() => setShowMore(!showMore)}>
-            {showMore ? t('Profile.showLess') : t('Profile.showMore')}
-          </ShowMoreLessButton>
-        </PatientCardInfoContainer>
+        <>
+          <PatientCardInfoContainer>
+            <PatientInfoName>{patientFullName}</PatientInfoName>
+            <ContactsContainer>
+              <CallIcon />
+              <ContactInfo>{patient?.phoneNumber}</ContactInfo>
+              <EmailIcon />
+              <ContactInfo>{patient?.email}</ContactInfo>
+            </ContactsContainer>
+            <InfoContainer>
+              {patient?.gender === male ? (
+                <GenderMaleIcon />
+              ) : (
+                <GenderFemaleIcon />
+              )}
+              <UserInfo>{patient?.gender}</UserInfo>
+              <CalendarIcon />
+              <UserInfo>{patientAge}</UserInfo>
+              <PinIcon />
+              <UserInfo>{patientCityCountry}</UserInfo>
+            </InfoContainer>
+            <Overview>
+              <OverviewTitle>{t('Patient.overview')}:</OverviewTitle>
+              {patient?.overview}
+            </Overview>
+            <LastAppointment>
+              <LastAppointmentTitle>
+                {t('Patient.lastAppointment')}
+              </LastAppointmentTitle>
+              {showLastAppointment()}
+            </LastAppointment>
+            <ShowMoreLessButton onClick={() => setShowMore(!showMore)}>
+              {showMore ? t('Profile.showLess') : t('Profile.showMore')}
+            </ShowMoreLessButton>
+          </PatientCardInfoContainer>
+          {doctorData.role === local && (
+            <ButtonContainer>
+              <BookAppointmentButton to={`/book-appointment/${patient.id}`}>
+                {t('BookAppointment.button')}
+              </BookAppointmentButton>
+            </ButtonContainer>
+          )}
+        </>
       )}
     </>
   );
