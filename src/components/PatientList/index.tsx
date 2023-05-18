@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useAppSelector } from '@redux/hooks';
 import { useTranslation } from 'react-i18next';
-import { PatientsList } from './styles';
+import { NotFound, PatientsList } from './styles';
 import PatientCard from '@components/PatientItem';
 import { LoadMoreButton } from '@components/general/styles';
 import {
@@ -51,15 +51,26 @@ function PatientList({ searchValue }: IProps) {
 
   return (
     <>
-      <PatientsList>
-        {filteredPatients?.slice(startIndex, endIndex).map((patient) => (
-          <PatientCard
-            key={patient.id}
-            patient={patient}
-            searchValue={searchValue}
-          />
-        ))}
-      </PatientsList>
+      {filteredPatients.length > 0 ? (
+        <PatientsList>
+          {filteredPatients?.slice(startIndex, endIndex).map((patient) => (
+            <PatientCard
+              key={patient.id}
+              patient={patient}
+              searchValue={searchValue}
+            />
+          ))}
+        </PatientsList>
+      ) : (
+        <NotFound>
+          {searchValue !== ''
+            ? `${t('Patients.PatientWithName')} "${searchValue}" ${t(
+                'Patients.notFound'
+              )}.`
+            : `${t('Patients.patients')}  ${t('Patients.notFound')}.`}
+        </NotFound>
+      )}
+
       {filteredPatients && endIndex < filteredPatients.length && (
         <LoadMoreButton onClick={handleLoadMoreClick}>
           {t('Patients.loadMore')}
