@@ -11,6 +11,7 @@ interface Props {
   selectedDay: Date | null;
   setSelectedDay: React.Dispatch<React.SetStateAction<Date | null>>;
   setSelectedDate: React.Dispatch<React.SetStateAction<Date | null>>;
+  setFormattedDate: React.Dispatch<React.SetStateAction<string>>;
 }
 
 interface FreeSlotProps {
@@ -33,6 +34,7 @@ const useAppointmentCalendarHook = ({
   selectedDay,
   setSelectedDay,
   setSelectedDate,
+  setFormattedDate,
 }: Props) => {
   const today = new Date();
   const nextMonth = addMonths(new Date(), 0);
@@ -188,6 +190,10 @@ const useAppointmentCalendarHook = ({
     setShowCalendar(!showCalendar);
   };
 
+  const onCancelClick = () => {
+    setSelectedDay(null);
+    setFormattedDate('');
+  };
   return {
     handleDayClick,
     toggleState,
@@ -199,6 +205,7 @@ const useAppointmentCalendarHook = ({
     currentStyle,
     showCalendar,
     formattedAppointments,
+    onCancelClick,
   };
 };
 

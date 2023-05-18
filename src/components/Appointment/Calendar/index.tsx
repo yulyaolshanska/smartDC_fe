@@ -43,6 +43,7 @@ const DayPickerCalendar: React.FC<Props> = ({
     setMonth,
     currentStyle,
     showCalendar,
+    onCancelClick,
   } = useAppointmentCalendarHook({
     onDayClick,
     specialization,
@@ -50,6 +51,7 @@ const DayPickerCalendar: React.FC<Props> = ({
     selectedDay,
     setSelectedDay,
     setSelectedDate,
+    setFormattedDate,
   });
 
   return (
@@ -60,14 +62,7 @@ const DayPickerCalendar: React.FC<Props> = ({
         ) : (
           <TextinCalendarInput>{formattedDate}</TextinCalendarInput>
         )}
-        {formattedDate && (
-          <CancelIcon
-            onClick={() => {
-              setSelectedDay(null);
-              setFormattedDate('');
-            }}
-          />
-        )}
+        {formattedDate && <CancelIcon onClick={onCancelClick} />}
         {!showCalendar ? <ArrowIcon /> : <ArrowIconShown />}
       </SelectText>
       {showCalendar && (
