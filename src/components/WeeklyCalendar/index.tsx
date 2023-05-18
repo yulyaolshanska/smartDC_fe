@@ -3,6 +3,7 @@ import { useParams } from 'react-router';
 import { getISOWeek } from 'date-fns';
 import { useTranslation } from 'react-i18next';
 import FullCalendar from '@fullcalendar/react';
+import { EventClickArg } from 'fullcalendar';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import { CalendarOptions } from '@fullcalendar/core';
 import { useGetAppointmentForWeekQuery } from 'services/AppointmentService';
@@ -84,7 +85,7 @@ function WeeklyCalendar() {
     eventContent: EventContent,
     height: '210px',
     dayHeaderFormat: { weekday: 'short', day: 'numeric' },
-    eventClick: (info) => {
+    eventClick: (info: EventClickArg) => {
       setCurrentDate((prev) => {
         return {
           ...prev,
