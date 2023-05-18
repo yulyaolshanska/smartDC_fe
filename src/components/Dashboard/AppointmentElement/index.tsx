@@ -34,7 +34,7 @@ const AppointmentElement = ({
     return Math.floor(diffTime / (1000 * 60 * 60 * 24 * 365));
   };
 
-  const getPatientInfo = React.useCallback(() => {
+  const getPatientInfo = React.useMemo(() => {
     {
       return `${patient.gender}, ${patient.lastName} ${getPatientAge()} y.o`;
     }
@@ -69,7 +69,7 @@ const AppointmentElement = ({
                 {patientName}
               </Typography>
               <Typography fontSize={VERY_SMALL_FONT_SIZE} fontWeight="500">
-                {getPatientInfo()}
+                {getPatientInfo}
               </Typography>
             </Stack>
             <Stack direction="row" alignItems="center">
