@@ -158,7 +158,7 @@
     "deleteTime": "Delete time:",
     "saveSchedule": "Save schedule",
     "selectTimezone": "Time Zone:",
-     "successfullySubmited": "Your schedule has been successfully updated!",
+    "successfullySubmited": "Your schedule has been successfully updated!",
     "calendar": "Calendar"
   },
   "BookAppointment": {
@@ -179,8 +179,8 @@
     "speciality": "Speciality",
     "located": "Located",
     "rating": "Rating",
-    "loadMore":"Load more",
-    "noDoctors":"No doctor with that name is available",
+    "loadMore": "Load more",
+    "noDoctors": "No doctor with that name is available",
     "confirm": "Confirm",
     "appointmentCreated": "Appointment successfully created",
     "search": "Search",
@@ -219,10 +219,13 @@
     "viewCard": "View card",
     "editCard": "Edit card",
     "search": "Search",
-    "loadMore": "Load More"
+    "loadMore": "Load More",
+    "PatientWithName": "Patient with name",
+    "notFound": "not fond",
+    "patients": "Patients"
   },
   "Appointments": {
-    "myAppointments" : "My appointments:",
+    "myAppointments": "My appointments:",
     "years": "y.o.",
     "remoteDoctor": "Remote",
     "localDoctor": "Local",

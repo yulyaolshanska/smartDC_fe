@@ -8,7 +8,7 @@ export const avoidStartWithRenderArray = [
 export const avoidExactRenderArray = ['/'];
 
 export const PATIENTS_PER_PAGE = 30;
-export const PATIENTS_PER_LOAD = 10;
+export const PATIENTS_PER_LOAD = 30;
 
 export const MARGIN_TOP = 20;
 export const PADDING = 16;
@@ -22,8 +22,9 @@ export const search = 'search';
 
 export const doctor = 'doctor';
 
-export const hash = '#';
-
 export const local = 'Local';
 
 export const previous = -1;
+
+export const hash = '#';
+
