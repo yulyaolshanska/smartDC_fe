@@ -20,7 +20,6 @@ import {
   ShowMoreLessButton,
   UserInfo,
 } from '@components/Patient/styles';
-import { lastAppointmentInfo } from '@constants/mockData';
 import { patientApi } from 'services/PatientService';
 import { male, years } from '@constants/patient';
 import Spinner from '@components/Loaders/Spinner';
@@ -28,8 +27,6 @@ import Spinner from '@components/Loaders/Spinner';
 function PatientCardInfo() {
   const { t } = useTranslation();
   const [showMore, setShowMore] = useState<boolean>(false);
-
-  const text = lastAppointmentInfo;
 
   const { id } = useParams();
 
@@ -42,6 +39,17 @@ function PatientCardInfo() {
   const patientAge = `${
     new Date().getFullYear() - new Date(patient?.birthDate).getFullYear()
   } ${years}`;
+
+  const showLastAppointment = () => {
+    const lastAppointment = patient.notes[0]?.note;
+
+    if (lastAppointment) {
+      return showMore
+        ? lastAppointment
+        : `${lastAppointment?.substring(0, 250)}...`;
+    }
+    return t('Appointments.noAppointmentsYet');
+  };
 
   return (
     <>
@@ -76,7 +84,7 @@ function PatientCardInfo() {
             <LastAppointmentTitle>
               {t('Patient.lastAppointment')}
             </LastAppointmentTitle>
-            {showMore ? text : `${text.substring(0, 250)}...`}
+            {showLastAppointment()}
           </LastAppointment>
           <ShowMoreLessButton onClick={() => setShowMore(!showMore)}>
             {showMore ? t('Profile.showLess') : t('Profile.showMore')}
