@@ -221,6 +221,15 @@
     "loadMore": "Load More"
   },
   "Appointments": {
-    "myAppointments" : "My appointments:"
+    "myAppointments" : "My appointments:",
+    "years": "y.o.",
+    "remoteDoctor": "Remote",
+    "localDoctor": "Local",
+    "localDoctorAgenda": "Local doctor",
+    "remoteDoctorAgenda": "Remote doctor",
+    "doctor": "Dr.",
+    "patient": "Patient",
+    "lastAppointment": "Last Appointment",
+    "noAppointmentsYet": "The patient has no appointments yet"
   }
 }

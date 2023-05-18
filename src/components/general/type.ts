@@ -1,3 +1,5 @@
+import { string } from 'yup';
+
 export interface IAuth {
   id: number;
   firstName: string;
@@ -33,7 +35,12 @@ export interface IPatient {
   address: string;
   timeZone: string;
   overview: string;
+  notes: Note[];
 }
+
+export type Note = {
+  note: string;
+};
 
 export type Option = {
   value: string | number;

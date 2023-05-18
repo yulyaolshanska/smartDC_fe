@@ -22,6 +22,8 @@ export const search = 'search';
 
 export const doctor = 'doctor';
 
+export const hash = '#';
+
 export const local = 'Local';
 
 export const zoomLink = 'https://zoom.us/meetingid';

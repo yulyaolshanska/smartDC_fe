@@ -7,6 +7,7 @@ import { useTranslation } from 'react-i18next';
 import { useAppSelector } from '@redux/hooks';
 import { appointmentApi } from 'services/BookAppointmetService';
 import { zoomLink } from '@constants/other';
+import { fullYearFormat, fullDateTimeFormat } from '@constants/format';
 
 interface DateObject {
   appointmentTimeRange: string;
@@ -51,16 +52,15 @@ const useAppointmentBookFormHook = () => {
   const onSubmit = async (data: DateObject) => {
     const [startTime, endTime] = data.appointmentTimeRange.split('-');
 
-
-    console.log(`data`,data)
+    console.log(`data`, data);
     const start = parse(
-      `${format(data.date, 'yyyy-MM-dd')} ${startTime.trim()}`,
-      'yyyy-MM-dd hh:mm aa',
+      `${format(data.date, fullYearFormat)} ${startTime.trim()}`,
+      fullDateTimeFormat,
       new Date()
     );
     const end = parse(
-      `${format(data.date, 'yyyy-MM-dd')} ${endTime.trim()}`,
-      'yyyy-MM-dd hh:mm aa',
+      `${format(data.date, fullYearFormat)} ${endTime.trim()}`,
+      fullDateTimeFormat,
       new Date()
     );
 
