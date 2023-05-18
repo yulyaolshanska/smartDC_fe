@@ -5,7 +5,6 @@ import { store } from '@redux/store';
 import ZoomVideo from '@zoom/videosdk';
 import Video from './Video';
 import usePeerVideoStateChange from './utils/usePeerVideoStateChange';
-import useActiveShareChange from './utils/useActiveShareChange';
 import { Stack } from '@mui/material';
 import FinishCallButton from './FinishCallButton';
 import ChatButton from './ChatButton';
@@ -13,7 +12,8 @@ import { VideoContainer } from './styles';
 import './index.scss';
 import StartCallButton from './StartCallButton';
 import { ToastContainer, toast } from 'react-toastify';
-import useSpeakerDeviceChange from './utils/useSpeakerDeviceChange';
+import useActiveSpeaker from './utils/useActiveSpeaker';
+import useActiveShareChange from './utils/useActiveShareChange';
 
 const dispatch = store.dispatch;
 let meetingArgs = { ...devConfig };
@@ -104,13 +104,14 @@ const ZoomComponent = () => {
       useActiveShareChange(client, mediaScreen, participantShareScreenRef);
     };
 
-    const handleSpeakerDeviceChange = () => {
-      useSpeakerDeviceChange(client, mediaScreen);
+    const handleActiveSpeaker = () => {
+      useActiveSpeaker(client);
     };
+
     console.log('-----------Event listeners connection--------------');
+    handleActiveSpeaker();
     handlePeerVideoStateChange();
     handlePeerShareScreen();
-    // handleSpeakerDeviceChange();
   }, [mediaScreen, participantCanvasRef, participantShareScreenRef]);
 
   return (
