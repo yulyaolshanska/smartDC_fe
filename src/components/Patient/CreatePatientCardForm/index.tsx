@@ -54,7 +54,7 @@ function CreatePatientCardForm() {
   const [createPatient] = patientApi.useCreatePatientMutation();
 
   const onSubmit = async (data: IPatient) => {
-    data.phoneNumber = plus + data.phoneNumber;
+    data.phoneNumber = plus + data.phoneNumber.replace(/\D/g, '');
     await createPatient(data).then((res) => {
       if (error in res && res.error) {
         toast.error(t('Error.somethingWasWrong'), {

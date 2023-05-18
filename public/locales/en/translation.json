@@ -183,7 +183,8 @@
     "noDoctors":"No doctor with that name is available",
     "confirm": "Confirm",
     "appointmentCreated": "Appointment successfully created",
-    "search": "Search"
+    "search": "Search",
+    "button": "Book appointment +"
   },
 
   "Notes": {
