@@ -144,7 +144,8 @@
   },
   "Dashboard": {
     "backToDashboard": "Back to dashboard",
-    "loading": "Loading..."
+    "loading": "Loading...",
+    "goBack": "Go back"
   },
   "Warning": {
     "viewScheduleWarning": "Warning: you are in view mode and creating new schedule will be done according to your local time!"

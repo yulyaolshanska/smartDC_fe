@@ -3,7 +3,13 @@ import { Stack, Box } from '@mui/system';
 import { Link, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { ReactComponent as CameraIcon } from '@assets/Camera.svg';
-import { ACTIVE, BORDER, CARLO_BLUE, NAVY_BLUE } from '@constants/colors';
+import {
+  ACTIVE,
+  BLACK,
+  BORDER,
+  CARLO_BLUE,
+  NAVY_BLUE,
+} from '@constants/colors';
 import { MEDIUM_FONT_SIZE } from '@constants/fontSizes';
 import { IAuth, IPatient } from '@components/general/type';
 import moment from 'moment';
@@ -11,6 +17,7 @@ import { Wrapper } from 'components/AppointmentsScheduler/AppointmentData/styles
 import DoctorInitialState from '@redux/slices/DoctorSlice/types';
 import { hash, local } from '@constants/other';
 import { timeFormat } from '@constants/format';
+import { NavLink } from 'react-router-dom';
 
 interface IAppointmentElement {
   doctor: DoctorInitialState;
@@ -88,11 +95,7 @@ const AppointmentData = ({
                 {moment(end).format(timeFormat)}
               </Typography>
             </Stack>
-            <Link
-              href={`/patient/${patient.id}`}
-              underline="none"
-              color="inherit"
-            >
+            <NavLink to={`/patient/${patient.id}`}>
               <Stack direction="row" gap="5px">
                 <Typography
                   fontSize={MEDIUM_FONT_SIZE}
@@ -101,11 +104,15 @@ const AppointmentData = ({
                 >
                   {patientFullName}
                 </Typography>
-                <Typography fontSize={MEDIUM_FONT_SIZE} fontWeight="500">
+                <Typography
+                  fontSize={MEDIUM_FONT_SIZE}
+                  fontWeight="500"
+                  color={BLACK}
+                >
                   {patientGenderAge}
                 </Typography>
               </Stack>
-            </Link>
+            </NavLink>
             <Stack direction="row" alignItems="center">
               <CameraIcon />
               <Typography
