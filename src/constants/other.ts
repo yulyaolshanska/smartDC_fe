@@ -25,3 +25,5 @@ export const doctor = 'doctor';
 export const hash = '#';
 
 export const local = 'Local';
+
+export const previous = -1;

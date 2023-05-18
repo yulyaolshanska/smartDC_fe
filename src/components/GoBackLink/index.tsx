@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import { ArrowBack } from '@components/general/styles';
 import { GoBack, LinkContainer } from '@components/GoBackLink/styles';
+import { previous } from '@constants/other';
 
 function GoBackLink() {
   const { t } = useTranslation();
@@ -10,7 +11,7 @@ function GoBackLink() {
 
   return (
     <LinkContainer>
-      <GoBack onClick={() => navigate(-1)}>
+      <GoBack onClick={() => navigate(previous)}>
         <ArrowBack />
         {t('Dashboard.goBack')}
       </GoBack>
