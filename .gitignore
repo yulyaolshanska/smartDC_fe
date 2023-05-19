@@ -47,3 +47,4 @@ Thumbs.db
 # envs
 .env
 .env.prod
+node_modules

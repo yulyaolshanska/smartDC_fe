@@ -5,10 +5,18 @@ import viteTsConfigPaths from 'vite-tsconfig-paths';
 import svgr from 'vite-plugin-svgr';
 
 export default defineConfig({
+  cacheDir: './node_modules/.vite/web-wizards-fe',
+
   server: {
     port: 4200,
     host: 'localhost',
   },
+
+  preview: {
+    port: 4300,
+    host: 'localhost',
+  },
+
   plugins: [
     react(),
     svgr(),

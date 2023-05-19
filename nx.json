@@ -1,28 +1,54 @@
 {
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
-  "npmScope": "store",
   "tasksRunnerOptions": {
     "default": {
-      "runner": "nx/tasks-runners/default",
+      "runner": "nx-cloud",
       "options": {
-        "cacheableOperations": ["build", "lint", "test", "e2e"]
+        "cacheableOperations": [
+          "build",
+          "lint",
+          "test",
+          "e2e"
+        ],
+        "accessToken": "N2RmNzI4ZmMtOTZmNi00MTY3LWJlZTctYWEwODQyMTAzMmU4fHJlYWQtd3JpdGU="
       }
     }
   },
   "targetDefaults": {
     "build": {
-      "dependsOn": ["^build"],
-      "inputs": ["production", "^production"]
+      "dependsOn": [
+        "^build"
+      ],
+      "inputs": [
+        "production",
+        "^production"
+      ]
+    },
+    "e2e": {
+      "inputs": [
+        "default",
+        "^production"
+      ]
     },
     "test": {
-      "inputs": ["default", "^production"]
+      "inputs": [
+        "default",
+        "^production"
+      ]
     },
     "lint": {
-      "inputs": ["default", "{workspaceRoot}/.eslintrc.json"]
+      "inputs": [
+        "default",
+        "{workspaceRoot}/.eslintrc.json",
+        "{workspaceRoot}/.eslintignore"
+      ]
     }
   },
   "namedInputs": {
-    "default": ["{projectRoot}/**/*", "sharedGlobals"],
+    "default": [
+      "{projectRoot}/**/*",
+      "sharedGlobals"
+    ],
     "production": [
       "default",
       "!{projectRoot}/**/?(*.)+(spec|test).[jt]s?(x)?(.snap)",
@@ -32,22 +58,21 @@
     "sharedGlobals": []
   },
   "generators": {
-    "@nrwl/react": {
+    "@nx/react": {
       "application": {
-        "style": "scss",
+        "style": "styled-components",
         "linter": "eslint",
         "bundler": "vite",
         "babel": true
       },
       "component": {
-        "style": "scss"
+        "style": "styled-components"
       },
       "library": {
-        "style": "scss",
-        "linter": "eslint",
-        "unitTestRunner": "vitest"
+        "style": "styled-components",
+        "linter": "eslint"
       }
     }
   },
-  "defaultProject": "store"
+  "defaultProject": "web-wizards-fe-1"
 }
