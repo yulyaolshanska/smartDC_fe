@@ -55,42 +55,45 @@ const DashboardComponent = () => {
     return copyAppointments as AppointmentElement[];
   };
 
-  const sortedAppointments = getItterableAppointments().sort(
-    (a: AppointmentElement, b: AppointmentElement) => {
-      const startTimeA = new Date(a.startTime);
-      const startTimeB = new Date(b.startTime);
-      return startTimeA.getTime() - startTimeB.getTime();
-    }
-  );
-
-  const groupedAppointments = sortedAppointments?.reduce(
-    (groups: { [key: string]: AppointmentElement[] }, appointment) => {
-      const startTime = new Date(appointment.startTime);
-      const startHour = startTime.getHours();
-      const startMinutes = startTime.getMinutes();
-
-      const endTime = new Date(appointment.endTime);
-      const endHour = endTime.getHours();
-      const endMinutes = endTime.getMinutes();
-
-      const roundedStartMinutes = Math.floor(startMinutes / 30) * 30;
-      const roundedEndMinutes = Math.floor(endMinutes / 30) * 30;
-
-      const timeRange = `${startHour}:${roundedStartMinutes
-        .toString()
-        .padStart(2, '0')} - ${endHour}:${roundedEndMinutes
-        .toString()
-        .padStart(2, '0')}`;
-
-      if (!groups[timeRange]) {
-        groups[timeRange] = [];
+  const sortedAppointments = React.useMemo(() => {
+    return getItterableAppointments().sort(
+      (a: AppointmentElement, b: AppointmentElement) => {
+        const startTimeA = new Date(a.startTime);
+        const startTimeB = new Date(b.startTime);
+        return startTimeA.getTime() - startTimeB.getTime();
       }
-      groups[timeRange].push(appointment);
-      return groups;
-    },
-    {}
-  );
+    );
+  }, [appointmentsArray, getItterableAppointments]);
 
+  const groupedAppointments = React.useMemo(() => {
+    return sortedAppointments?.reduce(
+      (groups: { [key: string]: AppointmentElement[] }, appointment) => {
+        const startTime = new Date(appointment.startTime);
+        const startHour = startTime.getHours();
+        const startMinutes = startTime.getMinutes();
+
+        const endTime = new Date(appointment.endTime);
+        const endHour = endTime.getHours();
+        const endMinutes = endTime.getMinutes();
+
+        const roundedStartMinutes = Math.floor(startMinutes / 30) * 30;
+        const roundedEndMinutes = Math.floor(endMinutes / 30) * 30;
+
+        const timeRange = `${startHour}:${roundedStartMinutes
+          .toString()
+          .padStart(2, '0')} - ${endHour}:${roundedEndMinutes
+          .toString()
+          .padStart(2, '0')}`;
+
+        if (!groups[timeRange]) {
+          groups[timeRange] = [];
+        }
+        groups[timeRange].push(appointment);
+        return groups;
+      },
+      {}
+    );
+  }, [appointmentsArray, sortedAppointments]);
   if (!appointmentsArray) {
     return (
       <div>

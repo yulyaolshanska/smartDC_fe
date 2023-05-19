@@ -8,6 +8,7 @@ import { authApi } from 'services/AuthService';
 import { ReactComponent as CameraIcon } from '@assets/Camera.svg';
 import { ACTIVE, ANOTHER_FUCKING_BLUE, BORDER } from '@constants/colors';
 import { VERY_SMALL_FONT_SIZE } from '@constants/fontSizes';
+import { Link } from 'react-router-dom';
 
 interface AppointmentElementProps {
   index: number;
@@ -21,6 +22,7 @@ const AppointmentElement = ({
   patient,
 }: AppointmentElementProps) => {
   const [show, setShow] = React.useState<boolean>(false);
+  const { data: doctor } = authApi.useGetMeQuery({});
 
   const { t } = useTranslation();
 
@@ -39,8 +41,11 @@ const AppointmentElement = ({
       return `${patient.gender}, ${patient.lastName} ${getPatientAge()} y.o`;
     }
   }, []);
-
-  const patientName = `${patient.firstName.charAt(0)}. ${patient.lastName}`;
+  const getPatientName = React.useMemo(() => {
+    {
+      return `${patient.firstName.charAt(0)}. ${patient.lastName}`;
+    }
+  }, []);
 
   return (
     <Box marginBottom="8px">
@@ -66,7 +71,7 @@ const AppointmentElement = ({
                 fontWeight="700"
                 color={ANOTHER_FUCKING_BLUE}
               >
-                {patientName}
+                <Link to={`/patient/${doctor.id}`}>{getPatientName}</Link>
               </Typography>
               <Typography fontSize={VERY_SMALL_FONT_SIZE} fontWeight="500">
                 {getPatientInfo}
@@ -80,7 +85,7 @@ const AppointmentElement = ({
                 fontSize={VERY_SMALL_FONT_SIZE}
                 fontWeight="700"
               >
-                {t('Dashboard.Remote')} -
+                {doctor.role ? t('Dashboard.Remote') : t('Dashboard.Local')}-
               </Typography>
               <Typography
                 fontSize={VERY_SMALL_FONT_SIZE}
@@ -108,7 +113,8 @@ const AppointmentElement = ({
           </Box>
           {fullText.length > 100 && (
             <Box color={ACTIVE} onClick={() => setShow(!show)}>
-              {t('Show')} {show ? 'less' : 'more'}
+              {t('Dashboard.Show')}
+              {show ? t('Profile.showLess') : t('Profile.showMore')}
             </Box>
           )}
         </Stack>
