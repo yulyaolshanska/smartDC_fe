@@ -3,7 +3,7 @@ import { DayClickEventHandler } from 'react-day-picker';
 import { addMonths } from 'date-fns';
 import { appointmentApi } from 'services/BookAppointmetService';
 import { BLUE, HINT } from '@constants/colors';
-import { TIME_OPTIONS } from '@constants/other';
+import { timeOptions } from '@constants/other';
 interface Props {
   onDayClick: (day: Date) => void;
   specialization: number;
@@ -57,7 +57,7 @@ const useAppointmentCalendarHook = ({
     }
   }, [freeSlots]);
 
-  const ThreeMonthPeriod = useMemo(() => {
+  const threeMonthPeriod = useMemo(() => {
     const result = [];
 
     for (let i = 0; i < 3; i++) {
@@ -76,7 +76,7 @@ const useAppointmentCalendarHook = ({
   }, []);
 
   // Set all time to 0 and receive the number equivalent by getTime() function
-  const formattedThreeMonthPeriod = ThreeMonthPeriod.map((date) => {
+  const formattedThreeMonthPeriod = threeMonthPeriod.map((date) => {
     date.setHours(0, 0, 0, 0);
     return date.getTime();
   });
@@ -165,8 +165,8 @@ const useAppointmentCalendarHook = ({
   }));
 
   function formatTimeRange(startTime, endTime) {
-    const start = new Date(startTime).toLocaleTimeString([], TIME_OPTIONS);
-    const end = new Date(endTime).toLocaleTimeString([], TIME_OPTIONS);
+    const start = new Date(startTime).toLocaleTimeString([], timeOptions);
+    const end = new Date(endTime).toLocaleTimeString([], timeOptions);
     return `${start}-${end}`;
   }
 

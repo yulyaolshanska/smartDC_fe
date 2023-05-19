@@ -19,6 +19,7 @@ export function SelectSpecInput({
   options = [],
   setSpecialization,
 }: Props & { control: Control<FormValues> }) {
+    
   return (
     <InputContainer hasError={!!error}>
       <span>{label}</span>

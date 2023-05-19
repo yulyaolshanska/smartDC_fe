@@ -28,7 +28,15 @@ export const local = 'Local';
 
 export const zoomLink = 'https://zoom.us/meetingid';
 
-export const TIME_OPTIONS = {
-    hour: '2-digit',
-    minute: '2-digit',
-  };
+export const timeOptions = {
+  hour: '2-digit',
+  minute: '2-digit',
+};
+
+export const long = 'long';
+
+export const twoDigit = '2-digit';
+
+export const numeric = 'numeric';
+
+export const dayPickerMonths="DayPicker-Months"

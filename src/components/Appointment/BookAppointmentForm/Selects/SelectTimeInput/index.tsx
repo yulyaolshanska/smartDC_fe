@@ -19,6 +19,7 @@ export function SelectTimeInput({
   options = [],
   setFormattedTime,
 }: Props & { control: Control<FormValues> }) {
+    
   return (
     <InputContainer hasError={!!error}>
       <span>{label}</span>

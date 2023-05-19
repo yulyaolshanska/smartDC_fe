@@ -1,5 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import useAppointmentCalendarHook from 'hooks/BookAppointment/useAppointmentCalendar.hook';
+import { dayPickerMonths } from '@constants/other';
 import {
   StyledDayPicker,
   CalendarWrapper,
@@ -79,8 +80,8 @@ const DayPickerCalendar: React.FC<Props> = ({
           modifiers={{ current: selectedDay, booked: bookedDays }}
           modifiersStyles={{ current: currentStyle, booked: bookedStyle }}
           classNames={{
-            months: 'DayPicker-Months',
-            month: 'DayPicker-Month',
+            months: `${dayPickerMonths}`,
+            month: `${dayPickerMonths}`,
           }}
         />
       )}

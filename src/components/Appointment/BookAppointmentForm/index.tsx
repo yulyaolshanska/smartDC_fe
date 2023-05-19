@@ -7,7 +7,7 @@ import { FormWrapper } from '@components/Appointment/BookAppointmentForm/styles'
 import FirstStepAppointment from '@components/Appointment/BookAppointmentForm/FirstStep';
 import SecondStepAppointment from '@components/Appointment/BookAppointmentForm/SecondStep';
 import appointmentSchema from '@validation/bookAppointment.validate';
-import useAppointmentBookFormHook from 'hooks/BookAppointment/useAppointmentBookForm.hool';
+import useAppointmentBookFormHook from 'hooks/BookAppointment/useAppointmentBookForm.hook';
 
 interface AvalibleTimeRange {
   label: string;
@@ -87,6 +87,7 @@ const BookAppointmentForm: React.FC = () => {
             handleSubmit={handleSubmit}
             selectedDate={selectedDate}
             formattedTime={formattedTime}
+            specialization={specialization}
           />
         )}
       </FormWrapper>{' '}

@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
 import { useAppSelector } from '@redux/hooks';
 import { appointmentApi } from 'services/BookAppointmetService';
-import { zoomLink } from '@constants/other';
+import { zoomLink, twoDigit, long, numeric } from '@constants/other';
 import { fullYearFormat, fullDateTimeFormat } from '@constants/format';
 
 interface DateObject {
@@ -26,16 +26,15 @@ const useAppointmentBookFormHook = () => {
 
   const { id: patientId } = useParams();
 
+  const options: Intl.DateTimeFormatOptions = {
+    weekday: `${long}`,
+    month: `${long}`,
+    day: `${twoDigit}`,
+    year: `${numeric}`,
+  };
+
   function formatDate(date: Date): string {
-    const options: Intl.DateTimeFormatOptions = {
-      weekday: 'long',
-      month: 'long',
-      day: '2-digit',
-      year: 'numeric',
-    };
-
     const formattedDate = date.toLocaleDateString('en-US', options);
-
     const weekday = date.toLocaleDateString('en-US', { weekday: 'long' });
     return formattedDate.replace(',' + weekday, '').trim() + ', ' + weekday;
   }

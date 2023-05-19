@@ -1,17 +1,18 @@
 import React, { useState, useMemo } from 'react';
 import { appointmentApi } from 'services/BookAppointmetService';
-import { specializations } from '@constants/mockData';
 
 interface Prop {
   selectedDate: Date;
   formattedTime: string;
   setStep: React.Dispatch<React.SetStateAction<boolean>>;
+  specialization: number;
 }
 
 const useAppointmentSecondStepHook = ({
   selectedDate,
   formattedTime,
   setStep,
+  specialization,
 }: Prop) => {
   const [limit, setLimit] = useState<number>(10);
   const [selectedDoctor, setSelectedDoctor] = useState<number | null>(null);
@@ -58,14 +59,18 @@ const useAppointmentSecondStepHook = ({
     const [, minutes] = time.split(':');
     return parseInt(minutes.trim());
   }
-  const selectedDateTime = reverseFormatTimeRange(formattedTime);
+
+  const selectedDateTime = useMemo(
+    () => reverseFormatTimeRange(formattedTime),
+    [formattedTime]
+  );
 
   //   send info to backend
   const { data: doctors, isLoading } =
     appointmentApi.useGetAllAvalibleDoctorsQuery({
       start: selectedDateTime.start,
       end: selectedDateTime.end,
-      specialization: 0,
+      specialization: specialization,
       limit: limit,
     });
 
@@ -86,26 +91,9 @@ const useAppointmentSecondStepHook = ({
     );
   }
 
-  function getSpecializationLabel(value: number) {
-    const spec = specializations.find((spec) => spec.value === value);
-    return spec ? spec.label : '';
-  }
-  const memoizedGetSpecializationLabel = useMemo(
-    () => getSpecializationLabel,
-    []
-  );
-
   function handleLoadMore() {
     setLimit((prev) => prev + 10);
   }
-
-  const handleDoctorChange = (
-    value: string,
-    onChange: (value: string) => void
-  ) => {
-    setSelectedDoctor(value);
-    onChange(value);
-  };
 
   const onPreviuosStepClick = () => {
     setSelectedDoctor(null);
@@ -118,10 +106,9 @@ const useAppointmentSecondStepHook = ({
     filter,
     filterName,
     limit,
-    memoizedGetSpecializationLabel,
     handleLoadMore,
-    handleDoctorChange,
     selectedDoctor,
+    setSelectedDoctor,
     onPreviuosStepClick,
     setStep,
   };

@@ -1,12 +1,12 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Controller, Control, FieldErrors } from 'react-hook-form';
+import { Control, FieldErrors } from 'react-hook-form';
 import CancelBtn from '@components/Appointment/CancelBtn';
-import { search, doctor } from '@constants/other';
+import { search } from '@constants/other';
 import Spinner from '@components/Loaders/Spinner';
 import { ReactComponent as ArrowLeft } from '@assets/arrowLeftIcon.svg';
-import defaultDoctorPhoto from '@assets/mockDoctorPhoto.png';
 import useAppointmentSecondStepHook from 'hooks/BookAppointment/useAppointmentSecondStep.hook';
+import DoctorItemComponent from '@components/Appointment/BookAppointmentForm/DoctorItem';
 import {
   StepWrapper,
   Text,
@@ -23,10 +23,6 @@ import {
   TitlesWrapper,
   TitleItem,
   DoctorsList,
-  DoctorItem,
-  DoctorItemInfo,
-  DoctorName,
-  DoctorImg,
   LoadMoreBtn,
 } from '@components/Appointment/BookAppointmentForm/SecondStep/styles';
 
@@ -40,6 +36,7 @@ interface Props {
   onSubmit: (param: string) => void;
   selectedDate: Date;
   formattedTime: string;
+  specialization: number;
 }
 
 const SecondStepAppointment = ({
@@ -52,6 +49,7 @@ const SecondStepAppointment = ({
   onSubmit,
   selectedDate,
   formattedTime,
+  specialization 
 }: Props) => {
   const { t } = useTranslation();
 
@@ -61,15 +59,15 @@ const SecondStepAppointment = ({
     filter,
     filterName,
     limit,
-    memoizedGetSpecializationLabel,
     handleLoadMore,
-    handleDoctorChange,
     selectedDoctor,
+    setSelectedDoctor,
     onPreviuosStepClick,
   } = useAppointmentSecondStepHook({
     selectedDate,
     formattedTime,
     setStep,
+    specialization
   });
 
   return (
@@ -111,58 +109,14 @@ const SecondStepAppointment = ({
           <DoctorsList>
             {!isLoading && filtered.length > 0 ? (
               filtered.map((doc) => (
-                <label htmlFor={doc.doctor.id}>
-                  <DoctorItem key={doc.doctor.id}>
-                    <DoctorItemInfo>
-                      <Controller
-                        control={control}
-                        name={doctor}
-                        render={({ field: { onChange } }) => (
-                          <input
-                            id={doc.doctor.id}
-                            {...register(`${doctor}`)}
-                            type="radio"
-                            value={doc.doctor.id}
-                            checked={selectedDoctor == doc.doctor.id}
-                            onChange={(e) =>
-                              handleDoctorChange(e.target.value, onChange!)
-                            }
-                            errors={errors}
-                          />
-                        )}
-                      />
-                      {doc.doctor.photoUrl ? (
-                        <DoctorImg
-                          src={doc.doctor.photoUrl}
-                          alt={doctor}
-                          width={32}
-                          height={32}
-                        />
-                      ) : (
-                        <DoctorImg
-                          src={defaultDoctorPhoto}
-                          alt={doctor}
-                          width={32}
-                          height={32}
-                        />
-                      )}
-
-                      <DoctorName>
-                        {doc.doctor.firstName}, {doc.doctor.lastName}
-                      </DoctorName>
-                    </DoctorItemInfo>
-
-                    <DoctorItemInfo>
-                      {memoizedGetSpecializationLabel(
-                        doc.doctor.specialization
-                      )}
-                    </DoctorItemInfo>
-                    <DoctorItemInfo>
-                      {' '}
-                      {doc.doctor.city}, {doc.doctor.country}
-                    </DoctorItemInfo>
-                  </DoctorItem>
-                </label>
+                <DoctorItemComponent
+                  doc={doc}
+                  selectedDoctor={selectedDoctor}
+                  errors={errors}
+                  register={register}
+                  control={control}
+                  setSelectedDoctor={setSelectedDoctor}
+                />
               ))
             ) : (
               <p> {t('BookAppointment.noDoctors')}</p>
