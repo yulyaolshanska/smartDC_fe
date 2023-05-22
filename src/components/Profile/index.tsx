@@ -1,6 +1,5 @@
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { DevTool } from '@hookform/devtools';
 import React from 'react';
 import Input from '@components/Input';
 import {
@@ -286,7 +285,6 @@ const ProfileComponent = () => {
           <CustomButton disabled> {t('Profile.cancel') ?? ''}</CustomButton>
           <CustomButton type="submit"> {t('Profile.save') ?? ''}</CustomButton>
         </ButtonsWrapepr>
-        <DevTool control={control} />
         <ToastContainer />
       </form>
     </>
