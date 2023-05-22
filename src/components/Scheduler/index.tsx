@@ -13,10 +13,7 @@ import TimezoneSelect from './TimezoneSelect/TimezoneSelect';
 import { WHITE } from '@constants/colors';
 import { useAppDispatch, useAppSelector } from '@redux/hooks';
 import { ToastContainer, toast } from 'react-toastify';
-import {
-  Availability,
-  availabilityApi,
-} from '../../services/AvailabilityService';
+import { Availability, availabilityApi } from 'services/AvailabilityService';
 
 const defaultTZ = moment.tz.guess();
 
