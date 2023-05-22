@@ -14,6 +14,7 @@ import StartCallButton from './StartCallButton';
 import { ToastContainer, toast } from 'react-toastify';
 import useActiveSpeaker from './utils/useActiveSpeaker';
 import useActiveShareChange from './utils/useActiveShareChange';
+import Sheduler from './Sheduler';
 
 const dispatch = store.dispatch;
 let meetingArgs = { ...devConfig };
@@ -36,11 +37,15 @@ const client = ZoomVideo.createClient();
 const ZoomComponent = () => {
   const [loading, setLoading] = React.useState(false);
   const [loadingText, setLoadingText] = React.useState('');
-  const [mediaScreen, setMediaScreen] = React.useState();
+  const [mediaScreen, setMediaScreen] = React.useState<any>(null);
   const [status, setStatus] = React.useState(false);
 
-  const participantCanvasRef = React.useRef(null);
-  const participantShareScreenRef = React.useRef(null);
+  const participantCanvasRef = React.useRef<HTMLCanvasElement | null>(null);
+  const participantShareScreenRef = React.useRef<HTMLCanvasElement | null>(
+    null
+  );
+
+  const selfVideoRef = React.useRef<HTMLVideoElement | null>(null);
 
   const init = async () => {
     client.init('US-EN', 'CDN');
@@ -54,6 +59,7 @@ const ZoomComponent = () => {
           toast.success('You joined the session');
         });
       const stream = client.getMediaStream();
+
       setMediaScreen(stream);
     } catch (error) {
       console.log(error);
@@ -105,7 +111,7 @@ const ZoomComponent = () => {
     };
 
     const handleActiveSpeaker = () => {
-      useActiveSpeaker(client);
+      useActiveSpeaker(client, selfVideoRef, participantCanvasRef);
     };
 
     console.log('-----------Event listeners connection--------------');
@@ -116,6 +122,7 @@ const ZoomComponent = () => {
 
   return (
     <VideoContainer>
+      <Sheduler />
       <ToastContainer />
       <Stack
         direction={'row'}
@@ -138,6 +145,7 @@ const ZoomComponent = () => {
           mediaScreen={mediaScreen}
           participantCanvasRef={participantCanvasRef}
           participantShareScreenRef={participantShareScreenRef}
+          selfVideoRef={selfVideoRef}
           setStatus={setStatus}
         />
       ) : null}

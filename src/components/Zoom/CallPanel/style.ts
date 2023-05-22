@@ -3,7 +3,12 @@ import { NORMAL_FONT_SIZE } from '@constants/fontSizes';
 import FONT_ROBOTO from '@constants/fonts';
 import styled from 'styled-components';
 
-export const CallPanelWrapper = styled.button`
+interface CallPanelWrapperProps {
+  isSelfFullScreen?: boolean;
+  isParticipantFullScreen?: boolean;
+}
+
+export const CallPanelWrapper = styled.button<CallPanelWrapperProps>`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -20,16 +25,13 @@ export const CallPanelWrapper = styled.button`
   left: 50%;
 `;
 
-export const PanelButtonStyle = styled.button`
+export const PanelButtonStyle = styled.button<CallPanelWrapperProps>`
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
   background: #00000085;
   border-radius: 50%;
-  /* 
-  position: ${({ isSelfFullScreen, isParticipantFullScreen }) =>
-    isSelfFullScreen || isParticipantFullScreen ? 'fixed' : 'absolute'}; */
 
   font-family: ${FONT_ROBOTO};
 
@@ -53,16 +55,13 @@ export const PanelButtonStyle = styled.button`
   }
 `;
 
-export const EndCallButtonStyle = styled.button`
+export const EndCallButtonStyle = styled.button<CallPanelWrapperProps>`
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
   background: #e9380d;
   border-radius: 50%;
-  /* 
-  position: ${({ isSelfFullScreen, isParticipantFullScreen }) =>
-    isSelfFullScreen || isParticipantFullScreen ? 'fixed' : 'absolute'}; */
 
   font-family: ${FONT_ROBOTO};
 

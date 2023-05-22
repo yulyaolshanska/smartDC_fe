@@ -1,16 +1,18 @@
 import { Button, Tooltip, Stack, Box } from '@mui/material';
-import React, { useCallback } from 'react';
+import React, { RefObject, useCallback } from 'react';
 import GoToFullScreenButton from '../GoToFullScreenButton';
 import { ParticipantCanvas, SelfVideo } from '../styles';
-import { createPortal } from 'react-dom';
+
 import NameTip from '../NameTip';
 import CallPanel from '../CallPanel';
 
 interface VideoProps {
   client: any;
   mediaScreen: any;
-  participantCanvasRef: any;
-  participantShareScreenRef: any;
+  participantCanvasRef: RefObject<HTMLCanvasElement> | null;
+  participantShareScreenRef: RefObject<HTMLCanvasElement> | null;
+  setStatus: (arg: boolean) => void;
+  selfVideoRef: RefObject<HTMLVideoElement> | null;
 }
 
 const Video = ({
@@ -19,6 +21,7 @@ const Video = ({
   participantCanvasRef,
   participantShareScreenRef,
   setStatus,
+  selfVideoRef,
 }: VideoProps) => {
   const [videoStarted, setVideoStarted] = React.useState(false);
   const [audioStarted, setAudioStarted] = React.useState(false);
@@ -30,11 +33,13 @@ const Video = ({
     React.useState(false);
 
   const isSupportWebCodecs = () => {
+    //@ts-ignore
     return typeof window.MediaStreamTrackProcessor === 'function';
   };
 
   const startVideoButton = React.useCallback(async () => {
     if (!videoStarted) {
+      //@ts-ignore
       if (!!window.chrome && !(typeof SharedArrayBuffer === 'function')) {
         setIsSab(false);
         await mediaScreen.startVideo({
@@ -84,11 +89,13 @@ const Video = ({
   const shareScreen = React.useCallback(async () => {
     if (isSharedScreen) {
       await mediaScreen.stopShareScreen();
-      document.querySelector('#share-video').style.display = 'none';
+      (document.querySelector('#share-video') as HTMLElement).style.display =
+        'none';
       setIsSharedScreen(false);
     } else {
       if (isSupportWebCodecs()) {
-        document.querySelector('#share-video').style.display = 'block';
+        (document.querySelector('#share-video') as HTMLElement).style.display =
+          'block';
         await mediaScreen.startShareScreen(
           document.querySelector('#share-video'),
           512,
@@ -117,10 +124,7 @@ const Video = ({
         {isSab ? (
           <Box position={'relative'}>
             <canvas id="self-view-canvas"></canvas>
-            <GoToFullScreenButton
-              setIsSelfFullScreen={setIsSelfFullScreen}
-              isSelfFullScreen={isSelfFullScreen}
-            />
+            <GoToFullScreenButton isSelfFullScreen={isSelfFullScreen} />
             <NameTip isSelfFullScreen={isSelfFullScreen}></NameTip>
           </Box>
         ) : (
@@ -128,6 +132,7 @@ const Video = ({
             <SelfVideo
               id="self-view-video"
               isSelfFullScreen={isSelfFullScreen}
+              ref={selfVideoRef}
             ></SelfVideo>
             {!isSelfFullScreen ? (
               <GoToFullScreenButton
@@ -142,6 +147,7 @@ const Video = ({
                 isSelfFullScreen={isSelfFullScreen}
                 setIsSelfFullScreen={setIsSelfFullScreen}
                 setIsParticipantFullScreen={setIsParticipantFullScreen}
+                isParticipantFullScreen={isParticipantFullScreen}
                 client={client}
                 setStatus={setStatus}
                 startVideoButton={startVideoButton}
@@ -168,16 +174,20 @@ const Video = ({
             />
           ) : null}
 
-          <NameTip isParticipantFullScreen={isParticipantFullScreen}></NameTip>
+          <NameTip isSelfFullScreen={isSelfFullScreen}></NameTip>
           {isParticipantFullScreen ? (
             <CallPanel
+              isSelfFullScreen={isSelfFullScreen}
+              setIsSelfFullScreen={setIsSelfFullScreen}
               setIsParticipantFullScreen={setIsParticipantFullScreen}
               isParticipantFullScreen={isParticipantFullScreen}
-              setIsSelfFullScreen={setIsSelfFullScreen}
               client={client}
               setStatus={setStatus}
               startVideoButton={startVideoButton}
               startAudioButton={startAudioButton}
+              audioStarted={audioStarted}
+              isMuted={isMuted}
+              videoStarted={videoStarted}
             />
           ) : null}
         </Box>

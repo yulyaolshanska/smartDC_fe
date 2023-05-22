@@ -1,7 +1,9 @@
+import { RefObject } from 'react';
+
 const usePeerVideoStateChange = async (
-  client,
-  mediaScreen,
-  participantCanvasRef
+  client: any,
+  mediaScreen: any,
+  participantCanvasRef: RefObject<HTMLCanvasElement>
 ) => {
   const onPeerVideoStateChange = async (payload: any) => {
     console.log('payload', payload);

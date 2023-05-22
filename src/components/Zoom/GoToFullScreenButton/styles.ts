@@ -3,7 +3,12 @@ import { NORMAL_FONT_SIZE } from '@constants/fontSizes';
 import FONT_ROBOTO from '@constants/fonts';
 import styled from 'styled-components';
 
-export const GoToFullScreenButtonStyle = styled.button`
+interface GoToFullScreenButtonStyleProps {
+  isSelfFullScreen?: boolean;
+  isParticipantFullScreen?: boolean;
+}
+
+export const GoToFullScreenButtonStyle = styled.button<GoToFullScreenButtonStyleProps>`
   display: flex;
   align-items: center;
   justify-content: center;

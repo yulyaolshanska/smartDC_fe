@@ -15,6 +15,21 @@ import {
   EndCallButtonStyle,
   PanelButtonStyle,
 } from './style';
+
+interface CallPanelProps {
+  client: any;
+  isSelfFullScreen: boolean;
+  isParticipantFullScreen: boolean;
+  setIsParticipantFullScreen: (arg: boolean) => void;
+  setIsSelfFullScreen: (arg: boolean) => void;
+  setStatus: (arg: boolean) => void;
+  startVideoButton: () => void;
+  startAudioButton: () => void;
+  audioStarted: boolean;
+  isMuted: boolean;
+  videoStarted: boolean;
+}
+
 const CallPanel = ({
   client,
   isSelfFullScreen,
@@ -27,7 +42,7 @@ const CallPanel = ({
   audioStarted,
   isMuted,
   videoStarted,
-}) => {
+}: CallPanelProps) => {
   const leaveSession = async () => {
     try {
       startVideoButton();

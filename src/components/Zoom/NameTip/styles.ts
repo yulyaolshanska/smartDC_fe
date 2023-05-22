@@ -3,8 +3,13 @@ import { NORMAL_FONT_SIZE, SMALL_FONT_SIZE } from '@constants/fontSizes';
 import FONT_ROBOTO from '@constants/fonts';
 import styled from 'styled-components';
 
+interface NameTipStyleProps {
+  isSelfFullScreen: boolean;
+}
+
 export const NameTipStyle = styled.div`
-  display: ${({ isSelfFullScreen }) => (isSelfFullScreen ? 'none' : 'flex')};
+  display: ${({ isSelfFullScreen }: NameTipStyleProps) =>
+    isSelfFullScreen ? 'none' : 'flex'};
   align-items: center;
   justify-content: center;
   gap: 8px;

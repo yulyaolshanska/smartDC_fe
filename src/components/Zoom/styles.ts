@@ -1,6 +1,14 @@
 import styled from 'styled-components';
 import { Participant } from '@zoom/videosdk';
 
+interface SelfVideoProps {
+  isSelfFullScreen: boolean;
+}
+
+interface ParticipantCanvasProps {
+  isParticipantFullScreen: boolean;
+}
+
 export const VideoContainer = styled.div`
   background-color: #d7ddf4;
   padding: 12px;
@@ -12,7 +20,7 @@ export const VideoContainer = styled.div`
   width: 100%;
 `;
 
-export const SelfVideo = styled.video`
+export const SelfVideo = styled.video<SelfVideoProps>`
   position: ${({ isSelfFullScreen }) => (isSelfFullScreen ? 'fixed' : '')};
   top: 0;
   left: 0;
@@ -27,7 +35,7 @@ export const SelfVideo = styled.video`
   transition: all 0.3s;
 `;
 
-export const ParticipantCanvas = styled.canvas`
+export const ParticipantCanvas = styled.canvas<ParticipantCanvasProps>`
   position: ${({ isParticipantFullScreen }) =>
     isParticipantFullScreen ? 'fixed' : ''};
   top: 0;
