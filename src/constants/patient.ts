@@ -16,3 +16,7 @@ export const search = 'search';
 export const years = 'years';
 export const male = 'Male';
 export const female = 'Female';
+export const unknownGender = 'Unknown gender';
+export const unknownCity = 'Unknown city';
+export const unknownCountry = 'Unknown country';
+export const unknownAge = 'Unknown age';

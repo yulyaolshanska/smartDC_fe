@@ -21,7 +21,7 @@ import {
 import CardWrapper from '@components/CardWrapper';
 
 import { IPatient } from '@components/general/type';
-import { male, female } from '@constants/patient';
+import { male, female, unknownCity, unknownCountry, unknownGender, unknownAge, years } from '@constants/patient';
 import { lastAppointmentInfo } from '@constants/mockData';
 
 interface IProps {
@@ -45,14 +45,14 @@ function PatientCard({ patient, searchValue }: IProps) {
   } = patient;
 
   const patientAge: string = birthDate
-  ? `${new Date().getFullYear() - new Date(birthDate).getFullYear()}`
-  : 'Unknown';
+  ? `${new Date().getFullYear() - new Date(birthDate).getFullYear()} ${years}`
+  : unknownAge;
 
   const patientFullName = `${firstName} ${lastName}`;
 
-  const patientCity: string = city ? city : 'Unknown city';
+  const patientCity: string = city ? city : unknownCity;
 
-  const patientCountry: string = country ? country : 'Unknown country';
+  const patientCountry: string = country ? country : unknownCountry;
 
   return (
     <PatientItem>
@@ -72,10 +72,10 @@ function PatientCard({ patient, searchValue }: IProps) {
             <>
               {gender === male && <GenderMaleIcon />}
               {gender === female && <GenderFemaleIcon />}
-              <UserInfo>{gender || 'Unknown gender'}</UserInfo>
+              <UserInfo>{gender || unknownGender}</UserInfo>
               <CalengarIcon />
               <UserInfo>
-                {patientAge} {t('PatientCard.years')}
+                {patientAge}
               </UserInfo>
               <PinIcon />
               <UserInfo>
