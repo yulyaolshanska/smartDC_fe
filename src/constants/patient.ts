@@ -15,3 +15,4 @@ export const overview = 'overview';
 export const search = 'search';
 export const years = 'years';
 export const male = 'Male';
+export const female = 'Female';
