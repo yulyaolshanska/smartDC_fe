@@ -1,11 +1,5 @@
-import React from 'react';
 import { LoadButton } from './styles';
 import { useTranslation } from 'react-i18next';
-import { noteApi } from 'services/NoteService';
-import { useAppDispatch, useAppSelector } from '@redux/hooks';
-import { noteFilterActions } from '@redux/slices/NoteFilterSlice';
-import { INotes } from '@components/Notes';
-import { appointmentsApi } from 'services/AppointmentService';
 
 //not reusable
 
