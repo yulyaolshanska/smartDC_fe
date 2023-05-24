@@ -24,6 +24,9 @@ function MessageInput({
   };
 
   const handleSend = () => {
+    if (value.trim() === '') {
+      return;
+    }
     send(value);
     setValue('');
     resetInputHeight();
