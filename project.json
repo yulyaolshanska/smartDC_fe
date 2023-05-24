@@ -1,15 +1,15 @@
 {
-  "name": "store",
+  "name": "web-wizards-fe",
   "$schema": "node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "./src",
   "projectType": "application",
   "targets": {
     "build": {
-      "executor": "@nrwl/vite:build",
+      "executor": "@nx/vite:build",
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
-        "outputPath": "dist/store"
+        "outputPath": "dist/web-wizards-fe"
       },
       "configurations": {
         "development": {
@@ -21,34 +21,56 @@
       }
     },
     "serve": {
-      "executor": "@nrwl/vite:dev-server",
+      "executor": "@nx/vite:dev-server",
       "defaultConfiguration": "development",
       "options": {
-        "buildTarget": "store:build"
+        "buildTarget": "web-wizards-fe:build"
       },
       "configurations": {
         "development": {
-          "buildTarget": "store:build:development",
+          "buildTarget": "web-wizards-fe:build:development",
           "hmr": true
         },
         "production": {
-          "buildTarget": "store:build:production",
+          "buildTarget": "web-wizards-fe:build:production",
           "hmr": false
         }
       }
     },
-    "test": {
-      "executor": "@nrwl/vite:test",
-      "outputs": ["{projectRoot}/coverage"],
+    "preview": {
+      "executor": "@nx/vite:preview-server",
+      "defaultConfiguration": "development",
       "options": {
-        "passWithNoTests": true
+        "buildTarget": "web-wizards-fe:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "web-wizards-fe:build:development"
+        },
+        "production": {
+          "buildTarget": "web-wizards-fe:build:production"
+        }
+      }
+    },
+    "test": {
+      "executor": "@nx/vite:test",
+      "outputs": ["coverage/web-wizards-fe"],
+      "options": {
+        "passWithNoTests": true,
+        "reportsDirectory": "coverage/web-wizards-fe"
       }
     },
     "lint": {
-      "executor": "@nrwl/linter:eslint",
+      "executor": "@nx/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": ["./src/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "serve-static": {
+      "executor": "@nx/web:file-server",
+      "options": {
+        "buildTarget": "web-wizards-fe-1:build"
       }
     }
   },

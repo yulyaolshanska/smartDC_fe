@@ -1,5 +1,9 @@
 import styled from 'styled-components';
-import { NORMAL_FONT_SIZE, SMALL_FONT_SIZE } from '@constants/fontSizes';
+import {
+  MEDIUM_FONT_SIZE,
+  NORMAL_FONT_SIZE,
+  SMALL_FONT_SIZE,
+} from '@constants/fontSizes';
 import FONT_ROBOTO from '@constants/fonts';
 import {
   BLACK,
@@ -9,6 +13,8 @@ import {
   LIGHT_BLUE,
   NAVY_BLUE,
 } from '@constants/colors';
+import { NavLink } from 'react-router-dom';
+
 export const Form = styled.form`
   margin: 35px;
   text-align: center;
@@ -119,4 +125,25 @@ export const ShowMoreLessButton = styled.button`
   &:hover {
     color: ${NAVY_BLUE};
   }
+`;
+
+export const ButtonContainer = styled.div`
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+`;
+
+export const BookAppointmentButton = styled(NavLink)`
+  background: -webkit-linear-gradient(${NAVY_BLUE}, ${CORNFLOWER_BLUE});
+  color: white;
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  width: 250px;
+  height: 50px;
+  border-radius: 10px;
+  font-size: ${SMALL_FONT_SIZE};
+  font-family: ${FONT_ROBOTO};
+  font-weight: bold;
 `;

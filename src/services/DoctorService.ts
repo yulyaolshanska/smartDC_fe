@@ -43,5 +43,11 @@ export const doctorApi = createApi({
         method: 'GET',
       }),
     }),
+    getDoctorById: builder.query({
+      query: (id) => ({
+        url: `/doctor/${id}`,
+        method: 'GET',
+      }),
+    }),
   }),
 });

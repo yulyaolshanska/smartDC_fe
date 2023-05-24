@@ -140,6 +140,7 @@ export const AuthGoogleContainer = styled.a`
   font-size: ${SMALL_FONT_SIZE};
   font-weight: bold;
   transition: all 0.2s ease-in-out;
+  padding: 0px 15px 0px 15px;
 
   &:hover {
     background-color: ${NAVY_BLUE};
@@ -151,7 +152,6 @@ export const AuthGoogleContainer = styled.a`
 export const GoogleImg = styled.img`
   height: 30px;
   width: 30px;
-  padding-left: 10px;
 `;
 
 export const GoogleText = styled.span`

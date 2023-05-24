@@ -62,9 +62,9 @@ const AppRouter = () => {
         <Route
           path={PATH.SIGN_UP_SECOND_STEP_GOOGLE}
           element={
-            // <ProtectedRoute allowedRoles={['']}>
-            <SignUpSecondFormGoogle />
-            // </ProtectedRoute>
+            <ProtectedRoute allowedRoles={['']}>
+              <SignUpSecondFormGoogle />
+            </ProtectedRoute>
           }
         />
         <Route
@@ -82,7 +82,7 @@ const AppRouter = () => {
               <EditPatientCard />
             </ProtectedRoute>
           }
-        />{' '}
+        />
         <Route
           path={PATH.FORGOT_PASS}
           element={
