@@ -12,9 +12,11 @@ function MessageInput({
   typing: (isTyping: boolean) => void;
 }) {
   const { t } = useTranslation();
-
+  const tWithDefault = (key: string) => {
+    const translation = t(key);
+    return translation || '';
+  };
   const [value, setValue] = useState<string>('');
-
   const inputRef = useRef<HTMLTextAreaElement>(null);
 
   const handleMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
@@ -64,7 +66,7 @@ function MessageInput({
         onChange={handleMessageChange}
         onKeyDown={handleKeyDown}
         onInput={handleTextareaHeight}
-        placeholder={t('Chat.typeMessage')}
+        placeholder={tWithDefault('Chat.typeMessage')}
         maxLength={MAX_CHARACTER_LIMIT}
         value={value}
       />

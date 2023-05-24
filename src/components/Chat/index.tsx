@@ -20,15 +20,10 @@ export interface Message {
 
 function Chat() {
   const { t } = useTranslation();
-
   const doctorData = useAppSelector((state) => state.doctorReducer);
-
   const doctorId = doctorData.id;
-
   const [socket, setSocket] = useState<Socket>();
-
   const [messages, setMessages] = useState<Message[]>([]);
-
   const [typingDisplay, setTypingDisplay] = useState<string>('');
 
   useEffect(() => {
