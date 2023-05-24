@@ -1,13 +1,18 @@
+import { AppointmentFormValues } from '@components/general/type';
+import { useAppDispatch } from '@redux/hooks';
+import { socketAppointmentActions } from '@redux/slices/socketAppointmentsSlice';
 import { useEffect } from 'react';
-import { createSocketWithHandlers } from 'socket-io';
+import { createSocketWithHandlers } from '@components/Zoom/socket-io';
 import { io, Socket } from 'socket.io-client';
 import cookie from 'utils/functions/cookies';
 
 const token = cookie.get('accessToken');
 
 const Scheduler = () => {
-  const handleAppointmentStarted = () => {
-    console.log('Appointment started. Displaying notification...');
+  const dispatch = useAppDispatch();
+  const handleAppointmentStarted = (data) => {
+    console.log('Appointment started. Displaying notification...', data);
+    dispatch(socketAppointmentActions.updateNextAppointment(data));
   };
 
   useEffect(() => {
@@ -19,7 +24,7 @@ const Scheduler = () => {
         },
         transports: ['websocket', 'polling'],
       }
-    ); // Connect to the backend server
+    );
 
     socket.on('connect', () => {
       console.log('Connected to the backend');
@@ -29,7 +34,7 @@ const Scheduler = () => {
     socket.on('appointment_update', handleAppointmentStarted);
 
     return () => {
-      socket.disconnect(); // Disconnect from the server when the component unmounts
+      socket.disconnect();
     };
   }, []);
 

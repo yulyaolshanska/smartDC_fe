@@ -22,6 +22,7 @@ import ZoomPage from '@pages/zoom';
 import Patients from '@pages/patients';
 import cookie from 'utils/functions/cookies';
 import AppointmentsDoctorScheduler from '@pages/doctorScheduler/appointmentsScheduler';
+import { createSocketWithHandlers } from '@components/Zoom/socket-io';
 
 export const PATH = {
   SIGN_UP: '/auth',

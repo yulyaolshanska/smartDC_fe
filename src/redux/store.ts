@@ -21,6 +21,7 @@ import { navigationReducer } from 'redux/slices/NavigationSlice';
 import { doctorReducer } from 'redux/slices/DoctorSlice';
 import { resetPasswordReducer } from '@redux/slices/auth/resetPassword';
 import { createPatientReducer } from '@redux/slices/patient/createPatient';
+import { socketAppointmenttReducer } from '@redux/slices/socketAppointmentsSlice';
 import { zoomReducer } from './slices/ZoomSlice';
 import { noteFilterReducer } from './slices/NoteFilterSlice';
 import { patientApi } from 'services/PatientService';
@@ -38,6 +39,7 @@ const rootReducer = combineReducers({
   createPatientReducer,
   noteFilterReducer,
   zoomReducer,
+  socketAppointmenttReducer,
   [noteApi.reducerPath]: noteApi.reducer,
   [doctorApi.reducerPath]: doctorApi.reducer,
   [authApi.reducerPath]: authApi.reducer,
@@ -58,6 +60,7 @@ const persistConfig = {
     'zoomApi',
     'zoomReducer',
     'noteFilterReducer',
+    'socketAppointmenttReducer',
     'authApi',
     'noteApi',
   ],

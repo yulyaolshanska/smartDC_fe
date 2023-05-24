@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import CreatePatientInitialState from '@redux/slices/patient/createPatient/types';
 
-const initialState = { nextAppointment: {} };
+const initialState = { nextAppointment: null };
 
 const socketAppointment = createSlice({
   name: 'socketAppointment',

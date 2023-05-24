@@ -1,4 +1,6 @@
+import { useAppDispatch } from '@redux/hooks';
 import { socketAppointmentActions } from '@redux/slices/socketAppointmentsSlice';
+import { store } from '@redux/store';
 import { Socket, io } from 'socket.io-client';
 import cookie from 'utils/functions/cookies';
 
@@ -11,6 +13,8 @@ type CreateSocketOptions = {
 const socketIOUrl = `${import.meta.env.VITE_REACT_APP_BASE_URL_SERVER}${
   import.meta.env.VITE_APPOINTMENT_NAMESPACE
 }`;
+
+const dispatch = store.dispatch;
 
 export const createSocketWithHandlers = (): Socket => {
   const token = cookie.get('accessToken');
@@ -28,7 +32,7 @@ export const createSocketWithHandlers = (): Socket => {
 
   socket.on('appointment_update', (nextAppointment) => {
     console.log('event: appointment_update', nextAppointment);
-    socketAppointmentActions.updateNextAppointment(nextAppointment);
+    dispatch(socketAppointmentActions.updateNextAppointment(nextAppointment));
   });
 
   return socket;

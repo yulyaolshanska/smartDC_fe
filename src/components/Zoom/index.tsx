@@ -16,6 +16,9 @@ import useActiveSpeaker from './utils/useActiveSpeaker';
 import useActiveShareChange from './utils/useActiveShareChange';
 import Sheduler from './Sheduler';
 
+import { useAppSelector } from '@redux/hooks';
+import { createSocketWithHandlers } from './socket-io';
+
 const dispatch = store.dispatch;
 let meetingArgs = { ...devConfig };
 
@@ -40,6 +43,10 @@ const ZoomComponent = () => {
   const [mediaScreen, setMediaScreen] = React.useState<any>(null);
   const [status, setStatus] = React.useState(false);
 
+  const socketNextAppointment = useAppSelector(
+    (state) => state.socketAppointmenttReducer.nextAppointment
+  );
+
   const participantCanvasRef = React.useRef<HTMLCanvasElement | null>(null);
   const participantShareScreenRef = React.useRef<HTMLCanvasElement | null>(
     null
@@ -47,32 +54,37 @@ const ZoomComponent = () => {
 
   const selfVideoRef = React.useRef<HTMLVideoElement | null>(null);
 
+  // React.useEffect(() => {
+  //   createSocketWithHandlers();
+  // }, []);
   const init = async () => {
-    client.init('US-EN', 'CDN');
+    if (socketNextAppointment) {
+      client.init('US-EN', 'CDN');
 
-    try {
-      setLoadingText('Joining the session');
-      await client
-        .join(meetingArgs.tpc, meetingArgs.signature, meetingArgs.name)
-        .then(() => {
-          setStatus(true);
-          toast.success('You joined the session');
-        });
-      const stream = client.getMediaStream();
+      try {
+        setLoadingText('Joining the session');
+        await client
+          .join(meetingArgs.tpc, meetingArgs.signature, meetingArgs.name)
+          .then(() => {
+            setStatus(true);
+            toast.success('You joined the session');
+          });
+        const stream = client.getMediaStream();
 
-      setMediaScreen(stream);
-    } catch (error) {
-      console.log(error);
+        setMediaScreen(stream);
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      toast.info('You have no active upcoming appointments');
     }
   };
-
   const leaveSession = async () => {
     await client.leave().then(() => {
       setStatus(false);
       toast.info('You left the session');
     });
   };
-
   React.useEffect(() => {
     const renderForNewParticipants = async () => {
       client.getAllUser().forEach(async (user) => {
