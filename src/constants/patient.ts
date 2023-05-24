@@ -20,3 +20,5 @@ export const unknownGender = 'Unknown gender';
 export const unknownCity = 'Unknown city';
 export const unknownCountry = 'Unknown country';
 export const unknownAge = 'Unknown age';
+export const local = 'Local';
+export const remote = 'Remote';

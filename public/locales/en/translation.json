@@ -159,7 +159,8 @@
     "saveSchedule": "Save schedule",
     "selectTimezone": "Time Zone:",
     "successfullySubmited": "Your schedule has been successfully updated!",
-    "calendar": "Calendar"
+    "calendar": "Calendar",
+    "localDoctorAvailability": "As Local doctor you work full-time work day and can't set your availability time!"
   },
   "BookAppointment": {
     "selectDoctorSpecialization": "Select doctor specialization",
