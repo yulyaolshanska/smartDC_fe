@@ -60,7 +60,7 @@ const AppointmentData = ({
   }`;
 
   const showLastAppointment = () => {
-    const lastAppointment = patient.notes[0]?.note;
+    const lastAppointment = patient?.notes[0]?.note;
 
     if (lastAppointment) {
       return show
