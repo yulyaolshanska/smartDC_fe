@@ -1,4 +1,4 @@
-import { WHITE } from '@constants/colors';
+import { SOME_COLOR, WHITE } from '@constants/colors';
 import { NORMAL_FONT_SIZE } from '@constants/fontSizes';
 import FONT_ROBOTO from '@constants/fonts';
 import styled from 'styled-components';
@@ -9,7 +9,7 @@ export const FinishCallButtonStyle = styled.button`
   justify-content: center;
   gap: 8px;
   width: 80%;
-  background-color: #e9380d;
+  background-color: ${SOME_COLOR};
   border-radius: 4px;
   font-family: ${FONT_ROBOTO};
 

@@ -7,6 +7,7 @@ import { io, Socket } from 'socket.io-client';
 import cookie from 'utils/functions/cookies';
 import { store } from '@redux/store';
 import { zoomApi } from 'services/ZoomService';
+import { useTranslation } from 'react-i18next';
 
 const token = cookie.get('accessToken');
 
@@ -18,12 +19,10 @@ const Scheduler = () => {
   );
 
   const [getSignature] = zoomApi.useGetSignatureMutation();
-  console.log(socketCallConfig);
+
   React.useEffect(() => {
     if (!socketCallConfig.signature && socketCallConfig.tpc) {
-      console.log('213123123');
       getSignature({ ...socketCallConfig }).then((res) => {
-        console.log('res', res);
         const updatedCallConfig = {
           ...socketCallConfig,
           signature: res.error.data,
@@ -42,8 +41,6 @@ const Scheduler = () => {
   );
 
   const handleAppointmentStarted = (data) => {
-    console.log(data.roomName);
-
     dispatch(
       socketAppointmentActions.updateNextAppointment(data.nextAppointment)
     );

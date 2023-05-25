@@ -1,4 +1,4 @@
-import { WHITE } from '@constants/colors';
+import { COLOR_TWO, WHITE } from '@constants/colors';
 import { NORMAL_FONT_SIZE } from '@constants/fontSizes';
 import FONT_ROBOTO from '@constants/fonts';
 import styled from 'styled-components';
@@ -8,7 +8,7 @@ export const StartCallButtonStyle = styled.button`
   align-items: center;
   justify-content: center;
   gap: 8px;
-  background-color: #90b457;
+  background-color: ${COLOR_TWO};
   border-radius: 4px;
   font-family: ${FONT_ROBOTO};
 

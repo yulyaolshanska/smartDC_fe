@@ -239,5 +239,11 @@
   "Chat": {
     "typeMessage": "Type your message...",
     "isTyping": "is typing"
+  },
+
+  "Zoom": {
+    "Chat": "Chat",
+    "Finish": "Finish and call next client",
+    "StartCall": "Start Call"
   }
 }

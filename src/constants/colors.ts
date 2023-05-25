@@ -85,3 +85,14 @@ export const CALENDAR_BOX_SHADOW = 'rgba(53, 53, 53, 0.12)';
 export const CALENDAR_HOVER_SHADOW = 'rgba(53, 53, 53, 0.16)';
 
 export const PERIWINKLE = '#cbd8ff';
+
+export const BLACK_BUT_NOT = '#00000085';
+export const SOME_COLOR = '#e9380d';
+
+export const COLOR_ONE = '#e2edfd';
+
+export const COLOR_TWO = '#90b457';
+
+export const COLOR_THREE = '#d7ddf4';
+
+export const AZURE = 'azure';

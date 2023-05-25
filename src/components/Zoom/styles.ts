@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 import { Participant } from '@zoom/videosdk';
+import { COLOR_THREE, BLACK_BUT_NOT } from '@constants/colors';
+import { AZURE } from './../../constants/colors';
 
 interface SelfVideoProps {
   isSelfFullScreen: boolean;
@@ -10,7 +12,7 @@ interface ParticipantCanvasProps {
 }
 
 export const VideoContainer = styled.div`
-  background-color: #d7ddf4;
+  background-color: ${COLOR_THREE};
   padding: 12px;
   height: fit-content;
   display: flex;
@@ -30,20 +32,26 @@ export const SelfVideo = styled.video<SelfVideoProps>`
   height: ${({ isSelfFullScreen }) => (isSelfFullScreen ? '100vh' : '288px')};
 
   border-radius: 4px;
-  background-color: ${({ isSelfFullScreen }) => (isSelfFullScreen ? '#00000085' : 'azure')};
+  background-color: ${({ isSelfFullScreen }) =>
+    isSelfFullScreen ? `${BLACK_BUT_NOT}` : `${AZURE}`};
   transition: all 0.3s;
 `;
 
 export const ParticipantCanvas = styled.canvas<ParticipantCanvasProps>`
-  position: ${({ isParticipantFullScreen }) => (isParticipantFullScreen ? 'fixed' : '')};
+  position: ${({ isParticipantFullScreen }) =>
+    isParticipantFullScreen ? 'fixed' : ''};
   top: 0;
   left: 0;
   right: 0;
-  z-index: ${({ isParticipantFullScreen }) => (isParticipantFullScreen ? 10 : null)};
-  width: ${({ isParticipantFullScreen }) => (isParticipantFullScreen ? '100vw' : '512px')};
-  height: ${({ isParticipantFullScreen }) => (isParticipantFullScreen ? '100vh' : '288px')};
+  z-index: ${({ isParticipantFullScreen }) =>
+    isParticipantFullScreen ? 10 : null};
+  width: ${({ isParticipantFullScreen }) =>
+    isParticipantFullScreen ? '100vw' : '512px'};
+  height: ${({ isParticipantFullScreen }) =>
+    isParticipantFullScreen ? '100vh' : '288px'};
 
   border-radius: 4px;
-  background-color: ${({ isParticipantFullScreen }) => (isParticipantFullScreen ? '#00000085' : 'azure')};
+  background-color: ${({ isParticipantFullScreen }) =>
+    isParticipantFullScreen ? `${BLACK_BUT_NOT} ` : `${AZURE}`};
   transition: all 0.3s;
 `;

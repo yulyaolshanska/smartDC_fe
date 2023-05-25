@@ -70,9 +70,7 @@ const ZoomComponent = () => {
         const stream = client.getMediaStream();
 
         setMediaScreen(stream);
-      } catch (error) {
-        console.log(error);
-      }
+      } catch (error) {}
     } else {
       toast.info('You have no active upcoming appointments');
     }

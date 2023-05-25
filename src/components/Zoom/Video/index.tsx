@@ -2,6 +2,7 @@ import { Button, Tooltip, Stack, Box } from '@mui/material';
 import React, { RefObject, useCallback } from 'react';
 import GoToFullScreenButton from '../GoToFullScreenButton';
 import { ParticipantCanvas, SelfVideo } from '../styles';
+import { useTranslation } from 'react-i18next';
 
 import NameTip from '../NameTip';
 import CallPanel from '../CallPanel';
@@ -31,6 +32,8 @@ const Video = ({
   const [isSelfFullScreen, setIsSelfFullScreen] = React.useState(false);
   const [isParticipantFullScreen, setIsParticipantFullScreen] =
     React.useState(false);
+
+  const { t } = useTranslation();
 
   const isSupportWebCodecs = () => {
     //@ts-ignore
@@ -211,19 +214,29 @@ const Video = ({
       ></canvas>
 
       <Tooltip title={videoStarted ? 'Stop Camera' : 'Start Camera'}>
-        <Button onClick={startVideoButton}>Video</Button>
+        <Button onClick={startVideoButton}>{t('Chat.Video')}</Button>
       </Tooltip>
 
-      <Tooltip title={isSharedScreen ? 'Stop Sharing' : 'Start Sharing'}>
-        <Button onClick={shareScreen}>Share</Button>
+      <Tooltip
+        title={
+          isSharedScreen
+            ? `${t('Chat.StartSharing')}`
+            : `${t('Chat.StopSharing')}`
+        }
+      >
+        <Button onClick={shareScreen}>{t('Chat.Share')}</Button>
       </Tooltip>
 
       <Tooltip
         title={`${
-          audioStarted ? (isMuted ? 'unmute' : 'mute') : 'Start Audio'
+          audioStarted
+            ? isMuted
+              ? `${t('Chat.unmute')}`
+              : `${t('Chat.mute')}`
+            : `${t('Chat.StartAudio')}`
         }`}
       >
-        <Button onClick={startAudioButton}>Audio</Button>
+        <Button onClick={startAudioButton}>{t('Chat.Audio')}</Button>
       </Tooltip>
     </Stack>
   );
