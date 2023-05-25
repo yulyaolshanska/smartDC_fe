@@ -144,7 +144,8 @@
   },
   "Dashboard": {
     "backToDashboard": "Back to dashboard",
-    "loading": "Loading..."
+    "loading": "Loading...",
+    "goBack": "Go back"
   },
   "Warning": {
     "viewScheduleWarning": "Warning: you are in view mode and creating new schedule will be done according to your local time!"
@@ -157,7 +158,7 @@
     "deleteTime": "Delete time:",
     "saveSchedule": "Save schedule",
     "selectTimezone": "Time Zone:",
-     "successfullySubmited": "Your schedule has been successfully updated!",
+    "successfullySubmited": "Your schedule has been successfully updated!",
     "calendar": "Calendar"
   },
   "BookAppointment": {
@@ -178,11 +179,12 @@
     "speciality": "Speciality",
     "located": "Located",
     "rating": "Rating",
-    "loadMore":"Load more",
-    "noDoctors":"No doctor with that name is available",
+    "loadMore": "Load more",
+    "noDoctors": "No doctor with that name is available",
     "confirm": "Confirm",
     "appointmentCreated": "Appointment successfully created",
-    "search": "Search"
+    "search": "Search",
+    "button": "Book appointment +"
   },
 
   "Notes": {
@@ -217,9 +219,25 @@
     "viewCard": "View card",
     "editCard": "Edit card",
     "search": "Search",
-    "loadMore": "Load More"
+    "loadMore": "Load More",
+    "PatientWithName": "Patient with name",
+    "notFound": "not fond",
+    "patients": "Patients"
   },
   "Appointments": {
-    "myAppointments" : "My appointments:"
+    "myAppointments": "My appointments:",
+    "years": "y.o.",
+    "remoteDoctor": "Remote",
+    "localDoctor": "Local",
+    "localDoctorAgenda": "Local doctor",
+    "remoteDoctorAgenda": "Remote doctor",
+    "doctor": "Dr.",
+    "patient": "Patient",
+    "lastAppointment": "Last Appointment",
+    "noAppointmentsYet": "The patient has no appointments yet"
+  },
+  "Chat": {
+    "typeMessage": "Type your message...",
+    "isTyping": "is typing"
   }
 }

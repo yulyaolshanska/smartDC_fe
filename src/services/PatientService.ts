@@ -24,8 +24,9 @@ export const patientApi = createApi({
         method: 'POST',
         body: data,
       }),
+      invalidatesTags: ['Patient'],
     }),
-    getPatients: builder.query<IPatient[], string>({
+    getAllPatients: builder.query<IPatient[], string>({
       query: () => '/patient',
       providesTags: ['Patient'],
     }),
@@ -35,7 +36,6 @@ export const patientApi = createApi({
         method: 'GET',
       }),
     }),
-
     updatePatient: builder.mutation({
       query: (data: PatientDto) => ({
         url: `/patient/${data.id}`,
@@ -44,7 +44,15 @@ export const patientApi = createApi({
       }),
       invalidatesTags: ['Patient'],
     }),
+    getPatientsForRemote: builder.query<IPatient[], number>({
+      query: (id) => `appointment/doctor/${id}/patients`,
+      providesTags: ['Patient'],
+    }),
   }),
 });
 
-export const { useGetPatientsQuery } = patientApi;
+export const {
+  useGetAllPatientsQuery,
+  useGetPatientsForRemoteQuery,
+  useGetPatientByIdQuery,
+} = patientApi;

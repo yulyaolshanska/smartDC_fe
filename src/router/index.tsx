@@ -23,6 +23,7 @@ import Patients from '@pages/patients';
 import cookie from 'utils/functions/cookies';
 import AppointmentsDoctorScheduler from '@pages/doctorScheduler/appointmentsScheduler';
 import { createSocketWithHandlers } from '@components/Zoom/socket-io';
+import Chat from '@components/Chat';
 
 export const PATH = {
   SIGN_UP: '/auth',
@@ -44,6 +45,7 @@ export const PATH = {
   PATIENT_CARD_INFO: '/patient/:id',
   APPOINTMENTS: '/appointment',
   ZOOM: '/zoom',
+  CHAT: '/chat',
 };
 
 const AppRouter = () => {
@@ -62,9 +64,9 @@ const AppRouter = () => {
         <Route
           path={PATH.SIGN_UP_SECOND_STEP_GOOGLE}
           element={
-            // <ProtectedRoute allowedRoles={['']}>
-            <SignUpSecondFormGoogle />
-            // </ProtectedRoute>
+            <ProtectedRoute allowedRoles={['']}>
+              <SignUpSecondFormGoogle />
+            </ProtectedRoute>
           }
         />
         <Route
@@ -76,13 +78,21 @@ const AppRouter = () => {
           }
         />
         <Route
+          path={PATH.CHAT}
+          element={
+            <ProtectedRoute allowedRoles={['Remote', 'Local']}>
+              <Chat />
+            </ProtectedRoute>
+          }
+        />
+        <Route
           path={PATH.EDIT_PATIENT_CARD}
           element={
             <ProtectedRoute allowedRoles={['Remote', 'Local']}>
               <EditPatientCard />
             </ProtectedRoute>
           }
-        />{' '}
+        />
         <Route
           path={PATH.FORGOT_PASS}
           element={
