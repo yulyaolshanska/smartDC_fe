@@ -17,6 +17,7 @@
     "loginTitle": "Login",
     "loginText": "Please, login into your medical account",
     "activationText": "You have successfully verified your account. In order to enter the system, please go to the login form",
+    "activationTextError": "This link is outdated. Please check your email and verify your account using the new link sent to your email.",
     "registrationTitle": "Registration",
     "registrationText": "Please, create your medical account and become a member",
     "firstName": "Your first name",
@@ -145,7 +146,13 @@
   "Dashboard": {
     "backToDashboard": "Back to dashboard",
     "loading": "Loading...",
-    "goBack": "Go back"
+    "goBack": "Go back",
+    "verificationInfo": "To start working you need to verificate your email!",
+    "details": "Details",
+    "receivedVerInfo": "You received verification link to email",
+    "sendAgain": "Send again",
+    "notification": "Link has been sended",
+    "close": "Close"
   },
   "Warning": {
     "viewScheduleWarning": "Warning: you are in view mode and creating new schedule will be done according to your local time!"

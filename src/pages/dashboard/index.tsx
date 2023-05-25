@@ -1,7 +1,13 @@
 import React from 'react';
+import VerificationOfEmail from '@components/VerificationOfEmail';
 
 const Dashboard = () => {
-  return <div>Dashboard</div>;
+  return (
+    <>
+      <VerificationOfEmail />
+      <div>Dashboard</div>
+    </>
+  );
 };
 
 export default Dashboard;
