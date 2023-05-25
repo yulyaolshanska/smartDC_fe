@@ -36,6 +36,7 @@ export interface IPatient {
   timeZone: string;
   overview: string;
   notes: Note[];
+  [key: string]: string | number | Note[] | undefined | null;
 }
 
 export type Note = {

@@ -28,3 +28,8 @@ export const previous = -1;
 
 export const hash = '#';
 
+export const Enter = 'Enter';
+
+export const oneLine = 1;
+
+export const MAX_CHARACTER_LIMIT = 250;

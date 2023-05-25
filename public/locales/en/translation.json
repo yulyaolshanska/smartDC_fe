@@ -242,5 +242,9 @@
     "patient": "Patient",
     "lastAppointment": "Last Appointment",
     "noAppointmentsYet": "The patient has no appointments yet"
+  },
+  "Chat": {
+    "typeMessage": "Type your message...",
+    "isTyping": "is typing"
   }
 }

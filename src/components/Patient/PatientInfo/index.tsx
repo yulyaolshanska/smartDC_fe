@@ -23,7 +23,7 @@ import {
   UserInfo,
 } from '@components/Patient/styles';
 import { patientApi } from 'services/PatientService';
-import { male, years } from '@constants/patient';
+import { female, male, unknownAge, unknownCity, unknownCountry, unknownGender, years } from '@constants/patient';
 import Spinner from '@components/Loaders/Spinner';
 import { useAppSelector } from '@redux/hooks';
 import { local } from '@constants/other';
@@ -40,11 +40,17 @@ function PatientCardInfo() {
     Number(id)
   );
 
+  const userAge: string = patient?.birthDate
+  ? `${new Date().getFullYear() - new Date(patient.birthDate).getFullYear()} ${years}`
+  : unknownAge;
+
+  const userCity: string = patient?.city ? patient.city : unknownCity;
+
+  const userCountry: string = patient?.country ? patient.country : unknownCountry;
+
   const patientFullName = `${patient?.firstName} ${patient?.lastName}`;
-  const patientCityCountry = `${patient?.city}, ${patient?.country}`;
-  const patientAge = `${
-    new Date().getFullYear() - new Date(patient?.birthDate).getFullYear()
-  } ${years}`;
+  const patientCityCountry = `${userCity}, ${userCountry}`;
+  const patientAge = `${userAge}`;
 
   const showLastAppointment = () => {
     const lastAppointment = patient.notes[0]?.note;
@@ -72,12 +78,9 @@ function PatientCardInfo() {
               <ContactInfo>{patient?.email}</ContactInfo>
             </ContactsContainer>
             <InfoContainer>
-              {patient?.gender === male ? (
-                <GenderMaleIcon />
-              ) : (
-                <GenderFemaleIcon />
-              )}
-              <UserInfo>{patient?.gender}</UserInfo>
+              {patient?.gender === male && <GenderMaleIcon />}
+              {patient?.gender === female && <GenderFemaleIcon />}
+              <UserInfo>{patient?.gender || unknownGender}</UserInfo>
               <CalendarIcon />
               <UserInfo>{patientAge}</UserInfo>
               <PinIcon />

@@ -22,6 +22,7 @@ import Patients from '@pages/patients';
 import cookie from 'utils/functions/cookies';
 import AppointmentsDoctorScheduler from '@pages/doctorScheduler/appointmentsScheduler';
 import Dashboard from "@pages/dashboard";
+import Chat from '@components/Chat';
 
 export const PATH = {
   SIGN_UP: '/auth',
@@ -42,6 +43,7 @@ export const PATH = {
   PATIENTS_LIST: '/patients',
   PATIENT_CARD_INFO: '/patient/:id',
   APPOINTMENTS: '/appointment',
+  CHAT: '/chat',
 };
 
 const AppRouter = () => {
@@ -67,6 +69,14 @@ const AppRouter = () => {
           element={
             <ProtectedRoute allowedRoles={['Remote', 'Local']}>
               <CreatePatientCard />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path={PATH.CHAT}
+          element={
+            <ProtectedRoute allowedRoles={['Remote', 'Local']}>
+              <Chat />
             </ProtectedRoute>
           }
         />
