@@ -16,8 +16,7 @@ export const GoToFullScreenButtonStyle = styled.button<GoToFullScreenButtonStyle
   background: #00000085;
   border-radius: 50%;
 
-  position: ${({ isSelfFullScreen, isParticipantFullScreen }) =>
-    isSelfFullScreen || isParticipantFullScreen ? 'fixed' : 'absolute'};
+  position: ${({ isSelfFullScreen, isParticipantFullScreen }) => (isSelfFullScreen || isParticipantFullScreen ? 'fixed' : 'absolute')};
 
   top: 8px;
   right: 8px;
@@ -31,8 +30,7 @@ export const GoToFullScreenButtonStyle = styled.button<GoToFullScreenButtonStyle
   height: 36px;
   width: 36px;
 
-  z-index: ${({ isSelfFullScreen, isParticipantFullScreen }) =>
-    isSelfFullScreen || isParticipantFullScreen ? 100 : null};
+  z-index: ${({ isSelfFullScreen, isParticipantFullScreen }) => (isSelfFullScreen || isParticipantFullScreen ? 100 : null)};
   transition: all 0.2s ease-in-out;
 
   &:active {

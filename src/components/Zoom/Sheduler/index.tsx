@@ -1,18 +1,59 @@
 import { AppointmentFormValues } from '@components/general/type';
-import { useAppDispatch } from '@redux/hooks';
+import { useAppDispatch, useAppSelector } from '@redux/hooks';
 import { socketAppointmentActions } from '@redux/slices/socketAppointmentsSlice';
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { createSocketWithHandlers } from '@components/Zoom/socket-io';
 import { io, Socket } from 'socket.io-client';
 import cookie from 'utils/functions/cookies';
+import { store } from '@redux/store';
+import { zoomApi } from 'services/ZoomService';
 
 const token = cookie.get('accessToken');
 
 const Scheduler = () => {
   const dispatch = useAppDispatch();
+
+  const socketCallConfig = useAppSelector(
+    (state) => state.socketAppointmenttReducer.callConfig
+  );
+
+  const [getSignature] = zoomApi.useGetSignatureMutation();
+  console.log(socketCallConfig);
+  React.useEffect(() => {
+    if (!socketCallConfig.signature && socketCallConfig.tpc) {
+      console.log('213123123');
+      getSignature({ ...socketCallConfig }).then((res) => {
+        console.log('res', res);
+        const updatedCallConfig = {
+          ...socketCallConfig,
+          signature: res.error.data,
+        };
+        dispatch(socketAppointmentActions.updateCallConfig(updatedCallConfig));
+      });
+    }
+  }, [socketCallConfig]);
+
+  // React.useEffect(() => {
+
+  // },[socketCallConfig])
+
+  const socketNextAppointment = useAppSelector(
+    (state) => state.socketAppointmenttReducer.nextAppointment
+  );
+
   const handleAppointmentStarted = (data) => {
-    console.log('Appointment started. Displaying notification...', data);
-    dispatch(socketAppointmentActions.updateNextAppointment(data));
+    console.log(data.roomName);
+
+    dispatch(
+      socketAppointmentActions.updateNextAppointment(data.nextAppointment)
+    );
+    if (!socketCallConfig.session_key)
+      dispatch(
+        socketAppointmentActions.updateCallConfig({
+          ...socketCallConfig,
+          session_key: data.roomName,
+        })
+      );
   };
 
   useEffect(() => {
@@ -26,10 +67,7 @@ const Scheduler = () => {
       }
     );
 
-    socket.on('connect', () => {
-      console.log('Connected to the backend');
-      console.log('123123');
-    });
+    socket.on('connect', () => {});
 
     socket.on('appointment_update', handleAppointmentStarted);
 

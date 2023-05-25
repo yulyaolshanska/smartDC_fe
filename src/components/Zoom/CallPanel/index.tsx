@@ -51,9 +51,7 @@ const CallPanel = ({
         setIsSelfFullScreen(false);
         setStatus(false);
       });
-    } catch (error) {
-      console.log('Unpossible to leave the session', error);
-    }
+    } catch (error) {}
   };
   return (
     <CallPanelWrapper

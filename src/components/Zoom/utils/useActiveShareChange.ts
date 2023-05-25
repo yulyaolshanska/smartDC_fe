@@ -3,22 +3,18 @@ import { RefObject } from 'react';
 const useActiveShareChange = (
   client: any,
   mediaScreen: any,
-  participantShareScreenRef: RefObject<HTMLCanvasElement>
+  participantShareScreenRef: RefObject<HTMLCanvasElement>,
 ): (() => void) => {
   const onActiveShareChange = (payload: any) => {
-    console.log('payload', payload);
-
     if (payload.state === 'Active') {
       mediaScreen.startShareView(
         participantShareScreenRef.current!,
-        payload.userId
+        payload.userId,
       );
       participantShareScreenRef.current!.style.display = 'block';
-    } else {
-      if (payload.action === 'Inactive') {
-        mediaScreen.stopShareView();
-        participantShareScreenRef.current!.style.display = 'none';
-      }
+    } else if (payload.action === 'Inactive') {
+      mediaScreen.stopShareView();
+      participantShareScreenRef.current!.style.display = 'none';
     }
   };
 

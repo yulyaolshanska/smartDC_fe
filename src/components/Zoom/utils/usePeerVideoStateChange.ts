@@ -3,13 +3,10 @@ import { RefObject } from 'react';
 const usePeerVideoStateChange = async (
   client: any,
   mediaScreen: any,
-  participantCanvasRef: RefObject<HTMLCanvasElement>
+  participantCanvasRef: RefObject<HTMLCanvasElement>,
 ) => {
   const onPeerVideoStateChange = async (payload: any) => {
-    console.log('payload', payload);
-
     if (payload.action === 'Start') {
-      console.log('mediaStart', mediaScreen);
       await mediaScreen.renderVideo(
         participantCanvasRef.current,
         payload.userId,
@@ -17,15 +14,12 @@ const usePeerVideoStateChange = async (
         900,
         0,
         0,
-        3
+        3,
       );
-
-      console.log('ref', participantCanvasRef);
     } else if (payload.action === 'Stop') {
-      console.log('mediaStop', mediaScreen);
       await mediaScreen.stopRenderVideo(
         participantCanvasRef.current,
-        payload.userId
+        payload.userId,
       );
     }
   };

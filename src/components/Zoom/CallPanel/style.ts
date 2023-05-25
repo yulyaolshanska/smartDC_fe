@@ -14,11 +14,9 @@ export const CallPanelWrapper = styled.button<CallPanelWrapperProps>`
   justify-content: center;
   gap: 8px;
 
-  position: ${({ isSelfFullScreen, isParticipantFullScreen }) =>
-    isSelfFullScreen || isParticipantFullScreen ? 'fixed' : 'absolute'};
+  position: ${({ isSelfFullScreen, isParticipantFullScreen }) => (isSelfFullScreen || isParticipantFullScreen ? 'fixed' : 'absolute')};
 
-  z-index: ${({ isSelfFullScreen, isParticipantFullScreen }) =>
-    isSelfFullScreen || isParticipantFullScreen ? 100 : null};
+  z-index: ${({ isSelfFullScreen, isParticipantFullScreen }) => (isSelfFullScreen || isParticipantFullScreen ? 100 : null)};
 
   bottom: 8px;
   right: 50%;
@@ -43,8 +41,7 @@ export const PanelButtonStyle = styled.button<CallPanelWrapperProps>`
   width: 60px;
   min-width: 60px;
 
-  z-index: ${({ isSelfFullScreen, isParticipantFullScreen }) =>
-    isSelfFullScreen || isParticipantFullScreen ? 100 : null};
+  z-index: ${({ isSelfFullScreen, isParticipantFullScreen }) => (isSelfFullScreen || isParticipantFullScreen ? 100 : null)};
   transition: all 0.2s ease-in-out;
 
   &:active {
@@ -73,8 +70,7 @@ export const EndCallButtonStyle = styled.button<CallPanelWrapperProps>`
   width: 100px;
   min-width: 100px;
 
-  z-index: ${({ isSelfFullScreen, isParticipantFullScreen }) =>
-    isSelfFullScreen || isParticipantFullScreen ? 100 : null};
+  z-index: ${({ isSelfFullScreen, isParticipantFullScreen }) => (isSelfFullScreen || isParticipantFullScreen ? 100 : null)};
   transition: all 0.2s ease-in-out;
 
   &:active {

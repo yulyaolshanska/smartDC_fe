@@ -19,22 +19,6 @@ import Sheduler from './Sheduler';
 import { useAppSelector } from '@redux/hooks';
 import { createSocketWithHandlers } from './socket-io';
 
-const dispatch = store.dispatch;
-let meetingArgs = { ...devConfig };
-
-const getToken = async () => {
-  let token = await dispatch(
-    zoomApi.endpoints.getSignature.initiate(meetingArgs)
-  );
-  return token;
-};
-
-if (!meetingArgs.signature && meetingArgs.tpc) {
-  getToken().then((res) => {
-    meetingArgs.signature = res.error.data;
-  });
-}
-
 const client = ZoomVideo.createClient();
 
 const ZoomComponent = () => {
@@ -47,6 +31,10 @@ const ZoomComponent = () => {
     (state) => state.socketAppointmenttReducer.nextAppointment
   );
 
+  const socketCallConfig = useAppSelector(
+    (state) => state.socketAppointmenttReducer.callConfig
+  );
+
   const participantCanvasRef = React.useRef<HTMLCanvasElement | null>(null);
   const participantShareScreenRef = React.useRef<HTMLCanvasElement | null>(
     null
@@ -54,17 +42,27 @@ const ZoomComponent = () => {
 
   const selfVideoRef = React.useRef<HTMLVideoElement | null>(null);
 
-  // React.useEffect(() => {
-  //   createSocketWithHandlers();
-  // }, []);
   const init = async () => {
+    client.init('US-EN', 'CDN');
     if (socketNextAppointment) {
-      client.init('US-EN', 'CDN');
-
       try {
         setLoadingText('Joining the session');
+        if (socketCallConfig.signature)
+          console.log(
+            'topic',
+            socketCallConfig.tpc,
+            'sign',
+            socketCallConfig.signature,
+            'name',
+            socketCallConfig.name
+          );
         await client
-          .join(meetingArgs.tpc, meetingArgs.signature, meetingArgs.name)
+          .join(
+            socketCallConfig.tpc,
+            socketCallConfig.signature,
+            socketCallConfig.name,
+            null
+          )
           .then(() => {
             setStatus(true);
             toast.success('You joined the session');
@@ -88,7 +86,6 @@ const ZoomComponent = () => {
   React.useEffect(() => {
     const renderForNewParticipants = async () => {
       client.getAllUser().forEach(async (user) => {
-        console.log('qwerty', participantCanvasRef);
         if (user.bVideoOn) {
           await mediaScreen.renderVideo(
             participantCanvasRef.current,
@@ -111,7 +108,7 @@ const ZoomComponent = () => {
       });
     };
     renderForNewParticipants();
-  }, [meetingArgs, mediaScreen]);
+  }, [socketCallConfig, mediaScreen]);
 
   React.useEffect(() => {
     const handlePeerVideoStateChange = () => {
@@ -126,7 +123,6 @@ const ZoomComponent = () => {
       useActiveSpeaker(client, selfVideoRef, participantCanvasRef);
     };
 
-    console.log('-----------Event listeners connection--------------');
     handleActiveSpeaker();
     handlePeerVideoStateChange();
     handlePeerShareScreen();

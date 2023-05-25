@@ -8,14 +8,12 @@ interface NameTipStyleProps {
 }
 
 export const NameTipStyle = styled.div`
-  display: ${({ isSelfFullScreen }: NameTipStyleProps) =>
-    isSelfFullScreen ? 'none' : 'flex'};
+  display: ${({ isSelfFullScreen }: NameTipStyleProps) => (isSelfFullScreen ? 'none' : 'flex')};
   align-items: center;
   justify-content: center;
   gap: 8px;
 
-  position: ${({ isSelfFullScreen }) =>
-    isSelfFullScreen ? 'fixed' : 'absolute'};
+  position: ${({ isSelfFullScreen }) => (isSelfFullScreen ? 'fixed' : 'absolute')};
   bottom: 8px;
   left: 8px;
   background: #00000085;

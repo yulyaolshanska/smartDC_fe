@@ -71,7 +71,6 @@ const Video = ({
 
   const startAudioButton = useCallback(async () => {
     if (audioStarted) {
-      console.log('-----------MutingAudio--------------');
       if (isMuted) {
         await mediaScreen.unmuteAudio();
         setIsMuted(false);
@@ -80,7 +79,6 @@ const Video = ({
         setIsMuted(true);
       }
     } else {
-      console.log('-----------Connecting the audio--------------');
       await mediaScreen.startAudio();
       setAudioStarted(true);
     }

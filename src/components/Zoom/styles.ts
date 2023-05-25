@@ -30,26 +30,20 @@ export const SelfVideo = styled.video<SelfVideoProps>`
   height: ${({ isSelfFullScreen }) => (isSelfFullScreen ? '100vh' : '288px')};
 
   border-radius: 4px;
-  background-color: ${({ isSelfFullScreen }) =>
-    isSelfFullScreen ? '#00000085' : 'azure'};
+  background-color: ${({ isSelfFullScreen }) => (isSelfFullScreen ? '#00000085' : 'azure')};
   transition: all 0.3s;
 `;
 
 export const ParticipantCanvas = styled.canvas<ParticipantCanvasProps>`
-  position: ${({ isParticipantFullScreen }) =>
-    isParticipantFullScreen ? 'fixed' : ''};
+  position: ${({ isParticipantFullScreen }) => (isParticipantFullScreen ? 'fixed' : '')};
   top: 0;
   left: 0;
   right: 0;
-  z-index: ${({ isParticipantFullScreen }) =>
-    isParticipantFullScreen ? 10 : null};
-  width: ${({ isParticipantFullScreen }) =>
-    isParticipantFullScreen ? '100vw' : '512px'};
-  height: ${({ isParticipantFullScreen }) =>
-    isParticipantFullScreen ? '100vh' : '288px'};
+  z-index: ${({ isParticipantFullScreen }) => (isParticipantFullScreen ? 10 : null)};
+  width: ${({ isParticipantFullScreen }) => (isParticipantFullScreen ? '100vw' : '512px')};
+  height: ${({ isParticipantFullScreen }) => (isParticipantFullScreen ? '100vh' : '288px')};
 
   border-radius: 4px;
-  background-color: ${({ isParticipantFullScreen }) =>
-    isParticipantFullScreen ? '#00000085' : 'azure'};
+  background-color: ${({ isParticipantFullScreen }) => (isParticipantFullScreen ? '#00000085' : 'azure')};
   transition: all 0.3s;
 `;

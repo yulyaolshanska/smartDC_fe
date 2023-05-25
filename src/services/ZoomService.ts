@@ -18,7 +18,7 @@ export const zoomApi = createApi({
   endpoints: (builder) => ({
     getSignature: builder.mutation({
       query: (data) => ({
-        url: `/zoom`,
+        url: '/zoom',
         method: 'POST',
         body: data,
       }),
