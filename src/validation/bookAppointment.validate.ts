@@ -11,15 +11,15 @@ export default function appointmentSchema() {
   const createBookAppointmentSchemaStepOne = yup.object().shape({
     specialization: yup
       .string()
-      .required(tWithDefault('Error.Error.fieldRequired')),
-    date: yup.date().required(tWithDefault('Error.Error.fieldRequired')),
+      .required(tWithDefault('Error.fieldRequired')),
+    date: yup.date().required(tWithDefault('Error.fieldRequired')),
     appointmentTimeRange: yup
       .string()
-      .required(tWithDefault('Error.Error.fieldRequired')),
+      .required(tWithDefault('Error.fieldRequired')),
   });
 
   const createBookAppointmentSchemaStepTwo = yup.object().shape({
-    doctor: yup.string().required(tWithDefault('Error.doctor')),
+    doctor: yup.string().required(tWithDefault('Error.fieldRequired')),
   });
 
   return {

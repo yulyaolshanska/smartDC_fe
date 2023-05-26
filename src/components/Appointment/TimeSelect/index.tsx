@@ -2,27 +2,33 @@ import { useTranslation } from 'react-i18next';
 import { Container } from '@mui/material';
 import { appointmentTimeRange } from '@constants/other';
 import { InputProps } from '@components/Patient/Inputs/type';
-import SelectInput from '@components/Select';
-import { appointmentTime } from '@constants/mockData';
-import { AppointmentFormValues } from '@components/general/type';
+import SelectTimeInput from '@components/Appointment/BookAppointmentForm/Selects/SelectTimeInput';
+
+interface Prop {
+  avalibleTimeRange: any;
+  setFormattedTime: React.Dispatch<React.SetStateAction<string>>;
+}
 
 function AppointmentTimeSelectInput({
   control,
   errors,
-}: InputProps & AppointmentFormValues) {
+  avalibleTimeRange,
+  setFormattedTime,
+}: InputProps & Prop) {
   const { t } = useTranslation();
 
   return (
     <Container style={{ padding: '0' }}>
-      <SelectInput
+      <SelectTimeInput
         control={control}
         fullWidth
         name={appointmentTimeRange}
         placeholder={t('BookAppointment.SelectAppointmentTime') ?? ''}
         helperText={errors.appointmentTimeRange?.message}
         error={Boolean(errors?.appointmentTimeRange)}
-        options={appointmentTime}
+        options={avalibleTimeRange}
         required={true}
+        setFormattedTime={setFormattedTime}
       />
     </Container>
   );

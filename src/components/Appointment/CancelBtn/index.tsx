@@ -1,5 +1,6 @@
 import { useTranslation } from 'react-i18next';
-import { PATH } from '@router/index';
+import { useParams } from 'react-router-dom';
+
 import {
   CancelBtnSmall,
   CancelIcon,
@@ -7,9 +8,10 @@ import {
 
 function CancelBtn() {
   const { t } = useTranslation();
-  
+  const { id: patientId } = useParams();
+
   return (
-    <CancelBtnSmall to={PATH.PATIENT_CARD_INFO}>
+    <CancelBtnSmall to={`/patient/${patientId}`}>
       <CancelIcon />
       {t('Patient.cancel') ?? ''}
     </CancelBtnSmall>

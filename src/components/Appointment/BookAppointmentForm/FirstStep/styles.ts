@@ -2,6 +2,11 @@ import styled from 'styled-components';
 import { BLACK } from '@constants/colors';
 import { XS_FONT_SIZE } from '@constants/fontSizes';
 
+export const TextInfo =styled.p`
+margin-bottom: 10px;
+font-weight:500;
+`
+
 export const CalendarWrapper = styled.div`
   display: flex;
   justify-content: center;
@@ -26,3 +31,17 @@ export const SelectedDayTime = styled.p`
   font-style: italic;
   font-size: ${XS_FONT_SIZE};
 `;
+
+export const HiddenInput= styled.input`
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+  white-space: nowrap;
+  -webkit-clip-path: inset(100%);
+          clip-path: inset(100%);
+  clip: rect(0 0 0 0);
+  overflow: hidden;
+`

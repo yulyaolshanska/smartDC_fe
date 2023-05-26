@@ -37,7 +37,7 @@ export const PATH = {
   CREATE_PATIENT_CARD: '/create-patient-card',
   EDIT_PATIENT_CARD: '/edit-patient-card/:id',
   SCHEDULER: '/scheduler',
-  BOOK_APPOINTMENT: '/book-appointment',
+  BOOK_APPOINTMENT: '/book-appointment/:id',
   AVAILABILITY: '/availability',
   PATIENTS_LIST: '/patients',
   PATIENT_CARD_INFO: '/patient/:id',
