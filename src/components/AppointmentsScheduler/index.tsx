@@ -9,10 +9,11 @@ import {
 import SelectedDay from '@components/AppointmentsScheduler/SelectedInfo/SelectedDay';
 import SelectedEvent from '@components/AppointmentsScheduler/SelectedInfo/SelectedEvent';
 import { useAppSelector } from '@redux/hooks';
-import { Appointment, appointmentApi } from 'services/AppointmentService';
+import { appointmentApi } from 'services/AppointmentService';
 import { IAuth, IPatient } from '@components/general/type';
 import { local } from '@constants/other';
 import { timeFormat } from '@constants/format';
+import { Appointment } from '../../services/types/appointment.type';
 
 export interface IScheduleItem {
   start: Date;

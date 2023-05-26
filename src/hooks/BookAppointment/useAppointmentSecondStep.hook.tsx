@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { appointmentApi } from 'services/BookAppointmetService';
+import { reverseFormatTimeRange } from 'utils/functions/timeUtils';
 
 interface Prop {
   selectedDate: Date;
@@ -18,50 +19,8 @@ const useAppointmentSecondStepHook = ({
   const [selectedDoctor, setSelectedDoctor] = useState<number | null>(null);
   const [filter, setFilter] = useState<string>(``);
 
-  // reverse time range for sending to backend
-  function reverseFormatTimeRange(timeRange: string) {
-    const [start, end] = timeRange
-      .split('-')
-      .map((time: string) => time.trim());
-
-    const startDate = new Date(selectedDate);
-    const endDate = new Date(selectedDate);
-
-    startDate.setHours(getHoursFromTime(start));
-    startDate.setMinutes(getMinutesFromTime(start));
-
-    endDate.setHours(getHoursFromTime(end));
-    endDate.setMinutes(getMinutesFromTime(end));
-
-    return {
-      start: startDate.toISOString(),
-      end: endDate.toISOString(),
-    };
-  }
-
-  function getHoursFromTime(time: string) {
-    const [hour] = time.split(':');
-    const isPM = time.includes('PM');
-    let formattedHour = parseInt(hour.trim());
-
-    if (formattedHour === 12) {
-      formattedHour = isPM ? formattedHour : 0;
-    } else {
-      formattedHour = isPM ? formattedHour + 12 : formattedHour;
-    }
-
-    const localTimezoneOffset = new Date().getTimezoneOffset() / 60;
-    formattedHour -= localTimezoneOffset;
-    return formattedHour;
-  }
-
-  function getMinutesFromTime(time: string) {
-    const [, minutes] = time.split(':');
-    return parseInt(minutes.trim());
-  }
-
   const selectedDateTime = useMemo(
-    () => reverseFormatTimeRange(formattedTime),
+    () => reverseFormatTimeRange(formattedTime, selectedDate),
     [formattedTime]
   );
 

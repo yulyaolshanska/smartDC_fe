@@ -10,6 +10,15 @@ export type Props = {
   setFormattedTime: React.Dispatch<React.SetStateAction<string>>;
 } & TextFieldProps;
 
+interface DataOption {
+  value: number;
+  label: string;
+}
+
+interface HandleOnChange {
+  (data: DataOption | null, onChange: (label: string) => void): void;
+}
+
 export function SelectTimeInput({
   control,
   name,
@@ -19,7 +28,11 @@ export function SelectTimeInput({
   options = [],
   setFormattedTime,
 }: Props & { control: Control<FormValues> }) {
-    
+  const handleOnChange: HandleOnChange = (data, onChange) => {
+    setFormattedTime(data?.label);
+    return onChange(data?.label);
+  };
+
   return (
     <InputContainer hasError={!!error}>
       <span>{label}</span>
@@ -29,10 +42,7 @@ export function SelectTimeInput({
         render={({ field: { ref, onChange, value, ...field } }) => (
           <Autocomplete
             options={options}
-            onChange={(_, data) => {
-              setFormattedTime(data?.label);
-              return onChange(data?.label);
-            }}
+            onChange={(_, data) => handleOnChange(data, onChange)}
             renderInput={(params) => (
               <TextField
                 {...params}

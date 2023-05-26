@@ -22,7 +22,7 @@ function InputGenderBirthDate({ control, errors }: InputProps) {
           helperText={errors.gender?.message}
           error={Boolean(errors?.gender)}
           options={genders}
-          required={true}
+          required={false}
         />
       </InputContainer>
       <InputContainer>
@@ -35,7 +35,7 @@ function InputGenderBirthDate({ control, errors }: InputProps) {
           placeholder={t('Patient.enterDateOfBirth') ?? ''}
           helperText={errors.birthDate?.message}
           error={Boolean(errors?.birthDate)}
-          required={true}
+          required={false}
         />
       </InputContainer>
     </>

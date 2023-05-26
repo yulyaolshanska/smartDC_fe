@@ -34,27 +34,19 @@ function CreatePatientCardForm() {
     formState: { errors, isValid },
   } = useForm<FormValues>({
     mode: 'onChange',
-    defaultValues: {
-      firstName: '',
-      lastName: '',
-      email: '',
-      gender: '',
-      phoneNumber: '',
-      city: '',
-      country: '',
-      address: '',
-      birthDate: '',
-      timeZone: '',
-      overview: '',
-    },
-
     resolver: yupResolver(createPatientCardSchema),
   });
 
   const [createPatient] = patientApi.useCreatePatientMutation();
 
   const onSubmit = async (data: IPatient) => {
-    data.phoneNumber = plus + data.phoneNumber;
+    for (const key in data) {
+      if (typeof data[key] === 'string' && (data[key] as string).trim() === '') {
+        data[key] = null;
+      }
+    }    
+  
+    data.phoneNumber = plus + data.phoneNumber.replace(/\D/g, '');
     await createPatient(data).then((res) => {
       if (error in res && res.error) {
         toast.error(t('Error.somethingWasWrong'), {
@@ -69,7 +61,7 @@ function CreatePatientCardForm() {
         }, 2000);
       }
     });
-  };
+  };  
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>

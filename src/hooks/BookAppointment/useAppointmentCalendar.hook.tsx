@@ -3,7 +3,7 @@ import { DayClickEventHandler } from 'react-day-picker';
 import { addMonths } from 'date-fns';
 import { appointmentApi } from 'services/BookAppointmetService';
 import { BLUE, HINT } from '@constants/colors';
-import { timeOptions } from '@constants/other';
+import { getThreeMonthPeriod, formatTimeRange } from 'utils/functions/timeUtils';
 interface Props {
   onDayClick: (day: Date) => void;
   specialization: number;
@@ -57,23 +57,7 @@ const useAppointmentCalendarHook = ({
     }
   }, [freeSlots]);
 
-  const threeMonthPeriod = useMemo(() => {
-    const result = [];
-
-    for (let i = 0; i < 3; i++) {
-      const year = today.getFullYear();
-      const month = today.getMonth() + i;
-      const daysInMonth = new Date(year, month + 1, 0).getDate();
-
-      for (let day = 1; day <= daysInMonth; day++) {
-        const date = new Date(year, month, day);
-        date.setHours(0, 0, 0, 0);
-        result.push(date);
-      }
-    }
-
-    return result;
-  }, []);
+  const threeMonthPeriod = useMemo(() => getThreeMonthPeriod(today), []);
 
   // Set all time to 0 and receive the number equivalent by getTime() function
   const formattedThreeMonthPeriod = threeMonthPeriod.map((date) => {
@@ -164,11 +148,6 @@ const useAppointmentCalendarHook = ({
     end: value.end,
   }));
 
-  function formatTimeRange(startTime, endTime) {
-    const start = new Date(startTime).toLocaleTimeString([], timeOptions);
-    const end = new Date(endTime).toLocaleTimeString([], timeOptions);
-    return `${start}-${end}`;
-  }
 
   const formattedAppointments = transformedSlots.map((appointment, index) => ({
     value: Number(index + 1),

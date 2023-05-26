@@ -8,7 +8,7 @@ export const avoidStartWithRenderArray = [
 export const avoidExactRenderArray = ['/'];
 
 export const PATIENTS_PER_PAGE = 30;
-export const PATIENTS_PER_LOAD = 10;
+export const PATIENTS_PER_LOAD = 30;
 
 export const MARGIN_TOP = 20;
 export const PADDING = 16;
@@ -21,6 +21,8 @@ export const date = 'date';
 export const search = 'search';
 
 export const doctor = 'doctor';
+
+export const previous = -1;
 
 export const hash = '#';
 
@@ -39,4 +41,14 @@ export const twoDigit = '2-digit';
 
 export const numeric = 'numeric';
 
-export const dayPickerMonths="DayPicker-Months"
+export const dayPickerMonths = 'DayPicker-Months';
+
+export const Enter = 'Enter';
+
+export const oneLine = 1;
+
+export const MAX_CHARACTER_LIMIT = 250;
+
+export const enUS = 'en-US';
+
+export const PM = 'PM';

@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
 import { useAppSelector } from '@redux/hooks';
 import { appointmentApi } from 'services/BookAppointmetService';
-import { zoomLink, twoDigit, long, numeric } from '@constants/other';
+import { zoomLink, twoDigit, long, numeric, enUS } from '@constants/other';
 import { fullYearFormat, fullDateTimeFormat } from '@constants/format';
 
 interface DateObject {
@@ -34,8 +34,8 @@ const useAppointmentBookFormHook = () => {
   };
 
   function formatDate(date: Date): string {
-    const formattedDate = date.toLocaleDateString('en-US', options);
-    const weekday = date.toLocaleDateString('en-US', { weekday: 'long' });
+    const formattedDate = date.toLocaleDateString(enUS, options);
+    const weekday = date.toLocaleDateString(enUS, { weekday: long });
     return formattedDate.replace(',' + weekday, '').trim() + ', ' + weekday;
   }
 
@@ -51,7 +51,6 @@ const useAppointmentBookFormHook = () => {
   const onSubmit = async (data: DateObject) => {
     const [startTime, endTime] = data.appointmentTimeRange.split('-');
 
-    console.log(`data`, data);
     const start = parse(
       `${format(data.date, fullYearFormat)} ${startTime.trim()}`,
       fullDateTimeFormat,

@@ -1,8 +1,9 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import cookie from 'utils/functions/cookies';
+import { Appointment } from 'services/types/appointment.type';
 import { IAuth, IPatient } from '@components/general/type';
 
-export interface Appointment {
+export interface IAppointment {
   id: string;
   startTime: string;
   endTime: string;
@@ -27,7 +28,24 @@ export const appointmentApi = createApi({
     },
   }),
   endpoints: (builder) => ({
-    getAppointmentsForDoctor: builder.query<Appointment[], number>({
+    getSpecializationById: builder.query({
+      query: (id: number | string) => ({
+        url: `/availability/specialization/${id}`,
+        method: 'GET',
+      }),
+      providesTags: ['Appointment'],
+    }),
+    getAppointmentForWeek: builder.query<
+      Appointment[],
+      { id: number; year: number; week: number }
+    >({
+      query: ({ id, year, week }) => ({
+        url: `appointment/patient/${id}/week/${year}/${week}`,
+        method: 'GET',
+      }),
+      providesTags: ['Appointment'],
+    }),
+    getAppointmentsForDoctor: builder.query<IAppointment[], number>({
       query: (doctorId) => ({
         url: `/appointment/doctor/${doctorId}`,
         method: 'GET',
@@ -38,3 +56,6 @@ export const appointmentApi = createApi({
     }),
   }),
 });
+
+export const { useGetSpecializationByIdQuery, useGetAppointmentForWeekQuery } =
+  appointmentApi;

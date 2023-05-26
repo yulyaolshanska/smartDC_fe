@@ -10,6 +10,15 @@ export type Props = {
   setSpecialization: React.Dispatch<React.SetStateAction<number>>;
 } & TextFieldProps;
 
+interface DataOption {
+  value: number;
+  label: string;
+}
+
+interface HandleOnChange {
+  (data: DataOption | null, onChange: (value: number) => void): void;
+}
+
 export function SelectSpecInput({
   control,
   name,
@@ -19,7 +28,11 @@ export function SelectSpecInput({
   options = [],
   setSpecialization,
 }: Props & { control: Control<FormValues> }) {
-    
+  const handleOnChange: HandleOnChange = (data, onChange) => {
+    setSpecialization(data?.value);
+    return onChange(data?.value);
+  };
+
   return (
     <InputContainer hasError={!!error}>
       <span>{label}</span>
@@ -29,10 +42,7 @@ export function SelectSpecInput({
         render={({ field: { ref, onChange, value, ...field } }) => (
           <Autocomplete
             options={options}
-            onChange={(_, data) => {
-              setSpecialization(data?.value);
-              return onChange(data?.value);
-            }}
+            onChange={(_, data) => handleOnChange(data, onChange)}
             renderInput={(params) => (
               <TextField
                 {...params}
