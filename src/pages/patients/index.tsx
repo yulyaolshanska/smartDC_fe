@@ -1,7 +1,7 @@
 import { AddButton, ArrowBack, Link } from '@components/general/styles';
 import { FormValues, ISearch } from '@components/general/type';
 import Input from '@components/Input';
-import { Notification } from '@components/Notification/MeetNotification';
+import { Notification } from '@components/MeetNotification';
 import { LinkContainer } from '@components/Patient/styles';
 import PatientList from '@components/PatientList';
 import { search } from '@constants/patient';

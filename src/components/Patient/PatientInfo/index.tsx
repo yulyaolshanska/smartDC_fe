@@ -35,7 +35,7 @@ import {
 import Spinner from '@components/Loaders/Spinner';
 import { useAppSelector } from '@redux/hooks';
 import { local } from '@constants/other';
-import { Notification } from '@components/Notification/MeetNotification';
+import { Notification } from '@components/MeetNotification';
 
 function PatientCardInfo() {
   const { t } = useTranslation();

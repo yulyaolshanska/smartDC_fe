@@ -7,6 +7,7 @@ import {
   CallInfo,
   DetailsBtn,
   DoctorInfo,
+  El,
   Info,
   NotificationContainer,
   PatientInfo,
@@ -25,29 +26,19 @@ export const Notification = () => {
   const dispatch = useAppDispatch();
   const [timer, setTimer] = useState(0);
 
-  const appointment = useAppSelector(
-    (state) => state.socketAppointmenttReducer.nextAppointment
-  );
+  const { patient, startTime, endTime, remoteDoctor, localDoctor } =
+    useAppSelector((state) => state.socketAppointmenttReducer.nextAppointment);
   const doctor = useAppSelector((state) => state.doctorReducer);
 
-  const handleAppointmentStarted = (data: Appointment) => {
-    if (data) {
-      dispatch(socketAppointmentActions.updateNextAppointment(data));
-    }
-  };
-
-  const formattedCurrentTime = moment(new Date()).format(
-    'YYYY-MM-DDTHH:mm:ss.SSS[Z]'
-  );
+  const formattedCurrentTime = moment().format('YYYY-MM-DDTHH:mm:ss.SSS[Z]');
   const diffTime =
-    new Date(appointment?.startTime).getTime() -
-    new Date(formattedCurrentTime).getTime();
+    new Date(startTime).getTime() - new Date(formattedCurrentTime).getTime();
   const isOpenNotificatin = diffTime < 300000 && diffTime > 1000;
   const isOpenNotif =
-    new Date().getTime() < new Date(appointment?.startTime).getTime() &&
-    new Date().getTime() < new Date(appointment?.endTime).getTime();
+    new Date().getTime() < new Date(startTime).getTime() &&
+    new Date().getTime() < new Date(endTime).getTime();
 
-  const deadline = new Date(appointment?.startTime);
+  const deadline = new Date(startTime);
   const diff = deadline.getTime() - new Date().getTime() || 0;
   const minutes = diff > 0 ? Math.floor(timer / 60) % 60 : 0;
   const seconds = diff > 0 ? Math.floor(timer % 60) : 0;
@@ -64,7 +55,7 @@ export const Notification = () => {
     return () => {
       clearInterval(intervalId);
     };
-  }, [appointment]);
+  }, [startTime]);
 
   useEffect(() => {
     const socket = io(
@@ -78,7 +69,7 @@ export const Notification = () => {
     );
 
     socket.on('connect', () => {
-      console.log('Connected ---------Jul');
+      console.log('Connected ---------');
     });
 
     socket.on('appointment_update', handleAppointmentStarted);
@@ -88,24 +79,33 @@ export const Notification = () => {
     };
   }, []);
 
+  const handleAppointmentStarted = (data: Appointment) => {
+    if (data) {
+      dispatch(socketAppointmentActions.updateNextAppointment(data));
+    }
+  };
+
   const getNotificationText = isOpenNotificatin
-    ? ` You will have a video-call in ${`0${minutes}:${seconds}`} minutes
+    ? `${t('Notification.youHaveVideoCallIn')}  ${`${minutes
+        .toString()
+        .padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`} minutes
             with:`
-    : `You currently have meeting with:`;
+    : `${t('Notification.youCurrentlyHaveMeeting')}`;
 
   const getPatient = useMemo(() => {
-    const gender = appointment?.patient?.gender === female ? 'Ms.' : 'Mr.';
-    return `${gender} ${appointment?.patient?.lastName}`;
-  }, [appointment]);
+    const gender =
+      patient?.gender === female
+        ? `${t('Notification.Ms')}`
+        : `${t('Notification.Mr')}`;
+    return `${gender} ${patient?.lastName}`;
+  }, [patient]);
 
   const getDoctor = useMemo(
     () =>
       `${t('Appointments.doctor')} ${
-        doctor.role === local
-          ? appointment.remoteDoctor.lastName
-          : appointment.localDoctor.lastName
+        doctor.role === local ? remoteDoctor.lastName : localDoctor.lastName
       }`,
-    [appointment]
+    [remoteDoctor, doctor, localDoctor]
   );
 
   return (
@@ -116,13 +116,16 @@ export const Notification = () => {
             <Title>{getNotificationText}</Title>
             <CallInfo>
               <PatientInfo
-                to={`/patient/${appointment?.patient?.id}`}
-              >{`${getPatient} and `}</PatientInfo>
+                to={`/patient/${patient?.id}`}
+              >{`${getPatient}  `}</PatientInfo>
+              <El>{t('Notification.and')}</El>
               <DoctorInfo>{getDoctor}</DoctorInfo>
             </CallInfo>
           </Info>
-          <DetailsBtn to={`/patient/${appointment?.patient?.id}`}>
-            {isOpenNotificatin ? 'Details' : 'Go to the meeting room'}
+          <DetailsBtn to={`/patient/${patient?.id}`}>
+            {isOpenNotificatin
+              ? `${t('Notification.details')}`
+              : `${t('Notification.goToMeetingRoom')}`}
           </DetailsBtn>
         </NotificationContainer>
       )}

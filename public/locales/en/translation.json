@@ -235,5 +235,14 @@
     "patient": "Patient",
     "lastAppointment": "Last Appointment",
     "noAppointmentsYet": "The patient has no appointments yet"
+  },
+  "Notification": {
+    "youHaveVideoCallIn": "You will have a video-call in",
+    "youCurrentlyHaveMeeting": "You currently have meeting with:",
+    "Ms": "Ms.",
+    "Mr": "Mr.",
+    "details": "Details",
+    "goToMeetingRoom": "Go to the meeting room",
+    "and": "and"
   }
 }
