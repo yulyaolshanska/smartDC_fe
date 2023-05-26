@@ -246,5 +246,9 @@
     "details": "Details",
     "goToMeetingRoom": "Go to the meeting room",
     "and": "and"
+  },
+  "Chat": {
+    "typeMessage": "Type your message...",
+    "isTyping": "is typing"
   }
 }
