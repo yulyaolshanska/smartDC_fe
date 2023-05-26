@@ -1,7 +1,9 @@
+import { useEffect, useMemo, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { io } from 'socket.io-client';
+import moment from 'moment';
 import { useAppDispatch, useAppSelector } from '@redux/hooks';
 import { socketAppointmentActions } from '@redux/slices/socketAppointmentsSlice';
-import { useEffect, useMemo, useState } from 'react';
-import { io } from 'socket.io-client';
 import cookie from 'utils/functions/cookies';
 import {
   CallInfo,
@@ -13,9 +15,7 @@ import {
   PatientInfo,
   Title,
 } from './styles';
-import moment from 'moment';
 import { Appointment } from 'services/types/appointment.type';
-import { useTranslation } from 'react-i18next';
 import { local } from '@constants/other';
 import { female } from '@constants/patient';
 
@@ -31,12 +31,13 @@ export const Notification = () => {
   const doctor = useAppSelector((state) => state.doctorReducer);
 
   const formattedCurrentTime = moment().format('YYYY-MM-DDTHH:mm:ss.SSS[Z]');
-  const diffTime =
+  const diffTimeStart =
     new Date(startTime).getTime() - new Date(formattedCurrentTime).getTime();
-  const isOpenNotificatin = diffTime < 300000 && diffTime > 1000;
-  const isOpenNotif =
-    new Date().getTime() < new Date(startTime).getTime() &&
-    new Date().getTime() < new Date(endTime).getTime();
+  const diffTimeEnd =
+    new Date(endTime).getTime() - new Date(formattedCurrentTime).getTime();
+  const isTimerRun = diffTimeStart < 300000 && diffTimeStart > 1000;
+  const isMeetInProgress = diffTimeEnd > 0 && diffTimeEnd <= 300000;
+  const isNotifOpen = isTimerRun || isMeetInProgress;
 
   const deadline = new Date(startTime);
   const diff = deadline.getTime() - new Date().getTime() || 0;
@@ -44,18 +45,25 @@ export const Notification = () => {
   const seconds = diff > 0 ? Math.floor(timer % 60) : 0;
 
   useEffect(() => {
-    const initialTimer = Number(diff / 1000);
+    const diffStart = deadline.getTime() - new Date().getTime();
+    const diffEnd = new Date(endTime).getTime() - new Date().getTime();
+
+    const initialTimer = isTimerRun
+      ? Math.floor(diffTimeStart / 1000)
+      : Math.floor(diffEnd / 1000);
+
     const intervalId = setInterval(() => {
       setTimer((prevTimer) => prevTimer - 1);
     }, 1000);
-    if (initialTimer) {
+
+    if (initialTimer > 0) {
       setTimer(initialTimer);
     }
 
     return () => {
       clearInterval(intervalId);
     };
-  }, [startTime]);
+  }, [startTime, endTime, diffTimeStart, diffTimeEnd]);
 
   useEffect(() => {
     const socket = io(
@@ -69,7 +77,7 @@ export const Notification = () => {
     );
 
     socket.on('connect', () => {
-      console.log('Connected ---------');
+      console.log('websocket connected ---------');
     });
 
     socket.on('appointment_update', handleAppointmentStarted);
@@ -82,10 +90,11 @@ export const Notification = () => {
   const handleAppointmentStarted = (data: Appointment) => {
     if (data) {
       dispatch(socketAppointmentActions.updateNextAppointment(data));
+      console.log('next meet', data);
     }
   };
 
-  const getNotificationText = isOpenNotificatin
+  const getNotificationText = isTimerRun
     ? `${t('Notification.youHaveVideoCallIn')}  ${`${minutes
         .toString()
         .padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`} minutes
@@ -110,7 +119,7 @@ export const Notification = () => {
 
   return (
     <>
-      {isOpenNotif && (
+      {isNotifOpen && (
         <NotificationContainer>
           <Info>
             <Title>{getNotificationText}</Title>
@@ -123,7 +132,7 @@ export const Notification = () => {
             </CallInfo>
           </Info>
           <DetailsBtn to={`/patient/${patient?.id}`}>
-            {isOpenNotificatin
+            {isTimerRun
               ? `${t('Notification.details')}`
               : `${t('Notification.goToMeetingRoom')}`}
           </DetailsBtn>
