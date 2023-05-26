@@ -36,6 +36,8 @@ const Drawer = () => {
   const selectedPosition = useAppSelector(
     (state) => state.navigationReducer.currentPage
   );
+  const currentDoctor = useAppSelector((state) => state.doctorReducer);
+
   const [showModal, setShowModal] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
@@ -65,7 +67,6 @@ const Drawer = () => {
     if (position) {
       dispatch(navigationActions.setCurrentPage(position.to));
     }
-    
   }, [location.pathname]);
 
   const { data: doctor, error, isLoading, refetch } = authApi.useGetMeQuery({});
@@ -83,14 +84,19 @@ const Drawer = () => {
 
   const cancelLogout = () => {
     setShowModal(false);
-  }
+  };
+
+  const getDoctorSpecialization =
+    currentDoctor.specialization === 1
+      ? `${t('Dashboard.anesthesiology')}`
+      : `${t('Dashboard.cardiology')}`;
 
   return (
     <DrawerContainer>
       <TopDrawer>
         <Logo />
         {positions.map((obj) => (
-          <Link to={obj.to}>
+          <Link to={obj.to} key={obj.name}>
             <PositionContainer
               key={obj.name}
               onClick={() => handleSelected(obj)}
@@ -109,18 +115,21 @@ const Drawer = () => {
       <BottomDrawer>
         <img src={photo} width={40} />
         <Stack>
-          <DoctorName> Dr. Malikovsy</DoctorName>
-          <DoctorSpeciality>Therapist</DoctorSpeciality>
+          <DoctorName>
+            {t('Appointments.doctor')} {currentDoctor.lastName}
+          </DoctorName>
+          <DoctorSpeciality> {getDoctorSpecialization}</DoctorSpeciality>
         </Stack>
       </BottomDrawer>
-      {showModal && 
-      <LogoutModal 
-        title={t('Auth.logoutText')}
-        confirmText={t('Auth.confirm')}
-        cancelTest={t('Auth.cancel')}
-        handleSubmitModal={confirmLogout}
-        handleCancelModal={cancelLogout}/>
-      }
+      {showModal && (
+        <LogoutModal
+          title={t('Auth.logoutText')}
+          confirmText={t('Auth.confirm')}
+          cancelTest={t('Auth.cancel')}
+          handleSubmitModal={confirmLogout}
+          handleCancelModal={cancelLogout}
+        />
+      )}
     </DrawerContainer>
   );
 };
