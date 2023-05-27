@@ -8,12 +8,11 @@ interface StartCallButtonProps {
   init?: () => void;
 }
 
-const { t } = useTranslation();
-
 const StartCallButton = ({
   initAndJoinSession,
   init,
 }: StartCallButtonProps) => {
+  const { t } = useTranslation();
   return (
     <StartCallButtonStyle onClick={init}>
       <p>{t('Chat.StartCall')}</p>

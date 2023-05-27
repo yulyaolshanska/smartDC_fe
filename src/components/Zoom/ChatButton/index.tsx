@@ -3,12 +3,11 @@ import { ChatButtonStyle } from './styles';
 import { ReactComponent as ChatIcon } from '@assets/chatIcon.svg';
 import { useTranslation } from 'react-i18next';
 
-const { t } = useTranslation();
-
 const ChatButton = () => {
+  const { t } = useTranslation();
   return (
     <ChatButtonStyle>
-      <p>{t('Chat.Chat')}</p>
+      <p>{t('Zoom.Chat')}</p>
       <ChatIcon />
     </ChatButtonStyle>
   );

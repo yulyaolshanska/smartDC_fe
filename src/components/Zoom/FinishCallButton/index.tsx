@@ -7,12 +7,11 @@ interface FinishCallButtonProps {
   leaveSession: () => void;
 }
 
-const { t } = useTranslation();
-
 const FinishCallButton = ({ leaveSession }: FinishCallButtonProps) => {
+  const { t } = useTranslation();
   return (
     <FinishCallButtonStyle onClick={leaveSession}>
-      <p>{t('Chat.Finish')}</p>
+      <p>{t('Zoom.Finish')}</p>
       <CameraIcon />
     </FinishCallButtonStyle>
   );
