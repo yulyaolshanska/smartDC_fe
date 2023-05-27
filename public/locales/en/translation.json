@@ -93,7 +93,9 @@
     "overlappingEventsError": "Validation error: working hours overlap",
     "pastDateError": "You cannot create schedule on a past date!",
     "calendarSlotError": "Something went wrong!",
-    "noEvents": "No events for this day"
+    "noEvents": "No events for this day",
+    "addressFormat": "Type correct address",
+    "existEmail": "This email is already in use"
   },
   "Patient": {
     "createPatientCard": "Create patient's card",
@@ -162,7 +164,7 @@
     "calendar": "Calendar"
   },
   "BookAppointment": {
-    "instruction":"Please choose a specialization of a doctor first. Then you will see all available dates, and after that, you can choose a suitable time for your client.",
+    "instruction": "Please choose a specialization of a doctor first. Then you will see all available dates, and after that, you can choose a suitable time for your client.",
     "selectDoctorSpecialization": "Select doctor specialization",
     "selectDay": "Select a day of appointment",
     "SelectAppointmentTime": "Select a time of appointment",

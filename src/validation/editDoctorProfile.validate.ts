@@ -1,4 +1,8 @@
-import { EMAIL_PATTERN, NAME_PATTERN } from '@constants/validation';
+import {
+  ADDRESS_REGEX,
+  EMAIL_PATTERN,
+  NAME_PATTERN,
+} from '@constants/validation';
 import { t } from 'i18next';
 import * as yup from 'yup';
 
@@ -25,13 +29,16 @@ export const EditRemoteSchema = yup.object().shape({
   phoneNumber: yup
     .string()
     .required(tWithDefault('Error.phoneNumberRequired'))
-    .min(6, '*Too short!'),
+    .min(10, tWithDefault('Error.tooShort')),
   city: yup.string().required(tWithDefault('Error.fieldRequired')),
   country: yup.string().required(tWithDefault('Error.fieldRequired')),
   gender: yup.string().required(tWithDefault('Error.fieldRequired')),
 
   timeZone: yup.string().required(tWithDefault('Error.fieldRequired')),
-  address: yup.string().required(tWithDefault('Error.fieldRequired')),
+  address: yup
+    .string()
+    .required(tWithDefault('Error.fieldRequired'))
+    .matches(ADDRESS_REGEX, tWithDefault('Error.addressFormat')),
 });
 
 export const EditLocalSchema = yup.object().shape({});
