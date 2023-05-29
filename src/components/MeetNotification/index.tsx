@@ -21,13 +21,16 @@ import { female } from '@constants/patient';
 
 const token = cookie.get('accessToken');
 
-export const Notification = () => {
+export const MeetNotification = () => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const [timer, setTimer] = useState(0);
 
+  const { nextAppointment } = useAppSelector(
+    (state) => state.socketAppointmentReducer.nextAppointment
+  );
   const { patient, startTime, endTime, remoteDoctor, localDoctor } =
-    useAppSelector((state) => state.socketAppointmenttReducer.nextAppointment);
+    nextAppointment;
   const doctor = useAppSelector((state) => state.doctorReducer);
 
   const formattedCurrentTime = moment().format('YYYY-MM-DDTHH:mm:ss.SSS[Z]');
