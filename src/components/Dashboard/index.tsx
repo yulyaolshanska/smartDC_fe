@@ -115,12 +115,14 @@ const DashboardComponent = () => {
             )
           )}
       </Stack>
-      <LoadMoreButton
-        setFetchAll={setFetchAll}
-        disabled={
-          fetchAll || groupedAppointments.length === appointmentsArray.count
-        }
-      />
+      {appointmentsArray.count ? (
+        <LoadMoreButton
+          setFetchAll={setFetchAll}
+          disabled={
+            fetchAll || groupedAppointments.length === appointmentsArray.count
+          }
+        />
+      ) : null}
     </Stack>
   );
 };
