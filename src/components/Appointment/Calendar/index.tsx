@@ -1,5 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import useAppointmentCalendarHook from 'hooks/BookAppointment/useAppointmentCalendar.hook';
+import { dayPickerMonths } from '@constants/other';
 import {
   StyledDayPicker,
   CalendarWrapper,
@@ -15,12 +16,22 @@ interface Props {
   onDayClick: (day: Date) => void;
   formattedDate: string;
   setFormattedDate: React.Dispatch<React.SetStateAction<string>>;
+  specialization: number;
+  setAvalibleTimeRange: React.Dispatch<React.SetStateAction<any>>;
+  setSelectedDate: React.Dispatch<React.SetStateAction<Date | null>>;
+  selectedDay: Date | null;
+  setSelectedDay: React.Dispatch<React.SetStateAction<Date | null>>;
 }
 
 const DayPickerCalendar: React.FC<Props> = ({
   onDayClick,
   formattedDate,
   setFormattedDate,
+  specialization,
+  setAvalibleTimeRange,
+  selectedDay,
+  setSelectedDay,
+  setSelectedDate,
 }) => {
   const { t } = useTranslation();
 
@@ -29,13 +40,20 @@ const DayPickerCalendar: React.FC<Props> = ({
     toggleState,
     bookedDays,
     bookedStyle,
-    selectedDay,
-    setSelectedDay,
     month,
     setMonth,
     currentStyle,
     showCalendar,
-  } = useAppointmentCalendarHook({ onDayClick });
+    onCancelClick,
+  } = useAppointmentCalendarHook({
+    onDayClick,
+    specialization,
+    setAvalibleTimeRange,
+    selectedDay,
+    setSelectedDay,
+    setSelectedDate,
+    setFormattedDate,
+  });
 
   return (
     <CalendarWrapper>
@@ -45,7 +63,7 @@ const DayPickerCalendar: React.FC<Props> = ({
         ) : (
           <TextinCalendarInput>{formattedDate}</TextinCalendarInput>
         )}
-        {formattedDate && <CancelIcon onClick={() => setFormattedDate('')} />}
+        {formattedDate && <CancelIcon onClick={onCancelClick} />}
         {!showCalendar ? <ArrowIcon /> : <ArrowIconShown />}
       </SelectText>
       {showCalendar && (
@@ -62,8 +80,8 @@ const DayPickerCalendar: React.FC<Props> = ({
           modifiers={{ current: selectedDay, booked: bookedDays }}
           modifiersStyles={{ current: currentStyle, booked: bookedStyle }}
           classNames={{
-            months: 'DayPicker-Months',
-            month: 'DayPicker-Month',
+            months: `${dayPickerMonths}`,
+            month: `${dayPickerMonths}`,
           }}
         />
       )}

@@ -1,65 +1,75 @@
-import React, { useState, useEffect } from 'react';
-import { ListOfDoctors } from '@constants/mockData';
+import React, { useState, useMemo } from 'react';
+import { appointmentApi } from 'services/BookAppointmetService';
+import { reverseFormatTimeRange } from 'utils/functions/timeUtils';
 
-interface Doctor {
-  id: string;
-  img: string;
-  name: string;
-  speciality: string;
-  located: string;
-  rating: string;
+interface Prop {
+  selectedDate: Date;
+  formattedTime: string;
+  setStep: React.Dispatch<React.SetStateAction<boolean>>;
+  specialization: number;
 }
 
-const useAppointmentSecondStepHook = () => {
-  const [filter, setFilter] = useState(``);
-  const [page, setPage] = useState(0);
-  const [allDoctors, setAllDoctors] = useState<Doctor[]>([]);
+const useAppointmentSecondStepHook = ({
+  selectedDate,
+  formattedTime,
+  setStep,
+  specialization,
+}: Prop) => {
+  const [limit, setLimit] = useState<number>(10);
+  const [selectedDoctor, setSelectedDoctor] = useState<number | null>(null);
+  const [filter, setFilter] = useState<string>(``);
 
-  let filtered = allDoctors;
-
-  const chunkSize = 10;
-  const visibledoctorsLists = Array.from(
-    { length: Math.ceil(ListOfDoctors.length / chunkSize) },
-    (_, index) =>
-      ListOfDoctors.slice(index * chunkSize, (index + 1) * chunkSize)
+  const selectedDateTime = useMemo(
+    () => reverseFormatTimeRange(formattedTime, selectedDate),
+    [formattedTime]
   );
 
-  useEffect(() => {
-    setAllDoctors(visibledoctorsLists[0]);
-  }, []);
+  //   send info to backend
+  const { data: doctors, isLoading } =
+    appointmentApi.useGetAllAvalibleDoctorsQuery({
+      start: selectedDateTime.start,
+      end: selectedDateTime.end,
+      specialization: specialization,
+      limit: limit,
+    });
+
+  //work with filter input
+  let filtered = doctors;
 
   function filterName(event: React.ChangeEvent<HTMLInputElement>) {
     setFilter(event.currentTarget.value);
   }
 
-  const filterNormilized = filter.toLowerCase().trim();
+  if (!isLoading && doctors?.length > 0) {
+    const filterNormilized = filter.toLowerCase().trim();
 
-  if (allDoctors.length > 0) {
-    filtered = allDoctors.filter((doctor) =>
-      doctor.name.toLowerCase().includes(filterNormilized)
+    filtered = doctors?.filter(
+      (doc) =>
+        doc?.doctor.firstName.toLowerCase().includes(filterNormilized) ||
+        doc?.doctor.lastName.toLowerCase().includes(filterNormilized)
     );
   }
 
-  const handleClickLoadMore = async () => {
-    setPage((prev) => (prev += 1));
+  function handleLoadMore() {
+    setLimit((prev) => prev + 10);
+  }
+
+  const onPreviuosStepClick = () => {
+    setSelectedDoctor(null);
+    setStep(false);
   };
 
-  useEffect(() => {
-    if (page !== 0) {
-      setAllDoctors((prev: Doctor[]) => [
-        ...prev,
-        ...visibledoctorsLists[page],
-      ]);
-    }
-  }, [page]);
-
   return {
-    page,
-    filterName,
-    handleClickLoadMore,
-    filter,
     filtered,
-    visibledoctorsLists,
+    isLoading,
+    filter,
+    filterName,
+    limit,
+    handleLoadMore,
+    selectedDoctor,
+    setSelectedDoctor,
+    onPreviuosStepClick,
+    setStep,
   };
 };
 

@@ -53,6 +53,12 @@ export const StyledDayPicker = styled(DayPicker)`
   .rdp-caption {
     width: 100%;
   }
+  .rdp-caption_start,
+  .rdp-caption_end {
+    flex-direction: column;
+    align-items: center;
+    border: none;
+  }
   .rdp-head_row {
     color: ${LIGHT_GRAY};
   }

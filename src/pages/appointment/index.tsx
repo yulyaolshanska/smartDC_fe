@@ -6,6 +6,7 @@ import BackToDashboard from '@components/BackToDashboardLink';
 import { LinkContainer } from '@components/Patient/styles';
 
 const CreateAppointment: React.FC = () => {
+    
   return (
     <>
       <LinkContainer>
