@@ -88,22 +88,6 @@ const AppRouter = () => {
           }
         />
         <Route
-          path={PATH.FORGOT_PASS}
-          element={
-            <ProtectedRoute allowedRoles={['Remote', 'Local']}>
-              <ForgotPassword />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path={PATH.CONFIRM}
-          element={
-            <ProtectedRoute allowedRoles={['Remote', 'Local']}>
-              <Confirmation />
-            </ProtectedRoute>
-          }
-        />
-        <Route
           path={PATH.EDIT_DOCTOR_PROFILE}
           element={
             <ProtectedRoute allowedRoles={['Remote', 'Local']}>
@@ -167,13 +151,11 @@ const AppRouter = () => {
             </ProtectedRoute>
           }
         />
-        {/* <Route path={PATH.PATIENT} element={<PatientPage />} /> */}
         <Route path={PATH.FORGOT_PASS} element={<ForgotPassword />} />
         <Route path={PATH.CONFIRM} element={<Confirmation />} />
         <Route path={PATH.EDIT_DOCTOR_PROFILE} element={<Profile />} />
         <Route path={PATH.HELP} element={<Help />} />
         <Route path={PATH.DASHBOARD} element={<Profile />} />
-        {/* <Route path={PATH.EDIT_PATIENT_CARD} element={<EditPatientCard />} /> */}
         <Route path="*" element={<NotFound />} />
       </Routes>
     </PageWrapper>

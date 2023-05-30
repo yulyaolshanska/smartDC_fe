@@ -29,9 +29,7 @@ export const DODGE_BLUE = 'dodgerblue';
 export const DARK_GREEN = '#188038';
 
 export const LIGHT_GREEN = '#BFE8CA';
-// /**
-//  * @deprecated
-//  */
+
 export const BLUE = '#4579EE';
 
 export const DRAWER_CONT = '#f4f6fd';
