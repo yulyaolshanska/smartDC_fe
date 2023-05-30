@@ -18,6 +18,8 @@ import {
 import { Appointment } from 'services/types/appointment.type';
 import { local } from '@constants/other';
 import { female } from '@constants/patient';
+import { notificationCurrentTime } from '@constants/format';
+import { fiveMinutes, sec } from '@constants/notification';
 
 const token = cookie.get('accessToken');
 
@@ -30,13 +32,13 @@ export const MeetNotification = () => {
     useAppSelector((state) => state.socketAppointmentReducer.nextAppointment);
   const doctor = useAppSelector((state) => state.doctorReducer);
 
-  const formattedCurrentTime = moment().format('YYYY-MM-DDTHH:mm:ss.SSS[Z]');
+  const formattedCurrentTime = moment().format(notificationCurrentTime);
   const diffTimeStart =
     new Date(startTime).getTime() - new Date(formattedCurrentTime).getTime();
   const diffTimeEnd =
     new Date(endTime).getTime() - new Date(formattedCurrentTime).getTime();
-  const isTimerRun = diffTimeStart < 300000 && diffTimeStart > 1000;
-  const isMeetInProgress = diffTimeEnd > 0 && diffTimeEnd <= 300000;
+  const isTimerRun = diffTimeStart < fiveMinutes && diffTimeStart > sec;
+  const isMeetInProgress = diffTimeEnd > 0 && diffTimeEnd <= fiveMinutes;
   const isNotifOpen = isTimerRun || isMeetInProgress;
 
   const deadline = new Date(startTime);
@@ -49,12 +51,12 @@ export const MeetNotification = () => {
     const diffEnd = new Date(endTime).getTime() - new Date().getTime();
 
     const initialTimer = isTimerRun
-      ? Math.floor(diffTimeStart / 1000)
-      : Math.floor(diffEnd / 1000);
+      ? Math.floor(diffTimeStart / sec)
+      : Math.floor(diffEnd / sec);
 
     const intervalId = setInterval(() => {
       setTimer((prevTimer) => prevTimer - 1);
-    }, 1000);
+    }, sec);
 
     if (initialTimer > 0) {
       setTimer(initialTimer);
