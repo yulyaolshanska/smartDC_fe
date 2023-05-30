@@ -78,10 +78,6 @@ export const MeetNotification = () => {
       }
     );
 
-    socket.on('connect', () => {
-      console.log('websocket connected ---------');
-    });
-
     socket.on('appointment_update', handleAppointmentStarted);
 
     return () => {
@@ -92,7 +88,6 @@ export const MeetNotification = () => {
   const handleAppointmentStarted = (data: Appointment) => {
     if (data) {
       dispatch(socketAppointmentActions.updateNextAppointment(data));
-      console.log('next meet', data);
     }
   };
 
