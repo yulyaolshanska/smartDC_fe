@@ -3,18 +3,13 @@ import { devConfig } from './config/dev';
 import React from 'react';
 import { store } from '@redux/store';
 import ZoomVideo from '@zoom/videosdk';
-import Video from './Video';
 import usePeerVideoStateChange from './utils/usePeerVideoStateChange';
 import { Stack } from '@mui/material';
-import FinishCallButton from './FinishCallButton';
-import ChatButton from './ChatButton';
 import { VideoContainer } from './styles';
 import './index.scss';
-import StartCallButton from './StartCallButton';
 import { ToastContainer, toast } from 'react-toastify';
 import useActiveSpeaker from './utils/useActiveSpeaker';
 import useActiveShareChange from './utils/useActiveShareChange';
-import Sheduler from './Sheduler';
 
 import { useAppSelector } from '@redux/hooks';
 import { createSocketWithHandlers } from './socket-io';
@@ -134,7 +129,6 @@ const ZoomComponent = () => {
 
   return (
     <VideoContainer>
-      <Sheduler />
       <ToastContainer />
       <Stack
         direction={'row'}
@@ -142,25 +136,7 @@ const ZoomComponent = () => {
         gap={'8px'}
         width={'100%'}
         marginBottom={status ? '12px' : 0}
-      >
-        {status ? (
-          <FinishCallButton leaveSession={leaveSession} />
-        ) : (
-          <StartCallButton init={init}></StartCallButton>
-        )}
-
-        <ChatButton />
-      </Stack>
-      {status ? (
-        <Video
-          client={client}
-          mediaScreen={mediaScreen}
-          participantCanvasRef={participantCanvasRef}
-          participantShareScreenRef={participantShareScreenRef}
-          selfVideoRef={selfVideoRef}
-          setStatus={setStatus}
-        />
-      ) : null}
+      ></Stack>
     </VideoContainer>
   );
 };
