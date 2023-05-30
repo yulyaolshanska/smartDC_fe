@@ -71,7 +71,7 @@ function Messages({
               <MessageText>
                 {message.text}
                 {message.fileName &&
-                  message.fileName.map((name, fileIndex) => (
+                  message?.fileName.map((name, fileIndex) => (
                     <FileContainer key={fileIndex}>
                       <DownloadButton
                         onClick={() =>
