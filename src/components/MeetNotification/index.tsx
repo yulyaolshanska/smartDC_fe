@@ -26,11 +26,8 @@ export const MeetNotification = () => {
   const dispatch = useAppDispatch();
   const [timer, setTimer] = useState(0);
 
-  const { nextAppointment } = useAppSelector(
-    (state) => state.socketAppointmentReducer.nextAppointment
-  );
   const { patient, startTime, endTime, remoteDoctor, localDoctor } =
-    nextAppointment;
+    useAppSelector((state) => state.socketAppointmentReducer.nextAppointment);
   const doctor = useAppSelector((state) => state.doctorReducer);
 
   const formattedCurrentTime = moment().format('YYYY-MM-DDTHH:mm:ss.SSS[Z]');
