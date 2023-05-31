@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-import CreatePatientInitialState from '@redux/slices/patient/createPatient/types';
 
 const initialState = {
   nextAppointment: null,

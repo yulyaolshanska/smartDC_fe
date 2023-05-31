@@ -1,7 +1,6 @@
-import React from 'react';
-import { ChatButtonStyle } from './styles';
-import { ReactComponent as ChatIcon } from '@assets/chatIcon.svg';
 import { useTranslation } from 'react-i18next';
+import { ReactComponent as ChatIcon } from '@assets/chatIcon.svg';
+import { ChatButtonStyle } from './styles';
 
 const ChatButton = () => {
   const { t } = useTranslation();

@@ -11,7 +11,6 @@ interface isSelfFullScreenProps {
 const NameTip = ({ isSelfFullScreen }: isSelfFullScreenProps) => {
   const { data: doctor } = authApi.useGetMeQuery({});
   return (
-    //@ts-ignore
     <NameTipStyle isSelfFullScreen={isSelfFullScreen}>
       <p>{doctor.lastName}</p>
     </NameTipStyle>

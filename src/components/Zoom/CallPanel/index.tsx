@@ -1,6 +1,3 @@
-import { Stack } from '@mui/material';
-import React from 'react';
-import ZoomVideo from '@zoom/videosdk';
 import VideocamOffIcon from '@mui/icons-material/VideocamOff';
 import MicOffIcon from '@mui/icons-material/MicOff';
 import SpeakerIcon from '@mui/icons-material/Speaker';
@@ -15,9 +12,10 @@ import {
   EndCallButtonStyle,
   PanelButtonStyle,
 } from './style';
+import { VideoClient } from '@zoom/videosdk';
 
 interface CallPanelProps {
-  client: any;
+  client: typeof VideoClient;
   isSelfFullScreen: boolean;
   isParticipantFullScreen: boolean;
   setIsParticipantFullScreen: (arg: boolean) => void;
@@ -43,6 +41,7 @@ const CallPanel = ({
   isMuted,
   videoStarted,
 }: CallPanelProps) => {
+  //
   const leaveSession = async () => {
     try {
       startVideoButton();
@@ -53,6 +52,7 @@ const CallPanel = ({
       });
     } catch (error) {}
   };
+
   return (
     <CallPanelWrapper
       isSelfFullScreen={isSelfFullScreen}

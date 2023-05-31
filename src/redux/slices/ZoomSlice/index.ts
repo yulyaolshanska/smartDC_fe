@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-import VideoClient from '@zoom/videosdk';
 
 const initialState = {};
 

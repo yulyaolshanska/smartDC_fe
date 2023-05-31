@@ -1,7 +1,7 @@
+import styled from 'styled-components';
 import { BLACK_BUT_NOT, WHITE } from '@constants/colors';
 import { NORMAL_FONT_SIZE } from '@constants/fontSizes';
 import FONT_ROBOTO from '@constants/fonts';
-import styled from 'styled-components';
 
 interface GoToFullScreenButtonStyleProps {
   isSelfFullScreen?: boolean;

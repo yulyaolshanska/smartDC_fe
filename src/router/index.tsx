@@ -1,4 +1,3 @@
-import React, { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import SignUpFirstStep from '@pages/auth/signUp/signUpFirstStep';
 import SignUpSecondFormGoogle from '@components/Auth/SignUpForm/SignUpSecondStepFormGoogle';
@@ -10,7 +9,6 @@ import Profile from '@pages/doctor/profile';
 import PageWrapper from '@components/PageWrapper';
 import Help from '@pages/help';
 import Activation from '@pages/auth/signUp/activation';
-import PatientPage from '@pages/patient';
 import CreatePatientCard from '@pages/patient/createPatientCard';
 import EditPatientCard from '@pages/patient/EditPatientCard';
 import CreateAppointment from '@pages/appointment';
@@ -20,9 +18,7 @@ import ProtectedRoute from './protected-route';
 import PatientInfo from '@pages/patient/patientInfo';
 import ZoomPage from '@pages/zoom';
 import Patients from '@pages/patients';
-import cookie from 'utils/functions/cookies';
 import AppointmentsDoctorScheduler from '@pages/doctorScheduler/appointmentsScheduler';
-import { createSocketWithHandlers } from '@components/Zoom/socket-io';
 import Chat from '@components/Chat';
 
 export const PATH = {

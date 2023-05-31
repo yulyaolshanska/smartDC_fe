@@ -1,21 +1,16 @@
+import { VideoClient } from '@zoom/videosdk';
 import { RefObject } from 'react';
 
-interface useActiveSpeakerProps {
-  client: any;
-  selfVideoRef: RefObject<HTMLVideoElement>;
-  participantCanvasRef: RefObject<HTMLCanvasElement>;
-}
-
 const useActiveSpeaker = (
-  client: any,
+  client: typeof VideoClient,
   selfVideoRef: RefObject<HTMLVideoElement>,
-  participantCanvasRef: RefObject<HTMLCanvasElement>,
+  participantCanvasRef: RefObject<HTMLCanvasElement>
 ): (() => void) => {
   let selfVideoTimeout: ReturnType<typeof setTimeout> | undefined;
   let participantCanvasTimeout: ReturnType<typeof setTimeout> | undefined;
 
   const clearActiveSpeakerTimeout = (
-    timeout?: ReturnType<typeof setTimeout>,
+    timeout?: ReturnType<typeof setTimeout>
   ) => {
     if (timeout) {
       clearTimeout(timeout);
@@ -24,7 +19,7 @@ const useActiveSpeaker = (
 
   const setActiveSpeaker = (
     element: HTMLElement,
-    timeout?: ReturnType<typeof setTimeout>,
+    timeout?: ReturnType<typeof setTimeout>
   ) => {
     element.style.border = '2px red solid';
     clearActiveSpeakerTimeout(timeout);
@@ -34,7 +29,7 @@ const useActiveSpeaker = (
   };
 
   const onActiveSpeakerChange = async (
-    payload: [{ userId: number; name: string }],
+    payload: [{ userId: number; name: string }]
   ) => {
     const currentUserId = client.getCurrentUserInfo().userId;
 

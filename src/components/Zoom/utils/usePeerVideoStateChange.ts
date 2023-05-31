@@ -1,11 +1,19 @@
+import { Stream, VideoClient } from '@zoom/videosdk';
 import { RefObject } from 'react';
 
+interface IonPeerVideoStateChangePayload {
+  userId: number;
+  action: 'Start' | 'Stop';
+}
+
 const usePeerVideoStateChange = async (
-  client: any,
-  mediaScreen: any,
-  participantCanvasRef: RefObject<HTMLCanvasElement>,
+  client: typeof VideoClient,
+  mediaScreen: typeof Stream,
+  participantCanvasRef: RefObject<HTMLCanvasElement>
 ) => {
-  const onPeerVideoStateChange = async (payload: any) => {
+  const onPeerVideoStateChange = async (
+    payload: IonPeerVideoStateChangePayload
+  ) => {
     if (payload.action === 'Start') {
       await mediaScreen.renderVideo(
         participantCanvasRef.current,
@@ -14,12 +22,12 @@ const usePeerVideoStateChange = async (
         900,
         0,
         0,
-        3,
+        3
       );
     } else if (payload.action === 'Stop') {
       await mediaScreen.stopRenderVideo(
         participantCanvasRef.current,
-        payload.userId,
+        payload.userId
       );
     }
   };

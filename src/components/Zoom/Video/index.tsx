@@ -6,10 +6,11 @@ import { useTranslation } from 'react-i18next';
 
 import NameTip from '../NameTip';
 import CallPanel from '../CallPanel';
+import { Stream, VideoClient } from '@zoom/videosdk';
 
 interface VideoProps {
-  client: any;
-  mediaScreen: any;
+  client: typeof VideoClient;
+  mediaScreen: typeof Stream;
   participantCanvasRef: RefObject<HTMLCanvasElement> | null;
   participantShareScreenRef: RefObject<HTMLCanvasElement> | null;
   setStatus: (arg: boolean) => void;
@@ -24,25 +25,26 @@ const Video = ({
   setStatus,
   selfVideoRef,
 }: VideoProps) => {
-  const [videoStarted, setVideoStarted] = React.useState(false);
-  const [audioStarted, setAudioStarted] = React.useState(false);
-  const [isMuted, setIsMuted] = React.useState(false);
-  const [isSharedScreen, setIsSharedScreen] = React.useState(false);
-  const [isSab, setIsSab] = React.useState(false);
-  const [isSelfFullScreen, setIsSelfFullScreen] = React.useState(false);
+  const [videoStarted, setVideoStarted] = React.useState<boolean>(false);
+  const [audioStarted, setAudioStarted] = React.useState<boolean>(false);
+  const [isMuted, setIsMuted] = React.useState<boolean>(false);
+  const [isSharedScreen, setIsSharedScreen] = React.useState<boolean>(false);
+  const [isSab, setIsSab] = React.useState<boolean>(false);
+  const [isSelfFullScreen, setIsSelfFullScreen] =
+    React.useState<boolean>(false);
   const [isParticipantFullScreen, setIsParticipantFullScreen] =
-    React.useState(false);
+    React.useState<boolean>(false);
 
   const { t } = useTranslation();
 
   const isSupportWebCodecs = () => {
-    //@ts-ignore
+    //@ts-ignore window does not contain this property
     return typeof window.MediaStreamTrackProcessor === 'function';
   };
 
   const startVideoButton = React.useCallback(async () => {
     if (!videoStarted) {
-      //@ts-ignore
+      //@ts-ignore window does not contain this property
       if (!!window.chrome && !(typeof SharedArrayBuffer === 'function')) {
         setIsSab(false);
         await mediaScreen.startVideo({
@@ -72,7 +74,7 @@ const Video = ({
     }
   }, [mediaScreen, videoStarted, client, isSab]);
 
-  const startAudioButton = useCallback(async () => {
+  const startAudioButton = useCallback(async (): Promise<void> => {
     if (audioStarted) {
       if (isMuted) {
         await mediaScreen.unmuteAudio();
@@ -87,7 +89,7 @@ const Video = ({
     }
   }, [mediaScreen, audioStarted, isMuted]);
 
-  const shareScreen = React.useCallback(async () => {
+  const shareScreen = React.useCallback(async (): Promise<void> => {
     if (isSharedScreen) {
       await mediaScreen.stopShareScreen();
       (document.querySelector('#share-video') as HTMLElement).style.display =
@@ -197,18 +199,12 @@ const Video = ({
       {!isSupportWebCodecs() ? (
         <canvas width={'512px'} height={'288px'} id="share-canvas"></canvas>
       ) : (
-        <video
-          style={{ maxWidth: '1024px', maxHeight: '576px' }}
-          width={'1024px'}
-          height={'576px'}
-          id="share-video"
-        ></video>
+        <video width={'1024px'} height={'576px'} id="share-video"></video>
       )}
 
       <canvas
         id="participant-share"
         ref={participantShareScreenRef}
-        style={{ maxWidth: '1024px', maxHeight: '576px' }}
         width={'1024px'}
         height={'576px'}
       ></canvas>

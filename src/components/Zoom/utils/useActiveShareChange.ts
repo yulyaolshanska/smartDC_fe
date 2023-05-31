@@ -1,18 +1,24 @@
+import { Stream, VideoClient } from '@zoom/videosdk';
 import { RefObject } from 'react';
 
+interface IonActiveShareChangePayload {
+  state: 'Active' | 'Inactive';
+  userId: number;
+}
+
 const useActiveShareChange = (
-  client: any,
-  mediaScreen: any,
-  participantShareScreenRef: RefObject<HTMLCanvasElement>,
+  client: typeof VideoClient,
+  mediaScreen: typeof Stream,
+  participantShareScreenRef: RefObject<HTMLCanvasElement>
 ): (() => void) => {
-  const onActiveShareChange = (payload: any) => {
+  const onActiveShareChange = (payload: IonActiveShareChangePayload) => {
     if (payload.state === 'Active') {
       mediaScreen.startShareView(
         participantShareScreenRef.current!,
-        payload.userId,
+        payload.userId
       );
       participantShareScreenRef.current!.style.display = 'block';
-    } else if (payload.action === 'Inactive') {
+    } else if (payload.state === 'Inactive') {
       mediaScreen.stopShareView();
       participantShareScreenRef.current!.style.display = 'none';
     }

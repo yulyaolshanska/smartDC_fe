@@ -5,7 +5,8 @@
   "scripts": {
     "start": "nx serve",
     "build": "nx build",
-    "test": "nx test"
+    "test": "nx test",
+    "lint": "eslint --ext js,ts,tsx src"
   },
   "private": true,
   "dependencies": {
@@ -43,6 +44,7 @@
     "i18next-browser-languagedetector": "^7.0.1",
     "i18next-http-backend": "^2.2.0",
     "jsrsasign": "^10.8.6",
+    "lint": "^0.8.19",
     "react": "18.2.0",
     "react-avatar-editor": "^13.0.0",
     "react-big-calendar": "^1.6.9",

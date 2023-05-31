@@ -1,7 +1,5 @@
 import styled from 'styled-components';
-import { Participant } from '@zoom/videosdk';
-import { COLOR_THREE, BLACK_BUT_NOT } from '@constants/colors';
-import { AZURE } from './../../constants/colors';
+import { COLOR_THREE, BLACK_BUT_NOT, AZURE } from '@constants/colors';
 
 interface SelfVideoProps {
   isSelfFullScreen: boolean;
