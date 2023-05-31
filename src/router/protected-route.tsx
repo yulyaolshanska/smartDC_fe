@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { Route, Navigate, useLocation } from 'react-router';
 import Spinner from '@components/Loaders/Spinner';
 import { Stack } from '@mui/system';
@@ -19,9 +19,23 @@ const ProtectedRoute = ({ children, allowedRoles }: ProtectedRoutesProps) => {
   const location = useLocation();
   const doctorRole = doctor?.role ? doctor?.role : '';
 
+  const [isVerifiedDoctor, setIsVerifiedDoctor] = useState(
+    useMemo(() => doctor?.isVerified || false, [doctor])
+  );
+
+  useEffect(() => {
+    setIsVerifiedDoctor(doctor?.isVerified || false);
+    console.log('isVerified', isVerifiedDoctor);
+  }, [doctor, isVerifiedDoctor]);
+
+  
   if (isLoading) {
     return <Spinner />;
   }
+
+//   if (isLoggedIn && !isVerifiedDoctor) {
+//     return <Navigate to="/dashboard" state={{ from: location }} replace />;
+//   }
 
   if (!isLoggedIn || !allowedRoles.includes(doctorRole)) {
     return <Navigate to="/" state={{ from: location }} replace />;

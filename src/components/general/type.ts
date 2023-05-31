@@ -45,6 +45,7 @@ export type Note = {
 
 export type Option = {
   value: string | number;
+  label?: string | null;
 };
 
 export type AppointmentFormValues = {

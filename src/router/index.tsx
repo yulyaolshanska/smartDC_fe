@@ -38,7 +38,7 @@ export const PATH = {
   CREATE_PATIENT_CARD: '/create-patient-card',
   EDIT_PATIENT_CARD: '/edit-patient-card/:id',
   SCHEDULER: '/scheduler',
-  BOOK_APPOINTMENT: '/book-appointment',
+  BOOK_APPOINTMENT: '/book-appointment/:id',
   AVAILABILITY: '/availability',
   PATIENTS_LIST: '/patients',
   PATIENT_CARD_INFO: '/patient/:id',
@@ -56,7 +56,7 @@ const AppRouter = () => {
         <Route path={PATH.LOGIN} element={<Login />} />
         <Route path={PATH.RESET_PASS} element={<ResetPassword />} />
         {/* Private Routes */}
-        <Route
+        {/* <Route
           path={PATH.SIGN_UP_SECOND_STEP_GOOGLE}
           element={
             <ProtectedRoute allowedRoles={['']} >
@@ -89,22 +89,6 @@ const AppRouter = () => {
           }
         />
         <Route
-          path={PATH.FORGOT_PASS}
-          element={
-            <ProtectedRoute allowedRoles={['Remote', 'Local']}>
-              <ForgotPassword />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path={PATH.CONFIRM}
-          element={
-            <ProtectedRoute allowedRoles={['Remote', 'Local']}>
-              <Confirmation />
-            </ProtectedRoute>
-          }
-        />
-        <Route
           path={PATH.EDIT_DOCTOR_PROFILE}
           element={
             <ProtectedRoute allowedRoles={['Remote', 'Local']}>
@@ -119,7 +103,7 @@ const AppRouter = () => {
               <Help />
             </ProtectedRoute>
           }
-        />
+        /> */}
         <Route
           path={PATH.DASHBOARD}
           element={
@@ -128,7 +112,7 @@ const AppRouter = () => {
             </ProtectedRoute>
           }
         />
-        <Route
+        {/* <Route
           path={PATH.AVAILABILITY}
           element={
             <ProtectedRoute allowedRoles={['Remote']}>
@@ -170,6 +154,9 @@ const AppRouter = () => {
         />
         <Route path={PATH.FORGOT_PASS} element={<ForgotPassword />} />
         <Route path={PATH.CONFIRM} element={<Confirmation />} />
+        <Route path={PATH.EDIT_DOCTOR_PROFILE} element={<Profile />} /> */}
+        <Route path={PATH.HELP} element={<Help />} />
+        <Route path={PATH.DASHBOARD} element={<Profile />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </PageWrapper>

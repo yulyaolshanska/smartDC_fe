@@ -90,7 +90,7 @@ const Drawer = () => {
       <TopDrawer>
         <Logo />
         {positions.map((obj) => (
-          <Link to={obj.to}>
+          <Link to={obj.to} >
             <PositionContainer
               key={obj.name}
               onClick={() => handleSelected(obj)}
