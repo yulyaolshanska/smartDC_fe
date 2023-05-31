@@ -112,16 +112,15 @@ const Drawer = () => {
               </Link>
             ) : (
               <div>
-            
-              <PositionContainerBlocked
-                key={obj.name}
-                onClick={() => handleSelected(obj)}
-                selected={selectedPosition && selectedPosition == obj.to}
-              >
-                {obj.icon()}
-                {obj.name}
-              </PositionContainerBlocked>
-            </div>
+                <PositionContainerBlocked
+                  key={obj.name}
+                  onClick={() => handleSelected(obj)}
+                  selected={selectedPosition && selectedPosition == obj.to}
+                >
+                  {obj.icon()}
+                  {obj.name}
+                </PositionContainerBlocked>
+              </div>
             )}
           </>
         ))}
