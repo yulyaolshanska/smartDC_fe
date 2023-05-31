@@ -18,15 +18,16 @@ interface IProps {
 function PatientList({ searchValue }: IProps) {
   const { t } = useTranslation();
   const doctorData = useAppSelector((state) => state.doctorReducer);
-  const { data: allPatients } = useGetAllPatientsQuery('');
-  const { data: patientsForRemote } = useGetPatientsForRemoteQuery(
-    doctorData.id
-  );
+  const { data: allPatients, isLoading: isLoadingForLocal } =
+    useGetAllPatientsQuery('');
+  const { data: patientsForRemote, isLoading: isLoadingForRemote } =
+    useGetPatientsForRemoteQuery(doctorData.id);
   const [currentPage] = useState<number>(1);
   const [displayedPatients, setDisplayedPatients] =
     useState<number>(PATIENTS_PER_PAGE);
   const startIndex = (currentPage - 1) * PATIENTS_PER_PAGE;
   const endIndex = displayedPatients;
+  const isLoading = isLoadingForLocal || isLoadingForRemote;
 
   const handleLoadMoreClick = () => {
     setDisplayedPatients(displayedPatients + PATIENTS_PER_LOAD);
@@ -51,7 +52,7 @@ function PatientList({ searchValue }: IProps) {
 
   return (
     <>
-      {filteredPatients.length > 0 ? (
+      {filteredPatients.length > 0 && !isLoading ? (
         <PatientsList>
           {filteredPatients?.slice(startIndex, endIndex).map((patient) => (
             <PatientCard
@@ -63,7 +64,7 @@ function PatientList({ searchValue }: IProps) {
         </PatientsList>
       ) : (
         <NotFound>
-          {searchValue !== ''
+          {searchValue !== '' && !isLoading
             ? `${t('Patients.PatientWithName')} "${searchValue}" ${t(
                 'Patients.notFound'
               )}.`

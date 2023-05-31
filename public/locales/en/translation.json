@@ -164,7 +164,7 @@
     "calendar": "Calendar"
   },
   "BookAppointment": {
-    "instruction":"Please choose a specialization of a doctor first. Then you will see all available dates, and after that, you can choose a suitable time for your client.",
+    "instruction": "Please choose a specialization of a doctor first. Then you will see all available dates, and after that, you can choose a suitable time for your client.",
     "selectDoctorSpecialization": "Select doctor specialization",
     "selectDay": "Select a day of appointment",
     "SelectAppointmentTime": "Select a time of appointment",
@@ -224,7 +224,7 @@
     "search": "Search",
     "loadMore": "Load More",
     "PatientWithName": "Patient with name",
-    "notFound": "not fond",
+    "notFound": "not found",
     "patients": "Patients"
   },
   "Appointments": {
