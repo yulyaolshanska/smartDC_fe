@@ -56,7 +56,7 @@ const AppRouter = () => {
         <Route path={PATH.LOGIN} element={<Login />} />
         <Route path={PATH.RESET_PASS} element={<ResetPassword />} />
         {/* Private Routes */}
-        {/* <Route
+        <Route
           path={PATH.SIGN_UP_SECOND_STEP_GOOGLE}
           element={
             <ProtectedRoute allowedRoles={['']} >
@@ -103,7 +103,7 @@ const AppRouter = () => {
               <Help />
             </ProtectedRoute>
           }
-        /> */}
+        />
         <Route
           path={PATH.DASHBOARD}
           element={
@@ -112,7 +112,7 @@ const AppRouter = () => {
             </ProtectedRoute>
           }
         />
-        {/* <Route
+        <Route
           path={PATH.AVAILABILITY}
           element={
             <ProtectedRoute allowedRoles={['Remote']}>
@@ -154,7 +154,7 @@ const AppRouter = () => {
         />
         <Route path={PATH.FORGOT_PASS} element={<ForgotPassword />} />
         <Route path={PATH.CONFIRM} element={<Confirmation />} />
-        <Route path={PATH.EDIT_DOCTOR_PROFILE} element={<Profile />} /> */}
+        <Route path={PATH.EDIT_DOCTOR_PROFILE} element={<Profile />} />
         <Route path={PATH.HELP} element={<Help />} />
         <Route path={PATH.DASHBOARD} element={<Profile />} />
         <Route path="*" element={<NotFound />} />
