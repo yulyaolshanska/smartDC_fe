@@ -59,6 +59,7 @@ export const PositionContainerBlocked = styled.div`
   border-radius: 8px;
   padding: 12px 46px 12px 17px;
   color: ${NOT_ACTIVE};
+  opacity: 0.6;
   font-size: ${NORMAL_FONT_SIZE};
   font-weight: 700;
   svg {
