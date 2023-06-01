@@ -67,7 +67,7 @@ function WeeklyCalendar() {
     }
   }, []);
 
-  const EventContent = () => {
+  const EventContent = useMemo(() => {
     const randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
 
     return (
@@ -77,7 +77,8 @@ function WeeklyCalendar() {
         </EventMain>
       </EventContainer>
     );
-  };
+  }, [appointments]);
+
   const options: CalendarOptions = {
     plugins: [dayGridPlugin],
     initialView: 'dayGridWeek',
