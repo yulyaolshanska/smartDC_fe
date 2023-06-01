@@ -23,6 +23,11 @@ import { fiveMinutes, sec } from '@constants/notification';
 
 const token = cookie.get('accessToken');
 
+type TimerResult = {
+  minutes: number;
+  seconds: number;
+};
+
 export const MeetNotification = () => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
@@ -32,22 +37,39 @@ export const MeetNotification = () => {
     useAppSelector((state) => state.socketAppointmentReducer.nextAppointment);
   const doctor = useAppSelector((state) => state.doctorReducer);
 
-  const formattedCurrentTime = moment().format(notificationCurrentTime);
-  const diffTimeStart =
-    new Date(startTime).getTime() - new Date(formattedCurrentTime).getTime();
-  const diffTimeEnd =
-    new Date(endTime).getTime() - new Date(formattedCurrentTime).getTime();
-  const isTimerRun = diffTimeStart < fiveMinutes && diffTimeStart > sec;
-  const isMeetInProgress = diffTimeEnd > 0 && diffTimeEnd <= fiveMinutes;
-  const isNotifOpen = isTimerRun || isMeetInProgress;
+  const formattedCurrentTime = useMemo(
+    () => moment().format(notificationCurrentTime),
+    [startTime]
+  );
 
-  const deadline = new Date(startTime);
-  const diff = deadline.getTime() - new Date().getTime() || 0;
-  const minutes = diff > 0 ? Math.floor(timer / 60) % 60 : 0;
-  const seconds = diff > 0 ? Math.floor(timer % 60) : 0;
+  const diffTimeStart = useMemo(
+    () =>
+      new Date(startTime).getTime() - new Date(formattedCurrentTime).getTime(),
+    [startTime, formattedCurrentTime]
+  );
+
+  const diffTimeEnd = useMemo(
+    () =>
+      new Date(endTime).getTime() - new Date(formattedCurrentTime).getTime(),
+    [endTime, formattedCurrentTime]
+  );
+
+  const isTimerRun = useMemo(
+    () => diffTimeStart < fiveMinutes && diffTimeStart > sec,
+    [diffTimeStart]
+  );
+
+  const isMeetInProgress = useMemo(
+    () => diffTimeEnd > 0 && diffTimeEnd <= fiveMinutes,
+    [diffTimeEnd]
+  );
+
+  const isNotifOpen = useMemo(
+    () => isTimerRun || isMeetInProgress,
+    [isTimerRun, isMeetInProgress]
+  );
 
   useEffect(() => {
-    const diffStart = deadline.getTime() - new Date().getTime();
     const diffEnd = new Date(endTime).getTime() - new Date().getTime();
 
     const initialTimer = isTimerRun
@@ -65,7 +87,7 @@ export const MeetNotification = () => {
     return () => {
       clearInterval(intervalId);
     };
-  }, [startTime, endTime, diffTimeStart, diffTimeEnd]);
+  }, []);
 
   useEffect(() => {
     const socket = io(
@@ -91,13 +113,6 @@ export const MeetNotification = () => {
     }
   };
 
-  const getNotificationText = isTimerRun
-    ? `${t('Notification.youHaveVideoCallIn')}  ${`${minutes
-        .toString()
-        .padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`} minutes
-            with:`
-    : `${t('Notification.youCurrentlyHaveMeeting')}`;
-
   const getPatient = useMemo(() => {
     const gender =
       patient?.gender === female
@@ -113,6 +128,31 @@ export const MeetNotification = () => {
       }`,
     [remoteDoctor, doctor, localDoctor]
   );
+
+  const calculateTimer = useMemo(
+    () =>
+      (startTime: string): TimerResult => {
+        const deadline = new Date(startTime);
+        const diff = deadline.getTime() - new Date().getTime() || 0;
+        const timer = diff > 0 ? Math.floor(diff / 1000) : 0;
+        const minutes = Math.floor(timer / 60) % 60;
+        const seconds = Math.floor(timer % 60);
+
+        return { minutes, seconds };
+      },
+    [startTime]
+  );
+
+  const { minutes, seconds } = calculateTimer(startTime);
+
+  const getNotificationText = useMemo(() => {
+    return isTimerRun
+      ? `${t('Notification.youHaveVideoCallIn')}  ${`${minutes
+          .toString()
+          .padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`} minutes
+            with:`
+      : `${t('Notification.youCurrentlyHaveMeeting')}`;
+  }, [minutes, seconds]);
 
   return (
     <>
