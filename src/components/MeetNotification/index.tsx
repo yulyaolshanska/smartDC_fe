@@ -28,7 +28,7 @@ type TimerResult = {
   seconds: number;
 };
 
-export const MeetNotification = () => {
+const MeetNotification = () => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const [timer, setTimer] = useState(0);
@@ -178,3 +178,5 @@ export const MeetNotification = () => {
     </>
   );
 };
+
+export default MeetNotification;
