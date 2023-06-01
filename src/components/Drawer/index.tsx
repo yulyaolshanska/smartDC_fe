@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import Logo from '@components/Logo';
 import { ReactComponent as DashbordIcon } from '@assets/dashbord.svg';
 import { ReactComponent as SignOutIcon } from '@assets/Sign Out.svg';
@@ -86,10 +86,11 @@ const Drawer = () => {
     setShowModal(false);
   };
 
-  const getDoctorSpecialization =
-    currentDoctor.specialization === 1
+  const getDoctorSpecialization = useMemo(() => {
+    return currentDoctor.specialization === 1
       ? `${t('Dashboard.anesthesiology')}`
       : `${t('Dashboard.cardiology')}`;
+  }, [currentDoctor]);
 
   return (
     <DrawerContainer>
