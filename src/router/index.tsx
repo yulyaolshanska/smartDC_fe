@@ -18,6 +18,7 @@ import NotFound from '@pages/notFound';
 import DoctorScheduler from '@pages/doctorScheduler';
 import ProtectedRoute from './protected-route';
 import PatientInfo from '@pages/patient/patientInfo';
+import Dashboard from '@pages/dashboard';
 import Patients from '@pages/patients';
 import cookie from 'utils/functions/cookies';
 import AppointmentsDoctorScheduler from '@pages/doctorScheduler/appointmentsScheduler';
@@ -107,20 +108,20 @@ const AppRouter = () => {
           path={PATH.DASHBOARD}
           element={
             <ProtectedRoute allowedRoles={['Remote', 'Local']}>
-              <Profile />
+              <Dashboard />
             </ProtectedRoute>
           }
         />
         <Route
           path={PATH.AVAILABILITY}
           element={
-            <ProtectedRoute allowedRoles={['Remote']}>
+            <ProtectedRoute allowedRoles={['Remote', 'Local']}>
               <DoctorScheduler />
             </ProtectedRoute>
           }
         />
         <Route
-          path={PATH.APPOINTMENTS}
+          path={PATH.APPOINTMENT}
           element={
             <ProtectedRoute allowedRoles={['Remote', 'Local']}>
               <AppointmentsDoctorScheduler />

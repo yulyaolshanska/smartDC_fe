@@ -29,6 +29,9 @@ a,
 a:link,
 a:visited {
   text-decoration: none;
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
 }
 
 a:hover {

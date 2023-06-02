@@ -36,10 +36,11 @@ export const genderInfo = 'Male';
 export const yearsInfo = '32 years';
 export const cityCountryInfo = 'Leova, Moldova';
 export const overviewInformation = 'overview information';
-export const lastAppointmentInfo = 'The average volume of RBCs, or the space each red blood cell fills, is measured through this test. '
-  + 'Results outside of the normal range can be a sign of anemia or chronic fatigue. The average volume of RBCs, or the space each red blood cell fills, is measured through this test.'
-  + 'The average volume of RBCs, or the space each red blood cell fills, is measured through this test. '
-  + 'Results outside of the normal range can be a sign of anemia or chronic fatigue. The average volume of RBCs, or the space each red blood cell fills, is measured through this test.';
+export const lastAppointmentInfo =
+  'The average volume of RBCs, or the space each red blood cell fills, is measured through this test. ' +
+  'Results outside of the normal range can be a sign of anemia or chronic fatigue. The average volume of RBCs, or the space each red blood cell fills, is measured through this test.' +
+  'The average volume of RBCs, or the space each red blood cell fills, is measured through this test. ' +
+  'Results outside of the normal range can be a sign of anemia or chronic fatigue. The average volume of RBCs, or the space each red blood cell fills, is measured through this test.';
 
 export const defaultAppointments = [
   {
