@@ -3,16 +3,20 @@ import Wrapper from '@components/Wrapper';
 import { Stack, Box } from '@mui/system';
 import { Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
 import { authApi } from 'services/AuthService';
 
 import { ReactComponent as CameraIcon } from '@assets/Camera.svg';
 import { ACTIVE, ANOTHER_FUCKING_BLUE, BORDER } from '@constants/colors';
 import { VERY_SMALL_FONT_SIZE } from '@constants/fontSizes';
 
+import getPatientAge from 'utils/functions/getPatientAge';
+import { IPatient } from '@components/general/type';
+
 interface AppointmentElementProps {
   index: number;
   remoteDoctor: Record<string, any>;
-  patient: Record<string, any>;
+  patient: IPatient;
 }
 
 const AppointmentElement = ({
@@ -21,26 +25,25 @@ const AppointmentElement = ({
   patient,
 }: AppointmentElementProps) => {
   const [show, setShow] = React.useState<boolean>(false);
+  const { data: doctor } = authApi.useGetMeQuery({});
 
   const { t } = useTranslation();
 
-  const fullText = patient.notes[0].note;
-  const cuttedText = patient.notes[0].note.slice(0, 100).trim();
-
-  const getPatientAge = () => {
-    const birthdate = new Date(patient.birthDate);
-    const today = new Date();
-    const diffTime = Number(today) - Number(birthdate);
-    return Math.floor(diffTime / (1000 * 60 * 60 * 24 * 365));
-  };
+  const fullText = patient?.notes[0]?.note ?? '';
+  const cuttedText = patient?.notes[0]?.note.slice(0, 100).trim() ?? '';
 
   const getPatientInfo = React.useMemo(() => {
     {
-      return `${patient.gender}, ${patient.lastName} ${getPatientAge()} y.o`;
+      return `${patient.gender}, ${patient.lastName} ${getPatientAge(
+        patient
+      )} y.o`;
     }
-  }, [patient]);
-
-  const patientName = `${patient.firstName.charAt(0)}. ${patient.lastName}`;
+  }, []);
+  const getPatientName = React.useMemo(() => {
+    {
+      return `${patient.firstName.charAt(0)}. ${patient.lastName}`;
+    }
+  }, []);
 
   return (
     <Box marginBottom="8px">
@@ -66,7 +69,7 @@ const AppointmentElement = ({
                 fontWeight="700"
                 color={ANOTHER_FUCKING_BLUE}
               >
-                {patientName}
+                <Link to={`/patient/${doctor.id}`}>{getPatientName}</Link>
               </Typography>
               <Typography fontSize={VERY_SMALL_FONT_SIZE} fontWeight="500">
                 {getPatientInfo}
@@ -80,7 +83,7 @@ const AppointmentElement = ({
                 fontSize={VERY_SMALL_FONT_SIZE}
                 fontWeight="700"
               >
-                {t('Dashboard.Remote')} -
+                {doctor.role ? t('Dashboard.Remote') : t('Dashboard.Local')}-
               </Typography>
               <Typography
                 fontSize={VERY_SMALL_FONT_SIZE}
@@ -108,7 +111,8 @@ const AppointmentElement = ({
           </Box>
           {fullText.length > 100 && (
             <Box color={ACTIVE} onClick={() => setShow(!show)}>
-              {t('Show')} {show ? 'less' : 'more'}
+              {t('Dashboard.Show')}
+              {show ? t('Profile.showLess') : t('Profile.showMore')}
             </Box>
           )}
         </Stack>

@@ -13,4 +13,5 @@ const navigationSlice = createSlice({
   },
 });
 
-export const { reducer: navigationReducer, actions: navigationActions } = navigationSlice;
+export const { reducer: navigationReducer, actions: navigationActions } =
+  navigationSlice;

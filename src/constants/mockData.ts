@@ -4,8 +4,8 @@ export const roles = [
 ];
 
 export const specializations = [
-  { value: 1, label: 'Anesthesiology' },
-  { value: 2, label: 'Cardiology' },
+  { value: 0, label: 'Anesthesiology' },
+  { value: 1, label: 'Cardiology' },
 ];
 
 export const genders = [
@@ -29,12 +29,6 @@ export const timeZones = [
   { value: 'GMT-06:00', label: '(GMT-06:00) Mezcales, San Vicente, Bucerías' },
 ];
 
-export const appointmentTime = [
-  { value: 1, label: '9:00-10:00' },
-  { value: 2, label: '10:00-11:00' },
-  { value: 3, label: '11:00-12:00' },
-];
-
 export const nameInfo = 'Patrick Beverley';
 export const phoneNumberInfo = '+380660012300';
 export const emailInfo = 'pat123beverley@gmail.com';
@@ -42,10 +36,11 @@ export const genderInfo = 'Male';
 export const yearsInfo = '32 years';
 export const cityCountryInfo = 'Leova, Moldova';
 export const overviewInformation = 'overview information';
-export const lastAppointmentInfo = 'The average volume of RBCs, or the space each red blood cell fills, is measured through this test. '
-  + 'Results outside of the normal range can be a sign of anemia or chronic fatigue. The average volume of RBCs, or the space each red blood cell fills, is measured through this test.'
-  + 'The average volume of RBCs, or the space each red blood cell fills, is measured through this test. '
-  + 'Results outside of the normal range can be a sign of anemia or chronic fatigue. The average volume of RBCs, or the space each red blood cell fills, is measured through this test.';
+export const lastAppointmentInfo =
+  'The average volume of RBCs, or the space each red blood cell fills, is measured through this test. ' +
+  'Results outside of the normal range can be a sign of anemia or chronic fatigue. The average volume of RBCs, or the space each red blood cell fills, is measured through this test.' +
+  'The average volume of RBCs, or the space each red blood cell fills, is measured through this test. ' +
+  'Results outside of the normal range can be a sign of anemia or chronic fatigue. The average volume of RBCs, or the space each red blood cell fills, is measured through this test.';
 
 export const defaultAppointments = [
   {

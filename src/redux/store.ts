@@ -24,10 +24,10 @@ import { createPatientReducer } from '@redux/slices/patient/createPatient';
 import { socketAppointmenttReducer } from '@redux/slices/socketAppointmentsSlice';
 import { zoomApi } from 'services/ZoomService';
 import { zoomReducer } from './slices/ZoomSlice';
-import { noteFilterReducer } from 'redux/slices/NoteFilterSlice';
-import { patientApi } from 'services/PatientService';
-import { availabilityApi } from 'services/AvailabilityService';
-import { appointmentApi } from 'services/AppointmentService';
+import { noteFilterReducer } from './slices/NoteFilterSlice';
+import { patientApi } from '../services/PatientService';
+import { availabilityApi } from '../services/AvailabilityService';
+import { appointmentApi } from '../services/BookAppointmetService';
 
 const rootReducer = combineReducers({
   loginReducer,

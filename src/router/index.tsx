@@ -17,6 +17,7 @@ import DoctorScheduler from '@pages/doctorScheduler';
 import ProtectedRoute from './protected-route';
 import PatientInfo from '@pages/patient/patientInfo';
 import ZoomPage from '@pages/zoom';
+import Dashboard from '@pages/dashboard';
 import Patients from '@pages/patients';
 import AppointmentsDoctorScheduler from '@pages/doctorScheduler/appointmentsScheduler';
 import Chat from '@components/Chat';
@@ -35,7 +36,7 @@ export const PATH = {
   CREATE_PATIENT_CARD: '/create-patient-card',
   EDIT_PATIENT_CARD: '/edit-patient-card/:id',
   SCHEDULER: '/scheduler',
-  BOOK_APPOINTMENT: '/book-appointment',
+  BOOK_APPOINTMENT: '/book-appointment/:id',
   AVAILABILITY: '/availability',
   PATIENTS_LIST: '/patients',
   PATIENT_CARD_INFO: '/patient/:id',
@@ -90,22 +91,6 @@ const AppRouter = () => {
           }
         />
         <Route
-          path={PATH.FORGOT_PASS}
-          element={
-            <ProtectedRoute allowedRoles={['Remote', 'Local']}>
-              <ForgotPassword />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path={PATH.CONFIRM}
-          element={
-            <ProtectedRoute allowedRoles={['Remote', 'Local']}>
-              <Confirmation />
-            </ProtectedRoute>
-          }
-        />
-        <Route
           path={PATH.EDIT_DOCTOR_PROFILE}
           element={
             <ProtectedRoute allowedRoles={['Remote', 'Local']}>
@@ -125,20 +110,20 @@ const AppRouter = () => {
           path={PATH.DASHBOARD}
           element={
             <ProtectedRoute allowedRoles={['Remote', 'Local']}>
-              <Profile />
+              <Dashboard />
             </ProtectedRoute>
           }
         />
         <Route
           path={PATH.AVAILABILITY}
           element={
-            <ProtectedRoute allowedRoles={['Remote']}>
+            <ProtectedRoute allowedRoles={['Remote', 'Local']}>
               <DoctorScheduler />
             </ProtectedRoute>
           }
         />
         <Route
-          path={PATH.APPOINTMENTS}
+          path={PATH.APPOINTMENT}
           element={
             <ProtectedRoute allowedRoles={['Remote', 'Local']}>
               <AppointmentsDoctorScheduler />
@@ -169,13 +154,11 @@ const AppRouter = () => {
             </ProtectedRoute>
           }
         />
-        {/* <Route path={PATH.PATIENT} element={<PatientPage />} /> */}
         <Route path={PATH.FORGOT_PASS} element={<ForgotPassword />} />
         <Route path={PATH.CONFIRM} element={<Confirmation />} />
         <Route path={PATH.EDIT_DOCTOR_PROFILE} element={<Profile />} />
         <Route path={PATH.HELP} element={<Help />} />
         <Route path={PATH.DASHBOARD} element={<Profile />} />
-        {/* <Route path={PATH.EDIT_PATIENT_CARD} element={<EditPatientCard />} /> */}
         <Route path="*" element={<NotFound />} />
       </Routes>
     </PageWrapper>

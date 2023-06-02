@@ -29,9 +29,7 @@ export const DODGE_BLUE = 'dodgerblue';
 export const DARK_GREEN = '#188038';
 
 export const LIGHT_GREEN = '#BFE8CA';
-/**
- * @deprecated
- */
+
 export const BLUE = '#4579EE';
 
 export const DRAWER_CONT = '#f4f6fd';
@@ -73,6 +71,10 @@ export const POP_UP_CONTENT_BACKGROUND = '#f8f8f8';
 export const DARK_BLUE = '#060d33';
 
 export const LIGHT_BLUE = '#081972';
+
+export const APPOINTMENT_TIME = '#060A32';
+
+export const ANOTHER_FUCKING_BLUE = '#4C92FF';
 
 export const BLUEBERRY_BLUE = '#4579EE';
 

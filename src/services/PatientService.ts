@@ -52,7 +52,7 @@ export const patientApi = createApi({
 });
 
 export const {
+  useGetPatientByIdQuery,
   useGetAllPatientsQuery,
   useGetPatientsForRemoteQuery,
-  useGetPatientByIdQuery,
 } = patientApi;
