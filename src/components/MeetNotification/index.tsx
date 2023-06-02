@@ -19,7 +19,12 @@ import { Appointment } from 'services/types/appointment.type';
 import { local } from '@constants/other';
 import { female } from '@constants/patient';
 import { notificationCurrentTime } from '@constants/format';
-import { fiveMinutes, sec } from '@constants/notification';
+import {
+  fiveMinutes,
+  MILLISEC_PER_SEC,
+  sec,
+  SEC_PER_MIN,
+} from '@constants/notification';
 
 const token = cookie.get('accessToken');
 
@@ -134,9 +139,9 @@ const MeetNotification = () => {
       (startTime: string): TimerResult => {
         const deadline = new Date(startTime);
         const diff = deadline.getTime() - new Date().getTime() || 0;
-        const timer = diff > 0 ? Math.floor(diff / 1000) : 0;
-        const minutes = Math.floor(timer / 60) % 60;
-        const seconds = Math.floor(timer % 60);
+        const timer = diff > 0 ? Math.floor(diff / MILLISEC_PER_SEC) : 0;
+        const minutes = Math.floor(timer / SEC_PER_MIN) % SEC_PER_MIN;
+        const seconds = Math.floor(timer % SEC_PER_MIN);
 
         return { minutes, seconds };
       },
