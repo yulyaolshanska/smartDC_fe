@@ -60,8 +60,32 @@ export const appointmentApi = createApi({
         { type: 'Appointment', doctorId },
       ],
     }),
+    getAllAvalibleDoctors: builder.query({
+      query: ({ start, end, specialization, limit }) => ({
+        url: '/availability',
+        method: 'GET',
+        params: {
+          start,
+          end,
+          specialization,
+          limit,
+        },
+      }),
+    }),
+    createAppointment: builder.mutation({
+      query: (data) => ({
+        url: `/appointment`,
+        method: 'POST',
+        body: data,
+      }),
+      invalidatesTags: ['Appointment'],
+    }),
   }),
 });
 
-export const { useGetSpecializationByIdQuery, useGetAppointmentForWeekQuery } =
-  appointmentApi;
+export const {
+  useGetSpecializationByIdQuery,
+  useGetAppointmentForWeekQuery,
+  useGetAllAvalibleDoctorsQuery,
+  useCreateAppointmentMutation,
+} = appointmentApi;

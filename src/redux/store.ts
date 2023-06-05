@@ -24,7 +24,7 @@ import { createPatientReducer } from '@redux/slices/patient/createPatient';
 import { noteFilterReducer } from './slices/NoteFilterSlice';
 import { patientApi } from '../services/PatientService';
 import { availabilityApi } from '../services/AvailabilityService';
-import { appointmentApi } from '../services/BookAppointmetService';
+import { appointmentApi } from '../services/AppointmentService';
 
 const rootReducer = combineReducers({
   loginReducer,

@@ -144,11 +144,6 @@
     "problem": "Some problem",
     "lorem": " Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore"
   },
-  "Dashboard": {
-    "backToDashboard": "Back to dashboard",
-    "loading": "Loading...",
-    "goBack": "Go back"
-  },
   "Warning": {
     "viewScheduleWarning": "Warning: you are in view mode and creating new schedule will be done according to your local time!"
   },
@@ -241,7 +236,7 @@
     "Remote": "Remote",
     "Local": "Local",
     "Dr.": "Dr.",
-    "LastAppointment": "LastAppointment"
+    "LastAppointment": "LastAppointment",
     "myAppointments": "My appointments:",
     "years": "y.o.",
     "remoteDoctor": "Remote",
@@ -251,9 +246,10 @@
     "doctor": "Dr.",
     "patient": "Patient",
     "lastAppointment": "Last Appointment",
-    "noAppointmentsYet": "The patient has no appointments yet"
-  },
-  "Chat": {
+    "noAppointmentsYet": "The patient has no appointments yet",
+    "goBack": "Go back"
+},
+"Chat": {
     "typeMessage": "Type your message...",
     "isTyping": "is typing"
   }
