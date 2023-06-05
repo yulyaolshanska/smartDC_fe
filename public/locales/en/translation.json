@@ -91,6 +91,7 @@
     "bothDatesRequired": "Validation error: both start and end dates are required",
     "endBeforeStartDateError": "Validation error: end date should be after start date",
     "overlappingEventsError": "Validation error: working hours overlap",
+    "somethingWasWrong": "Sorry, something was wrong!",
     "pastDateError": "You cannot create schedule on a past date!",
     "calendarSlotError": "Something went wrong!",
     "noEvents": "No events for this day"
@@ -123,6 +124,7 @@
     "save": "Save",
     "cancel": "Cancel",
     "cardUpdetedSuccess": "Patient's card updated successfully",
+
     "lastAppointment": "Last Appointment:",
     "cardCreatedSuccess": "Patient's card created successfully"
   },
@@ -226,6 +228,20 @@
     "patients": "Patients"
   },
   "Appointments": {
+    "myAppointments": "My appointments:"
+  },
+
+  "Dashboard": {
+    "backToDashboard": "Back to dashboard",
+    "loading": "Loading...",
+    "WelcomeDr": "Welcome, Dr.",
+    "Notification": "Notification",
+    "LatestAppointments": " Latest Appointments",
+    "LoadMore": "Load More",
+    "Remote": "Remote",
+    "Local": "Local",
+    "Dr.": "Dr.",
+    "LastAppointment": "LastAppointment"
     "myAppointments": "My appointments:",
     "years": "y.o.",
     "remoteDoctor": "Remote",
