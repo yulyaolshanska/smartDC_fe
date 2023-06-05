@@ -51,20 +51,6 @@ const useAppointmentBookFormHook = () => {
   const onSubmit = async (data: DateObject) => {
     const [startTime, endTime] = data.appointmentTimeRange.split('-');
 
-    console.log(startTime);
-    console.log(`data`, data.date);
-
-    // const start = parse(
-    //   `${format(data.date, fullYearFormat)} ${startTime.trim()}`,
-    //   fullDateTimeFormat,
-    //   new Date()
-    // );
-    // const end = parse(
-    //   `${format(data.date, fullYearFormat)} ${endTime.trim()}`,
-    //   fullDateTimeFormat,
-    //   new Date()
-    // );
-
     const parseDateTime = (dateTimeString) => {
       const [time, period] = dateTimeString.split(' ');
       let [hours, minutes] = time.split(':');
@@ -92,10 +78,6 @@ const useAppointmentBookFormHook = () => {
     const start = parseDateTime(startTimeString);
     const end = parseDateTime(endTimeString);
 
-    console.log(`start`, start);
-    console.log(`end`, end);
-
-    
     const appointmentInfo = {
       localDoctorId: Number(doctorData.id),
       remoteDoctorId: Number(data?.doctor),
