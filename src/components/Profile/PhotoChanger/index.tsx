@@ -32,8 +32,6 @@ const PhotoChanger = () => {
   const { t } = useTranslation();
   const finalUrl = import.meta.env.VITE_REACT_APP_BASE_URL_SERVER + avatarUrl;
 
-  console.log('doctor', doctor);
-
   return (
     <PhotoChangerWrapper>
       <p> {t('Profile.editProfile') ?? ''}</p>

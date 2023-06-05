@@ -38,7 +38,6 @@ const DashboardComponent = () => {
     refetchAppointments,
     t,
   } = useDashboardComponent();
-  console.log(appointmentsArray);
 
   if (!appointmentsArray) {
     return (

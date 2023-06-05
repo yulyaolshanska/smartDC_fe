@@ -28,7 +28,6 @@ const LoadMoreButton = ({ notesLocal }: LoadMoreButtonProps) => {
     dispatch(noteFilterActions.setSkipAmount());
   }, [notesLocalLength]);
 
-  console.log(notes);
   return (
     <LoadButton
       onClick={fetchMore}

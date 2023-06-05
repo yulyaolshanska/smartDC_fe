@@ -44,8 +44,6 @@ const Notes = () => {
     isLoading,
   } = noteApi.useGetPatientNoteQuery({ ...filterParams, patientId });
 
-  console.log(notes, 'local');
-
   const handleAddNew = () => {
     setAddNew(!addNew);
   };
