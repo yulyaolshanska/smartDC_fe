@@ -1,7 +1,6 @@
 import { useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { io } from 'socket.io-client';
-import moment from 'moment';
 import { useAppDispatch, useAppSelector } from '@redux/hooks';
 import { socketAppointmentActions } from '@redux/slices/socketAppointmentsSlice';
 import {
@@ -18,10 +17,10 @@ import { Appointment } from 'services/types/appointment.type';
 import { local } from '@constants/other';
 import { female } from '@constants/patient';
 import { fiveMinutes } from '@constants/notification';
-import { notificationCurrentTime } from '@constants/format';
 import useTimer from 'utils/hooks/useTimer';
 import cookie from 'utils/functions/cookies';
 import useNotificationText from 'utils/hooks/useNotificationText';
+import { getCurrentFormattedTime } from 'utils/functions/timeUtils';
 
 const token = cookie.get('accessToken');
 
@@ -81,15 +80,11 @@ const MeetNotification = () => {
     [remoteDoctor, doctor, localDoctor]
   );
 
-  const formattedCurrentTime = useMemo(
-    () => moment().format(notificationCurrentTime),
-    [startTime, seconds]
-  );
-
   const diffTimeEnd = useMemo(
     () =>
-      new Date(endTime).getTime() - new Date(formattedCurrentTime).getTime(),
-    [endTime, formattedCurrentTime]
+      new Date(endTime).getTime() -
+      new Date(getCurrentFormattedTime()).getTime(),
+    [endTime, seconds]
   );
 
   const isMeetInProgress = useMemo(

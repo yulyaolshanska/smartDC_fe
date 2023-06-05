@@ -1,4 +1,6 @@
+import { notificationCurrentTime } from '@constants/format';
 import { timeOptions, PM } from '@constants/other';
+import moment from 'moment';
 
 export const getThreeMonthPeriod = (today: Date) => {
   const result = [];
@@ -66,4 +68,8 @@ export const reverseFormatTimeRange = (
     start: startDate.toISOString(),
     end: endDate.toISOString(),
   };
+};
+
+export const getCurrentFormattedTime = () => {
+  return moment().format(notificationCurrentTime);
 };
