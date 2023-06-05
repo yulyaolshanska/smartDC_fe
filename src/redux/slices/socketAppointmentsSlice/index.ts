@@ -13,7 +13,7 @@ const initialState = {
   },
   callConfig: {
     name: 'my conf',
-    tpc: 'some shit',
+    tpc: '',
     role_type: 1,
     user_identity: '',
     session_key: '',

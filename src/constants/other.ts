@@ -52,3 +52,7 @@ export const MAX_CHARACTER_LIMIT = 250;
 export const enUS = 'en-US';
 
 export const PM = 'PM';
+
+export const MAX_COLOR_VALUE = 16777215;
+
+export const zero = '0';

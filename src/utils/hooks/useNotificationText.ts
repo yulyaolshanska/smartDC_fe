@@ -1,3 +1,5 @@
+import { zero } from '@constants/other';
+
 export type NotificationTextData = {
   isTimerRun: boolean;
   getNotificationText: string;
@@ -14,9 +16,9 @@ const useNotificationText = (
   const getNotificationText = isTimerRun
     ? `${t('Notification.youHaveVideoCallIn')} ${`${minutes
         .toString()
-        .padStart(2, '0')}:${seconds
-        .toString()
-        .padStart(2, '0')}`} minutes with:`
+        .padStart(2, zero)}:${seconds.toString().padStart(2, zero)}`} ${t(
+        'Notification.minutesWith'
+      )}`
     : `${t('Notification.youCurrentlyHaveMeeting')}`;
 
   return { isTimerRun, getNotificationText };

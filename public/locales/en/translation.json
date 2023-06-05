@@ -246,7 +246,8 @@
     "Mr": "Mr.",
     "details": "Details",
     "goToMeetingRoom": "Go to the meeting room",
-    "and": "and"
+    "and": "and",
+    "minutesWith": "minutes with:"
   },
   "Chat": {
     "typeMessage": "Type your message...",
