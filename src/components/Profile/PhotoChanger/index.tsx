@@ -32,24 +32,16 @@ const PhotoChanger = () => {
   const { t } = useTranslation();
   const finalUrl = import.meta.env.VITE_REACT_APP_BASE_URL_SERVER + avatarUrl;
 
+  console.log('doctor', doctor);
+
   return (
     <PhotoChangerWrapper>
       <p> {t('Profile.editProfile') ?? ''}</p>
-      {!doctor?.photoUrl ? (
-        <Photo>
-          <img src={defaultDoctorPhoto} alt="Photo" width="160px" />
-        </Photo>
-      ) : null}
-
       <Photo>
         {doctor?.photoUrl ? (
           <img src={finalUrl} alt="Photo" width="160px" />
         ) : (
-          <img
-            src={import.meta.env.VITE_REACT_APP_BASE_URL_SERVER + avatarUrl}
-            alt="Photo"
-            width="160px"
-          />
+          <img src={defaultDoctorPhoto} alt="Photo" width="160px" />
         )}
         <EditIconContainer onClick={() => setOpened(true)}>
           <img src={editIcon} />

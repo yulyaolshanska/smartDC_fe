@@ -13,13 +13,15 @@ import {
 
 export const DrawerContainer = styled.div`
   display: flex;
+  position: fixed;
   flex-direction: column;
-  min-width: 23.5vw;
+  width: 23.5vw;
   background-color: ${DRAWER_CONT};
   min-height: 100vh;
   border-right: 1px solid ${DRAWER_BORDER};
   padding: 12px;
   font-family: ${FONT_ROBOTO};
+  z-index: 10;
 `;
 
 export const PositionContainer = styled.div<{ selected?: boolean | string }>`

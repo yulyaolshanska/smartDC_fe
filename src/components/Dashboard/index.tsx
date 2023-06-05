@@ -38,6 +38,8 @@ const DashboardComponent = () => {
     refetchAppointments,
     t,
   } = useDashboardComponent();
+  console.log(appointmentsArray);
+
   if (!appointmentsArray) {
     return (
       <div>
@@ -82,6 +84,9 @@ const DashboardComponent = () => {
       </Stack>
 
       <Stack justifyContent="center" width="100%" alignItems="center">
+        {!appointmentsArray.appointments.length && (
+          <Typography>You have no appointments today</Typography>
+        )}
         {groupedAppointments &&
           Object.entries(groupedAppointments)?.map(
             ([timeRange, appointments]) => (

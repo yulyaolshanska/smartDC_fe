@@ -40,7 +40,7 @@ const useDashboardComponent = () => {
   }, [appointmentsArray]);
 
   const sortedAppointments = useMemo(() => {
-    return getItterableAppointments.sort(
+    return getItterableAppointments?.sort(
       (a: AppointmentElement, b: AppointmentElement) => {
         const startTimeA = new Date(a.startTime);
         const startTimeB = new Date(b.startTime);
