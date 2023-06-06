@@ -1,4 +1,5 @@
 import { notificationCurrentTime } from '@constants/format';
+import { fiveMinutes, sec } from '@constants/notification';
 import { timeOptions, PM } from '@constants/other';
 import moment from 'moment';
 
@@ -52,7 +53,7 @@ export const reverseFormatTimeRange = (
   timeRange: string,
   selectedDate: Date
 ) => {
-  console.log(`selectedDate`, selectedDate);
+
   const [start, end] = timeRange.split('-').map((time: string) => time.trim());
 
   const startDate = new Date(selectedDate);
@@ -72,4 +73,12 @@ export const reverseFormatTimeRange = (
 
 export const getCurrentFormattedTime = () => {
   return moment().format(notificationCurrentTime);
+};
+
+export const calculateInitialTimer = (startTime: string): number => {
+  const diffTimeStart = new Date(startTime).getTime() - new Date(getCurrentFormattedTime()).getTime();
+  const isTimerRun = diffTimeStart <= fiveMinutes && diffTimeStart > 0;
+  const initialTimer = isTimerRun ? Math.floor(diffTimeStart / sec) : 0;
+
+  return initialTimer;
 };

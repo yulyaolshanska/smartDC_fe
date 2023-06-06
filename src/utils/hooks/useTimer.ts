@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { fiveMinutes, sec, SEC_PER_MIN } from '@constants/notification';
-import { getCurrentFormattedTime } from 'utils/functions/timeUtils';
+import {  sec, SEC_PER_MIN } from '@constants/notification';
+import { calculateInitialTimer } from 'utils/functions/timeUtils';
 
 export type TimerData = {
   timer: number;
@@ -14,12 +14,7 @@ const useTimer = (startTime: string): TimerData => {
   const seconds = Math.floor(timer % SEC_PER_MIN);
 
   useEffect(() => {
-    const diffTimeStart =
-      new Date(startTime).getTime() -
-      new Date(getCurrentFormattedTime()).getTime();
-
-    const isTimerRun = diffTimeStart <= fiveMinutes && diffTimeStart > 0;
-    const initialTimer = isTimerRun ? Math.floor(diffTimeStart / sec) : 0;
+    const initialTimer = calculateInitialTimer(startTime);
 
     const intervalId = setInterval(() => {
       setTimer((prevTimer) => prevTimer - 1);

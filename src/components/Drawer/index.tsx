@@ -24,6 +24,7 @@ import { navigationActions } from '@redux/slices/NavigationSlice';
 import LogoutModal from './SignOut';
 import { useTranslation } from 'react-i18next';
 import { PATH } from '@router/index';
+import { anesthesiologyId } from '@constants/other';
 interface PositionsInterface {
   name: string;
   to: string;
@@ -87,7 +88,7 @@ const Drawer = () => {
   };
 
   const getDoctorSpecialization = useMemo(() => {
-    return currentDoctor.specialization === 1
+    return currentDoctor.specialization === anesthesiologyId
       ? `${t('Dashboard.anesthesiology')}`
       : `${t('Dashboard.cardiology')}`;
   }, [currentDoctor]);

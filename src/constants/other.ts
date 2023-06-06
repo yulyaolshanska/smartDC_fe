@@ -56,3 +56,5 @@ export const PM = 'PM';
 export const MAX_COLOR_VALUE = 16777215;
 
 export const zero = '0';
+
+export const anesthesiologyId = 1
