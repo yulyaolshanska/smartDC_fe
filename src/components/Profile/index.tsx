@@ -28,7 +28,6 @@ import { doctorApi } from 'services/DoctorService';
 import { ButtonsWrapepr, StageWrapper } from './styles';
 
 import {
-  cities,
   countries,
   genders,
   specializations,
