@@ -52,3 +52,9 @@ export const MAX_CHARACTER_LIMIT = 250;
 export const enUS = 'en-US';
 
 export const PM = 'PM';
+
+export enum Role {
+  Local = 'Local',
+  Remote = 'Remote',
+  Admin = 'Admin',
+}

@@ -4,6 +4,7 @@ import { authApi } from 'services/AuthService';
 import { appointmentApi } from 'services/AppointmentService';
 import { availabilityApi } from 'services/AvailabilityService';
 import { toast } from 'react-toastify';
+import { Role } from '@constants/other';
 
 interface AppointmentElement {
   id: number;
@@ -25,9 +26,8 @@ const useDashboardComponent = () => {
   } = availabilityApi.useSendNotificationsQuery(doctor.id);
   const [mount, setMount] = useState<boolean>();
   
-  console.log(notifications);
   useEffect(() => {
-    if (mount) {
+    if (mount && doctor.role === Role.Remote) {
       toast.warning(t('Dashboard.availability'), {
         position: toast.POSITION.TOP_CENTER,
       });
