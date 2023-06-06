@@ -1,5 +1,6 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Route, Routes } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 import SignUpFirstStep from '@pages/auth/signUp/signUpFirstStep';
 import SignUpSecondFormGoogle from '@components/Auth/SignUpForm/SignUpSecondStepFormGoogle';
 import ResetPassword from '@pages/auth/resetPassword';
@@ -10,7 +11,6 @@ import Profile from '@pages/doctor/profile';
 import PageWrapper from '@components/PageWrapper';
 import Help from '@pages/help';
 import Activation from '@pages/auth/signUp/activation';
-import PatientPage from '@pages/patient';
 import CreatePatientCard from '@pages/patient/createPatientCard';
 import EditPatientCard from '@pages/patient/EditPatientCard';
 import CreateAppointment from '@pages/appointment';
@@ -20,10 +20,8 @@ import ProtectedRoute from './protected-route';
 import PatientInfo from '@pages/patient/patientInfo';
 import Dashboard from '@pages/dashboard';
 import Patients from '@pages/patients';
-import cookie from 'utils/functions/cookies';
 import AppointmentsDoctorScheduler from '@pages/doctorScheduler/appointmentsScheduler';
 import Chat from '@components/Chat';
-import { ToastContainer } from 'react-toastify';
 
 export const PATH = {
   SIGN_UP: '/auth',

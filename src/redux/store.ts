@@ -22,9 +22,9 @@ import { doctorReducer } from 'redux/slices/DoctorSlice';
 import { resetPasswordReducer } from '@redux/slices/auth/resetPassword';
 import { createPatientReducer } from '@redux/slices/patient/createPatient';
 import { noteFilterReducer } from './slices/NoteFilterSlice';
-import { patientApi } from '../services/PatientService';
-import { availabilityApi } from '../services/AvailabilityService';
-import { appointmentApi } from '../services/AppointmentService';
+import { patientApi } from 'services/PatientService';
+import { availabilityApi } from 'services/AvailabilityService';
+import { appointmentApi } from 'services/AppointmentService';
 
 const rootReducer = combineReducers({
   loginReducer,
