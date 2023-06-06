@@ -15,20 +15,16 @@ import {
 import { phoneNumber } from '@constants/auth';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { EditRemoteSchema } from '@validation/editDoctorProfile.validate';
-
 import { Stack, Typography } from '@mui/material';
 import CustomButton from '@components/Button';
 import SelectInput from '@components/Select';
 import PhoneInput from '@components/PhoneInput';
 import { useAppSelector, useAppDispatch } from '@redux/hooks';
 import { doctorActions } from '@redux/slices/DoctorSlice';
-
 import { authApi } from 'services/AuthService';
 import { doctorApi } from 'services/DoctorService';
 import { ButtonsWrapepr, StageWrapper } from './styles';
-
 import {
-  cities,
   countries,
   genders,
   specializations,
@@ -272,7 +268,7 @@ const ProfileComponent = () => {
                 fullWidth
                 name={specialization}
                 placeholder={t('Auth.enterSpecialization') ?? ''}
-                options={specializations}
+                options={specializations.filter((spec) => spec.value !== 0)}
                 helperText={errors.specialization?.message}
                 error={Boolean(errors?.specialization)}
                 required={true}

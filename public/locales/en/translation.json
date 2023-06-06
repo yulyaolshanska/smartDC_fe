@@ -124,7 +124,7 @@
     "save": "Save",
     "cancel": "Cancel",
     "cardUpdetedSuccess": "Patient's card updated successfully",
-
+    "noOverviewYet": "The patient has no overview yet",
     "lastAppointment": "Last Appointment:",
     "cardCreatedSuccess": "Patient's card created successfully"
   },
