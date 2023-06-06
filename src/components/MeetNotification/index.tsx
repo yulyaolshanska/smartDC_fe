@@ -20,7 +20,8 @@ import { fiveMinutes } from '@constants/notification';
 import useTimer from 'utils/hooks/useTimer';
 import cookie from 'utils/functions/cookies';
 import useNotificationText from 'utils/hooks/useNotificationText';
-import { getCurrentFormattedTime } from 'utils/functions/timeUtils';
+import { getCurrentFormattedTime, getDiffTime } from 'utils/functions/timeUtils';
+import { notificationCurrentTime } from '@constants/format';
 
 const token = cookie.get('accessToken');
 
@@ -82,9 +83,7 @@ const MeetNotification = () => {
   );
 
   const diffTimeEnd = useMemo(
-    () =>
-      new Date(endTime).getTime() -
-      new Date(getCurrentFormattedTime()).getTime(),
+    () => getDiffTime(endTime),
     [endTime, seconds]
   );
 

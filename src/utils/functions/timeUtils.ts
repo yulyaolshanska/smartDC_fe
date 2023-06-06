@@ -71,12 +71,15 @@ export const reverseFormatTimeRange = (
   };
 };
 
-export const getCurrentFormattedTime = () => {
-  return moment().format(notificationCurrentTime);
+export const getCurrentFormattedTime = (format:string):string => {
+  return moment().format(format);
 };
 
+export const getDiffTime = (time:string): number => {
+  return new Date(time).getTime() - new Date(getCurrentFormattedTime(notificationCurrentTime)).getTime()}
+
 export const calculateInitialTimer = (startTime: string): number => {
-  const diffTimeStart = new Date(startTime).getTime() - new Date(getCurrentFormattedTime()).getTime();
+  const diffTimeStart = getDiffTime(startTime);
   const isTimerRun = diffTimeStart <= fiveMinutes && diffTimeStart > 0;
   const initialTimer = isTimerRun ? Math.floor(diffTimeStart / sec) : 0;
 
