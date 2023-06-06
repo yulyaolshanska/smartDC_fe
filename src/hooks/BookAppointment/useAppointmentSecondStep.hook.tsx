@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { appointmentApi } from 'services/BookAppointmetService';
+import { appointmentApi } from 'services/AppointmentService';
 import { reverseFormatTimeRange } from 'utils/functions/timeUtils';
 
 interface Prop {

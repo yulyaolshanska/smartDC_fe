@@ -5,7 +5,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
 import { useAppSelector } from '@redux/hooks';
-import { appointmentApi } from 'services/BookAppointmetService';
+import { appointmentApi } from 'services/AppointmentService';
 import { zoomLink, twoDigit, long, numeric, enUS } from '@constants/other';
 import { fullYearFormat, fullDateTimeFormat } from '@constants/format';
 
