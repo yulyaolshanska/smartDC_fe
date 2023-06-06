@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { ToastContainer } from 'react-toastify';
+import { useParams } from 'react-router';
 import {
   ArrowBack,
   AuthConfirmationContainer,
@@ -13,9 +15,7 @@ import {
 } from '@components/general/styles';
 import checkmark from '@assets/auth/checkmark.svg';
 import emotionSad from '@assets/emotionSad.svg';
-import { useParams } from 'react-router';
 import { error } from '@constants/auth';
-import { toast, ToastContainer } from 'react-toastify';
 import { PATH } from '@router/index';
 import { authApi } from 'services/AuthService';
 
@@ -23,7 +23,7 @@ function ActivationForm() {
   const { t } = useTranslation();
   const { link } = useParams();
   const [activationAccount] = authApi.useActivationMutation();
-  const [isActiveLink, setIsActiveLink] = useState(true);
+  const [isActiveLink, setIsActiveLink] = useState<boolean>(true);
 
   useEffect(() => {
     if (link) {

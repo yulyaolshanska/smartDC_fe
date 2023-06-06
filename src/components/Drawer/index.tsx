@@ -104,7 +104,7 @@ const Drawer = () => {
                 <PositionContainer
                   key={obj.name}
                   onClick={() => handleSelected(obj)}
-                  selected={selectedPosition && selectedPosition == obj.to}
+                  selected={selectedPosition && selectedPosition === obj.to}
                 >
                   {obj.icon()}
                   {obj.name}

@@ -22,6 +22,10 @@ const PopupVerificationModal = ({
   showModal,
 }: Props) => {
   const { t } = useTranslation();
+  const tWithDefault = (key: string) => {
+    const translation = t(key);
+    return translation || '';
+  };
 
   useEffect(() => {
     window.addEventListener('keydown', handlerKeyDown);
@@ -50,13 +54,13 @@ const PopupVerificationModal = ({
             <CancelButton
               onClick={() => setShowModal(false)}
               type="button"
-              value={t('Dashboard.close') ?? ''}
+              value={tWithDefault('Dashboard.close')}
             />
             <SendButton
               onClick={handleSendLink}
               disabled={false}
               type="button"
-              value={t('Dashboard.sendAgain') ?? ''}
+              value={tWithDefault('Dashboard.sendAgain')}
             />
           </ModalButtonsWrapper>
         </ModalContent>

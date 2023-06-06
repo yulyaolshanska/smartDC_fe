@@ -5,7 +5,7 @@ import { authApi } from 'services/AuthService';
 import Spinner from '@components/Loaders/Spinner';
 import infoIcon from '@assets/Info.svg';
 import { InfoWrapper, TextWrapper, Button } from './styles';
-import PopupVerificationModal from './PopupVerificationModal';
+import PopupVerificationModal from './PopupVerificationModal/index';
 
 const VerificationOfEmail = () => {
   const { t } = useTranslation();
