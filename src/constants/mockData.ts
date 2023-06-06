@@ -4,8 +4,35 @@ export const roles = [
 ];
 
 export const specializations = [
-  { value: 0, label: 'Anesthesiology' },
-  { value: 1, label: 'Cardiology' },
+  { value: 0, label: 'Therapist' },
+  { value: 1, label: 'Anesthesiology' },
+  { value: 2, label: 'Cardiology' },
+  { value: 3, label: 'Allergist' },
+  { value: 4, label: 'Bacteriologist' },
+  { value: 5, label: 'Gastroenterologist' },
+  { value: 6, label: 'Hematologist' },
+  { value: 7, label: 'Dermatologist' },
+  { value: 8, label: 'Nutritionist' },
+  { value: 9, label: 'Endocrinologist' },
+  { value: 10, label: 'Infectionist' },
+  { value: 11, label: 'Beautician' },
+  { value: 12, label: 'Mammologist' },
+  { value: 13, label: 'Narcologist' },
+  { value: 14, label: 'Neuropathologist' },
+  { value: 15, label: 'Oncologist' },
+  { value: 16, label: 'Orthopaedist' },
+  { value: 17, label: 'Otorhinolaryngologist' },
+  { value: 18, label: 'Ophthalmologist' },
+  { value: 19, label: 'Psychiatrist' },
+  { value: 20, label: 'Psychotherapist' },
+  { value: 21, label: 'Pulmonologist' },
+  { value: 22, label: 'Rehabilitator' },
+  { value: 23, label: 'Rheumatologist' },
+  { value: 24, label: 'Dentist' },
+  { value: 25, label: 'Toxicologist' },
+  { value: 26, label: 'Traumatologist' },
+  { value: 27, label: 'Phoniatrician' },
+  { value: 28, label: 'Physiologist' },
 ];
 
 export const genders = [
