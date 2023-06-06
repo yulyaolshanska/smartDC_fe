@@ -16,6 +16,8 @@ export interface Message {
   text: string;
   user: IAuth;
   createdAt: Date;
+  file: string[];
+  fileName: string[];
 }
 
 function Chat() {
@@ -43,6 +45,8 @@ function Chat() {
           {
             text: message.text,
             user: message.user,
+            file: message.file,
+            fileName: message.fileName,
             createdAt: message.createdAt,
           },
         ]);
@@ -62,13 +66,8 @@ function Chat() {
     }
   }, [socket]);
 
-  const sendMessage = (text: string) => {
+  const sendMessage = (message: Message) => {
     if (socket) {
-      const message = {
-        text: text,
-        user: doctorData,
-        createdAt: new Date(),
-      };
       socket.emit(createMessage, message);
     }
   };
@@ -92,9 +91,12 @@ function Chat() {
         <Messages messages={messages} currentUser={doctorData.id} />
       </MessagesContainer>
       {typingDisplay && <Typing>{typingDisplay}</Typing>}
-      <MessageInput send={sendMessage} typing={emitTyping} />
+      <MessageInput
+        sendMessage={sendMessage}
+        typing={emitTyping}
+        doctor={doctorData}
+      />
     </ChatContainer>
   );
 }
-
 export default Chat;

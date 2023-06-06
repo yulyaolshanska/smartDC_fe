@@ -35,6 +35,12 @@ export const appointmentApi = createApi({
       }),
       providesTags: ['Appointment'],
     }),
+    getTodayAppointment: builder.query({
+      query: ({ doctorId, all }: { doctorId: number; all: string }) => ({
+        url: `appointment/doctor/${doctorId}/today/${all}`,
+        method: 'GET',
+      }),
+    }),
     getAppointmentForWeek: builder.query<
       Appointment[],
       { id: number; year: number; week: number }

@@ -33,6 +33,7 @@ import cookie from 'utils/functions/cookies';
 import { doctorActions } from '@redux/slices/DoctorSlice';
 import { AppDispatch } from '@redux/store';
 import { authApi } from 'services/AuthService';
+import { appointmentsApi } from 'services/AppointmentService';
 
 function LoginForm() {
   const dispatch = useDispatch<AppDispatch>();
