@@ -1,9 +1,9 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { toast } from 'react-toastify';
 import { authApi } from 'services/AuthService';
 import { appointmentApi } from 'services/AppointmentService';
 import { availabilityApi } from 'services/AvailabilityService';
-import { toast } from 'react-toastify';
 import { Role } from '@constants/other';
 
 interface AppointmentElement {
