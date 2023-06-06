@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-import CreatePatientInitialState from '@redux/slices/patient/createPatient/types';
 
 const initialState = {
   nextAppointment: {
@@ -10,7 +9,6 @@ const initialState = {
     remoteDoctor: { id: null, firstName: '', lastName: '' },
     startTime: '',
     zoomLink: '',
-  },
   callConfig: {
     name: '',
     tpc: '',
@@ -21,6 +19,7 @@ const initialState = {
     password: '',
   },
   roomName: '',
+  }
 };
 
 const socketAppointment = createSlice({
@@ -28,7 +27,7 @@ const socketAppointment = createSlice({
   initialState,
   reducers: {
     updateNextAppointment(state, action) {
-      state.nextAppointment = action.payload;
+      state.nextAppointment = action.payload.nextAppointment;
     },
   },
 });

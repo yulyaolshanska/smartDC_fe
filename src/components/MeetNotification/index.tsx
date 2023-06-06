@@ -29,6 +29,7 @@ const MeetNotification = () => {
   const dispatch = useAppDispatch();
   const { patient, startTime, endTime, remoteDoctor, localDoctor } =
     useAppSelector((state) => state.socketAppointmentReducer.nextAppointment);
+    
   const doctor = useAppSelector((state) => state.doctorReducer);
 
   const { timer, minutes, seconds } = useTimer(startTime);
