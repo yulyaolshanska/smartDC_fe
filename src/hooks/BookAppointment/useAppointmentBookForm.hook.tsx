@@ -1,13 +1,11 @@
 import { useState } from 'react';
 import { Modifiers } from 'react-day-picker';
-import { parse, format } from 'date-fns';
 import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
 import { useAppSelector } from '@redux/hooks';
 import { appointmentApi } from 'services/AppointmentService';
-import { zoomLink, twoDigit, long, numeric, enUS } from '@constants/other';
-import { fullYearFormat, fullDateTimeFormat } from '@constants/format';
+import { zoomLink, twoDigit, long, numeric, enUS, PM, AM } from '@constants/other';
 
 interface DateObject {
   appointmentTimeRange: string;
@@ -55,7 +53,7 @@ const useAppointmentBookFormHook = () => {
       const [time, period] = dateTimeString.split(' ');
       let [hours, minutes] = time.split(':');
 
-      if (period === 'PM') {
+      if (period === PM) {
         hours = (parseInt(hours, 10) + 12).toString();
       }
 
@@ -69,10 +67,10 @@ const useAppointmentBookFormHook = () => {
     };
 
     const startTimeString = `${startTime.trim()} ${
-      startTime.includes('PM') ? 'PM' : 'AM'
+      startTime.includes(PM) ? PM : AM
     }`;
     const endTimeString = `${endTime.trim()} ${
-      endTime.includes('PM') ? 'PM' : 'AM'
+      endTime.includes(PM) ? PM : AM
     }`;
 
     const start = parseDateTime(startTimeString);
