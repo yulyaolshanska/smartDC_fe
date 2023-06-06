@@ -1,10 +1,10 @@
+import { NavLink } from 'react-router-dom';
 import {
   GREEN_BORDER,
   NOTIFICATION_BTN_BACKGROUND,
   WHITE,
   ZAMBEZI,
 } from '@constants/colors';
-import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const NotificationContainer = styled.div`

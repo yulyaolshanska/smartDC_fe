@@ -1,4 +1,5 @@
 import React, { useMemo, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import Logo from '@components/Logo';
 import { ReactComponent as DashbordIcon } from '@assets/dashbord.svg';
 import { ReactComponent as SignOutIcon } from '@assets/Sign Out.svg';
@@ -22,7 +23,6 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from '@redux/hooks';
 import { navigationActions } from '@redux/slices/NavigationSlice';
 import LogoutModal from './SignOut';
-import { useTranslation } from 'react-i18next';
 import { PATH } from '@router/index';
 import { anesthesiologyId } from '@constants/other';
 interface PositionsInterface {

@@ -17,7 +17,7 @@ import {
 } from './styles';
 import './index.css';
 import { Appointment } from 'services/types/appointment.type';
-import { MAX_COLOR_VALUE } from '@constants/other';
+import { colorLength, hash, MAX_COLOR_VALUE } from '@constants/other';
 
 interface Event {
   start: Date;
@@ -70,7 +70,7 @@ function WeeklyCalendar() {
 
   const EventContent = useMemo(() => {
     const randomColor =
-      '#' + Math.floor(Math.random() * MAX_COLOR_VALUE).toString(16);
+      hash + Math.floor(Math.random() * MAX_COLOR_VALUE).toString(colorLength);
 
     return (
       <EventContainer>

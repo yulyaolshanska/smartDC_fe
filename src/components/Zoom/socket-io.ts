@@ -1,6 +1,6 @@
-import { socketAppointmentActions } from '@redux/slices/socketAppointmentsSlice';
-import { store } from '@redux/store';
 import { Socket, io } from 'socket.io-client';
+import { store } from '@redux/store';
+import { socketAppointmentActions } from '@redux/slices/socketAppointmentsSlice';
 import cookie from 'utils/functions/cookies';
 
 const socketIOUrl = `${import.meta.env.VITE_REACT_APP_BASE_URL_SERVER}${
