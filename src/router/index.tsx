@@ -23,6 +23,7 @@ import Patients from '@pages/patients';
 import cookie from 'utils/functions/cookies';
 import AppointmentsDoctorScheduler from '@pages/doctorScheduler/appointmentsScheduler';
 import Chat from '@components/Chat';
+import { ToastContainer } from 'react-toastify';
 
 export const PATH = {
   SIGN_UP: '/auth',
@@ -49,6 +50,7 @@ export const PATH = {
 const AppRouter = () => {
   return (
     <PageWrapper>
+      <ToastContainer />
       <Routes>
         {/* Public Routes */}
         <Route path={PATH.SIGN_UP} element={<SignUpFirstStep />} />
@@ -121,7 +123,7 @@ const AppRouter = () => {
           }
         />
         <Route
-          path={PATH.APPOINTMENT}
+          path={PATH.APPOINTMENTS}
           element={
             <ProtectedRoute allowedRoles={['Remote', 'Local']}>
               <AppointmentsDoctorScheduler />

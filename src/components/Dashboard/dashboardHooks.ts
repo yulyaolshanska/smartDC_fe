@@ -2,6 +2,8 @@ import { useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { authApi } from 'services/AuthService';
 import { appointmentApi } from 'services/AppointmentService';
+import { availabilityApi } from 'services/AvailabilityService';
+import { toast } from 'react-toastify';
 
 interface AppointmentElement {
   id: number;
@@ -16,7 +18,24 @@ const useDashboardComponent = () => {
   const [fetchAll, setFetchAll] = useState<boolean>(false);
   const { data: doctor } = authApi.useGetMeQuery({});
   const { t } = useTranslation();
-
+  const { 
+    data: notifications, 
+    isLoading: isNotificationsLoading, 
+    error: notificationsError 
+  } = availabilityApi.useSendNotificationsQuery(doctor.id);
+  const [mount, setMount] = useState<boolean>();
+  
+  console.log(notifications);
+  useEffect(() => {
+    if (mount) {
+      toast.warning(t('Dashboard.availability'), {
+        position: toast.POSITION.TOP_CENTER,
+      });
+    } else {
+      setMount(true);
+    }
+  }, [mount, notifications, t]);
+  
   const {
     data: appointmentsArray,
     refetch: refetchAppointments,

@@ -246,7 +246,8 @@
     "patient": "Patient",
     "lastAppointment": "Last Appointment",
     "noAppointmentsYet": "The patient has no appointments yet",
-    "goBack": "Go back"
+    "goBack": "Go back",
+    "availability": "Manage your schedule for the upcoming month"
   },
   "Chat": {
     "typeMessage": "Type your message...",
