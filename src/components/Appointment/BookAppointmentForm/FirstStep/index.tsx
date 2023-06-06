@@ -78,8 +78,6 @@ const FirstStepAppointment = ({
 
   useEffect(() => {
     setValue(`${date}`, selectedDate);
-
-    console.log(selectedDate)
   }, [selectedDate]);
 
   return (
