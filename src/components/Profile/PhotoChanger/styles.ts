@@ -43,3 +43,11 @@ export const EditIconContainer = styled.div`
     transform: scale(100%) translateY(0px);
   }
 `;
+
+export const LinkContainer = styled.div`
+  font-style: normal;
+  font-size: ${SMALL_FONT_SIZE};
+  font-family: ${FONT_ROBOTO};
+  line-height: 22px;
+  margin-bottom: 20px;
+`;
