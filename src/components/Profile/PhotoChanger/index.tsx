@@ -2,14 +2,16 @@ import React from 'react';
 import { createPortal } from 'react-dom';
 import { useTranslation } from 'react-i18next';
 import editIcon from 'assets/edit.svg';
-import defaultDoctorPhoto from '@assets/mockDoctorPhoto.png';
+import defaultDoctorPhotoMale from 'assets/mockDoctorPhoto.png';
+import defaultDoctorPhotoFemale from 'assets/mockDoctorPhotoFemale.png';
 import { authApi } from 'services/AuthService';
 import { useMount } from '../AvatarEditor/hooksAvatarEditor';
-import { Photo, PhotoChangerWrapper, EditIconContainer } from './styles';
+import { Photo, PhotoChangerWrapper, EditIconContainer, LinkContainer } from './styles';
 import AvatarChanger from '../AvatarEditor';
 import { getDoctorAvatar } from '../api/getPhoto';
-import axios from '../api/axios';
-import AvatarLoader from './Skeleton';
+import { ArrowBack } from '@components/general/styles';
+import { Link } from 'react-router-dom';
+import { PATH } from '@router/index';
 
 const PhotoChanger = () => {
   const [opened, setOpened] = React.useState<boolean>(false);
@@ -34,27 +36,33 @@ const PhotoChanger = () => {
 
   return (
     <PhotoChangerWrapper>
-      <p> {t('Profile.editProfile') ?? ''}</p>
-      {!doctor?.photoUrl ? (
-        <Photo>
-          <img src={defaultDoctorPhoto} alt="Photo" width="160px" />
-        </Photo>
-      ) : null}
+      <LinkContainer>
+        <Link to={PATH.DASHBOARD}>
+          <ArrowBack />
+          {t('Dashboard.backToDashboard')}
+        </Link>
+      </LinkContainer>
 
       <Photo>
-        {doctor?.photoUrl ? (
-          <img src={finalUrl} alt="Photo" width="160px" />
-        ) : (
+        {!doctor?.photoUrl && (
           <img
-            src={import.meta.env.VITE_REACT_APP_BASE_URL_SERVER + avatarUrl}
+            src={
+              doctor?.gender === 'Male'
+                ? defaultDoctorPhotoMale
+                : defaultDoctorPhotoFemale
+            }
             alt="Photo"
             width="160px"
           />
+        )}
+        {doctor?.photoUrl && (
+          <img src={finalUrl} alt="Photo" width="160px" />
         )}
         <EditIconContainer onClick={() => setOpened(true)}>
           <img src={editIcon} />
         </EditIconContainer>
       </Photo>
+
       {mounted
         ? createPortal(
             <AvatarChanger

@@ -18,6 +18,7 @@ function useSignUpSecondStepHook() {
   const {
     handleSubmit,
     control,
+    watch,
     formState: { errors, isValid },
   } = useForm<FormValues>({
     mode: 'onChange',
@@ -28,7 +29,6 @@ function useSignUpSecondStepHook() {
       city: '',
       country: '',
       address: '',
-      specialization: 0,
       birthDate: '',
       timeZone: '',
     },
@@ -60,6 +60,7 @@ function useSignUpSecondStepHook() {
     errors,
     handleSubmit,
     isValid,
+    watch,
   };
 }
 

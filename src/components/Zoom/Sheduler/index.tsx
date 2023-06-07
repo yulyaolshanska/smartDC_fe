@@ -18,6 +18,7 @@ const Scheduler = () => {
 
   React.useEffect(() => {
     if (!socketCallConfig.signature && socketCallConfig.tpc) {
+      console.log('12345');
       getSignature({ ...socketCallConfig }).then((res) => {
         const updatedCallConfig = {
           ...socketCallConfig,

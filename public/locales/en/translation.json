@@ -17,6 +17,7 @@
     "loginTitle": "Login",
     "loginText": "Please, login into your medical account",
     "activationText": "You have successfully verified your account. In order to enter the system, please go to the login form",
+    "activationTextError": "This link is outdated. Please check your email and verify your account using the new link sent to your email.",
     "registrationTitle": "Registration",
     "registrationText": "Please, create your medical account and become a member",
     "firstName": "Your first name",
@@ -124,7 +125,7 @@
     "save": "Save",
     "cancel": "Cancel",
     "cardUpdetedSuccess": "Patient's card updated successfully",
-
+    "noOverviewYet": "The patient has no overview yet",
     "lastAppointment": "Last Appointment:",
     "cardCreatedSuccess": "Patient's card created successfully"
   },
@@ -144,11 +145,7 @@
     "problem": "Some problem",
     "lorem": " Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore"
   },
-  "Dashboard": {
-    "backToDashboard": "Back to dashboard",
-    "loading": "Loading...",
-    "goBack": "Go back"
-  },
+
   "Warning": {
     "viewScheduleWarning": "Warning: you are in view mode and creating new schedule will be done according to your local time!"
   },
@@ -164,7 +161,7 @@
     "calendar": "Calendar"
   },
   "BookAppointment": {
-    "instruction":"Please choose a specialization of a doctor first. Then you will see all available dates, and after that, you can choose a suitable time for your client.",
+    "instruction": "Please choose a specialization of a doctor first. Then you will see all available dates, and after that, you can choose a suitable time for your client.",
     "selectDoctorSpecialization": "Select doctor specialization",
     "selectDay": "Select a day of appointment",
     "SelectAppointmentTime": "Select a time of appointment",
@@ -195,15 +192,18 @@
     "show": "Show",
     "dr": "Dr.",
     "theNoteShouldContainAtLeastSymbols": "The note should contain at least 10 symbols",
-    "hint": "Hint",
+    "hint": "Hint:",
     "description": "Description",
+    "patientsFiles": "Patient's files",
+    "sortBy": "Sort By: ",
+    "sortOrder": "Sort Order: ",
     "add": "Add",
     "addAppointmentNote": "Add appointment note",
     "discardAdding": "Discard adding",
     "loadMore": "Load More",
     "Draganddropyourfilesanywhereor": "Drag and drop your files anywhere or",
     "Upload": "Upload",
-    "ToUpload": "To Upload",
+    "ToUpload": "Uploaded file:",
     "Search": "Search"
   },
   "NotFoundPage": {
@@ -228,7 +228,8 @@
     "patients": "Patients"
   },
   "Appointments": {
-    "myAppointments": "My appointments:"
+    "myAppointments": "My appointments:",
+    "noAppointmentsYet": "The patient has no appointments yet"
   },
 
   "Dashboard": {
@@ -241,7 +242,7 @@
     "Remote": "Remote",
     "Local": "Local",
     "Dr.": "Dr.",
-    "LastAppointment": "LastAppointment"
+    "LastAppointment": "LastAppointment",
     "myAppointments": "My appointments:",
     "years": "y.o.",
     "remoteDoctor": "Remote",
@@ -251,7 +252,14 @@
     "doctor": "Dr.",
     "patient": "Patient",
     "lastAppointment": "Last Appointment",
-    "noAppointmentsYet": "The patient has no appointments yet"
+    "noAppointmentsYet": "The patient has no appointments yet",
+    "goBack": "Go back",
+    "verificationInfo": "To start working you need to verificate your email!",
+    "details": "Details",
+    "receivedVerInfo": "You received verification link to email",
+    "sendAgain": "Send again",
+    "notification": "Link has been sended",
+    "close": "Close"
   },
   "Chat": {
     "typeMessage": "Type your message...",

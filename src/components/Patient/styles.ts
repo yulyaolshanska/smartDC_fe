@@ -12,6 +12,7 @@ import {
   DARK_BLUE,
   LIGHT_BLUE,
   NAVY_BLUE,
+  WHITE,
 } from '@constants/colors';
 
 import { NavLink } from 'react-router-dom';
@@ -115,7 +116,7 @@ export const LastAppointmentTitle = styled.span`
 
 export const LastAppointment = styled.p`
   margin-bottom: 6px;
-  font-size: ${SMALL_FONT_SIZE};
+  font-size: ${NORMAL_FONT_SIZE};
   line-height: 1.4;
   color: ${DARK_BLUE};
 `;
@@ -136,7 +137,7 @@ export const ButtonContainer = styled.div`
 
 export const BookAppointmentButton = styled(NavLink)`
   background: -webkit-linear-gradient(${NAVY_BLUE}, ${CORNFLOWER_BLUE});
-  color: white;
+  color: ${WHITE};
   display: flex;
   text-align: center;
   align-items: center;
@@ -147,4 +148,7 @@ export const BookAppointmentButton = styled(NavLink)`
   font-size: ${SMALL_FONT_SIZE};
   font-family: ${FONT_ROBOTO};
   font-weight: bold;
+  :hover {
+    color: ${WHITE};
+  }
 `;
