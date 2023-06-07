@@ -5,7 +5,18 @@ import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
 import { useAppSelector } from '@redux/hooks';
 import { appointmentApi } from 'services/AppointmentService';
-import { zoomLink, twoDigit, long, numeric, enUS, PM, AM, decimalNumber, twelveHours,oneMonth } from '@constants/other';
+import {
+  zoomLink,
+  twoDigit,
+  long,
+  numeric,
+  enUS,
+  PM,
+  AM,
+  decimalNumber,
+  twelveHours,
+  oneMonth,
+} from '@constants/other';
 
 interface DateObject {
   appointmentTimeRange: string;
@@ -54,7 +65,7 @@ const useAppointmentBookFormHook = () => {
       let [hours, minutes] = time.split(':');
 
       if (period === PM) {
-        hours = (parseInt(hours,decimalNumber) + twelveHours).toString();
+        hours = (parseInt(hours, decimalNumber) + twelveHours).toString();
       }
 
       const [year, month, day] = data.date
@@ -62,16 +73,20 @@ const useAppointmentBookFormHook = () => {
         .split('T')[0]
         .split('-');
       return new Date(
-        Date.UTC(year, parseInt(month, decimalNumber) - oneMonth, day, hours, minutes)
+        Date.UTC(
+          year,
+          parseInt(month, decimalNumber) - oneMonth,
+          day,
+          hours,
+          minutes
+        )
       );
     };
 
     const startTimeString = `${startTime.trim()} ${
       startTime.includes(PM) ? PM : AM
     }`;
-    const endTimeString = `${endTime.trim()} ${
-      endTime.includes(PM) ? PM : AM
-    }`;
+    const endTimeString = `${endTime.trim()} ${endTime.includes(PM) ? PM : AM}`;
 
     const start = parseDateTime(startTimeString);
     const end = parseDateTime(endTimeString);
