@@ -1,8 +1,10 @@
 import {
   BLACK,
   NOT_ACTIVE_BACKGROUND_HOVER,
-  UPLOAD_BUTTON_COLOR,
   WHITE,
+  BORDER,
+  DARK_BLUE,
+  ACTIVE,
 } from '@constants/colors';
 
 import FONT_ROBOTO from '@constants/fonts';
@@ -17,8 +19,8 @@ import {
 
 export const FileUploadContainer = styled.section`
   position: relative;
-  margin: 25px 0 15px;
-  border: 2px dotted lightgray;
+  margin: 15px 0 15px;
+  border: 1px solid ${BORDER};
   padding: 35px 20px;
   border-radius: 6px;
   display: flex;
@@ -55,11 +57,12 @@ export const InputLabel = styled.label`
 `;
 
 export const DragDropText = styled.p`
-  font-weight: bold;
-  letter-spacing: 2.2px;
   margin-top: 0;
   margin-bottom: 20px;
   text-align: center;
+  font-size: ${NORMAL_FONT_SIZE};
+  color: ${DARK_BLUE};
+  font-family: ${FONT_ROBOTO};
 `;
 
 export const UploadFileBtn = styled.button`
@@ -70,12 +73,11 @@ export const UploadFileBtn = styled.button`
   cursor: pointer;
   font-size: ${SMALL_FONT_SIZE};
   line-height: 1;
-  padding: 1.1em 2.8em;
+  padding: 15px 20px;
   text-align: center;
-  text-transform: uppercase;
   font-weight: 700;
   border-radius: 6px;
-  color: ${UPLOAD_BUTTON_COLOR};
+  color: ${ACTIVE};
   position: relative;
   overflow: hidden;
   z-index: 1;
