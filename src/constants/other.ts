@@ -53,4 +53,4 @@ export const enUS = 'en-US';
 
 export const PM = 'PM';
 
-export const numberTen = 10
+export const numberTen = 10;
