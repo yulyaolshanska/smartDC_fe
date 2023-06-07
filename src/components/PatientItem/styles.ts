@@ -70,14 +70,14 @@ export const Overview = styled.p`
 export const LastAppointmentTitle = styled.span`
   margin-right: 4px;
   font-weight: 700;
-  font-size: ${VERY_SMALL_FONT_SIZE};
+  font-size: ${SMALL_FONT_SIZE};
   line-height: 1.43;
   color: ${LIGHT_BLUE};
 `;
 
 export const LastAppointment = styled.p`
   margin-bottom: 6px;
-  font-size: ${VERY_SMALL_FONT_SIZE};
+  font-size: ${SMALL_FONT_SIZE};
   line-height: 1.4;
   color: ${DARK_BLUE};
 `;

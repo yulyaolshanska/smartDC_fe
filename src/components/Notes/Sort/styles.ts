@@ -1,6 +1,5 @@
-import {
-  ACTIVE, BLACK, NOT_ACTIVE_HOVER, ZAMBEZI,
-} from '@constants/colors';
+import { ACTIVE, BLACK, NOT_ACTIVE_HOVER, DARK_BLUE } from '@constants/colors';
+import FONT_ROBOTO from '@constants/fonts';
 import styled, { keyframes, css } from 'styled-components';
 
 const fadeIn = keyframes`
@@ -18,23 +17,27 @@ export const SortContainer = styled.div`
   cursor: pointer;
 `;
 export const SortByText = styled.div`
-  color: ${ZAMBEZI};
+  color: ${DARK_BLUE};
+  font-family: ${FONT_ROBOTO};
 `;
 
 export const SortStatementText = styled.div`
-  color: ${BLACK};
+  color: ${ACTIVE};
+  font-family: ${FONT_ROBOTO};
 `;
 export const SortList = styled.ul<{ toggle?: boolean }>`
+  font-family: ${FONT_ROBOTO};
   position: absolute;
   display: flex;
   flex-direction: column;
   width: 100%;
 
-  animation: ${(props) => (props.toggle
-    ? css`
+  animation: ${(props) =>
+    props.toggle
+      ? css`
           ${fadeIn} 0.5s ease-in-out
         `
-    : 'none')};
+      : 'none'};
 
   & * {
     background-color: ${NOT_ACTIVE_HOVER};
