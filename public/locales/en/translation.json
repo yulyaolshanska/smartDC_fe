@@ -124,7 +124,7 @@
     "save": "Save",
     "cancel": "Cancel",
     "cardUpdetedSuccess": "Patient's card updated successfully",
-
+    "noOverviewYet": "The patient has no overview yet",
     "lastAppointment": "Last Appointment:",
     "cardCreatedSuccess": "Patient's card created successfully"
   },
@@ -150,7 +150,7 @@
   "Calendar": {
     "endTime": "End time:",
     "startTime": "Start time:",
-    "selectTime": "Select a time range",
+    "selectTime": "Select hours (minutes will be ignored)",
     "selectedDate": "Selected date:",
     "deleteTime": "Delete time:",
     "saveSchedule": "Save schedule",
@@ -223,7 +223,8 @@
     "patients": "Patients"
   },
   "Appointments": {
-    "myAppointments": "My appointments:"
+    "myAppointments": "My appointments:",
+    "noAppointmentsYet": "The patient has no appointments yet"
   },
 
   "Dashboard": {
@@ -249,7 +250,8 @@
     "noAppointmentsYet": "The patient has no appointments yet",
     "goBack": "Go back"
 },
-"Chat": {
+
+  "Chat": {
     "typeMessage": "Type your message...",
     "isTyping": "is typing"
   }

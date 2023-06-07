@@ -11,7 +11,7 @@ import PopupDeleteContent from './Modals/PopupDeleteContent';
 import PopupCreateContent from './Modals/PopupCreateContent';
 import TimezoneSelect from './TimezoneSelect/TimezoneSelect';
 import { WHITE } from '@constants/colors';
-import { useAppDispatch, useAppSelector } from '@redux/hooks';
+import { useAppSelector } from '@redux/hooks';
 import { ToastContainer, toast } from 'react-toastify';
 import { Availability, availabilityApi } from 'services/AvailabilityService';
 
@@ -44,7 +44,6 @@ function Scheduler() {
   const {
     data: availabilityData,
     refetch: availabilityRefetch,
-    error: availabilityGetError,
     isLoading: availabilityIsLoading,
   } = availabilityApi.useGetAvailabilitiesForDoctorQuery(doctorData?.id || 0);
 
@@ -145,88 +144,84 @@ function Scheduler() {
   }
 
   function handleStartChange(event: ChangeEvent<HTMLInputElement>): void {
-    setSelectedRange({ ...selectedRange, start: event.target.value });
+    setSelectedRange({ ...selectedRange, start: event.target.value || null });
   }
-
+  
   function handleEndChange(event: ChangeEvent<HTMLInputElement>): void {
-    setSelectedRange({ ...selectedRange, end: event.target.value });
-  }
+    setSelectedRange({ ...selectedRange, end: event.target.value || null });
+  }  
 
   const handleSave = (): void => {
     if (selectedDate) {
-      let dayStartValue = new Date(selectedDate.getTime());
-      let dayEndValue = new Date(selectedDate.getTime());
-
+      const dayStartValue = new Date(selectedDate.getTime());
+      const dayEndValue = new Date(selectedDate.getTime());
+  
       if (!selectedRange.start || !selectedRange.end) {
-        let error = t('Error.bothDatesRequired');
+        const error = t('Error.bothDatesRequired');
         setErrorMessage(error);
         return;
       }
       if (selectedRange.end < selectedRange.start) {
-        let error = t('Error.endBeforeStartDateError');
+        const error = t('Error.endBeforeStartDateError');
         setErrorMessage(error);
         return;
       }
-
-      let start = selectedRange.start.toString();
-      let end = selectedRange.end.toString();
+  
+      const start = selectedRange.start.toString();
+      const end = selectedRange.end.toString();
       const [startHours, startMinutes] = start.split(':');
       const [endHours, endMinutes] = end.split(':');
 
-      dayStartValue.setHours(Number(startHours));
-      dayEndValue.setHours(Number(endHours));
-      dayStartValue.setMinutes(Number(startMinutes));
-      dayEndValue.setMinutes(Number(endMinutes));
+      dayStartValue.setHours(Number(startHours), Number(startMinutes));
+      dayEndValue.setHours(Number(endHours), Number(endMinutes));
+  
+      const slots = [];
+      for (let hour = dayStartValue.getHours(); hour < dayEndValue.getHours(); hour++) {
+        const slotStart = new Date(dayStartValue.getTime());
+        const slotEnd = new Date(dayStartValue.getTime());
+        slotStart.setHours(hour);
+        slotStart.setMinutes(0);
+        slotEnd.setHours(hour + 1);
+        slotEnd.setMinutes(0);
 
-      const uuid = uuidv4();
+        const uuid = uuidv4();
+        const newAvailability = {
+          uuid: uuid,
+          title: `Working hours`,
+          start: slotStart.toISOString(),
+          end: slotEnd.toISOString(),
+        };
+        const newEventAvailability = {
+          uuid: uuid,
+          title: `Working hours`,
+          start: slotStart,
+          end: slotEnd,
+        };
+        
+        slots.push(newEventAvailability);
+        (async () => {
+          try {
+            await createAvailability({
+              doctorId: doctorData.id,
+              availability: newAvailability,
+            }).unwrap();
+            availabilityRefetch();
+          } catch (err) {
+            toast.error(t('Error.calendarSlotError'), {
+              position: toast.POSITION.TOP_CENTER,
+            });
+          }
+        })();
+      }
+      
+      setEventsData([...eventsData, ...slots]);
       setShowCreatePopup(false);
       setErrorMessage('');
-
-      let newAvailability = {
-        uuid: uuid,
-        title: `Working hours`,
-        start: dayStartValue.toISOString(),
-        end: dayEndValue.toISOString(),
-      };
-      let newEventAvailability = {
-        uuid: uuid,
-        title: `Working hours`,
-        start: dayStartValue,
-        end: dayEndValue,
-      };
-
-      (async () => {
-        try {
-          await createAvailability({
-            doctorId: doctorData.id,
-            availability: newAvailability,
-          }).unwrap();
-          toast.success(t('Calendar.successfullySubmited'), {
-            position: toast.POSITION.TOP_CENTER,
-          });
-          availabilityRefetch();
-          setEventsData([...eventsData, newEventAvailability]);
-        } catch (err) {
-          toast.error(t('Error.calendarSlotError'), {
-            position: toast.POSITION.TOP_CENTER,
-          });
-        }
-        const updatedEventsData = eventsData.map((event) => {
-          if (
-            event.start.getTime() === dayStartValue.getTime() &&
-            event.end.getTime() === dayEndValue.getTime()
-          ) {
-            return {
-              ...event,
-              uuid: uuid,
-            };
-          }
-          return event;
-        });
-        setEventsData(updatedEventsData);
-      })();
+      toast.success(t('Calendar.successfullySubmited'), {
+        position: toast.POSITION.TOP_CENTER,
+      });
     }
-  };
+  };  
 
   if (availabilityIsLoading) {
     return <div>Loading...</div>;

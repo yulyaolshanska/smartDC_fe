@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 import { ReactComponent as CallIcon } from '@assets/patients/call.svg';
@@ -23,7 +23,15 @@ import {
   UserInfo,
 } from '@components/Patient/styles';
 import { patientApi } from 'services/PatientService';
-import { female, male, unknownAge, unknownCity, unknownCountry, unknownGender, years } from '@constants/patient';
+import {
+  female,
+  male,
+  unknownAge,
+  unknownCity,
+  unknownCountry,
+  unknownGender,
+  years,
+} from '@constants/patient';
 import Spinner from '@components/Loaders/Spinner';
 import { useAppSelector } from '@redux/hooks';
 import { local } from '@constants/other';
@@ -36,21 +44,30 @@ function PatientCardInfo() {
 
   const { id } = useParams();
 
-  const { data: patient, isLoading } = patientApi.useGetPatientByIdQuery(
-    Number(id)
-  );
+  const {
+    data: patient,
+    isLoading,
+    refetch: patientRefetch,
+  } = patientApi.useGetPatientByIdQuery(Number(id));
 
   const userAge: string = patient?.birthDate
-  ? `${new Date().getFullYear() - new Date(patient.birthDate).getFullYear()} ${years}`
-  : unknownAge;
+    ? `${
+        new Date().getFullYear() - new Date(patient.birthDate).getFullYear()
+      } ${years}`
+    : unknownAge;
 
   const userCity: string = patient?.city ? patient.city : unknownCity;
 
-  const userCountry: string = patient?.country ? patient.country : unknownCountry;
+  const userCountry: string = patient?.country
+    ? patient.country
+    : unknownCountry;
 
   const patientFullName = `${patient?.firstName} ${patient?.lastName}`;
   const patientCityCountry = `${userCity}, ${userCountry}`;
   const patientAge = `${userAge}`;
+  const patientOverview = patient?.overview
+    ? patient.overview
+    : t('Patient.noOverviewYet');
 
   const showLastAppointment = () => {
     const lastAppointment = patient.notes[0]?.note;
@@ -62,6 +79,10 @@ function PatientCardInfo() {
     }
     return t('Appointments.noAppointmentsYet');
   };
+
+  useEffect(() => {
+    patientRefetch();
+  }, []);
 
   return (
     <>
@@ -88,7 +109,7 @@ function PatientCardInfo() {
             </InfoContainer>
             <Overview>
               <OverviewTitle>{t('Patient.overview')}:</OverviewTitle>
-              {patient?.overview}
+              {patientOverview}
             </Overview>
             <LastAppointment>
               <LastAppointmentTitle>
@@ -96,9 +117,11 @@ function PatientCardInfo() {
               </LastAppointmentTitle>
               {showLastAppointment()}
             </LastAppointment>
-            <ShowMoreLessButton onClick={() => setShowMore(!showMore)}>
-              {showMore ? t('Profile.showLess') : t('Profile.showMore')}
-            </ShowMoreLessButton>
+            {patient.notes[0]?.note && (
+              <ShowMoreLessButton onClick={() => setShowMore(!showMore)}>
+                {showMore ? t('Profile.showLess') : t('Profile.showMore')}
+              </ShowMoreLessButton>
+            )}
           </PatientCardInfoContainer>
           {doctorData.role === local && (
             <ButtonContainer>
