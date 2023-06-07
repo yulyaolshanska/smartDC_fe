@@ -13,7 +13,7 @@ interface IPopupCreateContentProps {
     handleSave: () => void;
     setShowCreatePopup: (show: boolean) => void;
     setErrorMessage: (message: string) => void;
-};
+}
 
 const PopupCreateContent = ({
     selectedDate,
