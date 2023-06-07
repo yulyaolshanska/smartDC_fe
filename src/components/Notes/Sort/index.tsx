@@ -1,6 +1,6 @@
 import React from 'react';
 import { Stack, Box } from '@mui/material';
-import { createPortal } from 'react-dom';
+import { useTranslation } from 'react-i18next';
 import {
   SortByText,
   SortContainer,
@@ -9,7 +9,6 @@ import {
   Arrow,
   SortItem,
 } from './styles';
-import { relative } from 'path';
 import { useAppDispatch, useAppSelector } from '@redux/hooks';
 import { noteFilterActions } from '@redux/slices/NoteFilterSlice';
 import { noteApi } from 'services/NoteService';
@@ -67,6 +66,9 @@ const Sort = React.memo(({ setNotesLocal }: SortProps) => {
     setToggleSortOrder
   );
 
+  const { t } = useTranslation();
+
+
   return (
     <Stack direction="row">
       <Stack
@@ -77,7 +79,7 @@ const Sort = React.memo(({ setNotesLocal }: SortProps) => {
       >
         <SortContainer onClick={() => setToggleSortBy(!toggleSortBy)}>
           <Stack direction="row" alignItems="center" gap="5px">
-            <SortByText>Sort By:</SortByText>
+            <SortByText>{t('Notes.sortBy')}</SortByText>
             <SortStatementText>{sortBy}</SortStatementText>
             <Arrow toggle={toggleSortBy} />
           </Stack>
@@ -105,7 +107,7 @@ const Sort = React.memo(({ setNotesLocal }: SortProps) => {
       >
         <SortContainer onClick={() => setToggleSortOrder(!toggleSortOrder)}>
           <Stack direction="row" alignItems="center" gap="5px">
-            <SortByText>Sort Order: </SortByText>
+            <SortByText>{t(`Notes.sortOrder`)}</SortByText>
             <SortStatementText>{sortOrder}</SortStatementText>
             <Arrow toggle={toggleSortOrder} />
           </Stack>

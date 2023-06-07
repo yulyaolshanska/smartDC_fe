@@ -2,7 +2,8 @@ import React from 'react';
 import { createPortal } from 'react-dom';
 import { useTranslation } from 'react-i18next';
 import editIcon from 'assets/edit.svg';
-import defaultDoctorPhoto from '@assets/mockDoctorPhoto.png';
+import defaultDoctorPhotoMale from 'assets/mockDoctorPhoto.png';
+import defaultDoctorPhotoFemale from 'assets/mockDoctorPhotoFemale.png';
 import { authApi } from 'services/AuthService';
 import { useMount } from '../AvatarEditor/hooksAvatarEditor';
 import { Photo, PhotoChangerWrapper, EditIconContainer, LinkContainer } from './styles';
@@ -41,26 +42,27 @@ const PhotoChanger = () => {
           {t('Dashboard.backToDashboard')}
         </Link>
       </LinkContainer>
-      {!doctor?.photoUrl ? (
-        <Photo>
-          <img src={defaultDoctorPhoto} alt="Photo" width="160px" />
-        </Photo>
-      ) : null}
 
       <Photo>
-        {doctor?.photoUrl ? (
-          <img src={finalUrl} alt="Photo" width="160px" />
-        ) : (
+        {!doctor?.photoUrl && (
           <img
-            src={import.meta.env.VITE_REACT_APP_BASE_URL_SERVER + avatarUrl}
+            src={
+              doctor?.gender === 'Male'
+                ? defaultDoctorPhotoMale
+                : defaultDoctorPhotoFemale
+            }
             alt="Photo"
             width="160px"
           />
+        )}
+        {doctor?.photoUrl && (
+          <img src={finalUrl} alt="Photo" width="160px" />
         )}
         <EditIconContainer onClick={() => setOpened(true)}>
           <img src={editIcon} />
         </EditIconContainer>
       </Photo>
+
       {mounted
         ? createPortal(
             <AvatarChanger
