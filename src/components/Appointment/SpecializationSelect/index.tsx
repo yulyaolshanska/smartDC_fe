@@ -25,7 +25,7 @@ function SpecializationSelectInput({
         placeholder={t('BookAppointment.selectDoctorSpecialization') ?? ''}
         helperText={errors.specialization?.message}
         error={Boolean(errors?.specialization)}
-        options={specializations}
+        options={specializations.filter((spec) => spec.value !== 0)}
         required={true}
         setSpecialization={setSpecialization}
       />
