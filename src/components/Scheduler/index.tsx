@@ -220,50 +220,6 @@ function Scheduler() {
       toast.success(t('Calendar.successfullySubmited'), {
         position: toast.POSITION.TOP_CENTER,
       });
-
-      let newAvailability = {
-        uuid: uuid,
-        title: `Working hours`,
-        start: dayStartValue.toISOString(),
-        end: dayEndValue.toISOString(),
-      };
-      let newEventAvailability = {
-        uuid: uuid,
-        title: `Working hours`,
-        start: dayStartValue,
-        end: dayEndValue,
-      };
-
-      (async () => {
-        try {
-          await createAvailability({
-            doctorId: doctorData.id,
-            availability: newAvailability,
-          }).unwrap();
-          toast.success(t('Calendar.successfullySubmited'), {
-            position: toast.POSITION.TOP_CENTER,
-          });
-          availabilityRefetch();
-          setEventsData([...eventsData, newEventAvailability]);
-        } catch (err) {
-          toast.error(t('Error.calendarSlotError'), {
-            position: toast.POSITION.TOP_CENTER,
-          });
-        }
-        const updatedEventsData = eventsData.map((event) => {
-          if (
-            event.start.getTime() === dayStartValue.getTime() &&
-            event.end.getTime() === dayEndValue.getTime()
-          ) {
-            return {
-              ...event,
-              uuid: uuid,
-            };
-          }
-          return event;
-        });
-        setEventsData(updatedEventsData);
-      })();
     }
   };  
 
