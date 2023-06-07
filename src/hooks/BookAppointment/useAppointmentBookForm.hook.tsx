@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
 import { useAppSelector } from '@redux/hooks';
 import { appointmentApi } from 'services/AppointmentService';
-import { zoomLink, twoDigit, long, numeric, enUS, PM, AM } from '@constants/other';
+import { zoomLink, twoDigit, long, numeric, enUS, PM, AM, decimalNumber, twelveHours,oneMonth } from '@constants/other';
 
 interface DateObject {
   appointmentTimeRange: string;
@@ -54,7 +54,7 @@ const useAppointmentBookFormHook = () => {
       let [hours, minutes] = time.split(':');
 
       if (period === PM) {
-        hours = (parseInt(hours, 10) + 12).toString();
+        hours = (parseInt(hours,decimalNumber) + twelveHours).toString();
       }
 
       const [year, month, day] = data.date
@@ -62,7 +62,7 @@ const useAppointmentBookFormHook = () => {
         .split('T')[0]
         .split('-');
       return new Date(
-        Date.UTC(year, parseInt(month, 10) - 1, day, hours, minutes)
+        Date.UTC(year, parseInt(month, decimalNumber) - oneMonth, day, hours, minutes)
       );
     };
 
