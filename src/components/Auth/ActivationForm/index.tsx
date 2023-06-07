@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ToastContainer } from 'react-toastify';
 import { useParams } from 'react-router';
@@ -39,21 +39,19 @@ function ActivationForm() {
     <Container>
       <FormContainer>
         <Form>
-          {isActiveLink ? (
-            <>
-              <AuthConfirmationContainer>
+          <AuthConfirmationContainer>
+            {isActiveLink ? (
+              <>
                 <AuthConfirmationImg src={checkmark} />
-              </AuthConfirmationContainer>
-              <Text>{t('Auth.activationText')}</Text>
-            </>
-          ) : (
-            <>
-              <AuthConfirmationContainer>
+                <Text>{t('Auth.activationText')}</Text>
+              </>
+            ) : (
+              <>
                 <AuthConfirmationImg src={emotionSad} />
-              </AuthConfirmationContainer>
-              <Text>{t('Auth.activationTextError')}</Text>
-            </>
-          )}
+                <Text>{t('Auth.activationTextError')}</Text>
+              </>
+            )}
+          </AuthConfirmationContainer>
           <LinkContainer>
             <Link to={PATH.LOGIN}>
               <ArrowBack />
