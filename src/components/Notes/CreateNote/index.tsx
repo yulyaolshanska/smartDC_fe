@@ -1,3 +1,4 @@
+import { useParams } from 'react-router';
 import React from 'react';
 import { toast } from 'react-toastify';
 import { Stack } from '@mui/material';
@@ -9,7 +10,7 @@ import { authApi } from 'services/AuthService';
 import { useAppSelector } from '@redux/hooks';
 import FileUpload from '@components/FileInput';
 import { useConditionalRender } from 'utils/hooks/useConditionalRender';
-
+import {numberTen} from '@constants/other';
 import {
   Description,
   HintText,
@@ -23,7 +24,6 @@ import {
   StyledTextArea,
   CreateNoteContainer,
 } from './styles';
-import { useParams } from 'react-router';
 
 interface CreateNoteResponse {
   error: string;
@@ -125,7 +125,7 @@ const CreateNote = ({
           <Description>{t('Notes.description')}</Description>
           <TextAreaSection>
           <StyledTextArea onChange={handleTextArea} />
-          {value.length < 10 ? (
+          {value.length < numberTen ? (
               <ErrorWrapper>
               <HintText>{t('Notes.hint')}</HintText>
               <ErrorText>
