@@ -91,6 +91,7 @@
     "bothDatesRequired": "Validation error: both start and end dates are required",
     "endBeforeStartDateError": "Validation error: end date should be after start date",
     "overlappingEventsError": "Validation error: working hours overlap",
+    "somethingWasWrong": "Sorry, something was wrong!",
     "pastDateError": "You cannot create schedule on a past date!",
     "calendarSlotError": "Something went wrong!",
     "noEvents": "No events for this day"
@@ -123,6 +124,7 @@
     "save": "Save",
     "cancel": "Cancel",
     "cardUpdetedSuccess": "Patient's card updated successfully",
+    "noOverviewYet": "The patient has no overview yet",
     "lastAppointment": "Last Appointment:",
     "cardCreatedSuccess": "Patient's card created successfully"
   },
@@ -141,11 +143,6 @@
   "Help": {
     "problem": "Some problem",
     "lorem": " Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore"
-  },
-  "Dashboard": {
-    "backToDashboard": "Back to dashboard",
-    "loading": "Loading...",
-    "goBack": "Go back"
   },
   "Warning": {
     "viewScheduleWarning": "Warning: you are in view mode and creating new schedule will be done according to your local time!"
@@ -227,6 +224,21 @@
   },
   "Appointments": {
     "myAppointments": "My appointments:",
+    "noAppointmentsYet": "The patient has no appointments yet"
+  },
+
+  "Dashboard": {
+    "backToDashboard": "Back to dashboard",
+    "loading": "Loading...",
+    "WelcomeDr": "Welcome, Dr.",
+    "Notification": "Notification",
+    "LatestAppointments": " Latest Appointments",
+    "LoadMore": "Load More",
+    "Remote": "Remote",
+    "Local": "Local",
+    "Dr.": "Dr.",
+    "LastAppointment": "LastAppointment",
+    "myAppointments": "My appointments:",
     "years": "y.o.",
     "remoteDoctor": "Remote",
     "localDoctor": "Local",
@@ -235,7 +247,8 @@
     "doctor": "Dr.",
     "patient": "Patient",
     "lastAppointment": "Last Appointment",
-    "noAppointmentsYet": "The patient has no appointments yet"
+    "noAppointmentsYet": "The patient has no appointments yet",
+    "goBack": "Go back"
   },
   "Chat": {
     "typeMessage": "Type your message...",

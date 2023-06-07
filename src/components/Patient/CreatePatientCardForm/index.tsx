@@ -41,11 +41,14 @@ function CreatePatientCardForm() {
 
   const onSubmit = async (data: IPatient) => {
     for (const key in data) {
-      if (typeof data[key] === 'string' && (data[key] as string).trim() === '') {
+      if (
+        typeof data[key] === 'string' &&
+        (data[key] as string).trim() === ''
+      ) {
         data[key] = null;
       }
-    }    
-  
+    }
+
     data.phoneNumber = plus + data.phoneNumber.replace(/\D/g, '');
     await createPatient(data).then((res) => {
       if (error in res && res.error) {
@@ -57,11 +60,11 @@ function CreatePatientCardForm() {
           position: toast.POSITION.TOP_CENTER,
         });
         setTimeout(() => {
-          navigate(PATH.DASHBOARD);
+          navigate(PATH.PATIENTS_LIST);
         }, 2000);
       }
     });
-  };  
+  };
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>

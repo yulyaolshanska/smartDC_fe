@@ -12,4 +12,6 @@ export const MEDIUM_FONT_SIZE = '20px';
 
 export const LARGE_FONT_SIZE = '24px';
 
+export const A_LITTLE_BIT_LARGER_THAN_LARGE_FONT_SIZE = '28px';
+
 export const EXTRA_LARGE_FONT_SIZE = '96px';
