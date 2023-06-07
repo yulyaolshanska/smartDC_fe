@@ -1,3 +1,5 @@
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import {
   ACTIVE,
   BORDER,
@@ -6,12 +8,12 @@ import {
   LIGHT_BLUE,
 } from '@constants/colors';
 import { SMALL_FONT_SIZE, VERY_SMALL_FONT_SIZE } from '@constants/fontSizes';
-import { Link } from 'react-router-dom';
-import styled from 'styled-components';
+import FONT_ROBOTO from '@constants/fonts';
 
 export const PatientItem = styled.li`
   background: ${GHOST_WHITE};
   border: 1.5px solid ${BORDER};
+  font-family: ${FONT_ROBOTO};
   border-radius: 8px;
   padding: 20px;
 
