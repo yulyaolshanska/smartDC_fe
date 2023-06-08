@@ -1,13 +1,8 @@
+import { useParams } from 'react-router';
 import React from 'react';
-import { ToastContainer, toast } from 'react-toastify';
-import { Stack, Typography } from '@mui/material';
+import { toast } from 'react-toastify';
+import { Stack } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-
-import { HINT, ZAMBEZI } from '@constants/colors';
-import {
-  MEGA_SMAILL_FONT_SIZE,
-  SUPER_SMALL_FONT_SIZE,
-} from '@constants/fontSizes';
 import Wrapper from '@components/Wrapper';
 import { debounce } from 'utils/functions/debounce';
 import { noteApi } from 'services/NoteService';
@@ -15,15 +10,20 @@ import { authApi } from 'services/AuthService';
 import { useAppSelector } from '@redux/hooks';
 import FileUpload from '@components/FileInput';
 import { useConditionalRender } from 'utils/hooks/useConditionalRender';
-
+import {numberTen} from '@constants/other';
 import {
+  Description,
+  HintText,
+  ErrorText,
+  ErrorWrapper,
+  TextAreaSection,
+  UploaderWrapper,
   Date as StyledDate,
   Doctor,
   AddButton,
   StyledTextArea,
   CreateNoteContainer,
 } from './styles';
-import { useParams } from 'react-router';
 
 interface CreateNoteResponse {
   error: string;
@@ -122,28 +122,23 @@ const CreateNote = ({
       </Stack>
       <CreateNoteContainer>
         <Stack>
-          <Typography color={ZAMBEZI} fontSize={SUPER_SMALL_FONT_SIZE}>
-            {t('Notes.description')}
-          </Typography>
+          <Description>{t('Notes.description')}</Description>
+          <TextAreaSection>
           <StyledTextArea onChange={handleTextArea} />
-          <Stack direction="row" alignItems="center" gap="10px">
-            <Typography color={HINT} fontSize={MEGA_SMAILL_FONT_SIZE}>
-              {t('Notes.hint')}
-            </Typography>
-            {value.length < 10 ? (
-              <Typography color="red" fontSize={MEGA_SMAILL_FONT_SIZE}>
+          {value.length < numberTen ? (
+              <ErrorWrapper>
+              <HintText>{t('Notes.hint')}</HintText>
+              <ErrorText>
                 {t('Notes.theNoteShouldContainAtLeastSymbols')}
-              </Typography>
-            ) : null}
-          </Stack>
+              </ErrorText>
+            </ErrorWrapper>
+          ) : null}
 
-          <Stack alignItems="center">
-            <FileUpload
-              label="Patient's files"
-              //  multiple
-              updateFilesCb={updateUploadedFiles}
-            />
-          </Stack>
+          </TextAreaSection>
+          <UploaderWrapper>
+            <Description>{t('Notes.patientsFiles')}</Description>
+            <FileUpload updateFilesCb={updateUploadedFiles} />
+          </UploaderWrapper>
         </Stack>
       </CreateNoteContainer>
       <Doctor>

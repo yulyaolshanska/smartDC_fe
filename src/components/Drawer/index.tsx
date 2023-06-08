@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import Logo from '@components/Logo';
 import { ReactComponent as DashbordIcon } from '@assets/dashbord.svg';
@@ -17,6 +17,7 @@ import {
   DoctorSpeciality,
   DrawerContainer,
   PositionContainer,
+  PositionContainerBlocked,
   TopDrawer,
 } from './styles';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
@@ -76,6 +77,14 @@ const Drawer = () => {
     dispatch(doctorActions.getDoctor(doctor));
   }, []);
 
+  const [isVerifiedDoctor, setIsVerifiedDoctor] = useState(
+    useMemo(() => doctor?.isVerified || false, [doctor])
+  );
+
+  useEffect(() => {
+    setIsVerifiedDoctor(doctor?.isVerified || false);
+  }, [doctor]);
+
   const confirmLogout = () => {
     setShowModal(false);
     dispatch(clearPersist());
@@ -98,16 +107,31 @@ const Drawer = () => {
       <TopDrawer>
         <Logo />
         {positions.map((obj) => (
-          <Link to={obj.to} key={obj.name}>
-            <PositionContainer
-              key={obj.name}
-              onClick={() => handleSelected(obj)}
-              selected={selectedPosition && selectedPosition == obj.to}
-            >
-              {obj.icon()}
-              {obj.name}
-            </PositionContainer>
-          </Link>
+          <>
+            {isVerifiedDoctor ? (
+              <Link to={obj.to}>
+                <PositionContainer
+                  key={obj.name}
+                  onClick={() => handleSelected(obj)}
+                  selected={selectedPosition && selectedPosition === obj.to}
+                >
+                  {obj.icon()}
+                  {obj.name}
+                </PositionContainer>
+              </Link>
+            ) : (
+              <div>
+                <PositionContainerBlocked
+                  key={obj.name}
+                  onClick={() => handleSelected(obj)}
+                  selected={selectedPosition && selectedPosition == obj.to}
+                >
+                  {obj.icon()}
+                  {obj.name}
+                </PositionContainerBlocked>
+              </div>
+            )}
+          </>
         ))}
         <PositionContainer onClick={() => setShowModal(true)}>
           <SignOutIcon />
