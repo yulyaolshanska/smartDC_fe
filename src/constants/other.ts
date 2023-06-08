@@ -60,3 +60,5 @@ export const zero = '0';
 export const anesthesiologyId = 1;
 
 export const colorLength = 16
+
+export const numberTen = 10;

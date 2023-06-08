@@ -52,6 +52,26 @@ export const PositionContainer = styled.div<{ selected?: boolean | string }>`
     ${({ selected }) => !selected && 'transform: translateY(-7px);'}
   }
 `;
+
+export const PositionContainerBlocked = styled.div`
+  display: flex;
+  flex-direction: row;
+  border-radius: 8px;
+  padding: 12px 46px 12px 17px;
+  color: ${NOT_ACTIVE};
+  opacity: 0.6;
+  font-size: ${NORMAL_FONT_SIZE};
+  font-weight: 700;
+  svg {
+    margin-right: 16px;
+    fill: ${NOT_ACTIVE};
+  }
+  transition: 0.2s all;
+  &:nth-child(2) {
+    margin-top: 40px;
+  }
+`;
+
 export const TopDrawer = styled.div`
   display: flex;
   flex-direction: column;
