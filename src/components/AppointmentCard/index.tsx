@@ -3,8 +3,8 @@ import { Stack, Box } from '@mui/system';
 import { Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { ReactComponent as CameraIcon } from '@assets/Camera.svg';
-import { ACTIVE, BORDER, CARLO_BLUE, NAVY_BLUE } from '@constants/colors';
-import { NORMAL_FONT_SIZE } from '@constants/fontSizes';
+import { ACTIVE, BORDER, CARLO_BLUE,LIGHT_BLUE } from '@constants/colors';
+import { NORMAL_FONT_SIZE, SMALL_FONT_SIZE } from '@constants/fontSizes';
 import { IPatient } from '@components/general/type';
 import moment from 'moment';
 import { lastAppointmentInfo } from '@constants/mockData';
@@ -88,7 +88,6 @@ const AppointmentCard = ({
             <Box
               fontSize={NORMAL_FONT_SIZE}
               fontWeight="100"
-              fontStyle="italic"
             >
               {hash} {counter}
             </Box>
@@ -133,10 +132,9 @@ const AppointmentCard = ({
           <Box>
             <Typography
               display="inline"
-              fontStyle="italic"
-              fontWeight="300"
+              fontWeight="700"
               fontSize={NORMAL_FONT_SIZE}
-              color={NAVY_BLUE}
+              color={LIGHT_BLUE}
               marginRight="5px"
             >
               {`${t('Appointments.lastAppointment')}`}
@@ -144,17 +142,24 @@ const AppointmentCard = ({
             {showLastAppointment()}
           </Box>
           <Box
+         
             sx={{
               '&:hover': {
                 cursor: 'pointer',
               },
             }}
-            color={ACTIVE}
-            fontWeight="bold"
             marginTop="5px"
+
             onClick={() => setShow(!show)}
+          > 
+           <Typography
+            color={ACTIVE}
+          fontWeight="700"
+          fontSize={SMALL_FONT_SIZE}
+
           >
             {show ? t('Profile.showLess') : t('Profile.showMore')}
+            </Typography>
           </Box>
         </Stack>
       </Wrapper>

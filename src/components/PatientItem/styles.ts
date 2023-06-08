@@ -7,7 +7,7 @@ import {
   GHOST_WHITE,
   LIGHT_BLUE,
 } from '@constants/colors';
-import { SMALL_FONT_SIZE, VERY_SMALL_FONT_SIZE } from '@constants/fontSizes';
+import { NORMAL_FONT_SIZE, SMALL_FONT_SIZE, VERY_SMALL_FONT_SIZE } from '@constants/fontSizes';
 import FONT_ROBOTO from '@constants/fonts';
 
 export const PatientItem = styled.li`
@@ -59,18 +59,19 @@ export const UserInfo = styled.p`
 export const OverviewTitle = styled.span`
   margin-right: 4px;
   font-weight: 700;
-  font-size: ${SMALL_FONT_SIZE};
+  font-size: ${NORMAL_FONT_SIZE};
   line-height: 1.25;
 `;
 
 export const Overview = styled.p`
   margin-bottom: 6px;
+  font-size: ${SMALL_FONT_SIZE};
 `;
 
 export const LastAppointmentTitle = styled.span`
   margin-right: 4px;
   font-weight: 700;
-  font-size: ${SMALL_FONT_SIZE};
+  font-size: ${NORMAL_FONT_SIZE};
   line-height: 1.43;
   color: ${LIGHT_BLUE};
 `;
@@ -84,7 +85,7 @@ export const LastAppointment = styled.p`
 
 export const ViewLink = styled(Link)`
   font-weight: 700;
-  font-size: ${VERY_SMALL_FONT_SIZE};
+  font-size: ${SMALL_FONT_SIZE};
   line-height: 1.4;
   color: ${ACTIVE};
 `;
