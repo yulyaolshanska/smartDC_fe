@@ -60,9 +60,9 @@ const MeetNotification = () => {
     };
   }, []);
 
-  const handleAppointmentStarted = (data: Appointment) => {
+  const handleAppointmentStarted = (data) => {
     if (data) {
-      dispatch(socketAppointmentActions.updateNextAppointment(data));
+      dispatch(socketAppointmentActions.updateNextAppointment(data.nextAppointment));
     }
   };
 
