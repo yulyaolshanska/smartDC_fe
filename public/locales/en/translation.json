@@ -224,11 +224,19 @@
     "search": "Search",
     "loadMore": "Load More",
     "PatientWithName": "Patient with name",
-    "notFound": "not fond",
+    "notFound": "not found",
     "patients": "Patients"
   },
   "Appointments": {
     "myAppointments": "My appointments:",
+    "years": "y.o.",
+    "remoteDoctor": "Remote",
+    "localDoctor": "Local",
+    "localDoctorAgenda": "Local doctor",
+    "remoteDoctorAgenda": "Remote doctor",
+    "doctor": "Dr.",
+    "patient": "Patient",
+    "lastAppointment": "Last Appointment",
     "noAppointmentsYet": "The patient has no appointments yet"
   },
 
@@ -254,8 +262,20 @@
     "lastAppointment": "Last Appointment",
     "noAppointmentsYet": "The patient has no appointments yet",
     "goBack": "Go back",
-    "verificationInfo": "To start working you need to verificate your email!",
+    "anesthesiology": "Anesthesiology",
+    "cardiology": "Cardiology"
+
+  },
+  "Notification": {
+    "youHaveVideoCallIn": "You will have a video-call in",
+    "youCurrentlyHaveMeeting": "You currently have meeting with:",
+    "Ms": "Ms.",
+    "Mr": "Mr.",
     "details": "Details",
+    "goToMeetingRoom": "Go to the meeting room",
+    "and": "and",
+    "minutesWith": "minutes with:",
+    "verificationInfo": "To start working you need to verificate your email!",
     "receivedVerInfo": "You received verification link to email",
     "sendAgain": "Send again",
     "notification": "Link has been sended",

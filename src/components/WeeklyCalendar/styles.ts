@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { BLACK } from '@constants/colors';
 import { NORMAL_FONT_SIZE } from '@constants/fontSizes';
 import FONT_ROBOTO from '@constants/fonts';
 
@@ -17,6 +18,7 @@ export const CalendarTitle = styled.h1`
 `;
 export const EventMain = styled.div`
   border-radius: 50%;
+  border: 1px solid ${BLACK};
   color: ${(props) => props.color};
   width: 10px;
   height: 10px;

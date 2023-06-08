@@ -21,6 +21,7 @@ import PatientInfo from '@pages/patient/patientInfo';
 import Patients from '@pages/patients';
 import cookie from 'utils/functions/cookies';
 import AppointmentsDoctorScheduler from '@pages/doctorScheduler/appointmentsScheduler';
+import { createSocketWithHandlers } from '@components/Zoom/socket-io';
 import Dashboard from "@pages/dashboard";
 import Chat from '@components/Chat';
 
@@ -55,6 +56,8 @@ const AppRouter = () => {
         <Route path={PATH.VERIFICATION} element={<Activation />} />
         <Route path={PATH.LOGIN} element={<Login />} />
         <Route path={PATH.RESET_PASS} element={<ResetPassword />} />
+        <Route path={PATH.FORGOT_PASS} element={<ForgotPassword />} />
+        <Route path={PATH.CONFIRM} element={<Confirmation />} />
         {/* Private Routes */}
         <Route
           path={PATH.SIGN_UP_SECOND_STEP_GOOGLE}

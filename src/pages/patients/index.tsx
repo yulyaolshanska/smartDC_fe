@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import { AddButton } from '@components/general/styles';
 import { FormValues, ISearch } from '@components/general/type';
 import Input from '@components/Input';
+import MeetNotification from '@components/MeetNotification';
 import { LinkContainer } from '@components/Patient/styles';
 import PatientList from '@components/PatientList';
 import { search } from '@constants/patient';
@@ -20,7 +21,6 @@ function Patients() {
   const { handleSubmit, control } = useForm<FormValues>({
     mode: 'onChange',
   });
-  const onSubmit = (data: ISearch) => {};
 
   const handleChange = (e: React.FormEvent<HTMLFormElement>) => {
     setSearchValue(e.currentTarget.search.value);
@@ -31,8 +31,10 @@ function Patients() {
       <LinkContainer>
         <BackToDashboard />
       </LinkContainer>
+      <MeetNotification />
+
       <Container>
-        <Form onSubmit={handleSubmit(onSubmit)} onChange={handleChange}>
+        <Form onChange={handleChange}>
           <Input
             control={control}
             fullWidth

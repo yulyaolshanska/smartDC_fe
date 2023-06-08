@@ -88,6 +88,10 @@ export const CALENDAR_HOVER_SHADOW = 'rgba(53, 53, 53, 0.16)';
 
 export const PERIWINKLE = '#cbd8ff';
 
+export const GREEN_BORDER = '#00a344';
+
+export const NOTIFICATION_BTN_BACKGROUND = '#e6f6ed';
+
 export const ERROR_LIGHT = '#FEEAE8';
 
 export const ERROR_RED = '#E9380D';

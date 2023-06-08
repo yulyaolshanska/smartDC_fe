@@ -12,7 +12,7 @@ export default interface DoctorInitialState {
   phoneNumber?: string;
   photoUrl?: string;
   role?: string;
-  specialityId?: number;
+  specialization?: number;
   timeZone?: string;
   availabilities?: null | string;
 }
