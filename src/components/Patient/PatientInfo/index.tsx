@@ -32,15 +32,6 @@ import {
   unknownGender,
   years,
 } from '@constants/patient';
-import {
-  female,
-  male,
-  unknownAge,
-  unknownCity,
-  unknownCountry,
-  unknownGender,
-  years,
-} from '@constants/patient';
 import Spinner from '@components/Loaders/Spinner';
 import { useAppSelector } from '@redux/hooks';
 import { local } from '@constants/other';
@@ -60,10 +51,6 @@ function PatientCardInfo() {
   } = patientApi.useGetPatientByIdQuery(Number(id));
 
   const userAge: string = patient?.birthDate
-    ? `${
-        new Date().getFullYear() - new Date(patient.birthDate).getFullYear()
-      } ${years}`
-    : unknownAge;
     ? `${
         new Date().getFullYear() - new Date(patient.birthDate).getFullYear()
       } ${years}`

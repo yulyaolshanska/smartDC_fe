@@ -98,3 +98,7 @@ export const COLOR_TWO = '#90b457';
 export const COLOR_THREE = '#d7ddf4';
 
 export const AZURE = 'azure';
+
+export const ERROR_LIGHT = 'grey';
+
+export const ERROR_RED = 'grey';

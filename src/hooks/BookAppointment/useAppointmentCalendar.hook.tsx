@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo } from 'react';
 import { DayClickEventHandler } from 'react-day-picker';
 import { addMonths } from 'date-fns';
-import { appointmentApi } from 'services/BookAppointmetService';
+import { appointmentApi } from 'services/AppointmentService';
 import { BLUE, HINT } from '@constants/colors';
 import { getThreeMonthPeriod, formatTimeRange } from 'utils/functions/timeUtils';
 interface Props {

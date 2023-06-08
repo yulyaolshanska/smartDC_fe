@@ -20,7 +20,6 @@ import ZoomPage from '@pages/zoom';
 import Dashboard from '@pages/dashboard';
 import Patients from '@pages/patients';
 import AppointmentsDoctorScheduler from '@pages/doctorScheduler/appointmentsScheduler';
-import Dashboard from '@pages/dashboard';
 import Chat from '@components/Chat';
 
 export const PATH = {
