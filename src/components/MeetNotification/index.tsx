@@ -13,15 +13,14 @@ import {
   PatientInfo,
   Title,
 } from './styles';
-import { Appointment } from 'services/types/appointment.type';
 import { local } from '@constants/other';
 import { female } from '@constants/patient';
 import { fiveMinutes } from '@constants/notification';
 import useTimer from 'utils/hooks/useTimer';
 import cookie from 'utils/functions/cookies';
 import useNotificationText from 'utils/hooks/useNotificationText';
-import { getCurrentFormattedTime, getDiffTime } from 'utils/functions/timeUtils';
-import { notificationCurrentTime } from '@constants/format';
+import { getDiffTime } from 'utils/functions/timeUtils';
+import {  nextAppointment } from '@components/general/type';
 
 const token = cookie.get('accessToken');
 
@@ -60,7 +59,7 @@ const MeetNotification = () => {
     };
   }, []);
 
-  const handleAppointmentStarted = (data) => {
+  const handleAppointmentStarted = (data: nextAppointment) => {
     if (data) {
       dispatch(socketAppointmentActions.updateNextAppointment(data.nextAppointment));
     }

@@ -1,5 +1,3 @@
-import { string } from 'yup';
-
 export interface IAuth {
   id: number;
   firstName: string;
@@ -59,4 +57,19 @@ export type FormValues = IPatient & IAuth & AppointmentFormValues;
 
 export interface ISearch {
   search: string;
+}
+
+
+export interface  INextAppointment {
+  endTime: string,
+    id: number ,
+    localDoctor: {},
+    patient: IPatient,
+    remoteDoctor: {},
+    startTime: string,
+    zoomLink: string,
+}
+
+export type nextAppointment = {
+  nextAppointment: INextAppointment;
 }
