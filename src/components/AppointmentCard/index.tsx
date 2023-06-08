@@ -13,6 +13,7 @@ import { useAppSelector } from '@redux/hooks';
 import { hash, local } from '@constants/other';
 import { IDoctor } from 'services/types/appointment.type';
 import { timeFormat } from '@constants/format';
+import { getLastAppointment } from 'utils/functions/getLastAppointment';
 
 interface IAppointmentElement {
   patient: IPatient;
@@ -35,7 +36,6 @@ const AppointmentCard = ({
 
   const [show, setShow] = React.useState<boolean>(false);
   const doctor = useAppSelector((state) => state.doctorReducer);
-  const text = lastAppointmentInfo;
 
   const getPatientAge = useMemo(
     () =>
@@ -70,6 +70,8 @@ const AppointmentCard = ({
       }`,
     [doctor]
   );
+
+  const showLastAppointment =  () => getLastAppointment(patient,show)
 
   return (
     <Box marginBottom="8px">
@@ -139,7 +141,7 @@ const AppointmentCard = ({
             >
               {`${t('Appointments.lastAppointment')}`}
             </Typography>
-            {show ? text : `${text.substring(0, 250)}...`}
+            {showLastAppointment()}
           </Box>
           <Box
             sx={{

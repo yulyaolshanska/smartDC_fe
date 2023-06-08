@@ -12,6 +12,8 @@ import {
   ButtonContainer,
   ContactInfo,
   ContactsContainer,
+  EditCardLink,
+  EditContainer,
   InfoContainer,
   LastAppointment,
   LastAppointmentTitle,
@@ -93,6 +95,13 @@ function PatientCardInfo() {
         <>
           <MeetNotification />
           <PatientCardInfoContainer>
+          {doctorData.role === 'Local' && (
+            <EditContainer>
+          <EditCardLink to={`/edit-patient-card/${id}`}>
+            {t('Patient.editPatientCard')}
+          </EditCardLink>
+          </EditContainer>
+        )}
             <PatientInfoName>{patientFullName}</PatientInfoName>
             <ContactsContainer>
               <CallIcon />

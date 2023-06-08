@@ -59,7 +59,7 @@ const AppointmentData = ({
     doctor.role === local ? remoteDoctor.lastName : localDoctor.lastName
   }`;
 
-  const showLastAppointment = () => {
+ const showLastAppointment = () => {
     const lastAppointment = patient?.notes[0]?.note;
 
     if (lastAppointment) {
