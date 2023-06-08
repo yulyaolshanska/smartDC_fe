@@ -52,3 +52,5 @@ export const MAX_CHARACTER_LIMIT = 250;
 export const enUS = 'en-US';
 
 export const PM = 'PM';
+
+export const numberTen = 10;

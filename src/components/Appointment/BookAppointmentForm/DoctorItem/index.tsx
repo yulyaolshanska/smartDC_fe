@@ -10,7 +10,7 @@ import {
   DoctorItemInfo,
   DoctorName,
   DoctorImg,
-} from '@components/Appointment/BookAppointmentForm/SecondStep/styles';
+} from '@components/Appointment/BookAppointmentForm/DoctorItem/styles';
 
 interface Props {
   control: Control;

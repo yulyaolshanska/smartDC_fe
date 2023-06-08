@@ -3,6 +3,7 @@
   font-size: 16px;
   line-height: 1.5;
   color: #000000;
+  font-family: 'Roboto';
 }
 
 .fc-direction-ltr .fc-button-group > .fc-button {
@@ -11,8 +12,7 @@
   border-radius: 50%;
   color: #4d84e7;
   background-color: transparent;
-  /* border-color: #4d84e7;
-   */
+  font-family: 'Roboto';
   border: none;
 }
 
@@ -21,6 +21,7 @@
   font-size: 16px;
   line-height: 1.5;
   color: #585858;
+  font-family: 'Roboto';
 }
 
 .fc-theme-standard td,

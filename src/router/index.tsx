@@ -18,10 +18,10 @@ import NotFound from '@pages/notFound';
 import DoctorScheduler from '@pages/doctorScheduler';
 import ProtectedRoute from './protected-route';
 import PatientInfo from '@pages/patient/patientInfo';
-import Dashboard from '@pages/dashboard';
 import Patients from '@pages/patients';
 import cookie from 'utils/functions/cookies';
 import AppointmentsDoctorScheduler from '@pages/doctorScheduler/appointmentsScheduler';
+import Dashboard from "@pages/dashboard";
 import Chat from '@components/Chat';
 
 export const PATH = {
@@ -59,7 +59,7 @@ const AppRouter = () => {
         <Route
           path={PATH.SIGN_UP_SECOND_STEP_GOOGLE}
           element={
-            <ProtectedRoute allowedRoles={['']}>
+            <ProtectedRoute allowedRoles={['']} >
               <SignUpSecondFormGoogle />
             </ProtectedRoute>
           }
@@ -121,7 +121,7 @@ const AppRouter = () => {
           }
         />
         <Route
-          path={PATH.APPOINTMENT}
+          path={PATH.APPOINTMENTS}
           element={
             <ProtectedRoute allowedRoles={['Remote', 'Local']}>
               <AppointmentsDoctorScheduler />

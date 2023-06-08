@@ -73,5 +73,12 @@ export const authApi = createApi({
         method: 'GET',
       }),
     }),
+    reactivationLink: mutation({
+      query: (id: number) => ({
+        url: `/auth/reactivation/${id}`,
+        method: 'PATCH',
+      }),
+      invalidatesTags: ['Auth'],
+    }),
   }),
 });
