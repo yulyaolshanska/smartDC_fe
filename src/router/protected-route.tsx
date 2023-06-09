@@ -4,6 +4,9 @@ import Spinner from '@components/Loaders/Spinner';
 import { Stack } from '@mui/system';
 import { authApi } from 'services/AuthService';
 import cookie from 'utils/functions/cookies';
+import LocalDoctorScheduler from '@components/Scheduler/LocalDoctorSceduler';
+import { local } from '@constants/patient';
+import { PATH } from '.';
 
 interface ProtectedRoutesProps {
   children: any;
@@ -21,6 +24,10 @@ const ProtectedRoute = ({ children, allowedRoles }: ProtectedRoutesProps) => {
 
   if (isLoading) {
     return <Spinner />;
+  }
+
+  if (doctorRole === local && location.pathname === PATH.AVAILABILITY) {
+    return <LocalDoctorScheduler />;
   }
 
   if (!isLoggedIn || !allowedRoles.includes(doctorRole)) {
