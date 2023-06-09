@@ -8,7 +8,7 @@ import { NORMAL_FONT_SIZE, SMALL_FONT_SIZE } from '@constants/fontSizes';
 import { IPatient } from '@components/general/type';
 import moment from 'moment';
 import { lastAppointmentInfo } from '@constants/mockData';
-import { Wrapper } from './styles';
+import { Wrapper, BoxWrapper } from './styles';
 import { useAppSelector } from '@redux/hooks';
 import { hash, local } from '@constants/other';
 import { IDoctor } from 'services/types/appointment.type';
@@ -129,7 +129,7 @@ const AppointmentCard = ({
               </Typography>
             </Stack>
           </Stack>
-          <Box>
+          <BoxWrapper>
             <Typography
               display="inline"
               fontWeight="700"
@@ -140,7 +140,7 @@ const AppointmentCard = ({
               {`${t('Appointments.lastAppointment')}`}
             </Typography>
             {showLastAppointment()}
-          </Box>
+          </BoxWrapper>
           <Box
          
             sx={{

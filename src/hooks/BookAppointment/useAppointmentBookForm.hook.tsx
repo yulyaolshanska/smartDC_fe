@@ -1,14 +1,23 @@
 import { useState } from 'react';
 import { Modifiers } from 'react-day-picker';
-import { parse, format } from 'date-fns';
 import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
 import { useAppSelector } from '@redux/hooks';
-import { appointmentApi } from 'services/BookAppointmetService';
-import { zoomLink, twoDigit, long, numeric, enUS } from '@constants/other';
-import { fullYearFormat, fullDateTimeFormat } from '@constants/format';
-
+import { appointmentApi } from 'services/AppointmentService';
+import {
+    zoomLink,
+    twoDigit,
+    long,
+    numeric,
+    enUS,
+    PM,
+    AM,
+    decimalNumber,
+    twelveHours,
+    oneMonth,
+  } from '@constants/other';
+  
 interface DateObject {
   appointmentTimeRange: string;
   date: Date;
@@ -51,16 +60,36 @@ const useAppointmentBookFormHook = () => {
   const onSubmit = async (data: DateObject) => {
     const [startTime, endTime] = data.appointmentTimeRange.split('-');
 
-    const start = parse(
-      `${format(data.date, fullYearFormat)} ${startTime.trim()}`,
-      fullDateTimeFormat,
-      new Date()
-    );
-    const end = parse(
-      `${format(data.date, fullYearFormat)} ${endTime.trim()}`,
-      fullDateTimeFormat,
-      new Date()
-    );
+    const parseDateTime = (dateTimeString) => {
+        const [time, period] = dateTimeString.split(' ');
+        let [hours, minutes] = time.split(':');
+  
+        if (period === PM) {
+          hours = (parseInt(hours, decimalNumber) + twelveHours).toString();
+        }
+  
+        const [year, month, day] = data.date
+          .toISOString()
+          .split('T')[0]
+          .split('-');
+        return new Date(
+          Date.UTC(
+            year,
+            parseInt(month, decimalNumber) - oneMonth,
+            day,
+            hours,
+            minutes
+          )
+        );
+      };
+  
+      const startTimeString = `${startTime.trim()} ${
+        startTime.includes(PM) ? PM : AM
+      }`;
+      const endTimeString = `${endTime.trim()} ${endTime.includes(PM) ? PM : AM}`;
+  
+      const start = parseDateTime(startTimeString);
+      const end = parseDateTime(endTimeString);
 
     const appointmentInfo = {
       localDoctorId: Number(doctorData.id),

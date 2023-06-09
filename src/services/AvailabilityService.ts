@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { INotification } from 'services/types/doctorAvalibility.type';
 
 import cookie from 'utils/functions/cookies';
 
@@ -49,6 +50,12 @@ export const availabilityApi = createApi({
       query: ({ doctorId, uuid }) => ({
         url: `/availability/${doctorId}/${uuid}`,
         method: 'DELETE',
+      }),
+    }),
+    sendNotifications: builder.query<INotification, number>({
+      query: (doctorId) => ({
+        url: `/availability/send-notifications/${doctorId}`,
+        method: 'GET',
       }),
     }),
   }),

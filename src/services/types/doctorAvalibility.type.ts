@@ -17,3 +17,9 @@ export interface AvailabilityProps {
   title: string;
   uuid: string;
 }
+
+export interface INotification {
+  message: string;
+  action: string;
+  actionUrl: string;
+}

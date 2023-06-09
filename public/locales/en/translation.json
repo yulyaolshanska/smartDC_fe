@@ -145,20 +145,20 @@
     "problem": "Some problem",
     "lorem": " Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore"
   },
-
   "Warning": {
     "viewScheduleWarning": "Warning: you are in view mode and creating new schedule will be done according to your local time!"
   },
   "Calendar": {
     "endTime": "End time:",
     "startTime": "Start time:",
-    "selectTime": "Select a time range",
+    "selectTime": "Select hours (minutes will be ignored)",
     "selectedDate": "Selected date:",
     "deleteTime": "Delete time:",
     "saveSchedule": "Save schedule",
     "selectTimezone": "Time Zone:",
     "successfullySubmited": "Your schedule has been successfully updated!",
-    "calendar": "Calendar"
+    "calendar": "Calendar",
+    "localDoctorAvailability": "As Local doctor you work full-time work day and can't set your availability time!"
   },
   "BookAppointment": {
     "instruction": "Please choose a specialization of a doctor first. Then you will see all available dates, and after that, you can choose a suitable time for your client.",
@@ -239,7 +239,6 @@
     "lastAppointment": "Last Appointment:",
     "noAppointmentsYet": "The patient has no appointments yet."
   },
-
   "Dashboard": {
     "backToDashboard": "Back to dashboard",
     "loading": "Loading...",
@@ -264,7 +263,6 @@
     "goBack": "Go back",
     "anesthesiology": "Anesthesiology",
     "cardiology": "Cardiology"
-
   },
   "Notification": {
     "youHaveVideoCallIn": "You will have a video-call in",
@@ -279,7 +277,8 @@
     "receivedVerInfo": "You received verification link to email",
     "sendAgain": "Send again",
     "notification": "Link has been sended",
-    "close": "Close"
+    "close": "Close",
+    "availability": "Manage your schedule for the upcoming month"
   },
   "Chat": {
     "typeMessage": "Type your message...",
