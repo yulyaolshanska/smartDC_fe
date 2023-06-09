@@ -32,6 +32,7 @@ import cookie from 'utils/functions/cookies';
 import { doctorActions } from '@redux/slices/DoctorSlice';
 import { AppDispatch } from '@redux/store';
 import { authApi } from 'services/AuthService';
+import GoogleLoginButton from './GoogleLogin';
 
 function LoginForm() {
   const dispatch = useDispatch<AppDispatch>();
@@ -133,6 +134,7 @@ function LoginForm() {
           <AuthForgotPasswordContainer>
             <Link to={PATH.FORGOT_PASS}>{t('Auth.forgotPasswordLink')}</Link>
           </AuthForgotPasswordContainer>
+          <GoogleLoginButton />
           <SendButton
             disabled={!isValid}
             type="submit"
