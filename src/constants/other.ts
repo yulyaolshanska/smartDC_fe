@@ -53,6 +53,14 @@ export const enUS = 'en-US';
 
 export const PM = 'PM';
 
+export const AM = 'AM';
+
+export const decimalNumber =10;
+
+export const twelveHours = 12;
+
+export const oneMonth = 1;
+
 export const MAX_COLOR_VALUE = 16777215;
 
 export const zero = '0';
