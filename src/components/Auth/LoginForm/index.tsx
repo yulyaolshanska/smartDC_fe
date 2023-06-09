@@ -19,10 +19,9 @@ import {
   AuthForgotPasswordContainer,
 } from '@components/general/styles';
 import { FormValues, IAuth } from '@components/general/type';
-import GoogleLoginButton from '@components/Auth/LoginForm/GoogleLogin';
 import visible from '@assets/auth/eye.svg';
 import visibleOff from '@assets/auth/eyeSlash.svg';
-import { email, end, password, error } from '@constants/auth';
+import { email, end, password } from '@constants/auth';
 import signUpSchema from '@validation/auth.validate';
 import { PATH } from '@router/index';
 import { ToastContainer } from 'react-toastify';
@@ -33,7 +32,6 @@ import cookie from 'utils/functions/cookies';
 import { doctorActions } from '@redux/slices/DoctorSlice';
 import { AppDispatch } from '@redux/store';
 import { authApi } from 'services/AuthService';
-import { appointmentsApi } from 'services/AppointmentService';
 
 function LoginForm() {
   const dispatch = useDispatch<AppDispatch>();
@@ -135,7 +133,6 @@ function LoginForm() {
           <AuthForgotPasswordContainer>
             <Link to={PATH.FORGOT_PASS}>{t('Auth.forgotPasswordLink')}</Link>
           </AuthForgotPasswordContainer>
-          <GoogleLoginButton />
           <SendButton
             disabled={!isValid}
             type="submit"

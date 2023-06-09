@@ -26,7 +26,6 @@ import {
   password,
 } from '@constants/auth';
 import { PATH } from '@router/index';
-import AuthGoogleButton from '@components/Auth/AuthGoogleButton';
 import SignUpSecondForm from '@components/Auth/SignUpForm/SignUpSecondStepForm';
 import { ToastContainer } from 'react-toastify';
 import useSignUpFirstStepHook from 'hooks/useSignUpFirstStep.hook';
@@ -147,7 +146,6 @@ function SignUpFirstForm() {
                   }}
                 />
               </InputContainer>
-              <AuthGoogleButton />
               <SendButton
                 disabled={!isValid}
                 type="submit"
