@@ -62,3 +62,9 @@ export const anesthesiologyId = 1;
 export const colorLength = 16
 
 export const numberTen = 10;
+
+export enum Role {
+  Local = 'Local',
+  Remote = 'Remote',
+  Admin = 'Admin',
+}

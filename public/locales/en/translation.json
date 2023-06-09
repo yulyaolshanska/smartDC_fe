@@ -240,7 +240,6 @@
     "lastAppointment": "Last Appointment",
     "noAppointmentsYet": "The patient has no appointments yet"
   },
-
   "Dashboard": {
     "backToDashboard": "Back to dashboard",
     "loading": "Loading...",
@@ -280,7 +279,8 @@
     "receivedVerInfo": "You received verification link to email",
     "sendAgain": "Send again",
     "notification": "Link has been sended",
-    "close": "Close"
+    "close": "Close",
+    "availability": "Manage your schedule for the upcoming month"
   },
   "Chat": {
     "typeMessage": "Type your message...",
