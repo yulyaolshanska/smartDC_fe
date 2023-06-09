@@ -53,6 +53,16 @@ export const enUS = 'en-US';
 
 export const PM = 'PM';
 
+export const MAX_COLOR_VALUE = 16777215;
+
+export const zero = '0';
+
+export const anesthesiologyId = 1;
+
+export const colorLength = 16
+
+export const numberTen = 10;
+
 export enum Role {
   Local = 'Local',
   Remote = 'Remote',

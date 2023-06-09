@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import Logo from '@components/Logo';
 import { ReactComponent as DashbordIcon } from '@assets/dashbord.svg';
 import { ReactComponent as SignOutIcon } from '@assets/Sign Out.svg';
@@ -16,14 +17,15 @@ import {
   DoctorSpeciality,
   DrawerContainer,
   PositionContainer,
+  PositionContainerBlocked,
   TopDrawer,
 } from './styles';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from '@redux/hooks';
 import { navigationActions } from '@redux/slices/NavigationSlice';
 import LogoutModal from './SignOut';
-import { useTranslation } from 'react-i18next';
 import { PATH } from '@router/index';
+import { anesthesiologyId } from '@constants/other';
 interface PositionsInterface {
   name: string;
   to: string;
@@ -36,6 +38,8 @@ const Drawer = () => {
   const selectedPosition = useAppSelector(
     (state) => state.navigationReducer.currentPage
   );
+  const currentDoctor = useAppSelector((state) => state.doctorReducer);
+
   const [showModal, setShowModal] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
@@ -65,7 +69,6 @@ const Drawer = () => {
     if (position) {
       dispatch(navigationActions.setCurrentPage(position.to));
     }
-    
   }, [location.pathname]);
 
   const { data: doctor, error, isLoading, refetch } = authApi.useGetMeQuery({});
@@ -73,6 +76,14 @@ const Drawer = () => {
   React.useEffect(() => {
     dispatch(doctorActions.getDoctor(doctor));
   }, []);
+
+  const [isVerifiedDoctor, setIsVerifiedDoctor] = useState(
+    useMemo(() => doctor?.isVerified || false, [doctor])
+  );
+
+  useEffect(() => {
+    setIsVerifiedDoctor(doctor?.isVerified || false);
+  }, [doctor]);
 
   const confirmLogout = () => {
     setShowModal(false);
@@ -83,23 +94,44 @@ const Drawer = () => {
 
   const cancelLogout = () => {
     setShowModal(false);
-  }
+  };
+
+  const getDoctorSpecialization = useMemo(() => {
+    return currentDoctor.specialization === anesthesiologyId
+      ? `${t('Dashboard.anesthesiology')}`
+      : `${t('Dashboard.cardiology')}`;
+  }, [currentDoctor]);
 
   return (
     <DrawerContainer>
       <TopDrawer>
         <Logo />
         {positions.map((obj) => (
-          <Link to={obj.to}>
-            <PositionContainer
-              key={obj.name}
-              onClick={() => handleSelected(obj)}
-              selected={selectedPosition && selectedPosition == obj.to}
-            >
-              {obj.icon()}
-              {obj.name}
-            </PositionContainer>
-          </Link>
+          <>
+            {isVerifiedDoctor ? (
+              <Link to={obj.to}>
+                <PositionContainer
+                  key={obj.name}
+                  onClick={() => handleSelected(obj)}
+                  selected={selectedPosition && selectedPosition === obj.to}
+                >
+                  {obj.icon()}
+                  {obj.name}
+                </PositionContainer>
+              </Link>
+            ) : (
+              <div>
+                <PositionContainerBlocked
+                  key={obj.name}
+                  onClick={() => handleSelected(obj)}
+                  selected={selectedPosition && selectedPosition == obj.to}
+                >
+                  {obj.icon()}
+                  {obj.name}
+                </PositionContainerBlocked>
+              </div>
+            )}
+          </>
         ))}
         <PositionContainer onClick={() => setShowModal(true)}>
           <SignOutIcon />
@@ -109,18 +141,21 @@ const Drawer = () => {
       <BottomDrawer>
         <img src={photo} width={40} />
         <Stack>
-          <DoctorName> Dr. Malikovsy</DoctorName>
-          <DoctorSpeciality>Therapist</DoctorSpeciality>
+          <DoctorName>
+            {t('Appointments.doctor')} {currentDoctor.lastName}
+          </DoctorName>
+          <DoctorSpeciality> {getDoctorSpecialization}</DoctorSpeciality>
         </Stack>
       </BottomDrawer>
-      {showModal && 
-      <LogoutModal 
-        title={t('Auth.logoutText')}
-        confirmText={t('Auth.confirm')}
-        cancelTest={t('Auth.cancel')}
-        handleSubmitModal={confirmLogout}
-        handleCancelModal={cancelLogout}/>
-      }
+      {showModal && (
+        <LogoutModal
+          title={t('Auth.logoutText')}
+          confirmText={t('Auth.confirm')}
+          cancelTest={t('Auth.cancel')}
+          handleSubmitModal={confirmLogout}
+          handleCancelModal={cancelLogout}
+        />
+      )}
     </DrawerContainer>
   );
 };

@@ -1,4 +1,7 @@
+import { notificationCurrentTime } from '@constants/format';
+import { fiveMinutes, sec } from '@constants/notification';
 import { timeOptions, PM } from '@constants/other';
+import moment from 'moment';
 
 export const getThreeMonthPeriod = (today: Date) => {
   const result = [];
@@ -50,7 +53,7 @@ export const reverseFormatTimeRange = (
   timeRange: string,
   selectedDate: Date
 ) => {
-  console.log(`selectedDate`, selectedDate);
+
   const [start, end] = timeRange.split('-').map((time: string) => time.trim());
 
   const startDate = new Date(selectedDate);
@@ -66,4 +69,19 @@ export const reverseFormatTimeRange = (
     start: startDate.toISOString(),
     end: endDate.toISOString(),
   };
+};
+
+export const getCurrentFormattedTime = (format:string):string => {
+  return moment().format(format);
+};
+
+export const getDiffTime = (time:string): number => {
+  return new Date(time).getTime() - new Date(getCurrentFormattedTime(notificationCurrentTime)).getTime()}
+
+export const calculateInitialTimer = (startTime: string): number => {
+  const diffTimeStart = getDiffTime(startTime);
+  const isTimerRun = diffTimeStart <= fiveMinutes && diffTimeStart > 0;
+  const initialTimer = isTimerRun ? Math.floor(diffTimeStart / sec) : 0;
+
+  return initialTimer;
 };

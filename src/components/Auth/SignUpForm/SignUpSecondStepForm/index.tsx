@@ -38,6 +38,7 @@ import SelectInput from '@components/Select';
 import { PATH } from '@router/index';
 import PhoneInput from '@components/PhoneInput';
 import useSignUpSecondStepHook from 'hooks/useSignUpSecondStep.hook';
+import { local } from '@constants/other';
 
 function SignUpSecondForm() {
   const { t } = useTranslation();
@@ -46,8 +47,10 @@ function SignUpSecondForm() {
     return translation || '';
   };
 
-  const { handleSubmit, onSubmit, control, errors, isValid } =
+  const { handleSubmit, onSubmit, control, errors, isValid, watch } =
     useSignUpSecondStepHook();
+
+  const selectedRole = watch(role);
 
   return (
     <Container>
@@ -75,7 +78,11 @@ function SignUpSecondForm() {
               fullWidth
               name={specialization}
               placeholder={tWithDefault('Auth.enterSpecialization')}
-              options={specializations}
+              options={
+                selectedRole === local
+                  ? specializations.filter((spec) => spec.value === 0)
+                  : specializations.filter((spec) => spec.value !== 0)
+              }
               helperText={errors.specialization?.message}
               error={Boolean(errors?.specialization)}
               required={true}

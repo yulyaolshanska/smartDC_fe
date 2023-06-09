@@ -18,9 +18,10 @@ import NotFound from '@pages/notFound';
 import DoctorScheduler from '@pages/doctorScheduler';
 import ProtectedRoute from './protected-route';
 import PatientInfo from '@pages/patient/patientInfo';
-import Dashboard from '@pages/dashboard';
 import Patients from '@pages/patients';
 import AppointmentsDoctorScheduler from '@pages/doctorScheduler/appointmentsScheduler';
+import { createSocketWithHandlers } from '@components/Zoom/socket-io';
+import Dashboard from "@pages/dashboard";
 import Chat from '@components/Chat';
 
 export const PATH = {
@@ -55,11 +56,13 @@ const AppRouter = () => {
         <Route path={PATH.VERIFICATION} element={<Activation />} />
         <Route path={PATH.LOGIN} element={<Login />} />
         <Route path={PATH.RESET_PASS} element={<ResetPassword />} />
+        <Route path={PATH.FORGOT_PASS} element={<ForgotPassword />} />
+        <Route path={PATH.CONFIRM} element={<Confirmation />} />
         {/* Private Routes */}
         <Route
           path={PATH.SIGN_UP_SECOND_STEP_GOOGLE}
           element={
-            <ProtectedRoute allowedRoles={['']}>
+            <ProtectedRoute allowedRoles={['']} >
               <SignUpSecondFormGoogle />
             </ProtectedRoute>
           }
