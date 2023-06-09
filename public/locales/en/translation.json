@@ -152,7 +152,7 @@
   "Calendar": {
     "endTime": "End time:",
     "startTime": "Start time:",
-    "selectTime": "Select a time range",
+    "selectTime": "Select hours (minutes will be ignored)",
     "selectedDate": "Selected date:",
     "deleteTime": "Delete time:",
     "saveSchedule": "Save schedule",
