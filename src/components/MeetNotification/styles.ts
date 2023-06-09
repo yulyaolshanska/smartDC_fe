@@ -6,6 +6,7 @@ import {
   ZAMBEZI,
 } from '@constants/colors';
 import styled from 'styled-components';
+import { SMALL_FONT_SIZE, XS_FONT_SIZE } from '@constants/fontSizes';
 
 export const NotificationContainer = styled.div`
   display: flex;
@@ -21,7 +22,7 @@ export const NotificationContainer = styled.div`
 
 export const Title = styled.h4`
   font-weight: 400;
-  font-size: 16px;
+  font-size: ${SMALL_FONT_SIZE};
   line-height: 1.5;
   color: ${ZAMBEZI};
 `;
@@ -32,7 +33,7 @@ export const DetailsBtn = styled(NavLink)`
   background: ${NOTIFICATION_BTN_BACKGROUND};
   border-radius: 4px;
   font-weight: 700;
-  font-size: 14px;
+  font-size: ${XS_FONT_SIZE};
   line-height: 1.4;
   color: ${GREEN_BORDER};
 `;
@@ -44,13 +45,13 @@ export const Info = styled.div`
 
 export const PatientInfo = styled(NavLink)`
   font-weight: 700;
-  font-size: 16px;
+  font-size: ${SMALL_FONT_SIZE};
   line-height: 1.5;
   color: ${GREEN_BORDER};
 `;
 export const DoctorInfo = styled.button`
   font-weight: 700;
-  font-size: 16px;
+  font-size: ${SMALL_FONT_SIZE};
   line-height: 1.5;
   color: ${GREEN_BORDER};
 `;
@@ -62,7 +63,7 @@ export const CallInfo = styled.div`
 export const El = styled.span`
   margin: 0 5px;
   font-weight: 400;
-  font-size: 16px;
+  font-size: ${SMALL_FONT_SIZE};
   line-height: 1.5;
   color: ${ZAMBEZI};
 `;

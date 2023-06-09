@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { io } from 'socket.io-client';
 import { useAppDispatch, useAppSelector } from '@redux/hooks';
@@ -13,34 +13,43 @@ import {
   PatientInfo,
   Title,
 } from './styles';
-import { Appointment } from 'services/types/appointment.type';
 import { local } from '@constants/other';
 import { female } from '@constants/patient';
-import { fiveMinutes } from '@constants/notification';
-import useTimer from 'utils/hooks/useTimer';
+import { fiveMinutes,sec, SEC_PER_MIN } from '@constants/notification';
 import cookie from 'utils/functions/cookies';
 import useNotificationText from 'utils/hooks/useNotificationText';
-import { getCurrentFormattedTime, getDiffTime } from 'utils/functions/timeUtils';
-import { notificationCurrentTime } from '@constants/format';
+import { calculateInitialTimer, getDiffTime } from 'utils/functions/timeUtils';
+import {  nextAppointment } from '@components/general/type';
 
 const token = cookie.get('accessToken');
 
 const MeetNotification = () => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
+  const [timer, setTimer] = useState<number>(0);
+  const minutes = Math.floor(timer / SEC_PER_MIN) % SEC_PER_MIN;
+  const seconds = Math.floor(timer % SEC_PER_MIN);
+
   const { patient, startTime, endTime, remoteDoctor, localDoctor } =
-    useAppSelector((state) => state.socketAppointmentReducer.nextAppointment);
-    
-  const doctor = useAppSelector((state) => state.doctorReducer);
+  useAppSelector((state) => state.socketAppointmentReducer.nextAppointment);
+  
+const doctor = useAppSelector((state) => state.doctorReducer);
 
-  const { timer, minutes, seconds } = useTimer(startTime);
-
-  const { isTimerRun, getNotificationText } = useNotificationText(
-    t,
-    minutes,
-    seconds,
-    timer
-  );
+    useEffect(() => {
+      const initialTimer = calculateInitialTimer(startTime);
+  
+      const intervalId = setInterval(() => {
+        setTimer((prevTimer) => prevTimer - 1);
+      }, sec);
+  
+      if (initialTimer > 0) {
+        setTimer(initialTimer);
+      }
+  
+      return () => {
+        clearInterval(intervalId);
+      };
+    }, [startTime]);
 
   useEffect(() => {
     const socket = io(
@@ -60,11 +69,18 @@ const MeetNotification = () => {
     };
   }, []);
 
-  const handleAppointmentStarted = (data: Appointment) => {
+  const handleAppointmentStarted = (data: nextAppointment) => {
     if (data) {
-      dispatch(socketAppointmentActions.updateNextAppointment(data));
+      dispatch(socketAppointmentActions.updateNextAppointment(data.nextAppointment));
     }
   };
+
+  const { isTimerRun, getNotificationText } = useNotificationText(
+    t,
+    minutes,
+    seconds,
+    timer
+  );
 
   const getPatient = useMemo(() => {
     const gender =

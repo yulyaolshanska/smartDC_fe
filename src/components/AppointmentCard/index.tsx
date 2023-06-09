@@ -3,8 +3,8 @@ import { Stack, Box } from '@mui/system';
 import { Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { ReactComponent as CameraIcon } from '@assets/Camera.svg';
-import { ACTIVE, BORDER, CARLO_BLUE, NAVY_BLUE } from '@constants/colors';
-import { NORMAL_FONT_SIZE } from '@constants/fontSizes';
+import { ACTIVE, BORDER, CARLO_BLUE,LIGHT_BLUE } from '@constants/colors';
+import { NORMAL_FONT_SIZE, SMALL_FONT_SIZE } from '@constants/fontSizes';
 import { IPatient } from '@components/general/type';
 import moment from 'moment';
 import { lastAppointmentInfo } from '@constants/mockData';
@@ -13,6 +13,7 @@ import { useAppSelector } from '@redux/hooks';
 import { hash, local } from '@constants/other';
 import { IDoctor } from 'services/types/appointment.type';
 import { timeFormat } from '@constants/format';
+import { getLastAppointment } from 'utils/functions/getLastAppointment';
 
 interface IAppointmentElement {
   patient: IPatient;
@@ -35,7 +36,6 @@ const AppointmentCard = ({
 
   const [show, setShow] = React.useState<boolean>(false);
   const doctor = useAppSelector((state) => state.doctorReducer);
-  const text = lastAppointmentInfo;
 
   const getPatientAge = useMemo(
     () =>
@@ -71,6 +71,8 @@ const AppointmentCard = ({
     [doctor]
   );
 
+  const showLastAppointment =  () => getLastAppointment(patient,show)
+
   return (
     <Box marginBottom="8px">
       <Wrapper>
@@ -86,7 +88,6 @@ const AppointmentCard = ({
             <Box
               fontSize={NORMAL_FONT_SIZE}
               fontWeight="100"
-              fontStyle="italic"
             >
               {hash} {counter}
             </Box>
@@ -131,28 +132,34 @@ const AppointmentCard = ({
           <BoxWrapper>
             <Typography
               display="inline"
-              fontStyle="italic"
-              fontWeight="300"
+              fontWeight="700"
               fontSize={NORMAL_FONT_SIZE}
-              color={NAVY_BLUE}
+              color={LIGHT_BLUE}
               marginRight="5px"
             >
               {`${t('Appointments.lastAppointment')}`}
             </Typography>
-            {show ? text : `${text.substring(0, 250)}...`}
+            {showLastAppointment()}
           </BoxWrapper>
           <Box
+         
             sx={{
               '&:hover': {
                 cursor: 'pointer',
               },
             }}
-            color={ACTIVE}
-            fontWeight="bold"
             marginTop="5px"
+
             onClick={() => setShow(!show)}
+          > 
+           <Typography
+            color={ACTIVE}
+          fontWeight="700"
+          fontSize={SMALL_FONT_SIZE}
+
           >
             {show ? t('Profile.showLess') : t('Profile.showMore')}
+            </Typography>
           </Box>
         </Stack>
       </Wrapper>

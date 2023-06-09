@@ -236,8 +236,8 @@
     "remoteDoctorAgenda": "Remote doctor",
     "doctor": "Dr.",
     "patient": "Patient",
-    "lastAppointment": "Last Appointment",
-    "noAppointmentsYet": "The patient has no appointments yet"
+    "lastAppointment": "Last Appointment:",
+    "noAppointmentsYet": "The patient has no appointments yet."
   },
   "Dashboard": {
     "backToDashboard": "Back to dashboard",
@@ -259,7 +259,7 @@
     "doctor": "Dr.",
     "patient": "Patient",
     "lastAppointment": "Last Appointment",
-    "noAppointmentsYet": "The patient has no appointments yet",
+    "noAppointmentsYet": "The patient has no appointments yet.",
     "goBack": "Go back",
     "anesthesiology": "Anesthesiology",
     "cardiology": "Cardiology"

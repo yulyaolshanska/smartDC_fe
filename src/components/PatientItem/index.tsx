@@ -1,3 +1,4 @@
+import {  useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ReactComponent as CallIcon } from '@assets/patients/call.svg';
 import { ReactComponent as EmailIcon } from '@assets/patients/email.svg';
@@ -22,7 +23,7 @@ import CardWrapper from '@components/CardWrapper';
 
 import { IPatient } from '@components/general/type';
 import { male, female, unknownCity, unknownCountry, unknownGender, unknownAge, years } from '@constants/patient';
-import { lastAppointmentInfo } from '@constants/mockData';
+import { getLastAppointment } from 'utils/functions/getLastAppointment';
 
 interface IProps {
   patient: IPatient;
@@ -31,6 +32,8 @@ interface IProps {
 
 function PatientCard({ patient, searchValue }: IProps) {
   const { t } = useTranslation();
+  const [show, setShow] = useState<boolean>(false);
+
   const {
     phoneNumber,
     firstName,
@@ -53,6 +56,8 @@ function PatientCard({ patient, searchValue }: IProps) {
   const patientCity: string = city ? city : unknownCity;
 
   const patientCountry: string = country ? country : unknownCountry;
+
+  const showLastAppointment =  () => getLastAppointment(patient,show)
 
   return (
     <PatientItem>
@@ -91,7 +96,7 @@ function PatientCard({ patient, searchValue }: IProps) {
             <LastAppointmentTitle>
               {t('PatientCard.lastAppointment')}
             </LastAppointmentTitle>
-            {lastAppointmentInfo.substring(0, 250)}
+            {showLastAppointment()}
           </LastAppointment>
           <ViewLink to={`/patient/${id}`}>
             {t('PatientCard.viewProfile')}
