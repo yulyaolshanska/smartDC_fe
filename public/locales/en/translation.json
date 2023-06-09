@@ -145,7 +145,6 @@
     "problem": "Some problem",
     "lorem": " Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore"
   },
-
   "Warning": {
     "viewScheduleWarning": "Warning: you are in view mode and creating new schedule will be done according to your local time!"
   },
@@ -264,7 +263,6 @@
     "goBack": "Go back",
     "anesthesiology": "Anesthesiology",
     "cardiology": "Cardiology"
-
   },
   "Notification": {
     "youHaveVideoCallIn": "You will have a video-call in",
