@@ -73,7 +73,7 @@ function PatientCardInfo() {
     : t('Patient.noOverviewYet');
 
   const showLastAppointment = () => {
-    const lastAppointment = patient.notes[0]?.note;
+    const lastAppointment = '12345';
 
     if (lastAppointment) {
       return showMore

@@ -145,6 +145,10 @@
     "problem": "Some problem",
     "lorem": " Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore"
   },
+<<<<<<< HEAD
+=======
+
+>>>>>>> e131e8a8c60813053615f3c6d351ce1a4590c1d8
   "Warning": {
     "viewScheduleWarning": "Warning: you are in view mode and creating new schedule will be done according to your local time!"
   },
@@ -259,7 +263,11 @@
     "doctor": "Dr.",
     "patient": "Patient",
     "lastAppointment": "Last Appointment",
+<<<<<<< HEAD
     "noAppointmentsYet": "The patient has no appointments yet.",
+=======
+    "noAppointmentsYet": "The patient has no appointments yet",
+>>>>>>> e131e8a8c60813053615f3c6d351ce1a4590c1d8
     "goBack": "Go back",
     "anesthesiology": "Anesthesiology",
     "cardiology": "Cardiology",
@@ -283,5 +291,15 @@
   "Chat": {
     "typeMessage": "Type your message...",
     "isTyping": "is typing"
+  },
+
+  "Zoom": {
+    "Chat": "Chat",
+    "Finish": "Finish and call next client",
+    "StartCall": "Start Call",
+    "left": "You left the session",
+    "joined": "You joined the session",
+    "noAppointments": "You have no active appointments",
+    "startCall": "Start Call"
   }
 }

@@ -127,7 +127,7 @@ const ProfileComponent = () => {
               control={control}
               fullWidth
               name="lastName"
-              placeholder={t('Auth.enterLastName') ?? ''}
+              placeholder={t('Auth.enterLastNam') ?? ''}
               helperText={errors.lastName?.message}
               error={Boolean(errors?.lastName)}
               required={true}

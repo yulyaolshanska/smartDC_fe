@@ -20,7 +20,6 @@ const initialState = {
     password: '',
   },
   roomName: '',
-  
 };
 
 const socketAppointment = createSlice({
@@ -29,6 +28,9 @@ const socketAppointment = createSlice({
   reducers: {
     updateNextAppointment(state, action) {
       state.nextAppointment = action.payload;
+    },
+    updateCallConfig(state, action) {
+      state.callConfig = action.payload;
     },
   },
 });
