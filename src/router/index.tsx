@@ -20,11 +20,7 @@ import ProtectedRoute from './protected-route';
 import PatientInfo from '@pages/patient/patientInfo';
 import Patients from '@pages/patients';
 import AppointmentsDoctorScheduler from '@pages/doctorScheduler/appointmentsScheduler';
-import { createSocketWithHandlers } from '@components/Zoom/socket-io';
 import Dashboard from '@pages/dashboard';
-import ZoomPage from '@pages/zoom';
-import Patients from '@pages/patients';
-import AppointmentsDoctorScheduler from '@pages/doctorScheduler/appointmentsScheduler';
 import Chat from '@components/Chat';
 
 export const PATH = {

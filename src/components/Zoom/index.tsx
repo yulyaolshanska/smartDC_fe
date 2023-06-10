@@ -6,7 +6,6 @@ import { useAppSelector } from '@redux/hooks';
 import FinishCallButton from './FinishCallButton';
 import ChatButton from './ChatButton';
 import { VideoContainer } from './styles';
-import './index.scss';
 import StartCallButton from './StartCallButton';
 import useActiveSpeaker from './utils/useActiveSpeaker';
 import useActiveShareChange from './utils/useActiveShareChange';

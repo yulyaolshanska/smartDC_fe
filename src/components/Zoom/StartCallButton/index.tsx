@@ -1,5 +1,5 @@
 import { StartCallButtonStyle } from './styles';
-import { ReactComponent as CameraIcon } from '@assets/Video Camera.svg';
+import { ReactComponent as CameraIcon } from '@assets/VideoCamera.svg';
 import { useTranslation } from 'react-i18next';
 
 interface StartCallButtonProps {
