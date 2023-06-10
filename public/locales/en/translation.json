@@ -262,7 +262,8 @@
     "noAppointmentsYet": "The patient has no appointments yet.",
     "goBack": "Go back",
     "anesthesiology": "Anesthesiology",
-    "cardiology": "Cardiology"
+    "cardiology": "Cardiology",
+    "availability": "Manage your schedule for the upcoming month"
   },
   "Notification": {
     "youHaveVideoCallIn": "You will have a video-call in",
@@ -277,8 +278,7 @@
     "receivedVerInfo": "You received verification link to email",
     "sendAgain": "Send again",
     "notification": "Link has been sended",
-    "close": "Close",
-    "availability": "Manage your schedule for the upcoming month"
+    "close": "Close"
   },
   "Chat": {
     "typeMessage": "Type your message...",
