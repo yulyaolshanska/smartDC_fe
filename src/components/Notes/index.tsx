@@ -1,5 +1,7 @@
 import React from 'react';
 import { Stack } from '@mui/material';
+import { useParams } from 'react-router';
+import { ToastContainer, toast } from 'react-toastify';
 import AddNoteButton from './AddNoteButton';
 import SearchBar from './SearchBar';
 import Sort from './Sort';
@@ -9,10 +11,8 @@ import LoadMoreButton from '@components/LoadMoreButton';
 import { noteApi } from 'services/NoteService';
 import { useAppSelector } from '@redux/hooks';
 import Skeleton from './Skeleton';
-import { ToastContainer, toast } from 'react-toastify';
 import Error from './Error';
 import { patientApi } from 'services/PatientService';
-import { useParams } from 'react-router';
 
 export interface INotes {
   id: number;

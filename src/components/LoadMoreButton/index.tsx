@@ -4,6 +4,7 @@ import { noteApi } from 'services/NoteService';
 import { useAppDispatch, useAppSelector } from '@redux/hooks';
 import { noteFilterActions } from '@redux/slices/NoteFilterSlice';
 import { INotes } from '@components/Notes';
+import { useParams } from 'react-router';
 
 //not reusable
 
@@ -14,8 +15,11 @@ interface LoadMoreButtonProps {
 const LoadMoreButton = ({ notesLocal }: LoadMoreButtonProps) => {
   const dispatch = useAppDispatch();
   const filterParams = useAppSelector((state) => state.noteFilterReducer);
+
+  const { id: patientId } = useParams();
+
   const { data: notes, refetch: refetchNotes } = noteApi.useGetPatientNoteQuery(
-    { ...filterParams }
+    { ...filterParams, patientId }
   );
 
   const notesLocalLength = notesLocal.length;
