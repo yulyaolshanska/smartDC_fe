@@ -49,18 +49,18 @@ const PopupVerificationModal = ({
     <ModalOverlay onClick={(e) => onCloseOverlay(e)}>
       <ModalContainer>
         <ModalContent>
-          <Title>{t('Dashboard.receivedVerInfo')}</Title>
+          <Title>{t('Notification.receivedVerInfo')}</Title>
           <ModalButtonsWrapper>
             <CancelButton
               onClick={() => setShowModal(false)}
               type="button"
-              value={tWithDefault('Dashboard.close')}
+              value={tWithDefault('Notification.close')}
             />
             <SendButton
               onClick={handleSendLink}
               disabled={false}
               type="button"
-              value={tWithDefault('Dashboard.sendAgain')}
+              value={tWithDefault('Notification.sendAgain')}
             />
           </ModalButtonsWrapper>
         </ModalContent>
