@@ -40,10 +40,10 @@ const VerificationOfEmail = () => {
           <InfoWrapper>
             <TextWrapper>
               <img src={infoIcon} />
-              <p>{t('Dashboard.verificationInfo')}</p>
+              <p>{t('Notification.verificationInfo')}</p>
             </TextWrapper>
             <Button onClick={() => setShowModal(true)}>
-              {t('Dashboard.details')}
+              {t('Notification.details')}
             </Button>
           </InfoWrapper>
         )
