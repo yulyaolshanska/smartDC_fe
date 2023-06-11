@@ -30,7 +30,19 @@ The website is a platform for doctors worldwide to register, provide online cons
 ## Patient info page
 ![image](https://github.com/ZenBit-Tech/WebWizards_fe/assets/101277404/62ec719a-e703-4f93-904a-55bafb95667e)
 
+## List of Patients
+![image](https://github.com/ZenBit-Tech/WebWizards_fe/assets/101277404/013820cf-9f89-4ca4-a793-27af75f35a53)
+
 ## Zoom meetings page
 
 ## Chat
 
+## Technologies
+- React
+- Type script
+- React Hook Form
+- i18n 
+- React Day Picker
+- React Big Calendar
+- React-Phone-Input-2
+- WebSocket
