@@ -89,7 +89,9 @@ const DashboardComponent = () => {
 
       <Stack justifyContent="center" width="100%" alignItems="center">
         {!appointmentsArray.appointments.length && (
-          <Typography>You have no appointments today</Typography>
+          <Typography fontSize={LARGE_FONT_SIZE} marginTop={'25%'}>
+            You have no appointments today
+          </Typography>
         )}
         {groupedAppointments &&
           Object.entries(groupedAppointments)?.map(

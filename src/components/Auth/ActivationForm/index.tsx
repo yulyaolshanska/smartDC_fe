@@ -60,7 +60,6 @@ function ActivationForm() {
           </LinkContainer>
         </Form>
       </FormContainer>
-      <ToastContainer />
     </Container>
   );
 }

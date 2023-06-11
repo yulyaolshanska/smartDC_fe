@@ -12,12 +12,10 @@ const Scheduler = () => {
   const dispatch = useAppDispatch();
 
   const socketCallConfig = useAppSelector(
-    (state) => state.socketAppointmenttReducer.callConfig
+    (state) => state.socketAppointmentReducer.callConfig
   );
 
   const [getSignature] = zoomApi.useGetSignatureMutation();
-
-  const prevCallConfig = usePrevious(socketCallConfig);
 
   const handleGetSignature = useCallback(() => {
     if (!socketCallConfig.signature) {
@@ -35,10 +33,6 @@ const Scheduler = () => {
   useEffect(() => {
     handleGetSignature();
   }, [handleGetSignature]);
-
-  const socketNextAppointment = useAppSelector(
-    (state) => state.socketAppointmenttReducer.nextAppointment
-  );
 
   const handleAppointmentStarted = useCallback(
     (data) => {

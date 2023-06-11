@@ -13,12 +13,12 @@ import Sheduler from './Sheduler';
 import Video from './Video';
 import usePeerVideoStateChange from './utils/usePeerVideoStateChange';
 import { useTranslation } from 'react-i18next';
+import { useParams } from 'react-router';
+import { useConditionalRender } from 'utils/hooks/useConditionalRender';
 
 const client = ZoomVideo.createClient();
 
 const ZoomComponent = () => {
-  const [loading, setLoading] = React.useState<boolean>(false);
-  const [loadingText, setLoadingText] = React.useState<string>('');
   const [mediaScreen, setMediaScreen] = React.useState<typeof Stream | null>(
     null
   );
@@ -26,12 +26,20 @@ const ZoomComponent = () => {
 
   const { t } = useTranslation();
 
-  const socketNextAppointment = useAppSelector(
-    (state) => state.socketAppointmenttReducer.nextAppointment
+  const socketNextAppointmentId = useAppSelector(
+    (state) => state.socketAppointmentReducer.nextAppointment.id
   );
 
+  const { id: patientId } = useParams();
+
+  const nextAppointment = useAppSelector(
+    (state) => state.socketAppointmentReducer.nextAppointment
+  );
+
+  const render = useConditionalRender(patientId == nextAppointment.patient.id);
+
   const socketCallConfig = useAppSelector(
-    (state) => state.socketAppointmenttReducer.callConfig
+    (state) => state.socketAppointmentReducer.callConfig
   );
 
   const participantCanvasRef = React.useRef<HTMLCanvasElement | null>(null);
@@ -40,27 +48,31 @@ const ZoomComponent = () => {
   );
 
   const selfVideoRef = React.useRef<HTMLVideoElement | null>(null);
-
+  console.log('out', nextAppointment);
   const init = async () => {
     client.init('US-EN', 'CDN');
-    if (socketNextAppointment) {
+    if (socketNextAppointmentId) {
+      console.log(nextAppointment);
       try {
-        if (socketCallConfig.signature)
-          await client
-            .join(
-              socketCallConfig.tpc,
-              socketCallConfig.signature,
-              socketCallConfig.name
-            )
-            .then(() => {
-              setStatus(true);
-              toast.success(t('Zoom.joined'));
-            });
+        if (socketCallConfig.signature) console.log(socketCallConfig);
+        await client
+          .join(
+            socketCallConfig.tpc,
+            socketCallConfig.signature,
+            socketCallConfig.name
+          )
+          .then(() => {
+            setStatus(true);
+            toast.success(t('Zoom.joined'));
+          });
         const stream = client.getMediaStream();
 
         setMediaScreen(stream);
-      } catch (error) {}
+      } catch (error) {
+        console.log(error);
+      }
     } else {
+      console.log('123213');
       toast.info(t('Zoom.noAppointments'));
     }
   };
@@ -115,10 +127,9 @@ const ZoomComponent = () => {
     handlePeerShareScreen();
   }, [mediaScreen, participantCanvasRef, participantShareScreenRef]);
 
-  return (
+  return render(
     <VideoContainer>
       <Sheduler />
-      <ToastContainer />
       <Stack
         direction={'row'}
         alignItems={'center'}

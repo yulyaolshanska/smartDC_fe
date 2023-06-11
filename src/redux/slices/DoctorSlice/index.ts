@@ -13,7 +13,7 @@ const doctorSlice = createSlice({
     getDoctor(state, action) {
       return { ...state, ...action.payload };
     },
-    logout() {
+    logout(state) {
       localStorage.clear();
       sessionStorage.clear();
       cookie.delete('accessToken');

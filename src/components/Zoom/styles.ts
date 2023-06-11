@@ -18,6 +18,8 @@ export const VideoContainer = styled.div`
   align-items: center;
   flex-direction: column;
   width: 100%;
+  margin-bottom: 20px;
+  margin-right: 0;
 `;
 
 export const SelfVideo = styled.video<SelfVideoProps>`

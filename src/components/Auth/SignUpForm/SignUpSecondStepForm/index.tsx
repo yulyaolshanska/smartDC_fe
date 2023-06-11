@@ -187,7 +187,6 @@ function SignUpSecondForm() {
           </LinkContainer>
         </Form>
       </FormContainer>
-      <ToastContainer />
     </Container>
   );
 }

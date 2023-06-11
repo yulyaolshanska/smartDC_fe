@@ -14,13 +14,12 @@ export const authApi = createApi({
   tagTypes: ['Auth'],
   baseQuery: fetchBaseQuery({
     baseUrl: import.meta.env.VITE_REACT_APP_BASE_URL_SERVER,
-
     prepareHeaders: (headers) => {
       const token = cookie.get('accessToken');
       if (token) {
         headers.set('authorization', `Bearer ${token}`);
       }
-      headers.set('Content-Type', 'application/json');
+
       return headers;
     },
   }),
