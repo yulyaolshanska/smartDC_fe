@@ -1,7 +1,6 @@
-# WebWizardsFe1
+# WebWizards
 
-<a alt="Nx logo" href="http://web-wizards-frontend.s3-website.eu-central-1.amazonaws.com/" target="_blank" rel="noreferrer"><img src="./src/assets/logo.svg" width="45"></a>
-
+<a alt="Nx logo" href="http://web-wizards-frontend.s3-website.eu-central-1.amazonaws.com/" target="_blank" rel="noreferrer"><img src="./src/assets/Frame.png" width="45">myDOC</a>
 
 ## Development server
 
@@ -29,3 +28,4 @@ The website is a platform for doctors worldwide to register, provide online cons
 ## Zoom meetings page
 
 ## Chat
+
