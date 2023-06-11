@@ -1,6 +1,6 @@
 # WebWizards
 
-<a alt="Nx logo" href="http://web-wizards-frontend.s3-website.eu-central-1.amazonaws.com/" target="_blank" rel="noreferrer"><img src="./src/assets/Frame.png" width="45">myDOC</a>
+<a alt="Nx logo" href="http://web-wizards-frontend.s3-website.eu-central-1.amazonaws.com/" target="_blank" rel="noreferrer"><img src="./src/assets/Frame.png" width="80"></a>
 
 ## Development server
 
