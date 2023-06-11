@@ -60,36 +60,32 @@ const useAppointmentBookFormHook = () => {
   const onSubmit = async (data: DateObject) => {
     const [startTime, endTime] = data.appointmentTimeRange.split('-');
 
+
     const parseDateTime = (dateTimeString) => {
         const [time, period] = dateTimeString.split(' ');
         let [hours, minutes] = time.split(':');
-  
+      
         if (period === PM) {
           hours = (parseInt(hours, decimalNumber) + twelveHours).toString();
         }
-  
-        const [year, month, day] = data.date
-          .toISOString()
-          .split('T')[0]
-          .split('-');
-        return new Date(
-          Date.UTC(
-            year,
-            parseInt(month, decimalNumber) - oneMonth,
-            day,
-            hours,
-            minutes
-          )
-        );
+      
+        const date = new Date(data.date);
+        date.setHours(hours);
+        date.setMinutes(minutes);
+      
+        return date;
       };
-  
+      
       const startTimeString = `${startTime.trim()} ${
         startTime.includes(PM) ? PM : AM
       }`;
-      const endTimeString = `${endTime.trim()} ${endTime.includes(PM) ? PM : AM}`;
-  
+      const endTimeString = `${endTime.trim()} ${
+        endTime.includes(PM) ? PM : AM
+      }`;
+      
       const start = parseDateTime(startTimeString);
       const end = parseDateTime(endTimeString);
+          
 
     const appointmentInfo = {
       localDoctorId: Number(doctorData.id),
@@ -99,6 +95,9 @@ const useAppointmentBookFormHook = () => {
       endTime: end.toISOString(),
       startTime: start.toISOString(),
     };
+
+    console.log(`date`, data)
+    console.log(`appointmentInfo`,appointmentInfo)
 
     await createAppointment(appointmentInfo);
 
