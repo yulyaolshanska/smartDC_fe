@@ -89,14 +89,21 @@ const ProfileComponent = () => {
   const onSubmit = async (data: IAuth) => {
     try {
       const doctor = { ...data, id: doctorData.id };
-      await updateDoctorProfile(doctor);
+      await updateDoctorProfile(doctor).unwrap();
       toast.success(t('Profile.profileUpdatedSuccess'), {
         position: toast.POSITION.TOP_CENTER,
       });
     } catch (error) {
-      toast.error(t('Error.somethingWasWrong'), {
-        position: toast.POSITION.TOP_CENTER,
-      });
+      console.log(error);
+      if (error.data.message.includes('QueryFailedError')) {
+        toast.error(t('Error.existEmail'), {
+          position: toast.POSITION.TOP_CENTER,
+        });
+      } else {
+        toast.error(t('Error.somethingWasWrong'), {
+          position: toast.POSITION.TOP_CENTER,
+        });
+      }
     }
   };
 
@@ -127,7 +134,7 @@ const ProfileComponent = () => {
               control={control}
               fullWidth
               name="lastName"
-              placeholder={t('Auth.enterLastName') ?? ''}
+              placeholder={t('Auth.enterLastNam') ?? ''}
               helperText={errors.lastName?.message}
               error={Boolean(errors?.lastName)}
               required={true}
@@ -279,7 +286,10 @@ const ProfileComponent = () => {
 
         <ButtonsWrapepr>
           <CustomButton disabled> {t('Profile.cancel') ?? ''}</CustomButton>
-          <CustomButton type="submit"> {t('Profile.save') ?? ''}</CustomButton>
+          <CustomButton type="submit" disabled={!isValid}>
+            {' '}
+            {t('Profile.save') ?? ''}
+          </CustomButton>
         </ButtonsWrapepr>
         <ToastContainer />
       </form>

@@ -1,4 +1,3 @@
-import React from 'react';
 import { useSelector } from 'react-redux';
 import selectSignUp from '@redux/selectors/auth/signUp';
 import signUpSchema from '@validation/auth.validate';

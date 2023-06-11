@@ -4,17 +4,16 @@ import ProfileComponent from '@components/Profile';
 import PhotoChanger from '@components/Profile/PhotoChanger';
 import { LinkContainer } from '@components/general/styles';
 import BackToDashboard from '@components/BackToDashboardLink';
-
+import { Box } from '@mui/material';
 const Profile = () => {
   return (
     <>
-      <LinkContainer>
+      <Box marginBottom={'28px'}>
         <BackToDashboard />
-      </LinkContainer>
-      <br/>
+      </Box>
+
       <Wrapper>
-        <PhotoChanger />
-        <ProfileComponent />
+        <PhotoChanger /> <ProfileComponent />
       </Wrapper>
     </>
   );

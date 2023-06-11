@@ -37,6 +37,7 @@ export const noteApi = createApi({
         method: 'GET',
         params,
       }),
+      providesTags: ['Note'],
     }),
 
     createPatientNote: builder.mutation({
@@ -52,6 +53,7 @@ export const noteApi = createApi({
           body,
         };
       },
+      invalidatesTags: ['Note'],
     }),
     downloadFile: builder.query({
       query: (filename) => ({

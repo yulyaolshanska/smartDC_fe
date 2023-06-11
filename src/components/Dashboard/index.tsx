@@ -4,6 +4,7 @@ import { Box, Stack } from '@mui/system';
 import { authApi } from 'services/AuthService';
 import { Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
+import axios from 'axios';
 
 import { ReactComponent as PersonIcon } from '@assets/person-icon.svg';
 import { ReactComponent as TimeIcon } from '@assets/Time.svg';
@@ -38,6 +39,7 @@ const DashboardComponent = () => {
     refetchAppointments,
     t,
   } = useDashboardComponent();
+
   if (!appointmentsArray) {
     return (
       <div>
@@ -45,6 +47,10 @@ const DashboardComponent = () => {
       </div>
     );
   }
+
+  const request = axios
+    .get(`http://localhost:5000/auth/google/redirect`)
+    .then((res) => console.log(res));
 
   return (
     <Stack justifyContent="center" width="100%" alignItems="center">
@@ -82,6 +88,9 @@ const DashboardComponent = () => {
       </Stack>
 
       <Stack justifyContent="center" width="100%" alignItems="center">
+        {!appointmentsArray.appointments.length && (
+          // <Typography>You have no appointments today</Typography> TODO
+        )}
         {groupedAppointments &&
           Object.entries(groupedAppointments)?.map(
             ([timeRange, appointments]) => (

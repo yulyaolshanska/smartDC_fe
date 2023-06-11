@@ -33,15 +33,16 @@ export const doctorApi = createApi({
           url: `/doctor/${data.id}/upload`,
           method: 'POST',
           body: formData,
-          invalidatesTags: ['Doctor'],
         };
       },
+      invalidatesTags: ['Doctor'],
     }),
     getDoctorAvatar: builder.query({
       query: (id) => ({
         url: `/doctor/${id}/avatar`,
         method: 'GET',
       }),
+      providesTags: ['Doctor'],
     }),
     getDoctorById: builder.query({
       query: (id) => ({

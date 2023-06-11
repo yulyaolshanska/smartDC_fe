@@ -33,6 +33,7 @@ const PhotoChanger = () => {
 
   return (
     <PhotoChangerWrapper>
+      <p> {t('Profile.editProfile') ?? ''}</p>
       <Photo>
         {!doctor?.photoUrl && (
           <img
@@ -45,9 +46,7 @@ const PhotoChanger = () => {
             width="160px"
           />
         )}
-        {doctor?.photoUrl && (
-          <img src={finalUrl} alt="Photo" width="160px" />
-        )}
+        {doctor?.photoUrl && <img src={finalUrl} alt="Photo" width="160px" />}
         <EditIconContainer onClick={() => setOpened(true)}>
           <img src={editIcon} />
         </EditIconContainer>

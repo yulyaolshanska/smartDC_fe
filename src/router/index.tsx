@@ -21,7 +21,10 @@ import PatientInfo from '@pages/patient/patientInfo';
 import Patients from '@pages/patients';
 import AppointmentsDoctorScheduler from '@pages/doctorScheduler/appointmentsScheduler';
 import { createSocketWithHandlers } from '@components/Zoom/socket-io';
-import Dashboard from "@pages/dashboard";
+import Dashboard from '@pages/dashboard';
+import ZoomPage from '@pages/zoom';
+import Patients from '@pages/patients';
+import AppointmentsDoctorScheduler from '@pages/doctorScheduler/appointmentsScheduler';
 import Chat from '@components/Chat';
 
 export const PATH = {
@@ -43,6 +46,7 @@ export const PATH = {
   PATIENTS_LIST: '/patients',
   PATIENT_CARD_INFO: '/patient/:id',
   APPOINTMENTS: '/appointment',
+  ZOOM: '/zoom',
   CHAT: '/chat',
 };
 
@@ -62,7 +66,7 @@ const AppRouter = () => {
         <Route
           path={PATH.SIGN_UP_SECOND_STEP_GOOGLE}
           element={
-            <ProtectedRoute allowedRoles={['']} >
+            <ProtectedRoute allowedRoles={['']}>
               <SignUpSecondFormGoogle />
             </ProtectedRoute>
           }
