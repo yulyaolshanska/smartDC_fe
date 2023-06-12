@@ -25,7 +25,7 @@ const VerificationOfEmail = () => {
     try {
       await reactivationLink(doctor.id);
       setShowModal(false);
-      toast.success(t('Dashboard.notification'), {
+      toast.success(t('Notification.notification'), {
         position: toast.POSITION.TOP_CENTER,
       });
     } catch (error) {}
