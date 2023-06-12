@@ -37,7 +37,7 @@ import {
 import Spinner from '@components/Loaders/Spinner';
 import { useAppSelector } from '@redux/hooks';
 import { local } from '@constants/other';
-import MeetNotification  from '@components/MeetNotification';
+import MeetNotification from '@components/MeetNotification';
 
 function PatientCardInfo() {
   const { t } = useTranslation();
@@ -73,7 +73,7 @@ function PatientCardInfo() {
     : t('Patient.noOverviewYet');
 
   const showLastAppointment = () => {
-    const lastAppointment = '12345';
+    let lastAppointment;
 
     if (lastAppointment) {
       return showMore
@@ -95,13 +95,13 @@ function PatientCardInfo() {
         <>
           <MeetNotification />
           <PatientCardInfoContainer>
-          {doctorData.role === 'Local' && (
-            <EditContainer>
-          <EditCardLink to={`/edit-patient-card/${id}`}>
-            {t('Patient.editPatientCard')}
-          </EditCardLink>
-          </EditContainer>
-        )}
+            {doctorData.role === 'Local' && (
+              <EditContainer>
+                <EditCardLink to={`/edit-patient-card/${id}`}>
+                  {t('Patient.editPatientCard')}
+                </EditCardLink>
+              </EditContainer>
+            )}
             <PatientInfoName>{patientFullName}</PatientInfoName>
             <ContactsContainer>
               <CallIcon />

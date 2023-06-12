@@ -156,9 +156,11 @@ export const BookAppointmentButton = styled(NavLink)`
 
 export const EditCardLink = styled(ViewLink)`
   margin-left: auto;
-  margin-right:20px;
+  margin-right: 20px;
   font-size: ${SMALL_FONT_SIZE};
 `;
 
 export const EditContainer = styled.div`
-display:flex;`
+  margin-top: 25px;
+  display: flex;
+`;

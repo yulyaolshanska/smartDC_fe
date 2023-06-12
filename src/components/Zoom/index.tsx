@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ZoomVideo, { Stream } from '@zoom/videosdk';
 import { Stack } from '@mui/material';
 import { ToastContainer, toast } from 'react-toastify';
@@ -15,6 +15,7 @@ import usePeerVideoStateChange from './utils/usePeerVideoStateChange';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router';
 import { useConditionalRender } from 'utils/hooks/useConditionalRender';
+import Chat from '@components/Chat';
 
 const client = ZoomVideo.createClient();
 
@@ -25,6 +26,10 @@ const ZoomComponent = () => {
   const [status, setStatus] = React.useState<boolean>(false);
 
   const { t } = useTranslation();
+
+  const [showChat, setShowChat] = useState(false);
+
+  const handleChatToggle = () => setShowChat(!showChat);
 
   const socketNextAppointmentId = useAppSelector(
     (state) => state.socketAppointmentReducer.nextAppointment.id
@@ -128,34 +133,37 @@ const ZoomComponent = () => {
   }, [mediaScreen, participantCanvasRef, participantShareScreenRef]);
 
   return render(
-    <VideoContainer>
-      <Sheduler />
-      <Stack
-        direction={'row'}
-        alignItems={'center'}
-        gap={'8px'}
-        width={'100%'}
-        marginBottom={status ? '12px' : 0}
-      >
-        {status ? (
-          <FinishCallButton leaveSession={leaveSession} />
-        ) : (
-          <StartCallButton init={init}></StartCallButton>
-        )}
+    <>
+      <VideoContainer>
+        <Sheduler />
+        <Stack
+          direction={'row'}
+          alignItems={'center'}
+          gap={'8px'}
+          width={'100%'}
+          marginBottom={status ? '12px' : 0}
+        >
+          {status ? (
+            <FinishCallButton leaveSession={leaveSession} />
+          ) : (
+            <StartCallButton init={init}></StartCallButton>
+          )}
 
-        <ChatButton />
-      </Stack>
-      {status ? (
-        <Video
-          client={client}
-          mediaScreen={mediaScreen}
-          participantCanvasRef={participantCanvasRef}
-          participantShareScreenRef={participantShareScreenRef}
-          selfVideoRef={selfVideoRef}
-          setStatus={setStatus}
-        />
-      ) : null}
-    </VideoContainer>
+          <ChatButton onClick={handleChatToggle} />
+        </Stack>
+        {status ? (
+          <Video
+            client={client}
+            mediaScreen={mediaScreen}
+            participantCanvasRef={participantCanvasRef}
+            participantShareScreenRef={participantShareScreenRef}
+            selfVideoRef={selfVideoRef}
+            setStatus={setStatus}
+          />
+        ) : null}
+      </VideoContainer>
+      {showChat && <Chat />}
+    </>
   );
 };
 

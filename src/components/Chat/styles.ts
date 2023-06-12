@@ -17,10 +17,11 @@ export const ChatContainer = styled.div`
   display: flex;
   flex-direction: column;
   border: 1px solid ${BORDER};
-  height: 90vh;
+  height: 40vh;
   font-family: ${FONT_ROBOTO};
   font-size: ${SMALL_FONT_SIZE};
   background-color: ${DRAWER_CONT};
+  margin-bottom: 35px;
 `;
 
 export const MessageContainer = styled.div`
