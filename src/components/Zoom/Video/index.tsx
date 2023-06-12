@@ -128,7 +128,7 @@ const Video = ({
           <Box position={'relative'}>
             <canvas id="self-view-canvas"></canvas>
             <GoToFullScreenButton isSelfFullScreen={isSelfFullScreen} />
-            <NameTip isSelfFullScreen={isSelfFullScreen}></NameTip>
+            {/* <NameTip isSelfFullScreen={isSelfFullScreen}></NameTip> */}
           </Box>
         ) : (
           <Box position={'relative'}>
@@ -177,7 +177,7 @@ const Video = ({
             />
           ) : null}
 
-          <NameTip isSelfFullScreen={isSelfFullScreen}></NameTip>
+          {/* <NameTip isSelfFullScreen={isSelfFullScreen}></NameTip> */}
           {isParticipantFullScreen ? (
             <CallPanel
               isSelfFullScreen={isSelfFullScreen}

@@ -11,8 +11,8 @@ const initialState = {
     zoomLink: '',
   },
   callConfig: {
-    name: '',
-    tpc: '',
+    name: 'somename',
+    tpc: 'sometopic',
     role_type: 1,
     user_identity: '',
     session_key: '',

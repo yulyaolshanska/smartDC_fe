@@ -17,7 +17,7 @@ const Scheduler = () => {
 
   const [getSignature] = zoomApi.useGetSignatureMutation();
 
-  const handleGetSignature = useCallback(() => {
+  const handleGetSignature = () => {
     if (!socketCallConfig.signature) {
       getSignature({ ...socketCallConfig }).then((res) => {
         console.log(res.error.data);
@@ -28,7 +28,7 @@ const Scheduler = () => {
         dispatch(socketAppointmentActions.updateCallConfig(updatedCallConfig));
       });
     }
-  }, [socketCallConfig, getSignature, dispatch]);
+  };
 
   useEffect(() => {
     handleGetSignature();

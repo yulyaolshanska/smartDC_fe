@@ -65,6 +65,8 @@ const persistConfig = {
     'authApi',
     'noteApi',
     'appointmentApi',
+    'patientApi',
+    'availabilityApi',
   ],
 };
 

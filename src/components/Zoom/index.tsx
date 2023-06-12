@@ -57,7 +57,7 @@ const ZoomComponent = () => {
   const init = async () => {
     client.init('US-EN', 'CDN');
     if (socketNextAppointmentId) {
-      console.log(nextAppointment);
+      console.log('socket call config', socketCallConfig);
       try {
         if (socketCallConfig.signature) console.log(socketCallConfig);
         await client
