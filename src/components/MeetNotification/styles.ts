@@ -9,6 +9,7 @@ import styled from 'styled-components';
 import { SMALL_FONT_SIZE, XS_FONT_SIZE } from '@constants/fontSizes';
 
 export const NotificationContainer = styled.div`
+  width:100%;
   display: flex;
   justify-content: space-between;
   align-items: center;

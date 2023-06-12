@@ -18,6 +18,7 @@ import { ACTIVE, APPOINTMENT_TIME } from '@constants/colors';
 import LoadMoreButton from './LoadMoreButton';
 import Skeleton from './Skeleton';
 import useDashboardComponent from './dashboardHooks';
+import MeetNotification from '@components/MeetNotification';
 
 interface AppointmentElement {
   id: number;
@@ -67,7 +68,7 @@ const DashboardComponent = () => {
           {t('Dashboard.WelcomeDr')} {doctor.lastName}
         </Typography>
       </Stack>
-      <Box marginBottom="20px"> {t('Dashboard.Notification')}</Box>
+      <MeetNotification />
       <Stack alignSelf="start">
         <Stack direction="row" gap="20px" marginBottom="10px">
           <Typography fontSize={LARGE_FONT_SIZE} fontWeight="700">
